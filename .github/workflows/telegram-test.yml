@@ -1,15 +1,36 @@
-name: Telegram Test
+name: Telegram Chat ID
 
 on:
   workflow_dispatch:
 
 jobs:
-  test:
+  get-chat-id:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Get Telegram updates
+      - name: Find Telegram chat IDs
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         run: |
-          curl -s "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates"
+          RESPONSE=$(curl -s "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates")
+
+          echo "$RESPONSE" | python -c '
+          import json, sys
+
+          data = json.load(sys.stdin)
+          chats = {}
+
+          for update in data.get("result", []):
+              for key in ("message", "channel_post", "edited_channel_post"):
+                  obj = update.get(key)
+                  if obj and "chat" in obj:
+                      chat = obj["chat"]
+                      chats[str(chat["id"])] = chat.get("title", chat.get("username", "unknown"))
+
+          if chats:
+              print("CHAT ID TROVATI:")
+              for chat_id, title in chats.items():
+                  print(f"{chat_id}  ->  {title}")
+          else:
+              print("NESSUN CHAT TROVATO")
+          '
