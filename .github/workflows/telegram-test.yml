@@ -1,36 +1,34 @@
-name: Telegram Chat ID
+name: Pharma Radar Telegram Test
 
 on:
   workflow_dispatch:
 
 jobs:
-  get-chat-id:
+  telegram-test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Find Telegram chat IDs
+      - name: Send test alert
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          RESPONSE=$(curl -s "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates")
+          MESSAGE="🚨 PHARMA RADAR — TEST%0A%0A🟢 GitHub Actions: CONNECTED%0A🟢 Telegram Bot: CONNECTED%0A🟡 Pharma Scanner: NEXT%0A%0AInfrastructure test successful."
+
+          RESPONSE=$(curl -s \
+            --get \
+            --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+            --data-urlencode "text=${MESSAGE}" \
+            "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage")
 
           echo "$RESPONSE" | python -c '
           import json, sys
-
           data = json.load(sys.stdin)
-          chats = {}
 
-          for update in data.get("result", []):
-              for key in ("message", "channel_post", "edited_channel_post"):
-                  obj = update.get(key)
-                  if obj and "chat" in obj:
-                      chat = obj["chat"]
-                      chats[str(chat["id"])] = chat.get("title", chat.get("username", "unknown"))
-
-          if chats:
-              print("CHAT ID TROVATI:")
-              for chat_id, title in chats.items():
-                  print(f"{chat_id} -> {title}")
+          if data.get("ok"):
+              print("TELEGRAM MESSAGE SENT SUCCESSFULLY")
           else:
-              print("NESSUN CHAT TROVATO")
+              print("TELEGRAM ERROR")
+              print(data.get("description", "Unknown error"))
+              sys.exit(1)
           '
