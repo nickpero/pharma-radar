@@ -30,7 +30,7 @@ jobs:
           if chats:
               print("CHAT ID TROVATI:")
               for chat_id, title in chats.items():
-                  print(f"{chat_id}  ->  {title}")
+                  print(f"{chat_id} -> {title}")
           else:
               print("NESSUN CHAT TROVATO")
           '
