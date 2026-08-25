@@ -1,0 +1,85 @@
+{
+  "CAPR": {
+    "company_aliases": [
+      "Capricor Therapeutics",
+      "Capricor"
+    ],
+    "program_aliases": {
+      "deramiocel": [
+        "deramiocel",
+        "CAP-1002",
+        "CAP1002"
+      ]
+    }
+  },
+
+  "SVRA": {
+    "company_aliases": [
+      "Savara",
+      "Savara Inc"
+    ],
+    "program_aliases": {
+      "molgramostim": [
+        "molgramostim",
+        "molgramostim inhalation",
+        "MOLBREEVI"
+      ]
+    }
+  },
+
+  "ARGX": {
+    "company_aliases": [
+      "argenx",
+      "argenx SE",
+      "argenx bv"
+    ],
+    "program_aliases": {
+      "VYVGART": [
+        "VYVGART",
+        "efgartigimod",
+        "efgartigimod alfa",
+        "ARGX-113"
+      ]
+    }
+  },
+
+  "QURE": {
+    "company_aliases": [
+      "uniQure",
+      "uniQure N.V."
+    ],
+    "program_aliases": {
+      "AMT-130": [
+        "AMT-130",
+        "AMT130"
+      ]
+    }
+  },
+
+  "STOK": {
+    "company_aliases": [
+      "Stoke Therapeutics",
+      "Stoke Therapeutics Inc"
+    ],
+    "program_aliases": {
+      "zorevunersen": [
+        "zorevunersen",
+        "STK-001"
+      ]
+    }
+  },
+
+  "SMMT": {
+    "company_aliases": [
+      "Summit Therapeutics",
+      "Summit Therapeutics Inc"
+    ],
+    "program_aliases": {
+      "ivonescimab": [
+        "ivonescimab",
+        "AK112",
+        "IBI302"
+      ]
+    }
+  }
+}
