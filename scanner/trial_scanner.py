@@ -3,6 +3,7 @@ from pathlib import Path
 
 from scanner.clinical_trials import search_program
 from scanner.state import load_state, save_state, detect_changes
+from scanner.relevance import is_relevant
 
 
 WATCHLIST_FILE = Path("data/watchlist.json")
@@ -24,7 +25,10 @@ def scan():
     new_state = {}
     changes = []
     errors = []
+
     total_trials = 0
+    relevant_trials = 0
+    filtered_trials = 0
 
     for ticker, company in watchlist.items():
 
@@ -60,6 +64,16 @@ def scan():
 
                 total_trials += 1
 
+                if not is_relevant(
+                    trial,
+                    company,
+                    program
+                ):
+                    filtered_trials += 1
+                    continue
+
+                relevant_trials += 1
+
                 key = make_trial_key(
                     ticker,
                     program,
@@ -92,6 +106,8 @@ def scan():
     print("========== SCAN SUMMARY ==========")
     print(f"Companies: {len(watchlist)}")
     print(f"Trials found: {total_trials}")
+    print(f"Relevant trials: {relevant_trials}")
+    print(f"Filtered trials: {filtered_trials}")
     print(f"Changes detected: {len(changes)}")
     print(f"Errors: {len(errors)}")
     print("===================================")
@@ -99,6 +115,8 @@ def scan():
     return {
         "companies": len(watchlist),
         "total_trials": total_trials,
+        "relevant_trials": relevant_trials,
+        "filtered_trials": filtered_trials,
         "changes": changes,
         "errors": errors
-                        }
+    }
