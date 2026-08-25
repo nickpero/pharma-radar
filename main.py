@@ -11,6 +11,8 @@ def main():
     message = build_scan_report(
         companies=result["companies"],
         total_trials=result["total_trials"],
+        relevant_trials=result["relevant_trials"],
+        filtered_trials=result["filtered_trials"],
         changes=result["changes"],
         errors=result["errors"]
     )
