@@ -1,37 +1,48 @@
-import json
-from pathlib import Path
-
+from scanner.trial_scanner import scan
 from scanner.telegram import send_telegram
 
 
-WATCHLIST = Path("data/watchlist.json")
-
-
-def load_watchlist():
-    with open(WATCHLIST, "r", encoding="utf-8") as file:
-        return json.load(file)
-
-
 def main():
-    watchlist = load_watchlist()
+    print("Starting Pharma Radar...")
 
-    print(f"Loaded {len(watchlist)} companies")
+    changes = scan()
 
-    message = f"""🧬 PHARMA RADAR — ENGINE V1
+    if changes:
+        message = f"""🧬 PHARMA RADAR — TRIAL UPDATE
 
-🟢 Scanner started
-🟢 Telegram connected
-🟢 Watchlist loaded: {len(watchlist)} companies
+🚨 Changes detected: {len(changes)}
 
-🔎 Sources: INITIALIZING
-📡 Clinical trials: INITIALIZING
-📄 SEC: INITIALIZING
-🏛️ FDA: INITIALIZING
+"""
 
-Status: READY
+        for change in changes[:10]:
+            message += (
+                f"🔴 {change['ticker']} — "
+                f"{change['program']}\n"
+                f"NCT: {change['nct_id']}\n"
+            )
+
+            for field, values in change["changes"].items():
+                message += (
+                    f"{field}: "
+                    f"{values['old']} → "
+                    f"{values['new']}\n"
+                )
+
+            message += "\n"
+
+    else:
+        message = """🧬 PHARMA RADAR — SCAN
+
+🟢 ClinicalTrials.gov scanned
+🟢 Watchlist checked
+🟢 No changes detected
+
+Status: CLEAN
 """
 
     send_telegram(message)
+
+    print("Scan completed.")
 
 
 if __name__ == "__main__":
