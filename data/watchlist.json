@@ -1,0 +1,102 @@
+{
+  "CAPR": {
+    "company": "Capricor Therapeutics",
+    "programs": ["deramiocel"],
+    "priority": "RED"
+  },
+  "SVRA": {
+    "company": "Savara",
+    "programs": ["molgramostim", "MOLBREEVI"],
+    "priority": "RED"
+  },
+  "ZYME": {
+    "company": "Zymeworks",
+    "programs": ["zanidatamab"],
+    "priority": "RED"
+  },
+  "MIRM": {
+    "company": "Mirum Pharmaceuticals",
+    "programs": ["maralixibat", "zilurgisertib", "brelovitug"],
+    "priority": "RED"
+  },
+  "PHVS": {
+    "company": "Pharvaris",
+    "programs": ["deucrictibant"],
+    "priority": "RED"
+  },
+  "TENX": {
+    "company": "Tenax Therapeutics",
+    "programs": ["TNX-103"],
+    "priority": "RED"
+  },
+  "NUVL": {
+    "company": "Nuvalent",
+    "programs": ["zidesamtinib"],
+    "priority": "RED"
+  },
+  "RARE": {
+    "company": "Ultragenyx",
+    "programs": ["UX111"],
+    "priority": "ORANGE"
+  },
+  "TLX": {
+    "company": "Telix Pharmaceuticals",
+    "programs": ["TLX101", "Pixclara"],
+    "priority": "ORANGE"
+  },
+  "IONS": {
+    "company": "Ionis Pharmaceuticals",
+    "programs": ["zilganersen"],
+    "priority": "ORANGE"
+  },
+  "ARGX": {
+    "company": "argenx",
+    "programs": ["VYVGART"],
+    "priority": "RED"
+  },
+  "QURE": {
+    "company": "uniQure",
+    "programs": ["AMT-130"],
+    "priority": "RED"
+  },
+  "STOK": {
+    "company": "Stoke Therapeutics",
+    "programs": ["zorevunersen"],
+    "priority": "RED"
+  },
+  "ANNX": {
+    "company": "Annexon",
+    "programs": ["ANX007"],
+    "priority": "ORANGE"
+  },
+  "IMMX": {
+    "company": "Immix Biopharma",
+    "programs": ["NXC-201"],
+    "priority": "ORANGE"
+  },
+  "ALMS": {
+    "company": "Alumis",
+    "programs": ["ESK-001"],
+    "priority": "ORANGE"
+  },
+  "RNA": {
+    "company": "Avidity Biosciences",
+    "programs": ["delpacibart"],
+    "priority": "ORANGE"
+  },
+  "RGNX": {
+    "company": "REGENXBIO",
+    "programs": ["surabgene"],
+    "priority": "ORANGE"
+  },
+  "EYPT": {
+    "company": "EyePoint Pharmaceuticals",
+    "programs": ["vorolanib"],
+    "priority": "ORANGE"
+  },
+  "SMMT": {
+    "company": "Summit Therapeutics",
+    "programs": ["ivonescimab"],
+    "priority": "RED"
+  }
+}
