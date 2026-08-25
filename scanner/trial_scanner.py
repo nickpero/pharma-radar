@@ -25,6 +25,7 @@ def scan():
     new_state = {}
     changes = []
     errors = []
+    relevant_details = []
 
     total_trials = 0
     relevant_trials = 0
@@ -75,6 +76,14 @@ def scan():
 
                 relevant_trials += 1
 
+                relevant_details.append({
+                    "ticker": ticker,
+                    "program": program,
+                    "nct_id": nct_id,
+                    "status": trial.get("status"),
+                    "title": trial.get("title")
+                })
+
                 key = make_trial_key(
                     ticker,
                     program,
@@ -118,6 +127,7 @@ def scan():
         "total_trials": total_trials,
         "relevant_trials": relevant_trials,
         "filtered_trials": filtered_trials,
+        "relevant_details": relevant_details,
         "changes": changes,
         "errors": errors
     }
