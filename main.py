@@ -1,44 +1,19 @@
 from scanner.trial_scanner import scan
 from scanner.telegram import send_telegram
+from scanner.report import build_scan_report
 
 
 def main():
     print("Starting Pharma Radar...")
 
-    changes = scan()
+    result = scan()
 
-    if changes:
-        message = f"""🧬 PHARMA RADAR — TRIAL UPDATE
-
-🚨 Changes detected: {len(changes)}
-
-"""
-
-        for change in changes[:10]:
-            message += (
-                f"🔴 {change['ticker']} — "
-                f"{change['program']}\n"
-                f"NCT: {change['nct_id']}\n"
-            )
-
-            for field, values in change["changes"].items():
-                message += (
-                    f"{field}: "
-                    f"{values['old']} → "
-                    f"{values['new']}\n"
-                )
-
-            message += "\n"
-
-    else:
-        message = """🧬 PHARMA RADAR — SCAN
-
-🟢 ClinicalTrials.gov scanned
-🟢 Watchlist checked
-🟢 No changes detected
-
-Status: CLEAN
-"""
+    message = build_scan_report(
+        companies=result["companies"],
+        total_trials=result["total_trials"],
+        changes=result["changes"],
+        errors=result["errors"]
+    )
 
     send_telegram(message)
 
