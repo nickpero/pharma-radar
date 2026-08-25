@@ -1,34 +1,36 @@
 from scanner.trial_scanner import scan
-from scanner.state import save_state
 
 
 def create_baseline():
-    print("Creating Pharma Radar baseline...")
+    print("===================================")
+    print("PHARMA RADAR — BASELINE")
+    print("===================================")
 
-    result = scan()
+    result = scan(baseline=True)
 
     print()
-    print("Baseline created successfully.")
+    print("Baseline completed.")
     print(
-        f"Relevant trials registered: "
+        f"Companies: {result['companies']}"
+    )
+    print(
+        f"Trials found: {result['total_trials']}"
+    )
+    print(
+        f"Relevant trials: "
         f"{result['relevant_trials']}"
     )
+    print(
+        f"Filtered trials: "
+        f"{result['filtered_trials']}"
+    )
+    print(
+        f"Errors: {len(result['errors'])}"
+    )
 
-    # La normale scansione ha già salvato
-    # lo stato corrente.
-    #
-    # Gli eventuali eventi rilevati durante
-    # questa prima scansione NON devono
-    # essere considerati breaking news.
-    #
-    # Il file di stato appena creato rappresenta
-    # quindi la nostra baseline.
-
-    save_state(
-        __import__(
-            "scanner.state",
-            fromlist=["load_state"]
-        ).load_state()
+    print()
+    print(
+        "No alerts generated."
     )
 
 
