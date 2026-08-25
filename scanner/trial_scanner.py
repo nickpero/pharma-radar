@@ -65,7 +65,6 @@ def scan():
 
                 total_trials += 1
 
-                # Filter dei risultati non pertinenti
                 if not is_relevant(
                     trial,
                     company,
@@ -77,7 +76,6 @@ def scan():
 
                 relevant_trials += 1
 
-                # Memorizziamo i dettagli del trial
                 relevant_details.append({
                     "ticker": ticker,
                     "program": program,
@@ -86,7 +84,6 @@ def scan():
                     "title": trial.get("title")
                 })
 
-                # Chiave univoca del trial
                 key = make_trial_key(
                     ticker,
                     program,
@@ -95,13 +92,9 @@ def scan():
 
                 new_state[key] = trial
 
-                # Stato precedente
                 old_trial = old_state.get(key)
 
                 if old_trial:
-
-                    # Trial già conosciuto:
-                    # cerchiamo modifiche
                     trial_changes = detect_changes(
                         old_trial,
                         trial
@@ -119,8 +112,6 @@ def scan():
                         })
 
                 else:
-
-                    # Trial mai visto prima
                     changes.append({
                         "type": "NEW_TRIAL",
                         "ticker": ticker,
@@ -129,12 +120,10 @@ def scan():
                         "nct_id": nct_id,
                         "changes": {},
                         "trial": trial
-                    )
+                    })
 
-    # Salviamo lo stato aggiornato
     save_state(new_state)
 
-    # Output diagnostico
     print()
     print("========== SCAN SUMMARY ==========")
     print(f"Companies: {len(watchlist)}")
