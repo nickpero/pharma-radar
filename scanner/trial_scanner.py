@@ -67,6 +67,7 @@ def scan():
                 if not is_relevant(
                     trial,
                     company,
+                    ticker,
                     program
                 ):
                     filtered_trials += 1
