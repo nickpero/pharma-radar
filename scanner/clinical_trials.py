@@ -39,19 +39,76 @@ def extract_trial_info(study):
         "designModule", {}
     )
 
+    sponsor = protocol.get(
+        "sponsorCollaboratorsModule", {}
+    )
+
+    conditions = protocol.get(
+        "conditionsModule", {}
+    )
+
+    arms = protocol.get(
+        "armsInterventionsModule", {}
+    )
+
     return {
         "nct_id": identification.get("nctId"),
-        "title": identification.get("briefTitle"),
-        "status": status.get("overallStatus"),
-        "start_date": (
-            status.get("startDateStruct", {})
-            .get("date")
+
+        "title": identification.get(
+            "briefTitle"
         ),
-        "completion_date": (
-            status.get("completionDateStruct", {})
-            .get("date")
+
+        "official_title": identification.get(
+            "officialTitle"
         ),
-        "study_type": design.get("studyType")
+
+        "status": status.get(
+            "overallStatus"
+        ),
+
+        "last_update": status.get(
+            "lastUpdatePostDateStruct", {}
+        ).get("date"),
+
+        "start_date": status.get(
+            "startDateStruct", {}
+        ).get("date"),
+
+        "completion_date": status.get(
+            "completionDateStruct", {}
+        ).get("date"),
+
+        "study_type": design.get(
+            "studyType"
+        ),
+
+        "phases": design.get(
+            "phases", []
+        ),
+
+        "enrollment": design.get(
+            "enrollmentInfo", {}
+        ).get("count"),
+
+        "enrollment_type": design.get(
+            "enrollmentInfo", {}
+        ).get("type"),
+
+        "sponsor": sponsor.get(
+            "leadSponsor", {}
+        ).get("name"),
+
+        "conditions": conditions.get(
+            "conditions", []
+        ),
+
+        "interventions": [
+            intervention.get("name")
+            for intervention in arms.get(
+                "interventions", []
+            )
+            if intervention.get("name")
+        ]
     }
 
 
