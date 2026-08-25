@@ -10,15 +10,23 @@ WATCHLIST_FILE = Path("data/watchlist.json")
 
 
 def load_watchlist():
-    with open(WATCHLIST_FILE, "r", encoding="utf-8") as file:
+    with open(
+        WATCHLIST_FILE,
+        "r",
+        encoding="utf-8"
+    ) as file:
         return json.load(file)
 
 
 def make_trial_key(ticker, program, trial):
-    return f"{ticker}:{program}:{trial.get('nct_id')}"
+    return (
+        f"{ticker}:"
+        f"{program}:"
+        f"{trial.get('nct_id')}"
+    )
 
 
-def scan():
+def scan(baseline=False):
     watchlist = load_watchlist()
     old_state = load_state()
 
@@ -33,18 +41,27 @@ def scan():
 
     for ticker, company in watchlist.items():
 
-        programs = company.get("programs", [])
+        programs = company.get(
+            "programs",
+            []
+        )
 
         for program in programs:
 
-            print(f"Searching {ticker} - {program}")
+            print(
+                f"Searching {ticker} - {program}"
+            )
 
             try:
-                trials = search_program(program)
+                trials = search_program(
+                    program
+                )
 
             except Exception as error:
+
                 print(
-                    f"ERROR searching {ticker} - "
+                    f"ERROR searching "
+                    f"{ticker} - "
                     f"{program}: {error}"
                 )
 
@@ -58,7 +75,9 @@ def scan():
 
             for trial in trials:
 
-                nct_id = trial.get("nct_id")
+                nct_id = trial.get(
+                    "nct_id"
+                )
 
                 if not nct_id:
                     continue
@@ -80,8 +99,12 @@ def scan():
                     "ticker": ticker,
                     "program": program,
                     "nct_id": nct_id,
-                    "status": trial.get("status"),
-                    "title": trial.get("title")
+                    "status": trial.get(
+                        "status"
+                    ),
+                    "title": trial.get(
+                        "title"
+                    )
                 })
 
                 key = make_trial_key(
@@ -92,19 +115,39 @@ def scan():
 
                 new_state[key] = trial
 
-                old_trial = old_state.get(key)
+                old_trial = old_state.get(
+                    key
+                )
+
+                # --------------------------------
+                # BASELINE MODE
+                # --------------------------------
+
+                if baseline:
+                    continue
+
+                # --------------------------------
+                # LIVE MODE
+                # --------------------------------
 
                 if old_trial:
-                    trial_changes = detect_changes(
-                        old_trial,
-                        trial
+
+                    trial_changes = (
+                        detect_changes(
+                            old_trial,
+                            trial
+                        )
                     )
 
                     if trial_changes:
+
                         changes.append({
                             "type": "UPDATE",
                             "ticker": ticker,
-                            "company": company["company"],
+                            "company": company.get(
+                                "company",
+                                ticker
+                            ),
                             "program": program,
                             "nct_id": nct_id,
                             "changes": trial_changes,
@@ -112,27 +155,48 @@ def scan():
                         })
 
                 else:
+
                     changes.append({
                         "type": "NEW_TRIAL",
                         "ticker": ticker,
-                        "company": company["company"],
+                        "company": company.get(
+                            "company",
+                            ticker
+                        ),
                         "program": program,
                         "nct_id": nct_id,
                         "changes": {},
                         "trial": trial
                     })
 
+    # Salviamo SEMPRE lo stato più recente.
     save_state(new_state)
 
     print()
-    print("========== SCAN SUMMARY ==========")
-    print(f"Companies: {len(watchlist)}")
-    print(f"Trials found: {total_trials}")
-    print(f"Relevant trials: {relevant_trials}")
-    print(f"Filtered trials: {filtered_trials}")
-    print(f"Changes detected: {len(changes)}")
-    print(f"Errors: {len(errors)}")
-    print("===================================")
+    print(
+        "========== SCAN SUMMARY =========="
+    )
+    print(
+        f"Companies: {len(watchlist)}"
+    )
+    print(
+        f"Trials found: {total_trials}"
+    )
+    print(
+        f"Relevant trials: {relevant_trials}"
+    )
+    print(
+        f"Filtered trials: {filtered_trials}"
+    )
+    print(
+        f"Changes detected: {len(changes)}"
+    )
+    print(
+        f"Errors: {len(errors)}"
+    )
+    print(
+        "==================================="
+    )
 
     return {
         "companies": len(watchlist),
@@ -141,5 +205,6 @@ def scan():
         "filtered_trials": filtered_trials,
         "relevant_details": relevant_details,
         "changes": changes,
-        "errors": errors
-    }
+        "errors": errors,
+        "baseline": baseline
+                    }
