@@ -13,6 +13,7 @@ def main():
         total_trials=result["total_trials"],
         relevant_trials=result["relevant_trials"],
         filtered_trials=result["filtered_trials"],
+        relevant_details=result["relevant_details"],
         changes=result["changes"],
         errors=result["errors"]
     )
