@@ -2,26 +2,48 @@ import os
 import requests
 
 
-def send_telegram(message: str):
+TELEGRAM_API = "https://api.telegram.org/bot{}/sendMessage"
+
+
+def send_telegram(message):
     token = os.environ["TELEGRAM_BOT_TOKEN"]
     chat_id = os.environ["TELEGRAM_CHAT_ID"]
 
-    url = f"https://api.telegram.org/bot{token}/sendMessage"
+    url = TELEGRAM_API.format(token)
 
-    response = requests.post(
-        url,
-        data={
-            "chat_id": chat_id,
-            "text": message
-        },
-        timeout=20
-    )
+    # Telegram permette massimo 4096 caratteri
+    # per singolo messaggio.
+    max_length = 4000
 
-    response.raise_for_status()
+    chunks = []
 
-    data = response.json()
+    while len(message) > max_length:
+        split_at = message.rfind(
+            "\n",
+            0,
+            max_length
+        )
 
-    if not data.get("ok"):
-        raise RuntimeError(data)
+        if split_at == -1:
+            split_at = max_length
 
-    return data
+        chunks.append(
+            message[:split_at]
+        )
+
+        message = message[split_at:].lstrip()
+
+    if message:
+        chunks.append(message)
+
+    for chunk in chunks:
+        response = requests.post(
+            url,
+            json={
+                "chat_id": chat_id,
+                "text": chunk
+            },
+            timeout=30
+        )
+
+        response.raise_for_status()
