@@ -23,6 +23,7 @@ def scan():
 
     new_state = {}
     changes = []
+    errors = []
     total_trials = 0
 
     for ticker, company in watchlist.items():
@@ -35,11 +36,19 @@ def scan():
 
             try:
                 trials = search_program(program)
+
             except Exception as error:
                 print(
                     f"ERROR searching {ticker} - "
                     f"{program}: {error}"
                 )
+
+                errors.append({
+                    "ticker": ticker,
+                    "program": program,
+                    "error": str(error)
+                })
+
                 continue
 
             for trial in trials:
@@ -84,6 +93,12 @@ def scan():
     print(f"Companies: {len(watchlist)}")
     print(f"Trials found: {total_trials}")
     print(f"Changes detected: {len(changes)}")
+    print(f"Errors: {len(errors)}")
     print("===================================")
 
-    return changes
+    return {
+        "companies": len(watchlist),
+        "total_trials": total_trials,
+        "changes": changes,
+        "errors": errors
+                        }
