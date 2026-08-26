@@ -25,3 +25,4 @@ jobs:
         run: |
           python -m scanner.test_catalyst
           python -m scanner.test_integration
+          python -m scanner.test_score
