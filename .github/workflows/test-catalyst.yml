@@ -29,3 +29,4 @@ jobs:
           python -m scanner.test_scoring_integration
           python -m scanner.test_alert_filter
           python -m scanner.test_trial_scanner
+          python -m scanner.test_telegram
