@@ -5,6 +5,7 @@ from scanner.clinical_trials import search_program
 from scanner.state import load_state, save_state, detect_changes
 from scanner.relevance import is_relevant
 from scanner.catalyst import classify_trial_changes
+from scanner.score import score_events
 
 
 WATCHLIST_FILE = Path("data/watchlist.json")
@@ -146,6 +147,10 @@ def scan(baseline=False):
                             )
                         )
 
+                        scored_events = score_events(
+                            catalyst_events
+                        )
+
                         changes.append({
                             "type": "UPDATE",
                             "ticker": ticker,
@@ -156,11 +161,24 @@ def scan(baseline=False):
                             "program": program,
                             "nct_id": nct_id,
                             "changes": trial_changes,
-                            "catalyst_events": catalyst_events,
+                            "catalyst_events": scored_events,
                             "trial": trial
                         })
 
                 else:
+
+                    new_event = {
+                        "type": "NEW_TRIAL",
+                        "severity": "MEDIUM",
+                        "direction": "UNKNOWN",
+                        "field": None,
+                        "old_value": None,
+                        "new_value": None
+                    }
+
+                    scored_new_event = score_events(
+                        [new_event]
+                    )
 
                     changes.append({
                         "type": "NEW_TRIAL",
@@ -172,16 +190,7 @@ def scan(baseline=False):
                         "program": program,
                         "nct_id": nct_id,
                         "changes": {},
-                        "catalyst_events": [
-                            {
-                                "type": "NEW_TRIAL",
-                                "severity": "MEDIUM",
-                                "direction": "UNKNOWN",
-                                "field": None,
-                                "old_value": None,
-                                "new_value": None
-                            }
-                        ],
+                        "catalyst_events": scored_new_event,
                         "trial": trial
                     })
 
@@ -189,7 +198,9 @@ def scan(baseline=False):
     # SAVE CURRENT STATE
     # =================================
 
-    save_state(new_state)
+    save_state(
+        new_state
+    )
 
     # =================================
     # SCAN SUMMARY
