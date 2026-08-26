@@ -24,3 +24,4 @@ jobs:
       - name: Run Catalyst tests
         run: |
           python -m scanner.test_catalyst
+          python -m scanner.test_integration
