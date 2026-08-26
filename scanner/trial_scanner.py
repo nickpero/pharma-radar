@@ -4,6 +4,7 @@ from pathlib import Path
 from scanner.clinical_trials import search_program
 from scanner.state import load_state, save_state, detect_changes
 from scanner.relevance import is_relevant
+from scanner.catalyst import classify_trial_changes
 
 
 WATCHLIST_FILE = Path("data/watchlist.json")
@@ -119,27 +120,31 @@ def scan(baseline=False):
                     key
                 )
 
-                # --------------------------------
+                # =================================
                 # BASELINE MODE
-                # --------------------------------
+                # =================================
 
                 if baseline:
                     continue
 
-                # --------------------------------
+                # =================================
                 # LIVE MODE
-                # --------------------------------
+                # =================================
 
                 if old_trial:
 
-                    trial_changes = (
-                        detect_changes(
-                            old_trial,
-                            trial
-                        )
+                    trial_changes = detect_changes(
+                        old_trial,
+                        trial
                     )
 
                     if trial_changes:
+
+                        catalyst_events = (
+                            classify_trial_changes(
+                                trial_changes
+                            )
+                        )
 
                         changes.append({
                             "type": "UPDATE",
@@ -151,6 +156,7 @@ def scan(baseline=False):
                             "program": program,
                             "nct_id": nct_id,
                             "changes": trial_changes,
+                            "catalyst_events": catalyst_events,
                             "trial": trial
                         })
 
@@ -166,34 +172,59 @@ def scan(baseline=False):
                         "program": program,
                         "nct_id": nct_id,
                         "changes": {},
+                        "catalyst_events": [
+                            {
+                                "type": "NEW_TRIAL",
+                                "severity": "MEDIUM",
+                                "direction": "UNKNOWN",
+                                "field": None,
+                                "old_value": None,
+                                "new_value": None
+                            }
+                        ],
                         "trial": trial
                     })
 
-    # Salviamo SEMPRE lo stato più recente.
+    # =================================
+    # SAVE CURRENT STATE
+    # =================================
+
     save_state(new_state)
 
+    # =================================
+    # SCAN SUMMARY
+    # =================================
+
     print()
+
     print(
         "========== SCAN SUMMARY =========="
     )
+
     print(
         f"Companies: {len(watchlist)}"
     )
+
     print(
         f"Trials found: {total_trials}"
     )
+
     print(
         f"Relevant trials: {relevant_trials}"
     )
+
     print(
         f"Filtered trials: {filtered_trials}"
     )
+
     print(
         f"Changes detected: {len(changes)}"
     )
+
     print(
         f"Errors: {len(errors)}"
     )
+
     print(
         "==================================="
     )
@@ -207,4 +238,4 @@ def scan(baseline=False):
         "changes": changes,
         "errors": errors,
         "baseline": baseline
-                    }
+                }
