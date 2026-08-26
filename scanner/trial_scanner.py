@@ -6,6 +6,7 @@ from scanner.state import load_state, save_state, detect_changes
 from scanner.relevance import is_relevant
 from scanner.catalyst import classify_trial_changes
 from scanner.score import score_events
+from scanner.alert_filter import filter_alerts, sort_alerts
 
 
 WATCHLIST_FILE = Path("data/watchlist.json")
@@ -34,6 +35,7 @@ def scan(baseline=False):
 
     new_state = {}
     changes = []
+    alerts = []
     errors = []
     relevant_details = []
 
@@ -129,7 +131,7 @@ def scan(baseline=False):
                     continue
 
                 # =================================
-                # LIVE MODE
+                # EXISTING TRIAL
                 # =================================
 
                 if old_trial:
@@ -151,19 +153,28 @@ def scan(baseline=False):
                             catalyst_events
                         )
 
-                        changes.append({
-                            "type": "UPDATE",
-                            "ticker": ticker,
-                            "company": company.get(
-                                "company",
-                                ticker
-                            ),
-                            "program": program,
-                            "nct_id": nct_id,
-                            "changes": trial_changes,
-                            "catalyst_events": scored_events,
-                            "trial": trial
-                        })
+                        trial_alerts = filter_alerts(
+                            scored_events
+                        )
+
+                        for event in trial_alerts:
+
+                            alerts.append({
+                                "ticker": ticker,
+                                "company": company.get(
+                                    "company",
+                                    ticker
+                                ),
+                                "program": program,
+                                "nct_id": nct_id,
+                                "event": event,
+                                "changes": trial_changes,
+                                "trial": trial
+                            })
+
+                # =================================
+                # NEW TRIAL
+                # =================================
 
                 else:
 
@@ -176,23 +187,36 @@ def scan(baseline=False):
                         "new_value": None
                     }
 
-                    scored_new_event = score_events(
+                    scored_events = score_events(
                         [new_event]
                     )
 
-                    changes.append({
-                        "type": "NEW_TRIAL",
-                        "ticker": ticker,
-                        "company": company.get(
-                            "company",
-                            ticker
-                        ),
-                        "program": program,
-                        "nct_id": nct_id,
-                        "changes": {},
-                        "catalyst_events": scored_new_event,
-                        "trial": trial
-                    })
+                    trial_alerts = filter_alerts(
+                        scored_events
+                    )
+
+                    for event in trial_alerts:
+
+                        alerts.append({
+                            "ticker": ticker,
+                            "company": company.get(
+                                "company",
+                                ticker
+                            ),
+                            "program": program,
+                            "nct_id": nct_id,
+                            "event": event,
+                            "changes": {},
+                            "trial": trial
+                        })
+
+    # =================================
+    # SORT ALERTS
+    # =================================
+
+    alerts = sort_alerts(
+        alerts
+    )
 
     # =================================
     # SAVE CURRENT STATE
@@ -203,7 +227,7 @@ def scan(baseline=False):
     )
 
     # =================================
-    # SCAN SUMMARY
+    # SUMMARY
     # =================================
 
     print()
@@ -229,7 +253,7 @@ def scan(baseline=False):
     )
 
     print(
-        f"Changes detected: {len(changes)}"
+        f"Changes detected: {len(alerts)}"
     )
 
     print(
@@ -245,8 +269,9 @@ def scan(baseline=False):
         "total_trials": total_trials,
         "relevant_trials": relevant_trials,
         "filtered_trials": filtered_trials,
-        "relevant_details": relevant_details,
-        "changes": changes,
+        "changes": alerts,
+        "alerts": alerts,
         "errors": errors,
+        "relevant_details": relevant_details,
         "baseline": baseline
-                }
+                        }
