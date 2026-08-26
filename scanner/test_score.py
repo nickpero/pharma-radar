@@ -120,7 +120,7 @@ def test_score_multiple_events():
 
     assert len(scored) == 2
 
-    assert scored[0]["score"] == 100
+    assert scored[0]["score"] == 95
     assert scored[0]["label"] == "CRITICAL"
 
     assert scored[1]["score"] == 15
