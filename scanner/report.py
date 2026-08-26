@@ -1,3 +1,47 @@
+def format_catalyst_event(event):
+    event_type = event.get("type", "UNKNOWN")
+    severity = event.get("severity", "LOW")
+    direction = event.get("direction", "UNKNOWN")
+
+    severity_icons = {
+        "HIGH": "🔴",
+        "MEDIUM": "🟠",
+        "LOW": "🟢"
+    }
+
+    icon = severity_icons.get(
+        severity,
+        "⚪"
+    )
+
+    if event_type == "STATUS_CHANGE":
+        description = "Status change"
+
+    elif event_type == "DATE_CHANGE":
+        description = "Clinical date change"
+
+    elif event_type == "ENROLLMENT_CHANGE":
+        description = "Enrollment change"
+
+    elif event_type == "PHASE_CHANGE":
+        description = "Phase change"
+
+    elif event_type == "PROTOCOL_CHANGE":
+        description = "Protocol change"
+
+    elif event_type == "NEW_TRIAL":
+        description = "New clinical trial"
+
+    else:
+        description = "Clinical trial change"
+
+    return (
+        f"{icon} {description} "
+        f"[{severity}] "
+        f"{direction}"
+    )
+
+
 def build_scan_report(
     companies,
     total_trials,
@@ -19,67 +63,38 @@ def build_scan_report(
         ""
     ]
 
-    # Errori
+    # =================================
+    # ERRORS
+    # =================================
+
     if errors:
+
         lines.append("⚠️ SEARCH ERRORS")
+        lines.append("")
 
         for error in errors[:10]:
+
             lines.append(
                 f"• {error['ticker']} — "
                 f"{error['program']}"
             )
+
             lines.append(
                 f"  {error['error']}"
             )
 
         lines.append("")
 
-    # Nuovi trial
-    new_trials = [
-        change
-        for change in changes
-        if change.get("type") == "NEW_TRIAL"
-    ]
+    # =================================
+    # CATALYST EVENTS
+    # =================================
 
-    if new_trials:
-        lines.append("🆕 NEW TRIALS")
+    if changes:
 
-        for change in new_trials[:10]:
-            trial = change["trial"]
-
-            lines.append(
-                f"• {change['ticker']} — "
-                f"{change['program']}"
-            )
-
-            lines.append(
-                f"  {change['nct_id']} — "
-                f"{trial.get('status', 'UNKNOWN')}"
-            )
-
-            if trial.get("title"):
-                lines.append(
-                    f"  {trial['title']}"
-                )
-
-            if trial.get("sponsor"):
-                lines.append(
-                    f"  Sponsor: {trial['sponsor']}"
-                )
-
+        lines.append("🚨 CATALYST EVENTS")
         lines.append("")
 
-    # Trial aggiornati
-    updates = [
-        change
-        for change in changes
-        if change.get("type") == "UPDATE"
-    ]
-
-    if updates:
-        lines.append("🔄 TRIAL UPDATES")
-
-        for change in updates[:10]:
+        for change in changes[:15]:
 
             lines.append(
                 f"• {change['ticker']} — "
@@ -90,21 +105,51 @@ def build_scan_report(
                 f"  {change['nct_id']}"
             )
 
-            for field, values in change[
-                "changes"
-            ].items():
+            catalyst_events = change.get(
+                "catalyst_events",
+                []
+            )
+
+            for event in catalyst_events:
+
+                lines.append(
+                    f"  {format_catalyst_event(event)}"
+                )
+
+            # Dettaglio delle modifiche
+
+            raw_changes = change.get(
+                "changes",
+                {}
+            )
+
+            for field, values in raw_changes.items():
+
+                old_value = values.get(
+                    "old"
+                )
+
+                new_value = values.get(
+                    "new"
+                )
 
                 lines.append(
                     f"  {field}: "
-                    f"{values['old']} → "
-                    f"{values['new']}"
+                    f"{old_value} → "
+                    f"{new_value}"
                 )
 
-        lines.append("")
+            lines.append("")
 
-    # Trial pertinenti
+    # =================================
+    # RELEVANT TRIALS
+    # =================================
+
     if relevant_details:
-        lines.append("🎯 RELEVANT TRIALS")
+
+        lines.append(
+            "🎯 RELEVANT TRIALS"
+        )
 
         for detail in relevant_details[:15]:
 
@@ -119,13 +164,17 @@ def build_scan_report(
             )
 
             if detail.get("title"):
+
                 lines.append(
                     f"  {detail['title']}"
                 )
 
         lines.append("")
 
-    # Stato finale
+    # =================================
+    # FINAL STATUS
+    # =================================
+
     if errors:
         status = "WARNING"
 
@@ -135,10 +184,14 @@ def build_scan_report(
     else:
         status = "CLEAN"
 
-    lines.extend([
-        "🟢 Scan completed",
-        "",
+    lines.append(
+        "🟢 Scan completed"
+    )
+
+    lines.append("")
+
+    lines.append(
         f"Status: {status}"
-    ])
+    )
 
     return "\n".join(lines)
