@@ -21,9 +21,6 @@ MAX_MESSAGE_LENGTH = 4096
 def send_telegram(message):
     """
     Invia un messaggio Telegram usando Bot API.
-
-    Il messaggio viene inviato tramite POST
-    senza URL encoding manuale.
     """
 
     token = os.getenv(
@@ -52,8 +49,6 @@ def send_telegram(message):
             "Telegram message is empty"
         )
 
-    # Telegram Bot API limita i messaggi
-    # testuali a 4096 caratteri.
     if len(message) > MAX_MESSAGE_LENGTH:
         message = (
             message[:MAX_MESSAGE_LENGTH - 20]
@@ -133,6 +128,9 @@ def get_severity_icon(label):
 def format_catalyst_alert(alert):
     """
     Crea il messaggio Telegram per un catalyst.
+
+    Mantiene l'intestazione compatibile con
+    i test esistenti del Pharma Radar.
     """
 
     ticker = alert.get(
@@ -232,7 +230,7 @@ def format_catalyst_alert(alert):
     )
 
     # ========================================
-    # COMPANY LINE
+    # COMPANY
     # ========================================
 
     if company and company != ticker:
@@ -246,7 +244,7 @@ def format_catalyst_alert(alert):
         company_line = ticker
 
     # ========================================
-    # EVENT DESCRIPTION
+    # EVENT
     # ========================================
 
     if subtype:
@@ -284,9 +282,9 @@ def format_catalyst_alert(alert):
     # ========================================
 
     lines = [
-        f"{severity_icon} PHARMA RADAR — {label}",
+        "🚨 PHARMA RADAR — CATALYST",
         "",
-        f"🏢 {company_line}",
+        f"{severity_icon} {company_line}",
         f"💊 {program}",
         f"🧬 {nct_id}",
         "",
@@ -306,6 +304,7 @@ def format_catalyst_alert(alert):
         f"🎯 Score: {score}/100",
         f"{severity_icon} Severity: {severity}",
         f"{direction_icon} Direction: {direction}",
+        f"🏷 Label: {label}",
     ])
 
     return "\n".join(
@@ -338,11 +337,8 @@ def send_catalyst_alert(alert):
 
 def send_catalyst_alerts(alerts):
     """
-    Invia tutti gli alert catalyst.
-
-    Gli alert vengono inviati separatamente
-    per evitare che un singolo messaggio
-    superi il limite Telegram.
+    Invia tutti gli alert catalyst
+    separatamente.
     """
 
     results = []
