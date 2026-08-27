@@ -102,7 +102,6 @@ def classify_status_change(
         "TRIAL_WITHDRAWN",
     }:
         severity = "HIGH"
-
     else:
         severity = "MEDIUM"
 
@@ -137,7 +136,6 @@ def classify_date_change(
     if new < old:
         subtype = "DATE_ACCELERATED"
         direction = "POSITIVE"
-
     else:
         subtype = "DATE_DELAYED"
         direction = "NEGATIVE"
@@ -148,9 +146,7 @@ def classify_date_change(
         "old_value": old_date,
         "new_value": new_date,
         "direction": direction,
-        "event_date": new_date.strftime(
-            "%Y-%m-%d"
-        ),
+        "event_date": new_date.isoformat(),
         "severity": "HIGH",
     }
 
