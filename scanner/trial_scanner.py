@@ -12,6 +12,10 @@ from scanner.alert_filter import filter_alerts, sort_alerts
 WATCHLIST_FILE = Path("data/watchlist.json")
 
 
+# ============================================
+# WATCHLIST
+# ============================================
+
 def load_watchlist():
     with open(
         WATCHLIST_FILE,
@@ -21,7 +25,16 @@ def load_watchlist():
         return json.load(file)
 
 
+# ============================================
+# TRIAL KEY
+# ============================================
+
 def make_trial_key(ticker, program, trial):
+    """
+    Crea una chiave stabile per identificare
+    un trial all'interno della watchlist.
+    """
+
     return (
         f"{ticker}:"
         f"{program}:"
@@ -29,19 +42,83 @@ def make_trial_key(ticker, program, trial):
     )
 
 
+# ============================================
+# BUILD ALERT
+# ============================================
+
+def build_alert(
+    ticker,
+    company,
+    program,
+    nct_id,
+    event,
+    changes,
+    trial
+):
+    """
+    Costruisce un alert standardizzato.
+    """
+
+    return {
+        "ticker": ticker,
+        "company": company.get(
+            "company",
+            ticker
+        ),
+        "program": program,
+        "nct_id": nct_id,
+        "event": event,
+        "changes": changes,
+        "trial": trial,
+        "score": event.get(
+            "score",
+            0
+        ),
+        "label": event.get(
+            "label",
+            "LOW"
+        ),
+        "severity": event.get(
+            "severity",
+            "LOW"
+        ),
+        "direction": event.get(
+            "direction",
+            "UNKNOWN"
+        ),
+        "subtype": event.get(
+            "subtype"
+        )
+    }
+
+
+# ============================================
+# SCAN
+# ============================================
+
 def scan(baseline=False):
+
     watchlist = load_watchlist()
+
     old_state = load_state()
 
     new_state = {}
-    changes = []
+
+    detected_changes = []
+
     alerts = []
+
     errors = []
+
     relevant_details = []
 
     total_trials = 0
     relevant_trials = 0
     filtered_trials = 0
+
+    # ========================================
+    # COMPANIES
+    # ========================================
 
     for ticker, company in watchlist.items():
 
@@ -56,7 +133,12 @@ def scan(baseline=False):
                 f"Searching {ticker} - {program}"
             )
 
+            # =================================
+            # SEARCH
+            # =================================
+
             try:
+
                 trials = search_program(
                     program
                 )
@@ -77,6 +159,10 @@ def scan(baseline=False):
 
                 continue
 
+            # =================================
+            # TRIALS
+            # =================================
+
             for trial in trials:
 
                 nct_id = trial.get(
@@ -88,16 +174,26 @@ def scan(baseline=False):
 
                 total_trials += 1
 
+                # =================================
+                # RELEVANCE
+                # =================================
+
                 if not is_relevant(
                     trial,
                     company,
                     ticker,
                     program
                 ):
+
                     filtered_trials += 1
+
                     continue
 
                 relevant_trials += 1
+
+                # =================================
+                # RELEVANT DETAILS
+                # =================================
 
                 relevant_details.append({
                     "ticker": ticker,
@@ -110,6 +206,10 @@ def scan(baseline=False):
                         "title"
                     )
                 })
+
+                # =================================
+                # TRIAL KEY
+                # =================================
 
                 key = make_trial_key(
                     ticker,
@@ -124,7 +224,7 @@ def scan(baseline=False):
                 )
 
                 # =================================
-                # BASELINE MODE
+                # BASELINE
                 # =================================
 
                 if baseline:
@@ -141,36 +241,66 @@ def scan(baseline=False):
                         trial
                     )
 
-                    if trial_changes:
+                    if not trial_changes:
+                        continue
 
-                        catalyst_events = (
-                            classify_trial_changes(
-                                trial_changes
+                    # ---------------------------------
+                    # Count actual detected changes
+                    # ---------------------------------
+
+                    detected_changes.append({
+                        "ticker": ticker,
+                        "program": program,
+                        "nct_id": nct_id,
+                        "changes": trial_changes
+                    })
+
+                    # ---------------------------------
+                    # Catalyst classification
+                    # ---------------------------------
+
+                    catalyst_events = (
+                        classify_trial_changes(
+                            trial_changes
+                        )
+                    )
+
+                    if not catalyst_events:
+                        continue
+
+                    # ---------------------------------
+                    # Score
+                    # ---------------------------------
+
+                    scored_events = score_events(
+                        catalyst_events
+                    )
+
+                    # ---------------------------------
+                    # Alert filter
+                    # ---------------------------------
+
+                    trial_alerts = filter_alerts(
+                        scored_events
+                    )
+
+                    # ---------------------------------
+                    # Build alerts
+                    # ---------------------------------
+
+                    for event in trial_alerts:
+
+                        alerts.append(
+                            build_alert(
+                                ticker,
+                                company,
+                                program,
+                                nct_id,
+                                event,
+                                trial_changes,
+                                trial
                             )
                         )
-
-                        scored_events = score_events(
-                            catalyst_events
-                        )
-
-                        trial_alerts = filter_alerts(
-                            scored_events
-                        )
-
-                        for event in trial_alerts:
-
-                            alerts.append({
-                                "ticker": ticker,
-                                "company": company.get(
-                                    "company",
-                                    ticker
-                                ),
-                                "program": program,
-                                "nct_id": nct_id,
-                                "event": event,
-                                "changes": trial_changes,
-                                "trial": trial
-                            })
 
                 # =================================
                 # NEW TRIAL
@@ -182,6 +312,7 @@ def scan(baseline=False):
                         "type": "NEW_TRIAL",
                         "severity": "MEDIUM",
                         "direction": "UNKNOWN",
+                        "subtype": "NEW_TRIAL",
                         "field": None,
                         "old_value": None,
                         "new_value": None
@@ -197,38 +328,37 @@ def scan(baseline=False):
 
                     for event in trial_alerts:
 
-                        alerts.append({
-                            "ticker": ticker,
-                            "company": company.get(
-                                "company",
-                                ticker
-                            ),
-                            "program": program,
-                            "nct_id": nct_id,
-                            "event": event,
-                            "changes": {},
-                            "trial": trial
-                        })
+                        alerts.append(
+                            build_alert(
+                                ticker,
+                                company,
+                                program,
+                                nct_id,
+                                event,
+                                {},
+                                trial
+                            )
+                        )
 
-    # =================================
+    # ========================================
     # SORT ALERTS
-    # =================================
+    # ========================================
 
     alerts = sort_alerts(
         alerts
     )
 
-    # =================================
-    # SAVE CURRENT STATE
-    # =================================
+    # ========================================
+    # SAVE STATE
+    # ========================================
 
     save_state(
         new_state
     )
 
-    # =================================
+    # ========================================
     # SUMMARY
-    # =================================
+    # ========================================
 
     print()
 
@@ -253,7 +383,11 @@ def scan(baseline=False):
     )
 
     print(
-        f"Changes detected: {len(alerts)}"
+        f"Changes detected: {len(detected_changes)}"
+    )
+
+    print(
+        f"Alerts: {len(alerts)}"
     )
 
     print(
@@ -264,14 +398,19 @@ def scan(baseline=False):
         "==================================="
     )
 
+    # ========================================
+    # RETURN
+    # ========================================
+
     return {
         "companies": len(watchlist),
         "total_trials": total_trials,
         "relevant_trials": relevant_trials,
         "filtered_trials": filtered_trials,
+        "detected_changes": detected_changes,
         "changes": alerts,
         "alerts": alerts,
         "errors": errors,
         "relevant_details": relevant_details,
         "baseline": baseline
-                        }
+    }
