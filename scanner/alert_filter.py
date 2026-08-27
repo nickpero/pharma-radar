@@ -3,9 +3,9 @@ Pharma Radar — Alert Filter
 
 Seleziona gli eventi che meritano un alert Telegram.
 
-Lo scoring determina la rilevanza.
-Questo modulo determina se l'evento supera
-la soglia necessaria per generare un alert.
+Lo scoring determina la rilevanza numerica.
+Questo modulo determina se l'evento deve
+effettivamente generare un alert.
 """
 
 
@@ -18,6 +18,63 @@ DEFAULT_CRITICAL_SCORE = 80
 
 
 # ============================================
+# CLINICAL EVENT TYPES
+# ============================================
+
+HIGH_VALUE_SUBTYPES = {
+    "PRIMARY_ENDPOINT_MET",
+    "PRIMARY_ENDPOINT_FAILED",
+    "TOPLINE_RESULTS",
+    "FDA_APPROVAL",
+    "FDA_REJECTION",
+    "TRIAL_STOPPED_EFFICACY",
+    "TRIAL_STOPPED_SAFETY",
+    "TRIAL_COMPLETED",
+    "TRIAL_TERMINATED",
+    "TRIAL_SUSPENDED",
+    "TRIAL_WITHDRAWN",
+    "DATE_ACCELERATED",
+    "DATE_DELAYED",
+    "PHASE_3_STARTED",
+    "PHASE_2_STARTED",
+    "ENROLLMENT_COMPLETED",
+}
+
+
+# ============================================
+# EVENTS THAT SHOULD NOT ALERT BY DEFAULT
+# ============================================
+
+IGNORED_SUBTYPES = {
+    "FIELD_UPDATED",
+    "FIELD_CHANGE",
+    "ENROLLMENT_INCREASED",
+    "TRIAL_RECRUITING",
+}
+
+
+# ============================================
+# SCORE CONVERSION
+# ============================================
+
+def get_score(event):
+
+    score = event.get(
+        "score",
+        0
+    )
+
+    try:
+        return int(score)
+
+    except (
+        ValueError,
+        TypeError
+    ):
+        return 0
+
+
+# ============================================
 # SINGLE EVENT
 # ============================================
 
@@ -27,23 +84,64 @@ def is_alert_worthy(
 ):
     """
     Restituisce True se l'evento supera
-    la soglia di alert.
+    la soglia e rappresenta un evento
+    clinicamente rilevante.
     """
 
-    score = event.get(
-        "score",
-        0
+    score = get_score(
+        event
     )
 
-    try:
-        score = int(score)
-    except (
-        ValueError,
-        TypeError
-    ):
+    if score < minimum_score:
         return False
 
-    return score >= minimum_score
+    subtype = str(
+        event.get(
+            "subtype",
+            ""
+        )
+    ).upper()
+
+    event_type = str(
+        event.get(
+            "type",
+            ""
+        )
+    ).upper()
+
+    # ----------------------------------------
+    # Explicitly ignored events
+    # ----------------------------------------
+
+    if subtype in IGNORED_SUBTYPES:
+        return False
+
+    # ----------------------------------------
+    # High-value clinical events
+    # ----------------------------------------
+
+    if subtype in HIGH_VALUE_SUBTYPES:
+        return True
+
+    # ----------------------------------------
+    # Important event types
+    # ----------------------------------------
+
+    if event_type in {
+        "STATUS_CHANGE",
+        "DATE_CHANGE",
+        "PHASE_CHANGE",
+    }:
+        return True
+
+    # ----------------------------------------
+    # Generic high-score fallback
+    #
+    # Protects compatibility with future
+    # catalyst types not yet known.
+    # ----------------------------------------
+
+    return score >= 80
 
 
 # ============================================
@@ -58,18 +156,9 @@ def is_critical(
     Identifica gli eventi CRITICAL.
     """
 
-    score = event.get(
-        "score",
-        0
+    score = get_score(
+        event
     )
-
-    try:
-        score = int(score)
-    except (
-        ValueError,
-        TypeError
-    ):
-        return False
 
     return score >= critical_score
 
@@ -84,7 +173,7 @@ def filter_alerts(
 ):
     """
     Restituisce soltanto gli eventi
-    che superano la soglia.
+    che devono generare un alert.
     """
 
     alerts = []
@@ -95,11 +184,14 @@ def filter_alerts(
             event,
             minimum_score
         ):
+
             alerts.append(
                 event
             )
 
-    return alerts
+    return sort_alerts(
+        alerts
+    )
 
 
 # ============================================
@@ -122,11 +214,14 @@ def filter_critical(
             event,
             critical_score
         ):
+
             critical.append(
                 event
             )
 
-    return critical
+    return sort_alerts(
+        critical
+    )
 
 
 # ============================================
@@ -141,9 +236,8 @@ def sort_alerts(events):
 
     return sorted(
         events,
-        key=lambda event: event.get(
-            "score",
-            0
+        key=lambda event: get_score(
+            event
         ),
         reverse=True
-  )
+    )
