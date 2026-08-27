@@ -1,61 +1,46 @@
-"""
-Pharma Radar — Catalyst Classification Engine
-
-Classifica le modifiche dei trial clinici in base a:
-- tipo di evento
-- severità clinica
-- direzione potenziale
-- anticipo/ritardo delle date
-"""
-
-from datetime import date
+from datetime import datetime
 
 
-# ============================================
-# STATUS TRANSITIONS
-# ============================================
+# ============================================================
+# PHARMA RADAR — CATALYST ENGINE
+# ============================================================
 
-POSITIVE_STATUS_TRANSITIONS = {
-    (
-        "NOT_YET_RECRUITING",
-        "RECRUITING",
-    ),
-    (
-        "NOT_YET_RECRUITING",
-        "ENROLLING_BY_INVITATION",
-    ),
-    (
-        "RECRUITING",
-        "ENROLLING_BY_INVITATION",
-    ),
+POSITIVE_STATUS = {
+    "RECRUITING",
+    "ENROLLING_BY_INVITATION",
+    "ACTIVE_NOT_RECRUITING",
+    "COMPLETED",
 }
 
-
-NEGATIVE_STATUS_TRANSITIONS = {
+NEGATIVE_STATUS = {
     "TERMINATED",
     "SUSPENDED",
     "WITHDRAWN",
 }
 
 
-# ============================================
-# DATE HELPERS
-# ============================================
+def normalize(value):
+
+    if value is None:
+        return None
+
+    return str(value).strip().upper()
+
 
 def parse_date(value):
-    """
-    Converte una data YYYY-MM-DD in un oggetto date.
-
-    Restituisce None se il valore non è valido.
-    """
 
     if not value:
         return None
 
+    if isinstance(value, datetime):
+        return value.date()
+
     try:
-        return date.fromisoformat(
-            str(value)
-        )
+        return datetime.strptime(
+            str(value),
+            "%Y-%m-%d"
+        ).date()
+
     except (
         ValueError,
         TypeError
@@ -63,377 +48,368 @@ def parse_date(value):
         return None
 
 
-def classify_date_change(
-    field,
-    old_value,
-    new_value
-):
-    """
-    Determina se una modifica di data
-    rappresenta un anticipo o un ritardo.
-    """
+def status_direction(old_status, new_status):
 
-    old_date = parse_date(
-        old_value
+    old_status = normalize(
+        old_status
     )
 
-    new_date = parse_date(
-        new_value
+    new_status = normalize(
+        new_status
     )
 
-    # ----------------------------------------
-    # Data non interpretabile
-    # ----------------------------------------
+    if (
+        new_status == "COMPLETED"
+        and old_status != "COMPLETED"
+    ):
+        return "POSITIVE"
 
-    if not old_date or not new_date:
+    if new_status in {
+        "TERMINATED",
+        "WITHDRAWN"
+    }:
+        return "NEGATIVE"
 
-        return {
-            "type": "DATE_CHANGE",
-            "severity": "HIGH",
-            "direction": "UNKNOWN",
-            "field": field,
-            "old_value": old_value,
-            "new_value": new_value,
+    if new_status == "SUSPENDED":
+        return "NEGATIVE"
+
+    if (
+        new_status == "RECRUITING"
+        and old_status in {
+            "NOT_YET_RECRUITING",
+            "SUSPENDED"
         }
+    ):
+        return "POSITIVE"
 
-    # ----------------------------------------
-    # Anticipo
-    # ----------------------------------------
+    return "UNKNOWN"
 
-    if new_date < old_date:
-
-        days = (
-            old_date - new_date
-        ).days
-
-        return {
-            "type": "DATE_CHANGE",
-            "severity": "HIGH",
-            "direction": "POSITIVE",
-            "subtype": "DATE_ACCELERATED",
-            "days_changed": days,
-            "field": field,
-            "old_value": old_value,
-            "new_value": new_value,
-        }
-
-    # ----------------------------------------
-    # Ritardo
-    # ----------------------------------------
-
-    if new_date > old_date:
-
-        days = (
-            new_date - old_date
-        ).days
-
-        return {
-            "type": "DATE_CHANGE",
-            "severity": "HIGH",
-            "direction": "NEGATIVE",
-            "subtype": "DATE_DELAYED",
-            "days_changed": days,
-            "field": field,
-            "old_value": old_value,
-            "new_value": new_value,
-        }
-
-    # ----------------------------------------
-    # Nessuna variazione reale
-    # ----------------------------------------
-
-    return {
-        "type": "DATE_CHANGE",
-        "severity": "LOW",
-        "direction": "NEUTRAL",
-        "subtype": "DATE_UNCHANGED",
-        "days_changed": 0,
-        "field": field,
-        "old_value": old_value,
-        "new_value": new_value,
-    }
-
-
-# ============================================
-# STATUS CLASSIFICATION
-# ============================================
 
 def classify_status_change(
     old_status,
     new_status
 ):
-    """
-    Classifica un cambio di status.
-    """
 
-    old_status = str(
-        old_status or ""
-    ).upper()
+    old_status = normalize(
+        old_status
+    )
 
-    new_status = str(
-        new_status or ""
-    ).upper()
+    new_status = normalize(
+        new_status
+    )
 
-    # ----------------------------------------
-    # Positive transition
-    # ----------------------------------------
-
-    if (
+    direction = status_direction(
         old_status,
         new_status
-    ) in POSITIVE_STATUS_TRANSITIONS:
-
-        return {
-            "type": "STATUS_CHANGE",
-            "severity": "MEDIUM",
-            "direction": "POSITIVE",
-            "subtype": "TRIAL_PROGRESS",
-            "field": "status",
-            "old_value": old_status,
-            "new_value": new_status,
-        }
-
-    # ----------------------------------------
-    # Trial completed
-    # ----------------------------------------
+    )
 
     if new_status == "COMPLETED":
 
-        return {
-            "type": "STATUS_CHANGE",
-            "severity": "HIGH",
-            "direction": "CATALYST",
-            "subtype": "TRIAL_COMPLETED",
-            "field": "status",
-            "old_value": old_status,
-            "new_value": new_status,
-        }
+        subtype = "TRIAL_COMPLETED"
 
-    # ----------------------------------------
-    # Negative status
-    # ----------------------------------------
+    elif new_status == "TERMINATED":
 
-    if new_status in NEGATIVE_STATUS_TRANSITIONS:
+        subtype = "TRIAL_TERMINATED"
 
-        return {
-            "type": "STATUS_CHANGE",
-            "severity": "HIGH",
-            "direction": "NEGATIVE",
-            "subtype": "TRIAL_STOPPED",
-            "field": "status",
-            "old_value": old_status,
-            "new_value": new_status,
-        }
+    elif new_status == "SUSPENDED":
 
-    # ----------------------------------------
-    # Active not recruiting
-    # ----------------------------------------
+        subtype = "TRIAL_SUSPENDED"
 
-    if new_status == "ACTIVE_NOT_RECRUITING":
+    elif new_status == "WITHDRAWN":
 
-        return {
-            "type": "STATUS_CHANGE",
-            "severity": "MEDIUM",
-            "direction": "NEUTRAL",
-            "subtype": "RECRUITMENT_CLOSED",
-            "field": "status",
-            "old_value": old_status,
-            "new_value": new_status,
-        }
+        subtype = "TRIAL_WITHDRAWN"
 
-    # ----------------------------------------
-    # Recruiting
-    # ----------------------------------------
+    elif new_status == "RECRUITING":
 
-    if new_status == "RECRUITING":
+        subtype = "TRIAL_RECRUITING"
 
-        return {
-            "type": "STATUS_CHANGE",
-            "severity": "MEDIUM",
-            "direction": "POSITIVE",
-            "subtype": "RECRUITING_STARTED",
-            "field": "status",
-            "old_value": old_status,
-            "new_value": new_status,
-        }
+    else:
 
-    # ----------------------------------------
-    # Generic status change
-    # ----------------------------------------
+        subtype = "STATUS_CHANGE"
 
     return {
         "type": "STATUS_CHANGE",
-        "severity": "MEDIUM",
-        "direction": "UNKNOWN",
-        "subtype": "STATUS_UPDATED",
-        "field": "status",
+        "subtype": subtype,
         "old_value": old_status,
         "new_value": new_status,
+        "direction": direction,
     }
 
 
-# ============================================
-# GENERIC FIELD CLASSIFICATION
-# ============================================
+def classify_date_change(
+    old_date,
+    new_date
+):
 
-def classify_change(
+    old = parse_date(
+        old_date
+    )
+
+    new = parse_date(
+        new_date
+    )
+
+    if not old or not new:
+        return None
+
+    if old == new:
+        return None
+
+    if new < old:
+
+        subtype = "DATE_ACCELERATED"
+        direction = "POSITIVE"
+
+    else:
+
+        subtype = "DATE_DELAYED"
+        direction = "NEGATIVE"
+
+    return {
+        "type": "DATE_CHANGE",
+        "subtype": subtype,
+        "old_value": old_date,
+        "new_value": new_date,
+        "direction": direction,
+        "event_date": new_date,
+    }
+
+
+def classify_enrollment_change(
+    old_enrollment,
+    new_enrollment
+):
+
+    if (
+        old_enrollment is None
+        or new_enrollment is None
+    ):
+        return None
+
+    try:
+
+        old_value = int(
+            old_enrollment
+        )
+
+        new_value = int(
+            new_enrollment
+        )
+
+    except (
+        ValueError,
+        TypeError
+    ):
+
+        return None
+
+    if new_value <= old_value:
+        return None
+
+    return {
+        "type": "ENROLLMENT_CHANGE",
+        "subtype": "ENROLLMENT_INCREASED",
+        "old_value": old_value,
+        "new_value": new_value,
+        "direction": "UNKNOWN",
+    }
+
+
+def classify_field_change(
     field,
     old_value,
     new_value
 ):
-    """
-    Classifica una singola modifica.
-    """
 
-    field = str(
-        field or ""
-    ).lower()
-
-    # ----------------------------------------
-    # STATUS
-    # ----------------------------------------
-
-    if field == "status":
-
-        return classify_status_change(
-            old_value,
-            new_value
-        )
-
-    # ----------------------------------------
-    # DATES
-    # ----------------------------------------
-
-    if field in {
-        "start_date",
-        "completion_date",
-        "primary_completion_date",
-    }:
-
-        return classify_date_change(
-            field,
-            old_value,
-            new_value
-        )
-
-    # ----------------------------------------
-    # ENROLLMENT
-    # ----------------------------------------
-
-    if field == "enrollment":
-
-        return {
-            "type": "ENROLLMENT_CHANGE",
-            "severity": "MEDIUM",
-            "direction": "UNKNOWN",
-            "subtype": "ENROLLMENT_UPDATED",
-            "field": field,
-            "old_value": old_value,
-            "new_value": new_value,
-        }
-
-    # ----------------------------------------
-    # ENROLLMENT TYPE
-    # ----------------------------------------
-
-    if field == "enrollment_type":
-
-        return {
-            "type": "ENROLLMENT_CHANGE",
-            "severity": "LOW",
-            "direction": "UNKNOWN",
-            "subtype": "ENROLLMENT_TYPE_UPDATED",
-            "field": field,
-            "old_value": old_value,
-            "new_value": new_value,
-        }
-
-    # ----------------------------------------
-    # PHASE
-    # ----------------------------------------
-
-    if field == "phases":
-
-        return {
-            "type": "PHASE_CHANGE",
-            "severity": "HIGH",
-            "direction": "POSITIVE",
-            "subtype": "PHASE_UPDATED",
-            "field": field,
-            "old_value": old_value,
-            "new_value": new_value,
-        }
-
-    # ----------------------------------------
-    # PROTOCOL / TITLE
-    # ----------------------------------------
-
-    if field in {
-        "title",
-        "official_title",
-    }:
-
-        return {
-            "type": "PROTOCOL_CHANGE",
-            "severity": "HIGH",
-            "direction": "UNKNOWN",
-            "subtype": "PROTOCOL_UPDATED",
-            "field": field,
-            "old_value": old_value,
-            "new_value": new_value,
-        }
-
-    # ----------------------------------------
-    # GENERIC
-    # ----------------------------------------
+    if old_value == new_value:
+        return None
 
     return {
         "type": "FIELD_CHANGE",
-        "severity": "LOW",
-        "direction": "UNKNOWN",
-        "subtype": "FIELD_UPDATED",
+        "subtype": field,
         "field": field,
         "old_value": old_value,
         "new_value": new_value,
+        "direction": "UNKNOWN",
     }
 
 
-# ============================================
-# MULTIPLE CHANGES
-# ============================================
-
-def classify_trial_changes(changes):
-    """
-    Trasforma tutte le modifiche di un trial
-    in eventi Catalyst.
-    """
+def classify_trial_changes(
+    changes
+):
 
     events = []
 
-    for field, values in changes.items():
+    # ========================================================
+    # STATUS
+    # ========================================================
+
+    old_status = changes.get(
+        "status",
+        {}
+    ).get(
+        "old"
+    )
+
+    new_status = changes.get(
+        "status",
+        {}
+    ).get(
+        "new"
+    )
+
+    if (
+        old_status is not None
+        and new_status is not None
+        and old_status != new_status
+    ):
+
+        events.append(
+            classify_status_change(
+                old_status,
+                new_status
+            )
+        )
+
+    # ========================================================
+    # PRIMARY COMPLETION DATE
+    # ========================================================
+
+    primary_date = changes.get(
+        "primary_completion_date",
+        {}
+    )
+
+    date_event = classify_date_change(
+        primary_date.get("old"),
+        primary_date.get("new")
+    )
+
+    if date_event:
+
+        date_event["field"] = (
+            "primary_completion_date"
+        )
+
+        events.append(
+            date_event
+        )
+
+    # ========================================================
+    # STUDY COMPLETION DATE
+    # ========================================================
+
+    study_date = changes.get(
+        "study_completion_date",
+        {}
+    )
+
+    date_event = classify_date_change(
+        study_date.get("old"),
+        study_date.get("new")
+    )
+
+    if date_event:
+
+        date_event["field"] = (
+            "study_completion_date"
+        )
+
+        events.append(
+            date_event
+        )
+
+    # ========================================================
+    # ENROLLMENT
+    # ========================================================
+
+    enrollment = changes.get(
+        "enrollment",
+        {}
+    )
+
+    enrollment_event = (
+        classify_enrollment_change(
+            enrollment.get("old"),
+            enrollment.get("new")
+        )
+    )
+
+    if enrollment_event:
+
+        events.append(
+            enrollment_event
+        )
+
+    # ========================================================
+    # OTHER FIELDS
+    # ========================================================
+
+    ignored_fields = {
+        "status",
+        "primary_completion_date",
+        "study_completion_date",
+        "enrollment",
+    }
+
+    for field, change in changes.items():
+
+        if field in ignored_fields:
+            continue
 
         if not isinstance(
-            values,
+            change,
             dict
         ):
             continue
 
-        old_value = values.get(
+        old_value = change.get(
             "old"
         )
 
-        new_value = values.get(
+        new_value = change.get(
             "new"
         )
 
-        event = classify_change(
+        event = classify_field_change(
             field,
             old_value,
             new_value
         )
 
-        events.append(
-            event
-        )
+        if event:
+
+            events.append(
+                event
+            )
+
+    return events
+
+
+def enrich_events(
+    events,
+    trial=None
+):
+
+    trial = trial or {}
+
+    phase = trial.get(
+        "phase"
+    )
+
+    for event in events:
+
+        event["phase"] = phase
+
+        if (
+            event.get("event_date")
+            is None
+        ):
+
+            event["event_date"] = (
+                trial.get(
+                    "primary_completion_date"
+                )
+            )
 
     return events
