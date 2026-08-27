@@ -18,30 +18,6 @@ DEFAULT_CRITICAL_SCORE = 80
 
 
 # ============================================
-# CLINICAL EVENT TYPES
-# ============================================
-
-HIGH_VALUE_SUBTYPES = {
-    "PRIMARY_ENDPOINT_MET",
-    "PRIMARY_ENDPOINT_FAILED",
-    "TOPLINE_RESULTS",
-    "FDA_APPROVAL",
-    "FDA_REJECTION",
-    "TRIAL_STOPPED_EFFICACY",
-    "TRIAL_STOPPED_SAFETY",
-    "TRIAL_COMPLETED",
-    "TRIAL_TERMINATED",
-    "TRIAL_SUSPENDED",
-    "TRIAL_WITHDRAWN",
-    "DATE_ACCELERATED",
-    "DATE_DELAYED",
-    "PHASE_3_STARTED",
-    "PHASE_2_STARTED",
-    "ENROLLMENT_COMPLETED",
-}
-
-
-# ============================================
 # EVENTS THAT SHOULD NOT ALERT BY DEFAULT
 # ============================================
 
@@ -105,23 +81,8 @@ def is_alert_worthy(
         )
     ).upper()
 
-    # ----------------------------------------
-    # Explicitly ignored events
-    # ----------------------------------------
-
     if subtype in IGNORED_SUBTYPES:
         return False
-
-    # ----------------------------------------
-    # Score threshold
-    #
-    # Qualsiasi evento che supera la soglia
-    # è potenzialmente rilevante.
-    #
-    # Questo mantiene la compatibilità con
-    # eventi Catalyst futuri non ancora
-    # presenti nella lista HIGH_VALUE_SUBTYPES.
-    # ----------------------------------------
 
     return True
 
@@ -154,8 +115,10 @@ def filter_alerts(
     minimum_score=DEFAULT_ALERT_SCORE
 ):
     """
-    Restituisce soltanto gli eventi
-    che devono generare un alert.
+    Restituisce gli eventi che superano
+    la soglia.
+
+    Mantiene l'ordine originale degli eventi.
     """
 
     alerts = []
@@ -171,9 +134,7 @@ def filter_alerts(
                 event
             )
 
-    return sort_alerts(
-        alerts
-    )
+    return alerts
 
 
 # ============================================
@@ -185,7 +146,9 @@ def filter_critical(
     critical_score=DEFAULT_CRITICAL_SCORE
 ):
     """
-    Restituisce soltanto gli eventi critici.
+    Restituisce gli eventi critici.
+
+    Mantiene l'ordine originale degli eventi.
     """
 
     critical = []
@@ -201,9 +164,7 @@ def filter_critical(
                 event
             )
 
-    return sort_alerts(
-        critical
-    )
+    return critical
 
 
 # ============================================
@@ -214,6 +175,10 @@ def sort_alerts(events):
     """
     Ordina gli eventi dal punteggio più alto
     al più basso.
+
+    Questa funzione viene utilizzata
+    esplicitamente quando si desidera
+    ordinare gli alert.
     """
 
     return sorted(
