@@ -1,8 +1,30 @@
 from scanner.trial_scanner import scan
-from scanner.telegram import send_telegram, format_catalyst_alert
+from scanner.telegram import (
+    send_telegram,
+    send_catalyst_alerts,
+)
 
+
+# ============================================
+# BUILD SUMMARY
+# ============================================
 
 def build_summary(result):
+
+    alerts = result.get(
+        "alerts",
+        []
+    )
+
+    errors = result.get(
+        "errors",
+        []
+    )
+
+    detected_changes = result.get(
+        "detected_changes",
+        []
+    )
 
     lines = [
         "🧬 PHARMA RADAR — SCAN",
@@ -11,12 +33,17 @@ def build_summary(result):
         f"🔬 Trials found: {result['total_trials']}",
         f"🎯 Relevant trials: {result['relevant_trials']}",
         f"🧹 Filtered out: {result['filtered_trials']}",
-        f"🚨 Alerts: {len(result['alerts'])}",
-        f"❌ Errors: {len(result['errors'])}",
+        f"🔄 Changes detected: {len(detected_changes)}",
+        f"🚨 Alerts: {len(alerts)}",
+        f"❌ Errors: {len(errors)}",
         "",
     ]
 
-    if result["alerts"]:
+    # ========================================
+    # ALERT SUMMARY
+    # ========================================
+
+    if alerts:
 
         lines.append(
             "🚨 CATALYST ALERTS"
@@ -24,7 +51,7 @@ def build_summary(result):
 
         lines.append("")
 
-        for alert in result["alerts"]:
+        for alert in alerts:
 
             event = alert.get(
                 "event",
@@ -61,28 +88,42 @@ def build_summary(result):
 
         lines.append("")
 
-    if result["errors"]:
+    # ========================================
+    # ERRORS
+    # ========================================
+
+    if errors:
 
         lines.append(
             "❌ ERRORS"
         )
 
-        for error in result["errors"]:
+        for error in errors:
 
             lines.append(
                 f"• {error.get('ticker', 'UNKNOWN')} "
                 f"— {error.get('program', 'UNKNOWN')}"
             )
 
+            if error.get("error"):
+
+                lines.append(
+                    f"  {error.get('error')}"
+                )
+
         lines.append("")
 
-    if result["alerts"]:
+    # ========================================
+    # STATUS
+    # ========================================
+
+    if alerts:
 
         lines.append(
             "Status: REVIEW"
         )
 
-    elif result["errors"]:
+    elif errors:
 
         lines.append(
             "Status: WARNING"
@@ -99,6 +140,10 @@ def build_summary(result):
     )
 
 
+# ============================================
+# SEND ALERTS
+# ============================================
+
 def send_alerts(result):
 
     alerts = result.get(
@@ -106,16 +151,17 @@ def send_alerts(result):
         []
     )
 
-    for alert in alerts:
+    if not alerts:
+        return []
 
-        message = format_catalyst_alert(
-            alert
-        )
+    return send_catalyst_alerts(
+        alerts
+    )
 
-        send_telegram(
-            message
-        )
 
+# ============================================
+# MAIN
+# ============================================
 
 def main():
 
@@ -132,22 +178,26 @@ def main():
     print()
     print(summary)
 
-    # =====================================
+    # ========================================
     # TELEGRAM SUMMARY
-    # =====================================
+    # ========================================
 
     send_telegram(
         summary
     )
 
-    # =====================================
+    # ========================================
     # TELEGRAM CATALYST ALERTS
-    # =====================================
+    # ========================================
 
     send_alerts(
         result
     )
 
+
+# ============================================
+# ENTRY POINT
+# ============================================
 
 if __name__ == "__main__":
 
