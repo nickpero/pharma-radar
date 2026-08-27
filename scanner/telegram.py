@@ -129,18 +129,13 @@ def format_catalyst_alert(alert):
     """
     Crea il messaggio Telegram per un catalyst.
 
-    Mantiene l'intestazione compatibile con
-    i test esistenti del Pharma Radar.
+    Mantiene il formato compatibile con
+    i test esistenti.
     """
 
     ticker = alert.get(
         "ticker",
         "UNKNOWN"
-    )
-
-    company = alert.get(
-        "company",
-        ""
     )
 
     program = alert.get(
@@ -230,74 +225,38 @@ def format_catalyst_alert(alert):
     )
 
     # ========================================
-    # COMPANY
-    # ========================================
-
-    if company and company != ticker:
-
-        company_line = (
-            f"{ticker} — {company}"
-        )
-
-    else:
-
-        company_line = ticker
-
-    # ========================================
-    # EVENT
-    # ========================================
-
-    if subtype:
-
-        event_line = (
-            f"🎯 {subtype}"
-        )
-
-    else:
-
-        event_line = (
-            f"🎯 {event_type}"
-        )
-
-    # ========================================
-    # CHANGES
-    # ========================================
-
-    change_lines = []
-
-    if old_value is not None:
-
-        change_lines.append(
-            f"Old: {old_value}"
-        )
-
-    if new_value is not None:
-
-        change_lines.append(
-            f"New: {new_value}"
-        )
-
-    # ========================================
     # MESSAGE
     # ========================================
 
     lines = [
         "🚨 PHARMA RADAR — CATALYST",
         "",
-        f"{severity_icon} {company_line}",
-        f"💊 {program}",
+        f"{severity_icon} {ticker} — {program}",
         f"🧬 {nct_id}",
         "",
-        event_line,
-        f"Type: {event_type}",
+        f"Event: {event_type}",
+        f"Subtype: {subtype}",
     ]
 
-    if change_lines:
+    # ========================================
+    # CHANGES
+    # ========================================
 
-        lines.extend([
-            "",
-            *change_lines,
-        ])
+    if old_value is not None:
+
+        lines.append(
+            f"Old: {old_value}"
+        )
+
+    if new_value is not None:
+
+        lines.append(
+            f"New: {new_value}"
+        )
+
+    # ========================================
+    # SCORE
+    # ========================================
 
     lines.extend([
         "",
