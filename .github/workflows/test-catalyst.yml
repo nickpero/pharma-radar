@@ -31,3 +31,4 @@ jobs:
           python -m scanner.test_trial_scanner
           python -m scanner.test_telegram
           python -m scanner.test_main
+          python -m scanner.test_catalyst_score
