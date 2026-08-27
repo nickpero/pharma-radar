@@ -84,8 +84,11 @@ def is_alert_worthy(
 ):
     """
     Restituisce True se l'evento supera
-    la soglia e rappresenta un evento
-    clinicamente rilevante.
+    la soglia di alert.
+
+    Gli eventi esplicitamente ignorati
+    vengono esclusi anche se hanno uno
+    score elevato.
     """
 
     score = get_score(
@@ -102,13 +105,6 @@ def is_alert_worthy(
         )
     ).upper()
 
-    event_type = str(
-        event.get(
-            "type",
-            ""
-        )
-    ).upper()
-
     # ----------------------------------------
     # Explicitly ignored events
     # ----------------------------------------
@@ -117,31 +113,17 @@ def is_alert_worthy(
         return False
 
     # ----------------------------------------
-    # High-value clinical events
-    # ----------------------------------------
-
-    if subtype in HIGH_VALUE_SUBTYPES:
-        return True
-
-    # ----------------------------------------
-    # Important event types
-    # ----------------------------------------
-
-    if event_type in {
-        "STATUS_CHANGE",
-        "DATE_CHANGE",
-        "PHASE_CHANGE",
-    }:
-        return True
-
-    # ----------------------------------------
-    # Generic high-score fallback
+    # Score threshold
     #
-    # Protects compatibility with future
-    # catalyst types not yet known.
+    # Qualsiasi evento che supera la soglia
+    # è potenzialmente rilevante.
+    #
+    # Questo mantiene la compatibilità con
+    # eventi Catalyst futuri non ancora
+    # presenti nella lista HIGH_VALUE_SUBTYPES.
     # ----------------------------------------
 
-    return score >= 80
+    return True
 
 
 # ============================================
@@ -153,7 +135,7 @@ def is_critical(
     critical_score=DEFAULT_CRITICAL_SCORE
 ):
     """
-    Identifica gli eventi CRITICAL.
+    Identifica gli eventi critici.
     """
 
     score = get_score(
