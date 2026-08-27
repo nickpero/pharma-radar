@@ -1,226 +1,187 @@
 from scanner.catalyst import (
-    classify_change,
     classify_status_change,
+    classify_date_change,
+    classify_enrollment_change,
     classify_trial_changes,
+    enrich_events,
 )
 
 
-def test_status_change():
+def test_completed_status():
 
     event = classify_status_change(
         "RECRUITING",
-        "COMPLETED"
+        "COMPLETED",
     )
 
     assert event["type"] == "STATUS_CHANGE"
-    assert event["severity"] == "HIGH"
-    assert event["direction"] == "CATALYST"
     assert event["subtype"] == "TRIAL_COMPLETED"
+    assert event["direction"] == "POSITIVE"
 
 
-def test_negative_status_change():
+def test_terminated_status():
 
     event = classify_status_change(
         "RECRUITING",
-        "TERMINATED"
+        "TERMINATED",
     )
 
-    assert event["type"] == "STATUS_CHANGE"
-    assert event["severity"] == "HIGH"
+    assert event["subtype"] == "TRIAL_TERMINATED"
     assert event["direction"] == "NEGATIVE"
-    assert event["subtype"] == "TRIAL_STOPPED"
 
 
-def test_positive_status_change():
+def test_suspended_status():
 
     event = classify_status_change(
-        "NOT_YET_RECRUITING",
-        "RECRUITING"
+        "RECRUITING",
+        "SUSPENDED",
     )
 
-    assert event["type"] == "STATUS_CHANGE"
-    assert event["severity"] == "MEDIUM"
-    assert event["direction"] == "POSITIVE"
-    assert event["subtype"] == "TRIAL_PROGRESS"
+    assert event["subtype"] == "TRIAL_SUSPENDED"
+    assert event["direction"] == "NEGATIVE"
 
 
 def test_recruiting_status():
 
     event = classify_status_change(
         "NOT_YET_RECRUITING",
-        "RECRUITING"
-    )
-
-    assert event["subtype"] == "TRIAL_PROGRESS"
-
-
-def test_active_not_recruiting():
-
-    event = classify_status_change(
         "RECRUITING",
-        "ACTIVE_NOT_RECRUITING"
     )
 
-    assert event["type"] == "STATUS_CHANGE"
-    assert event["severity"] == "MEDIUM"
-    assert event["direction"] == "NEUTRAL"
-    assert event["subtype"] == "RECRUITMENT_CLOSED"
+    assert event["subtype"] == "TRIAL_RECRUITING"
+    assert event["direction"] == "POSITIVE"
 
 
 def test_date_accelerated():
 
-    event = classify_change(
-        "completion_date",
-        "2027-06-30",
-        "2027-03-31"
+    event = classify_date_change(
+        "2027-12-01",
+        "2027-06-01",
     )
 
     assert event["type"] == "DATE_CHANGE"
-    assert event["severity"] == "HIGH"
-    assert event["direction"] == "POSITIVE"
     assert event["subtype"] == "DATE_ACCELERATED"
-    assert event["days_changed"] == 91
+    assert event["direction"] == "POSITIVE"
 
 
 def test_date_delayed():
 
-    event = classify_change(
-        "completion_date",
-        "2027-06-30",
-        "2027-12-31"
+    event = classify_date_change(
+        "2027-06-01",
+        "2028-01-01",
     )
 
-    assert event["type"] == "DATE_CHANGE"
-    assert event["severity"] == "HIGH"
-    assert event["direction"] == "NEGATIVE"
     assert event["subtype"] == "DATE_DELAYED"
+    assert event["direction"] == "NEGATIVE"
 
 
-def test_invalid_date():
+def test_same_date():
 
-    event = classify_change(
-        "completion_date",
-        "unknown",
-        "2027-12-31"
+    event = classify_date_change(
+        "2027-06-01",
+        "2027-06-01",
     )
 
-    assert event["type"] == "DATE_CHANGE"
-    assert event["severity"] == "HIGH"
-    assert event["direction"] == "UNKNOWN"
+    assert event is None
 
 
-def test_enrollment_change():
+def test_enrollment_increased():
 
-    event = classify_change(
-        "enrollment",
+    event = classify_enrollment_change(
         100,
-        150
+        150,
     )
 
+    assert event is not None
     assert event["type"] == "ENROLLMENT_CHANGE"
-    assert event["severity"] == "MEDIUM"
-    assert event["direction"] == "UNKNOWN"
-    assert event["subtype"] == "ENROLLMENT_UPDATED"
+    assert event["subtype"] == "ENROLLMENT_INCREASED"
 
 
-def test_enrollment_type_change():
+def test_enrollment_decreased():
 
-    event = classify_change(
-        "enrollment_type",
-        "ESTIMATED",
-        "ACTUAL"
+    event = classify_enrollment_change(
+        150,
+        100,
     )
 
-    assert event["type"] == "ENROLLMENT_CHANGE"
-    assert event["severity"] == "LOW"
+    assert event is None
 
 
-def test_phase_change():
-
-    event = classify_change(
-        "phases",
-        ["PHASE2"],
-        ["PHASE3"]
-    )
-
-    assert event["type"] == "PHASE_CHANGE"
-    assert event["severity"] == "HIGH"
-    assert event["direction"] == "POSITIVE"
-
-
-def test_protocol_change():
-
-    event = classify_change(
-        "official_title",
-        "Old title",
-        "New title"
-    )
-
-    assert event["type"] == "PROTOCOL_CHANGE"
-    assert event["severity"] == "HIGH"
-    assert event["direction"] == "UNKNOWN"
-
-
-def test_generic_change():
-
-    event = classify_change(
-        "conditions",
-        ["Condition A"],
-        ["Condition B"]
-    )
-
-    assert event["type"] == "FIELD_CHANGE"
-    assert event["severity"] == "LOW"
-
-
-def test_multiple_changes():
+def test_classify_trial_changes():
 
     changes = {
         "status": {
             "old": "RECRUITING",
-            "new": "COMPLETED"
+            "new": "COMPLETED",
         },
-        "completion_date": {
-            "old": "2027-06-30",
-            "new": "2027-03-31"
-        }
+        "primary_completion_date": {
+            "old": "2027-12-01",
+            "new": "2027-06-01",
+        },
+        "enrollment": {
+            "old": 100,
+            "new": 150,
+        },
     }
 
     events = classify_trial_changes(
         changes
     )
 
-    assert len(events) == 2
+    assert len(events) == 3
 
-    assert events[0]["type"] == "STATUS_CHANGE"
-    assert events[0]["direction"] == "CATALYST"
+    assert events[0]["subtype"] == (
+        "TRIAL_COMPLETED"
+    )
 
-    assert events[1]["type"] == "DATE_CHANGE"
-    assert events[1]["direction"] == "POSITIVE"
-    assert events[1]["subtype"] == "DATE_ACCELERATED"
+    assert events[1]["subtype"] == (
+        "DATE_ACCELERATED"
+    )
+
+    assert events[2]["subtype"] == (
+        "ENROLLMENT_INCREASED"
+    )
+
+
+def test_enrich_events():
+
+    events = [
+        {
+            "type": "STATUS_CHANGE",
+            "subtype": "TRIAL_COMPLETED",
+        }
+    ]
+
+    trial = {
+        "phase": "PHASE3",
+        "primary_completion_date": "2027-06-01",
+    }
+
+    enriched = enrich_events(
+        events,
+        trial,
+    )
+
+    assert enriched[0]["phase"] == "PHASE3"
+    assert enriched[0]["event_date"] == (
+        "2027-06-01"
+    )
 
 
 if __name__ == "__main__":
 
-    test_status_change()
-    test_negative_status_change()
-    test_positive_status_change()
+    test_completed_status()
+    test_terminated_status()
+    test_suspended_status()
     test_recruiting_status()
-    test_active_not_recruiting()
-
     test_date_accelerated()
     test_date_delayed()
-    test_invalid_date()
-
-    test_enrollment_change()
-    test_enrollment_type_change()
-
-    test_phase_change()
-    test_protocol_change()
-    test_generic_change()
-
-    test_multiple_changes()
+    test_same_date()
+    test_enrollment_increased()
+    test_enrollment_decreased()
+    test_classify_trial_changes()
+    test_enrich_events()
 
     print(
-        "✅ Catalyst Engine tests passed"
+        "✅ Catalyst classification tests passed"
     )
