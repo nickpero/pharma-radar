@@ -1,17 +1,29 @@
+"""
+Pharma Radar — Telegram Alerts
+
+Gestisce l'invio degli alert Pharma Radar
+tramite Telegram Bot API.
+"""
+
 import os
 import requests
 
 
 TELEGRAM_API = "https://api.telegram.org"
 
+MAX_MESSAGE_LENGTH = 4096
+
+
+# ============================================
+# SEND TELEGRAM
+# ============================================
 
 def send_telegram(message):
     """
     Invia un messaggio Telegram usando Bot API.
 
-    Il testo viene passato direttamente come parametro
-    alla libreria requests: NON viene fatto URL encoding
-    manuale del messaggio.
+    Il messaggio viene inviato tramite POST
+    senza URL encoding manuale.
     """
 
     token = os.getenv(
@@ -30,6 +42,22 @@ def send_telegram(message):
     if not chat_id:
         raise RuntimeError(
             "TELEGRAM_CHAT_ID is not configured"
+        )
+
+    if not isinstance(message, str):
+        message = str(message)
+
+    if not message.strip():
+        raise ValueError(
+            "Telegram message is empty"
+        )
+
+    # Telegram Bot API limita i messaggi
+    # testuali a 4096 caratteri.
+    if len(message) > MAX_MESSAGE_LENGTH:
+        message = (
+            message[:MAX_MESSAGE_LENGTH - 20]
+            + "\n\n[TRUNCATED]"
         )
 
     url = (
@@ -54,6 +82,54 @@ def send_telegram(message):
     return response.json()
 
 
+# ============================================
+# DIRECTION ICON
+# ============================================
+
+def get_direction_icon(direction):
+
+    direction = str(
+        direction or "UNKNOWN"
+    ).upper()
+
+    if direction in {
+        "POSITIVE",
+        "CATALYST",
+    }:
+        return "📈"
+
+    if direction == "NEGATIVE":
+        return "📉"
+
+    return "⚪"
+
+
+# ============================================
+# SEVERITY ICON
+# ============================================
+
+def get_severity_icon(label):
+
+    label = str(
+        label or "LOW"
+    ).upper()
+
+    if label == "CRITICAL":
+        return "🚨"
+
+    if label == "HIGH":
+        return "🔴"
+
+    if label == "MEDIUM":
+        return "🟠"
+
+    return "⚪"
+
+
+# ============================================
+# CATALYST ALERT FORMAT
+# ============================================
+
 def format_catalyst_alert(alert):
     """
     Crea il messaggio Telegram per un catalyst.
@@ -62,6 +138,11 @@ def format_catalyst_alert(alert):
     ticker = alert.get(
         "ticker",
         "UNKNOWN"
+    )
+
+    company = alert.get(
+        "company",
+        ""
     )
 
     program = alert.get(
@@ -79,34 +160,55 @@ def format_catalyst_alert(alert):
         {}
     )
 
+    if not isinstance(event, dict):
+        event = {}
+
     event_type = event.get(
         "type",
-        "UNKNOWN"
+        alert.get(
+            "event_type",
+            "UNKNOWN"
+        )
     )
 
     severity = event.get(
         "severity",
-        "UNKNOWN"
+        alert.get(
+            "severity",
+            "UNKNOWN"
+        )
     )
 
     direction = event.get(
         "direction",
-        "UNKNOWN"
+        alert.get(
+            "direction",
+            "UNKNOWN"
+        )
     )
 
     score = event.get(
         "score",
-        0
+        alert.get(
+            "score",
+            0
+        )
     )
 
     label = event.get(
         "label",
-        "LOW"
+        alert.get(
+            "label",
+            "LOW"
+        )
     )
 
     subtype = event.get(
         "subtype",
-        ""
+        alert.get(
+            "subtype",
+            ""
+        )
     )
 
     old_value = event.get(
@@ -118,62 +220,103 @@ def format_catalyst_alert(alert):
     )
 
     # ========================================
-    # DIRECTION ICON
+    # ICONS
     # ========================================
 
-    if direction in {
-        "POSITIVE",
-        "CATALYST",
-    }:
-        direction_icon = "📈"
+    direction_icon = get_direction_icon(
+        direction
+    )
 
-    elif direction == "NEGATIVE":
-        direction_icon = "📉"
+    severity_icon = get_severity_icon(
+        label
+    )
+
+    # ========================================
+    # COMPANY LINE
+    # ========================================
+
+    if company and company != ticker:
+
+        company_line = (
+            f"{ticker} — {company}"
+        )
 
     else:
-        direction_icon = "⚪"
+
+        company_line = ticker
 
     # ========================================
-    # SEVERITY ICON
+    # EVENT DESCRIPTION
     # ========================================
 
-    if label == "CRITICAL":
-        severity_icon = "🚨"
+    if subtype:
 
-    elif label == "HIGH":
-        severity_icon = "🔴"
-
-    elif label == "MEDIUM":
-        severity_icon = "🟠"
+        event_line = (
+            f"🎯 {subtype}"
+        )
 
     else:
-        severity_icon = "⚪"
+
+        event_line = (
+            f"🎯 {event_type}"
+        )
+
+    # ========================================
+    # CHANGES
+    # ========================================
+
+    change_lines = []
+
+    if old_value is not None:
+
+        change_lines.append(
+            f"Old: {old_value}"
+        )
+
+    if new_value is not None:
+
+        change_lines.append(
+            f"New: {new_value}"
+        )
 
     # ========================================
     # MESSAGE
     # ========================================
 
     lines = [
-        "🚨 PHARMA RADAR — CATALYST",
+        f"{severity_icon} PHARMA RADAR — {label}",
         "",
-        f"{severity_icon} {ticker} — {program}",
+        f"🏢 {company_line}",
+        f"💊 {program}",
         f"🧬 {nct_id}",
         "",
-        f"Event: {event_type}",
-        f"Subtype: {subtype}",
-        "",
-        f"Old: {old_value}",
-        f"New: {new_value}",
-        "",
-        f"🎯 Score: {score}/100",
-        f"{severity_icon} {label}",
-        f"{direction_icon} Direction: {direction}",
+        event_line,
+        f"Type: {event_type}",
     ]
 
+    if change_lines:
+
+        lines.extend([
+            "",
+            *change_lines,
+        ])
+
+    lines.extend([
+        "",
+        f"🎯 Score: {score}/100",
+        f"{severity_icon} Severity: {severity}",
+        f"{direction_icon} Direction: {direction}",
+    ])
+
     return "\n".join(
-        lines
+        str(line)
+        for line in lines
     )
 
+
+# ============================================
+# SEND SINGLE ALERT
+# ============================================
 
 def send_catalyst_alert(alert):
     """
@@ -189,9 +332,17 @@ def send_catalyst_alert(alert):
     )
 
 
+# ============================================
+# SEND MULTIPLE ALERTS
+# ============================================
+
 def send_catalyst_alerts(alerts):
     """
     Invia tutti gli alert catalyst.
+
+    Gli alert vengono inviati separatamente
+    per evitare che un singolo messaggio
+    superi il limite Telegram.
     """
 
     results = []
