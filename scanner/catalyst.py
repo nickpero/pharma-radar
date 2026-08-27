@@ -146,7 +146,7 @@ def classify_date_change(
         "old_value": old_date,
         "new_value": new_date,
         "direction": direction,
-        "event_date": new_date.isoformat(),
+        "event_date": new.isoformat(),
         "severity": "HIGH",
     }
 
