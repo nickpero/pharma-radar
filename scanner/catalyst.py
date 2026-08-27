@@ -288,6 +288,31 @@ def classify_trial_changes(changes):
         events.append(date_event)
 
     # --------------------------------------------------------
+    # GENERIC COMPLETION DATE
+    # --------------------------------------------------------
+    #
+    # Compatibility with older integration data.
+    # --------------------------------------------------------
+
+    completion_date = changes.get(
+        "completion_date",
+        {},
+    )
+
+    date_event = classify_date_change(
+        completion_date.get("old"),
+        completion_date.get("new"),
+    )
+
+    if date_event:
+
+        date_event["field"] = (
+            "completion_date"
+        )
+
+        events.append(date_event)
+
+    # --------------------------------------------------------
     # ENROLLMENT
     # --------------------------------------------------------
 
@@ -314,6 +339,7 @@ def classify_trial_changes(changes):
         "status",
         "primary_completion_date",
         "study_completion_date",
+        "completion_date",
         "enrollment",
     }
 
@@ -362,6 +388,9 @@ def enrich_events(
             event["event_date"] = (
                 trial.get(
                     "primary_completion_date"
+                )
+                or trial.get(
+                    "completion_date"
                 )
             )
 
