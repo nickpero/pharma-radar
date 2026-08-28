@@ -32,3 +32,4 @@ jobs:
           python -m scanner.test_telegram
           python -m scanner.test_main
           python -m scanner.test_catalyst_score
+          python -m scanner.test_end_to_end
