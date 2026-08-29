@@ -91,12 +91,20 @@ def get_trading_impact(event):
     Determina il livello di impatto potenziale
     dell'evento sul titolo.
 
-    La valutazione combina:
+    La gerarchia è:
 
-    - subtype
-    - event type
-    - score
-    - direction
+    1. Catalyst estremi espliciti
+    2. Event subtype conosciuto
+    3. Event type
+    4. Score come supporto
+
+    IMPORTANTE:
+    Un punteggio elevato NON trasforma automaticamente
+    ogni evento in EXTREME.
+
+    Esempio:
+    DATE_ACCELERATED + score 100 = HIGH
+    TRIAL_COMPLETED + CATALYST + score 100 = EXTREME
     """
 
     subtype = str(
@@ -156,25 +164,29 @@ def get_trading_impact(event):
         return "EXTREME"
 
     # ========================================
-    # CRITICAL SCORE
+    # STATUS CHANGE
     # ========================================
 
-    if score >= 80:
+    if event_type == "STATUS_CHANGE":
 
+        # Un catalyst esplicito è Extreme
+        if direction == "CATALYST":
+            return "EXTREME"
+
+        # Un cambiamento positivo/negativo
+        # di status è comunque High
         if direction in {
             "POSITIVE",
             "NEGATIVE",
-            "CATALYST",
         }:
-
-            return "EXTREME"
+            return "HIGH"
 
     # ========================================
-    # HIGH SCORE
+    # KNOWN SUBTYPE
     # ========================================
 
-    if score >= 60:
-        return "HIGH"
+    if subtype in EVENT_PRIORITY:
+        return EVENT_PRIORITY[subtype]
 
     # ========================================
     # EVENT TYPE
@@ -189,22 +201,9 @@ def get_trading_impact(event):
             "DATE_ACCELERATED",
             "DATE_DELAYED",
         }:
-
             return "HIGH"
 
         return "MEDIUM"
-
-    if event_type == "STATUS_CHANGE":
-
-        if direction == "CATALYST":
-            return "EXTREME"
-
-        if direction in {
-            "POSITIVE",
-            "NEGATIVE",
-        }:
-
-            return "HIGH"
 
     if event_type == "ENROLLMENT_CHANGE":
         return "MEDIUM"
@@ -214,6 +213,23 @@ def get_trading_impact(event):
 
     if event_type == "FIELD_CHANGE":
         return "LOW"
+
+    # ========================================
+    # SCORE FALLBACK
+    # ========================================
+
+    # Il punteggio può aumentare la priorità
+    # solo quando non abbiamo già classificato
+    # l'evento in modo più specifico.
+
+    if score >= 80:
+        return "HIGH"
+
+    if score >= 60:
+        return "HIGH"
+
+    if score >= 35:
+        return "MEDIUM"
 
     return DEFAULT_PRIORITY
 
