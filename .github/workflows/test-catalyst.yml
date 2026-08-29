@@ -37,3 +37,4 @@ jobs:
           python -m scanner.test_fda_news
           python -m scanner.test_fda_catalyst
           python -m scanner.test_fda_score
+          python -m scanner.test_main_fda
