@@ -11,7 +11,7 @@ Serve a stabilire la priorità operativa dell'evento.
 
 
 # ============================================
-# TRADING IMPACT
+# TRADING IMPACT LEVELS
 # ============================================
 
 IMPACT_LEVELS = {
@@ -83,13 +83,20 @@ DEFAULT_PRIORITY = "LOW"
 
 
 # ============================================
-# GET IMPACT
+# GET TRADING IMPACT
 # ============================================
 
 def get_trading_impact(event):
     """
     Determina il livello di impatto potenziale
     dell'evento sul titolo.
+
+    La valutazione combina:
+
+    - subtype
+    - event type
+    - score
+    - direction
     """
 
     subtype = str(
@@ -106,34 +113,88 @@ def get_trading_impact(event):
         )
     ).upper()
 
-    # ----------------------------------------
-    # Exact subtype match
-    # ----------------------------------------
+    direction = str(
+        event.get(
+            "direction",
+            "UNKNOWN"
+        )
+    ).upper()
 
-    if subtype in EVENT_PRIORITY:
+    score = event.get(
+        "score",
+        0
+    )
 
-        return EVENT_PRIORITY[
-            subtype
-        ]
+    try:
+        score = int(score)
 
-    # ----------------------------------------
-    # Generic event type
-    # ----------------------------------------
+    except (
+        ValueError,
+        TypeError
+    ):
+        score = 0
+
+    # ========================================
+    # EXTREME SUBTYPES
+    # ========================================
+
+    if subtype in {
+        "TRIAL_POSITIVE",
+        "ENDPOINT_REACHED",
+        "TRIAL_NEGATIVE",
+        "ENDPOINT_FAILED",
+        "TRIAL_STOPPED_SAFETY",
+        "TRIAL_STOPPED_EFFICACY",
+        "FDA_APPROVAL",
+        "EMA_APPROVAL",
+        "FDA_REJECTION",
+        "EMA_REJECTION",
+        "COMPLETE_RESPONSE_LETTER",
+        "CLINICAL_RESULTS",
+    }:
+
+        return "EXTREME"
+
+    # ========================================
+    # CRITICAL SCORE
+    # ========================================
+
+    if score >= 80:
+
+        if direction in {
+            "POSITIVE",
+            "NEGATIVE",
+            "CATALYST",
+        }:
+
+            return "EXTREME"
+
+    # ========================================
+    # HIGH SCORE
+    # ========================================
+
+    if score >= 60:
+        return "HIGH"
+
+    # ========================================
+    # EVENT TYPE
+    # ========================================
 
     if event_type == "PHASE_CHANGE":
         return "HIGH"
 
     if event_type == "DATE_CHANGE":
-        return "HIGH"
+
+        if subtype in {
+            "DATE_ACCELERATED",
+            "DATE_DELAYED",
+        }:
+
+            return "HIGH"
+
+        return "MEDIUM"
 
     if event_type == "STATUS_CHANGE":
-
-        direction = str(
-            event.get(
-                "direction",
-                "UNKNOWN"
-            )
-        ).upper()
 
         if direction == "CATALYST":
             return "EXTREME"
@@ -142,6 +203,7 @@ def get_trading_impact(event):
             "POSITIVE",
             "NEGATIVE",
         }:
+
             return "HIGH"
 
     if event_type == "ENROLLMENT_CHANGE":
@@ -162,7 +224,7 @@ def get_trading_impact(event):
 
 def trading_priority_score(event):
     """
-    Converte l'impatto Trading in un valore 1-4.
+    Converte il Trading Impact in un valore 1-4.
     """
 
     impact = get_trading_impact(
@@ -198,20 +260,37 @@ def get_urgency(event):
 
     try:
         score = int(score)
+
     except (
         ValueError,
         TypeError
     ):
         score = 0
 
+    # ========================================
+    # EXTREME
+    # ========================================
+
     if impact == "EXTREME":
         return "IMMEDIATE"
+
+    # ========================================
+    # HIGH
+    # ========================================
 
     if impact == "HIGH" and score >= 60:
         return "FAST"
 
+    # ========================================
+    # MEDIUM
+    # ========================================
+
     if impact == "MEDIUM":
         return "NORMAL"
+
+    # ========================================
+    # LOW
+    # ========================================
 
     return "LOW"
 
@@ -261,4 +340,4 @@ def enrich_trading_events(events):
     return [
         enrich_trading_event(event)
         for event in events
-      ]
+    ]
