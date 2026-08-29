@@ -122,6 +122,50 @@ def get_severity_icon(label):
 
 
 # ============================================
+# TRADING IMPACT ICON
+# ============================================
+
+def get_trading_impact_icon(impact):
+
+    impact = str(
+        impact or "LOW"
+    ).upper()
+
+    if impact == "EXTREME":
+        return "🔥"
+
+    if impact == "HIGH":
+        return "🔴"
+
+    if impact == "MEDIUM":
+        return "🟠"
+
+    return "⚪"
+
+
+# ============================================
+# URGENCY ICON
+# ============================================
+
+def get_urgency_icon(urgency):
+
+    urgency = str(
+        urgency or "LOW"
+    ).upper()
+
+    if urgency == "IMMEDIATE":
+        return "⚡"
+
+    if urgency == "FAST":
+        return "🚀"
+
+    if urgency == "NORMAL":
+        return "🕐"
+
+    return "⚪"
+
+
+# ============================================
 # CATALYST ALERT FORMAT
 # ============================================
 
@@ -129,8 +173,12 @@ def format_catalyst_alert(alert):
     """
     Crea il messaggio Telegram per un catalyst.
 
-    Mantiene il formato compatibile con
-    i test esistenti.
+    Include:
+    - Catalyst score
+    - Severity
+    - Direction
+    - Trading Impact
+    - Urgency
     """
 
     ticker = alert.get(
@@ -204,6 +252,22 @@ def format_catalyst_alert(alert):
         )
     )
 
+    trading_impact = event.get(
+        "trading_impact",
+        alert.get(
+            "trading_impact",
+            "LOW"
+        )
+    )
+
+    urgency = event.get(
+        "urgency",
+        alert.get(
+            "urgency",
+            "LOW"
+        )
+    )
+
     old_value = event.get(
         "old_value"
     )
@@ -222,6 +286,16 @@ def format_catalyst_alert(alert):
 
     severity_icon = get_severity_icon(
         label
+    )
+
+    trading_impact_icon = (
+        get_trading_impact_icon(
+            trading_impact
+        )
+    )
+
+    urgency_icon = get_urgency_icon(
+        urgency
     )
 
     # ========================================
@@ -255,7 +329,7 @@ def format_catalyst_alert(alert):
         )
 
     # ========================================
-    # SCORE
+    # TRADING INTELLIGENCE
     # ========================================
 
     lines.extend([
@@ -264,6 +338,14 @@ def format_catalyst_alert(alert):
         f"{severity_icon} Severity: {severity}",
         f"{direction_icon} Direction: {direction}",
         f"🏷 Label: {label}",
+        (
+            f"{trading_impact_icon} "
+            f"Trading Impact: {trading_impact}"
+        ),
+        (
+            f"{urgency_icon} "
+            f"Urgency: {urgency}"
+        ),
     ])
 
     return "\n".join(
