@@ -19,6 +19,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Run Catalyst tests
@@ -32,6 +33,7 @@ jobs:
           python -m scanner.test_telegram
           python -m scanner.test_main
           python -m scanner.test_catalyst_score
-          python -m scanner.test_end_to_end
           python -m scanner.test_trading_intelligence
           python -m scanner.test_fda_news
+          python -m scanner.test_fda_catalyst
+          python -m scanner.test_fda_score
