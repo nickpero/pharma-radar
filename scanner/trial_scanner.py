@@ -6,6 +6,7 @@ from scanner.state import load_state, save_state, detect_changes
 from scanner.relevance import is_relevant
 from scanner.catalyst import classify_trial_changes
 from scanner.score import score_events
+from scanner.trading_intelligence import enrich_trading_events
 from scanner.alert_filter import filter_alerts, sort_alerts
 
 
@@ -88,6 +89,18 @@ def build_alert(
         ),
         "subtype": event.get(
             "subtype"
+        ),
+        "trading_impact": event.get(
+            "trading_impact",
+            "LOW"
+        ),
+        "trading_priority": event.get(
+            "trading_priority",
+            1
+        ),
+        "urgency": event.get(
+            "urgency",
+            "LOW"
         )
     }
 
@@ -277,11 +290,21 @@ def scan(baseline=False):
                     )
 
                     # ---------------------------------
+                    # Trading Intelligence
+                    # ---------------------------------
+
+                    enriched_events = (
+                        enrich_trading_events(
+                            scored_events
+                        )
+                    )
+
+                    # ---------------------------------
                     # Alert filter
                     # ---------------------------------
 
                     trial_alerts = filter_alerts(
-                        scored_events
+                        enriched_events
                     )
 
                     # ---------------------------------
@@ -322,8 +345,14 @@ def scan(baseline=False):
                         [new_event]
                     )
 
+                    enriched_events = (
+                        enrich_trading_events(
+                            scored_events
+                        )
+                    )
+
                     trial_alerts = filter_alerts(
-                        scored_events
+                        enriched_events
                     )
 
                     for event in trial_alerts:
@@ -413,4 +442,4 @@ def scan(baseline=False):
         "errors": errors,
         "relevant_details": relevant_details,
         "baseline": baseline
-    }
+                }
