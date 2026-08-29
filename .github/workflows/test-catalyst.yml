@@ -34,3 +34,4 @@ jobs:
           python -m scanner.test_catalyst_score
           python -m scanner.test_end_to_end
           python -m scanner.test_trading_intelligence
+          python -m scanner.test_fda_news
