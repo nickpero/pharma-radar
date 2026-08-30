@@ -36,12 +36,14 @@ from scanner.fda_news import (
 # ============================================
 
 REQUEST_TIMEOUT = 30
+
 MAX_ITEMS = 50
 
 HEADERS = {
     "User-Agent": (
-        "PharmaRadar/1.0 "
-        "(research monitoring tool)"
+        "Mozilla/5.0 "
+        "(compatible; PharmaRadar/1.0; "
+        "+https://www.fda.gov/)"
     )
 }
 
@@ -109,6 +111,7 @@ def get_item_id(item):
 
     if url:
         value = url
+
     else:
         value = (
             f"{item.get('title', '')}|"
@@ -121,7 +124,7 @@ def get_item_id(item):
 
 
 # ============================================
-# PARSE DATE
+# NORMALIZE DATE
 # ============================================
 
 def normalize_date(value):
@@ -212,12 +215,13 @@ def extract_date(element):
 
     if time_element:
 
-        datetime_value = time_element.get(
-            "datetime"
+        datetime_value = (
+            time_element.get(
+                "datetime"
+            )
         )
 
         if datetime_value:
-
             return normalize_date(
                 datetime_value
             )
@@ -228,7 +232,6 @@ def extract_date(element):
         )
 
         if time_text:
-
             return normalize_date(
                 time_text
             )
@@ -241,6 +244,10 @@ def extract_date(element):
         " ",
         strip=True,
     )
+
+    # ----------------------------------------
+    # MONTH NAME DATE
+    # ----------------------------------------
 
     pattern = (
         r"\b("
@@ -433,6 +440,9 @@ def find_news_containers(soup):
     Individua i contenitori delle news FDA.
     """
 
+    if soup is None:
+        return []
+
     selectors = [
         "article",
         ".node--type-press-release",
@@ -461,6 +471,7 @@ def find_news_containers(soup):
     # ----------------------------------------
 
     unique = []
+
     seen = set()
 
     for container in containers:
@@ -499,6 +510,19 @@ def parse_fda_page(
     if not html:
         return []
 
+    try:
+        max_items = int(
+            max_items
+        )
+    except (
+        ValueError,
+        TypeError,
+    ):
+        max_items = MAX_ITEMS
+
+    if max_items <= 0:
+        return []
+
     soup = BeautifulSoup(
         html,
         "html.parser",
@@ -509,6 +533,7 @@ def parse_fda_page(
     )
 
     news = []
+
     seen_ids = set()
 
     for container in containers:
