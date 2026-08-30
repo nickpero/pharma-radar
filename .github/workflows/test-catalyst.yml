@@ -22,6 +22,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Check Python syntax
+        run: |
+          python -m py_compile scanner/fda_feed.py
+
       - name: Run Catalyst tests
         run: |
           python -m scanner.test_catalyst
