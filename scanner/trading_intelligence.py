@@ -1,8 +1,9 @@
 """
 Pharma Radar — Trading Intelligence
 
-Trasforma un evento clinico già classificato e
-scorato in una valutazione orientata al trading.
+Trasforma un evento clinico o regolatorio già
+classificato e scorato in una valutazione
+orientata al trading.
 
 IMPORTANTE:
 Non è una raccomandazione di acquisto o vendita.
@@ -29,7 +30,7 @@ IMPACT_LEVELS = {
 EVENT_PRIORITY = {
 
     # ----------------------------------------
-    # EXTREME
+    # EXTREME — CLINICAL
     # ----------------------------------------
 
     "TRIAL_POSITIVE": "EXTREME",
@@ -38,24 +39,30 @@ EVENT_PRIORITY = {
     "ENDPOINT_FAILED": "EXTREME",
     "TRIAL_STOPPED_SAFETY": "EXTREME",
     "TRIAL_STOPPED_EFFICACY": "EXTREME",
+    "CLINICAL_RESULTS": "EXTREME",
+
+    # ----------------------------------------
+    # EXTREME — FDA / REGULATORY
+    # ----------------------------------------
 
     "FDA_APPROVAL": "EXTREME",
-    "EMA_APPROVAL": "EXTREME",
     "FDA_REJECTION": "EXTREME",
+    "FDA_SAFETY_WARNING": "EXTREME",
+    "FDA_SAFETY_SIGNAL": "EXTREME",
+    "FDA_RECALL": "EXTREME",
+    "EMA_APPROVAL": "EXTREME",
     "EMA_REJECTION": "EXTREME",
     "COMPLETE_RESPONSE_LETTER": "EXTREME",
-
-    "CLINICAL_RESULTS": "EXTREME",
 
     # ----------------------------------------
     # HIGH
     # ----------------------------------------
 
     "DATE_ACCELERATED": "HIGH",
+    "DATE_DELAYED": "HIGH",
     "PHASE_ADVANCED": "HIGH",
     "PHASE_CHANGE": "HIGH",
     "SIGNIFICANT_ENROLLMENT_CHANGE": "HIGH",
-    "DATE_DELAYED": "HIGH",
 
     # ----------------------------------------
     # MEDIUM
@@ -90,22 +97,10 @@ def get_trading_impact(event):
     """
     Determina il livello di impatto potenziale
     dell'evento sul titolo.
-
-    La gerarchia è:
-
-    1. Catalyst estremi espliciti
-    2. Event subtype conosciuto
-    3. Event type
-    4. Score come supporto
-
-    IMPORTANTE:
-    Un punteggio elevato NON trasforma automaticamente
-    ogni evento in EXTREME.
-
-    Esempio:
-    DATE_ACCELERATED + score 100 = HIGH
-    TRIAL_COMPLETED + CATALYST + score 100 = EXTREME
     """
+
+    if not isinstance(event, dict):
+        return DEFAULT_PRIORITY
 
     subtype = str(
         event.get(
@@ -121,89 +116,66 @@ def get_trading_impact(event):
         )
     ).upper()
 
-    direction = str(
-        event.get(
-            "direction",
-            "UNKNOWN"
-        )
-    ).upper()
-
-    score = event.get(
-        "score",
-        0
-    )
-
-    try:
-        score = int(score)
-
-    except (
-        ValueError,
-        TypeError
-    ):
-        score = 0
-
-    # ========================================
-    # EXTREME SUBTYPES
-    # ========================================
-
-    if subtype in {
-        "TRIAL_POSITIVE",
-        "ENDPOINT_REACHED",
-        "TRIAL_NEGATIVE",
-        "ENDPOINT_FAILED",
-        "TRIAL_STOPPED_SAFETY",
-        "TRIAL_STOPPED_EFFICACY",
-        "FDA_APPROVAL",
-        "EMA_APPROVAL",
-        "FDA_REJECTION",
-        "EMA_REJECTION",
-        "COMPLETE_RESPONSE_LETTER",
-        "CLINICAL_RESULTS",
-    }:
-
-        return "EXTREME"
-
-    # ========================================
-    # STATUS CHANGE
-    # ========================================
-
-    if event_type == "STATUS_CHANGE":
-
-        # Un catalyst esplicito è Extreme
-        if direction == "CATALYST":
-            return "EXTREME"
-
-        # Un cambiamento positivo/negativo
-        # di status è comunque High
-        if direction in {
-            "POSITIVE",
-            "NEGATIVE",
-        }:
-            return "HIGH"
-
-    # ========================================
-    # KNOWN SUBTYPE
-    # ========================================
+    # ----------------------------------------
+    # Exact subtype match
+    # ----------------------------------------
 
     if subtype in EVENT_PRIORITY:
-        return EVENT_PRIORITY[subtype]
 
-    # ========================================
-    # EVENT TYPE
-    # ========================================
+        return EVENT_PRIORITY[
+            subtype
+        ]
+
+    # ----------------------------------------
+    # Generic event type
+    # ----------------------------------------
+
+    if event_type == "FDA_EVENT":
+
+        # FDA events not explicitly mapped
+        # are still treated as important.
+
+        priority = str(
+            event.get(
+                "priority",
+                ""
+            )
+        ).upper()
+
+        if priority == "EXTREME":
+            return "EXTREME"
+
+        if priority == "HIGH":
+            return "HIGH"
+
+        if priority == "MEDIUM":
+            return "MEDIUM"
+
+        return DEFAULT_PRIORITY
 
     if event_type == "PHASE_CHANGE":
         return "HIGH"
 
     if event_type == "DATE_CHANGE":
+        return "HIGH"
 
-        if subtype in {
-            "DATE_ACCELERATED",
-            "DATE_DELAYED",
+    if event_type == "STATUS_CHANGE":
+
+        direction = str(
+            event.get(
+                "direction",
+                "UNKNOWN"
+            )
+        ).upper()
+
+        if direction == "CATALYST":
+            return "EXTREME"
+
+        if direction in {
+            "POSITIVE",
+            "NEGATIVE",
         }:
             return "HIGH"
-
-        return "MEDIUM"
 
     if event_type == "ENROLLMENT_CHANGE":
         return "MEDIUM"
@@ -214,23 +186,6 @@ def get_trading_impact(event):
     if event_type == "FIELD_CHANGE":
         return "LOW"
 
-    # ========================================
-    # SCORE FALLBACK
-    # ========================================
-
-    # Il punteggio può aumentare la priorità
-    # solo quando non abbiamo già classificato
-    # l'evento in modo più specifico.
-
-    if score >= 80:
-        return "HIGH"
-
-    if score >= 60:
-        return "HIGH"
-
-    if score >= 35:
-        return "MEDIUM"
-
     return DEFAULT_PRIORITY
 
 
@@ -240,7 +195,7 @@ def get_trading_impact(event):
 
 def trading_priority_score(event):
     """
-    Converte il Trading Impact in un valore 1-4.
+    Converte l'impatto Trading in un valore 1-4.
     """
 
     impact = get_trading_impact(
@@ -283,30 +238,30 @@ def get_urgency(event):
     ):
         score = 0
 
-    # ========================================
+    # ----------------------------------------
     # EXTREME
-    # ========================================
+    # ----------------------------------------
 
     if impact == "EXTREME":
         return "IMMEDIATE"
 
-    # ========================================
+    # ----------------------------------------
     # HIGH
-    # ========================================
+    # ----------------------------------------
 
     if impact == "HIGH" and score >= 60:
         return "FAST"
 
-    # ========================================
+    # ----------------------------------------
     # MEDIUM
-    # ========================================
+    # ----------------------------------------
 
     if impact == "MEDIUM":
         return "NORMAL"
 
-    # ========================================
+    # ----------------------------------------
     # LOW
-    # ========================================
+    # ----------------------------------------
 
     return "LOW"
 
@@ -318,8 +273,11 @@ def get_urgency(event):
 def enrich_trading_event(event):
     """
     Aggiunge le informazioni Trading Intelligence
-    all'evento senza modificarne i dati originali.
+    all'evento senza modificare i dati originali.
     """
+
+    if not isinstance(event, dict):
+        return {}
 
     result = dict(
         event
@@ -352,6 +310,9 @@ def enrich_trading_events(events):
     """
     Arricchisce una lista di eventi.
     """
+
+    if not events:
+        return []
 
     return [
         enrich_trading_event(event)
