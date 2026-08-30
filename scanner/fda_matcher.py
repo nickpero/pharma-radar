@@ -11,12 +11,24 @@ Il matcher utilizza:
 - nome programma/farmaco
 - alias programma/farmaco
 
-Non produce raccomandazioni di acquisto o vendita.
-Il suo compito è esclusivamente identificare
-a quale azienda/program possa appartenere una news.
+IMPORTANTE:
+Il ticker viene verificato separatamente e in modo
+case-sensitive per evitare falsi positivi causati da
+parole comuni inglesi.
+
+Esempio:
+ticker = RARE
+testo = "a rare blood disorder"
+
+NON deve essere considerato un match.
+
+Il matcher non produce raccomandazioni di acquisto
+o vendita.
 """
 
+
 import json
+import re
 from pathlib import Path
 
 
@@ -39,7 +51,7 @@ ALIASES_FILE = Path(
 
 def normalize(text):
     """
-    Normalizza un testo per il matching.
+    Normalizza un testo per il matching generale.
     """
 
     if text is None:
@@ -60,9 +72,10 @@ def normalize(text):
     }
 
     for old, new in replacements.items():
+
         text = text.replace(
             old,
-            new
+            new,
         )
 
     return " ".join(
@@ -87,7 +100,7 @@ def load_json(path):
     with open(
         path,
         "r",
-        encoding="utf-8"
+        encoding="utf-8",
     ) as file:
 
         return json.load(file)
@@ -134,7 +147,7 @@ def build_news_text(news_item):
 
     if not isinstance(
         news_item,
-        dict
+        dict,
     ):
         raise TypeError(
             "news_item must be a dictionary"
@@ -143,11 +156,11 @@ def build_news_text(news_item):
     parts = [
         news_item.get(
             "title",
-            ""
+            "",
         ),
         news_item.get(
             "summary",
-            ""
+            "",
         ),
     ]
 
@@ -160,31 +173,68 @@ def build_news_text(news_item):
     )
 
 
+def build_raw_news_text(news_item):
+    """
+    Costruisce il testo originale della news.
+
+    Viene utilizzato per il matching del ticker,
+    che deve essere case-sensitive.
+    """
+
+    if not isinstance(
+        news_item,
+        dict,
+    ):
+        raise TypeError(
+            "news_item must be a dictionary"
+        )
+
+    parts = [
+        news_item.get(
+            "title",
+            "",
+        ),
+        news_item.get(
+            "summary",
+            "",
+        ),
+    ]
+
+    return " ".join(
+        str(part)
+        for part in parts
+        if part
+    )
+
+
 # ============================================
 # ALIAS EXTRACTION
 # ============================================
 
 def get_company_aliases(
     ticker,
-    company
+    company,
 ):
     """
-    Restituisce tutti gli alias disponibili
-    per una società.
+    Restituisce gli alias della società.
+
+    Il ticker NON viene incluso negli alias
+    generici: viene gestito separatamente con
+    matching case-sensitive.
     """
 
     aliases_data = load_aliases()
 
     company_config = aliases_data.get(
         ticker,
-        {}
+        {},
     )
 
     aliases = []
 
     company_name = company.get(
         "company",
-        ""
+        "",
     )
 
     if company_name:
@@ -195,24 +245,17 @@ def get_company_aliases(
     configured_aliases = (
         company_config.get(
             "company_aliases",
-            []
+            [],
         )
     )
 
     if isinstance(
         configured_aliases,
-        list
+        list,
     ):
 
         aliases.extend(
             configured_aliases
-        )
-
-    # Ticker itself can also be useful,
-    # but only as an exact token.
-    if ticker:
-        aliases.append(
-            ticker
         )
 
     return [
@@ -224,7 +267,7 @@ def get_company_aliases(
 
 def get_program_aliases(
     ticker,
-    program
+    program,
 ):
     """
     Restituisce tutti gli alias disponibili
@@ -235,13 +278,13 @@ def get_program_aliases(
 
     company_config = aliases_data.get(
         ticker,
-        {}
+        {},
     )
 
     program_aliases = (
         company_config.get(
             "program_aliases",
-            {}
+            {},
         )
     )
 
@@ -252,13 +295,13 @@ def get_program_aliases(
     configured_aliases = (
         program_aliases.get(
             program,
-            []
+            [],
         )
     )
 
     if isinstance(
         configured_aliases,
-        list
+        list,
     ):
 
         aliases.extend(
@@ -278,14 +321,18 @@ def get_program_aliases(
 
 def contains_alias(
     text,
-    alias
+    alias,
 ):
     """
     Verifica la presenza di un alias nel testo.
 
-    Per evitare falsi positivi banali,
-    il matching avviene sui token quando
-    l'alias è una singola parola.
+    Il matching generale è case-insensitive.
+
+    Alias composti:
+        matching della sequenza completa.
+
+Alias singoli:
+        matching come token completo.
     """
 
     normalized_text = normalize(
@@ -321,17 +368,83 @@ def contains_alias(
 
 
 # ============================================
+# TICKER MATCH
+# ============================================
+
+def contains_ticker(
+    news_item,
+    ticker,
+):
+    """
+    Verifica la presenza del ticker nel testo
+    originale della news.
+
+    IMPORTANTE:
+
+    Il matching è case-sensitive.
+
+    Esempio:
+
+        ticker = RARE
+
+        "rare blood disorder"
+            -> NO MATCH
+
+        "RARE announces FDA approval"
+            -> MATCH
+
+    Questo evita falsi positivi dovuti a ticker
+    che coincidono con parole comuni.
+    """
+
+    if not ticker:
+        return False
+
+    ticker = str(
+        ticker
+    ).strip()
+
+    if not ticker:
+        return False
+
+    raw_text = build_raw_news_text(
+        news_item
+    )
+
+    if not raw_text:
+        return False
+
+    pattern = (
+        r"(?<![A-Za-z0-9])"
+        + re.escape(ticker)
+        + r"(?![A-Za-z0-9])"
+    )
+
+    return bool(
+        re.search(
+            pattern,
+            raw_text,
+        )
+    )
+
+
+# ============================================
 # MATCH COMPANY
 # ============================================
 
 def match_company(
     news_item,
     ticker,
-    company
+    company,
 ):
     """
     Determina se la news contiene riferimenti
     riconducibili alla società.
+
+    Il match può avvenire tramite:
+    - nome società;
+    - alias società;
+    - ticker esatto case-sensitive.
     """
 
     news_text = build_news_text(
@@ -340,21 +453,38 @@ def match_company(
 
     aliases = get_company_aliases(
         ticker,
-        company
+        company,
     )
 
     matches = []
+
+    # ----------------------------------------
+    # COMPANY NAME / ALIASES
+    # ----------------------------------------
 
     for alias in aliases:
 
         if contains_alias(
             news_text,
-            alias
+            alias,
         ):
 
             matches.append(
                 alias
             )
+
+    # ----------------------------------------
+    # TICKER
+    # ----------------------------------------
+
+    if contains_ticker(
+        news_item,
+        ticker,
+    ):
+
+        matches.append(
+            ticker
+        )
 
     return matches
 
@@ -366,7 +496,7 @@ def match_company(
 def match_program(
     news_item,
     ticker,
-    program
+    program,
 ):
     """
     Determina se la news contiene riferimenti
@@ -379,7 +509,7 @@ def match_program(
 
     aliases = get_program_aliases(
         ticker,
-        program
+        program,
     )
 
     matches = []
@@ -388,7 +518,7 @@ def match_program(
 
         if contains_alias(
             news_text,
-            alias
+            alias,
         ):
 
             matches.append(
@@ -404,23 +534,25 @@ def match_program(
 
 def match_fda_news(
     news_item,
-    watchlist=None
+    watchlist=None,
 ):
     """
     Cerca tutte le corrispondenze della news FDA
     nella watchlist.
 
     Una corrispondenza può essere ottenuta tramite:
-    - società
-    - programma/farmaco
-    - entrambi
+    - società;
+    - ticker;
+    - programma/farmaco;
+    - società + programma;
+    - ticker + programma.
 
     Restituisce una lista di match strutturati.
     """
 
     if not isinstance(
         news_item,
-        dict
+        dict,
     ):
         raise TypeError(
             "news_item must be a dictionary"
@@ -432,7 +564,7 @@ def match_fda_news(
 
     if not isinstance(
         watchlist,
-        dict
+        dict,
     ):
         raise TypeError(
             "watchlist must be a dictionary"
@@ -446,25 +578,25 @@ def match_fda_news(
 
         if not isinstance(
             company,
-            dict
+            dict,
         ):
             continue
 
         programs = company.get(
             "programs",
-            []
+            [],
         )
 
         if not isinstance(
             programs,
-            list
+            list,
         ):
             continue
 
         company_matches = match_company(
             news_item,
             ticker,
-            company
+            company,
         )
 
         for program in programs:
@@ -472,7 +604,7 @@ def match_fda_news(
             program_matches = match_program(
                 news_item,
                 ticker,
-                program
+                program,
             )
 
             if (
@@ -487,7 +619,9 @@ def match_fda_news(
                 company_matches
                 and program_matches
             ):
-                match_type = "COMPANY_AND_PROGRAM"
+                match_type = (
+                    "COMPANY_AND_PROGRAM"
+                )
 
             elif company_matches:
 
@@ -501,7 +635,7 @@ def match_fda_news(
                 "ticker": ticker,
                 "company": company.get(
                     "company",
-                    ticker
+                    ticker,
                 ),
                 "program": program,
                 "match_type": match_type,
@@ -527,7 +661,7 @@ def match_fda_news(
 # ============================================
 
 def get_match_confidence(
-    match_type
+    match_type,
 ):
     """
     Assegna un livello di confidenza
@@ -557,7 +691,7 @@ def get_match_confidence(
 # ============================================
 
 def get_best_match(
-    matches
+    matches,
 ):
     """
     Restituisce il match più affidabile.
@@ -582,11 +716,11 @@ def get_best_match(
         key=lambda item: priority.get(
             item.get(
                 "match_type",
-                ""
+                "",
             ),
-            0
+            0,
         ),
-        reverse=True
+        reverse=True,
     )
 
     return ordered[0]
@@ -598,7 +732,7 @@ def get_best_match(
 
 def identify_fda_target(
     news_item,
-    watchlist=None
+    watchlist=None,
 ):
     """
     Identifica il miglior target della news FDA.
@@ -609,7 +743,7 @@ def identify_fda_target(
 
     matches = match_fda_news(
         news_item,
-        watchlist
+        watchlist,
     )
 
     return get_best_match(
@@ -623,7 +757,7 @@ def identify_fda_target(
 
 def match_fda_news_batch(
     news_items,
-    watchlist=None
+    watchlist=None,
 ):
     """
     Applica il matching a una lista di news FDA.
@@ -641,7 +775,7 @@ def match_fda_news_batch(
 
         matches = match_fda_news(
             news_item,
-            watchlist
+            watchlist,
         )
 
         results.append({
@@ -664,7 +798,7 @@ def match_fda_news_batch(
 
 def filter_matched_fda_news(
     news_items,
-    watchlist=None
+    watchlist=None,
 ):
     """
     Restituisce soltanto le news FDA
@@ -673,7 +807,7 @@ def filter_matched_fda_news(
 
     batch = match_fda_news_batch(
         news_items,
-        watchlist
+        watchlist,
     )
 
     return [
@@ -681,3 +815,29 @@ def filter_matched_fda_news(
         for item in batch
         if item["matched"]
     ]
+
+
+# ============================================
+# PUBLIC API
+# ============================================
+
+__all__ = [
+    "normalize",
+    "load_json",
+    "load_watchlist",
+    "load_aliases",
+    "build_news_text",
+    "build_raw_news_text",
+    "get_company_aliases",
+    "get_program_aliases",
+    "contains_alias",
+    "contains_ticker",
+    "match_company",
+    "match_program",
+    "match_fda_news",
+    "get_match_confidence",
+    "get_best_match",
+    "identify_fda_target",
+    "match_fda_news_batch",
+    "filter_matched_fda_news",
+]
