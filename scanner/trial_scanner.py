@@ -201,3 +201,400 @@ def scan_fda(
 
     Gli errori FDA non interrompono la scansione
     Clinical Trials.
+    """
+
+    try:
+
+        news = get_fda_catalyst_news(
+            max_items=max_items,
+        )
+
+        events = process_fda_news(
+            news,
+            watchlist,
+        )
+
+        trading_events = (
+            filter_fda_trading_alerts(
+                events
+            )
+        )
+
+        trading_events = sort_fda_events(
+            trading_events
+        )
+
+        alerts = [
+            build_fda_alert(event)
+            for event in trading_events
+        ]
+
+        return {
+            "news": news,
+            "events": events,
+            "alerts": alerts,
+            "error": None,
+        }
+
+    except Exception as error:
+
+        return {
+            "news": [],
+            "events": [],
+            "alerts": [],
+            "error": str(error),
+        }
+
+
+# ============================================
+# SCAN
+# ============================================
+
+def scan(baseline=False):
+
+    watchlist = load_watchlist()
+
+    old_state = load_state()
+
+    new_state = {}
+
+    detected_changes = []
+
+    alerts = []
+
+    errors = []
+
+    relevant_details = []
+
+    total_trials = 0
+    relevant_trials = 0
+    filtered_trials = 0
+
+    # ========================================
+    # CLINICAL TRIALS
+    # ========================================
+
+    for ticker, company in watchlist.items():
+
+        programs = company.get(
+            "programs",
+            [],
+        )
+
+        for program in programs:
+
+            print(
+                f"Searching {ticker} - {program}"
+            )
+
+            # =================================
+            # SEARCH
+            # =================================
+
+            try:
+
+                trials = search_program(
+                    program
+                )
+
+            except Exception as error:
+
+                print(
+                    f"ERROR searching "
+                    f"{ticker} - "
+                    f"{program}: {error}"
+                )
+
+                errors.append({
+                    "ticker": ticker,
+                    "program": program,
+                    "error": str(error),
+                })
+
+                continue
+
+            # =================================
+            # TRIALS
+            # =================================
+
+            for trial in trials:
+
+                nct_id = trial.get(
+                    "nct_id"
+                )
+
+                if not nct_id:
+                    continue
+
+                total_trials += 1
+
+                # =================================
+                # RELEVANCE
+                # =================================
+
+                if not is_relevant(
+                    trial,
+                    company,
+                    ticker,
+                    program,
+                ):
+
+                    filtered_trials += 1
+
+                    continue
+
+                relevant_trials += 1
+
+                # =================================
+                # RELEVANT DETAILS
+                # =================================
+
+                relevant_details.append({
+                    "ticker": ticker,
+                    "program": program,
+                    "nct_id": nct_id,
+                    "status": trial.get(
+                        "status"
+                    ),
+                    "title": trial.get(
+                        "title"
+                    ),
+                })
+
+                # =================================
+                # TRIAL KEY
+                # =================================
+
+                key = make_trial_key(
+                    ticker,
+                    program,
+                    trial,
+                )
+
+                new_state[key] = trial
+
+                old_trial = old_state.get(
+                    key
+                )
+
+                # =================================
+                # BASELINE
+                # =================================
+
+                if baseline:
+                    continue
+
+                # =================================
+                # EXISTING TRIAL
+                # =================================
+
+                if old_trial:
+
+                    trial_changes = detect_changes(
+                        old_trial,
+                        trial,
+                    )
+
+                    if not trial_changes:
+                        continue
+
+                    detected_changes.append({
+                        "ticker": ticker,
+                        "program": program,
+                        "nct_id": nct_id,
+                        "changes": trial_changes,
+                    })
+
+                    catalyst_events = (
+                        classify_trial_changes(
+                            trial_changes
+                        )
+                    )
+
+                    if not catalyst_events:
+                        continue
+
+                    scored_events = score_events(
+                        catalyst_events
+                    )
+
+                    enriched_events = (
+                        enrich_trading_events(
+                            scored_events
+                        )
+                    )
+
+                    trial_alerts = filter_alerts(
+                        enriched_events
+                    )
+
+                    for event in trial_alerts:
+
+                        alerts.append(
+                            build_alert(
+                                ticker,
+                                company,
+                                program,
+                                nct_id,
+                                event,
+                                trial_changes,
+                                trial,
+                            )
+                        )
+
+                # =================================
+                # NEW TRIAL
+                # =================================
+
+                else:
+
+                    new_event = {
+                        "type": "NEW_TRIAL",
+                        "severity": "MEDIUM",
+                        "direction": "UNKNOWN",
+                        "subtype": "NEW_TRIAL",
+                        "field": None,
+                        "old_value": None,
+                        "new_value": None,
+                    }
+
+                    scored_events = score_events(
+                        [new_event]
+                    )
+
+                    enriched_events = (
+                        enrich_trading_events(
+                            scored_events
+                        )
+                    )
+
+                    trial_alerts = filter_alerts(
+                        enriched_events
+                    )
+
+                    for event in trial_alerts:
+
+                        alerts.append(
+                            build_alert(
+                                ticker,
+                                company,
+                                program,
+                                nct_id,
+                                event,
+                                {},
+                                trial,
+                            )
+                        )
+
+    # ========================================
+    # FDA FEED
+    # ========================================
+
+    print()
+    print(
+        "Searching FDA catalyst news..."
+    )
+
+    fda_result = scan_fda(
+        watchlist
+    )
+
+    if fda_result["error"]:
+
+        errors.append({
+            "ticker": "FDA",
+            "program": "FDA_FEED",
+            "error": fda_result["error"],
+        })
+
+    else:
+
+        alerts.extend(
+            fda_result["alerts"]
+        )
+
+    # ========================================
+    # SORT ALL ALERTS
+    # ========================================
+
+    alerts = sort_alerts(
+        alerts
+    )
+
+    # ========================================
+    # SAVE STATE
+    # ========================================
+
+    save_state(
+        new_state
+    )
+
+    # ========================================
+    # SUMMARY
+    # ========================================
+
+    print()
+
+    print(
+        "========== SCAN SUMMARY =========="
+    )
+
+    print(
+        f"Companies: {len(watchlist)}"
+    )
+
+    print(
+        f"Trials found: {total_trials}"
+    )
+
+    print(
+        f"Relevant trials: {relevant_trials}"
+    )
+
+    print(
+        f"Filtered trials: {filtered_trials}"
+    )
+
+    print(
+        f"Changes detected: {len(detected_changes)}"
+    )
+
+    print(
+        f"FDA news: {len(fda_result['news'])}"
+    )
+
+    print(
+        f"FDA events: {len(fda_result['events'])}"
+    )
+
+    print(
+        f"Alerts: {len(alerts)}"
+    )
+
+    print(
+        f"Errors: {len(errors)}"
+    )
+
+    print(
+        "==================================="
+    )
+
+    # ========================================
+    # RETURN
+    # ========================================
+
+    return {
+        "companies": len(watchlist),
+        "total_trials": total_trials,
+        "relevant_trials": relevant_trials,
+        "filtered_trials": filtered_trials,
+        "detected_changes": detected_changes,
+        "changes": alerts,
+        "alerts": alerts,
+        "errors": errors,
+        "relevant_details": relevant_details,
+        "fda_news": fda_result["news"],
+        "fda_events": fda_result["events"],
+        "fda_alerts": fda_result["alerts"],
+        "baseline": baseline,
+    }
