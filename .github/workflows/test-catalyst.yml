@@ -44,3 +44,4 @@ jobs:
           python -m scanner.test_main_fda
           python -m scanner.test_fda_matcher
           python -m scanner.test_fda_pipeline
+          python -m scanner.test_fda_feed
