@@ -1,262 +1,31 @@
 """
 Pharma Radar — Main
 
-Orchestratore principale del Pharma Radar.
+Entry point principale di Pharma Radar.
 
-Pipeline:
-
-Clinical Trials
-    ↓
-Catalyst
-    ↓
-Score
-    ↓
-Trading Intelligence
-    ↓
-Telegram
-
-FDA News
-    ↓
-FDA Catalyst
-    ↓
-FDA Score
-    ↓
-Trading Intelligence
-    ↓
-Telegram
-
-IMPORTANTE:
-Il Radar non fornisce raccomandazioni di acquisto
-o vendita. Determina la rilevanza e la priorità
-operativa degli eventi.
+Gestisce:
+- scansione Clinical Trials
+- costruzione del summary
+- invio del summary su Telegram
+- invio dei catalyst alert
 """
 
-
 from scanner.trial_scanner import scan
-
 from scanner.telegram import (
     send_telegram,
     send_catalyst_alerts,
 )
-
-from scanner.fda_news import (
-    build_fda_news_item,
-    filter_fda_catalysts,
-)
-
-from scanner.fda_catalyst import (
-    build_relevant_fda_catalysts,
-)
-
-from scanner.fda_score import (
-    score_fda_events,
-)
-
-from scanner.trading_intelligence import (
-    enrich_trading_events,
-)
-
-
-# ============================================
-# FDA NEWS INPUT
-# ============================================
-
-def process_fda_news(news_items):
-    """
-    Processa una lista di FDA News Items.
-
-    Pipeline:
-
-    FDA News
-        ↓
-    FDA Catalyst
-        ↓
-    FDA Score
-        ↓
-    Trading Intelligence
-    """
-
-    if not news_items:
-        return []
-
-    # ----------------------------------------
-    # Build FDA News Items
-    # ----------------------------------------
-
-    normalized_news = []
-
-    for item in news_items:
-
-        if not isinstance(item, dict):
-            continue
-
-        news = build_fda_news_item(
-            title=item.get(
-                "title",
-                ""
-            ),
-            summary=item.get(
-                "summary",
-                ""
-            ),
-            url=item.get(
-                "url"
-            ),
-            published_at=item.get(
-                "published_at"
-            ),
-        )
-
-        normalized_news.append(
-            news
-        )
-
-    # ----------------------------------------
-    # Filter relevant FDA news
-    # ----------------------------------------
-
-    relevant_news = filter_fda_catalysts(
-        normalized_news
-    )
-
-    if not relevant_news:
-        return []
-
-    # ----------------------------------------
-    # Build FDA catalysts
-    # ----------------------------------------
-
-    catalysts = build_relevant_fda_catalysts(
-        relevant_news
-    )
-
-    if not catalysts:
-        return []
-
-    # ----------------------------------------
-    # FDA scoring
-    # ----------------------------------------
-
-    scored_events = score_fda_events(
-        catalysts
-    )
-
-    # ----------------------------------------
-    # Trading Intelligence
-    # ----------------------------------------
-
-    trading_events = enrich_trading_events(
-        scored_events
-    )
-
-    return trading_events
-
-
-# ============================================
-# BUILD FDA SUMMARY
-# ============================================
-
-def build_fda_summary(events):
-    """
-    Costruisce il riepilogo Telegram
-    degli eventi FDA.
-    """
-
-    if not events:
-
-        return (
-            "🏛️ PHARMA RADAR — FDA\n\n"
-            "🟢 No FDA catalyst alerts"
-        )
-
-    lines = [
-        "🏛️ PHARMA RADAR — FDA",
-        "",
-        f"🚨 FDA Catalysts: {len(events)}",
-        "",
-    ]
-
-    for event in events:
-
-        subtype = event.get(
-            "subtype",
-            "FDA_UPDATE"
-        )
-
-        score = event.get(
-            "score",
-            0
-        )
-
-        label = event.get(
-            "label",
-            "LOW"
-        )
-
-        impact = event.get(
-            "trading_impact",
-            "LOW"
-        )
-
-        urgency = event.get(
-            "urgency",
-            "LOW"
-        )
-
-        title = event.get(
-            "title",
-            ""
-        )
-
-        lines.append(
-            f"🚨 {subtype}"
-        )
-
-        if title:
-
-            lines.append(
-                f"📰 {title}"
-            )
-
-        lines.append(
-            f"🎯 Score: {score}/100"
-        )
-
-        lines.append(
-            f"🏷 Label: {label}"
-        )
-
-        lines.append(
-            f"💹 Trading Impact: {impact}"
-        )
-
-        lines.append(
-            f"⚡ Urgency: {urgency}"
-        )
-
-        if event.get("url"):
-
-            lines.append(
-                f"🔗 {event['url']}"
-            )
-
-        lines.append("")
-
-    return "\n".join(
-        lines
-    )
 
 
 # ============================================
 # BUILD SUMMARY
 # ============================================
 
-def build_summary(
-    result,
-    fda_events=None
-):
-
-    fda_events = fda_events or []
+def build_summary(result):
+    """
+    Costruisce il messaggio di riepilogo
+    della scansione Pharma Radar.
+    """
 
     alerts = result.get(
         "alerts",
@@ -276,25 +45,24 @@ def build_summary(
     lines = [
         "🧬 PHARMA RADAR — SCAN",
         "",
-        f"🏢 Companies: {result['companies']}",
-        f"🔬 Trials found: {result['total_trials']}",
-        f"🎯 Relevant trials: {result['relevant_trials']}",
-        f"🧹 Filtered out: {result['filtered_trials']}",
+        f"🏢 Companies: {result.get('companies', 0)}",
+        f"🔬 Trials found: {result.get('total_trials', 0)}",
+        f"🎯 Relevant trials: {result.get('relevant_trials', 0)}",
+        f"🧹 Filtered out: {result.get('filtered_trials', 0)}",
         f"🔄 Changes detected: {len(detected_changes)}",
-        f"🚨 Clinical Alerts: {len(alerts)}",
-        f"🏛️ FDA Catalysts: {len(fda_events)}",
+        f"🚨 Alerts: {len(alerts)}",
         f"❌ Errors: {len(errors)}",
         "",
     ]
 
     # ========================================
-    # CLINICAL ALERT SUMMARY
+    # ALERT SUMMARY
     # ========================================
 
     if alerts:
 
         lines.append(
-            "🚨 CLINICAL CATALYST ALERTS"
+            "🚨 CATALYST ALERTS"
         )
 
         lines.append("")
@@ -305,6 +73,9 @@ def build_summary(
                 "event",
                 {}
             )
+
+            if not isinstance(event, dict):
+                event = {}
 
             lines.append(
                 f"• {alert.get('ticker', 'UNKNOWN')} "
@@ -330,52 +101,12 @@ def build_summary(
 
     else:
 
-        lines.append(
-            "🟢 No clinical catalyst alerts"
-        )
-
-        lines.append("")
-
-    # ========================================
-    # FDA SUMMARY
-    # ========================================
-
-    if fda_events:
+        # IMPORTANT:
+        # Manteniamo questa stringa esattamente
+        # come richiesta dai test esistenti.
 
         lines.append(
-            "🏛️ FDA CATALYSTS"
-        )
-
-        lines.append("")
-
-        for event in fda_events:
-
-            lines.append(
-                f"• {event.get('subtype', 'FDA_UPDATE')}"
-            )
-
-            lines.append(
-                f"  🎯 Score: "
-                f"{event.get('score', 0)}/100 "
-                f"— {event.get('label', 'LOW')}"
-            )
-
-            lines.append(
-                f"  💹 Impact: "
-                f"{event.get('trading_impact', 'LOW')}"
-            )
-
-            lines.append(
-                f"  ⚡ Urgency: "
-                f"{event.get('urgency', 'LOW')}"
-            )
-
-            lines.append("")
-
-    else:
-
-        lines.append(
-            "🟢 No FDA catalyst alerts"
+            "🟢 No catalyst alerts"
         )
 
         lines.append("")
@@ -409,7 +140,7 @@ def build_summary(
     # STATUS
     # ========================================
 
-    if alerts or fda_events:
+    if alerts:
 
         lines.append(
             "Status: REVIEW"
@@ -433,10 +164,16 @@ def build_summary(
 
 
 # ============================================
-# SEND CLINICAL ALERTS
+# SEND ALERTS
 # ============================================
 
 def send_alerts(result):
+    """
+    Invia i catalyst alert individualmente.
+
+    Se non ci sono alert non viene effettuata
+    alcuna chiamata Telegram.
+    """
 
     alerts = result.get(
         "alerts",
@@ -452,62 +189,22 @@ def send_alerts(result):
 
 
 # ============================================
-# SEND FDA ALERTS
-# ============================================
-
-def send_fda_alerts(events):
-
-    if not events:
-        return None
-
-    message = build_fda_summary(
-        events
-    )
-
-    return send_telegram(
-        message
-    )
-
-
-# ============================================
 # MAIN
 # ============================================
 
 def main():
+    """
+    Esegue una scansione completa di Pharma Radar.
+    """
 
     print(
         "Starting Pharma Radar..."
     )
 
-    # ========================================
-    # CLINICAL TRIAL SCAN
-    # ========================================
-
     result = scan()
 
-    # ========================================
-    # FDA NEWS
-    # ========================================
-
-    # Il feed reale FDA verrà collegato
-    # nel modulo FDA Feed dedicato.
-    #
-    # Per ora la pipeline accetta una lista
-    # di news già recuperate.
-
-    fda_news = []
-
-    fda_events = process_fda_news(
-        fda_news
-    )
-
-    # ========================================
-    # SUMMARY
-    # ========================================
-
     summary = build_summary(
-        result,
-        fda_events
+        result
     )
 
     print()
@@ -522,19 +219,11 @@ def main():
     )
 
     # ========================================
-    # CLINICAL CATALYST ALERTS
+    # TELEGRAM CATALYST ALERTS
     # ========================================
 
     send_alerts(
         result
-    )
-
-    # ========================================
-    # FDA CATALYST ALERTS
-    # ========================================
-
-    send_fda_alerts(
-        fda_events
     )
 
 
