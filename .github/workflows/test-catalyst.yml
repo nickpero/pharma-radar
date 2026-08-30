@@ -38,3 +38,4 @@ jobs:
           python -m scanner.test_fda_catalyst
           python -m scanner.test_fda_score
           python -m scanner.test_main_fda
+          python -m scanner.test_fda_matcher
