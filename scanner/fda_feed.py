@@ -4,7 +4,7 @@ Pharma Radar — FDA Feed
 Recupera le comunicazioni pubbliche FDA e le
 trasforma in News Item standardizzati.
 
-Responsabilità del modulo:
+Responsabilità:
 - recuperare le news FDA;
 - estrarre titolo, URL, data e testo;
 - eliminare duplicati;
@@ -12,13 +12,13 @@ Responsabilità del modulo:
 
 NON effettua:
 - scoring;
-- matching con aziende;
+- matching;
 - Trading Intelligence;
 - invio Telegram.
 """
 
-import re
 import hashlib
+import re
 from datetime import datetime, timezone
 from urllib.parse import urljoin
 
@@ -56,9 +56,6 @@ def fetch_fda_page(
 ):
     """
     Recupera una pagina FDA.
-
-    Restituisce l'HTML oppure solleva
-    un'eccezione HTTP.
     """
 
     response = requests.get(
@@ -78,7 +75,7 @@ def fetch_fda_page(
 
 def normalize_text(text):
     """
-    Normalizza testo HTML/plain text.
+    Normalizza il testo.
     """
 
     if text is None:
@@ -101,11 +98,10 @@ def normalize_text(text):
 
 def get_item_id(item):
     """
-    Genera un identificatore stabile per una news.
+    Genera un identificatore stabile.
 
-    L'URL è la chiave primaria quando disponibile.
-    In assenza dell'URL viene utilizzato titolo +
-    data.
+    L'URL viene utilizzato come chiave primaria
+    quando disponibile.
     """
 
     url = normalize_text(
@@ -113,18 +109,18 @@ def get_item_id(item):
     )
 
     if url:
+
         value = url
 
     else:
+
         value = (
             f"{item.get('title', '')}|"
             f"{item.get('published_at', '')}"
         )
 
     return hashlib.sha256(
-        value.encode(
-            "utf-8"
-        )
+        value.encode("utf-8")
     ).hexdigest()
 
 
@@ -136,8 +132,11 @@ def normalize_date(value):
     """
     Normalizza una data FDA in formato ISO.
 
-    Se la data non è interpretabile, restituisce
-    comunque il valore originale normalizzato.
+    Supporta:
+    - ISO;
+    - date testuali;
+    - MM/DD/YYYY;
+    - YYYY-MM-DD.
     """
 
     if not value:
@@ -148,7 +147,7 @@ def normalize_date(value):
     )
 
     # ----------------------------------------
-    # ISO DATE
+    # ISO
     # ----------------------------------------
 
     try:
@@ -166,7 +165,7 @@ def normalize_date(value):
         pass
 
     # ----------------------------------------
-    # COMMON FDA FORMAT
+    # COMMON FORMATS
     # ----------------------------------------
 
     formats = [
@@ -203,14 +202,14 @@ def normalize_date(value):
 
 def extract_date(element):
     """
-    Cerca una data all'interno di un elemento.
+    Estrae una data da un elemento HTML.
     """
 
     if element is None:
         return None
 
     # ----------------------------------------
-    # <time datetime="...">
+    # <time>
     # ----------------------------------------
 
     time_element = element.find(
@@ -226,22 +225,24 @@ def extract_date(element):
         )
 
         if datetime_value:
+
             return normalize_date(
                 datetime_value
             )
 
-        text = time_element.get_text(
+        time_text = time_element.get_text(
             " ",
             strip=True,
         )
 
-        if text:
+        if time_text:
+
             return normalize_date(
-                text
+                time_text
             )
 
     # ----------------------------------------
-    # TEXT
+    # TEXT SEARCH
     # ----------------------------------------
 
     text = element.get_text(
@@ -249,28 +250,51 @@ def extract_date(element):
         strip=True,
     )
 
+    # Regex volutamente semplice e bilanciata.
+    #
+    # Esempio:
+    # August 30, 2026
+
+    pattern = (
+        r"\b("
+        r"January|February|March|April|May|June|"
+        r"July|August|September|October|November|December"
+        r")\s+"
+        r"\d{1,2}"
+        r",\s+"
+        r"\d{4}"
+        r"\b"
+    )
+
     match = re.search(
-        r"""
-        (
-            January|February|March|April|
-            May|June|July|August|
-            September|October|November|December
-        )
-        \s+
-        \d{1,2}
-        ,
-        \s+
-        \d{4}
-        )
-        """,
+        pattern,
         text,
-        re.IGNORECASE | re.VERBOSE,
+        flags=re.IGNORECASE,
     )
 
     if match:
 
         return normalize_date(
-            match.group(1)
+            match.group(0)
+        )
+
+    # ----------------------------------------
+    # NUMERIC DATE
+    # ----------------------------------------
+
+    numeric_pattern = (
+        r"\b\d{1,2}/\d{1,2}/\d{4}\b"
+    )
+
+    match = re.search(
+        numeric_pattern,
+        text,
+    )
+
+    if match:
+
+        return normalize_date(
+            match.group(0)
         )
 
     return None
@@ -282,15 +306,11 @@ def extract_date(element):
 
 def extract_summary(element):
     """
-    Estrae una breve descrizione dalla card FDA.
+    Estrae una breve descrizione.
     """
 
     if element is None:
         return ""
-
-    # ----------------------------------------
-    # COMMON DESCRIPTION TAGS
-    # ----------------------------------------
 
     selectors = [
         "p",
@@ -330,7 +350,7 @@ def extract_link(
     base_url=FDA_NEWS_URL,
 ):
     """
-    Estrae il link della comunicazione FDA.
+    Estrae il link della comunicazione.
     """
 
     if element is None:
@@ -387,296 +407,4 @@ def extract_title(element):
 
         if title_element:
 
-            title = normalize_text(
-                title_element.get_text(
-                    " ",
-                    strip=True,
-                )
-            )
-
-            if title:
-                return title
-
-    # ----------------------------------------
-    # FALLBACK LINK TEXT
-    # ----------------------------------------
-
-    link = element.find(
-        "a"
-    )
-
-    if link:
-
-        return normalize_text(
-            link.get_text(
-                " ",
-                strip=True,
-            )
-        )
-
-    return ""
-
-
-# ============================================
-# FIND NEWS CONTAINERS
-# ============================================
-
-def find_news_containers(soup):
-    """
-    Individua i contenitori delle comunicazioni
-    FDA.
-
-    La funzione utilizza più strategie per
-    tollerare piccole variazioni del markup FDA.
-    """
-
-    selectors = [
-
-        "article",
-
-        ".node--type-press-release",
-
-        ".node--type-news",
-
-        ".views-row",
-
-        ".news-item",
-
-        ".press-release",
-
-        "li",
-    ]
-
-    containers = []
-
-    for selector in selectors:
-
-        found = soup.select(
-            selector
-        )
-
-        if found:
-
-            containers.extend(
-                found
-            )
-
-    # ----------------------------------------
-    # REMOVE DUPLICATES
-    # ----------------------------------------
-
-    unique = []
-
-    seen = set()
-
-    for container in containers:
-
-        identity = id(
-            container
-        )
-
-        if identity in seen:
-            continue
-
-        seen.add(
-            identity
-        )
-
-        unique.append(
-            container
-        )
-
-    return unique
-
-
-# ============================================
-# PARSE PAGE
-# ============================================
-
-def parse_fda_page(
-    html,
-    base_url=FDA_NEWS_URL,
-    max_items=MAX_ITEMS,
-):
-    """
-    Converte l'HTML FDA in una lista di
-    News Item standardizzati.
-    """
-
-    if not html:
-        return []
-
-    soup = BeautifulSoup(
-        html,
-        "html.parser",
-    )
-
-    containers = find_news_containers(
-        soup
-    )
-
-    news = []
-
-    seen_ids = set()
-
-    for container in containers:
-
-        title = extract_title(
-            container
-        )
-
-        url = extract_link(
-            container,
-            base_url,
-        )
-
-        summary = extract_summary(
-            container
-        )
-
-        published_at = extract_date(
-            container
-        )
-
-        # ------------------------------------
-        # VALIDATION
-        # ------------------------------------
-
-        if not title:
-            continue
-
-        # Un contenitore senza URL e senza
-        # data è meno affidabile, ma può
-        # comunque essere utilizzato.
-
-        item = build_fda_news_item(
-            title=title,
-            summary=summary,
-            url=url,
-            published_at=published_at,
-        )
-
-        item["id"] = get_item_id(
-            item
-        )
-
-        if item["id"] in seen_ids:
-            continue
-
-        seen_ids.add(
-            item["id"]
-        )
-
-        news.append(
-            item
-        )
-
-        if len(news) >= max_items:
-            break
-
-    return news
-
-
-# ============================================
-# GET FDA NEWS
-# ============================================
-
-def get_fda_news(
-    max_items=MAX_ITEMS,
-):
-    """
-    Recupera e analizza le comunicazioni
-    pubbliche FDA.
-    """
-
-    html = fetch_fda_page(
-        FDA_NEWS_URL
-    )
-
-    return parse_fda_page(
-        html,
-        base_url=FDA_NEWS_URL,
-        max_items=max_items,
-    )
-
-
-# ============================================
-# FILTER CATALYST NEWS
-# ============================================
-
-def get_fda_catalyst_news(
-    max_items=MAX_ITEMS,
-):
-    """
-    Recupera soltanto le news FDA con
-    priorità HIGH o EXTREME.
-    """
-
-    news = get_fda_news(
-        max_items=max_items
-    )
-
-    return [
-        item
-        for item in news
-        if item.get("priority")
-        in {
-            "HIGH",
-            "EXTREME",
-        }
-    ]
-
-
-# ============================================
-# SORT NEWS
-# ============================================
-
-def sort_fda_news(news_items):
-    """
-    Ordina le news mettendo prima le più
-    rilevanti.
-    """
-
-    priority_order = {
-        "EXTREME": 3,
-        "HIGH": 2,
-        "LOW": 1,
-    }
-
-    return sorted(
-        news_items,
-        key=lambda item: (
-            priority_order.get(
-                item.get(
-                    "priority",
-                    "LOW",
-                ),
-                0,
-            ),
-            item.get(
-                "published_at"
-            ) or "",
-        ),
-        reverse=True,
-    )
-
-
-# ============================================
-# PUBLIC API
-# ============================================
-
-__all__ = [
-    "fetch_fda_page",
-    "normalize_text",
-    "get_item_id",
-    "normalize_date",
-    "extract_date",
-    "extract_summary",
-    "extract_link",
-    "extract_title",
-    "find_news_containers",
-    "parse_fda_page",
-    "get_fda_news",
-    "get_fda_catalyst_news",
-    "sort_fda_news",
-]
+            title = normalize
