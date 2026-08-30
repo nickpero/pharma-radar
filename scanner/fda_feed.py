@@ -40,12 +40,6 @@ REQUEST_TIMEOUT = 30
 
 MAX_ITEMS = 50
 
-FDA_DOMAIN = "https://www.fda.gov"
-
-PRESS_ANNOUNCEMENT_PATH = (
-    "/news-events/press-announcements/"
-)
-
 HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 "
@@ -64,9 +58,7 @@ HEADERS = {
 # FETCH
 # ============================================
 
-def fetch_fda_page(
-    url=FDA_NEWS_URL,
-):
+def fetch_fda_page(url=FDA_NEWS_URL):
     """
     Recupera una pagina FDA.
     """
@@ -123,7 +115,6 @@ def get_item_id(item):
 
     if url:
         value = url
-
     else:
         value = (
             f"{item.get('title', '')}|"
@@ -153,9 +144,7 @@ def normalize_date(value):
     if not value:
         return None
 
-    value = normalize_text(
-        value
-    )
+    value = normalize_text(value)
 
     # ----------------------------------------
     # ISO
@@ -221,16 +210,12 @@ def extract_date(element):
     # <time>
     # ----------------------------------------
 
-    time_element = element.find(
-        "time"
-    )
+    time_element = element.find("time")
 
     if time_element:
 
-        datetime_value = (
-            time_element.get(
-                "datetime"
-            )
+        datetime_value = time_element.get(
+            "datetime"
         )
 
         if datetime_value:
@@ -249,30 +234,6 @@ def extract_date(element):
             return normalize_date(
                 time_text
             )
-
-    # ----------------------------------------
-    # COMMON DATE ATTRIBUTES
-    # ----------------------------------------
-
-    for attribute in (
-        "datetime",
-        "date",
-        "data-date",
-        "content",
-    ):
-
-        value = element.get(
-            attribute
-        )
-
-        if value:
-
-            normalized = normalize_date(
-                value
-            )
-
-            if normalized:
-                return normalized
 
     # ----------------------------------------
     # TEXT SEARCH
@@ -345,12 +306,11 @@ def extract_summary(element):
         return ""
 
     selectors = [
+        "p",
         ".field--name-body",
         ".field--name-field-summary",
         ".summary",
         ".description",
-        ".field--name-field-description",
-        "p",
     ]
 
     for selector in selectors:
@@ -384,13 +344,6 @@ def extract_link(
 ):
     """
     Estrae il link della comunicazione.
-
-    Il link deve puntare a un singolo
-    Press Announcement FDA.
-
-    Questa funzione mantiene inoltre
-    il comportamento necessario ai test
-    con link relativi.
     """
 
     if element is None:
@@ -430,13 +383,13 @@ def extract_title(element):
         return ""
 
     selectors = [
-        ".field--name-title",
-        ".node-title",
-        ".title",
         "h1",
         "h2",
         "h3",
         "h4",
+        ".field--name-title",
+        ".node-title",
+        ".title",
     ]
 
     for selector in selectors:
@@ -461,9 +414,7 @@ def extract_title(element):
     # FALLBACK LINK
     # ----------------------------------------
 
-    link = element.find(
-        "a"
-    )
+    link = element.find("a")
 
     if link:
 
@@ -478,19 +429,27 @@ def extract_title(element):
 
 
 # ============================================
-# PRESS ANNOUNCEMENT LINK
+# PRESS ANNOUNCEMENT URL
 # ============================================
 
-def is_press_announcement_url(
-    url,
-):
+def is_fda_press_announcement_url(url):
     """
-    Verifica che un URL sia quello di un
-    singolo FDA Press Announcement.
+    Verifica se un URL appartiene a una vera
+    FDA Press Announcement.
 
-    IMPORTANTE:
-    la pagina indice /press-announcements/
-    non viene considerata una news.
+    Sono accettati soltanto URL di dettaglio
+    sotto le sezioni ufficiali FDA Press Announcements.
+
+    NON considera valida la pagina indice:
+        /press-announcements
+
+    Sono valide, per esempio:
+        /press-announcements/fda-approves-...
+
+    Sono escluse:
+        /press-announcements
+        /press-announcements/
+        URL di altre sezioni FDA.
     """
 
     if not url:
@@ -498,109 +457,104 @@ def is_press_announcement_url(
 
     normalized = normalize_text(
         url
-    )
+    ).lower()
+
+    # ----------------------------------------
+    # URL assoluto o relativo
+    # ----------------------------------------
+
+    normalized = normalized.split(
+        "?",
+        1
+    )[0]
+
+    normalized = normalized.split(
+        "#",
+        1
+    )[0]
+
+    normalized = normalized.rstrip("/")
+
+    # ----------------------------------------
+    # FDA HOST
+    # ----------------------------------------
+
+    if not (
+        normalized.startswith(
+            "https://www.fda.gov/"
+        )
+        or normalized.startswith(
+            "http://www.fda.gov/"
+        )
+        or normalized.startswith(
+            "https://fda.gov/"
+        )
+        or normalized.startswith(
+            "http://fda.gov/"
+        )
+        or normalized.startswith("/")
+    ):
+        return False
+
+    # ----------------------------------------
+    # TRUE DETAIL PAGE
+    # ----------------------------------------
+
+    valid_prefixes = [
+        "https://www.fda.gov/"
+        "news-events/fda-newsroom/"
+        "press-announcements/",
+
+        "https://www.fda.gov/"
+        "news-events/newsroom/"
+        "press-announcements/",
+
+        "https://fda.gov/"
+        "news-events/fda-newsroom/"
+        "press-announcements/",
+
+        "https://fda.gov/"
+        "news-events/newsroom/"
+        "press-announcements/",
+    ]
+
+    if normalized.startswith(
+        tuple(valid_prefixes)
+    ):
+        return True
 
     # ----------------------------------------
     # RELATIVE URL
     # ----------------------------------------
 
-    if normalized.startswith("/"):
-        normalized = urljoin(
-            FDA_DOMAIN,
-            normalized,
-        )
-
-    # ----------------------------------------
-    # ONLY FDA
-    # ----------------------------------------
-
-    if not normalized.startswith(
-        FDA_DOMAIN
+    if normalized.startswith(
+        "/news-events/fda-newsroom/"
+        "press-announcements/"
     ):
-        return False
+        return True
 
-    # ----------------------------------------
-    # REQUIRED PATH
-    # ----------------------------------------
-
-    if PRESS_ANNOUNCEMENT_PATH not in normalized:
-        return False
-
-    # ----------------------------------------
-    # REMOVE QUERY / FRAGMENT
-    # ----------------------------------------
-
-    clean_url = normalized.split(
-        "?",
-        1
-    )[0]
-
-    clean_url = clean_url.split(
-        "#",
-        1
-    )[0]
-
-    # ----------------------------------------
-    # INDEX PAGE IS NOT A NEWS ITEM
-    # ----------------------------------------
-
-    if clean_url.rstrip("/") == (
-        FDA_DOMAIN
-        + PRESS_ANNOUNCEMENT_PATH.rstrip("/")
+    if normalized.startswith(
+        "/news-events/newsroom/"
+        "press-announcements/"
     ):
-        return False
+        return True
 
-    return True
+    return False
 
 
 # ============================================
-# VALID TITLE
+# BACKWARD COMPATIBILITY
 # ============================================
 
-def is_valid_press_announcement_title(
-    title,
-):
+def is_press_announcement_url(url):
     """
-    Esclude titoli provenienti da menu,
-    footer e navigazione FDA.
+    Alias compatibile con eventuale codice
+    precedente che utilizza il nome abbreviato.
     """
 
-    title = normalize_text(
-        title
+    return is_fda_press_announcement_url(
+        url
     )
-
-    if not title:
-        return False
-
-    normalized = title.lower()
-
-    blocked_exact = {
-        "press announcements",
-        "skip to main content",
-        "skip to fda search",
-        "skip to in this section menu",
-        "skip to footer links",
-        "report a product problem",
-        "contact fda",
-        "fda guidance documents",
-        "recalls, market withdrawals and safety alerts",
-    }
-
-    if normalized in blocked_exact:
-        return False
-
-    blocked_prefixes = (
-        "skip to ",
-    )
-
-    for prefix in blocked_prefixes:
-
-        if normalized.startswith(
-            prefix
-        ):
-            return False
-
-    return True
 
 
 # ============================================
@@ -611,23 +565,34 @@ def find_news_containers(soup):
     """
     Individua i contenitori delle news FDA.
 
-    La funzione è volutamente compatibile
-    con la struttura usata dai test locali.
+    L'ordine dei selettori è importante:
+    vengono privilegiati i contenitori specifici
+    delle Press Announcements.
+
+    Il fallback su 'li' è mantenuto per compatibilità
+    con eventuali versioni differenti dell'HTML FDA,
+    ma i link vengono comunque filtrati.
     """
 
     if soup is None:
         return []
 
     selectors = [
-        "article",
+        "article.node--type-press-release",
+        "article.node--type-news",
         ".node--type-press-release",
         ".node--type-news",
+        ".view-press-announcements .views-row",
         ".views-row",
         ".news-item",
         ".press-release",
+        "article",
+        "li",
     ]
 
     containers = []
+
+    seen = set()
 
     for selector in selectors:
 
@@ -635,250 +600,99 @@ def find_news_containers(soup):
             selector
         )
 
-        if found:
+        for container in found:
 
-            containers.extend(
-                found
+            identity = id(
+                container
             )
 
-    # ----------------------------------------
-    # FALLBACK
-    # ----------------------------------------
-    #
-    # Se la pagina FDA non usa i container
-    # precedenti, cerchiamo direttamente i
-    # link ai singoli Press Announcements.
-    #
-
-    if not containers:
-
-        links = soup.find_all(
-            "a",
-            href=True,
-        )
-
-        for link in links:
-
-            href = normalize_text(
-                link.get("href")
-            )
-
-            absolute_url = urljoin(
-                FDA_DOMAIN,
-                href,
-            )
-
-            if not is_press_announcement_url(
-                absolute_url
-            ):
+            if identity in seen:
                 continue
 
-            parent = (
-                link.find_parent(
-                    "li"
-                )
-                or link.find_parent(
-                    "div"
-                )
-                or link
+            seen.add(
+                identity
             )
 
             containers.append(
-                parent
+                container
             )
 
-    # ----------------------------------------
-    # REMOVE DUPLICATES
-    # ----------------------------------------
-
-    unique = []
-
-    seen = set()
-
-    for container in containers:
-
-        identity = id(
-            container
-        )
-
-        if identity in seen:
-            continue
-
-        seen.add(
-            identity
-        )
-
-        unique.append(
-            container
-        )
-
-    return unique
+    return containers
 
 
 # ============================================
-# DISCOVER DIRECT NEWS LINKS
+# PARSE PAGE
 # ============================================
 
-def discover_press_announcement_links(
-    soup,
-    base_url=FDA_NEWS_URL,
-):
-    """
-    Cerca direttamente nella pagina tutti i
-    link appartenenti a singoli FDA Press
-    Announcements.
-
-    È il fallback principale per la struttura
-    reale della pagina FDA.
-    """
-
-    if soup is None:
-        return []
-
-    results = []
-
-    seen = set()
-
-    for link in soup.find_all(
-        "a",
-        href=True,
-    ):
-
-        href = normalize_text(
-            link.get("href")
-        )
-
-        if not href:
-            continue
-
-        absolute_url = urljoin(
-            base_url,
-            href,
-        )
-
-        if not is_press_announcement_url(
-            absolute_url
-        ):
-            continue
-
-        if absolute_url in seen:
-            continue
-
-        seen.add(
-            absolute_url
-        )
-
-        results.append({
-            "url": absolute_url,
-            "anchor": link,
-        })
-
-    return results
-
-
-# ============================================
-# FIND CONTAINER FOR LINK
-# ============================================
-
-def find_link_container(
-    link,
-):
-    """
-    Cerca il contenitore più utile attorno
-    a un link di Press Announcement.
-    """
-
-    if link is None:
-        return None
-
-    # Prefer article/list item/card.
-    for tag_name in (
-        "article",
-        "li",
-    ):
-
-        parent = link.find_parent(
-            tag_name
-        )
-
-        if parent:
-            return parent
-
-    # Try common Drupal/Bootstrap containers.
-    parent = link.parent
-
-    if parent:
-        return parent
-
-    return link
-
-
-# ============================================
-# PARSE DIRECT NEWS LINKS
-# ============================================
-
-def parse_direct_press_links(
-    soup,
+def parse_fda_page(
+    html,
     base_url=FDA_NEWS_URL,
     max_items=MAX_ITEMS,
 ):
     """
-    Parsing robusto dei singoli link FDA.
+    Converte HTML FDA in News Items.
 
-    Utilizzato quando la struttura HTML della
-    pagina indice non è sufficientemente stabile.
+    Vengono accettati soltanto contenitori
+    che contengono un URL riconducibile a una
+    vera Press Announcement.
     """
 
-    discovered = discover_press_announcement_links(
-        soup,
-        base_url,
+    if not html:
+        return []
+
+    try:
+        max_items = int(
+            max_items
+        )
+    except (
+        ValueError,
+        TypeError,
+    ):
+        max_items = MAX_ITEMS
+
+    if max_items <= 0:
+        return []
+
+    soup = BeautifulSoup(
+        html,
+        "html.parser",
+    )
+
+    containers = find_news_containers(
+        soup
     )
 
     news = []
 
     seen_ids = set()
 
-    for discovered_item in discovered:
+    for container in containers:
 
-        link = discovered_item[
-            "anchor"
-        ]
-
-        url = discovered_item[
-            "url"
-        ]
-
-        container = find_link_container(
-            link
+        title = extract_title(
+            container
         )
 
-        title = ""
+        url = extract_link(
+            container,
+            base_url,
+        )
 
         # ------------------------------------
-        # TITLE FROM CONTAINER
-        # ------------------------------------
-
-        if container is not None:
-
-            title = extract_title(
-                container
-            )
-
-        # ------------------------------------
-        # FALLBACK LINK TEXT
+        # VALIDATION
         # ------------------------------------
 
         if not title:
+            continue
 
-            title = normalize_text(
-                link.get_text(
-                    " ",
-                    strip=True,
-                )
-            )
+        if not url:
+            continue
 
-        if not is_valid_press_announcement_title(
-            title
+        # ------------------------------------
+        # ONLY REAL PRESS ANNOUNCEMENTS
+        # ------------------------------------
+
+        if not is_fda_press_announcement_url(
+            url
         ):
             continue
 
@@ -890,6 +704,10 @@ def parse_direct_press_links(
             container
         )
 
+        # ------------------------------------
+        # BUILD ITEM
+        # ------------------------------------
+
         item = build_fda_news_item(
             title=title,
             summary=summary,
@@ -900,6 +718,10 @@ def parse_direct_press_links(
         item["id"] = get_item_id(
             item
         )
+
+        # ------------------------------------
+        # DUPLICATE FILTER
+        # ------------------------------------
 
         if item["id"] in seen_ids:
             continue
@@ -919,181 +741,6 @@ def parse_direct_press_links(
 
 
 # ============================================
-# PARSE PAGE
-# ============================================
-
-def parse_fda_page(
-    html,
-    base_url=FDA_NEWS_URL,
-    max_items=MAX_ITEMS,
-):
-    """
-    Converte HTML FDA in News Items.
-
-    Strategia:
-    1. cerca veri container di news;
-    2. verifica che contengano un link a un
-       singolo Press Announcement;
-    3. se la struttura non produce risultati,
-       cerca direttamente tutti i link validi.
-
-    In questo modo non vengono restituiti
-    elementi di navigazione FDA.
-    """
-
-    if not html:
-        return []
-
-    try:
-        max_items = int(
-            max_items
-        )
-
-    except (
-        ValueError,
-        TypeError,
-    ):
-
-        max_items = MAX_ITEMS
-
-    if max_items <= 0:
-        return []
-
-    soup = BeautifulSoup(
-        html,
-        "html.parser",
-    )
-
-    news = []
-
-    seen_ids = set()
-
-    # ========================================
-    # STRATEGIA 1 — CONTAINERS
-    # ========================================
-
-    containers = find_news_containers(
-        soup
-    )
-
-    for container in containers:
-
-        title = extract_title(
-            container
-        )
-
-        if not is_valid_press_announcement_title(
-            title
-        ):
-            continue
-
-        # ------------------------------------
-        # FIND A VALID PRESS LINK
-        # ------------------------------------
-
-        url = None
-
-        for link in container.find_all(
-            "a",
-            href=True,
-        ):
-
-            candidate = urljoin(
-                base_url,
-                normalize_text(
-                    link.get("href")
-                ),
-            )
-
-            if is_press_announcement_url(
-                candidate
-            ):
-
-                url = candidate
-                break
-
-        # ------------------------------------
-        # IMPORTANT:
-        # A REAL LIVE NEWS MUST HAVE A DIRECT
-        # PRESS ANNOUNCEMENT URL.
-        #
-        # Local unit tests may use arbitrary
-        # URLs, so preserve those tests when
-        # the HTML is synthetic.
-        # ------------------------------------
-
-        if url is None:
-
-            links = container.find_all(
-                "a",
-                href=True,
-            )
-
-            if links:
-
-                candidate = normalize_text(
-                    links[0].get("href")
-                )
-
-                if candidate:
-
-                    url = urljoin(
-                        base_url,
-                        candidate,
-                    )
-
-        if not url:
-            continue
-
-        summary = extract_summary(
-            container
-        )
-
-        published_at = extract_date(
-            container
-        )
-
-        item = build_fda_news_item(
-            title=title,
-            summary=summary,
-            url=url,
-            published_at=published_at,
-        )
-
-        item["id"] = get_item_id(
-            item
-        )
-
-        if item["id"] in seen_ids:
-            continue
-
-        seen_ids.add(
-            item["id"]
-        )
-
-        news.append(
-            item
-        )
-
-        if len(news) >= max_items:
-            return news
-
-    # ========================================
-    # STRATEGIA 2 — DIRECT LINKS
-    # ========================================
-
-    if not news:
-
-        news = parse_direct_press_links(
-            soup,
-            base_url=base_url,
-            max_items=max_items,
-        )
-
-    return news[:max_items]
-
-
-# ============================================
 # GET FDA NEWS
 # ============================================
 
@@ -1101,7 +748,8 @@ def get_fda_news(
     max_items=MAX_ITEMS,
 ):
     """
-    Recupera le comunicazioni pubbliche FDA.
+    Recupera le comunicazioni pubbliche FDA
+    dalla pagina Press Announcements.
     """
 
     html = fetch_fda_page(
@@ -1123,11 +771,11 @@ def get_fda_catalyst_news(
     max_items=MAX_ITEMS,
 ):
     """
-    Recupera le news FDA con priorità
-    HIGH o EXTREME.
+    Recupera le news FDA con priorità HIGH
+    o EXTREME.
 
-    La classificazione della priorità viene
-    effettuata da fda_news.py.
+    Il filtro di priorità viene effettuato
+    sulla struttura prodotta da fda_news.py.
     """
 
     news = get_fda_news(
@@ -1191,12 +839,9 @@ __all__ = [
     "extract_summary",
     "extract_link",
     "extract_title",
+    "is_fda_press_announcement_url",
     "is_press_announcement_url",
-    "is_valid_press_announcement_title",
     "find_news_containers",
-    "discover_press_announcement_links",
-    "find_link_container",
-    "parse_direct_press_links",
     "parse_fda_page",
     "get_fda_news",
     "get_fda_catalyst_news",
