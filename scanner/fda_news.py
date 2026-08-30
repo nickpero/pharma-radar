@@ -1,29 +1,30 @@
 """
 Pharma Radar — FDA News Feed
 
-Recupera comunicazioni pubbliche FDA tramite
-feed RSS ufficiali e le trasforma in oggetti
-strutturati utilizzabili dal Pharma Radar.
+Recupera le comunicazioni pubbliche della FDA
+utilizzabili come possibili catalyst Pharma.
 
-Pipeline:
+Il modulo:
+- scarica la pagina ufficiale FDA;
+- estrae le Press Announcements;
+- normalizza titolo, data e URL;
+- classifica le news;
+- assegna una priorità preliminare;
+- prepara dati strutturati per i successivi
+  motori Catalyst, Score e Trading Intelligence.
 
-FDA RSS
-    ↓
-News Item
-    ↓
-Keyword Classification
-    ↓
-FDA Priority
-    ↓
-FDA Catalyst
-
+IMPORTANTE:
 Questo modulo NON decide se una notizia è
-tradabile.
+tradabile e NON produce raccomandazioni
+di acquisto o vendita.
 """
 
+
 import re
+from html.parser import HTMLParser
+from urllib.parse import urljoin
+
 import requests
-import xml.etree.ElementTree as ET
 
 
 # ============================================
@@ -38,16 +39,8 @@ FDA_DRUGS_URL = (
 
 FDA_NEWS_URL = (
     "https://www.fda.gov/"
-    "news-events/fda-newsroom/press-announcements"
-)
-
-# FDA official RSS feed for press releases.
-#
-# FDA publishes official RSS feeds for agency
-# news and announcements.
-FDA_PRESS_RSS_URL = (
-    "https://www.fda.gov/about-fda/"
-    "contact-fda/subscribe-podcasts-and-news-feeds"
+    "news-events/fda-newsroom/"
+    "press-announcements"
 )
 
 
@@ -61,8 +54,19 @@ HEADERS = {
     "User-Agent": (
         "PharmaRadar/1.0 "
         "(research monitoring tool)"
-    )
+    ),
+    "Accept": (
+        "text/html,"
+        "application/xhtml+xml"
+    ),
 }
+
+
+# ============================================
+# LIMITS
+# ============================================
+
+DEFAULT_MAX_NEWS = 50
 
 
 # ============================================
@@ -84,8 +88,6 @@ FDA_CATALYST_KEYWORDS = {
         "rejects",
         "refuses",
         "refusal",
-        "not approved",
-        "cannot approve",
     ],
 
     "SAFETY": [
@@ -93,11 +95,8 @@ FDA_CATALYST_KEYWORDS = {
         "safety concern",
         "safety signal",
         "adverse event",
-        "adverse events",
         "warning",
         "recall",
-        "risk",
-        "serious adverse",
     ],
 
     "CLINICAL": [
@@ -108,9 +107,7 @@ FDA_CATALYST_KEYWORDS = {
         "phase 3",
         "primary endpoint",
         "secondary endpoint",
-        "endpoint",
         "efficacy",
-        "clinical results",
     ],
 
     "LABEL": [
@@ -118,11 +115,204 @@ FDA_CATALYST_KEYWORDS = {
         "labeling",
         "indication",
         "expanded indication",
-        "expands indication",
-        "new indication",
-        "label expansion",
     ],
 }
+
+
+# ============================================
+# HTML PARSER
+# ============================================
+
+class FDAAnnouncementParser(HTMLParser):
+    """
+    Parser HTML leggero per la pagina FDA
+    Press Announcements.
+
+    Non dipende da BeautifulSoup o da altre
+    librerie esterne.
+    """
+
+    def __init__(self):
+
+        super().__init__()
+
+        self.announcements = []
+
+        self.current_link = None
+        self.current_text = []
+
+        self.current_date = None
+
+        self.in_heading = False
+        self.in_date = False
+
+    # ----------------------------------------
+    # START TAG
+    # ----------------------------------------
+
+    def handle_starttag(self, tag, attrs):
+
+        attributes = dict(
+            attrs
+        )
+
+        # ------------------------------------
+        # Heading / link
+        # ------------------------------------
+
+        if tag.lower() in {
+            "h2",
+            "h3",
+            "h4",
+        }:
+
+            self.in_heading = True
+            self.current_text = []
+
+            href = attributes.get(
+                "href"
+            )
+
+            if href:
+
+                self.current_link = href
+
+        # ------------------------------------
+        # Link
+        # ------------------------------------
+
+        elif tag.lower() == "a":
+
+            href = attributes.get(
+                "href"
+            )
+
+            if href:
+
+                self.current_link = href
+
+                self.current_text = []
+
+        # ------------------------------------
+        # Time / date
+        # ------------------------------------
+
+        elif tag.lower() == "time":
+
+            self.in_date = True
+
+            self.current_date = (
+                attributes.get(
+                    "datetime"
+                )
+            )
+
+    # ----------------------------------------
+    # DATA
+    # ----------------------------------------
+
+    def handle_data(self, data):
+
+        if self.in_heading:
+
+            self.current_text.append(
+                data
+            )
+
+        if self.in_date:
+
+            text = normalize_text(
+                data
+            )
+
+            if text:
+
+                self.current_date = (
+                    self.current_date
+                    or text
+                )
+
+    # ----------------------------------------
+    # END TAG
+    # ----------------------------------------
+
+    def handle_endtag(self, tag):
+
+        tag = tag.lower()
+
+        # ------------------------------------
+        # Heading completed
+        # ------------------------------------
+
+        if tag in {
+            "h2",
+            "h3",
+            "h4",
+        }:
+
+            title = normalize_text(
+                " ".join(
+                    self.current_text
+                )
+            )
+
+            if (
+                title
+                and self.current_link
+            ):
+
+                self.announcements.append({
+                    "title": title,
+                    "url": self.current_link,
+                    "published_at": (
+                        self.current_date
+                    ),
+                })
+
+            self.in_heading = False
+            self.current_text = []
+
+        # ------------------------------------
+        # Link completed
+        # ------------------------------------
+
+        elif tag == "a":
+
+            if (
+                self.current_text
+                and self.current_link
+            ):
+
+                title = normalize_text(
+                    " ".join(
+                        self.current_text
+                    )
+                )
+
+                # Only keep likely FDA
+                # announcement links.
+                if (
+                    title
+                    and self.current_link
+                ):
+
+                    self.announcements.append({
+                        "title": title,
+                        "url": self.current_link,
+                        "published_at": (
+                            self.current_date
+                        ),
+                    })
+
+            self.current_text = []
+
+        # ------------------------------------
+        # Date completed
+        # ------------------------------------
+
+        elif tag == "time":
+
+            self.in_date = False
 
 
 # ============================================
@@ -131,7 +321,7 @@ FDA_CATALYST_KEYWORDS = {
 
 def fetch_url(url):
     """
-    Scarica una pagina o un feed FDA.
+    Scarica una pagina FDA.
     """
 
     response = requests.get(
@@ -151,7 +341,7 @@ def fetch_url(url):
 
 def normalize_text(text):
     """
-    Normalizza il testo.
+    Normalizza il testo per la classificazione.
     """
 
     if text is None:
@@ -166,6 +356,29 @@ def normalize_text(text):
     )
 
     return text.strip()
+
+
+# ============================================
+# NORMALIZE URL
+# ============================================
+
+def normalize_url(url):
+    """
+    Converte un URL FDA relativo in assoluto.
+    """
+
+    if not url:
+
+        return None
+
+    url = str(
+        url
+    ).strip()
+
+    return urljoin(
+        FDA_NEWS_URL,
+        url
+    )
 
 
 # ============================================
@@ -221,6 +434,10 @@ def get_fda_priority(categories):
     """
     Determina la priorità iniziale della
     comunicazione FDA.
+
+    Questa è una classificazione preliminare.
+    Lo scoring finale avverrà nel Trading
+    Intelligence layer.
     """
 
     categories = {
@@ -291,18 +508,130 @@ def build_fda_news_item(
 
 
 # ============================================
+# PARSE PRESS ANNOUNCEMENTS
+# ============================================
+
+def parse_fda_press_announcements(
+    html,
+    max_items=DEFAULT_MAX_NEWS
+):
+    """
+    Estrae le Press Announcements dalla
+    pagina HTML FDA.
+
+    Restituisce una lista di news standardizzate.
+    """
+
+    if not html:
+
+        return []
+
+    parser = FDAAnnouncementParser()
+
+    parser.feed(
+        html
+    )
+
+    results = []
+
+    seen = set()
+
+    for announcement in (
+        parser.announcements
+    ):
+
+        title = normalize_text(
+            announcement.get(
+                "title",
+                ""
+            )
+        )
+
+        if not title:
+            continue
+
+        url = normalize_url(
+            announcement.get(
+                "url"
+            )
+        )
+
+        published_at = (
+            announcement.get(
+                "published_at"
+            )
+        )
+
+        key = (
+            title.lower(),
+            url or ""
+        )
+
+        if key in seen:
+            continue
+
+        seen.add(
+            key
+        )
+
+        item = build_fda_news_item(
+            title=title,
+            summary="",
+            url=url,
+            published_at=published_at,
+        )
+
+        results.append(
+            item
+        )
+
+        if (
+            max_items is not None
+            and len(results) >= max_items
+        ):
+
+            break
+
+    return results
+
+
+# ============================================
+# FETCH PRESS ANNOUNCEMENTS
+# ============================================
+
+def fetch_fda_press_announcements(
+    max_items=DEFAULT_MAX_NEWS
+):
+    """
+    Scarica e interpreta le ultime Press
+    Announcements pubblicate dalla FDA.
+    """
+
+    html = fetch_url(
+        FDA_NEWS_URL
+    )
+
+    return parse_fda_press_announcements(
+        html,
+        max_items=max_items
+    )
+
+
+# ============================================
 # FILTER CATALYST NEWS
 # ============================================
 
 def filter_fda_catalysts(news_items):
     """
-    Restituisce soltanto le comunicazioni FDA
-    con potenziale rilevanza.
+    Restituisce soltanto le comunicazioni
+    FDA con potenziale rilevanza.
     """
 
     catalysts = []
 
-    for item in news_items:
+    for item in (
+        news_items or []
+    ):
 
         if item.get(
             "priority"
@@ -319,240 +648,58 @@ def filter_fda_catalysts(news_items):
 
 
 # ============================================
-# XML HELPERS
+# DEDUPLICATE NEWS
 # ============================================
 
-def _strip_namespace(tag):
+def deduplicate_fda_news(
+    news_items
+):
     """
-    Rimuove il namespace XML dal tag.
-    """
+    Elimina eventuali duplicati.
 
-    if "}" in tag:
-
-        return tag.split(
-            "}",
-            1
-        )[1]
-
-    return tag
-
-
-def _find_text(element, names):
-    """
-    Cerca il primo elemento XML corrispondente
-    ai nomi forniti.
+    La deduplicazione usa titolo + URL.
     """
 
-    names = {
-        str(name).lower()
-        for name in names
-    }
+    if not news_items:
 
-    for child in element.iter():
-
-        tag = _strip_namespace(
-            child.tag
-        ).lower()
-
-        if tag in names:
-
-            return normalize_text(
-                child.text
-            )
-
-    return ""
-
-
-# ============================================
-# PARSE RSS
-# ============================================
-
-def parse_fda_rss(xml_text):
-    """
-    Converte un feed RSS/XML FDA in una lista
-    di News Items.
-
-    Supporta RSS standard e namespace XML.
-    """
-
-    if not xml_text:
         return []
 
-    root = ET.fromstring(
-        xml_text
-    )
+    results = []
 
-    items = []
+    seen = set()
 
-    for element in root.iter():
+    for item in news_items:
 
-        tag = _strip_namespace(
-            element.tag
-        ).lower()
-
-        if tag not in {
-            "item",
-            "entry",
-        }:
-
-            continue
-
-        title = _find_text(
-            element,
-            {
+        title = normalize_text(
+            item.get(
                 "title",
-            }
-        )
+                ""
+            )
+        ).lower()
 
-        summary = _find_text(
-            element,
-            {
-                "description",
-                "summary",
-                "content",
-            }
-        )
-
-        published_at = _find_text(
-            element,
-            {
-                "pubdate",
-                "published",
-                "updated",
-                "date",
-            }
-        )
-
-        url = None
-
-        # ------------------------------------
-        # RSS <link>
-        # ------------------------------------
-
-        for child in element:
-
-            tag_name = _strip_namespace(
-                child.tag
-            ).lower()
-
-            if tag_name == "link":
-
-                if child.text:
-
-                    url = (
-                        child.text.strip()
-                    )
-
-                elif child.attrib.get(
-                    "href"
-                ):
-
-                    url = (
-                        child.attrib[
-                            "href"
-                        ]
-                    )
-
-                if url:
-                    break
-
-        if not title:
-            continue
-
-        items.append(
-            build_fda_news_item(
-                title=title,
-                summary=summary,
-                url=url,
-                published_at=published_at,
+        url = normalize_url(
+            item.get(
+                "url"
             )
         )
 
-    return items
-
-
-# ============================================
-# FETCH FDA RSS
-# ============================================
-
-def fetch_fda_rss(
-    rss_url=None
-):
-    """
-    Scarica e interpreta un feed RSS FDA.
-
-    Nota:
-    l'URL RSS può essere fornito dal feed
-    ufficiale FDA configurato nel progetto.
-    """
-
-    if rss_url is None:
-
-        raise ValueError(
-            "rss_url must be provided"
+        key = (
+            title,
+            url or ""
         )
 
-    xml_text = fetch_url(
-        rss_url
-    )
+        if key in seen:
+            continue
 
-    return parse_fda_rss(
-        xml_text
-    )
-
-
-# ============================================
-# GET FDA NEWS
-# ============================================
-
-def get_fda_news(
-    rss_url=None
-):
-    """
-    Recupera le news FDA dal feed RSS
-    configurato.
-
-    Restituisce sempre una lista.
-    """
-
-    if rss_url is None:
-
-        return []
-
-    try:
-
-        return fetch_fda_rss(
-            rss_url
+        seen.add(
+            key
         )
 
-    except (
-        requests.RequestException,
-        ET.ParseError,
-        ValueError,
-    ):
+        results.append(
+            item
+        )
 
-        return []
-
-
-# ============================================
-# GET FDA CATALYST NEWS
-# ============================================
-
-def get_fda_catalyst_news(
-    rss_url=None
-):
-    """
-    Recupera soltanto le news FDA
-    considerate potenziali catalyst.
-    """
-
-    news = get_fda_news(
-        rss_url
-    )
-
-    return filter_fda_catalysts(
-        news
-    )
+    return results
 
 
 # ============================================
@@ -568,5 +715,4 @@ def get_fda_sources():
     return {
         "drug_approvals": FDA_DRUGS_URL,
         "press_announcements": FDA_NEWS_URL,
-        "press_rss": FDA_PRESS_RSS_URL,
     }
