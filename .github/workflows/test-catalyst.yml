@@ -45,3 +45,4 @@ jobs:
           python -m scanner.test_fda_matcher
           python -m scanner.test_fda_pipeline
           python -m scanner.test_fda_feed
+          python -m scanner.test_live_fda
