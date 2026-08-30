@@ -1,40 +1,42 @@
 """
-Pharma Radar — FDA News Feed
+Pharma Radar — FDA Feed
 
-Recupera le comunicazioni pubbliche della FDA
-utilizzabili come possibili catalyst Pharma.
+Recupera le comunicazioni pubbliche FDA e le
+trasforma in News Item standardizzati.
 
-Questo modulo NON decide se una notizia è
-tradabile: fornisce dati strutturati al
-motore di classificazione.
+Responsabilità:
+- recuperare le news FDA;
+- estrarre titolo, URL, data e testo;
+- eliminare duplicati;
+- restituire dati compatibili con fda_news.py.
+
+NON effettua:
+- scoring;
+- matching;
+- Trading Intelligence;
+- invio Telegram.
 """
 
+import hashlib
 import re
+from datetime import datetime, timezone
+from urllib.parse import urljoin
+
 import requests
+from bs4 import BeautifulSoup
 
-
-# ============================================
-# FDA SOURCES
-# ============================================
-
-FDA_DRUGS_URL = (
-    "https://www.fda.gov/"
-    "drugs/resources-information-approved-drugs/"
-    "drug-approvals-and-databases"
-)
-
-FDA_NEWS_URL = (
-    "https://www.fda.gov/"
-    "news-events/fda-newsroom/"
-    "press-announcements"
+from scanner.fda_news import (
+    FDA_NEWS_URL,
+    build_fda_news_item,
 )
 
 
 # ============================================
-# HTTP SETTINGS
+# SETTINGS
 # ============================================
 
 REQUEST_TIMEOUT = 30
+MAX_ITEMS = 50
 
 HEADERS = {
     "User-Agent": (
@@ -45,61 +47,14 @@ HEADERS = {
 
 
 # ============================================
-# KEYWORDS
+# FETCH
 # ============================================
 
-FDA_CATALYST_KEYWORDS = {
-
-    "APPROVAL": [
-        "approves",
-        "approved",
-        "approval",
-    ],
-
-    "REJECTION": [
-        "complete response letter",
-        "rejected",
-        "rejects",
-        "refuses",
-        "refusal",
-    ],
-
-    "SAFETY": [
-        "safety",
-        "safety concern",
-        "safety signal",
-        "adverse event",
-        "warning",
-        "recall",
-    ],
-
-    "CLINICAL": [
-        "clinical trial",
-        "clinical study",
-        "phase 1",
-        "phase 2",
-        "phase 3",
-        "primary endpoint",
-        "secondary endpoint",
-        "efficacy",
-    ],
-
-    "LABEL": [
-        "label",
-        "labeling",
-        "indication",
-        "expanded indication",
-    ],
-}
-
-
-# ============================================
-# HTTP GET
-# ============================================
-
-def fetch_url(url):
+def fetch_fda_page(
+    url=FDA_NEWS_URL,
+):
     """
-    Scarica una pagina FDA.
+    Recupera una pagina FDA.
     """
 
     response = requests.get(
@@ -114,12 +69,12 @@ def fetch_url(url):
 
 
 # ============================================
-# NORMALIZE TEXT
+# NORMALIZE
 # ============================================
 
 def normalize_text(text):
     """
-    Normalizza il testo per la classificazione.
+    Normalizza il testo.
     """
 
     if text is None:
@@ -130,169 +85,588 @@ def normalize_text(text):
     text = re.sub(
         r"\s+",
         " ",
-        text
+        text,
     )
 
     return text.strip()
 
 
 # ============================================
-# CLASSIFY FDA TEXT
+# ITEM ID
 # ============================================
 
-def classify_fda_text(title, summary=""):
+def get_item_id(item):
     """
-    Classifica una comunicazione FDA
-    in base alle parole chiave.
+    Genera un identificatore stabile.
+
+    L'URL viene utilizzato come chiave primaria
+    quando disponibile.
     """
 
-    title = normalize_text(
-        title
+    url = normalize_text(
+        item.get("url")
     )
 
-    summary = normalize_text(
-        summary
-    )
+    if url:
+        value = url
+    else:
+        value = (
+            f"{item.get('title', '')}|"
+            f"{item.get('published_at', '')}"
+        )
 
-    text = (
-        f"{title} "
-        f"{summary}"
-    ).lower()
-
-    categories = []
-
-    for category, keywords in (
-        FDA_CATALYST_KEYWORDS.items()
-    ):
-
-        for keyword in keywords:
-
-            if keyword.lower() in text:
-
-                categories.append(
-                    category
-                )
-
-                break
-
-    return categories
+    return hashlib.sha256(
+        value.encode("utf-8")
+    ).hexdigest()
 
 
 # ============================================
-# CATALYST PRIORITY
+# PARSE DATE
 # ============================================
 
-def get_fda_priority(categories):
+def normalize_date(value):
     """
-    Determina la priorità iniziale della
-    comunicazione FDA.
+    Normalizza una data FDA in formato ISO.
 
-    Questa è una classificazione preliminare.
-    Lo scoring finale avverrà nel Trading
-    Intelligence layer.
+    Supporta:
+    - ISO;
+    - date testuali;
+    - MM/DD/YYYY;
+    - YYYY-MM-DD.
     """
 
-    categories = set(
-        categories or []
+    if not value:
+        return None
+
+    value = normalize_text(
+        value
     )
 
-    if categories.intersection({
-        "APPROVAL",
-        "REJECTION",
-        "SAFETY",
-    }):
-        return "EXTREME"
+    # ----------------------------------------
+    # ISO
+    # ----------------------------------------
 
-    if categories.intersection({
-        "CLINICAL",
-        "LABEL",
-    }):
-        return "HIGH"
+    try:
+        parsed = datetime.fromisoformat(
+            value.replace(
+                "Z",
+                "+00:00",
+            )
+        )
 
-    return "LOW"
+        return parsed.isoformat()
 
+    except ValueError:
+        pass
 
-# ============================================
-# BUILD NEWS ITEM
-# ============================================
+    # ----------------------------------------
+    # COMMON FORMATS
+    # ----------------------------------------
 
-def build_fda_news_item(
-    title,
-    summary="",
-    url=None,
-    published_at=None
-):
-    """
-    Costruisce un oggetto news standardizzato.
-    """
+    formats = [
+        "%B %d, %Y",
+        "%b %d, %Y",
+        "%m/%d/%Y",
+        "%Y-%m-%d",
+    ]
 
-    title = normalize_text(
-        title
-    )
+    for date_format in formats:
 
-    summary = normalize_text(
-        summary
-    )
-
-    categories = classify_fda_text(
-        title,
-        summary
-    )
-
-    priority = get_fda_priority(
-        categories
-    )
-
-    return {
-        "source": "FDA",
-        "title": title,
-        "summary": summary,
-        "url": url,
-        "published_at": published_at,
-        "categories": categories,
-        "priority": priority,
-    }
-
-
-# ============================================
-# FILTER CATALYST NEWS
-# ============================================
-
-def filter_fda_catalysts(news_items):
-    """
-    Restituisce soltanto le comunicazioni
-    FDA con potenziale rilevanza.
-    """
-
-    catalysts = []
-
-    for item in news_items:
-
-        if item.get(
-            "priority"
-        ) in {
-            "EXTREME",
-            "HIGH",
-        }:
-
-            catalysts.append(
-                item
+        try:
+            parsed = datetime.strptime(
+                value,
+                date_format,
             )
 
-    return catalysts
+            parsed = parsed.replace(
+                tzinfo=timezone.utc
+            )
+
+            return parsed.isoformat()
+
+        except ValueError:
+            continue
+
+    return value
+
+
+# ============================================
+# EXTRACT DATE
+# ============================================
+
+def extract_date(element):
+    """
+    Estrae una data da un elemento HTML.
+    """
+
+    if element is None:
+        return None
+
+    # ----------------------------------------
+    # <time>
+    # ----------------------------------------
+
+    time_element = element.find(
+        "time"
+    )
+
+    if time_element:
+
+        datetime_value = time_element.get(
+            "datetime"
+        )
+
+        if datetime_value:
+
+            return normalize_date(
+                datetime_value
+            )
+
+        time_text = time_element.get_text(
+            " ",
+            strip=True,
+        )
+
+        if time_text:
+
+            return normalize_date(
+                time_text
+            )
+
+    # ----------------------------------------
+    # TEXT SEARCH
+    # ----------------------------------------
+
+    text = element.get_text(
+        " ",
+        strip=True,
+    )
+
+    pattern = (
+        r"\b("
+        r"January|February|March|April|May|June|"
+        r"July|August|September|October|November|December"
+        r")\s+"
+        r"\d{1,2}"
+        r",\s+"
+        r"\d{4}"
+        r"\b"
+    )
+
+    match = re.search(
+        pattern,
+        text,
+        flags=re.IGNORECASE,
+    )
+
+    if match:
+
+        return normalize_date(
+            match.group(0)
+        )
+
+    # ----------------------------------------
+    # NUMERIC DATE
+    # ----------------------------------------
+
+    numeric_pattern = (
+        r"\b\d{1,2}/\d{1,2}/\d{4}\b"
+    )
+
+    match = re.search(
+        numeric_pattern,
+        text,
+    )
+
+    if match:
+
+        return normalize_date(
+            match.group(0)
+        )
+
+    return None
+
+
+# ============================================
+# EXTRACT SUMMARY
+# ============================================
+
+def extract_summary(element):
+    """
+    Estrae una breve descrizione.
+    """
+
+    if element is None:
+        return ""
+
+    selectors = [
+        "p",
+        ".field--name-body",
+        ".field--name-field-summary",
+        ".summary",
+        ".description",
+    ]
+
+    for selector in selectors:
+
+        paragraph = element.select_one(
+            selector
+        )
+
+        if paragraph:
+
+            text = normalize_text(
+                paragraph.get_text(
+                    " ",
+                    strip=True,
+                )
+            )
+
+            if text:
+                return text
+
+    return ""
+
+
+# ============================================
+# EXTRACT LINK
+# ============================================
+
+def extract_link(
+    element,
+    base_url=FDA_NEWS_URL,
+):
+    """
+    Estrae il link della comunicazione.
+    """
+
+    if element is None:
+        return None
+
+    link = element.find(
+        "a",
+        href=True,
+    )
+
+    if not link:
+        return None
+
+    href = normalize_text(
+        link.get("href")
+    )
+
+    if not href:
+        return None
+
+    return urljoin(
+        base_url,
+        href,
+    )
+
+
+# ============================================
+# EXTRACT TITLE
+# ============================================
+
+def extract_title(element):
+    """
+    Estrae il titolo della news.
+    """
+
+    if element is None:
+        return ""
+
+    selectors = [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        ".field--name-title",
+        ".node-title",
+        ".title",
+    ]
+
+    for selector in selectors:
+
+        title_element = element.select_one(
+            selector
+        )
+
+        if title_element:
+
+            title = normalize_text(
+                title_element.get_text(
+                    " ",
+                    strip=True,
+                )
+            )
+
+            if title:
+                return title
+
+    # ----------------------------------------
+    # FALLBACK LINK
+    # ----------------------------------------
+
+    link = element.find(
+        "a"
+    )
+
+    if link:
+
+        return normalize_text(
+            link.get_text(
+                " ",
+                strip=True,
+            )
+        )
+
+    return ""
+
+
+# ============================================
+# FIND NEWS CONTAINERS
+# ============================================
+
+def find_news_containers(soup):
+    """
+    Individua i contenitori delle news FDA.
+    """
+
+    selectors = [
+        "article",
+        ".node--type-press-release",
+        ".node--type-news",
+        ".views-row",
+        ".news-item",
+        ".press-release",
+        "li",
+    ]
+
+    containers = []
+
+    for selector in selectors:
+
+        found = soup.select(
+            selector
+        )
+
+        if found:
+            containers.extend(
+                found
+            )
+
+    # ----------------------------------------
+    # REMOVE DUPLICATES
+    # ----------------------------------------
+
+    unique = []
+    seen = set()
+
+    for container in containers:
+
+        identity = id(
+            container
+        )
+
+        if identity in seen:
+            continue
+
+        seen.add(
+            identity
+        )
+
+        unique.append(
+            container
+        )
+
+    return unique
+
+
+# ============================================
+# PARSE PAGE
+# ============================================
+
+def parse_fda_page(
+    html,
+    base_url=FDA_NEWS_URL,
+    max_items=MAX_ITEMS,
+):
+    """
+    Converte HTML FDA in News Items.
+    """
+
+    if not html:
+        return []
+
+    soup = BeautifulSoup(
+        html,
+        "html.parser",
+    )
+
+    containers = find_news_containers(
+        soup
+    )
+
+    news = []
+    seen_ids = set()
+
+    for container in containers:
+
+        title = extract_title(
+            container
+        )
+
+        url = extract_link(
+            container,
+            base_url,
+        )
+
+        summary = extract_summary(
+            container
+        )
+
+        published_at = extract_date(
+            container
+        )
+
+        # ------------------------------------
+        # VALIDATION
+        # ------------------------------------
+
+        if not title:
+            continue
+
+        item = build_fda_news_item(
+            title=title,
+            summary=summary,
+            url=url,
+            published_at=published_at,
+        )
+
+        item["id"] = get_item_id(
+            item
+        )
+
+        # ------------------------------------
+        # DUPLICATE FILTER
+        # ------------------------------------
+
+        if item["id"] in seen_ids:
+            continue
+
+        seen_ids.add(
+            item["id"]
+        )
+
+        news.append(
+            item
+        )
+
+        if len(news) >= max_items:
+            break
+
+    return news
+
+
+# ============================================
+# GET FDA NEWS
+# ============================================
+
+def get_fda_news(
+    max_items=MAX_ITEMS,
+):
+    """
+    Recupera le comunicazioni pubbliche FDA.
+    """
+
+    html = fetch_fda_page(
+        FDA_NEWS_URL
+    )
+
+    return parse_fda_page(
+        html,
+        base_url=FDA_NEWS_URL,
+        max_items=max_items,
+    )
+
+
+# ============================================
+# GET FDA CATALYST NEWS
+# ============================================
+
+def get_fda_catalyst_news(
+    max_items=MAX_ITEMS,
+):
+    """
+    Recupera soltanto le news FDA
+    con priorità HIGH o EXTREME.
+    """
+
+    news = get_fda_news(
+        max_items=max_items
+    )
+
+    return [
+        item
+        for item in news
+        if item.get("priority")
+        in {
+            "HIGH",
+            "EXTREME",
+        }
+    ]
+
+
+# ============================================
+# SORT NEWS
+# ============================================
+
+def sort_fda_news(news_items):
+    """
+    Ordina le news per priorità e data.
+    """
+
+    priority_order = {
+        "EXTREME": 3,
+        "HIGH": 2,
+        "LOW": 1,
+    }
+
+    return sorted(
+        news_items or [],
+        key=lambda item: (
+            priority_order.get(
+                item.get(
+                    "priority",
+                    "LOW",
+                ),
+                0,
+            ),
+            item.get(
+                "published_at"
+            ) or "",
+        ),
+        reverse=True,
+    )
 
 
 # ============================================
 # PUBLIC API
 # ============================================
 
-def get_fda_sources():
-    """
-    Restituisce gli endpoint FDA utilizzati
-    dal Radar.
-    """
-
-    return {
-        "drug_approvals": FDA_DRUGS_URL,
-        "press_announcements": FDA_NEWS_URL,
-    }
+__all__ = [
+    "fetch_fda_page",
+    "normalize_text",
+    "get_item_id",
+    "normalize_date",
+    "extract_date",
+    "extract_summary",
+    "extract_link",
+    "extract_title",
+    "find_news_containers",
+    "parse_fda_page",
+    "get_fda_news",
+    "get_fda_catalyst_news",
+    "sort_fda_news",
+]
