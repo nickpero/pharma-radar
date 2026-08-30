@@ -407,4 +407,282 @@ def extract_title(element):
 
         if title_element:
 
-            title = normalize
+            title = normalize_text(
+                title_element.get_text(
+                    " ",
+                    strip=True,
+                )
+            )
+
+            if title:
+                return title
+
+    # ----------------------------------------
+    # FALLBACK LINK
+    # ----------------------------------------
+
+    link = element.find(
+        "a"
+    )
+
+    if link:
+
+        return normalize_text(
+            link.get_text(
+                " ",
+                strip=True,
+            )
+        )
+
+    return ""
+
+
+# ============================================
+# FIND NEWS CONTAINERS
+# ============================================
+
+def find_news_containers(soup):
+    """
+    Individua i contenitori delle news FDA.
+    """
+
+    selectors = [
+        "article",
+        ".node--type-press-release",
+        ".node--type-news",
+        ".views-row",
+        ".news-item",
+        ".press-release",
+        "li",
+    ]
+
+    containers = []
+
+    for selector in selectors:
+
+        found = soup.select(
+            selector
+        )
+
+        if found:
+
+            containers.extend(
+                found
+            )
+
+    # ----------------------------------------
+    # REMOVE DUPLICATES
+    # ----------------------------------------
+
+    unique = []
+
+    seen = set()
+
+    for container in containers:
+
+        identity = id(
+            container
+        )
+
+        if identity in seen:
+            continue
+
+        seen.add(
+            identity
+        )
+
+        unique.append(
+            container
+        )
+
+    return unique
+
+
+# ============================================
+# PARSE PAGE
+# ============================================
+
+def parse_fda_page(
+    html,
+    base_url=FDA_NEWS_URL,
+    max_items=MAX_ITEMS,
+):
+    """
+    Converte HTML FDA in News Items.
+    """
+
+    if not html:
+        return []
+
+    soup = BeautifulSoup(
+        html,
+        "html.parser",
+    )
+
+    containers = find_news_containers(
+        soup
+    )
+
+    news = []
+
+    seen_ids = set()
+
+    for container in containers:
+
+        title = extract_title(
+            container
+        )
+
+        url = extract_link(
+            container,
+            base_url,
+        )
+
+        summary = extract_summary(
+            container
+        )
+
+        published_at = extract_date(
+            container
+        )
+
+        # ------------------------------------
+        # VALIDATION
+        # ------------------------------------
+
+        if not title:
+            continue
+
+        item = build_fda_news_item(
+            title=title,
+            summary=summary,
+            url=url,
+            published_at=published_at,
+        )
+
+        item["id"] = get_item_id(
+            item
+        )
+
+        # ------------------------------------
+        # DUPLICATE FILTER
+        # ------------------------------------
+
+        if item["id"] in seen_ids:
+            continue
+
+        seen_ids.add(
+            item["id"]
+        )
+
+        news.append(
+            item
+        )
+
+        if len(news) >= max_items:
+            break
+
+    return news
+
+
+# ============================================
+# GET FDA NEWS
+# ============================================
+
+def get_fda_news(
+    max_items=MAX_ITEMS,
+):
+    """
+    Recupera le comunicazioni pubbliche FDA.
+    """
+
+    html = fetch_fda_page(
+        FDA_NEWS_URL
+    )
+
+    return parse_fda_page(
+        html,
+        base_url=FDA_NEWS_URL,
+        max_items=max_items,
+    )
+
+
+# ============================================
+# GET FDA CATALYST NEWS
+# ============================================
+
+def get_fda_catalyst_news(
+    max_items=MAX_ITEMS,
+):
+    """
+    Recupera soltanto le news FDA
+    con priorità HIGH o EXTREME.
+    """
+
+    news = get_fda_news(
+        max_items=max_items
+    )
+
+    return [
+        item
+        for item in news
+        if item.get("priority")
+        in {
+            "HIGH",
+            "EXTREME",
+        }
+    ]
+
+
+# ============================================
+# SORT NEWS
+# ============================================
+
+def sort_fda_news(news_items):
+    """
+    Ordina le news per priorità e data.
+    """
+
+    priority_order = {
+        "EXTREME": 3,
+        "HIGH": 2,
+        "LOW": 1,
+    }
+
+    return sorted(
+        news_items,
+        key=lambda item: (
+            priority_order.get(
+                item.get(
+                    "priority",
+                    "LOW",
+                ),
+                0,
+            ),
+            item.get(
+                "published_at"
+            ) or "",
+        ),
+        reverse=True,
+    )
+
+
+# ============================================
+# PUBLIC API
+# ============================================
+
+__all__ = [
+    "fetch_fda_page",
+    "normalize_text",
+    "get_item_id",
+    "normalize_date",
+    "extract_date",
+    "extract_summary",
+    "extract_link",
+    "extract_title",
+    "find_news_containers",
+    "parse_fda_page",
+    "get_fda_news",
+    "get_fda_catalyst_news",
+    "sort_fda_news",
+]
