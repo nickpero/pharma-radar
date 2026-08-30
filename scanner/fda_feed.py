@@ -156,6 +156,7 @@ def normalize_date(value):
     # ----------------------------------------
 
     try:
+
         parsed = datetime.fromisoformat(
             value.replace(
                 "Z",
@@ -182,6 +183,7 @@ def normalize_date(value):
     for date_format in formats:
 
         try:
+
             parsed = datetime.strptime(
                 value,
                 date_format,
@@ -221,10 +223,8 @@ def extract_date(element):
 
     if time_element:
 
-        datetime_value = (
-            time_element.get(
-                "datetime"
-            )
+        datetime_value = time_element.get(
+            "datetime"
         )
 
         if datetime_value:
@@ -234,4 +234,24 @@ def extract_date(element):
             )
 
         time_text = time_element.get_text(
-            "
+            " ",
+            strip=True,
+        )
+
+        if time_text:
+
+            normalized = normalize_date(
+                time_text
+            )
+
+            if normalized:
+                return normalized
+
+    # ----------------------------------------
+    # COMMON DATE ATTRIBUTES
+    # ----------------------------------------
+
+    for attribute in (
+        "datetime",
+        "data-date",
+        "content",
