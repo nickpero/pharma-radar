@@ -50,6 +50,8 @@ EVENT_PRIORITY = {
     "FDA_SAFETY_WARNING": "EXTREME",
     "FDA_SAFETY_SIGNAL": "EXTREME",
     "FDA_RECALL": "EXTREME",
+    "LABEL_EXPANSION": "EXTREME",
+
     "EMA_APPROVAL": "EXTREME",
     "EMA_REJECTION": "EXTREME",
     "COMPLETE_RESPONSE_LETTER": "EXTREME",
@@ -127,13 +129,10 @@ def get_trading_impact(event):
         ]
 
     # ----------------------------------------
-    # Generic event type
+    # Generic FDA event
     # ----------------------------------------
 
     if event_type == "FDA_EVENT":
-
-        # FDA events not explicitly mapped
-        # are still treated as important.
 
         priority = str(
             event.get(
@@ -152,6 +151,10 @@ def get_trading_impact(event):
             return "MEDIUM"
 
         return DEFAULT_PRIORITY
+
+    # ----------------------------------------
+    # Generic clinical event types
+    # ----------------------------------------
 
     if event_type == "PHASE_CHANGE":
         return "HIGH"
@@ -238,30 +241,14 @@ def get_urgency(event):
     ):
         score = 0
 
-    # ----------------------------------------
-    # EXTREME
-    # ----------------------------------------
-
     if impact == "EXTREME":
         return "IMMEDIATE"
-
-    # ----------------------------------------
-    # HIGH
-    # ----------------------------------------
 
     if impact == "HIGH" and score >= 60:
         return "FAST"
 
-    # ----------------------------------------
-    # MEDIUM
-    # ----------------------------------------
-
     if impact == "MEDIUM":
         return "NORMAL"
-
-    # ----------------------------------------
-    # LOW
-    # ----------------------------------------
 
     return "LOW"
 
