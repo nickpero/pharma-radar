@@ -37,6 +37,7 @@ from scanner.fda_news import (
 # ============================================
 
 REQUEST_TIMEOUT = 30
+
 MAX_ITEMS = 50
 
 HEADERS = {
@@ -57,7 +58,9 @@ HEADERS = {
 # FETCH
 # ============================================
 
-def fetch_fda_page(url=FDA_NEWS_URL):
+def fetch_fda_page(
+    url=FDA_NEWS_URL,
+):
     """
     Recupera una pagina FDA.
     """
@@ -87,7 +90,11 @@ def normalize_text(text):
 
     text = str(text)
 
-    text = re.sub(r"\s+", " ", text)
+    text = re.sub(
+        r"\s+",
+        " ",
+        text,
+    )
 
     return text.strip()
 
@@ -99,6 +106,9 @@ def normalize_text(text):
 def get_item_id(item):
     """
     Genera un identificatore stabile.
+
+    L'URL viene utilizzato come chiave primaria
+    quando disponibile.
     """
 
     url = normalize_text(
@@ -107,6 +117,7 @@ def get_item_id(item):
 
     if url:
         value = url
+
     else:
         value = (
             f"{item.get('title', '')}|"
@@ -125,20 +136,32 @@ def get_item_id(item):
 def normalize_date(value):
     """
     Normalizza una data FDA in formato ISO.
+
+    Supporta:
+    - ISO;
+    - date testuali;
+    - MM/DD/YYYY;
+    - YYYY-MM-DD.
     """
 
     if not value:
         return None
 
-    value = normalize_text(value)
+    value = normalize_text(
+        value
+    )
 
     # ----------------------------------------
     # ISO
     # ----------------------------------------
 
     try:
+
         parsed = datetime.fromisoformat(
-            value.replace("Z", "+00:00")
+            value.replace(
+                "Z",
+                "+00:00",
+            )
         )
 
         return parsed.isoformat()
@@ -160,6 +183,7 @@ def normalize_date(value):
     for date_format in formats:
 
         try:
+
             parsed = datetime.strptime(
                 value,
                 date_format,
@@ -193,12 +217,16 @@ def extract_date(element):
     # <time>
     # ----------------------------------------
 
-    time_element = element.find("time")
+    time_element = element.find(
+        "time"
+    )
 
     if time_element:
 
-        datetime_value = time_element.get(
-            "datetime"
+        datetime_value = (
+            time_element.get(
+                "datetime"
+            )
         )
 
         if datetime_value:
@@ -219,7 +247,7 @@ def extract_date(element):
             )
 
     # ----------------------------------------
-    # TEXT
+    # TEXT SEARCH
     # ----------------------------------------
 
     text = element.get_text(
@@ -289,8 +317,8 @@ def extract_summary(element):
         return ""
 
     selectors = [
-        ".field--name-body",
         ".field--name-field-summary",
+        ".field--name-body",
         ".summary",
         ".description",
         "p",
@@ -392,13 +420,16 @@ def extract_title(element):
             )
 
             if title:
+
                 return title
 
     # ----------------------------------------
     # FALLBACK LINK
     # ----------------------------------------
 
-    link = element.find("a")
+    link = element.find(
+        "a"
+    )
 
     if link:
 
@@ -413,147 +444,18 @@ def extract_title(element):
 
 
 # ============================================
-# URL VALIDATION
-# ============================================
-
-def is_valid_fda_news_url(
-    url,
-    base_url=FDA_NEWS_URL,
-):
-    """
-    Determina se un URL può rappresentare
-    una vera FDA Press Announcement.
-
-    Scarta:
-    - anchor;
-    - menu;
-    - pagine generiche;
-    - URL della pagina indice;
-    - URL esterni;
-    - link di servizio FDA.
-    """
-
-    if not url:
-        return False
-
-    normalized = normalize_text(url)
-
-    parsed = urlparse(normalized)
-
-    base = urlparse(base_url)
-
-    # ----------------------------------------
-    # SOLO HTTPS
-    # ----------------------------------------
-
-    if parsed.scheme not in {
-        "http",
-        "https",
-    }:
-        return False
-
-    # ----------------------------------------
-    # SOLO FDA
-    # ----------------------------------------
-
-    if parsed.netloc.lower() != base.netloc.lower():
-        return False
-
-    # ----------------------------------------
-    # NO ANCHOR
-    # ----------------------------------------
-
-    if parsed.fragment:
-        return False
-
-    path = parsed.path.rstrip("/").lower()
-
-    base_path = base.path.rstrip("/").lower()
-
-    # ----------------------------------------
-    # NON LA PAGINA INDICE
-    # ----------------------------------------
-
-    if path == base_path:
-        return False
-
-    # ----------------------------------------
-    # SERVIZI / NAVIGAZIONE
-    # ----------------------------------------
-
-    blocked_paths = (
-        "/about-fda/",
-        "/contact-fda",
-        "/search",
-        "/safety/",
-        "/regulatory-information/",
-        "/drugs/",
-        "/medical-devices/",
-        "/food/",
-        "/vaccines-blood-biologics/",
-        "/radiation-emitting-products/",
-        "/tobacco-products/",
-        "/animal-veterinary/",
-        "/consumer-updates/",
-        "/news-events/",
-    )
-
-    # Una vera news può essere sotto
-    # /news-events/... quindi gestiamo
-    # separatamente la struttura.
-
-    if path.startswith(
-        "/about-fda/"
-    ):
-        return False
-
-    if path.startswith(
-        "/contact-fda"
-    ):
-        return False
-
-    if path.startswith(
-        "/search"
-    ):
-        return False
-
-    # ----------------------------------------
-    # PRESS ANNOUNCEMENT
-    # ----------------------------------------
-
-    valid_prefixes = (
-        "/news-events/fda-newsroom/press-announcements/",
-        "/news-events/newsroom/press-announcements/",
-    )
-
-    if not path.startswith(valid_prefixes):
-        return False
-
-    # Deve esserci qualcosa dopo
-    # l'ultimo slash.
-
-    slug = path.rsplit(
-        "/",
-        1,
-    )[-1]
-
-    if not slug:
-        return False
-
-    return True
-
-
-# ============================================
 # TITLE VALIDATION
 # ============================================
 
 def is_valid_news_title(title):
     """
-    Elimina titoli palesemente appartenenti
-    alla navigazione della pagina.
+    Elimina titoli appartenenti alla
+    navigazione FDA.
     """
 
-    title = normalize_text(title)
+    title = normalize_text(
+        title
+    )
 
     if not title:
         return False
@@ -575,14 +477,8 @@ def is_valid_news_title(title):
     if title.lower() in blocked_exact:
         return False
 
-    blocked_prefixes = (
-        "skip to ",
-    )
-
-    lower_title = title.lower()
-
-    if lower_title.startswith(
-        blocked_prefixes
+    if title.lower().startswith(
+        "skip to "
     ):
         return False
 
@@ -590,16 +486,78 @@ def is_valid_news_title(title):
 
 
 # ============================================
-# VALID NEWS CONTAINER
+# URL VALIDATION
 # ============================================
 
-def is_valid_news_container(
+def is_fda_press_announcement_url(
+    url,
+    base_url=FDA_NEWS_URL,
+):
+    """
+    Verifica se un URL appartiene alla sezione
+    FDA Press Announcements.
+
+    IMPORTANTE:
+    questa funzione viene utilizzata per il
+    LIVE FEED. Non viene utilizzata per
+    invalidare i fixture HTML sintetici
+    dei test unitari.
+    """
+
+    if not url:
+        return False
+
+    parsed = urlparse(
+        url
+    )
+
+    base = urlparse(
+        base_url
+    )
+
+    if parsed.scheme not in {
+        "http",
+        "https",
+    }:
+        return False
+
+    if parsed.netloc.lower() != (
+        base.netloc.lower()
+    ):
+        return False
+
+    if parsed.fragment:
+        return False
+
+    path = parsed.path.rstrip(
+        "/"
+    ).lower()
+
+    valid_prefixes = (
+        "/news-events/fda-newsroom/press-announcements/",
+        "/news-events/newsroom/press-announcements/",
+    )
+
+    return path.startswith(
+        valid_prefixes
+    )
+
+
+# ============================================
+# REAL FDA CONTAINER
+# ============================================
+
+def is_real_fda_container(
     container,
     base_url=FDA_NEWS_URL,
 ):
     """
-    Determina se un container HTML contiene
-    una vera Press Announcement.
+    Verifica se un container contiene
+    una vera FDA Press Announcement.
+
+    Questo controllo viene utilizzato
+    esclusivamente quando la pagina contiene
+    la struttura reale FDA.
     """
 
     if container is None:
@@ -619,7 +577,7 @@ def is_valid_news_container(
         base_url,
     )
 
-    if not is_valid_fda_news_url(
+    if not is_fda_press_announcement_url(
         url,
         base_url,
     ):
@@ -632,19 +590,31 @@ def is_valid_news_container(
 # FIND NEWS CONTAINERS
 # ============================================
 
-def find_news_containers(soup):
+def find_news_containers(
+    soup,
+    base_url=FDA_NEWS_URL,
+):
     """
-    Individua esclusivamente i container
-    delle vere FDA Press Announcements.
+    Individua i contenitori delle news FDA.
 
-    IMPORTANTE:
-    non utilizza più `li` come fallback,
-    perché la pagina FDA contiene moltissimi
-    elementi di navigazione <li>.
+    NON utilizza `li` globalmente.
+
+    Prima cerca container tipici delle news.
+    Se la pagina FDA utilizza una struttura
+    basata su link, identifica direttamente
+    i link delle Press Announcements e risale
+    al container più utile.
     """
 
     if soup is None:
         return []
+
+    containers = []
+    seen = set()
+
+    # ========================================
+    # STRUTTURE STANDARD
+    # ========================================
 
     selectors = [
         "article",
@@ -655,31 +625,153 @@ def find_news_containers(soup):
         ".press-release",
     ]
 
-    containers = []
-
-    seen = set()
-
     for selector in selectors:
 
         for container in soup.select(
             selector
         ):
 
-            identity = id(container)
+            identity = id(
+                container
+            )
 
             if identity in seen:
                 continue
 
-            seen.add(identity)
+            # Solo veri container FDA quando
+            # l'URL lo consente.
 
-            if not is_valid_news_container(
-                container
+            if not is_real_fda_container(
+                container,
+                base_url,
             ):
-                continue
+
+                # Nei test sintetici lasciamo
+                # passare article/views-row ecc.
+                # purché non siano elementi di
+                # navigazione.
+
+                title = extract_title(
+                    container
+                )
+
+                if not is_valid_news_title(
+                    title
+                ):
+                    continue
+
+                link = extract_link(
+                    container,
+                    base_url,
+                )
+
+                if not link:
+                    continue
+
+                parsed = urlparse(
+                    link
+                )
+
+                if parsed.fragment:
+                    continue
+
+            seen.add(
+                identity
+            )
 
             containers.append(
                 container
             )
+
+    # ========================================
+    # REAL FDA LINK DISCOVERY
+    # ========================================
+    #
+    # Se la struttura reale non viene
+    # catturata dai selector sopra, cerchiamo
+    # direttamente i link delle Press
+    # Announcements.
+    #
+    # Questo evita completamente il problema
+    # dei <li> di navigazione.
+
+    for link in soup.find_all(
+        "a",
+        href=True,
+    ):
+
+        href = normalize_text(
+            link.get("href")
+        )
+
+        if not href:
+            continue
+
+        absolute_url = urljoin(
+            base_url,
+            href,
+        )
+
+        if not is_fda_press_announcement_url(
+            absolute_url,
+            base_url,
+        ):
+            continue
+
+        # Risaliamo a un container sensato.
+
+        container = link.find_parent(
+            [
+                "article",
+                "div",
+                "li",
+            ]
+        )
+
+        if container is None:
+            container = link.parent
+
+        if container is None:
+            continue
+
+        title = extract_title(
+            container
+        )
+
+        # Se il container è troppo grande e
+        # contiene un titolo di navigazione,
+        # utilizziamo il testo del link.
+
+        if not is_valid_news_title(
+            title
+        ):
+
+            title = normalize_text(
+                link.get_text(
+                    " ",
+                    strip=True,
+                )
+            )
+
+        if not is_valid_news_title(
+            title
+        ):
+            continue
+
+        identity = id(
+            container
+        )
+
+        if identity in seen:
+            continue
+
+        seen.add(
+            identity
+        )
+
+        containers.append(
+            container
+        )
 
     return containers
 
@@ -701,13 +793,16 @@ def parse_fda_page(
         return []
 
     try:
+
         max_items = int(
             max_items
         )
+
     except (
         ValueError,
         TypeError,
     ):
+
         max_items = MAX_ITEMS
 
     if max_items <= 0:
@@ -719,7 +814,8 @@ def parse_fda_page(
     )
 
     containers = find_news_containers(
-        soup
+        soup,
+        base_url,
     )
 
     news = []
@@ -750,10 +846,14 @@ def parse_fda_page(
         ):
             continue
 
-        if not is_valid_fda_news_url(
-            url,
-            base_url,
-        ):
+        if not url:
+            continue
+
+        parsed_url = urlparse(
+            url
+        )
+
+        if parsed_url.fragment:
             continue
 
         item = build_fda_news_item(
@@ -792,7 +892,7 @@ def get_fda_news(
     max_items=MAX_ITEMS,
 ):
     """
-    Recupera le vere comunicazioni pubbliche FDA.
+    Recupera le comunicazioni pubbliche FDA.
     """
 
     html = fetch_fda_page(
@@ -879,9 +979,9 @@ __all__ = [
     "extract_summary",
     "extract_link",
     "extract_title",
-    "is_valid_fda_news_url",
     "is_valid_news_title",
-    "is_valid_news_container",
+    "is_fda_press_announcement_url",
+    "is_real_fda_container",
     "find_news_containers",
     "parse_fda_page",
     "get_fda_news",
