@@ -37,7 +37,6 @@ from scanner.fda_news import (
 # ============================================
 
 REQUEST_TIMEOUT = 30
-
 MAX_ITEMS = 50
 
 HEADERS = {
@@ -58,9 +57,7 @@ HEADERS = {
 # FETCH
 # ============================================
 
-def fetch_fda_page(
-    url=FDA_NEWS_URL,
-):
+def fetch_fda_page(url=FDA_NEWS_URL):
     """
     Recupera una pagina FDA.
     """
@@ -77,7 +74,7 @@ def fetch_fda_page(
 
 
 # ============================================
-# NORMALIZE
+# NORMALIZE TEXT
 # ============================================
 
 def normalize_text(text):
@@ -100,7 +97,7 @@ def normalize_text(text):
 
 
 # ============================================
-# URL NORMALIZATION
+# NORMALIZE URL
 # ============================================
 
 def normalize_url(
@@ -112,8 +109,7 @@ def normalize_url(
 
     - converte URL relativi in assoluti;
     - elimina fragment;
-    - elimina spazi;
-    - mantiene query string.
+    - conserva la query string.
     """
 
     if not url:
@@ -124,15 +120,17 @@ def normalize_url(
     if not url:
         return None
 
-    url = urljoin(
+    absolute = urljoin(
         base_url,
         url,
     )
 
-    parsed = urlparse(url)
+    parsed = urlparse(
+        absolute
+    )
 
     if not parsed.scheme or not parsed.netloc:
-        return url
+        return absolute
 
     return parsed._replace(
         fragment=""
@@ -145,22 +143,8 @@ def normalize_url(
 
 def is_fda_press_announcement_url(url):
     """
-    Determina se un URL appartiene a una vera
+    Verifica se l'URL appartiene a una vera
     FDA Press Announcement.
-
-    Sono accettati i percorsi FDA del tipo:
-
-        /news-events/press-announcements/...
-
-    oppure:
-
-        /news-events/fda-newsroom/press-announcements/...
-
-    Non vengono considerati validi:
-    - la pagina indice;
-    - anchor interni;
-    - pagine di navigazione;
-    - URL esterni.
     """
 
     if not url:
@@ -179,16 +163,13 @@ def is_fda_press_announcement_url(url):
 
     hostname = parsed.netloc.lower()
 
-    if not (
-        hostname == "www.fda.gov"
-        or hostname.endswith(".fda.gov")
-    ):
+    if hostname not in {
+        "www.fda.gov",
+        "fda.gov",
+    }:
         return False
 
     path = parsed.path.rstrip("/").lower()
-
-    if not path:
-        return False
 
     valid_prefixes = (
         "/news-events/press-announcements/",
@@ -201,13 +182,6 @@ def is_fda_press_announcement_url(url):
     ):
         return False
 
-    # La pagina indice non è una news.
-    if path in {
-        "/news-events/press-announcements",
-        "/news-events/fda-newsroom/press-announcements",
-    }:
-        return False
-
     return True
 
 
@@ -217,17 +191,8 @@ def is_fda_press_announcement_url(url):
 
 def is_valid_news_title(title):
     """
-    Determina se un titolo è plausibilmente
-    una vera news FDA.
-
-    Serve soprattutto a impedire che elementi
-    di navigazione come:
-
-        Press Announcements
-        Skip to main content
-        Contact FDA
-
-    vengano trattati come news.
+    Verifica se il titolo è plausibilmente
+    una vera comunicazione FDA.
     """
 
     title = normalize_text(
@@ -282,10 +247,6 @@ def is_valid_news_title(title):
 def get_item_id(item):
     """
     Genera un identificatore stabile.
-
-    Priorità:
-    1. URL normalizzato;
-    2. titolo + data.
     """
 
     if not isinstance(
@@ -303,11 +264,17 @@ def get_item_id(item):
 
     else:
         title = normalize_text(
-            item.get("title", "")
+            item.get(
+                "title",
+                "",
+            )
         ).lower()
 
         published_at = normalize_text(
-            item.get("published_at", "")
+            item.get(
+                "published_at",
+                "",
+            )
         ).lower()
 
         value = (
@@ -327,12 +294,6 @@ def get_item_id(item):
 def normalize_date(value):
     """
     Normalizza una data FDA in formato ISO.
-
-    Supporta:
-    - ISO;
-    - date testuali;
-    - MM/DD/YYYY;
-    - YYYY-MM-DD.
     """
 
     if not value:
@@ -342,10 +303,7 @@ def normalize_date(value):
         value
     )
 
-    # ----------------------------------------
     # ISO
-    # ----------------------------------------
-
     try:
         parsed = datetime.fromisoformat(
             value.replace(
@@ -358,10 +316,6 @@ def normalize_date(value):
 
     except ValueError:
         pass
-
-    # ----------------------------------------
-    # COMMON FORMATS
-    # ----------------------------------------
 
     formats = [
         "%B %d, %Y",
@@ -402,10 +356,6 @@ def extract_date(element):
     if element is None:
         return None
 
-    # ----------------------------------------
-    # <time>
-    # ----------------------------------------
-
     time_element = element.find(
         "time"
     )
@@ -419,7 +369,6 @@ def extract_date(element):
         )
 
         if datetime_value:
-
             return normalize_date(
                 datetime_value
             )
@@ -430,14 +379,9 @@ def extract_date(element):
         )
 
         if time_text:
-
             return normalize_date(
                 time_text
             )
-
-    # ----------------------------------------
-    # COMMON DATE ATTRIBUTES
-    # ----------------------------------------
 
     for attribute in (
         "datetime",
@@ -451,27 +395,19 @@ def extract_date(element):
         )
 
         if value:
-
-            normalized = normalize_date(
+            result = normalize_date(
                 value
             )
 
-            if normalized:
-                return normalized
-
-    # ----------------------------------------
-    # TEXT SEARCH
-    # ----------------------------------------
+            if result:
+                return result
 
     text = element.get_text(
         " ",
         strip=True,
     )
 
-    # ----------------------------------------
-    # MONTH NAME DATE
-    # ----------------------------------------
-
+    # Month name
     pattern = (
         r"\b("
         r"January|February|March|April|May|June|"
@@ -490,15 +426,11 @@ def extract_date(element):
     )
 
     if match:
-
         return normalize_date(
             match.group(0)
         )
 
-    # ----------------------------------------
-    # NUMERIC DATE
-    # ----------------------------------------
-
+    # Numeric date
     numeric_pattern = (
         r"\b\d{1,2}/\d{1,2}/\d{4}\b"
     )
@@ -509,15 +441,11 @@ def extract_date(element):
     )
 
     if match:
-
         return normalize_date(
             match.group(0)
         )
 
-    # ----------------------------------------
-    # ISO DATE INSIDE TEXT
-    # ----------------------------------------
-
+    # ISO date
     iso_pattern = (
         r"\b\d{4}-\d{2}-\d{2}"
         r"(?:T\d{2}:\d{2}(?::\d{2})?"
@@ -530,7 +458,6 @@ def extract_date(element):
     )
 
     if match:
-
         return normalize_date(
             match.group(0)
         )
@@ -575,10 +502,7 @@ def extract_summary(element):
                 )
             )
 
-            if (
-                text
-                and len(text) > 10
-            ):
+            if len(text) > 10:
                 return text
 
     return ""
@@ -599,11 +523,9 @@ def extract_link(
     if element is None:
         return None
 
-    # ----------------------------------------
-    # ELEMENT ITSELF
-    # ----------------------------------------
-
+    # Elemento stesso
     if element.name == "a":
+
         href = element.get(
             "href"
         )
@@ -614,10 +536,7 @@ def extract_link(
                 base_url,
             )
 
-    # ----------------------------------------
-    # CHILD LINK
-    # ----------------------------------------
-
+    # Link figlio
     link = element.find(
         "a",
         href=True,
@@ -626,12 +545,9 @@ def extract_link(
     if not link:
         return None
 
-    href = normalize_text(
-        link.get("href")
+    href = link.get(
+        "href"
     )
-
-    if not href:
-        return None
 
     return normalize_url(
         href,
@@ -652,14 +568,14 @@ def extract_title(element):
         return ""
 
     selectors = [
+        ".field--name-title",
+        ".node-title",
+        ".views-field-title",
         "h1",
         "h2",
         "h3",
         "h4",
-        ".field--name-title",
-        ".node-title",
         ".title",
-        ".views-field-title",
     ]
 
     for selector in selectors:
@@ -668,24 +584,22 @@ def extract_title(element):
             selector
         )
 
-        if title_element:
+        if not title_element:
+            continue
 
-            title = normalize_text(
-                title_element.get_text(
-                    " ",
-                    strip=True,
-                )
+        title = normalize_text(
+            title_element.get_text(
+                " ",
+                strip=True,
             )
+        )
 
-            if is_valid_news_title(
-                title
-            ):
-                return title
+        if is_valid_news_title(
+            title
+        ):
+            return title
 
-    # ----------------------------------------
-    # LINK FALLBACK
-    # ----------------------------------------
-
+    # Fallback sul link
     link = element.find(
         "a"
     )
@@ -713,20 +627,10 @@ def extract_title(element):
 
 def find_news_containers(soup):
     """
-    Individua i contenitori delle news FDA.
+    Individua i possibili contenitori delle news.
 
-    IMPORTANTE:
-
-    Non utilizziamo più genericamente <li>.
-
-    La precedente implementazione includeva elementi
-    di navigazione FDA come:
-
-        Press Announcements
-        Skip to main content
-        Contact FDA
-
-    provocando falsi risultati nel LIVE TEST.
+    NON utilizza <li> genericamente perché questo
+    cattura la navigazione FDA.
     """
 
     if soup is None:
@@ -744,72 +648,30 @@ def find_news_containers(soup):
 
     containers = []
 
-    for selector in selectors:
-
-        found = soup.select(
-            selector
-        )
-
-        if found:
-            containers.extend(
-                found
-            )
-
-    # ----------------------------------------
-    # FALLBACK:
-    # cerca link che sembrano vere
-    # Press Announcement.
-    # ----------------------------------------
-
-    if not containers:
-
-        for link in soup.find_all(
-            "a",
-            href=True,
-        ):
-
-            href = normalize_url(
-                link.get("href")
-            )
-
-            if not is_fda_press_announcement_url(
-                href
-            ):
-                continue
-
-            parent = link.parent
-
-            if parent is not None:
-                containers.append(
-                    parent
-                )
-
-    # ----------------------------------------
-    # REMOVE DUPLICATES
-    # ----------------------------------------
-
-    unique = []
-
     seen = set()
 
-    for container in containers:
+    for selector in selectors:
 
-        identity = id(
-            container
-        )
+        for container in soup.select(
+            selector
+        ):
 
-        if identity in seen:
-            continue
+            identity = id(
+                container
+            )
 
-        seen.add(
-            identity
-        )
+            if identity in seen:
+                continue
 
-        unique.append(
-            container
-        )
+            seen.add(
+                identity
+            )
 
-    return unique
+            containers.append(
+                container
+            )
+
+    return containers
 
 
 # ============================================
@@ -821,17 +683,14 @@ def find_press_announcement_links(
     base_url=FDA_NEWS_URL,
 ):
     """
-    Cerca direttamente tutti i link alle vere
+    Cerca direttamente i link alle vere
     Press Announcements.
-
-    Questa funzione viene utilizzata come fallback
-    quando la struttura HTML FDA cambia.
     """
 
     if soup is None:
         return []
 
-    links = []
+    result = []
 
     seen = set()
 
@@ -857,11 +716,119 @@ def find_press_announcement_links(
             href
         )
 
-        links.append(
+        result.append(
             anchor
         )
 
-    return links
+    return result
+
+
+# ============================================
+# DUPLICATE KEY
+# ============================================
+
+def get_duplicate_key(
+    item,
+    base_url=FDA_NEWS_URL,
+):
+    """
+    Costruisce una chiave forte per la
+    deduplicazione.
+
+    Priorità:
+
+    1. URL;
+    2. titolo + data;
+    3. titolo + summary.
+    """
+
+    if not isinstance(
+        item,
+        dict,
+    ):
+        return None
+
+    url = normalize_url(
+        item.get("url"),
+        base_url,
+    )
+
+    if url:
+        return (
+            "URL",
+            url.lower(),
+        )
+
+    title = normalize_text(
+        item.get(
+            "title",
+            "",
+        )
+    ).lower()
+
+    published_at = normalize_text(
+        item.get(
+            "published_at",
+            "",
+        )
+    ).lower()
+
+    if title and published_at:
+        return (
+            "CONTENT",
+            title,
+            published_at,
+        )
+
+    summary = normalize_text(
+        item.get(
+            "summary",
+            "",
+        )
+    ).lower()
+
+    if title and summary:
+        return (
+            "CONTENT",
+            title,
+            summary,
+        )
+
+    if title:
+        return (
+            "TITLE",
+            title,
+        )
+
+    return None
+
+
+# ============================================
+# BUILD ITEM
+# ============================================
+
+def build_news_item(
+    title,
+    summary,
+    url,
+    published_at,
+):
+    """
+    Costruisce un News Item standardizzato.
+    """
+
+    item = build_fda_news_item(
+        title=title,
+        summary=summary,
+        url=url,
+        published_at=published_at,
+    )
+
+    item["id"] = get_item_id(
+        item
+    )
+
+    return item
 
 
 # ============================================
@@ -876,17 +843,8 @@ def parse_fda_page(
     """
     Converte HTML FDA in News Items.
 
-    Strategia:
-
-    1. individua i contenitori strutturati;
-    2. estrae titolo/link/data/testo;
-    3. scarta elementi di navigazione;
-    4. elimina duplicati tramite URL;
-    5. usa un fallback diretto sui link FDA
-       quando necessario.
-
-    Per i test HTML locali vengono accettati anche
-    URL non appartenenti a fda.gov.
+    La deduplicazione viene effettuata prima
+    dell'inserimento definitivo del risultato.
     """
 
     if not html:
@@ -896,7 +854,6 @@ def parse_fda_page(
         max_items = int(
             max_items
         )
-
     except (
         ValueError,
         TypeError,
@@ -913,15 +870,11 @@ def parse_fda_page(
 
     news = []
 
-    # ----------------------------------------
-    # DUPLICATE KEYS
-    # ----------------------------------------
-
     seen_keys = set()
 
-    # ----------------------------------------
-    # CONTAINER PARSER
-    # ----------------------------------------
+    # ========================================
+    # PASS 1 — CONTAINER STRUTTURATI
+    # ========================================
 
     containers = find_news_containers(
         soup
@@ -943,6 +896,28 @@ def parse_fda_page(
             base_url,
         )
 
+        # Gli URL FDA devono essere vere
+        # Press Announcements.
+        if url:
+
+            parsed = urlparse(
+                url
+            )
+
+            hostname = (
+                parsed.netloc.lower()
+            )
+
+            if hostname in {
+                "www.fda.gov",
+                "fda.gov",
+            }:
+
+                if not is_fda_press_announcement_url(
+                    url
+                ):
+                    continue
+
         summary = extract_summary(
             container
         )
@@ -951,91 +926,104 @@ def parse_fda_page(
             container
         )
 
-        # ------------------------------------
-        # LIVE FDA VALIDATION
-        # ------------------------------------
-        #
-        # Se siamo davanti a un vero URL FDA,
-        # deve essere una Press Announcement.
-        #
-        # Per gli HTML sintetici dei test accettiamo
-        # invece anche /test, /one, /two, ecc.
-        # ------------------------------------
-
-        if url:
-
-            parsed = urlparse(
-                url
-            )
-
-            is_fda_url = (
-                parsed.netloc.lower()
-                in {
-                    "www.fda.gov",
-                    "fda.gov",
-                }
-            )
-
-            if (
-                is_fda_url
-                and not is_fda_press_announcement_url(
-                    url
-                )
-            ):
-                continue
-
-        # ------------------------------------
-        # ITEM
-        # ------------------------------------
-
-        item = build_fda_news_item(
+        item = build_news_item(
             title=title,
             summary=summary,
             url=url,
             published_at=published_at,
         )
 
-        # ------------------------------------
-        # STABLE ID
-        # ------------------------------------
-
-        item["id"] = get_item_id(
-            item
-        )
-
-        # ------------------------------------
-        # STRONG DUPLICATE KEY
-        # ------------------------------------
-
-        normalized_url = normalize_url(
-            item.get("url"),
+        duplicate_key = get_duplicate_key(
+            item,
             base_url,
         )
 
-        if normalized_url:
+        if duplicate_key is None:
+            continue
 
-            duplicate_key = (
-                "URL",
-                normalized_url.lower(),
+        # DEDUPLICAZIONE PRIMA DELL'APPEND
+        if duplicate_key in seen_keys:
+            continue
+
+        seen_keys.add(
+            duplicate_key
+        )
+
+        news.append(
+            item
+        )
+
+        if len(news) >= max_items:
+            return news
+
+    # ========================================
+    # PASS 2 — FALLBACK LINK DIRETTI
+    # ========================================
+
+    links = find_press_announcement_links(
+        soup,
+        base_url,
+    )
+
+    for link in links:
+
+        url = normalize_url(
+            link.get("href"),
+            base_url,
+        )
+
+        if not url:
+            continue
+
+        title = normalize_text(
+            link.get_text(
+                " ",
+                strip=True,
             )
+        )
 
-        else:
+        if not is_valid_news_title(
+            title
+        ):
+            continue
 
-            duplicate_key = (
-                "CONTENT",
-                normalize_text(
-                    item.get(
-                        "title",
-                        "",
-                    )
-                ).lower(),
-                normalize_text(
-                    item.get(
-                        "published_at",
-                        "",
-                    )
-                ).lower(),
+        # Cerchiamo il contenitore più utile
+        # vicino al link.
+        container = (
+            link.find_parent(
+                "article"
             )
+            or link.find_parent(
+                "li"
+            )
+            or link.find_parent(
+                "div"
+            )
+            or link.parent
+        )
+
+        summary = extract_summary(
+            container
+        )
+
+        published_at = extract_date(
+            container
+        )
+
+        item = build_news_item(
+            title=title,
+            summary=summary,
+            url=url,
+            published_at=published_at,
+        )
+
+        duplicate_key = get_duplicate_key(
+            item,
+            base_url,
+        )
+
+        if duplicate_key is None:
+            continue
 
         if duplicate_key in seen_keys:
             continue
@@ -1050,98 +1038,6 @@ def parse_fda_page(
 
         if len(news) >= max_items:
             break
-
-    # ----------------------------------------
-    # FALLBACK DIRECT LINK PARSER
-    # ----------------------------------------
-    #
-    # Se il parser strutturato non ha trovato
-    # alcuna vera news, analizziamo direttamente
-    # i link Press Announcement.
-    # ----------------------------------------
-
-    if not news:
-
-        links = find_press_announcement_links(
-            soup,
-            base_url,
-        )
-
-        for link in links:
-
-            title = normalize_text(
-                link.get_text(
-                    " ",
-                    strip=True,
-                )
-            )
-
-            if not is_valid_news_title(
-                title
-            ):
-                continue
-
-            url = normalize_url(
-                link.get("href"),
-                base_url,
-            )
-
-            if not url:
-                continue
-
-            # --------------------------------
-            # Cerca il contenitore più vicino.
-            # --------------------------------
-
-            container = (
-                link.find_parent(
-                    [
-                        "article",
-                        "div",
-                        "li",
-                        "section",
-                    ]
-                )
-                or link.parent
-            )
-
-            summary = extract_summary(
-                container
-            )
-
-            published_at = extract_date(
-                container
-            )
-
-            item = build_fda_news_item(
-                title=title,
-                summary=summary,
-                url=url,
-                published_at=published_at,
-            )
-
-            item["id"] = get_item_id(
-                item
-            )
-
-            duplicate_key = (
-                "URL",
-                url.lower(),
-            )
-
-            if duplicate_key in seen_keys:
-                continue
-
-            seen_keys.add(
-                duplicate_key
-            )
-
-            news.append(
-                item
-            )
-
-            if len(news) >= max_items:
-                break
 
     return news
 
@@ -1247,6 +1143,8 @@ __all__ = [
     "is_valid_news_title",
     "find_news_containers",
     "find_press_announcement_links",
+    "get_duplicate_key",
+    "build_news_item",
     "parse_fda_page",
     "get_fda_news",
     "get_fda_catalyst_news",
