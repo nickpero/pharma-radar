@@ -12,7 +12,7 @@ Serve a stabilire la priorità operativa dell'evento.
 
 
 # ============================================
-# TRADING IMPACT LEVELS
+# TRADING IMPACT
 # ============================================
 
 IMPACT_LEVELS = {
@@ -30,7 +30,7 @@ IMPACT_LEVELS = {
 EVENT_PRIORITY = {
 
     # ----------------------------------------
-    # EXTREME — CLINICAL
+    # EXTREME
     # ----------------------------------------
 
     "TRIAL_POSITIVE": "EXTREME",
@@ -39,21 +39,17 @@ EVENT_PRIORITY = {
     "ENDPOINT_FAILED": "EXTREME",
     "TRIAL_STOPPED_SAFETY": "EXTREME",
     "TRIAL_STOPPED_EFFICACY": "EXTREME",
-    "CLINICAL_RESULTS": "EXTREME",
-
-    # ----------------------------------------
-    # EXTREME — FDA / REGULATORY
-    # ----------------------------------------
 
     "FDA_APPROVAL": "EXTREME",
     "FDA_REJECTION": "EXTREME",
     "FDA_SAFETY_WARNING": "EXTREME",
-    "FDA_SAFETY_SIGNAL": "EXTREME",
-    "FDA_RECALL": "EXTREME",
+    "CLINICAL_RESULTS": "EXTREME",
+
+    # FDA label expansion può avere un impatto
+    # materiale sul mercato e viene quindi
+    # trattato come evento regolatorio critico.
     "LABEL_EXPANSION": "EXTREME",
 
-    "EMA_APPROVAL": "EXTREME",
-    "EMA_REJECTION": "EXTREME",
     "COMPLETE_RESPONSE_LETTER": "EXTREME",
 
     # ----------------------------------------
@@ -61,10 +57,10 @@ EVENT_PRIORITY = {
     # ----------------------------------------
 
     "DATE_ACCELERATED": "HIGH",
-    "DATE_DELAYED": "HIGH",
     "PHASE_ADVANCED": "HIGH",
     "PHASE_CHANGE": "HIGH",
     "SIGNIFICANT_ENROLLMENT_CHANGE": "HIGH",
+    "DATE_DELAYED": "HIGH",
 
     # ----------------------------------------
     # MEDIUM
@@ -92,7 +88,7 @@ DEFAULT_PRIORITY = "LOW"
 
 
 # ============================================
-# GET TRADING IMPACT
+# GET IMPACT
 # ============================================
 
 def get_trading_impact(event):
@@ -102,7 +98,9 @@ def get_trading_impact(event):
     """
 
     if not isinstance(event, dict):
-        return DEFAULT_PRIORITY
+        raise TypeError(
+            "event must be a dictionary"
+        )
 
     subtype = str(
         event.get(
@@ -129,31 +127,7 @@ def get_trading_impact(event):
         ]
 
     # ----------------------------------------
-    # Generic FDA event
-    # ----------------------------------------
-
-    if event_type == "FDA_EVENT":
-
-        priority = str(
-            event.get(
-                "priority",
-                ""
-            )
-        ).upper()
-
-        if priority == "EXTREME":
-            return "EXTREME"
-
-        if priority == "HIGH":
-            return "HIGH"
-
-        if priority == "MEDIUM":
-            return "MEDIUM"
-
-        return DEFAULT_PRIORITY
-
-    # ----------------------------------------
-    # Generic clinical event types
+    # Generic event type
     # ----------------------------------------
 
     if event_type == "PHASE_CHANGE":
@@ -199,6 +173,11 @@ def get_trading_impact(event):
 def trading_priority_score(event):
     """
     Converte l'impatto Trading in un valore 1-4.
+
+    4 = EXTREME
+    3 = HIGH
+    2 = MEDIUM
+    1 = LOW
     """
 
     impact = get_trading_impact(
@@ -234,7 +213,6 @@ def get_urgency(event):
 
     try:
         score = int(score)
-
     except (
         ValueError,
         TypeError
@@ -264,7 +242,9 @@ def enrich_trading_event(event):
     """
 
     if not isinstance(event, dict):
-        return {}
+        raise TypeError(
+            "event must be a dictionary"
+        )
 
     result = dict(
         event
