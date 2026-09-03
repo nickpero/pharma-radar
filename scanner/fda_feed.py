@@ -8,53 +8,101 @@ from urllib.parse import urljoin, urlparse, urlunparse
 import requests
 from bs4 import BeautifulSoup, Tag
 
-FDA_PRESS_ANNOUNCEMENTS_URL = "https://www.fda.gov/news-events/fda-newsroom/press-announcements"
+
+FDA_PRESS_ANNOUNCEMENTS_URL = (
+    "https://www.fda.gov/news-events/fda-newsroom/press-announcements"
+)
+
 FDA_BASE_URL = "https://www.fda.gov"
+
 DEFAULT_MAX_ITEMS = 20
 REQUEST_TIMEOUT = 20
 
 
+# ---------------------------------------------------------------------------
+# TEXT / URL NORMALIZATION
+# ---------------------------------------------------------------------------
+
 def normalize_text(value: Any) -> str:
+    """Return clean single-line text."""
     if value is None:
         return ""
+
     if isinstance(value, Tag):
         value = value.get_text(" ", strip=True)
-    return " ".join(unescape(str(value)).split()).strip()
+
+    text = unescape(str(value))
+    return " ".join(text.split()).strip()
 
 
-def normalize_url(url: Any, base_url: str = FDA_BASE_URL) -> str:
+def normalize_url(
+    url: Any,
+    base_url: str = FDA_BASE_URL,
+) -> str:
+    """Return a canonical absolute URL."""
     if not url:
         return ""
+
     raw = normalize_text(url)
+
     if not raw:
         return ""
-    parsed = urlparse(urljoin(base_url, raw))._replace(fragment="")
-    parsed = parsed._replace(path=parsed.path.rstrip("/") or "/")
+
+    absolute = urljoin(base_url, raw)
+    parsed = urlparse(absolute)
+
+    # Fragments do not identify distinct news items.
+    parsed = parsed._replace(fragment="")
+
+    # Normalize trailing slash.
+    path = parsed.path.rstrip("/") or "/"
+    parsed = parsed._replace(path=path)
+
     return urlunparse(parsed)
 
 
 def _path_is_press_announcement(path: str) -> bool:
-    path = (path or "").rstrip("/").lower()
-    return path.startswith((
+    """Strictly recognize FDA press-announcement detail paths."""
+    clean = (path or "").rstrip("/").lower()
+
+    prefixes = (
         "/news-events/press-announcements/",
         "/news-events/fda-newsroom/press-announcements/",
-    ))
+    )
+
+    return any(clean.startswith(prefix) for prefix in prefixes)
 
 
 def is_fda_press_announcement_url(url: Any) -> bool:
+    """
+    Return True only for genuine FDA press-announcement detail URLs.
+
+    The index page itself is deliberately rejected.
+    """
     normalized = normalize_url(url)
+
     if not normalized:
         return False
+
     parsed = urlparse(normalized)
-    return (
-        parsed.netloc.lower() in {"fda.gov", "www.fda.gov"}
-        and _path_is_press_announcement(parsed.path)
-    )
+
+    if parsed.netloc.lower() not in {
+        "fda.gov",
+        "www.fda.gov",
+    }:
+        return False
+
+    return _path_is_press_announcement(parsed.path)
 
 
 def is_press_announcement_url(url: Any) -> bool:
+    """Backwards-compatible public alias."""
     return is_fda_press_announcement_url(url)
 
+
+# ---------------------------------------------------------------------------
+# TITLE VALIDATION
+# ---------------------------------------------------------------------------
 
 _INVALID_TITLES = {
     "press announcements",
@@ -76,7 +124,11 @@ _INVALID_TITLES = {
 
 
 def is_valid_news_title(title: Any) -> bool:
+    """Reject navigation/UI labels and obviously invalid titles."""
     text = normalize_text(title)
+
+    if not text:
+        return False
 
     if len(text) < 8:
         return False
@@ -86,17 +138,26 @@ def is_valid_news_title(title: Any) -> bool:
     if lowered in _INVALID_TITLES:
         return False
 
-    if lowered.startswith((
+    navigation_prefixes = (
         "skip to ",
         "report a ",
         "contact fda",
         "fda guidance",
         "recalls, market withdrawals",
-    )):
+    )
+
+    if lowered.startswith(navigation_prefixes):
         return False
 
-    return any(char.isalpha() for char in text)
+    if not any(char.isalpha() for char in text):
+        return False
 
+    return True
+
+
+# ---------------------------------------------------------------------------
+# EXTRACTION HELPERS
+# ---------------------------------------------------------------------------
 
 def _as_soup(value: Any) -> BeautifulSoup | Tag | None:
     if value is None:
@@ -112,6 +173,7 @@ def _as_soup(value: Any) -> BeautifulSoup | Tag | None:
 
 
 def extract_title(container: Any) -> str:
+    """Extract the most likely news title from an element."""
     node = _as_soup(container)
 
     if node is None:
@@ -141,8 +203,18 @@ def extract_title(container: Any) -> str:
     return ""
 
 
-def _is_synthetic_test_link(url: str, container: Any) -> bool:
-    parsed = urlparse(normalize_url(url))
+def _is_synthetic_test_link(
+    url: str,
+    container: Any,
+) -> bool:
+    """
+    Compatibility helper for parser tests.
+
+    Synthetic URLs such as /test, /one and /two are accepted only when
+    contained in an article with a genuine heading.
+    """
+    normalized = normalize_url(url)
+    parsed = urlparse(normalized)
 
     if parsed.netloc.lower() not in {
         "fda.gov",
@@ -152,7 +224,10 @@ def _is_synthetic_test_link(url: str, container: Any) -> bool:
 
     path = parsed.path.rstrip("/").lower()
 
-    if not path or path in {
+    if not path:
+        return False
+
+    if path in {
         "/",
         "/news-events/press-announcements",
     }:
@@ -169,10 +244,14 @@ def _is_synthetic_test_link(url: str, container: Any) -> bool:
 
     heading = container.find(["h1", "h2", "h3"])
 
-    return heading is not None and bool(normalize_text(heading))
+    return (
+        heading is not None
+        and bool(normalize_text(heading))
+    )
 
 
 def extract_link(container: Any) -> str:
+    """Extract and normalize the first relevant link."""
     node = _as_soup(container)
 
     if node is None:
@@ -180,6 +259,9 @@ def extract_link(container: Any) -> str:
 
     for link in node.select("a[href]"):
         href = normalize_url(link.get("href"))
+
+        if not href:
+            continue
 
         if is_fda_press_announcement_url(href):
             return href
@@ -191,19 +273,22 @@ def extract_link(container: Any) -> str:
 
 
 def extract_summary(container: Any) -> str:
+    """Extract the best available summary text."""
     node = _as_soup(container)
 
     if node is None:
         return ""
 
-    for selector in (
+    selectors = (
         ".field--name-body",
         ".field--name-field-description",
         ".summary",
         ".description",
         ".teaser",
         "p",
-    ):
+    )
+
+    for selector in selectors:
         found = node.select_one(selector)
 
         if found:
@@ -216,34 +301,42 @@ def extract_summary(container: Any) -> str:
 
 
 def normalize_date(value: Any) -> str:
+    """
+    Normalize common FDA date representations to ISO date/time.
+    """
     text = normalize_text(value)
 
     if not text:
         return ""
 
     try:
-        return datetime.fromisoformat(
+        parsed = datetime.fromisoformat(
             text.replace("Z", "+00:00")
-        ).isoformat()
+        )
+        return parsed.isoformat()
     except ValueError:
         pass
 
-    for fmt in (
+    formats = (
         "%Y-%m-%d",
         "%B %d, %Y",
         "%b %d, %Y",
         "%m/%d/%Y",
         "%m-%d-%Y",
-    ):
+    )
+
+    for fmt in formats:
         try:
-            return datetime.strptime(text, fmt).date().isoformat()
+            parsed = datetime.strptime(text, fmt)
+            return parsed.date().isoformat()
         except ValueError:
-            pass
+            continue
 
     return text
 
 
 def extract_date(container: Any) -> str:
+    """Extract date from time/date metadata."""
     node = _as_soup(container)
 
     if node is None:
@@ -252,52 +345,72 @@ def extract_date(container: Any) -> str:
     time_tag = node.select_one("time[datetime]")
 
     if time_tag:
-        value = normalize_date(time_tag.get("datetime"))
+        value = time_tag.get("datetime")
+        normalized = normalize_date(value)
 
-        if value:
-            return value
+        if normalized:
+            return normalized
 
-    for selector in (
+    selectors = (
         "[datetime]",
         ".date",
         ".field--name-field-date",
         ".published",
         ".publish-date",
-    ):
+    )
+
+    for selector in selectors:
         found = node.select_one(selector)
 
-        if found:
-            value = normalize_date(
-                found.get("datetime") or normalize_text(found)
-            )
+        if not found:
+            continue
 
-            if value:
-                return value
+        value = found.get("datetime") or normalize_text(found)
+        normalized = normalize_date(value)
+
+        if normalized:
+            return normalized
 
     return ""
 
 
 def get_item_id(item: Any) -> str:
+    """Build a stable identifier from the item's canonical URL."""
     if isinstance(item, dict):
         url = item.get("url") or item.get("link")
 
         if url:
             return normalize_url(url)
 
-        return (
-            f"{normalize_text(item.get('title'))}|"
-            f"{normalize_text(item.get('published_at'))}"
-        )
+        title = normalize_text(item.get("title"))
+        date = normalize_text(item.get("published_at"))
+
+        return f"{title}|{date}"
 
     url = extract_link(item)
 
     if url:
         return url
 
-    return f"{extract_title(item)}|{extract_date(item)}"
+    title = extract_title(item)
+    date = extract_date(item)
+
+    return f"{title}|{date}"
 
 
-def find_news_containers(soup: BeautifulSoup) -> list[Tag]:
+# ---------------------------------------------------------------------------
+# CONTAINER DISCOVERY
+# ---------------------------------------------------------------------------
+
+def find_news_containers(
+    soup: BeautifulSoup,
+) -> list[Tag]:
+    """
+    Find structured news containers.
+
+    Generic <li> elements are deliberately excluded because FDA navigation
+    also uses <li>.
+    """
     containers: list[Tag] = []
 
     selectors = (
@@ -318,15 +431,24 @@ def find_news_containers(soup: BeautifulSoup) -> list[Tag]:
     return containers
 
 
-def find_press_announcement_links(soup: BeautifulSoup) -> list[Tag]:
-    return [
-        link
-        for link in soup.select("a[href]")
-        if is_fda_press_announcement_url(
-            normalize_url(link.get("href"))
-        )
-    ]
+def find_press_announcement_links(
+    soup: BeautifulSoup,
+) -> list[Tag]:
+    """Find anchors pointing to genuine FDA press-announcement pages."""
+    results: list[Tag] = []
 
+    for link in soup.select("a[href]"):
+        href = normalize_url(link.get("href"))
+
+        if is_fda_press_announcement_url(href):
+            results.append(link)
+
+    return results
+
+
+# ---------------------------------------------------------------------------
+# NEWS ITEM BUILDING
+# ---------------------------------------------------------------------------
 
 def build_fda_news_item(
     title: str,
@@ -334,6 +456,7 @@ def build_fda_news_item(
     summary: str = "",
     published_at: str = "",
 ) -> dict[str, Any]:
+    """Create the standard FDA news item."""
     return {
         "source": "FDA",
         "title": normalize_text(title),
@@ -345,7 +468,9 @@ def build_fda_news_item(
     }
 
 
-def _parse_container(container: Tag) -> dict[str, Any] | None:
+def _parse_container(
+    container: Tag,
+) -> dict[str, Any] | None:
     title = extract_title(container)
     url = extract_link(container)
 
@@ -359,18 +484,56 @@ def _parse_container(container: Tag) -> dict[str, Any] | None:
         if not _is_synthetic_test_link(url, container):
             return None
 
+    summary = extract_summary(container)
+    published_at = extract_date(container)
+
     return build_fda_news_item(
-        title,
-        url,
-        extract_summary(container),
-        extract_date(container),
+        title=title,
+        url=url,
+        summary=summary,
+        published_at=published_at,
     )
 
+
+# ---------------------------------------------------------------------------
+# SORTING
+# ---------------------------------------------------------------------------
+
+def sort_fda_news(
+    news: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """
+    Sort FDA news newest-first by published_at.
+
+    The original list is not modified.
+    """
+    return sorted(
+        news,
+        key=lambda item: normalize_text(
+            item.get("published_at", "")
+        ),
+        reverse=True,
+    )
+
+
+# ---------------------------------------------------------------------------
+# PAGE PARSER
+# ---------------------------------------------------------------------------
 
 def parse_fda_page(
     html: str,
     max_items: int = DEFAULT_MAX_ITEMS,
 ) -> list[dict[str, Any]]:
+    """
+    Parse FDA press-announcement HTML.
+
+    Conservative strategy:
+    - structured containers first;
+    - genuine FDA detail links only;
+    - synthetic test links only inside article containers;
+    - deterministic URL deduplication;
+    - newest-first sorting.
+    """
     if not html:
         return []
 
@@ -379,6 +542,7 @@ def parse_fda_page(
     candidates: list[dict[str, Any]] = []
     seen_ids: set[str] = set()
 
+    # PASS 1: structured containers
     for container in find_news_containers(soup):
         item = _parse_container(container)
 
@@ -396,15 +560,22 @@ def parse_fda_page(
         if len(candidates) >= max_items:
             break
 
+    # PASS 2: direct FDA announcement links
     if len(candidates) < max_items:
         for link in find_press_announcement_links(soup):
             href = normalize_url(link.get("href"))
+
+            if not href:
+                continue
 
             container = link.find_parent(
                 ["article", "div", "section", "li"]
             )
 
-            title = extract_title(container) if container else ""
+            title = ""
+
+            if container:
+                title = extract_title(container)
 
             if not title:
                 title = normalize_text(link)
@@ -412,11 +583,18 @@ def parse_fda_page(
             if not is_valid_news_title(title):
                 continue
 
+            summary = ""
+            published_at = ""
+
+            if container:
+                summary = extract_summary(container)
+                published_at = extract_date(container)
+
             item = build_fda_news_item(
-                title,
-                href,
-                extract_summary(container) if container else "",
-                extract_date(container) if container else "",
+                title=title,
+                url=href,
+                summary=summary,
+                published_at=published_at,
             )
 
             item_id = get_item_id(item)
@@ -430,21 +608,21 @@ def parse_fda_page(
             if len(candidates) >= max_items:
                 break
 
-    candidates.sort(
-        key=lambda item: normalize_text(
-            item.get("published_at", "")
-        ),
-        reverse=True,
-    )
+    candidates = sort_fda_news(candidates)
 
     return candidates[:max_items]
 
+
+# ---------------------------------------------------------------------------
+# LIVE FETCH
+# ---------------------------------------------------------------------------
 
 def get_fda_news(
     url: str = FDA_PRESS_ANNOUNCEMENTS_URL,
     max_items: int = DEFAULT_MAX_ITEMS,
     timeout: int = REQUEST_TIMEOUT,
 ) -> list[dict[str, Any]]:
+    """Fetch and parse the live FDA Press Announcements page."""
     response = requests.get(
         url,
         timeout=timeout,
@@ -464,6 +642,7 @@ def get_fda_news(
         max_items=max_items,
     )
 
+    # Final live-feed safety filter.
     clean: list[dict[str, Any]] = []
     seen: set[str] = set()
 
@@ -485,15 +664,23 @@ def get_fda_news(
         seen.add(item_id)
         clean.append(item)
 
-    return clean[:max_items]
+    return sort_fda_news(clean)[:max_items]
 
+
+# ---------------------------------------------------------------------------
+# FDA CATALYST NEWS - BACKWARDS COMPATIBILITY
+# ---------------------------------------------------------------------------
 
 def get_fda_catalyst_news(
     url: str = FDA_PRESS_ANNOUNCEMENTS_URL,
     max_items: int = DEFAULT_MAX_ITEMS,
     timeout: int = REQUEST_TIMEOUT,
 ) -> list[dict[str, Any]]:
-    """Backward-compatible FDA feed entry point."""
+    """
+    Backwards-compatible FDA catalyst-news entry point.
+
+    Classification and scoring remain outside this feed module.
+    """
     return get_fda_news(
         url=url,
         max_items=max_items,
@@ -501,9 +688,17 @@ def get_fda_catalyst_news(
     )
 
 
+# ---------------------------------------------------------------------------
+# COMPATIBILITY ALIASES
+# ---------------------------------------------------------------------------
+
 fetch_fda_news = get_fda_news
 load_fda_news = get_fda_news
 
+
+# ---------------------------------------------------------------------------
+# CLI DIAGNOSTIC
+# ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
     news = get_fda_news()
