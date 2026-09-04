@@ -10,6 +10,7 @@ Il matcher utilizza:
 - alias società
 - nome programma/farmaco
 - alias programma/farmaco
+- contenuto esteso della FDA News Item
 
 IMPORTANTE:
 Il ticker viene verificato separatamente e in modo
@@ -26,7 +27,6 @@ Il matcher non produce raccomandazioni di acquisto
 o vendita.
 """
 
-
 import json
 import re
 from pathlib import Path
@@ -42,6 +42,39 @@ WATCHLIST_FILE = Path(
 
 ALIASES_FILE = Path(
     "data/aliases.json"
+)
+
+
+# ============================================
+# EXTENDED NEWS FIELDS
+# ============================================
+
+# Campi testuali che possono contenere informazioni
+# aggiuntive provenienti dalla FDA.
+#
+# Non tutti saranno necessariamente presenti in ogni
+# News Item. Il matcher li utilizza soltanto quando
+# disponibili.
+
+NEWS_TEXT_FIELDS = (
+    "title",
+    "summary",
+    "description",
+    "content",
+    "body",
+    "text",
+    "article_text",
+    "full_text",
+    "drug",
+    "drug_name",
+    "program",
+    "program_name",
+    "company",
+    "company_name",
+    "sponsor",
+    "manufacturer",
+    "applicant",
+    "raw_text",
 )
 
 
@@ -69,10 +102,15 @@ def normalize(text):
         ")": " ",
         ":": " ",
         ";": " ",
+        "[": " ",
+        "]": " ",
+        "{": " ",
+        "}": " ",
+        "'": " ",
+        '"': " ",
     }
 
     for old, new in replacements.items():
-
         text = text.replace(
             old,
             new,
@@ -102,7 +140,6 @@ def load_json(path):
         "r",
         encoding="utf-8",
     ) as file:
-
         return json.load(file)
 
 
@@ -136,13 +173,61 @@ def load_aliases():
 
 
 # ============================================
-# TEXT CONSTRUCTION
+# TEXT EXTRACTION
 # ============================================
 
-def build_news_text(news_item):
+def _stringify_news_value(value):
     """
-    Costruisce il testo complessivo utilizzato
-    per il matching della news FDA.
+    Converte in testo un valore proveniente
+    da una News Item.
+
+    Supporta:
+    - stringhe
+    - numeri
+    - liste
+    - tuple
+    - set
+    - dizionari
+
+    Serve per rendere il matcher robusto anche
+    quando una sorgente FDA utilizza strutture
+    leggermente diverse.
+    """
+
+    if value is None:
+        return ""
+
+    if isinstance(value, str):
+        return value
+
+    if isinstance(
+        value,
+        (list, tuple, set),
+    ):
+        return " ".join(
+            _stringify_news_value(item)
+            for item in value
+        )
+
+    if isinstance(value, dict):
+        return " ".join(
+            _stringify_news_value(item)
+            for item in value.values()
+        )
+
+    return str(value)
+
+
+def get_news_text_parts(news_item):
+    """
+    Estrae tutti i campi testuali utili della news.
+
+    I campi vengono deduplicati mantenendo l'ordine
+    originale.
+
+    Il metodo è volutamente conservativo:
+    vengono utilizzati soltanto campi testuali
+    esplicitamente riconosciuti.
     """
 
     if not isinstance(
@@ -153,23 +238,51 @@ def build_news_text(news_item):
             "news_item must be a dictionary"
         )
 
-    parts = [
-        news_item.get(
-            "title",
-            "",
-        ),
-        news_item.get(
-            "summary",
-            "",
-        ),
-    ]
+    parts = []
+    seen = set()
+
+    for field in NEWS_TEXT_FIELDS:
+        value = news_item.get(field)
+
+        text = _stringify_news_value(
+            value
+        ).strip()
+
+        if not text:
+            continue
+
+        normalized = text.strip()
+
+        if normalized in seen:
+            continue
+
+        seen.add(normalized)
+        parts.append(text)
+
+    return parts
+
+
+# ============================================
+# TEXT CONSTRUCTION
+# ============================================
+
+def build_news_text(news_item):
+    """
+    Costruisce il testo complessivo utilizzato
+    per il matching della news FDA.
+
+    A differenza della versione precedente,
+    considera anche eventuali campi estesi:
+    description, content, body, sponsor,
+    manufacturer, drug, ecc.
+    """
+
+    parts = get_news_text_parts(
+        news_item
+    )
 
     return normalize(
-        " ".join(
-            str(part)
-            for part in parts
-            if part
-        )
+        " ".join(parts)
     )
 
 
@@ -179,32 +292,16 @@ def build_raw_news_text(news_item):
 
     Viene utilizzato per il matching del ticker,
     che deve essere case-sensitive.
+
+    Anche qui vengono inclusi gli eventuali
+    campi estesi della News Item.
     """
 
-    if not isinstance(
-        news_item,
-        dict,
-    ):
-        raise TypeError(
-            "news_item must be a dictionary"
-        )
-
-    parts = [
-        news_item.get(
-            "title",
-            "",
-        ),
-        news_item.get(
-            "summary",
-            "",
-        ),
-    ]
-
-    return " ".join(
-        str(part)
-        for part in parts
-        if part
+    parts = get_news_text_parts(
+        news_item
     )
+
+    return " ".join(parts)
 
 
 # ============================================
@@ -253,7 +350,6 @@ def get_company_aliases(
         configured_aliases,
         list,
     ):
-
         aliases.extend(
             configured_aliases
         )
@@ -303,7 +399,6 @@ def get_program_aliases(
         configured_aliases,
         list,
     ):
-
         aliases.extend(
             configured_aliases
         )
@@ -331,7 +426,7 @@ def contains_alias(
     Alias composti:
         matching della sequenza completa.
 
-Alias singoli:
+    Alias singoli:
         matching come token completo.
     """
 
@@ -358,7 +453,6 @@ Alias singoli:
     )
 
     if len(alias_tokens) == 1:
-
         return alias_tokens[0] in text_tokens
 
     return (
@@ -468,10 +562,10 @@ def match_company(
             news_text,
             alias,
         ):
-
-            matches.append(
-                alias
-            )
+            if alias not in matches:
+                matches.append(
+                    alias
+                )
 
     # ----------------------------------------
     # TICKER
@@ -481,10 +575,10 @@ def match_company(
         news_item,
         ticker,
     ):
-
-        matches.append(
-            ticker
-        )
+        if ticker not in matches:
+            matches.append(
+                ticker
+            )
 
     return matches
 
@@ -501,6 +595,12 @@ def match_program(
     """
     Determina se la news contiene riferimenti
     al programma/farmaco.
+
+    Il matching utilizza:
+    - nome programma;
+    - alias programma;
+    - eventuali riferimenti presenti nel
+      contenuto esteso della news.
     """
 
     news_text = build_news_text(
@@ -520,10 +620,10 @@ def match_program(
             news_text,
             alias,
         ):
-
-            matches.append(
-                alias
-            )
+            if alias not in matches:
+                matches.append(
+                    alias
+                )
 
     return matches
 
@@ -559,7 +659,6 @@ def match_fda_news(
         )
 
     if watchlist is None:
-
         watchlist = load_watchlist()
 
     if not isinstance(
@@ -624,11 +723,9 @@ def match_fda_news(
                 )
 
             elif company_matches:
-
                 match_type = "COMPANY"
 
             elif program_matches:
-
                 match_type = "PROGRAM"
 
             matches.append({
@@ -826,6 +923,7 @@ __all__ = [
     "load_json",
     "load_watchlist",
     "load_aliases",
+    "get_news_text_parts",
     "build_news_text",
     "build_raw_news_text",
     "get_company_aliases",
