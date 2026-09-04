@@ -46,3 +46,4 @@ jobs:
           python -m scanner.test_fda_pipeline
           python -m scanner.test_fda_feed
           python -m scanner.test_live_fda
+          python -c "from scanner.fda_news import get_fda_news; n=get_fda_news(max_news=50); print('FDA NEWS:', len(n)); [print(x.get('title'), '|', x.get('url')) for x in n]"
