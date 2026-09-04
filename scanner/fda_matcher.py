@@ -23,6 +23,12 @@ testo = "a rare blood disorder"
 
 NON deve essere considerato un match.
 
+Per la pipeline FDA destinata agli alert, un semplice
+match aziendale NON è sufficiente.
+
+Deve essere identificato anche uno specifico
+programma/farmaco.
+
 Il matcher non produce raccomandazioni di acquisto
 o vendita.
 """
@@ -48,13 +54,6 @@ ALIASES_FILE = Path(
 # ============================================
 # EXTENDED NEWS FIELDS
 # ============================================
-
-# Campi testuali che possono contenere informazioni
-# aggiuntive provenienti dalla FDA.
-#
-# Non tutti saranno necessariamente presenti in ogni
-# News Item. Il matcher li utilizza soltanto quando
-# disponibili.
 
 NEWS_TEXT_FIELDS = (
     "title",
@@ -188,10 +187,6 @@ def _stringify_news_value(value):
     - tuple
     - set
     - dizionari
-
-    Serve per rendere il matcher robusto anche
-    quando una sorgente FDA utilizza strutture
-    leggermente diverse.
     """
 
     if value is None:
@@ -224,10 +219,6 @@ def get_news_text_parts(news_item):
 
     I campi vengono deduplicati mantenendo l'ordine
     originale.
-
-    Il metodo è volutamente conservativo:
-    vengono utilizzati soltanto campi testuali
-    esplicitamente riconosciuti.
     """
 
     if not isinstance(
@@ -270,11 +261,6 @@ def build_news_text(news_item):
     """
     Costruisce il testo complessivo utilizzato
     per il matching della news FDA.
-
-    A differenza della versione precedente,
-    considera anche eventuali campi estesi:
-    description, content, body, sponsor,
-    manufacturer, drug, ecc.
     """
 
     parts = get_news_text_parts(
@@ -292,9 +278,6 @@ def build_raw_news_text(news_item):
 
     Viene utilizzato per il matching del ticker,
     che deve essere case-sensitive.
-
-    Anche qui vengono inclusi gli eventuali
-    campi estesi della News Item.
     """
 
     parts = get_news_text_parts(
@@ -422,12 +405,6 @@ def contains_alias(
     Verifica la presenza di un alias nel testo.
 
     Il matching generale è case-insensitive.
-
-    Alias composti:
-        matching della sequenza completa.
-
-    Alias singoli:
-        matching come token completo.
     """
 
     normalized_text = normalize(
@@ -473,8 +450,6 @@ def contains_ticker(
     Verifica la presenza del ticker nel testo
     originale della news.
 
-    IMPORTANTE:
-
     Il matching è case-sensitive.
 
     Esempio:
@@ -486,9 +461,6 @@ def contains_ticker(
 
         "RARE announces FDA approval"
             -> MATCH
-
-    Questo evita falsi positivi dovuti a ticker
-    che coincidono con parole comuni.
     """
 
     if not ticker:
@@ -647,7 +619,13 @@ def match_fda_news(
     - società + programma;
     - ticker + programma.
 
-    Restituisce una lista di match strutturati.
+    Questa funzione mantiene anche i match
+    COMPANY per compatibilità con il motore
+    di matching.
+
+    La decisione finale utilizzata dalla pipeline
+    FDA viene presa da identify_fda_target(),
+    che richiede un programma specifico.
     """
 
     if not isinstance(
@@ -834,8 +812,36 @@ def identify_fda_target(
     """
     Identifica il miglior target della news FDA.
 
-    Restituisce None quando non è possibile
-    associare la news alla watchlist.
+    REGOLA DI SICUREZZA:
+
+    Per la pipeline FDA destinata agli alert
+    non è sufficiente identificare soltanto
+    l'azienda o il ticker.
+
+    Deve essere identificato anche uno specifico
+    programma/farmaco.
+
+    Questo impedisce casi come:
+
+        RARE
+        -> Ultragenyx
+        -> UX111
+
+    quando UX111 NON compare realmente nella news.
+
+    Esempi:
+
+        "FDA approves VYVGART..."
+            -> ARGX / VYVGART
+
+        "FDA approves zidesamtinib..."
+            -> NUVL / zidesamtinib
+
+        "RARE sector activity..."
+            -> None
+
+        "Ultragenyx announces UX111 update..."
+            -> RARE / UX111
     """
 
     matches = match_fda_news(
@@ -843,8 +849,31 @@ def identify_fda_target(
         watchlist,
     )
 
+    if not matches:
+        return None
+
+    # ----------------------------------------
+    # SAFETY FILTER
+    # ----------------------------------------
+    #
+    # Scartiamo tutti i match che non hanno
+    # identificato un programma specifico.
+    #
+    # Questo è il punto fondamentale della
+    # correzione anti-falso-positivo.
+    # ----------------------------------------
+
+    program_matches = [
+        match
+        for match in matches
+        if match.get("program_matches")
+    ]
+
+    if not program_matches:
+        return None
+
     return get_best_match(
-        matches
+        program_matches
     )
 
 
@@ -860,7 +889,7 @@ def match_fda_news_batch(
     Applica il matching a una lista di news FDA.
 
     Restituisce una lista di risultati, inclusi
-    anche quelli senza corrispondenza.
+    anche quelli senza corrispondenza valida.
     """
 
     if not news_items:
@@ -875,15 +904,16 @@ def match_fda_news_batch(
             watchlist,
         )
 
+        best_match = identify_fda_target(
+            news_item,
+            watchlist,
+        )
+
         results.append({
             "news": news_item,
             "matches": matches,
-            "best_match": get_best_match(
-                matches
-            ),
-            "matched": bool(
-                matches
-            ),
+            "best_match": best_match,
+            "matched": best_match is not None,
         })
 
     return results
@@ -899,7 +929,10 @@ def filter_matched_fda_news(
 ):
     """
     Restituisce soltanto le news FDA
-    che hanno almeno un target nella watchlist.
+    che hanno un target valido nella watchlist.
+
+    Un target valido deve avere anche uno
+    specifico programma/farmaco identificato.
     """
 
     batch = match_fda_news_batch(
@@ -939,3 +972,13 @@ __all__ = [
     "match_fda_news_batch",
     "filter_matched_fda_news",
 ]
+
+
+# ============================================
+# DIRECT EXECUTION
+# ============================================
+
+if __name__ == "__main__":
+    print(
+        "FDA Matcher module loaded successfully."
+    )
