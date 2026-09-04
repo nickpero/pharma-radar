@@ -65,7 +65,6 @@ def normalize_date(value: Any) -> str:
     if not text:
         return ""
 
-    # ISO datetime
     try:
         normalized = text.replace("Z", "+00:00")
         dt = datetime.fromisoformat(normalized)
@@ -74,10 +73,10 @@ def normalize_date(value: Any) -> str:
             dt = dt.replace(tzinfo=timezone.utc)
 
         return dt.astimezone(timezone.utc).isoformat()
+
     except ValueError:
         pass
 
-    # Common FDA date formats
     formats = (
         "%B %d, %Y",
         "%b %d, %Y",
@@ -138,7 +137,6 @@ def is_valid_news_title(title: str) -> bool:
     if lowered in INVALID_TITLES:
         return False
 
-    # Reject obvious navigation / site chrome.
     navigation_terms = (
         "skip to ",
         "menu",
@@ -150,7 +148,6 @@ def is_valid_news_title(title: str) -> bool:
     if any(lowered.startswith(term) for term in navigation_terms):
         return False
 
-    # FDA press announcement titles should contain meaningful text.
     if len(title) < 10:
         return False
 
@@ -165,14 +162,16 @@ def get_item_id(item: Any) -> str:
     """
     Return a deterministic SHA-256 identifier.
 
-    The identity intentionally uses the canonical URL first. When no URL is
-    available, title/date are used as a fallback.
+    The canonical URL is the primary identity.
+    Title/date are used as fallback when URL is unavailable.
     """
 
     if isinstance(item, dict):
         url = normalize_url(item.get("url", ""))
         title = normalize_text(item.get("title", ""))
-        published_at = normalize_date(item.get("published_at", ""))
+        published_at = normalize_date(
+            item.get("published_at", "")
+        )
 
         if url:
             identity = url.lower()
@@ -186,7 +185,39 @@ def get_item_id(item: Any) -> str:
     else:
         identity = normalize_text(item).lower()
 
-    return hashlib.sha256(identity.encode("utf-8")).hexdigest()
+    return hashlib.sha256(
+        identity.encode("utf-8")
+    ).hexdigest()
+
+
+# ---------------------------------------------------------------------------
+# SORTING
+# ---------------------------------------------------------------------------
+
+def sort_fda_news(
+    news: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """
+    Sort FDA news newest first.
+
+    Items without a valid date are kept after dated items.
+    """
+
+    def sort_key(item: dict[str, Any]) -> tuple[int, str]:
+        published_at = normalize_date(
+            item.get("published_at", "")
+        )
+
+        if not published_at:
+            return (0, "")
+
+        return (1, published_at)
+
+    return sorted(
+        news,
+        key=sort_key,
+        reverse=True,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -194,10 +225,14 @@ def get_item_id(item: Any) -> str:
 # ---------------------------------------------------------------------------
 
 def extract_title(node: Tag) -> str:
-    heading = node.find(["h1", "h2", "h3", "h4", "h5", "h6"])
+    heading = node.find(
+        ["h1", "h2", "h3", "h4", "h5", "h6"]
+    )
 
     if heading:
-        return normalize_text(heading.get_text(" ", strip=True))
+        return normalize_text(
+            heading.get_text(" ", strip=True)
+        )
 
     title_meta = node.find(
         "meta",
@@ -205,7 +240,9 @@ def extract_title(node: Tag) -> str:
     )
 
     if title_meta and title_meta.get("content"):
-        return normalize_text(title_meta["content"])
+        return normalize_text(
+            title_meta["content"]
+        )
 
     return ""
 
@@ -216,13 +253,14 @@ def extract_link(node: Tag) -> str:
     if not link:
         return ""
 
-    href = normalize_text(link.get("href", ""))
+    href = normalize_text(
+        link.get("href", "")
+    )
 
     return normalize_url(href)
 
 
 def extract_summary(node: Tag) -> str:
-    # Prefer common description fields.
     for selector in (
         "p",
         ".field--name-body",
@@ -234,7 +272,9 @@ def extract_summary(node: Tag) -> str:
         element = node.select_one(selector)
 
         if element:
-            text = normalize_text(element.get_text(" ", strip=True))
+            text = normalize_text(
+                element.get_text(" ", strip=True)
+            )
 
             if text:
                 return text
@@ -251,12 +291,13 @@ def extract_date(node: Tag) -> str:
         if datetime_value:
             return normalize_date(datetime_value)
 
-        text = normalize_text(time_element.get_text(" ", strip=True))
+        text = normalize_text(
+            time_element.get_text(" ", strip=True)
+        )
 
         if text:
             return normalize_date(text)
 
-    # Common date classes.
     for selector in (
         ".date",
         ".datetime",
@@ -266,7 +307,9 @@ def extract_date(node: Tag) -> str:
         element = node.select_one(selector)
 
         if element:
-            text = normalize_text(element.get_text(" ", strip=True))
+            text = normalize_text(
+                element.get_text(" ", strip=True)
+            )
 
             if text:
                 return normalize_date(text)
@@ -283,6 +326,7 @@ def build_fda_news_item(
     *,
     source: str = "FDA",
 ) -> dict[str, Any] | None:
+
     title = extract_title(node)
     url = extract_link(node)
     summary = extract_summary(node)
@@ -300,7 +344,10 @@ def build_fda_news_item(
         "summary": summary,
         "url": url,
         "published_at": published_at,
-        "categories": ["FDA", "PRESS_ANNOUNCEMENT"],
+        "categories": [
+            "FDA",
+            "PRESS_ANNOUNCEMENT",
+        ],
         "priority": "HIGH",
     }
 
@@ -314,18 +361,20 @@ def parse_fda_page(
     *,
     max_items: int = 50,
 ) -> list[dict[str, Any]]:
+
     if not html:
         return []
 
-    soup = BeautifulSoup(html, "html.parser")
+    soup = BeautifulSoup(
+        html,
+        "html.parser",
+    )
 
     candidates: list[Tag] = []
 
-    # Preferred structure used by the FDA.
     for article in soup.find_all("article"):
         candidates.append(article)
 
-    # Fallbacks for pages/templates where article tags are absent.
     if not candidates:
         selectors = (
             ".node--type-press-announcement",
@@ -349,37 +398,30 @@ def parse_fda_page(
 
     results: list[dict[str, Any]] = []
 
-    # -----------------------------------------------------------------------
-    # IMPORTANT:
-    # Deduplicate while parsing.
-    #
-    # FDA pages can contain the same announcement more than once in the HTML
-    # (for example in repeated responsive/navigation containers). We use the
-    # canonical URL as the primary identity and SHA-256 item IDs as a
-    # secondary guard.
-    # -----------------------------------------------------------------------
-
     seen_urls: set[str] = set()
     seen_ids: set[str] = set()
 
     for candidate in candidates:
+
         item = build_fda_news_item(candidate)
 
         if item is None:
             continue
 
-        canonical_url = normalize_url(item.get("url", "")).lower()
+        canonical_url = normalize_url(
+            item.get("url", "")
+        ).lower()
 
         if not canonical_url:
             continue
 
         item_id = get_item_id(item)
 
-        # Primary duplicate protection: canonical URL.
+        # Primary duplicate protection.
         if canonical_url in seen_urls:
             continue
 
-        # Secondary duplicate protection: deterministic item ID.
+        # Secondary duplicate protection.
         if item_id in seen_ids:
             continue
 
@@ -388,16 +430,7 @@ def parse_fda_page(
 
         results.append(item)
 
-        if len(results) >= max_items:
-            break
-
-    # Newest first when dates are available.
-    results.sort(
-        key=lambda item: normalize_date(
-            item.get("published_at", "")
-        ),
-        reverse=True,
-    )
+    results = sort_fda_news(results)
 
     return results[:max_items]
 
@@ -411,13 +444,15 @@ def get_fda_news(
     max_items: int = 50,
     timeout: int = DEFAULT_TIMEOUT,
 ) -> list[dict[str, Any]]:
+
     response = requests.get(
         FDA_PRESS_ANNOUNCEMENTS_URL,
         timeout=timeout,
         headers={
             "User-Agent": (
                 "Mozilla/5.0 "
-                "(compatible; PharmaRadar/1.0; +https://www.fda.gov/)"
+                "(compatible; PharmaRadar/1.0; "
+                "+https://www.fda.gov/)"
             )
         },
     )
@@ -431,7 +466,7 @@ def get_fda_news(
 
 
 # ---------------------------------------------------------------------------
-# CATALYST FEED COMPATIBILITY
+# FDA CATALYST FEED
 # ---------------------------------------------------------------------------
 
 def get_fda_catalyst_news(
@@ -441,9 +476,6 @@ def get_fda_catalyst_news(
 ) -> list[dict[str, Any]]:
     """
     Compatibility entry point used by the FDA catalyst pipeline.
-
-    The FDA press-announcement feed is the source; downstream modules are
-    responsible for classification, ticker matching and scoring.
     """
 
     return get_fda_news(
@@ -453,7 +485,7 @@ def get_fda_catalyst_news(
 
 
 # ---------------------------------------------------------------------------
-# ALIASES / BACKWARD COMPATIBILITY
+# BACKWARD COMPATIBILITY ALIASES
 # ---------------------------------------------------------------------------
 
 fetch_fda_news = get_fda_news
@@ -465,9 +497,12 @@ fetch_fda_catalyst_news = get_fda_catalyst_news
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
+
     news = get_fda_news()
 
-    print(f"FDA items: {len(news)}")
+    print(
+        f"FDA items: {len(news)}"
+    )
 
     for item in news:
         print(
