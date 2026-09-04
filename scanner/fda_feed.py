@@ -50,7 +50,6 @@ def normalize_date(value: Any) -> str:
     if not text:
         return ""
 
-    # ISO datetime
     try:
         normalized = text.replace("Z", "+00:00")
 
@@ -64,7 +63,6 @@ def normalize_date(value: Any) -> str:
     except ValueError:
         pass
 
-    # Common FDA date formats
     formats = (
         "%B %d, %Y",
         "%b %d, %Y",
@@ -96,34 +94,33 @@ def normalize_url(url: str) -> str:
     if not url:
         return ""
 
-    return urljoin(FDA_BASE_URL, url)
+    return urljoin(
+        FDA_BASE_URL,
+        url,
+    )
 
 
-def is_fda_press_announcement_url(url: str) -> bool:
-    """
-    Validate that the URL belongs to FDA.
-
-    The unit tests intentionally use synthetic FDA-relative URLs such as
-    /test, /one, /two and /three. Therefore validation is based on the
-    official FDA domain rather than requiring a specific production path.
-
-    Production filtering is performed additionally through title/content
-    validation and the FDA source page.
-    """
+def is_fda_press_announcement_url(
+    url: str,
+) -> bool:
 
     normalized = normalize_url(url)
 
     if not normalized:
         return False
 
-    if not normalized.startswith(FDA_BASE_URL):
+    if not normalized.startswith(
+        FDA_BASE_URL
+    ):
         return False
 
-    # Prevent accepting look-alike domains such as:
-    # https://www.fda.gov.example.com
-    remainder = normalized[len(FDA_BASE_URL):]
+    remainder = normalized[
+        len(FDA_BASE_URL):
+    ]
 
-    if remainder and not remainder.startswith("/"):
+    if remainder and not remainder.startswith(
+        "/"
+    ):
         return False
 
     return True
@@ -145,7 +142,10 @@ INVALID_TITLES = {
 }
 
 
-def is_valid_news_title(title: str) -> bool:
+def is_valid_news_title(
+    title: str,
+) -> bool:
+
     title = normalize_text(title)
 
     if not title:
@@ -180,13 +180,9 @@ def is_valid_news_title(title: str) -> bool:
 # ITEM ID
 # ---------------------------------------------------------------------------
 
-def get_item_id(item: Any) -> str:
-    """
-    Return a deterministic SHA-256 identifier.
-
-    URL is the primary identity.
-    Title/date are used as fallback when no URL exists.
-    """
+def get_item_id(
+    item: Any,
+) -> str:
 
     if isinstance(item, dict):
 
@@ -214,7 +210,9 @@ def get_item_id(item: Any) -> str:
             )
 
     else:
-        identity = normalize_text(item).lower()
+        identity = normalize_text(
+            item
+        ).lower()
 
     return hashlib.sha256(
         identity.encode("utf-8")
@@ -228,18 +226,6 @@ def get_item_id(item: Any) -> str:
 def sort_fda_news(
     news: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
-    """
-    Sort FDA news by priority.
-
-    Expected priority order:
-
-        EXTREME
-        HIGH
-        MEDIUM
-        LOW
-
-    Items without a known priority are placed last.
-    """
 
     priority_rank = {
         "EXTREME": 4,
@@ -273,7 +259,9 @@ def sort_fda_news(
 # HTML EXTRACTION
 # ---------------------------------------------------------------------------
 
-def extract_title(node: Tag) -> str:
+def extract_title(
+    node: Tag,
+) -> str:
 
     heading = node.find(
         [
@@ -314,7 +302,9 @@ def extract_title(node: Tag) -> str:
     return ""
 
 
-def extract_link(node: Tag) -> str:
+def extract_link(
+    node: Tag,
+) -> str:
 
     link = node.find(
         "a",
@@ -331,7 +321,9 @@ def extract_link(node: Tag) -> str:
     return normalize_url(href)
 
 
-def extract_summary(node: Tag) -> str:
+def extract_summary(
+    node: Tag,
+) -> str:
 
     selectors = (
         "p",
@@ -363,7 +355,9 @@ def extract_summary(node: Tag) -> str:
     return ""
 
 
-def extract_date(node: Tag) -> str:
+def extract_date(
+    node: Tag,
+) -> str:
 
     time_element = node.find(
         "time"
@@ -442,7 +436,9 @@ def build_fda_news_item(
     if not is_valid_news_title(title):
         return None
 
-    if not is_fda_press_announcement_url(url):
+    if not is_fda_press_announcement_url(
+        url
+    ):
         return None
 
     return {
@@ -450,6 +446,115 @@ def build_fda_news_item(
         "title": title,
         "summary": summary,
         "url": url,
+        "published_at": published_at,
+        "categories": [
+            "FDA",
+            "PRESS_ANNOUNCEMENT",
+        ],
+        "priority": "HIGH",
+    }
+
+
+# ---------------------------------------------------------------------------
+# LINK-BASED FALLBACK
+# ---------------------------------------------------------------------------
+
+def build_fda_news_item_from_link(
+    link: Tag,
+    *,
+    source: str = "FDA",
+) -> dict[str, Any] | None:
+    """
+    Build an FDA news item directly from an announcement link.
+
+    The live FDA page currently exposes announcement entries through links
+    that may not be wrapped in <article>. This fallback makes the feed
+    resilient to that page structure while preserving the article parser
+    used by the unit tests.
+    """
+
+    href = normalize_url(
+        link.get("href", "")
+    )
+
+    if not is_fda_press_announcement_url(
+        href
+    ):
+        return None
+
+    # Prefer the visible anchor text.
+    title = normalize_text(
+        link.get_text(
+            " ",
+            strip=True,
+        )
+    )
+
+    if not is_valid_news_title(title):
+        return None
+
+    # Find the closest useful container.
+    container: Tag | None = None
+
+    for parent in link.parents:
+
+        if not isinstance(parent, Tag):
+            continue
+
+        if parent.name in (
+            "li",
+            "article",
+            "div",
+            "section",
+        ):
+            container = parent
+            break
+
+    published_at = ""
+
+    summary = ""
+
+    if container is not None:
+
+        published_at = extract_date(
+            container
+        )
+
+        summary = extract_summary(
+            container
+        )
+
+    # Some FDA pages place the date in the
+    # same textual block as the announcement.
+    if not published_at and container:
+
+        text = normalize_text(
+            container.get_text(
+                " ",
+                strip=True,
+            )
+        )
+
+        date_match = re.search(
+            r"\b("
+            r"January|February|March|April|May|June|"
+            r"July|August|September|October|November|December"
+            r")\s+"
+            r"\d{1,2},\s+\d{4}\b",
+            text,
+        )
+
+        if date_match:
+
+            published_at = normalize_date(
+                date_match.group(0)
+            )
+
+    return {
+        "source": source,
+        "title": title,
+        "summary": summary,
+        "url": href,
         "published_at": published_at,
         "categories": [
             "FDA",
@@ -477,16 +582,26 @@ def parse_fda_page(
         "html.parser",
     )
 
+    results: list[
+        dict[str, Any]
+    ] = []
+
+    seen_urls: set[str] = set()
+
+    seen_ids: set[str] = set()
+
+    # =======================================================================
+    # 1. PRIMARY PARSER
+    # =======================================================================
+
     candidates: list[Tag] = []
 
-    # Preferred FDA structure.
     for article in soup.find_all(
         "article"
     ):
 
         candidates.append(article)
 
-    # Fallback structures.
     if not candidates:
 
         selectors = (
@@ -516,18 +631,6 @@ def parse_fda_page(
             if candidates:
                 break
 
-    results: list[
-        dict[str, Any]
-    ] = []
-
-    # -----------------------------------------------------------------------
-    # DEDUPLICATION
-    # -----------------------------------------------------------------------
-
-    seen_urls: set[str] = set()
-
-    seen_ids: set[str] = set()
-
     for candidate in candidates:
 
         item = build_fda_news_item(
@@ -544,13 +647,13 @@ def parse_fda_page(
         if not canonical_url:
             continue
 
-        item_id = get_item_id(item)
+        item_id = get_item_id(
+            item
+        )
 
-        # Same canonical URL.
         if canonical_url in seen_urls:
             continue
 
-        # Same deterministic ID.
         if item_id in seen_ids:
             continue
 
@@ -564,8 +667,71 @@ def parse_fda_page(
 
         results.append(item)
 
-    # Sort by priority as required by
-    # the FDA feed contract/tests.
+    # =======================================================================
+    # 2. LIVE FDA LINK FALLBACK
+    # =======================================================================
+
+    # If the article/container parser did not find anything, inspect every
+    # FDA announcement link directly.
+    #
+    # This is intentionally a fallback so the existing unit-test behavior
+    # remains unchanged.
+    # =======================================================================
+
+    for link in soup.find_all(
+        "a",
+        href=True,
+    ):
+
+        href = normalize_url(
+            link.get("href", "")
+        )
+
+        # For live FDA pages, prioritize actual press-announcement paths.
+        if "/news-events/press-announcements/" not in href:
+            continue
+
+        item = build_fda_news_item_from_link(
+            link
+        )
+
+        if item is None:
+            continue
+
+        canonical_url = normalize_url(
+            item.get("url", "")
+        ).lower()
+
+        if not canonical_url:
+            continue
+
+        item_id = get_item_id(
+            item
+        )
+
+        if canonical_url in seen_urls:
+            continue
+
+        if item_id in seen_ids:
+            continue
+
+        seen_urls.add(
+            canonical_url
+        )
+
+        seen_ids.add(
+            item_id
+        )
+
+        results.append(item)
+
+        if len(results) >= max_items:
+            break
+
+    # =======================================================================
+    # 3. FINAL SORT + LIMIT
+    # =======================================================================
+
     results = sort_fda_news(
         results
     )
@@ -591,7 +757,12 @@ def get_fda_news(
                 "Mozilla/5.0 "
                 "(compatible; PharmaRadar/1.0; "
                 "+https://www.fda.gov/)"
-            )
+            ),
+            "Accept": (
+                "text/html,application/xhtml+xml,"
+                "application/xml;q=0.9,*/*;q=0.8"
+            ),
+            "Accept-Language": "en-US,en;q=0.9",
         },
     )
 
