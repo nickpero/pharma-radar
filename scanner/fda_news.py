@@ -4,27 +4,29 @@ Pharma Radar — FDA News Feed
 Recupera le comunicazioni pubbliche della FDA
 utilizzabili come possibili catalyst Pharma.
 
-Il modulo:
-- scarica la pagina ufficiale FDA;
-- estrae le Press Announcements;
-- normalizza titolo, data e URL;
-- classifica le news;
-- assegna una priorità preliminare;
-- prepara dati strutturati per i successivi
-  motori Catalyst, Score e Trading Intelligence.
+Pipeline:
 
-IMPORTANTE:
+FDA Press Announcements
+        ↓
+Parsing
+        ↓
+Normalizzazione
+        ↓
+Classificazione
+        ↓
+Priorità
+
 Questo modulo NON decide se una notizia è
 tradabile e NON produce raccomandazioni
 di acquisto o vendita.
 """
 
-
+import hashlib
 import re
-from html.parser import HTMLParser
 from urllib.parse import urljoin
 
 import requests
+from bs4 import BeautifulSoup
 
 
 # ============================================
@@ -44,6 +46,11 @@ FDA_NEWS_URL = (
 )
 
 
+# Compatibilità con eventuali moduli che
+# utilizzano questo nome.
+FDA_PRESS_ANNOUNCEMENTS_URL = FDA_NEWS_URL
+
+
 # ============================================
 # HTTP SETTINGS
 # ============================================
@@ -52,13 +59,17 @@ REQUEST_TIMEOUT = 30
 
 HEADERS = {
     "User-Agent": (
-        "PharmaRadar/1.0 "
-        "(research monitoring tool)"
+        "Mozilla/5.0 "
+        "(compatible; PharmaRadar/1.0; "
+        "+https://www.fda.gov/)"
     ),
     "Accept": (
         "text/html,"
-        "application/xhtml+xml"
+        "application/xhtml+xml,"
+        "application/xml;q=0.9,"
+        "*/*;q=0.8"
     ),
+    "Accept-Language": "en-US,en;q=0.9",
 }
 
 
@@ -80,6 +91,9 @@ FDA_CATALYST_KEYWORDS = {
         "approved",
         "approval",
         "approving",
+        "grants accelerated approval",
+        "grants approval",
+        "grants traditional approval",
     ],
 
     "REJECTION": [
@@ -88,6 +102,8 @@ FDA_CATALYST_KEYWORDS = {
         "rejects",
         "refuses",
         "refusal",
+        "not approved",
+        "failed to approve",
     ],
 
     "SAFETY": [
@@ -95,8 +111,10 @@ FDA_CATALYST_KEYWORDS = {
         "safety concern",
         "safety signal",
         "adverse event",
+        "adverse events",
         "warning",
         "recall",
+        "risk",
     ],
 
     "CLINICAL": [
@@ -108,6 +126,8 @@ FDA_CATALYST_KEYWORDS = {
         "primary endpoint",
         "secondary endpoint",
         "efficacy",
+        "clinical results",
+        "trial results",
     ],
 
     "LABEL": [
@@ -115,233 +135,19 @@ FDA_CATALYST_KEYWORDS = {
         "labeling",
         "indication",
         "expanded indication",
+        "label expansion",
     ],
 }
 
 
 # ============================================
-# HTML PARSER
-# ============================================
-
-class FDAAnnouncementParser(HTMLParser):
-    """
-    Parser HTML leggero per la pagina FDA
-    Press Announcements.
-
-    Non dipende da BeautifulSoup o da altre
-    librerie esterne.
-    """
-
-    def __init__(self):
-
-        super().__init__()
-
-        self.announcements = []
-
-        self.current_link = None
-        self.current_text = []
-
-        self.current_date = None
-
-        self.in_heading = False
-        self.in_date = False
-
-    # ----------------------------------------
-    # START TAG
-    # ----------------------------------------
-
-    def handle_starttag(self, tag, attrs):
-
-        attributes = dict(
-            attrs
-        )
-
-        # ------------------------------------
-        # Heading / link
-        # ------------------------------------
-
-        if tag.lower() in {
-            "h2",
-            "h3",
-            "h4",
-        }:
-
-            self.in_heading = True
-            self.current_text = []
-
-            href = attributes.get(
-                "href"
-            )
-
-            if href:
-
-                self.current_link = href
-
-        # ------------------------------------
-        # Link
-        # ------------------------------------
-
-        elif tag.lower() == "a":
-
-            href = attributes.get(
-                "href"
-            )
-
-            if href:
-
-                self.current_link = href
-
-                self.current_text = []
-
-        # ------------------------------------
-        # Time / date
-        # ------------------------------------
-
-        elif tag.lower() == "time":
-
-            self.in_date = True
-
-            self.current_date = (
-                attributes.get(
-                    "datetime"
-                )
-            )
-
-    # ----------------------------------------
-    # DATA
-    # ----------------------------------------
-
-    def handle_data(self, data):
-
-        if self.in_heading:
-
-            self.current_text.append(
-                data
-            )
-
-        if self.in_date:
-
-            text = normalize_text(
-                data
-            )
-
-            if text:
-
-                self.current_date = (
-                    self.current_date
-                    or text
-                )
-
-    # ----------------------------------------
-    # END TAG
-    # ----------------------------------------
-
-    def handle_endtag(self, tag):
-
-        tag = tag.lower()
-
-        # ------------------------------------
-        # Heading completed
-        # ------------------------------------
-
-        if tag in {
-            "h2",
-            "h3",
-            "h4",
-        }:
-
-            title = normalize_text(
-                " ".join(
-                    self.current_text
-                )
-            )
-
-            if (
-                title
-                and self.current_link
-            ):
-
-                self.announcements.append({
-                    "title": title,
-                    "url": self.current_link,
-                    "published_at": (
-                        self.current_date
-                    ),
-                })
-
-            self.in_heading = False
-            self.current_text = []
-
-        # ------------------------------------
-        # Link completed
-        # ------------------------------------
-
-        elif tag == "a":
-
-            if (
-                self.current_text
-                and self.current_link
-            ):
-
-                title = normalize_text(
-                    " ".join(
-                        self.current_text
-                    )
-                )
-
-                # Only keep likely FDA
-                # announcement links.
-                if (
-                    title
-                    and self.current_link
-                ):
-
-                    self.announcements.append({
-                        "title": title,
-                        "url": self.current_link,
-                        "published_at": (
-                            self.current_date
-                        ),
-                    })
-
-            self.current_text = []
-
-        # ------------------------------------
-        # Date completed
-        # ------------------------------------
-
-        elif tag == "time":
-
-            self.in_date = False
-
-
-# ============================================
-# HTTP GET
-# ============================================
-
-def fetch_url(url):
-    """
-    Scarica una pagina FDA.
-    """
-
-    response = requests.get(
-        url,
-        headers=HEADERS,
-        timeout=REQUEST_TIMEOUT,
-    )
-
-    response.raise_for_status()
-
-    return response.text
-
-
-# ============================================
-# NORMALIZE TEXT
+# TEXT NORMALIZATION
 # ============================================
 
 def normalize_text(text):
     """
-    Normalizza il testo per la classificazione.
+    Normalizza uno string mantenendo il contenuto
+    leggibile.
     """
 
     if text is None:
@@ -359,26 +165,140 @@ def normalize_text(text):
 
 
 # ============================================
-# NORMALIZE URL
+# DATE NORMALIZATION
+# ============================================
+
+def normalize_date(value):
+    """
+    Normalizza una data FDA senza tentare
+    conversioni rischiose.
+
+    Mantiene il valore ISO se disponibile.
+    """
+
+    if value is None:
+        return None
+
+    value = normalize_text(value)
+
+    if not value:
+        return None
+
+    return value
+
+
+# ============================================
+# URL NORMALIZATION
 # ============================================
 
 def normalize_url(url):
     """
-    Converte un URL FDA relativo in assoluto.
+    Converte URL relativi FDA in URL assoluti.
     """
 
     if not url:
-
         return None
 
-    url = str(
-        url
-    ).strip()
+    url = str(url).strip()
 
     return urljoin(
         FDA_NEWS_URL,
         url
     )
+
+
+# ============================================
+# FDA URL VALIDATION
+# ============================================
+
+def is_fda_press_announcement_url(url):
+    """
+    Verifica che un URL appartenga al dominio FDA.
+
+    Gli URL sintetici usati dai test possono
+    utilizzare percorsi diversi, quindi il controllo
+    resta volutamente permissivo sul path.
+    """
+
+    if not url:
+        return False
+
+    normalized = normalize_url(url)
+
+    if not normalized:
+        return False
+
+    return normalized.startswith(
+        "https://www.fda.gov/"
+    )
+
+
+# ============================================
+# TITLE VALIDATION
+# ============================================
+
+def is_valid_news_title(title):
+    """
+    Scarta titoli vuoti o elementi di navigazione
+    della pagina FDA.
+    """
+
+    title = normalize_text(title)
+
+    if not title:
+        return False
+
+    if len(title) < 12:
+        return False
+
+    navigation_titles = {
+        "menu",
+        "search",
+        "home",
+        "contact",
+        "about",
+        "resources",
+        "news",
+        "newsroom",
+        "press announcements",
+        "skip to main content",
+    }
+
+    if title.lower() in navigation_titles:
+        return False
+
+    return True
+
+
+# ============================================
+# ITEM ID
+# ============================================
+
+def get_item_id(item):
+    """
+    Genera un ID stabile per una FDA news item.
+    """
+
+    if not isinstance(item, dict):
+        raise TypeError(
+            "item must be a dictionary"
+        )
+
+    raw = "|".join([
+        normalize_text(
+            item.get("title", "")
+        ),
+        normalize_url(
+            item.get("url")
+        ) or "",
+        normalize_date(
+            item.get("published_at")
+        ) or "",
+    ])
+
+    return hashlib.sha256(
+        raw.encode("utf-8")
+    ).hexdigest()
 
 
 # ============================================
@@ -391,16 +311,11 @@ def classify_fda_text(
 ):
     """
     Classifica una comunicazione FDA
-    in base alle parole chiave.
+    in base al titolo e al summary.
     """
 
-    title = normalize_text(
-        title
-    )
-
-    summary = normalize_text(
-        summary
-    )
+    title = normalize_text(title)
+    summary = normalize_text(summary)
 
     text = (
         f"{title} "
@@ -432,34 +347,27 @@ def classify_fda_text(
 
 def get_fda_priority(categories):
     """
-    Determina la priorità iniziale della
-    comunicazione FDA.
-
-    Questa è una classificazione preliminare.
-    Lo scoring finale avverrà nel Trading
-    Intelligence layer.
+    Determina la priorità preliminare.
     """
 
-    categories = {
+    normalized = {
         str(category).upper()
         for category in (
             categories or []
         )
     }
 
-    if categories.intersection({
+    if normalized.intersection({
         "APPROVAL",
         "REJECTION",
         "SAFETY",
     }):
-
         return "EXTREME"
 
-    if categories.intersection({
+    if normalized.intersection({
         "CLINICAL",
         "LABEL",
     }):
-
         return "HIGH"
 
     return "LOW"
@@ -476,15 +384,16 @@ def build_fda_news_item(
     published_at=None
 ):
     """
-    Costruisce un oggetto news standardizzato.
+    Costruisce una FDA News Item standardizzata.
     """
 
-    title = normalize_text(
-        title
-    )
+    title = normalize_text(title)
+    summary = normalize_text(summary)
 
-    summary = normalize_text(
-        summary
+    url = normalize_url(url)
+
+    published_at = normalize_date(
+        published_at
     )
 
     categories = classify_fda_text(
@@ -496,223 +405,6 @@ def build_fda_news_item(
         categories
     )
 
-    return {
+    item = {
         "source": "FDA",
-        "title": title,
-        "summary": summary,
-        "url": url,
-        "published_at": published_at,
-        "categories": categories,
-        "priority": priority,
-    }
-
-
-# ============================================
-# PARSE PRESS ANNOUNCEMENTS
-# ============================================
-
-def parse_fda_press_announcements(
-    html,
-    max_items=DEFAULT_MAX_NEWS
-):
-    """
-    Estrae le Press Announcements dalla
-    pagina HTML FDA.
-
-    Restituisce una lista di news standardizzate.
-    """
-
-    if not html:
-
-        return []
-
-    parser = FDAAnnouncementParser()
-
-    parser.feed(
-        html
-    )
-
-    results = []
-
-    seen = set()
-
-    for announcement in (
-        parser.announcements
-    ):
-
-        title = normalize_text(
-            announcement.get(
-                "title",
-                ""
-            )
-        )
-
-        if not title:
-            continue
-
-        url = normalize_url(
-            announcement.get(
-                "url"
-            )
-        )
-
-        published_at = (
-            announcement.get(
-                "published_at"
-            )
-        )
-
-        key = (
-            title.lower(),
-            url or ""
-        )
-
-        if key in seen:
-            continue
-
-        seen.add(
-            key
-        )
-
-        item = build_fda_news_item(
-            title=title,
-            summary="",
-            url=url,
-            published_at=published_at,
-        )
-
-        results.append(
-            item
-        )
-
-        if (
-            max_items is not None
-            and len(results) >= max_items
-        ):
-
-            break
-
-    return results
-
-
-# ============================================
-# FETCH PRESS ANNOUNCEMENTS
-# ============================================
-
-def fetch_fda_press_announcements(
-    max_items=DEFAULT_MAX_NEWS
-):
-    """
-    Scarica e interpreta le ultime Press
-    Announcements pubblicate dalla FDA.
-    """
-
-    html = fetch_url(
-        FDA_NEWS_URL
-    )
-
-    return parse_fda_press_announcements(
-        html,
-        max_items=max_items
-    )
-
-
-# ============================================
-# FILTER CATALYST NEWS
-# ============================================
-
-def filter_fda_catalysts(news_items):
-    """
-    Restituisce soltanto le comunicazioni
-    FDA con potenziale rilevanza.
-    """
-
-    catalysts = []
-
-    for item in (
-        news_items or []
-    ):
-
-        if item.get(
-            "priority"
-        ) in {
-            "EXTREME",
-            "HIGH",
-        }:
-
-            catalysts.append(
-                item
-            )
-
-    return catalysts
-
-
-# ============================================
-# DEDUPLICATE NEWS
-# ============================================
-
-def deduplicate_fda_news(
-    news_items
-):
-    """
-    Elimina eventuali duplicati.
-
-    La deduplicazione usa titolo + URL.
-    """
-
-    if not news_items:
-
-        return []
-
-    results = []
-
-    seen = set()
-
-    for item in news_items:
-
-        title = normalize_text(
-            item.get(
-                "title",
-                ""
-            )
-        ).lower()
-
-        url = normalize_url(
-            item.get(
-                "url"
-            )
-        )
-
-        key = (
-            title,
-            url or ""
-        )
-
-        if key in seen:
-            continue
-
-        seen.add(
-            key
-        )
-
-        results.append(
-            item
-        )
-
-    return results
-
-
-# ============================================
-# PUBLIC API
-# ============================================
-
-def get_fda_sources():
-    """
-    Restituisce gli endpoint FDA utilizzati
-    dal Radar.
-    """
-
-    return {
-        "drug_approvals": FDA_DRUGS_URL,
-        "press_announcements": FDA_NEWS_URL,
-    }
+        "
