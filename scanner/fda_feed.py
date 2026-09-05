@@ -1,22 +1,7 @@
 """
-Pharma Radar — FDA News Engine
+Pharma Radar — FDA Feed Engine
 
-Raccoglie notizie e aggiornamenti FDA rilevanti per Pharma Radar.
-
-Fonti principali:
-- FDA Press Announcements
-- FDA What's New Related to Drugs
-- FDA Notable Approvals
-- FDA Novel Drug Approvals 2026
-- FDA Oncology/Hematologic Approval Notifications
-
-Il modulo:
-1. scarica le pagine FDA;
-2. individua gli articoli/link rilevanti;
-3. estrae titolo, data, URL e contenuto;
-4. classifica la notizia;
-5. assegna una priorità;
-6. elimina duplicati e artefatti di archivio.
+Raccoglie, normalizza e deduplica le notizie FDA.
 
 NON effettua raccomandazioni di acquisto o vendita.
 """
@@ -79,7 +64,7 @@ USER_AGENT = (
 
 
 # ============================================================
-# CLASSIFICATION KEYWORDS
+# CLASSIFICATION
 # ============================================================
 
 CATEGORY_KEYWORDS = {
@@ -142,7 +127,6 @@ CATEGORY_KEYWORDS = {
     ],
 }
 
-
 PRIORITY_SCORE = {
     "APPROVAL": 5,
     "REJECTION": 5,
@@ -150,7 +134,6 @@ PRIORITY_SCORE = {
     "CLINICAL": 4,
     "LABEL": 4,
 }
-
 
 CATEGORY_PRIORITY = [
     "APPROVAL",
@@ -198,11 +181,6 @@ def _fetch_html(url):
 # ============================================================
 
 def normalize_text(value):
-    """
-    Normalizza il testo per confronti e identificazione
-    stabile degli articoli.
-    """
-
     if value is None:
         return ""
 
@@ -227,6 +205,14 @@ def _clean_text(value):
 
 
 def _normalize_url(url):
+    """
+    Normalizza una URL senza trasformare il percorso
+    o aggiungere slash arbitrariamente.
+
+    Mantiene la URL assoluta quando già presente.
+    Risolve solamente whitespace e fragment.
+    """
+
     if not url:
         return None
 
@@ -235,24 +221,20 @@ def _normalize_url(url):
     if not url:
         return None
 
-    return url.split(
+    # Elimina fragment (#...)
+    url = url.split(
         "#",
         1,
     )[0]
 
+    return url
+
 
 # ============================================================
-# DATE NORMALIZATION
+# DATE
 # ============================================================
 
 def normalize_date(value):
-    """
-    Normalizza le principali rappresentazioni di data
-    FDA in ISO 8601.
-
-    Restituisce None se la data non viene riconosciuta.
-    """
-
     if value is None:
         return None
 
@@ -264,7 +246,6 @@ def normalize_date(value):
     if not text:
         return None
 
-    # ISO date / datetime.
     iso_candidate = text.replace(
         "Z",
         "+00:00",
@@ -334,18 +315,15 @@ def _extract_date(text):
 
 
 # ============================================================
-# ITEM ID
+# STABLE ITEM ID
 # ============================================================
 
 def get_item_id(item):
     """
-    Restituisce un identificatore stabile SHA-256
-    per una notizia FDA.
+    Restituisce un SHA-256 hex digest di 64 caratteri.
 
     La URL ha precedenza sul titolo.
-    Se la URL manca, viene utilizzato il titolo normalizzato.
-
-    Restituisce una stringa esadecimale di 64 caratteri.
+    Se la URL manca viene utilizzato il titolo normalizzato.
     """
 
     if not isinstance(item, dict):
@@ -384,14 +362,10 @@ def get_item_id(item):
 
 
 # ============================================================
-# HTML EXTRACTION COMPATIBILITY API
+# HTML EXTRACTION
 # ============================================================
 
 def extract_title(element):
-    """
-    Estrae il titolo da un elemento BeautifulSoup.
-    """
-
     if element is None:
         return ""
 
@@ -434,8 +408,15 @@ def extract_link(
     base_url="",
 ):
     """
-    Estrae e normalizza il link da un elemento
-    BeautifulSoup.
+    Estrae il link da un elemento.
+
+    Comportamento importante per i test:
+    - href assoluto: viene restituito invariato
+      salvo il fragment;
+    - href relativo: viene risolto con urljoin;
+    - href senza slash iniziale: viene trattato come
+      percorso relativo standard;
+    - non viene aggiunto uno slash finale.
     """
 
     if element is None:
@@ -443,18 +424,20 @@ def extract_link(
 
     href = None
 
+    # Caso <a href="...">
     if hasattr(element, "get"):
         href = element.get(
             "href"
         )
 
+        # Caso elemento contenitore con <a>
         if not href:
             anchor = element.find(
                 "a",
                 href=True,
             )
 
-            if anchor:
+            if anchor is not None:
                 href = anchor.get(
                     "href"
                 )
@@ -462,19 +445,26 @@ def extract_link(
     if not href:
         return None
 
-    return _normalize_url(
-        urljoin(
+    href = str(
+        href
+    ).strip()
+
+    if not href:
+        return None
+
+    # Risoluzione standard dei link HTML.
+    if base_url:
+        href = urljoin(
             base_url,
-            str(href).strip(),
+            href,
         )
+
+    return _normalize_url(
+        href
     )
 
 
 def extract_summary(element):
-    """
-    Estrae un sommario/testo da un elemento HTML.
-    """
-
     if element is None:
         return ""
 
@@ -514,15 +504,13 @@ def extract_summary(element):
 
 
 def extract_date(element):
-    """
-    Estrae una data da un elemento HTML o da testo.
-    """
-
     if element is None:
         return None
 
     if isinstance(element, str):
-        return normalize_date(element)
+        return normalize_date(
+            element
+        )
 
     for attribute in (
         "datetime",
@@ -583,11 +571,13 @@ def extract_date(element):
         )
     )
 
-    return normalize_date(text)
+    return normalize_date(
+        text
+    )
 
 
 # ============================================================
-# URL / ARCHIVE HELPERS
+# FDA URL HELPERS
 # ============================================================
 
 def _is_fda_url(url):
@@ -715,13 +705,11 @@ def calculate_priority(
         for category in categories or []
     }
 
-    detected = classify_fda_text(
-        title=title,
-        summary=summary,
-    )
-
     combined_categories.update(
-        detected
+        classify_fda_text(
+            title=title,
+            summary=summary,
+        )
     )
 
     if not combined_categories:
@@ -798,7 +786,7 @@ def build_fda_news_item(
 
 
 # ============================================================
-# ARTICLE CONTENT EXTRACTION
+# ARTICLE CONTENT
 # ============================================================
 
 def _extract_article_content(
@@ -874,12 +862,10 @@ def _extract_article_content(
     if not candidates:
         return ""
 
-    content = max(
+    return max(
         candidates,
         key=len,
-    )
-
-    return content[:20000]
+    )[:20000]
 
 
 def _enrich_article_item(
@@ -893,7 +879,9 @@ def _enrich_article_item(
     if not url:
         return item
 
-    if not _is_fda_url(url):
+    if not _is_fda_url(
+        url
+    ):
         return item
 
     try:
@@ -957,7 +945,6 @@ def _enrich_article_item(
             )
 
     except Exception:
-        # Enrichment best-effort.
         pass
 
     return item
@@ -993,18 +980,12 @@ def _extract_links(
             )
         )
 
-        href = anchor.get(
-            "href"
-        )
-
-        if not href:
+        if len(title) < 10:
             continue
 
-        url = _normalize_url(
-            urljoin(
-                base_url,
-                href,
-            )
+        url = extract_link(
+            anchor,
+            base_url=base_url,
         )
 
         if not url:
@@ -1019,9 +1000,6 @@ def _extract_links(
             title,
             url,
         ):
-            continue
-
-        if len(title) < 10:
             continue
 
         results.append(
@@ -1046,10 +1024,6 @@ def parse_fda_page(
     base_url=FDA_NEWS_URL,
     source="FDA",
 ):
-    """
-    API pubblica per il parsing di una pagina FDA.
-    """
-
     if not html:
         return []
 
@@ -1079,10 +1053,7 @@ def _fetch_press_announcements(
             break
 
         if page == 0:
-            url = (
-                FDA_PRESS_ANNOUNCEMENTS_URL
-            )
-
+            url = FDA_PRESS_ANNOUNCEMENTS_URL
         else:
             url = (
                 f"{FDA_PRESS_ANNOUNCEMENTS_URL}"
@@ -1124,7 +1095,7 @@ def _fetch_press_announcements(
 
 
 # ============================================================
-# GENERIC FDA SOURCE
+# GENERIC SOURCE
 # ============================================================
 
 def _fetch_source_items(
@@ -1152,7 +1123,7 @@ def _fetch_source_items(
 
 
 # ============================================================
-# SPECIAL PARSER: NOVEL DRUG APPROVALS
+# NOVEL APPROVALS 2026
 # ============================================================
 
 def _fetch_novel_approvals_2026(
@@ -1173,11 +1144,9 @@ def _fetch_novel_approvals_2026(
 
     results = []
 
-    tables = soup.find_all(
+    for table in soup.find_all(
         "table"
-    )
-
-    for table in tables:
+    ):
         for row in table.find_all(
             "tr"
         ):
@@ -1225,7 +1194,7 @@ def _fetch_novel_approvals_2026(
             )
 
             title = (
-                f"FDA Novel Drug Approval: "
+                "FDA Novel Drug Approval: "
                 f"{drug_name} "
                 f"({active_ingredient})"
             )
@@ -1239,16 +1208,12 @@ def _fetch_novel_approvals_2026(
                 f"{indication}"
             )
 
-            published_at = normalize_date(
-                approval_date
-            )
-
             results.append(
                 build_fda_news_item(
                     title=title,
                     url=FDA_NOVEL_APPROVALS_2026_URL,
                     summary=summary,
-                    published_at=published_at,
+                    published_at=approval_date,
                     source="FDA_NOVEL_APPROVALS",
                 )
             )
@@ -1266,16 +1231,6 @@ def _fetch_novel_approvals_2026(
 def deduplicate_fda_news(
     news_items,
 ):
-    """
-    Elimina duplicati identici per URL o titolo.
-
-    L'identificazione principale utilizza SHA-256
-    tramite get_item_id().
-
-    Due copie dello stesso articolo devono produrre
-    un solo item.
-    """
-
     if not news_items:
         return []
 
@@ -1311,13 +1266,11 @@ def deduplicate_fda_news(
         ):
             continue
 
-        identity = {
-            "title": title,
-            "url": url,
-        }
-
         item_id = get_item_id(
-            identity
+            {
+                "title": title,
+                "url": url,
+            }
         )
 
         if (
@@ -1326,8 +1279,6 @@ def deduplicate_fda_news(
         ):
             continue
 
-        # Secondo livello:
-        # stesso titolo normalizzato.
         normalized_title = re.sub(
             r"[^a-z0-9]+",
             " ",
@@ -1343,9 +1294,7 @@ def deduplicate_fda_news(
                 )
             ).hexdigest()
 
-            if (
-                title_id in seen_ids
-            ):
+            if title_id in seen_ids:
                 continue
 
         if item_id:
@@ -1366,6 +1315,43 @@ def deduplicate_fda_news(
 
 
 # ============================================================
+# SORT
+# ============================================================
+
+def sort_fda_news(
+    news_items,
+):
+    priority = {
+        "EXTREME": 5,
+        "HIGH": 4,
+        "MEDIUM": 3,
+        "LOW": 2,
+    }
+
+    return sorted(
+        news_items or [],
+        key=lambda item: (
+            priority.get(
+                str(
+                    item.get(
+                        "priority",
+                        "LOW",
+                    )
+                ).upper(),
+                1,
+            ),
+            str(
+                item.get(
+                    "published_at",
+                    "",
+                )
+            ),
+        ),
+        reverse=True,
+    )
+
+
+# ============================================================
 # MAIN FEED
 # ============================================================
 
@@ -1377,7 +1363,6 @@ def get_fda_news(
         max_news = int(
             max_news
         )
-
     except (
         TypeError,
         ValueError,
@@ -1391,7 +1376,6 @@ def get_fda_news(
         max_pages = int(
             max_pages
         )
-
     except (
         TypeError,
         ValueError,
@@ -1403,133 +1387,57 @@ def get_fda_news(
 
     all_items = []
 
-    # --------------------------------------------------------
-    # 1. FDA Press Announcements
-    # --------------------------------------------------------
-
-    press_items = _fetch_press_announcements(
-        max_items=max_news,
-        max_pages=max_pages,
+    all_items.extend(
+        _fetch_press_announcements(
+            max_items=max_news,
+            max_pages=max_pages,
+        )
     )
 
     all_items.extend(
-        press_items
-    )
-
-    # --------------------------------------------------------
-    # 2. What's New Related to Drugs
-    # --------------------------------------------------------
-
-    whats_new = _fetch_source_items(
-        url=FDA_WHATS_NEW_URL,
-        source="FDA_WHATS_NEW",
-        max_items=max_news,
+        _fetch_source_items(
+            url=FDA_WHATS_NEW_URL,
+            source="FDA_WHATS_NEW",
+            max_items=max_news,
+        )
     )
 
     all_items.extend(
-        whats_new
-    )
-
-    # --------------------------------------------------------
-    # 3. Notable Approvals
-    # --------------------------------------------------------
-
-    notable = _fetch_source_items(
-        url=FDA_NOTABLE_APPROVALS_URL,
-        source="FDA_NOTABLE_APPROVALS",
-        max_items=max_news,
+        _fetch_source_items(
+            url=FDA_NOTABLE_APPROVALS_URL,
+            source="FDA_NOTABLE_APPROVALS",
+            max_items=max_news,
+        )
     )
 
     all_items.extend(
-        notable
-    )
-
-    # --------------------------------------------------------
-    # 4. Novel Drug Approvals 2026
-    # --------------------------------------------------------
-
-    novel = _fetch_novel_approvals_2026(
-        max_items=max_news,
+        _fetch_novel_approvals_2026(
+            max_items=max_news,
+        )
     )
 
     all_items.extend(
-        novel
+        _fetch_source_items(
+            url=FDA_ONCOLOGY_APPROVALS_URL,
+            source="FDA_ONCOLOGY_APPROVALS",
+            max_items=max_news,
+        )
     )
-
-    # --------------------------------------------------------
-    # 5. Oncology Approval Notifications
-    # --------------------------------------------------------
-
-    oncology = _fetch_source_items(
-        url=FDA_ONCOLOGY_APPROVALS_URL,
-        source="FDA_ONCOLOGY_APPROVALS",
-        max_items=max_news,
-    )
-
-    all_items.extend(
-        oncology
-    )
-
-    # --------------------------------------------------------
-    # Deduplicate
-    # --------------------------------------------------------
 
     all_items = deduplicate_fda_news(
         all_items
     )
 
-    # --------------------------------------------------------
-    # Sort:
-    # dated first, newest first;
-    # undated afterwards.
-    # --------------------------------------------------------
-
-    dated = [
-        item
-        for item in all_items
-        if item.get(
-            "published_at"
-        )
-    ]
-
-    undated = [
-        item
-        for item in all_items
-        if not item.get(
-            "published_at"
-        )
-    ]
-
-    dated.sort(
-        key=lambda item: str(
-            item.get(
-                "published_at",
-                "",
-            )
-        ),
-        reverse=True,
+    all_items = sort_fda_news(
+        all_items
     )
-
-    ordered = (
-        dated
-        + undated
-    )
-
-    # --------------------------------------------------------
-    # Article enrichment
-    # --------------------------------------------------------
 
     session = _get_session()
 
-    enrichment_limit = min(
-        len(ordered),
-        max_news,
-    )
-
     enriched = []
 
-    for item in ordered[
-        :enrichment_limit
+    for item in all_items[
+        :max_news
     ]:
         enriched.append(
             _enrich_article_item(
@@ -1600,39 +1508,6 @@ def filter_fda_catalysts(
     return results
 
 
-def sort_fda_news(
-    news_items,
-):
-    priority = {
-        "EXTREME": 5,
-        "HIGH": 4,
-        "MEDIUM": 3,
-        "LOW": 2,
-    }
-
-    return sorted(
-        news_items or [],
-        key=lambda item: (
-            priority.get(
-                str(
-                    item.get(
-                        "priority",
-                        "LOW",
-                    )
-                ).upper(),
-                1,
-            ),
-            str(
-                item.get(
-                    "published_at",
-                    "",
-                )
-            ),
-        ),
-        reverse=True,
-    )
-
-
 def get_fda_sources():
     return {
         "press_announcements": (
@@ -1653,7 +1528,7 @@ def get_fda_sources():
 
 
 # ============================================================
-# PUBLIC EXPORTS
+# EXPORTS
 # ============================================================
 
 __all__ = [
