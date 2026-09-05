@@ -59,7 +59,6 @@ def normalize_url(url, base_url=FDA_NEWS_URL) -> str:
 
 
 def is_fda_press_announcement_url(url) -> bool:
-    """Accept only the canonical FDA Press Announcements URL family."""
     if not url:
         return False
     try:
@@ -70,7 +69,6 @@ def is_fda_press_announcement_url(url) -> bool:
     path = (parsed.path or "").lower().rstrip("/")
     if host not in {"www.fda.gov", "fda.gov"}:
         return False
-    # Canonical FDA path is /news-events/fda-newsroom/press-announcements/<slug>.
     return path.startswith("/news-events/fda-newsroom/press-announcements/")
 
 
@@ -78,20 +76,13 @@ def is_valid_news_title(title) -> bool:
     title = normalize_text(title)
     if not title or len(title) < 4 or len(title) > 500:
         return False
-    return title.lower() not in {
-        "home", "news", "search", "menu", "main menu", "skip to main content",
-        "contact fda", "about fda", "resources", "subscribe",
-    }
+    return title.lower() not in {"home", "news", "search", "menu", "main menu", "skip to main content", "contact fda", "about fda", "resources", "subscribe"}
 
 
 def get_item_id(item) -> str:
     if not isinstance(item, dict):
         item = {"value": str(item)}
-    raw = "|".join([
-        normalize_text(item.get("title", "")),
-        normalize_text(item.get("url", "")),
-        normalize_text(item.get("published_at", "")),
-    ])
+    raw = "|".join([normalize_text(item.get("title", "")), normalize_text(item.get("url", "")), normalize_text(item.get("published_at", ""))])
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
@@ -128,11 +119,7 @@ def _extract_date(container):
         if value:
             return _parse_date(value)
     text = normalize_text(container.get_text(" ", strip=True))
-    patterns = [
-        r"\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4}\b",
-        r"\b\d{1,2}/\d{1,2}/\d{4}\b",
-        r"\b\d{4}-\d{2}-\d{2}\b",
-    ]
+    patterns = [r"\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4}\b", r"\b\d{1,2}/\d{1,2}/\d{4}\b", r"\b\d{4}-\d{2}-\d{2}\b"]
     for pattern in patterns:
         match = re.search(pattern, text, re.IGNORECASE)
         if match:
@@ -205,15 +192,7 @@ def build_fda_news_item(title, url, published_at=None, summary="", source="FDA")
     url = normalize_url(url)
     summary = normalize_text(summary)
     categories = classify_fda_text(f"{title} {summary}")
-    item = {
-        "source": source,
-        "title": title,
-        "summary": summary,
-        "url": url,
-        "published_at": _parse_date(published_at),
-        "categories": categories,
-        "priority": get_fda_priority(categories),
-    }
+    item = {"source": source, "title": title, "summary": summary, "url": url, "published_at": _parse_date(published_at), "categories": categories, "priority": get_fda_priority(categories)}
     item["item_id"] = get_item_id(item)
     return item
 
@@ -271,19 +250,18 @@ def _fetch_html(url, params=None):
     last_error = None
     for attempt in range(1, FETCH_RETRIES + 1):
         try:
-            response = SESSION.get(
-                url,
-                params=params,
-                timeout=REQUEST_TIMEOUT,
-                headers={"Cache-Control": "no-cache", "Pragma": "no-cache"},
-            )
-            response.raise_for_status()
+            response = SESSION.get(url, params=params, timeout=REQUEST_TIMEOUT, headers={"Cache-Control": "no-cache", "Pragma": "no-cache"})
+            status = response.status_code
+            final_url = str(response.url)
             content = response.text or ""
+            print(f"FDA FETCH attempt={attempt}/{FETCH_RETRIES} status={status} bytes={len(content)} url={final_url}", flush=True)
+            response.raise_for_status()
             if content.strip():
                 return content
-            last_error = requests.RequestException(f"Empty FDA response for {url}")
+            last_error = requests.RequestException(f"Empty FDA response for {final_url} (HTTP {status})")
         except requests.RequestException as exc:
             last_error = exc
+            print(f"FDA FETCH ERROR attempt={attempt}/{FETCH_RETRIES}: {type(exc).__name__}: {exc}", flush=True)
         if attempt < FETCH_RETRIES:
             time.sleep(RETRY_DELAY_SECONDS * attempt)
     raise last_error or requests.RequestException(f"Unable to fetch {url}")
@@ -311,6 +289,7 @@ def _fetch_press_announcements(max_news=DEFAULT_MAX_NEWS, max_pages=DEFAULT_MAX_
             continue
         parsed = _filter_press_announcement_items(parse_fda_page(html, FDA_PRESS_ANNOUNCEMENTS_URL, max_news))
         results.extend(parsed)
+        print(f"FDA PRESS PAGE page={page} parsed={len(parsed)} cumulative={len(results)}", flush=True)
         if not parsed:
             break
     results = deduplicate_fda_news(results)[:max_news]
@@ -321,7 +300,9 @@ def _fetch_press_announcements(max_news=DEFAULT_MAX_NEWS, max_pages=DEFAULT_MAX_
     except requests.RequestException:
         return []
     parsed = parse_fda_page(html, FDA_NEWSROOM_URL, max_news * 2)
-    return deduplicate_fda_news(_filter_press_announcement_items(parsed))[:max_news]
+    filtered = _filter_press_announcement_items(parsed)
+    print(f"FDA NEWSROOM FALLBACK parsed={len(parsed)} press={len(filtered)}", flush=True)
+    return deduplicate_fda_news(filtered)[:max_news]
 
 
 def _fetch_source_items(url, max_items=DEFAULT_MAX_NEWS):
@@ -394,59 +375,4 @@ def sort_fda_news(news_items):
 def get_fda_news(max_news=DEFAULT_MAX_NEWS, max_pages=DEFAULT_MAX_PAGES, max_items=None):
     if max_items is not None:
         max_news = max_items
-    try:
-        max_news = int(max_news)
-    except (TypeError, ValueError):
-        max_news = DEFAULT_MAX_NEWS
-    if max_news <= 0:
-        return []
-    news = _fetch_press_announcements(max_news, max_pages)
-    news = _filter_press_announcement_items(news)
-    return sort_fda_news(deduplicate_fda_news(news))[:max_news]
-
-
-def get_fda_catalyst_news(max_items=DEFAULT_MAX_NEWS):
-    return filter_fda_catalysts(get_fda_news(max_news=max_items))
-
-
-def filter_fda_catalysts(news_items):
-    relevant = []
-    for item in news_items or []:
-        categories = {str(x).upper() for x in item.get("categories", [])}
-        priority = str(item.get("priority", "LOW")).upper()
-        if categories.intersection({"APPROVAL", "REJECTION", "SAFETY", "CLINICAL", "LABEL"}) or priority in {"EXTREME", "HIGH"}:
-            relevant.append(item)
-    return relevant
-
-
-def get_fda_sources():
-    return {
-        "press_announcements": FDA_PRESS_ANNOUNCEMENTS_URL,
-        "newsroom": FDA_NEWSROOM_URL,
-        "drug_safety": FDA_DRUGS_URL,
-        "whats_new": FDA_WHATS_NEW_URL,
-        "notable_approvals": FDA_NOTABLE_APPROVALS_URL,
-        "novel_approvals_2026": FDA_NOVEL_APPROVALS_2026_URL,
-        "oncology_approvals": FDA_ONCOLOGY_APPROVALS_URL,
-    }
-
-
-def deduplicate_news(news_items):
-    return deduplicate_fda_news(news_items)
-
-
-def sort_news(news_items):
-    return sort_fda_news(news_items)
-
-
-__all__ = [
-    "FDA_NEWS_URL", "FDA_PRESS_ANNOUNCEMENTS_URL", "FDA_NEWSROOM_URL", "FDA_DRUGS_URL",
-    "FDA_WHATS_NEW_URL", "FDA_NOTABLE_APPROVALS_URL", "FDA_NOVEL_APPROVALS_2026_URL",
-    "FDA_ONCOLOGY_APPROVALS_URL", "DEFAULT_MAX_NEWS", "DEFAULT_MAX_PAGES", "REQUEST_TIMEOUT",
-    "FETCH_RETRIES", "normalize_text", "normalize_url", "normalize_date",
-    "is_fda_press_announcement_url", "is_valid_news_title", "get_item_id", "extract_title",
-    "extract_link", "extract_summary", "extract_date", "classify_fda_text", "get_fda_priority",
-    "calculate_priority", "build_fda_news_item", "parse_fda_page", "deduplicate_fda_news",
-    "sort_fda_news", "get_fda_news", "get_fda_catalyst_news", "filter_fda_catalysts",
-    "get_fda_sources", "deduplicate_news", "sort_news",
-]
+    return sort_fda_news(_fetch_press_announcements(max_news=max_news, max_pages=max_pages))[:max_news]
