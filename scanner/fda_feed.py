@@ -230,6 +230,69 @@ def _normalize_url(url):
     return url
 
 
+def is_fda_url(url):
+    """
+    True se l'URL appartiene a FDA.gov.
+    """
+
+    if not url:
+        return False
+
+    try:
+        hostname = urlparse(
+            str(url)
+        ).netloc.lower()
+    except Exception:
+        return False
+
+    return (
+        hostname == "fda.gov"
+        or hostname.endswith(".fda.gov")
+    )
+
+
+def is_fda_press_announcement_url(url):
+    """
+    True se l'URL appartiene alla sezione
+    FDA Press Announcements.
+    """
+
+    if not url:
+        return False
+
+    normalized = _normalize_url(
+        url
+    )
+
+    if not normalized:
+        return False
+
+    if not is_fda_url(
+        normalized
+    ):
+        return False
+
+    parsed = urlparse(
+        normalized
+    )
+
+    path = parsed.path.rstrip(
+        "/"
+    ).lower()
+
+    expected_path = (
+        "/news-events/fda-newsroom/"
+        "press-announcements"
+    )
+
+    return (
+        path == expected_path
+        or path.startswith(
+            expected_path + "/"
+        )
+    )
+
+
 # ============================================
 # DATE
 # ============================================
@@ -448,12 +511,13 @@ def extract_link(
     if not href:
         return None
 
-    href = str(href).strip()
+    href = str(
+        href
+    ).strip()
 
     if not href:
         return None
 
-    # Risolve automaticamente i link relativi FDA.
     href = urljoin(
         base_url,
         href,
@@ -518,7 +582,9 @@ def extract_date(element):
         element,
         str,
     ):
-        return normalize_date(element)
+        return normalize_date(
+            element
+        )
 
     for attribute in (
         "datetime",
@@ -590,29 +656,8 @@ def extract_date(element):
 
 
 # ============================================
-# FDA URL / ARCHIVE HELPERS
+# ARCHIVE
 # ============================================
-
-def _is_fda_url(url):
-
-    if not url:
-        return False
-
-    try:
-        hostname = urlparse(
-            url
-        ).netloc.lower()
-
-    except Exception:
-        return False
-
-    return (
-        hostname == "fda.gov"
-        or hostname.endswith(
-            ".fda.gov"
-        )
-    )
-
 
 def _is_archive_artifact(
     title,
@@ -906,7 +951,9 @@ def _enrich_article_item(
     if not url:
         return item
 
-    if not _is_fda_url(url):
+    if not is_fda_url(
+        url
+    ):
         return item
 
     try:
@@ -1037,7 +1084,6 @@ def parse_fda_page(
 
     results = []
 
-    # Prima scelta: articoli.
     articles = soup.find_all(
         "article"
     )
@@ -1061,13 +1107,13 @@ def parse_fda_page(
 
         results.append(item)
 
-        if (
-            max_items is not None
-            and len(results) >= int(max_items)
-        ):
-            break
+        if max_items is not None:
 
-    # Fallback per pagine FDA che non usano <article>.
+            if len(results) >= int(
+                max_items
+            ):
+                break
+
     if not articles:
 
         for anchor in soup.find_all(
@@ -1093,7 +1139,9 @@ def parse_fda_page(
             if not url:
                 continue
 
-            if not _is_fda_url(url):
+            if not is_fda_url(
+                url
+            ):
                 continue
 
             if _is_archive_artifact(
@@ -1112,11 +1160,12 @@ def parse_fda_page(
 
             results.append(item)
 
-            if (
-                max_items is not None
-                and len(results) >= int(max_items)
-            ):
-                break
+            if max_items is not None:
+
+                if len(results) >= int(
+                    max_items
+                ):
+                    break
 
     return deduplicate_fda_news(
         results
@@ -1124,7 +1173,7 @@ def parse_fda_page(
 
 
 # ============================================
-# LINK EXTRACTION FALLBACK
+# LINK EXTRACTION
 # ============================================
 
 def _extract_links(
@@ -1166,7 +1215,9 @@ def _extract_links(
         if not url:
             continue
 
-        if not _is_fda_url(url):
+        if not is_fda_url(
+            url
+        ):
             continue
 
         if _is_archive_artifact(
@@ -1269,6 +1320,7 @@ def _fetch_source_items(
 ):
 
     try:
+
         html = _fetch_html(
             url
         )
@@ -1735,4 +1787,6 @@ __all__ = [
     "sort_fda_news",
     "deduplicate_fda_news",
     "get_fda_sources",
+    "is_fda_url",
+    "is_fda_press_announcement_url",
 ]
