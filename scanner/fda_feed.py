@@ -210,6 +210,73 @@ def _clean_text(value):
 
 
 # ============================================
+# NEWS TITLE VALIDATION
+# ============================================
+
+def is_valid_news_title(title):
+    """
+    Verifica se un titolo può essere considerato
+    una vera notizia/articolo FDA.
+
+    Evita:
+    - titoli vuoti;
+    - testi troppo corti;
+    - elementi di navigazione;
+    - artefatti di archivio;
+    - titoli puramente numerici;
+    - link generici non informativi.
+    """
+
+    title = normalize_text(title)
+
+    if not title:
+        return False
+
+    if len(title) < 10:
+        return False
+
+    if len(title) > 500:
+        return False
+
+    if _is_archive_artifact(
+        title,
+        None,
+    ):
+        return False
+
+    if title.isdigit():
+        return False
+
+    normalized = re.sub(
+        r"[^a-z0-9]+",
+        " ",
+        title.lower(),
+    ).strip()
+
+    if not normalized:
+        return False
+
+    invalid_titles = {
+        "read more",
+        "learn more",
+        "more information",
+        "view all",
+        "next",
+        "previous",
+        "home",
+        "search",
+        "menu",
+        "contact us",
+        "subscribe",
+    }
+
+    if normalized in invalid_titles:
+        return False
+
+    return True
+
+
+# ============================================
 # URL
 # ============================================
 
@@ -247,7 +314,9 @@ def is_fda_url(url):
 
     return (
         hostname == "fda.gov"
-        or hostname.endswith(".fda.gov")
+        or hostname.endswith(
+            ".fda.gov"
+        )
     )
 
 
@@ -1039,7 +1108,9 @@ def _parse_article(
         article
     )
 
-    if not title:
+    if not is_valid_news_title(
+        title
+    ):
         return None
 
     url = extract_link(
@@ -1128,7 +1199,9 @@ def parse_fda_page(
                 )
             )
 
-            if len(title) < 10:
+            if not is_valid_news_title(
+                title
+            ):
                 continue
 
             url = extract_link(
@@ -1204,7 +1277,9 @@ def _extract_links(
             )
         )
 
-        if len(title) < 10:
+        if not is_valid_news_title(
+            title
+        ):
             continue
 
         url = extract_link(
@@ -1478,7 +1553,9 @@ def deduplicate_fda_news(
             item.get("url")
         )
 
-        if not title:
+        if not is_valid_news_title(
+            title
+        ):
             continue
 
         if _is_archive_artifact(
@@ -1789,4 +1866,5 @@ __all__ = [
     "get_fda_sources",
     "is_fda_url",
     "is_fda_press_announcement_url",
+    "is_valid_news_title",
 ]
