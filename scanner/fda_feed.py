@@ -785,19 +785,28 @@ def deduplicate_fda_news(news_items):
 
 def _sort_key(item):
     value = item.get("published_at")
-    if not value:
-        return datetime.min
+    if value:
+        try:
+            return (
+                1,
+                datetime.fromisoformat(
+                    str(value).replace("Z", "+00:00")
+                ).replace(tzinfo=None),
+            )
+        except ValueError:
+            pass
 
-    try:
-        return datetime.fromisoformat(
-            str(value).replace("Z", "+00:00")
-        ).replace(tzinfo=None)
-    except ValueError:
-        return datetime.min
+    priority_rank = {
+        "EXTREME": 3,
+        "HIGH": 2,
+        "MEDIUM": 1,
+        "LOW": 0,
+    }
+    return (0, priority_rank.get(str(item.get("priority", "LOW")).upper(), 0))
 
 
 def sort_fda_news(news_items):
-    """Ordina le FDA news dalla più recente alla più vecchia."""
+    """Ordina per data quando presente; altrimenti per priorità."""
     return sorted(
         news_items or [],
         key=_sort_key,
