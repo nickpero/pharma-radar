@@ -214,19 +214,6 @@ def _clean_text(value):
 # ============================================
 
 def is_valid_news_title(title):
-    """
-    Verifica se un titolo può essere considerato
-    una vera notizia/articolo FDA.
-
-    Evita:
-    - titoli vuoti;
-    - testi troppo corti;
-    - elementi di navigazione;
-    - artefatti di archivio;
-    - titoli puramente numerici;
-    - link generici non informativi.
-    """
-
     title = normalize_text(title)
 
     if not title:
@@ -298,10 +285,6 @@ def _normalize_url(url):
 
 
 def is_fda_url(url):
-    """
-    True se l'URL appartiene a FDA.gov.
-    """
-
     if not url:
         return False
 
@@ -321,11 +304,6 @@ def is_fda_url(url):
 
 
 def is_fda_press_announcement_url(url):
-    """
-    True se l'URL appartiene alla sezione
-    FDA Press Announcements.
-    """
-
     if not url:
         return False
 
@@ -468,7 +446,6 @@ def get_item_id(item):
     )
 
     if url:
-
         identity = url.lower()
 
     else:
@@ -1656,7 +1633,19 @@ def sort_fda_news(
 def get_fda_news(
     max_news=DEFAULT_MAX_NEWS,
     max_pages=DEFAULT_MAX_PAGES,
+    max_items=None,
 ):
+    """
+    Recupera le news FDA.
+
+    Compatibilità:
+    - max_news: parametro principale attuale
+    - max_items: alias storico utilizzato dai test
+      e dalle vecchie integrazioni
+    """
+
+    if max_items is not None:
+        max_news = max_items
 
     try:
 
