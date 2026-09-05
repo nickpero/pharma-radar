@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import hashlib
 import re
+import time
 from datetime import datetime
 from html import unescape
 from urllib.parse import urljoin, urlparse
@@ -45,6 +46,8 @@ FDA_NEWS_URL = (
 )
 
 FDA_PRESS_ANNOUNCEMENTS_URL = FDA_NEWS_URL
+
+FDA_NEWSROOM_URL = "https://www.fda.gov/news-events/fda-newsroom"
 
 FDA_DRUGS_URL = (
     "https://www.fda.gov/drugs/"
@@ -75,6 +78,8 @@ FDA_ONCOLOGY_APPROVALS_URL = (
 DEFAULT_MAX_NEWS = 50
 DEFAULT_MAX_PAGES = 5
 REQUEST_TIMEOUT = 20
+FETCH_RETRIES = 3
+RETRY_DELAY_SECONDS = 1
 
 USER_AGENT = (
     "Mozilla/5.0 (compatible; PharmaRadar/1.0; "
@@ -600,14 +605,58 @@ def parse_fda_page(
 # ---------------------------------------------------------------------------
 
 def _fetch_html(url, params=None):
-    response = SESSION.get(url, params=params, timeout=REQUEST_TIMEOUT)
-    response.raise_for_status()
-    return response.text
+    """
+    Recupera HTML FDA con retry.
+
+    GitHub Actions può ricevere temporaneamente una risposta vuota o un
+    errore HTTP dal CDN/WAF FDA. In quel caso riproviamo prima di dichiarare
+    la fonte non disponibile.
+    """
+    last_error = None
+
+    for attempt in range(1, FETCH_RETRIES + 1):
+        try:
+            response = SESSION.get(
+                url,
+                params=params,
+                timeout=REQUEST_TIMEOUT,
+                headers={
+                    "Cache-Control": "no-cache",
+                    "Pragma": "no-cache",
+                },
+            )
+            response.raise_for_status()
+
+            content = response.text or ""
+            if content.strip():
+                return content
+
+            last_error = requests.RequestException(
+                f"Empty FDA response for {url}"
+            )
+        except requests.RequestException as exc:
+            last_error = exc
+
+        if attempt < FETCH_RETRIES:
+            time.sleep(RETRY_DELAY_SECONDS * attempt)
+
+    if last_error is not None:
+        raise last_error
+
+    raise requests.RequestException(f"Unable to fetch {url}")
 
 
 # ---------------------------------------------------------------------------
 # PRESS ANNOUNCEMENTS FETCH
 # ---------------------------------------------------------------------------
+
+def _filter_press_announcement_items(items):
+    return [
+        item
+        for item in items
+        if is_fda_press_announcement_url(item.get("url"))
+    ]
+
 
 def _fetch_press_announcements(
     max_news=DEFAULT_MAX_NEWS,
@@ -649,18 +698,34 @@ def _fetch_press_announcements(
             max_items=max_news,
         )
 
-        parsed = [
-            item
-            for item in parsed
-            if is_fda_press_announcement_url(item.get("url"))
-        ]
-
+        parsed = _filter_press_announcement_items(parsed)
         results.extend(parsed)
 
         if not parsed:
             break
 
-    return deduplicate_fda_news(results)[:max_news]
+    results = deduplicate_fda_news(results)[:max_news]
+
+    # FALLBACK STRUTTURALE:
+    # la FDA pubblica gli stessi comunicati anche nella pagina Newsroom.
+    # Se il listing dedicato è temporaneamente vuoto/bloccato, usiamo
+    # Newsroom come seconda sorgente ma manteniamo il filtro URL stretto.
+    if not results:
+        try:
+            newsroom_html = _fetch_html(FDA_NEWSROOM_URL)
+        except requests.RequestException:
+            newsroom_html = ""
+
+        if newsroom_html:
+            newsroom_items = parse_fda_page(
+                newsroom_html,
+                base_url=FDA_NEWSROOM_URL,
+                max_items=max_news * 2,
+            )
+            results = _filter_press_announcement_items(newsroom_items)
+            results = deduplicate_fda_news(results)[:max_news]
+
+    return results
 
 
 # ---------------------------------------------------------------------------
@@ -894,6 +959,7 @@ def get_fda_sources():
     """Restituisce le fonti FDA disponibili."""
     return {
         "press_announcements": FDA_PRESS_ANNOUNCEMENTS_URL,
+        "newsroom": FDA_NEWSROOM_URL,
         "drug_safety": FDA_DRUGS_URL,
         "whats_new": FDA_WHATS_NEW_URL,
         "notable_approvals": FDA_NOTABLE_APPROVALS_URL,
@@ -915,6 +981,7 @@ def sort_news(news_items):
 __all__ = [
     "FDA_NEWS_URL",
     "FDA_PRESS_ANNOUNCEMENTS_URL",
+    "FDA_NEWSROOM_URL",
     "FDA_DRUGS_URL",
     "FDA_WHATS_NEW_URL",
     "FDA_NOTABLE_APPROVALS_URL",
@@ -923,6 +990,7 @@ __all__ = [
     "DEFAULT_MAX_NEWS",
     "DEFAULT_MAX_PAGES",
     "REQUEST_TIMEOUT",
+    "FETCH_RETRIES",
     "normalize_text",
     "normalize_url",
     "normalize_date",
