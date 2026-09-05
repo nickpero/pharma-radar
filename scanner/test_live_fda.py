@@ -18,6 +18,7 @@ NON effettua:
 - Telegram.
 """
 
+import time
 from urllib.parse import urlparse
 
 from scanner.fda_feed import (
@@ -32,6 +33,8 @@ from scanner.fda_feed import (
 # ============================================
 
 MAX_ITEMS = 10
+LIVE_RETRIES = 3
+LIVE_RETRY_DELAY_SECONDS = 2
 
 
 # ============================================
@@ -59,9 +62,24 @@ BLOCKED_TITLES = {
 
 def test_live_fda():
 
-    news = get_fda_news(
-        max_items=MAX_ITEMS
-    )
+    news = []
+
+    for attempt in range(1, LIVE_RETRIES + 1):
+
+        news = get_fda_news(
+            max_items=MAX_ITEMS
+        )
+
+        if news:
+            break
+
+        print(
+            f"⚠️ FDA live feed returned 0 news "
+            f"(attempt {attempt}/{LIVE_RETRIES})"
+        )
+
+        if attempt < LIVE_RETRIES:
+            time.sleep(LIVE_RETRY_DELAY_SECONDS)
 
     print()
     print(
@@ -77,7 +95,8 @@ def test_live_fda():
     # ----------------------------------------
 
     assert news, (
-        "FDA feed returned no news"
+        "FDA feed returned no news after "
+        f"{LIVE_RETRIES} attempts"
     )
 
     # ----------------------------------------
