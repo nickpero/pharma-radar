@@ -1,7 +1,11 @@
 """
 Pharma Radar — FDA Feed Engine
 
-Raccoglie, normalizza e deduplica le notizie FDA.
+Raccoglie, normalizza e deduplica le FDA Press Announcements.
+
+IMPORTANTE:
+Questo modulo rappresenta il feed ufficiale FDA Press Announcements.
+Le altre sezioni FDA vengono gestite dal modulo fda_news.py.
 
 NON effettua raccomandazioni di acquisto o vendita.
 """
@@ -304,6 +308,21 @@ def is_fda_url(url):
 
 
 def is_fda_press_announcement_url(url):
+    """
+    True SOLO per URL appartenenti alla sezione
+    ufficiale FDA Press Announcements.
+
+    Sono validi:
+        /news-events/fda-newsroom/press-announcements
+        /news-events/fda-newsroom/press-announcements/...
+
+    NON sono validi:
+        /drugs/...
+        /drugs/drug-approvals-and-databases/...
+        /media/...
+        altre sezioni FDA.
+    """
+
     if not url:
         return False
 
@@ -332,12 +351,15 @@ def is_fda_press_announcement_url(url):
         "press-announcements"
     )
 
-    return (
-        path == expected_path
-        or path.startswith(
-            expected_path + "/"
-        )
-    )
+    if path == expected_path:
+        return True
+
+    if path.startswith(
+        expected_path + "/"
+    ):
+        return True
+
+    return False
 
 
 # ============================================
@@ -446,6 +468,7 @@ def get_item_id(item):
     )
 
     if url:
+
         identity = url.lower()
 
     else:
@@ -997,7 +1020,7 @@ def _enrich_article_item(
     if not url:
         return item
 
-    if not is_fda_url(
+    if not is_fda_press_announcement_url(
         url
     ):
         return item
@@ -1098,6 +1121,15 @@ def _parse_article(
     if not url:
         return None
 
+    # IMPORTANT:
+    # parse_fda_page viene usato per il Press Feed.
+    # Non accettiamo URL appartenenti ad altre
+    # sezioni FDA.
+    if not is_fda_press_announcement_url(
+        url
+    ):
+        return None
+
     summary = extract_summary(
         article
     )
@@ -1189,7 +1221,7 @@ def parse_fda_page(
             if not url:
                 continue
 
-            if not is_fda_url(
+            if not is_fda_press_announcement_url(
                 url
             ):
                 continue
@@ -1267,7 +1299,7 @@ def _extract_links(
         if not url:
             continue
 
-        if not is_fda_url(
+        if not is_fda_press_announcement_url(
             url
         ):
             continue
@@ -1347,9 +1379,20 @@ def _fetch_press_announcements(
 
         for item in page_items:
 
+            item_url = item.get(
+                "url"
+            )
+
+            # Second safety check:
+            # nessun elemento non-Press può entrare.
+            if not is_fda_press_announcement_url(
+                item_url
+            ):
+                continue
+
             if _is_archive_artifact(
                 item.get("title"),
-                item.get("url"),
+                item_url,
             ):
                 continue
 
@@ -1358,7 +1401,9 @@ def _fetch_press_announcements(
             if len(results) >= max_items:
                 break
 
-    return results
+    return deduplicate_fda_news(
+        results
+    )
 
 
 # ============================================
@@ -1380,6 +1425,9 @@ def _fetch_source_items(
     except Exception:
         return []
 
+    # Questo helper rimane disponibile per
+    # compatibilità, ma parse_fda_page applica
+    # il filtro Press Announcements.
     items = parse_fda_page(
         html=html,
         base_url=url,
@@ -1627,7 +1675,7 @@ def sort_fda_news(
 
 
 # ============================================
-# MAIN FDA NEWS
+# MAIN FDA FEED
 # ============================================
 
 def get_fda_news(
@@ -1636,12 +1684,15 @@ def get_fda_news(
     max_items=None,
 ):
     """
-    Recupera le news FDA.
+    Recupera esclusivamente FDA Press Announcements.
 
     Compatibilità:
-    - max_news: parametro principale attuale
-    - max_items: alias storico utilizzato dai test
-      e dalle vecchie integrazioni
+    - max_news: parametro corrente
+    - max_items: alias storico
+
+    IMPORTANTE:
+    Non aggrega qui le altre pagine FDA.
+    L'aggregazione multi-source appartiene a fda_news.py.
     """
 
     if max_items is not None:
@@ -1679,44 +1730,18 @@ def get_fda_news(
     if max_pages <= 0:
         max_pages = DEFAULT_MAX_PAGES
 
-    all_items = []
-
-    all_items.extend(
-        _fetch_press_announcements(
-            max_items=max_news,
-            max_pages=max_pages,
-        )
+    all_items = _fetch_press_announcements(
+        max_items=max_news,
+        max_pages=max_pages,
     )
 
-    all_items.extend(
-        _fetch_source_items(
-            url=FDA_WHATS_NEW_URL,
-            source="FDA_WHATS_NEW",
-            max_items=max_news,
+    all_items = [
+        item
+        for item in all_items
+        if is_fda_press_announcement_url(
+            item.get("url")
         )
-    )
-
-    all_items.extend(
-        _fetch_source_items(
-            url=FDA_NOTABLE_APPROVALS_URL,
-            source="FDA_NOTABLE_APPROVALS",
-            max_items=max_news,
-        )
-    )
-
-    all_items.extend(
-        _fetch_novel_approvals_2026(
-            max_items=max_news,
-        )
-    )
-
-    all_items.extend(
-        _fetch_source_items(
-            url=FDA_ONCOLOGY_APPROVALS_URL,
-            source="FDA_ONCOLOGY_APPROVALS",
-            max_items=max_news,
-        )
-    )
+    ]
 
     all_items = deduplicate_fda_news(
         all_items
@@ -1751,7 +1776,7 @@ def get_fda_catalyst_news(
 ):
 
     news = get_fda_news(
-        max_news=max_items,
+        max_items=max_items,
     )
 
     return filter_fda_catalysts(
