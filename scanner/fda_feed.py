@@ -376,3 +376,8 @@ def get_fda_news(max_news=DEFAULT_MAX_NEWS, max_pages=DEFAULT_MAX_PAGES, max_ite
     if max_items is not None:
         max_news = max_items
     return sort_fda_news(_fetch_press_announcements(max_news=max_news, max_pages=max_pages))[:max_news]
+
+
+def get_fda_catalyst_news(max_news=DEFAULT_MAX_NEWS, max_pages=DEFAULT_MAX_PAGES, max_items=None):
+    """Backward-compatible alias used by the clinical-trial scanner."""
+    return get_fda_news(max_news=max_news, max_pages=max_pages, max_items=max_items)
