@@ -17,9 +17,9 @@ import requests
 from bs4 import BeautifulSoup
 
 
-# ============================================================
-# CONFIGURATION
-# ============================================================
+# ============================================
+# FDA SOURCES
+# ============================================
 
 FDA_NEWS_URL = (
     "https://www.fda.gov/news-events/fda-newsroom/"
@@ -53,6 +53,11 @@ FDA_ONCOLOGY_APPROVALS_URL = (
     "oncology-cancerhematologic-malignancies-approval-notifications"
 )
 
+
+# ============================================
+# CONFIG
+# ============================================
+
 DEFAULT_MAX_NEWS = 50
 DEFAULT_MAX_PAGES = 5
 REQUEST_TIMEOUT = 20
@@ -63,9 +68,9 @@ USER_AGENT = (
 )
 
 
-# ============================================================
+# ============================================
 # CLASSIFICATION
-# ============================================================
+# ============================================
 
 CATEGORY_KEYWORDS = {
     "APPROVAL": [
@@ -144,9 +149,9 @@ CATEGORY_PRIORITY = [
 ]
 
 
-# ============================================================
+# ============================================
 # HTTP
-# ============================================================
+# ============================================
 
 def _get_session():
     session = requests.Session()
@@ -176,9 +181,9 @@ def _fetch_html(url):
     return response.text
 
 
-# ============================================================
-# TEXT NORMALIZATION
-# ============================================================
+# ============================================
+# TEXT
+# ============================================
 
 def normalize_text(value):
     if value is None:
@@ -204,15 +209,11 @@ def _clean_text(value):
     return normalize_text(value)
 
 
+# ============================================
+# URL
+# ============================================
+
 def _normalize_url(url):
-    """
-    Normalizza una URL senza trasformare il percorso
-    o aggiungere slash arbitrariamente.
-
-    Mantiene la URL assoluta quando già presente.
-    Risolve solamente whitespace e fragment.
-    """
-
     if not url:
         return None
 
@@ -221,7 +222,6 @@ def _normalize_url(url):
     if not url:
         return None
 
-    # Elimina fragment (#...)
     url = url.split(
         "#",
         1,
@@ -230,15 +230,19 @@ def _normalize_url(url):
     return url
 
 
-# ============================================================
+# ============================================
 # DATE
-# ============================================================
+# ============================================
 
 def normalize_date(value):
+
     if value is None:
         return None
 
-    if isinstance(value, datetime):
+    if isinstance(
+        value,
+        datetime,
+    ):
         return value.isoformat()
 
     text = normalize_text(value)
@@ -284,6 +288,7 @@ def normalize_date(value):
     ]
 
     for pattern, date_format in patterns:
+
         match = re.search(
             pattern,
             text,
@@ -314,19 +319,16 @@ def _extract_date(text):
     return normalize_date(text)
 
 
-# ============================================================
-# STABLE ITEM ID
-# ============================================================
+# ============================================
+# ITEM ID
+# ============================================
 
 def get_item_id(item):
-    """
-    Restituisce un SHA-256 hex digest di 64 caratteri.
 
-    La URL ha precedenza sul titolo.
-    Se la URL manca viene utilizzato il titolo normalizzato.
-    """
-
-    if not isinstance(item, dict):
+    if not isinstance(
+        item,
+        dict,
+    ):
         return None
 
     url = _normalize_url(
@@ -334,9 +336,11 @@ def get_item_id(item):
     )
 
     if url:
+
         identity = url.lower()
 
     else:
+
         title = normalize_text(
             item.get(
                 "title",
@@ -361,15 +365,19 @@ def get_item_id(item):
     ).hexdigest()
 
 
-# ============================================================
+# ============================================
 # HTML EXTRACTION
-# ============================================================
+# ============================================
 
 def extract_title(element):
+
     if element is None:
         return ""
 
-    if isinstance(element, str):
+    if isinstance(
+        element,
+        str,
+    ):
         return normalize_text(element)
 
     for selector in (
@@ -380,11 +388,13 @@ def extract_title(element):
         ".node__title",
         ".title",
     ):
+
         found = element.select_one(
             selector
         )
 
         if found:
+
             text = normalize_text(
                 found.get_text(
                     " ",
@@ -405,39 +415,32 @@ def extract_title(element):
 
 def extract_link(
     element,
-    base_url="",
+    base_url=FDA_NEWS_URL,
 ):
-    """
-    Estrae il link da un elemento.
-
-    Comportamento importante per i test:
-    - href assoluto: viene restituito invariato
-      salvo il fragment;
-    - href relativo: viene risolto con urljoin;
-    - href senza slash iniziale: viene trattato come
-      percorso relativo standard;
-    - non viene aggiunto uno slash finale.
-    """
 
     if element is None:
         return None
 
     href = None
 
-    # Caso <a href="...">
-    if hasattr(element, "get"):
+    if hasattr(
+        element,
+        "get",
+    ):
+
         href = element.get(
             "href"
         )
 
-        # Caso elemento contenitore con <a>
         if not href:
+
             anchor = element.find(
                 "a",
                 href=True,
             )
 
             if anchor is not None:
+
                 href = anchor.get(
                     "href"
                 )
@@ -445,19 +448,16 @@ def extract_link(
     if not href:
         return None
 
-    href = str(
-        href
-    ).strip()
+    href = str(href).strip()
 
     if not href:
         return None
 
-    # Risoluzione standard dei link HTML.
-    if base_url:
-        href = urljoin(
-            base_url,
-            href,
-        )
+    # Risolve automaticamente i link relativi FDA.
+    href = urljoin(
+        base_url,
+        href,
+    )
 
     return _normalize_url(
         href
@@ -465,10 +465,14 @@ def extract_link(
 
 
 def extract_summary(element):
+
     if element is None:
         return ""
 
-    if isinstance(element, str):
+    if isinstance(
+        element,
+        str,
+    ):
         return normalize_text(element)
 
     for selector in (
@@ -480,11 +484,13 @@ def extract_summary(element):
         ".teaser",
         "p",
     ):
+
         found = element.select_one(
             selector
         )
 
         if found:
+
             text = normalize_text(
                 found.get_text(
                     " ",
@@ -504,24 +510,28 @@ def extract_summary(element):
 
 
 def extract_date(element):
+
     if element is None:
         return None
 
-    if isinstance(element, str):
-        return normalize_date(
-            element
-        )
+    if isinstance(
+        element,
+        str,
+    ):
+        return normalize_date(element)
 
     for attribute in (
         "datetime",
         "data-date",
         "content",
     ):
+
         value = element.get(
             attribute
         )
 
         if value:
+
             normalized = normalize_date(
                 value
             )
@@ -534,15 +544,18 @@ def extract_date(element):
     )
 
     if time_element:
+
         for attribute in (
             "datetime",
             "data-date",
         ):
+
             value = time_element.get(
                 attribute
             )
 
             if value:
+
                 normalized = normalize_date(
                     value
                 )
@@ -576,11 +589,12 @@ def extract_date(element):
     )
 
 
-# ============================================================
-# FDA URL HELPERS
-# ============================================================
+# ============================================
+# FDA URL / ARCHIVE HELPERS
+# ============================================
 
 def _is_fda_url(url):
+
     if not url:
         return False
 
@@ -604,6 +618,7 @@ def _is_archive_artifact(
     title,
     url,
 ):
+
     title_clean = normalize_text(
         title
     ).lower()
@@ -632,14 +647,15 @@ def _is_archive_artifact(
     return False
 
 
-# ============================================================
+# ============================================
 # CLASSIFICATION
-# ============================================================
+# ============================================
 
 def classify_fda_text(
     title="",
     summary="",
 ):
+
     text = (
         f"{title} {summary}"
     ).lower()
@@ -647,11 +663,15 @@ def classify_fda_text(
     categories = set()
 
     for category, keywords in CATEGORY_KEYWORDS.items():
+
         for keyword in keywords:
+
             if keyword.lower() in text:
+
                 categories.add(
                     category
                 )
+
                 break
 
     return sorted(
@@ -666,9 +686,8 @@ def classify_fda_text(
     )
 
 
-def get_fda_priority(
-    categories,
-):
+def get_fda_priority(categories):
+
     if not categories:
         return "LOW"
 
@@ -700,9 +719,12 @@ def calculate_priority(
     title="",
     summary="",
 ):
+
     combined_categories = {
         str(category).upper()
-        for category in categories or []
+        for category in (
+            categories or []
+        )
     }
 
     combined_categories.update(
@@ -735,9 +757,9 @@ def calculate_priority(
     return "LOW"
 
 
-# ============================================================
+# ============================================
 # NEWS ITEM
-# ============================================================
+# ============================================
 
 def build_fda_news_item(
     title,
@@ -746,6 +768,7 @@ def build_fda_news_item(
     published_at=None,
     source="FDA",
 ):
+
     title = normalize_text(
         title
     )
@@ -785,13 +808,12 @@ def build_fda_news_item(
     }
 
 
-# ============================================================
+# ============================================
 # ARTICLE CONTENT
-# ============================================================
+# ============================================
 
-def _extract_article_content(
-    html,
-):
+def _extract_article_content(html):
+
     if not html:
         return ""
 
@@ -826,9 +848,11 @@ def _extract_article_content(
     ]
 
     for selector in selectors:
+
         for element in soup.select(
             selector
         ):
+
             text = normalize_text(
                 element.get_text(
                     " ",
@@ -842,11 +866,13 @@ def _extract_article_content(
                 )
 
     if not candidates:
+
         body = soup.find(
             "body"
         )
 
         if body:
+
             text = normalize_text(
                 body.get_text(
                     " ",
@@ -872,6 +898,7 @@ def _enrich_article_item(
     item,
     session=None,
 ):
+
     url = item.get(
         "url"
     )
@@ -879,12 +906,11 @@ def _enrich_article_item(
     if not url:
         return item
 
-    if not _is_fda_url(
-        url
-    ):
+    if not _is_fda_url(url):
         return item
 
     try:
+
         if session is None:
             session = _get_session()
 
@@ -900,6 +926,7 @@ def _enrich_article_item(
         )
 
         if content:
+
             existing_summary = normalize_text(
                 item.get(
                     "summary",
@@ -908,40 +935,41 @@ def _enrich_article_item(
             )
 
             if existing_summary:
+
                 combined = (
                     f"{existing_summary} "
                     f"{content}"
                 )
+
             else:
+
                 combined = content
 
             item["summary"] = combined[
                 :20000
             ]
 
-            item["categories"] = (
-                classify_fda_text(
-                    title=item.get(
-                        "title",
-                        "",
-                    ),
-                    summary=item["summary"],
-                )
+            item["categories"] = classify_fda_text(
+                title=item.get(
+                    "title",
+                    "",
+                ),
+                summary=item[
+                    "summary"
+                ],
             )
 
-            item["priority"] = (
-                calculate_priority(
-                    categories=item[
-                        "categories"
-                    ],
-                    title=item.get(
-                        "title",
-                        "",
-                    ),
-                    summary=item[
-                        "summary"
-                    ],
-                )
+            item["priority"] = calculate_priority(
+                categories=item[
+                    "categories"
+                ],
+                title=item.get(
+                    "title",
+                    "",
+                ),
+                summary=item[
+                    "summary"
+                ],
             )
 
     except Exception:
@@ -950,15 +978,161 @@ def _enrich_article_item(
     return item
 
 
-# ============================================================
-# LINK EXTRACTION
-# ============================================================
+# ============================================
+# ARTICLE PARSER
+# ============================================
+
+def _parse_article(
+    article,
+    base_url,
+    source,
+):
+
+    title = extract_title(
+        article
+    )
+
+    if not title:
+        return None
+
+    url = extract_link(
+        article,
+        base_url=base_url,
+    )
+
+    if not url:
+        return None
+
+    summary = extract_summary(
+        article
+    )
+
+    published_at = extract_date(
+        article
+    )
+
+    return build_fda_news_item(
+        title=title,
+        url=url,
+        summary=summary,
+        published_at=published_at,
+        source=source,
+    )
+
+
+def parse_fda_page(
+    html,
+    base_url=FDA_NEWS_URL,
+    source="FDA",
+    max_items=None,
+):
+
+    if not html:
+        return []
+
+    soup = BeautifulSoup(
+        html,
+        "html.parser",
+    )
+
+    results = []
+
+    # Prima scelta: articoli.
+    articles = soup.find_all(
+        "article"
+    )
+
+    for article in articles:
+
+        item = _parse_article(
+            article=article,
+            base_url=base_url,
+            source=source,
+        )
+
+        if item is None:
+            continue
+
+        if _is_archive_artifact(
+            item.get("title"),
+            item.get("url"),
+        ):
+            continue
+
+        results.append(item)
+
+        if (
+            max_items is not None
+            and len(results) >= int(max_items)
+        ):
+            break
+
+    # Fallback per pagine FDA che non usano <article>.
+    if not articles:
+
+        for anchor in soup.find_all(
+            "a",
+            href=True,
+        ):
+
+            title = normalize_text(
+                anchor.get_text(
+                    " ",
+                    strip=True,
+                )
+            )
+
+            if len(title) < 10:
+                continue
+
+            url = extract_link(
+                anchor,
+                base_url=base_url,
+            )
+
+            if not url:
+                continue
+
+            if not _is_fda_url(url):
+                continue
+
+            if _is_archive_artifact(
+                title,
+                url,
+            ):
+                continue
+
+            item = build_fda_news_item(
+                title=title,
+                url=url,
+                summary="",
+                published_at=None,
+                source=source,
+            )
+
+            results.append(item)
+
+            if (
+                max_items is not None
+                and len(results) >= int(max_items)
+            ):
+                break
+
+    return deduplicate_fda_news(
+        results
+    )
+
+
+# ============================================
+# LINK EXTRACTION FALLBACK
+# ============================================
 
 def _extract_links(
     html,
     base_url,
     source,
 ):
+
     if not html:
         return []
 
@@ -973,6 +1147,7 @@ def _extract_links(
         "a",
         href=True,
     ):
+
         title = normalize_text(
             anchor.get_text(
                 " ",
@@ -991,9 +1166,7 @@ def _extract_links(
         if not url:
             continue
 
-        if not _is_fda_url(
-            url
-        ):
+        if not _is_fda_url(url):
             continue
 
         if _is_archive_artifact(
@@ -1012,36 +1185,20 @@ def _extract_links(
             )
         )
 
-    return results
-
-
-# ============================================================
-# PAGE PARSER
-# ============================================================
-
-def parse_fda_page(
-    html,
-    base_url=FDA_NEWS_URL,
-    source="FDA",
-):
-    if not html:
-        return []
-
-    return _extract_links(
-        html=html,
-        base_url=base_url,
-        source=source,
+    return deduplicate_fda_news(
+        results
     )
 
 
-# ============================================================
+# ============================================
 # PRESS ANNOUNCEMENTS
-# ============================================================
+# ============================================
 
 def _fetch_press_announcements(
     max_items=50,
     max_pages=DEFAULT_MAX_PAGES,
 ):
+
     results = []
 
     session = _get_session()
@@ -1049,18 +1206,25 @@ def _fetch_press_announcements(
     for page in range(
         max_pages
     ):
+
         if len(results) >= max_items:
             break
 
         if page == 0:
-            url = FDA_PRESS_ANNOUNCEMENTS_URL
+
+            url = (
+                FDA_PRESS_ANNOUNCEMENTS_URL
+            )
+
         else:
+
             url = (
                 f"{FDA_PRESS_ANNOUNCEMENTS_URL}"
                 f"?page={page}"
             )
 
         try:
+
             response = session.get(
                 url,
                 timeout=REQUEST_TIMEOUT,
@@ -1075,18 +1239,18 @@ def _fetch_press_announcements(
             html=response.text,
             base_url=url,
             source="FDA_PRESS",
+            max_items=max_items - len(results),
         )
 
         for item in page_items:
+
             if _is_archive_artifact(
                 item.get("title"),
                 item.get("url"),
             ):
                 continue
 
-            results.append(
-                item
-            )
+            results.append(item)
 
             if len(results) >= max_items:
                 break
@@ -1094,15 +1258,16 @@ def _fetch_press_announcements(
     return results
 
 
-# ============================================================
+# ============================================
 # GENERIC SOURCE
-# ============================================================
+# ============================================
 
 def _fetch_source_items(
     url,
     source,
     max_items=50,
 ):
+
     try:
         html = _fetch_html(
             url
@@ -1115,21 +1280,22 @@ def _fetch_source_items(
         html=html,
         base_url=url,
         source=source,
+        max_items=max_items,
     )
 
-    return items[
-        :max_items
-    ]
+    return items[:max_items]
 
 
-# ============================================================
-# NOVEL APPROVALS 2026
-# ============================================================
+# ============================================
+# NOVEL APPROVALS
+# ============================================
 
 def _fetch_novel_approvals_2026(
     max_items=50,
 ):
+
     try:
+
         html = _fetch_html(
             FDA_NOVEL_APPROVALS_2026_URL
         )
@@ -1147,9 +1313,11 @@ def _fetch_novel_approvals_2026(
     for table in soup.find_all(
         "table"
     ):
+
         for row in table.find_all(
             "tr"
         ):
+
             cells = row.find_all(
                 [
                     "td",
@@ -1224,20 +1392,23 @@ def _fetch_novel_approvals_2026(
     return results
 
 
-# ============================================================
+# ============================================
 # DEDUPLICATION
-# ============================================================
+# ============================================
 
 def deduplicate_fda_news(
-    news_items,
+    news_items
 ):
+
     if not news_items:
         return []
 
     results = []
+
     seen_ids = set()
 
     for item in news_items:
+
         if not isinstance(
             item,
             dict,
@@ -1252,9 +1423,7 @@ def deduplicate_fda_news(
         )
 
         url = _normalize_url(
-            item.get(
-                "url"
-            )
+            item.get("url")
         )
 
         if not title:
@@ -1288,6 +1457,7 @@ def deduplicate_fda_news(
         title_id = None
 
         if normalized_title:
+
             title_id = hashlib.sha256(
                 normalized_title.encode(
                     "utf-8"
@@ -1307,20 +1477,19 @@ def deduplicate_fda_news(
                 title_id
             )
 
-        results.append(
-            item
-        )
+        results.append(item)
 
     return results
 
 
-# ============================================================
+# ============================================
 # SORT
-# ============================================================
+# ============================================
 
 def sort_fda_news(
-    news_items,
+    news_items
 ):
+
     priority = {
         "EXTREME": 5,
         "HIGH": 4,
@@ -1351,35 +1520,42 @@ def sort_fda_news(
     )
 
 
-# ============================================================
-# MAIN FEED
-# ============================================================
+# ============================================
+# MAIN FDA NEWS
+# ============================================
 
 def get_fda_news(
     max_news=DEFAULT_MAX_NEWS,
     max_pages=DEFAULT_MAX_PAGES,
 ):
+
     try:
+
         max_news = int(
             max_news
         )
+
     except (
         TypeError,
         ValueError,
     ):
+
         max_news = DEFAULT_MAX_NEWS
 
     if max_news <= 0:
         return []
 
     try:
+
         max_pages = int(
             max_pages
         )
+
     except (
         TypeError,
         ValueError,
     ):
+
         max_pages = DEFAULT_MAX_PAGES
 
     if max_pages <= 0:
@@ -1436,9 +1612,8 @@ def get_fda_news(
 
     enriched = []
 
-    for item in all_items[
-        :max_news
-    ]:
+    for item in all_items[:max_news]:
+
         enriched.append(
             _enrich_article_item(
                 item,
@@ -1446,18 +1621,17 @@ def get_fda_news(
             )
         )
 
-    return enriched[
-        :max_news
-    ]
+    return enriched[:max_news]
 
 
-# ============================================================
+# ============================================
 # COMPATIBILITY API
-# ============================================================
+# ============================================
 
 def get_fda_catalyst_news(
     max_items=DEFAULT_MAX_NEWS,
 ):
+
     news = get_fda_news(
         max_news=max_items,
     )
@@ -1468,14 +1642,16 @@ def get_fda_catalyst_news(
 
 
 def filter_fda_catalysts(
-    news_items,
+    news_items
 ):
+
     if not news_items:
         return []
 
     results = []
 
     for item in news_items:
+
         if not isinstance(
             item,
             dict,
@@ -1501,14 +1677,14 @@ def filter_fda_catalysts(
                 "HIGH",
             }
         ):
-            results.append(
-                item
-            )
+
+            results.append(item)
 
     return results
 
 
 def get_fda_sources():
+
     return {
         "press_announcements": (
             FDA_PRESS_ANNOUNCEMENTS_URL
@@ -1527,9 +1703,9 @@ def get_fda_sources():
     }
 
 
-# ============================================================
+# ============================================
 # EXPORTS
-# ============================================================
+# ============================================
 
 __all__ = [
     "FDA_NEWS_URL",
