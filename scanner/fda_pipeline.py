@@ -60,7 +60,9 @@ def process_fda_news_item(news_item, watchlist=None):
     trading = enrich_trading_event(scored)
     trading = enrich_alert_priority(trading)
     trading["pipeline"] = "FDA_NEWS"
-    trading["pipeline_stage"] = "ALERT_PRIORITY"
+    # Preserve the established pipeline contract: the new priority is
+    # an enrichment field, not a replacement for the Trading Intelligence stage.
+    trading["pipeline_stage"] = "TRADING_INTELLIGENCE"
     return trading
 
 
