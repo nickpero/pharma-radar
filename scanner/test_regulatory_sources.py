@@ -1,6 +1,7 @@
 from scanner.ema_feed import build_ema_news_item, classify_ema_text, parse_ema_rss
-from scanner.sec_feed import DEFAULT_USER_AGENT, build_sec_item
+from scanner.sec_feed import DEFAULT_USER_AGENT, build_sec_item, get_ticker_cik_map
 from scanner.regulatory_pipeline import process_regulatory_news
+from scanner.fda_score import score_fda_event
 
 
 def test_ema_rss_parser():
@@ -35,6 +36,27 @@ def test_sec_user_agent_is_declared():
     assert "@" in DEFAULT_USER_AGENT
 
 
+def test_sec_watchlist_cik_map_avoids_runtime_ticker_lookup():
+    mapping = get_ticker_cik_map()
+    assert mapping["CAPR"] == "0001133869"
+    assert mapping["NUVL"] == "0001861560"
+    assert mapping["IONS"] == "0000874015"
+    assert mapping["SMMT"] == "0001599298"
+    assert "ARGX" not in mapping
+
+
+def test_fda_score_preserves_label():
+    event = {
+        "type": "FDA_EVENT",
+        "subtype": "FDA_APPROVAL",
+        "severity": "HIGH",
+        "direction": "CATALYST",
+    }
+    scored = score_fda_event(event)
+    assert scored["score"] == 100
+    assert scored["label"] == "CRITICAL"
+
+
 def test_regulatory_pipeline_requires_program_match():
     watchlist = {"ARGX": {"company": "argenx", "programs": ["VYVGART"]}}
     items = [build_ema_news_item("argenx reports VYVGART regulatory update", "/en/news/vyvgart", "2026-09-01")]
@@ -58,6 +80,8 @@ if __name__ == "__main__":
     test_ema_content_classification()
     test_primary_source_builders()
     test_sec_user_agent_is_declared()
+    test_sec_watchlist_cik_map_avoids_runtime_ticker_lookup()
+    test_fda_score_preserves_label()
     test_regulatory_pipeline_requires_program_match()
     test_regulatory_pipeline_rejects_generic_company_only_news()
     print("Regulatory source tests passed")
