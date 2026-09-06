@@ -9,8 +9,7 @@ esistente: prepara semplicemente gli eventi FDA
 nel formato corretto.
 """
 
-
-from scanner.score import score_event
+from scanner.score import score_event, score_label
 
 
 # ============================================
@@ -18,7 +17,6 @@ from scanner.score import score_event
 # ============================================
 
 FDA_SCORE_BONUS = {
-
     "FDA_APPROVAL": 25,
     "FDA_REJECTION": 25,
     "FDA_SAFETY_WARNING": 25,
@@ -42,24 +40,12 @@ def enrich_fda_event(event):
     """
 
     if not isinstance(event, dict):
-        raise TypeError(
-            "event must be a dictionary"
-        )
+        raise TypeError("event must be a dictionary")
 
     result = dict(event)
 
-    subtype = str(
-        result.get(
-            "subtype",
-            "FDA_UPDATE"
-        )
-    ).upper()
-
-    bonus = FDA_SCORE_BONUS.get(
-        subtype,
-        0
-    )
-
+    subtype = str(result.get("subtype", "FDA_UPDATE")).upper()
+    bonus = FDA_SCORE_BONUS.get(subtype, 0)
     result["fda_score_bonus"] = bonus
 
     return result
@@ -76,67 +62,33 @@ def score_fda_event(event):
     Usa il motore di scoring esistente e applica
     successivamente il bonus FDA specifico.
 
-    Il risultato finale è limitato a 100.
+    Il risultato finale è limitato a 100 e riceve
+    anche la stessa label del Catalyst Scoring Engine.
     """
 
-    enriched = enrich_fda_event(
-        event
-    )
-
-    base_score = score_event(
-        enriched
-    )
+    enriched = enrich_fda_event(event)
+    base_score = score_event(enriched)
 
     if isinstance(base_score, dict):
-
-        result = dict(
-            base_score
-        )
-
-        current_score = result.get(
-            "score",
-            0
-        )
-
+        result = dict(base_score)
+        current_score = result.get("score", 0)
     else:
-
-        result = dict(
-            enriched
-        )
-
+        result = dict(enriched)
         current_score = base_score
 
     try:
-        current_score = int(
-            current_score
-        )
-    except (
-        ValueError,
-        TypeError
-    ):
+        current_score = int(current_score)
+    except (ValueError, TypeError):
         current_score = 0
 
-    bonus = enriched.get(
-        "fda_score_bonus",
-        0
-    )
-
     try:
-        bonus = int(
-            bonus
-        )
-    except (
-        ValueError,
-        TypeError
-    ):
+        bonus = int(enriched.get("fda_score_bonus", 0))
+    except (ValueError, TypeError):
         bonus = 0
 
-    final_score = min(
-        current_score + bonus,
-        100
-    )
-
+    final_score = min(current_score + bonus, 100)
     result["score"] = final_score
+    result["label"] = score_label(final_score)
 
     return result
 
@@ -146,17 +98,8 @@ def score_fda_event(event):
 # ============================================
 
 def score_fda_events(events):
-    """
-    Calcola il punteggio di una lista di
-    FDA catalyst events.
-    """
-
+    """Calcola score per una lista di FDA catalyst events."""
     if not events:
         return []
 
-    return [
-        score_fda_event(
-            event
-        )
-        for event in events
-      ]
+    return [score_fda_event(event) for event in events]
