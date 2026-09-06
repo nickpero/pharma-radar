@@ -29,6 +29,7 @@ WATCHLIST_CIK = {
 CATALYST_ITEMS = {"1.01", "1.02", "2.01", "2.03", "3.01", "5.02", "7.01", "8.01"}
 DISCOVERY_MAX_FILINGS = 2
 DISCOVERY_MAX_TICKERS = 4
+DISCOVERY_ROTATION_SECONDS = 3600
 JINA_MIN_INTERVAL = 1.5
 _JINA_LOCK = threading.Lock()
 _JINA_LAST_REQUEST = 0.0
@@ -276,18 +277,29 @@ def _discover_company_filings(ticker, company, cik, max_filings=DISCOVERY_MAX_FI
 
 
 def _discover_missing_companies(watchlist, existing_tickers):
-    """Bound secondary SEC discovery to avoid hammering Jina."""
+    """Run a small rotating SEC discovery batch so every domestic watchlist ticker is covered over time."""
     missing = []
     for ticker, config in (watchlist or {}).items():
         ticker = str(ticker).upper()
         if ticker in existing_tickers or ticker not in WATCHLIST_CIK:
             continue
         company = config.get("company", ticker) if isinstance(config, dict) else ticker
-        missing.append((ticker, company, WATCHLIST_CIK[ticker]))
-    selected = missing[:DISCOVERY_MAX_TICKERS]
-    print(f"SEC DISCOVERY BUDGET: selected={len(selected)} missing={len(missing)}", flush=True)
+        priority = str(config.get("priority", config.get("risk", ""))).upper() if isinstance(config, dict) else ""
+        risk = str(config.get("risk", "" )).upper() if isinstance(config, dict) else ""
+        tier = 0 if priority in {"RED", "CRITICAL", "HIGH"} or risk in {"RED", "CRITICAL", "HIGH"} else 1
+        missing.append((tier, ticker, company, WATCHLIST_CIK[ticker]))
+    missing.sort(key=lambda item: (item[0], item[1]))
+    if not missing:
+        print("SEC DISCOVERY BUDGET: selected=0 missing=0", flush=True)
+        return []
+    tickers = missing
+    bucket = int(time.time() // DISCOVERY_ROTATION_SECONDS)
+    start = (bucket * DISCOVERY_MAX_TICKERS) % len(tickers)
+    ordered = tickers[start:] + tickers[:start]
+    selected = ordered[:DISCOVERY_MAX_TICKERS]
+    print(f"SEC DISCOVERY BUDGET: selected={len(selected)} missing={len(missing)} rotation_bucket={bucket}", flush=True)
     results = []
-    for ticker, company, cik in selected:
+    for _, ticker, company, cik in selected:
         if _JINA_RATE_LIMITED:
             break
         results.extend(_discover_company_filings(ticker, company, cik))
