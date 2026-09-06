@@ -15,7 +15,7 @@ CATEGORY_PRIORITY = ["APPROVAL", "REJECTION", "SAFETY", "CLINICAL", "LABEL"]
 ADVANCED_RULES = [
     ("TRIAL_HOLD_LIFTED", "POSITIVE", "HIGH", ("clinical hold lifted", "hold lifted", "lifted the clinical hold", "hold is lifted")),
     ("TRIAL_HOLD", "NEGATIVE", "EXTREME", ("clinical hold", "placed on clinical hold", "trial hold", "study hold")),
-    ("REJECTION", "NEGATIVE", "EXTREME", ("complete response letter", r"\bcrl\b", "not approved", "rejected", "rejection", "refused", "refusal", "denied", "denial")),
+    ("REJECTION", "NEGATIVE", "EXTREME", ("complete response letter", r"\bcrl\b", "not approved", "does not approve", "did not approve", "will not approve", "won't approve", "rejected", "rejection", "refused", "refusal", "denied", "denial")),
     ("SAFETY", "NEGATIVE", "EXTREME", ("boxed warning", "safety warning", "drug safety communication", "recall", "serious safety", "safety concern", "contamination")),
     ("APPROVAL", "POSITIVE", "EXTREME", ("approves", "approved", "approval", "authorizes", "authorized", "authorization", "cleared", "clearance")),
     ("LABEL_EXPANSION", "POSITIVE", "HIGH", ("label expansion", "expanded indication", "expands indication", "expanded use", "expands use", "expanded the indication", "expands the indication", "new indication")),
