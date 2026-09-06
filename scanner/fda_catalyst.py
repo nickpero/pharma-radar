@@ -20,7 +20,7 @@ ADVANCED_RULES = [
     ("DATE_DELAYED", "NEGATIVE", "HIGH", ("delayed timeline", "date delayed", "delay in the timeline", "later than expected", "delayed submission")),
     ("REJECTION", "NEGATIVE", "EXTREME", ("complete response letter", r"\bcrl\b", "not approved", "rejected", "rejection", "refused", "refusal", "denied", "denial")),
     ("SAFETY", "NEGATIVE", "EXTREME", ("boxed warning", "safety warning", "drug safety communication", "recall", "serious safety", "safety concern", "contamination")),
-    ("APPROVAL", "POSITIVE", "EXTREME", ("approved", "approval", "authorizes", "authorized", "authorization", "cleared", "clearance")),
+    ("APPROVAL", "POSITIVE", "EXTREME", ("approves", "approved", "approval", "authorizes", "authorized", "authorization", "cleared", "clearance")),
     ("LABEL_EXPANSION", "POSITIVE", "HIGH", ("label expansion", "expanded indication", "expanded use", "expanded the indication", "new indication")),
     ("FILING", "POSITIVE", "HIGH", ("new drug application", "biologics license application", "nda submission", "bla submission", "regulatory submission", "submitted the application", "filing accepted")),
     ("CLINICAL_RESULT", "NEGATIVE", "HIGH", ("failed to meet", "did not meet", "missed the primary endpoint", "failed the primary endpoint", "futility", "negative topline")),
@@ -37,7 +37,6 @@ def _matches(text, pattern):
 
 
 def classify_fda_catalyst(news_item):
-    """Classifica una news FDA in catalyst_type, direction e urgency."""
     if not isinstance(news_item, dict):
         raise TypeError("news_item must be a dictionary")
     text = _text(news_item)
@@ -61,17 +60,11 @@ def build_fda_catalyst(news_item):
     advanced = classify_fda_catalyst(news_item)
     event.update(advanced)
     subtype_map = {
-        "CLINICAL_RESULT": "CLINICAL_RESULTS",
-        "LABEL_EXPANSION": "LABEL_EXPANSION",
-        "REJECTION": "FDA_REJECTION",
-        "SAFETY": "FDA_SAFETY_WARNING",
-        "APPROVAL": "FDA_APPROVAL",
-        "TRIAL_HOLD": "TRIAL_HOLD",
-        "TRIAL_HOLD_LIFTED": "TRIAL_HOLD_LIFTED",
-        "PHASE_ADVANCEMENT": "PHASE_ADVANCED",
-        "DATE_ACCELERATED": "DATE_ACCELERATED",
-        "DATE_DELAYED": "DATE_DELAYED",
-        "FILING": "REGULATORY_FILING",
+        "CLINICAL_RESULT": "CLINICAL_RESULTS", "LABEL_EXPANSION": "LABEL_EXPANSION",
+        "REJECTION": "FDA_REJECTION", "SAFETY": "FDA_SAFETY_WARNING", "APPROVAL": "FDA_APPROVAL",
+        "TRIAL_HOLD": "TRIAL_HOLD", "TRIAL_HOLD_LIFTED": "TRIAL_HOLD_LIFTED",
+        "PHASE_ADVANCEMENT": "PHASE_ADVANCED", "DATE_ACCELERATED": "DATE_ACCELERATED",
+        "DATE_DELAYED": "DATE_DELAYED", "FILING": "REGULATORY_FILING",
     }
     if advanced["catalyst_type"] in subtype_map:
         event["subtype"] = subtype_map[advanced["catalyst_type"]]
@@ -79,15 +72,12 @@ def build_fda_catalyst(news_item):
         event["severity"] = "HIGH"
     elif advanced["urgency"] == "HIGH" and event.get("severity") == "LOW":
         event["severity"] = "MEDIUM"
-    event["source"] = news_item.get("source", "FDA")
-    event["title"] = news_item.get("title", "")
-    event["summary"] = news_item.get("summary", "")
-    event["url"] = news_item.get("url")
-    event["published_at"] = news_item.get("published_at")
-    event["categories"] = list(normalized_categories)
-    event["field"] = None
-    event["old_value"] = None
-    event["new_value"] = news_item.get("title", "")
+    event.update({
+        "source": news_item.get("source", "FDA"), "title": news_item.get("title", ""),
+        "summary": news_item.get("summary", ""), "url": news_item.get("url"),
+        "published_at": news_item.get("published_at"), "categories": list(normalized_categories),
+        "field": None, "old_value": None, "new_value": news_item.get("title", ""),
+    })
     return event
 
 
