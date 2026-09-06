@@ -1,7 +1,5 @@
 """P0 acceptance test: live FDA article -> body enrichment -> matcher -> catalyst."""
 
-import requests
-
 from scanner.fda_enrichment import enrich_fda_news_item
 from scanner.fda_feed import build_fda_news_item
 from scanner.fda_matcher import identify_fda_target
@@ -14,20 +12,7 @@ ZIDESAMTINIB_URL = (
 )
 
 
-def fetch_live_article():
-    response = requests.get(
-        ZIDESAMTINIB_URL,
-        timeout=20,
-        headers={
-            "User-Agent": "Mozilla/5.0 (compatible; PharmaRadar/1.0; +https://www.fda.gov/)"
-        },
-    )
-    response.raise_for_status()
-    return response.text
-
-
 def test_live_fda_zidesamtinib_p0():
-    html = fetch_live_article()
     item = {
         "source": "FDA LIVE",
         "title": "FDA approves zidesamtinib for ROS1-positive non-small cell lung cancer",
@@ -35,13 +20,9 @@ def test_live_fda_zidesamtinib_p0():
         "url": ZIDESAMTINIB_URL,
     }
 
-    from scanner.fda_enrichment import _extract_article_text
-    item["content"] = _extract_article_text(html, item["title"])
-    item["article_text"] = item["content"]
-    item["body"] = item["content"]
-    item["text"] = f"{item['title']} {item['summary']} {item['content']}"
+    item = enrich_fda_news_item(item)
 
-    assert len(item["content"]) > 200, "FDA article body was not extracted"
+    assert len(item.get("content", "")) > 200, "FDA article body was not extracted"
     assert "zidesamtinib" in item["content"].lower(), "FDA article body lacks zidesamtinib"
     assert "nuvalent" in item["content"].lower(), "FDA article body lacks Nuvalent"
 
