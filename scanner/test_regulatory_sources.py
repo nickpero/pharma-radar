@@ -17,7 +17,7 @@ def test_ema_content_classification():
     categories = classify_ema_text(
         "Committee recommends medicine",
         "",
-        "The committee adopted a positive opinion recommending a change to the marketing authorisation.",
+        "The committee adopted a positive opinion recommending a change to the marketing authorisation and an extension of the product label.",
     )
     assert "APPROVAL" in categories
     assert "LABEL" in categories
