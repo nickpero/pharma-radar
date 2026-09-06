@@ -1,7 +1,7 @@
 """P0 acceptance test: live FDA article -> body enrichment -> matcher -> catalyst."""
 
 from scanner.fda_enrichment import enrich_fda_news_item
-from scanner.fda_feed import build_fda_news_item
+from scanner.fda_news import build_fda_news_item
 from scanner.fda_matcher import identify_fda_target
 from scanner.fda_pipeline import process_fda_news_item
 from scanner.trial_scanner import load_watchlist
