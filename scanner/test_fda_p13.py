@@ -62,6 +62,20 @@ def test_date_events_are_directional():
     assert delayed["direction"] == "NEGATIVE"
 
 
+def test_phase_and_filing():
+    phase = classify("Program advances to Phase 3")
+    filing = classify("Company submitted the application")
+    assert phase["catalyst_type"] == "PHASE_ADVANCEMENT"
+    assert filing["catalyst_type"] == "FILING"
+    assert filing["direction"] == "POSITIVE"
+
+
+def test_negation_protection():
+    result = classify("FDA says the drug is not approved")
+    assert result["catalyst_type"] == "REJECTION"
+    assert result["direction"] == "NEGATIVE"
+
+
 def test_neutral_fallback():
     result = classify("FDA publishes general administrative update")
     assert result["catalyst_type"] == "NEUTRAL"
@@ -89,6 +103,8 @@ if __name__ == "__main__":
     test_clinical_results_can_be_negative_or_positive()
     test_hold_and_hold_lift_are_opposite()
     test_date_events_are_directional()
+    test_phase_and_filing()
+    test_negation_protection()
     test_neutral_fallback()
     test_build_preserves_legacy_approval_subtype()
     print("P1.3 FDA CATALYST TESTS PASSED")
