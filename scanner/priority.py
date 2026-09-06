@@ -5,6 +5,9 @@ P2.1: combina catalyst score, trading impact,
 urgency e match confidence in un singolo valore
 operativo per ordinare gli alert.
 
+P2.2: converte la priorità numerica in una gerarchia
+operativa per la distribuzione degli alert.
+
 Non è una previsione del movimento del titolo e
 non costituisce una raccomandazione finanziaria.
 """
@@ -61,15 +64,41 @@ def get_alert_priority(event):
     )
 
 
+def get_alert_tier(priority):
+    """Restituisce la classe operativa dell'alert."""
+    value = _bounded_int(priority)
+
+    if value >= 80:
+        return "CRITICAL"
+    if value >= 60:
+        return "HIGH"
+    if value >= 40:
+        return "WATCH"
+    return "LOW"
+
+
+def get_alert_tier_icon(tier):
+    """Restituisce l'icona Telegram per la classe operativa."""
+    tier = str(tier or "LOW").upper()
+    return {
+        "CRITICAL": "🚨",
+        "HIGH": "🔴",
+        "WATCH": "🟠",
+        "LOW": "⚪",
+    }.get(tier, "⚪")
+
+
 def enrich_alert_priority(event):
-    """Aggiunge alert_priority senza alterare i dati originali."""
+    """Aggiunge priorità e tier senza alterare i dati originali."""
     result = dict(event)
-    result["alert_priority"] = get_alert_priority(result)
+    priority = get_alert_priority(result)
+    result["alert_priority"] = priority
+    result["alert_tier"] = get_alert_tier(priority)
     return result
 
 
 def enrich_alert_priorities(events):
-    """Arricchisce una lista di eventi con la priorità unificata."""
+    """Arricchisce una lista di eventi con priorità e tier."""
     if not events:
         return []
     return [enrich_alert_priority(event) for event in events]
