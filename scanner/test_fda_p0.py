@@ -13,12 +13,12 @@ ZIDESAMTINIB_URL = (
 
 
 def test_live_fda_zidesamtinib_p0():
-    item = {
-        "source": "FDA LIVE",
-        "title": "FDA approves zidesamtinib for ROS1-positive non-small cell lung cancer",
-        "summary": "FDA approval of zidesamtinib.",
-        "url": ZIDESAMTINIB_URL,
-    }
+    item = build_fda_news_item(
+        title="FDA approves zidesamtinib for ROS1-positive non-small cell lung cancer",
+        summary="FDA approval of zidesamtinib.",
+        url=ZIDESAMTINIB_URL,
+        source="FDA LIVE",
+    )
 
     item = enrich_fda_news_item(item)
 
