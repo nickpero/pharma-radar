@@ -1,3 +1,4 @@
+# CI trigger: EMA label fixture uses an explicit extension-of-indication signal.
 from scanner.ema_feed import build_ema_news_item, classify_ema_text, parse_ema_rss
 import scanner.sec_feed as sec_feed
 from scanner.sec_feed import (
