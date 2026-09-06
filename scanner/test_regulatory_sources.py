@@ -1,5 +1,5 @@
-from scanner.ema_feed import build_ema_news_item, parse_ema_rss
-from scanner.sec_feed import build_sec_item
+from scanner.ema_feed import build_ema_news_item, classify_ema_text, parse_ema_rss
+from scanner.sec_feed import DEFAULT_USER_AGENT, build_sec_item
 from scanner.regulatory_pipeline import process_regulatory_news
 
 
@@ -12,12 +12,27 @@ def test_ema_rss_parser():
     assert "VYVGART" in items[0]["title"]
 
 
+def test_ema_content_classification():
+    categories = classify_ema_text(
+        "Committee recommends medicine",
+        "",
+        "The committee adopted a positive opinion recommending a change to the marketing authorisation.",
+    )
+    assert "APPROVAL" in categories
+    assert "LABEL" in categories
+
+
 def test_primary_source_builders():
     ema = build_ema_news_item("EMA VYVGART update", "/en/news/vyvgart", "2026-09-01")
     sec = build_sec_item("ARGX", "argenx", "0001743812", "0000000000-26-000001", "8-K", "2026-09-01", "argx-8k.htm", ["8.01"], "argenx VYVGART clinical update")
     assert ema["source_type"] == "PRIMARY_REGULATORY"
     assert sec["source_type"] == "PRIMARY_CORPORATE"
     assert sec["form"] == "8-K"
+
+
+def test_sec_user_agent_is_declared():
+    assert "PharmaRadar" in DEFAULT_USER_AGENT
+    assert "@" in DEFAULT_USER_AGENT
 
 
 def test_regulatory_pipeline_requires_program_match():
@@ -40,7 +55,9 @@ def test_regulatory_pipeline_rejects_generic_company_only_news():
 
 if __name__ == "__main__":
     test_ema_rss_parser()
+    test_ema_content_classification()
     test_primary_source_builders()
+    test_sec_user_agent_is_declared()
     test_regulatory_pipeline_requires_program_match()
     test_regulatory_pipeline_rejects_generic_company_only_news()
     print("Regulatory source tests passed")
