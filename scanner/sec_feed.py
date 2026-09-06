@@ -4,6 +4,7 @@ from __future__ import annotations
 import hashlib
 import os
 import re
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import requests
 
@@ -26,6 +27,8 @@ WATCHLIST_CIK = {
 }
 
 CATALYST_ITEMS = {"1.01", "1.02", "2.01", "2.03", "3.01", "5.02", "7.01", "8.01"}
+DISCOVERY_MAX_FILINGS = 2
+DISCOVERY_WORKERS = 8
 
 
 def normalize_text(value) -> str:
@@ -245,6 +248,98 @@ def _fetch_proxy(max_filings=50):
     return []
 
 
+def _browse_company_url(cik, count=10):
+    return (
+        f"{SEC_BROWSE}?action=getcompany&CIK={cik}&type=8-K"
+        f"&owner=exclude&count={int(count)}"
+    )
+
+
+def _extract_accessions(text, max_filings=DISCOVERY_MAX_FILINGS):
+    """Extract unique SEC 8-K accession numbers from an EDGAR browse page."""
+    found = []
+    for accession in re.findall(r"\b\d{10}-\d{2}-\d{6}\b", text or ""):
+        if accession not in found:
+            found.append(accession)
+        if len(found) >= max_filings:
+            break
+    return found
+
+
+def _extract_filing_date(text):
+    """Extract the first filing date exposed by an EDGAR filing detail page."""
+    match = re.search(r"Filing Date\s+(\d{4}-\d{2}-\d{2})", text or "", flags=re.I)
+    return match.group(1) if match else ""
+
+
+def _discover_company_filings(ticker, company, cik, max_filings=DISCOVERY_MAX_FILINGS):
+    """Discover recent company 8-Ks when the global proxy feed misses a watchlist filer."""
+    try:
+        browse_text = _get_jina_text(_browse_company_url(cik, count=max(10, max_filings * 4)))
+        accessions = _extract_accessions(browse_text, max_filings=max_filings)
+        if not accessions:
+            print(f"SEC DISCOVERY EMPTY: ticker={ticker}", flush=True)
+            return []
+
+        results = []
+        for accession in accessions:
+            index_text = _get_jina_text(_filing_index_url(cik, accession))
+            filing_date = _extract_filing_date(index_text)
+            names = _extract_document_names(index_text)
+            primary_doc = _pick_document(names)
+            text, content_url = _enrich_proxy_row({}, cik, accession)
+            items = _extract_items(re.search(r"Items?\s+(.{0,300})", index_text or "", flags=re.I).group(1)
+                                   if re.search(r"Items?\s+(.{0,300})", index_text or "", flags=re.I) else "")
+            if not items:
+                items = ["7.01", "8.01"]
+            results.append(build_sec_item(
+                ticker=ticker,
+                company=company,
+                cik=cik,
+                accession=accession,
+                form="8-K",
+                filing_date=filing_date,
+                primary_doc=primary_doc,
+                items=items,
+                text=text,
+                title=f"SEC 8-K — {company} ({ticker})",
+                url=content_url or _filing_url(cik, accession, primary_doc),
+            ))
+        print(f"SEC DISCOVERY FOUND: ticker={ticker} filings={len(results)}", flush=True)
+        return results
+    except (requests.RequestException, ValueError, TypeError) as exc:
+        print(f"SEC DISCOVERY ERROR: ticker={ticker} {type(exc).__name__}: {exc}", flush=True)
+        return []
+
+
+def _discover_missing_companies(watchlist, existing_tickers):
+    """Run company discovery only for watchlist tickers absent from the global proxy feed."""
+    missing = []
+    for ticker, config in (watchlist or {}).items():
+        ticker = str(ticker).upper()
+        if ticker in existing_tickers or ticker not in WATCHLIST_CIK:
+            continue
+        company = config.get("company", ticker) if isinstance(config, dict) else ticker
+        missing.append((ticker, company, WATCHLIST_CIK[ticker]))
+
+    if not missing:
+        return []
+
+    results = []
+    with ThreadPoolExecutor(max_workers=min(DISCOVERY_WORKERS, len(missing))) as executor:
+        futures = {
+            executor.submit(_discover_company_filings, ticker, company, cik): ticker
+            for ticker, company, cik in missing
+        }
+        for future in as_completed(futures):
+            ticker = futures[future]
+            try:
+                results.extend(future.result())
+            except Exception as exc:
+                print(f"SEC DISCOVERY WORKER ERROR: ticker={ticker} {type(exc).__name__}: {exc}", flush=True)
+    return results
+
+
 def get_sec_news(watchlist, max_filings_per_company=3):
     try:
         results = []
@@ -292,6 +387,11 @@ def get_sec_news(watchlist, max_filings_per_company=3):
                 title=f"SEC 8-K — {company_by_ticker[ticker]} ({ticker})",
                 url=content_url or (f"https://www.sec.gov/Archives/edgar/data/{int(WATCHLIST_CIK[ticker])}/{accession.replace('-', '')}/" if accession else ""),
             ))
+
+        existing_tickers = {str(item.get("ticker", "")).upper() for item in results}
+        discovery_results = _discover_missing_companies(watchlist, existing_tickers)
+        results.extend(discovery_results)
+        print(f"SEC DISCOVERY SUMMARY: proxy={len(existing_tickers)} discovered={len(discovery_results)}", flush=True)
         return results
     except (requests.RequestException, ValueError, TypeError, KeyError) as exc:
         print(f"SEC PROXY ERROR: {type(exc).__name__}: {exc}", flush=True)
@@ -323,6 +423,8 @@ def get_sec_filings_for_ticker(ticker, company, max_filings=3):
                     ))
                 if len(results) >= max_filings:
                     break
-            return results
+            if results:
+                return results
+            return _discover_company_filings(ticker, company, cik, max_filings=max_filings)
         except requests.RequestException:
-            return []
+            return _discover_company_filings(ticker, company, cik, max_filings=max_filings)
