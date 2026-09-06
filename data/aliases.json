@@ -1,85 +1,86 @@
 {
   "CAPR": {
-    "company_aliases": [
-      "Capricor Therapeutics",
-      "Capricor"
-    ],
-    "program_aliases": {
-      "deramiocel": [
-        "deramiocel",
-        "CAP-1002",
-        "CAP1002"
-      ]
-    }
+    "company_aliases": ["Capricor Therapeutics", "Capricor", "Capricor Therapeutics Inc"],
+    "program_aliases": {"deramiocel": ["deramiocel", "CAP-1002", "CAP1002"]}
   },
-
   "SVRA": {
-    "company_aliases": [
-      "Savara",
-      "Savara Inc"
-    ],
+    "company_aliases": ["Savara", "Savara Inc", "Savara Pharmaceuticals"],
+    "program_aliases": {"molgramostim": ["molgramostim", "molgramostim inhalation", "MOLBREEVI"], "MOLBREEVI": ["MOLBREEVI", "molgramostim"]}
+  },
+  "ZYME": {
+    "company_aliases": ["Zymeworks", "Zymeworks Inc"],
+    "program_aliases": {"zanidatamab": ["zanidatamab", "zanidatamab-hrii", "Ziihera", "ZW49"]}
+  },
+  "MIRM": {
+    "company_aliases": ["Mirum Pharmaceuticals", "Mirum", "Mirum Pharmaceuticals Inc"],
     "program_aliases": {
-      "molgramostim": [
-        "molgramostim",
-        "molgramostim inhalation",
-        "MOLBREEVI"
-      ]
+      "maralixibat": ["maralixibat", "Livmarli"],
+      "zilurgisertib": ["zilurgisertib"],
+      "brelovitug": ["brelovitug"]
     }
   },
-
+  "PHVS": {
+    "company_aliases": ["Pharvaris", "Pharvaris N.V.", "Pharvaris NV"],
+    "program_aliases": {"deucrictibant": ["deucrictibant", "Ekterly", "PHVS416", "PHVS719"]}
+  },
+  "TENX": {
+    "company_aliases": ["Tenax Therapeutics", "Tenax", "Tenax Therapeutics Inc"],
+    "program_aliases": {"TNX-103": ["TNX-103", "TNX103"]}
+  },
+  "NUVL": {
+    "company_aliases": ["Nuvalent", "Nuvalent Inc", "Nuvalent, Inc."],
+    "program_aliases": {"zidesamtinib": ["zidesamtinib", "Jideytro", "NVL-520"]}
+  },
+  "RARE": {
+    "company_aliases": ["Ultragenyx", "Ultragenyx Pharmaceutical", "Ultragenyx Pharmaceutical Inc"],
+    "program_aliases": {"UX111": ["UX111", "etuvetidigene autotemcel"]}
+  },
+  "TLX": {
+    "company_aliases": ["Telix Pharmaceuticals", "Telix", "Telix Pharmaceuticals Limited"],
+    "program_aliases": {"TLX101": ["TLX101"], "Pixclara": ["Pixclara", "TLX-300"]}
+  },
+  "IONS": {
+    "company_aliases": ["Ionis Pharmaceuticals", "Ionis", "Ionis Pharmaceuticals Inc"],
+    "program_aliases": {"zilganersen": ["zilganersen", "ION363"]}
+  },
   "ARGX": {
-    "company_aliases": [
-      "argenx",
-      "argenx SE",
-      "argenx bv"
-    ],
-    "program_aliases": {
-      "VYVGART": [
-        "VYVGART",
-        "efgartigimod",
-        "efgartigimod alfa",
-        "ARGX-113"
-      ]
-    }
+    "company_aliases": ["argenx", "argenx SE", "argenx bv", "argenx US Inc"],
+    "program_aliases": {"VYVGART": ["VYVGART", "efgartigimod", "efgartigimod alfa", "ARGX-113"]}
   },
-
   "QURE": {
-    "company_aliases": [
-      "uniQure",
-      "uniQure N.V."
-    ],
-    "program_aliases": {
-      "AMT-130": [
-        "AMT-130",
-        "AMT130"
-      ]
-    }
+    "company_aliases": ["uniQure", "uniQure N.V.", "uniQure NV"],
+    "program_aliases": {"AMT-130": ["AMT-130", "AMT130"]}
   },
-
   "STOK": {
-    "company_aliases": [
-      "Stoke Therapeutics",
-      "Stoke Therapeutics Inc"
-    ],
-    "program_aliases": {
-      "zorevunersen": [
-        "zorevunersen",
-        "STK-001"
-      ]
-    }
+    "company_aliases": ["Stoke Therapeutics", "Stoke Therapeutics Inc"],
+    "program_aliases": {"zorevunersen": ["zorevunersen", "STK-001", "STK001"]}
   },
-
+  "ANNX": {
+    "company_aliases": ["Annexon", "Annexon Inc"],
+    "program_aliases": {"ANX007": ["ANX007", "ANX-007"]}
+  },
+  "IMMX": {
+    "company_aliases": ["Immix Biopharma", "Immix Biopharma Inc", "ImmixBio"],
+    "program_aliases": {"NXC-201": ["NXC-201", "NXC201"]}
+  },
+  "ALMS": {
+    "company_aliases": ["Alumis", "Alumis Inc"],
+    "program_aliases": {"ESK-001": ["ESK-001", "ESK001"]}
+  },
+  "RNA": {
+    "company_aliases": ["Avidity Biosciences", "Avidity", "Avidity Biosciences Inc"],
+    "program_aliases": {"delpacibart": ["delpacibart"]}
+  },
+  "RGNX": {
+    "company_aliases": ["REGENXBIO", "REGENXBIO Inc", "REGENXBIO Inc."],
+    "program_aliases": {"surabgene": ["surabgene", "RGX-202", "RGX202"]}
+  },
+  "EYPT": {
+    "company_aliases": ["EyePoint Pharmaceuticals", "EyePoint", "EyePoint Pharmaceuticals Inc"],
+    "program_aliases": {"vorolanib": ["vorolanib", "EYP-1901", "EYP1901"]}
+  },
   "SMMT": {
-    "company_aliases": [
-      "Summit Therapeutics",
-      "Summit Therapeutics Inc"
-    ],
-    "program_aliases": {
-      "ivonescimab": [
-        "ivonescimab",
-        "AK112",
-        "IBI302"
-      ]
-    }
+    "company_aliases": ["Summit Therapeutics", "Summit Therapeutics Inc"],
+    "program_aliases": {"ivonescimab": ["ivonescimab", "AK112", "IBI302"]}
   }
 }
