@@ -68,6 +68,17 @@ def _filing_index_url(cik, accession):
     return f"{SEC_ARCHIVES}/{int(cik)}/{accession.replace('-', '')}/{accession}-index.html"
 
 
+def _extract_document_names(index_text):
+    """Extract HTML document filenames from an EDGAR index rendered by Jina."""
+    names = re.findall(r"\b[A-Za-z0-9][A-Za-z0-9_.-]*\.(?:htm|html)\b", index_text or "", flags=re.I)
+    unique = []
+    for name in names:
+        clean = name.strip(".,;:()[]")
+        if clean.lower() not in {n.lower() for n in unique}:
+            unique.append(clean)
+    return unique
+
+
 def _resolve_primary_document(cik, accession):
     """Resolve the primary 8-K HTML document from the EDGAR index."""
     index_url = _filing_index_url(cik, accession)
@@ -75,17 +86,34 @@ def _resolve_primary_document(cik, accession):
         return ""
     try:
         index_text = _get_jina_text(index_url)
-    except requests.RequestException:
+    except requests.RequestException as exc:
+        print(f"SEC INDEX UNAVAILABLE: {type(exc).__name__}: {exc}", flush=True)
         return ""
 
-    # EDGAR primary documents commonly contain `_8k` in the filename.
-    names = re.findall(r"\b[A-Za-z0-9_.-]+_8k\.(?:htm|html)\b", index_text, flags=re.I)
+    names = _extract_document_names(index_text)
     if not names:
-        names = re.findall(r"\b[A-Za-z0-9_.-]+8-k\.(?:htm|html)\b", index_text, flags=re.I)
-    if not names:
+        print(f"SEC INDEX EMPTY: accession={accession}", flush=True)
         return ""
-    filename = names[0]
-    return f"{SEC_ARCHIVES}/{int(cik)}/{accession.replace('-', '')}/{filename}"
+
+    # Prefer the primary 8-K document. EDGAR commonly uses `_8k` or `8-k`.
+    preferred = [
+        n for n in names
+        if re.search(r"(?:_8k|8-k)\.(?:htm|html)$", n, flags=re.I)
+    ]
+    if not preferred:
+        # Fallback to an exhibit press release if the index does not expose the primary doc.
+        preferred = [
+            n for n in names
+            if re.search(r"(?:ex99[-_]?1|ex-99[-.]?1)\.(?:htm|html)$", n, flags=re.I)
+        ]
+    if not preferred:
+        print(f"SEC PRIMARY DOC NOT FOUND: accession={accession} docs={names[:8]}", flush=True)
+        return ""
+
+    filename = preferred[0]
+    document_url = f"{SEC_ARCHIVES}/{int(cik)}/{accession.replace('-', '')}/{filename}"
+    print(f"SEC PRIMARY DOC RESOLVED: accession={accession} file={filename}", flush=True)
+    return document_url
 
 
 def _enrich_proxy_row(row, cik, accession):
@@ -96,6 +124,10 @@ def _enrich_proxy_row(row, cik, accession):
         return "", filing_url
     try:
         text = _get_jina_text(primary_doc_url)
+        if len(text) < 200:
+            print(f"SEC CONTENT TOO SHORT: accession={accession} chars={len(text)}", flush=True)
+            return "", filing_url
+        print(f"SEC CONTENT ENRICHED: accession={accession} chars={len(text)}", flush=True)
         return text, primary_doc_url
     except requests.RequestException as exc:
         print(f"SEC CONTENT UNAVAILABLE: {type(exc).__name__}: {exc}", flush=True)
