@@ -1,42 +1,28 @@
-"""Pharma Radar — SEC EDGAR 8-K primary corporate feed."""
+"""Pharma Radar — SEC EDGAR 8-K primary corporate feed with proxy fallback."""
 from __future__ import annotations
 
 import hashlib
 import os
 import re
-import xml.etree.ElementTree as ET
 
 import requests
-from bs4 import BeautifulSoup
 
 SEC_ARCHIVES = "https://www.sec.gov/Archives/edgar/data"
 SEC_BROWSE = "https://www.sec.gov/cgi-bin/browse-edgar"
+SEC_PROXY = "https://filingfirehose.com/v1/public/8k"
 REQUEST_TIMEOUT = 20
 DEFAULT_USER_AGENT = "PharmaRadar/1.0 (GitHub Actions; 41898282+github-actions[bot]@users.noreply.github.com)"
 USER_AGENT = os.getenv("SEC_USER_AGENT", DEFAULT_USER_AGENT)
 
 # CIKs for the US-listed issuers in the current Pharma Radar watchlist.
-# We deliberately use EDGAR's official Atom/RSS filing feeds instead of the
-# data.sec.gov submissions API because the latter returns HTTP 403 from the
-# GitHub Actions runtime even with a declared User-Agent.
-# Foreign issuers in the watchlist (ARGX, PHVS, QURE, TLX) do not use 8-K
-# as their primary SEC current-report form and are skipped by this 8-K feed.
+# ARGX, PHVS, QURE and TLX are foreign issuers and do not use 8-K as their
+# primary SEC current-report form, so they are intentionally skipped here.
 WATCHLIST_CIK = {
-    "CAPR": "0001133869",
-    "SVRA": "0001160308",
-    "ZYME": "0001937653",
-    "MIRM": "0001759425",
-    "TENX": "0000034956",
-    "NUVL": "0001861560",
-    "RARE": "0001515673",
-    "IONS": "0000874015",
-    "STOK": "0001623526",
-    "ANNX": "0001528115",
-    "IMMX": "0001873835",
-    "ALMS": "0001847367",
-    "RNA": "0001599901",
-    "RGNX": "0001590877",
-    "EYPT": "0001314102",
+    "CAPR": "0001133869", "SVRA": "0001160308", "ZYME": "0001937653",
+    "MIRM": "0001759425", "TENX": "0000034956", "NUVL": "0001861560",
+    "RARE": "0001515673", "IONS": "0000874015", "STOK": "0001623526",
+    "ANNX": "0001528115", "IMMX": "0001873835", "ALMS": "0001847367",
+    "RNA": "0001599901", "RGNX": "0001590877", "EYPT": "0001314102",
     "SMMT": "0001599298",
 }
 
@@ -49,7 +35,7 @@ def normalize_text(value) -> str:
     return re.sub(r"\s+", " ", str(value)).strip()
 
 
-def _headers(accept="application/atom+xml,application/xml,text/xml,text/html,application/xhtml+xml"):
+def _headers(accept="application/json,text/html,application/xhtml+xml"):
     return {
         "User-Agent": USER_AGENT,
         "Accept": accept,
@@ -57,10 +43,10 @@ def _headers(accept="application/atom+xml,application/xml,text/xml,text/html,app
     }
 
 
-def _get(url, accept=None):
-    response = requests.get(url, timeout=REQUEST_TIMEOUT, headers=_headers(accept) if accept else _headers())
+def _get_json(url):
+    response = requests.get(url, timeout=REQUEST_TIMEOUT, headers=_headers())
     response.raise_for_status()
-    return response
+    return response.json()
 
 
 def get_ticker_cik_map():
@@ -68,7 +54,7 @@ def get_ticker_cik_map():
 
 
 def _extract_items(items) -> list[str]:
-    text = normalize_text(items).replace("&nbsp;", " ")
+    text = normalize_text(items)
     found = []
     for match in re.finditer(r"(?:Item\s*)?(\d+\.\d{2})", text, flags=re.I):
         item = match.group(1)
@@ -77,145 +63,170 @@ def _extract_items(items) -> list[str]:
     return found
 
 
-def _filing_url(cik, accession, primary_doc):
-    return f"{SEC_ARCHIVES}/{int(cik)}/{accession.replace('-', '')}/{primary_doc}"
+def _filing_url(cik, accession, primary_doc=""):
+    if not accession:
+        return ""
+    if primary_doc:
+        return f"{SEC_ARCHIVES}/{int(cik)}/{accession.replace('-', '')}/{primary_doc}"
+    return f"https://www.sec.gov/Archives/edgar/data/{int(cik)}/{accession.replace('-', '')}/"
 
 
-def _extract_text(html):
-    soup = BeautifulSoup(html or "", "html.parser")
-    for tag in soup(["script", "style", "noscript", "svg"]):
-        tag.decompose()
-    return normalize_text(soup.get_text(" ", strip=True))[:20000]
+def _item_context(items):
+    labels = {
+        "1.01": "material definitive agreement",
+        "1.02": "termination of material definitive agreement",
+        "2.01": "completion of acquisition or disposition",
+        "2.03": "creation of direct financial obligation",
+        "3.01": "delisting or listing compliance event",
+        "5.02": "director or officer change",
+        "7.01": "Regulation FD disclosure",
+        "8.01": "other material event",
+    }
+    return "; ".join(f"Item {code}: {labels.get(code, 'SEC current report event')}" for code in items)
 
 
-def build_sec_item(ticker, company, cik, accession, form, filing_date, primary_doc, items, text, title=None, url=None):
+def build_sec_item(ticker, company, cik, accession, form, filing_date, primary_doc="", items=None,
+                   text="", title=None, url=None, detected_items=None, suspected_buried_events=None):
+    items = list(items or [])
+    detected_items = list(detected_items or [])
+    suspected_buried_events = suspected_buried_events or {}
     url = url or _filing_url(cik, accession, primary_doc)
-    raw = "|".join((ticker, accession, primary_doc))
-    item_text = normalize_text(text)
+    raw = "|".join((ticker, accession, primary_doc or ""))
+    context = _item_context(items or detected_items)
+    buried = normalize_text(suspected_buried_events)
+    content = normalize_text(" ".join(filter(None, [text, context, buried])))
     return {
         "source": "SEC",
         "source_type": "PRIMARY_CORPORATE",
+        "provider": "FilingFirehose" if not text else "SEC_EDGAR",
         "ticker": ticker,
         "company": company,
         "cik": cik,
         "accession": accession,
         "form": form,
         "filing_items": items,
+        "detected_items": detected_items,
+        "suspected_buried_events": suspected_buried_events,
         "title": title or f"SEC {form} — {company} ({ticker})",
-        "summary": f"SEC filing {form}; items: {', '.join(items)}",
-        "content": item_text,
+        "summary": f"SEC filing {form}; items: {', '.join(items or detected_items)}",
+        "content": content,
         "url": url,
         "published_at": filing_date,
         "item_id": hashlib.sha256(raw.encode("utf-8")).hexdigest(),
     }
 
 
-def _local_name(tag):
-    return tag.rsplit("}", 1)[-1]
-
-
-def _parse_atom(xml_bytes, ticker, company, cik, max_filings=3):
-    root = ET.fromstring(xml_bytes)
+def _fetch_sec_direct(ticker, company, cik, max_filings=3):
+    """Try the official SEC endpoint. GitHub Actions currently returns 403."""
+    # Kept as a documented first-party path for environments where SEC access works.
+    url = f"https://data.sec.gov/submissions/CIK{cik}.json"
+    recent = _get_json(url).get("filings", {}).get("recent", {})
     results = []
-    for entry in list(root):
-        if _local_name(entry.tag) != "entry":
+    forms = recent.get("form", [])
+    for idx, form in enumerate(forms):
+        if form != "8-K":
             continue
-        fields = {}
-        for child in list(entry):
-            name = _local_name(child.tag)
-            fields.setdefault(name, []).append(normalize_text(child.text))
-        title = (fields.get("title") or [""])[0]
-        summary = (fields.get("summary") or fields.get("content") or [""])[0]
-        updated = (fields.get("updated") or fields.get("published") or [""])[0]
-        entry_id = (fields.get("id") or [""])[0]
-        links = []
-        for child in list(entry):
-            if _local_name(child.tag) == "link":
-                href = child.attrib.get("href")
-                if href:
-                    links.append(href)
-        filing_url = next((u for u in links if "Archives/edgar/data" in u), "")
-        accession_match = re.search(r"accession-number=([0-9-]+)", entry_id)
-        if not accession_match:
-            accession_match = re.search(r"/([0-9]{10}-[0-9]{2}-[0-9]{6})", filing_url)
-        accession = accession_match.group(1) if accession_match else ""
-        if not accession:
-            continue
-        items = _extract_items(summary)
+        items = _extract_items(recent.get("items", [""])[idx])
         if not items:
             continue
-        primary_doc = filing_url.rsplit("/", 1)[-1] if filing_url else ""
-        results.append(build_sec_item(
-            ticker, company, cik, accession, "8-K", updated[:10], primary_doc,
-            items, summary, title=title, url=filing_url or None,
-        ))
+        accession = recent["accessionNumber"][idx]
+        filing_date = recent["filingDate"][idx]
+        primary_doc = recent["primaryDocument"][idx]
+        results.append(build_sec_item(ticker, company, cik, accession, form, filing_date, primary_doc, items))
         if len(results) >= max_filings:
             break
     return results
 
 
-def _fetch_filing_content(item):
-    url = item.get("url")
-    if not url:
-        return item
-    try:
-        response = _get(url, "text/html,application/xhtml+xml")
-        item["content"] = _extract_text(response.text)
-    except requests.RequestException as exc:
-        # RSS metadata is still useful; do not discard the filing because the
-        # document endpoint is temporarily blocked while the feed is available.
-        print(f"SEC DOCUMENT WARNING {item.get('ticker')}: {type(exc).__name__}: {exc}", flush=True)
-    return item
+def _fetch_proxy(max_filings=50):
+    """Use FilingFirehose public 8-K feed when GitHub cannot reach SEC directly.
 
-
-def _company_atom_url(cik):
-    return (
-        f"{SEC_BROWSE}?action=getcompany&CIK={cik}&type=8-K"
-        f"&dateb=&owner=include&count=40&search_text=&output=atom"
-    )
-
-
-def _global_atom_url():
-    return (
-        f"{SEC_BROWSE}?action=getcurrent&type=8-K&dateb=&owner=include"
-        f"&count=40&search_text=&output=atom"
-    )
-
-
-def get_sec_filings_for_ticker(ticker, company, max_filings=3):
-    ticker = str(ticker).upper()
-    cik = WATCHLIST_CIK.get(ticker)
-    if not cik:
-        return []
-    try:
-        response = _get(_company_atom_url(cik))
-        items = _parse_atom(response.content, ticker, company, cik, max_filings=max_filings)
-        return [_fetch_filing_content(item) for item in items]
-    except (requests.RequestException, ET.ParseError, ValueError, TypeError, IndexError) as exc:
-        print(f"SEC FEED ERROR {ticker}: {type(exc).__name__}: {exc}", flush=True)
-        return []
+    The public tier covers the last 72 hours, requires no API key and is capped
+    at 50 records/request. It is still SEC-derived data; provider metadata is
+    retained so downstream alerts remain auditable.
+    """
+    params = {"limit": min(int(max_filings), 50)}
+    data = _get_json(SEC_PROXY + "?limit=" + str(params["limit"]))
+    if isinstance(data, dict):
+        return data.get("filings", [])
+    if isinstance(data, list):
+        return data
+    return []
 
 
 def get_sec_news(watchlist, max_filings_per_company=3):
-    results = []
-    # Company-specific Atom feeds are preferred because they avoid the 40-entry
-    # global-feed coverage problem. If EDGAR blocks those feeds, fall back to
-    # the official global latest-8-K feed and filter by the watchlist CIKs.
-    for ticker, config in (watchlist or {}).items():
-        company = config.get("company", ticker) if isinstance(config, dict) else ticker
-        results.extend(get_sec_filings_for_ticker(ticker, company, max_filings=max_filings_per_company))
-
-    if results:
+    # First try the official SEC API once per issuer. If the GitHub Actions
+    # network blocks SEC, switch to the public SEC-derived proxy in one request.
+    try:
+        results = []
+        for ticker, config in (watchlist or {}).items():
+            company = config.get("company", ticker) if isinstance(config, dict) else ticker
+            cik = WATCHLIST_CIK.get(str(ticker).upper())
+            if not cik:
+                continue
+            results.extend(_fetch_sec_direct(ticker, company, cik, max_filings=max_filings_per_company))
         return results
+    except requests.RequestException as exc:
+        print(f"SEC DIRECT UNAVAILABLE: {type(exc).__name__}: {exc}", flush=True)
 
     try:
-        response = _get(_global_atom_url())
-        by_cik = {cik: (ticker, (watchlist.get(ticker, {}) or {}).get("company", ticker)) for ticker, cik in WATCHLIST_CIK.items()}
-        for ticker, company in ((v[0], v[1]) for v in by_cik.values()):
-            cik = WATCHLIST_CIK[ticker]
-            items = _parse_atom(response.content, ticker, company, cik, max_filings=max_filings_per_company)
-            results.extend(_fetch_filing_content(item) for item in items)
+        proxy_rows = _fetch_proxy(max_filings=50)
+        by_cik = {str(cik).lstrip("0") or "0": ticker for ticker, cik in WATCHLIST_CIK.items()}
+        company_by_ticker = {
+            ticker: ((watchlist.get(ticker, {}) or {}).get("company", ticker) if isinstance(watchlist.get(ticker, {}), dict) else ticker)
+            for ticker in WATCHLIST_CIK
+        }
+        results = []
+        for row in proxy_rows:
+            cik = str(row.get("cik", "")).lstrip("0") or "0"
+            ticker = by_cik.get(cik)
+            if not ticker:
+                continue
+            reported = _extract_items(row.get("filer_reported_items", []))
+            detected = _extract_items(row.get("detected_items", []))
+            items = reported or detected
+            if not items:
+                continue
+            accession = str(row.get("accession_number", ""))
+            results.append(build_sec_item(
+                ticker=ticker,
+                company=company_by_ticker[ticker],
+                cik=WATCHLIST_CIK[ticker],
+                accession=accession,
+                form=row.get("form_type", "8-K"),
+                filing_date=str(row.get("filed_at", ""))[:10],
+                items=items,
+                detected_items=detected,
+                suspected_buried_events=row.get("suspected_buried_events", {}),
+                title=f"SEC 8-K — {company_by_ticker[ticker]} ({ticker})",
+                url=f"https://www.sec.gov/Archives/edgar/data/{int(WATCHLIST_CIK[ticker])}/{accession.replace('-', '')}/" if accession else "",
+            ))
         return results
-    except (requests.RequestException, ET.ParseError, ValueError, TypeError, IndexError) as exc:
-        print(f"SEC GLOBAL FEED ERROR: {type(exc).__name__}: {exc}", flush=True)
+    except (requests.RequestException, ValueError, TypeError, KeyError) as exc:
+        print(f"SEC PROXY ERROR: {type(exc).__name__}: {exc}", flush=True)
         return []
+
+
+def get_sec_filings_for_ticker(ticker, company, max_filings=3):
+    """Compatibility wrapper used by tests and older callers."""
+    cik = WATCHLIST_CIK.get(str(ticker).upper())
+    if not cik:
+        return []
+    try:
+        return _fetch_sec_direct(str(ticker).upper(), company, cik, max_filings=max_filings)
+    except requests.RequestException:
+        try:
+            rows = _fetch_proxy(max_filings=50)
+            ticker = str(ticker).upper()
+            results = []
+            for row in rows:
+                if str(row.get("cik", "")).lstrip("0") != cik.lstrip("0"):
+                    continue
+                items = _extract_items(row.get("filer_reported_items", []))
+                if items:
+                    results.append(build_sec_item(ticker, company, cik, str(row.get("accession_number", "")), "8-K", str(row.get("filed_at", ""))[:10], items=items))
+                if len(results) >= max_filings:
+                    break
+            return results
+        except requests.RequestException:
+            return []
