@@ -24,7 +24,7 @@ jobs:
 
       - name: Check Python syntax
         run: |
-          python -m py_compile scanner/fda_feed.py
+          python -m py_compile scanner/fda_feed.py scanner/priority.py
 
       - name: Run Catalyst tests
         run: |
@@ -38,6 +38,7 @@ jobs:
           python -m scanner.test_main
           python -m scanner.test_catalyst_score
           python -m scanner.test_trading_intelligence
+          python -m scanner.test_priority
           python -m scanner.test_fda_news
           python -m scanner.test_fda_catalyst
           python -m scanner.test_fda_score
