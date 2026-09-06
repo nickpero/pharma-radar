@@ -8,7 +8,6 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-SEC_TICKERS_URL = "https://www.sec.gov/files/company_tickers.json"
 SEC_ARCHIVES = "https://www.sec.gov/Archives/edgar/data"
 SEC_DATA = "https://data.sec.gov/submissions"
 REQUEST_TIMEOUT = 20
@@ -16,8 +15,32 @@ REQUEST_TIMEOUT = 20
 # The GitHub Actions bot address is project infrastructure, not a user mailbox.
 DEFAULT_USER_AGENT = "PharmaRadar/1.0 (GitHub Actions; 41898282+github-actions[bot]@users.noreply.github.com)"
 USER_AGENT = os.getenv("SEC_USER_AGENT", DEFAULT_USER_AGENT)
+
+# CIKs for the US-listed issuers in the current Pharma Radar watchlist.
+# We intentionally do not call /files/company_tickers.json at runtime: that
+# endpoint returns 403 from GitHub Actions despite a declared User-Agent.
+# Foreign issuers in the watchlist (ARGX, PHVS, QURE, TLX) do not use 8-K
+# as their primary SEC current-report form and are skipped by this 8-K feed.
+WATCHLIST_CIK = {
+    "CAPR": "0001133869",
+    "SVRA": "0001160308",
+    "ZYME": "0001937653",
+    "MIRM": "0001759425",
+    "TENX": "0000034956",
+    "NUVL": "0001861560",
+    "RARE": "0001515673",
+    "IONS": "0000874015",
+    "STOK": "0001623526",
+    "ANNX": "0001528115",
+    "IMMX": "0001873835",
+    "ALMS": "0001847367",
+    "RNA": "0001599901",
+    "RGNX": "0001590877",
+    "EYPT": "0001314102",
+    "SMMT": "0001599298",
+}
+
 CATALYST_ITEMS = {"1.01", "1.02", "2.01", "2.03", "3.01", "5.02", "7.01", "8.01"}
-_TICKER_CIK_CACHE = None
 
 
 def normalize_text(value) -> str:
@@ -41,16 +64,8 @@ def _get_json(url):
 
 
 def get_ticker_cik_map():
-    global _TICKER_CIK_CACHE
-    if _TICKER_CIK_CACHE is not None:
-        return _TICKER_CIK_CACHE
-    data = _get_json(SEC_TICKERS_URL)
-    _TICKER_CIK_CACHE = {
-        normalize_text(row.get("ticker")).upper(): str(row.get("cik_str", "")).zfill(10)
-        for row in data.values()
-        if normalize_text(row.get("ticker")) and row.get("cik_str")
-    }
-    return _TICKER_CIK_CACHE
+    """Return the local watchlist CIK map without hitting the SEC ticker file."""
+    return dict(WATCHLIST_CIK)
 
 
 def _extract_items(items):
