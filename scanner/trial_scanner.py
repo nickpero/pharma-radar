@@ -7,40 +7,24 @@ from scanner.relevance import is_relevant
 from scanner.catalyst import classify_trial_changes
 from scanner.score import score_events
 from scanner.trading_intelligence import enrich_trading_events
-from scanner.alert_filter import filter_alerts, sort_alerts
+from scanner.priority import enrich_alert_priorities, sort_by_alert_priority
+from scanner.alert_filter import filter_alerts
 
 from scanner.fda_enrichment import get_enriched_fda_news
-from scanner.fda_pipeline import (
-    process_fda_news,
-    filter_fda_trading_alerts,
-    sort_fda_events,
-)
-
+from scanner.fda_pipeline import process_fda_news, filter_fda_trading_alerts
 
 WATCHLIST_FILE = Path("data/watchlist.json")
 
-
-# ============================================
-# WATCHLIST
-# ============================================
 
 def load_watchlist():
     with open(WATCHLIST_FILE, "r", encoding="utf-8") as file:
         return json.load(file)
 
 
-# ============================================
-# TRIAL KEY
-# ============================================
-
 def make_trial_key(ticker, program, trial):
     """Crea una chiave stabile per identificare un trial."""
     return f"{ticker}:{program}:{trial.get('nct_id')}"
 
-
-# ============================================
-# BUILD ALERT
-# ============================================
 
 def build_alert(ticker, company, program, nct_id, event, changes, trial):
     """Costruisce un alert standardizzato."""
@@ -60,12 +44,9 @@ def build_alert(ticker, company, program, nct_id, event, changes, trial):
         "trading_impact": event.get("trading_impact", "LOW"),
         "trading_priority": event.get("trading_priority", 1),
         "urgency": event.get("urgency", "LOW"),
+        "alert_priority": event.get("alert_priority", 0),
     }
 
-
-# ============================================
-# BUILD FDA ALERT
-# ============================================
 
 def build_fda_alert(event):
     """Converte un evento FDA Trading Intelligence nel formato Radar."""
@@ -85,6 +66,7 @@ def build_fda_alert(event):
         "trading_impact": event.get("trading_impact", "LOW"),
         "trading_priority": event.get("trading_priority", 1),
         "urgency": event.get("urgency", "LOW"),
+        "alert_priority": event.get("alert_priority", 0),
         "source": "FDA",
         "title": event.get("title", ""),
         "summary": event.get("summary", ""),
@@ -93,45 +75,18 @@ def build_fda_alert(event):
     }
 
 
-# ============================================
-# PROCESS FDA
-# ============================================
-
 def scan_fda(watchlist, max_items=50):
-    """
-    Recupera le FDA News, arricchisce gli articoli FDA ufficiali
-    prima del matching e passa quindi alla pipeline catalyst.
-    """
+    """FDA feed -> enrichment -> matcher -> catalyst -> score -> priority."""
     try:
-        # PRODUCTION P0 PATH:
-        # FDA feed -> official article enrichment -> matcher -> catalyst
         news = get_enriched_fda_news(max_news=max_items, max_pages=5)
-
         events = process_fda_news(news, watchlist)
         trading_events = filter_fda_trading_alerts(events)
-        trading_events = sort_fda_events(trading_events)
-
+        trading_events = sort_by_alert_priority(trading_events)
         alerts = [build_fda_alert(event) for event in trading_events]
-
-        return {
-            "news": news,
-            "events": events,
-            "alerts": alerts,
-            "error": None,
-        }
-
+        return {"news": news, "events": events, "alerts": alerts, "error": None}
     except Exception as error:
-        return {
-            "news": [],
-            "events": [],
-            "alerts": [],
-            "error": str(error),
-        }
+        return {"news": [], "events": [], "alerts": [], "error": str(error)}
 
-
-# ============================================
-# SCAN
-# ============================================
 
 def scan(baseline=False):
     watchlist = load_watchlist()
@@ -145,15 +100,10 @@ def scan(baseline=False):
     relevant_trials = 0
     filtered_trials = 0
 
-    # ========================================
-    # CLINICAL TRIALS
-    # ========================================
     for ticker, company in watchlist.items():
         programs = company.get("programs", [])
-
         for program in programs:
             print(f"Searching {ticker} - {program}")
-
             try:
                 trials = search_program(program)
             except Exception as error:
@@ -165,7 +115,6 @@ def scan(baseline=False):
                 nct_id = trial.get("nct_id")
                 if not nct_id:
                     continue
-
                 total_trials += 1
 
                 if not is_relevant(trial, company, ticker, program):
@@ -206,13 +155,11 @@ def scan(baseline=False):
 
                     scored_events = score_events(catalyst_events)
                     enriched_events = enrich_trading_events(scored_events)
+                    enriched_events = enrich_alert_priorities(enriched_events)
                     trial_alerts = filter_alerts(enriched_events)
 
                     for event in trial_alerts:
-                        alerts.append(build_alert(
-                            ticker, company, program, nct_id,
-                            event, trial_changes, trial,
-                        ))
+                        alerts.append(build_alert(ticker, company, program, nct_id, event, trial_changes, trial))
 
                 else:
                     new_event = {
@@ -226,32 +173,22 @@ def scan(baseline=False):
                     }
                     scored_events = score_events([new_event])
                     enriched_events = enrich_trading_events(scored_events)
+                    enriched_events = enrich_alert_priorities(enriched_events)
                     trial_alerts = filter_alerts(enriched_events)
 
                     for event in trial_alerts:
-                        alerts.append(build_alert(
-                            ticker, company, program, nct_id,
-                            event, {}, trial,
-                        ))
+                        alerts.append(build_alert(ticker, company, program, nct_id, event, {}, trial))
 
-    # ========================================
-    # FDA FEED
-    # ========================================
     print()
     print("Searching FDA catalyst news...")
-
     fda_result = scan_fda(watchlist)
 
     if fda_result["error"]:
-        errors.append({
-            "ticker": "FDA",
-            "program": "FDA_FEED",
-            "error": fda_result["error"],
-        })
+        errors.append({"ticker": "FDA", "program": "FDA_FEED", "error": fda_result["error"]})
     else:
         alerts.extend(fda_result["alerts"])
 
-    alerts = sort_alerts(alerts)
+    alerts = sort_by_alert_priority(alerts)
     save_state(new_state)
 
     print()
