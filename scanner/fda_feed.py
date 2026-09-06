@@ -329,6 +329,14 @@ def _fetch_press_announcements(max_news=DEFAULT_MAX_NEWS, max_pages=DEFAULT_MAX_
         max_news, max_pages = DEFAULT_MAX_NEWS, DEFAULT_MAX_PAGES
     if max_news <= 0:
         return []
+
+    # FDA's current press-announcement listing returns 404 for the legacy
+    # ?page=N endpoint. The official RSS feed is the primary live source.
+    rss_results = _fetch_press_rss(max_news)
+    if rss_results:
+        return rss_results
+
+    # Keep the HTML listing only as a fallback for temporary RSS outages.
     results = []
     for page in range(max_pages):
         if len(results) >= max_news:
@@ -345,10 +353,6 @@ def _fetch_press_announcements(max_news=DEFAULT_MAX_NEWS, max_pages=DEFAULT_MAX_
     results = deduplicate_fda_news(results)[:max_news]
     if results:
         return results
-
-    rss_results = _fetch_press_rss(max_news)
-    if rss_results:
-        return rss_results
 
     try:
         html = _fetch_html(FDA_NEWSROOM_URL)
