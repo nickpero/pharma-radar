@@ -53,11 +53,7 @@ def _get_jina_text(url):
     headers = {"Accept": "text/plain", "User-Agent": USER_AGENT}
     if JINA_API_KEY:
         headers["Authorization"] = f"Bearer {JINA_API_KEY}"
-    response = requests.get(
-        JINA_READER + url,
-        timeout=REQUEST_TIMEOUT,
-        headers=headers,
-    )
+    response = requests.get(JINA_READER + url, timeout=REQUEST_TIMEOUT, headers=headers)
     response.raise_for_status()
     return normalize_text(response.text)
 
@@ -68,49 +64,65 @@ def _filing_index_url(cik, accession):
     return f"{SEC_ARCHIVES}/{int(cik)}/{accession.replace('-', '')}/{accession}-index.html"
 
 
+def _filing_directory_url(cik, accession):
+    if not accession:
+        return ""
+    return f"{SEC_ARCHIVES}/{int(cik)}/{accession.replace('-', '')}/"
+
+
 def _extract_document_names(index_text):
-    """Extract HTML document filenames from an EDGAR index rendered by Jina."""
+    """Extract HTML document filenames from an EDGAR index/directory rendered by Jina."""
     names = re.findall(r"\b[A-Za-z0-9][A-Za-z0-9_.-]*\.(?:htm|html)\b", index_text or "", flags=re.I)
     unique = []
+    seen = set()
     for name in names:
         clean = name.strip(".,;:()[]")
-        if clean.lower() not in {n.lower() for n in unique}:
+        key = clean.lower()
+        if key.endswith("-index.html") or key.endswith("-index.htm"):
+            continue
+        if key not in seen:
+            seen.add(key)
             unique.append(clean)
     return unique
 
 
+def _pick_document(names):
+    preferred = [n for n in names if re.search(r"(?:_8k|8-k)\.(?:htm|html)$", n, flags=re.I)]
+    if preferred:
+        return preferred[0]
+    exhibits = [n for n in names if re.search(r"(?:ex99[-_]?1|ex-99[-.]?1)\.(?:htm|html)$", n, flags=re.I)]
+    if exhibits:
+        return exhibits[0]
+    return ""
+
+
 def _resolve_primary_document(cik, accession):
-    """Resolve the primary 8-K HTML document from the EDGAR index."""
+    """Resolve the primary 8-K HTML document from the EDGAR index, then directory listing."""
     index_url = _filing_index_url(cik, accession)
     if not index_url:
         return ""
+    index_text = ""
     try:
         index_text = _get_jina_text(index_url)
     except requests.RequestException as exc:
         print(f"SEC INDEX UNAVAILABLE: {type(exc).__name__}: {exc}", flush=True)
-        return ""
 
     names = _extract_document_names(index_text)
-    if not names:
-        print(f"SEC INDEX EMPTY: accession={accession}", flush=True)
-        return ""
+    filename = _pick_document(names)
 
-    # Prefer the primary 8-K document. EDGAR commonly uses `_8k` or `8-k`.
-    preferred = [
-        n for n in names
-        if re.search(r"(?:_8k|8-k)\.(?:htm|html)$", n, flags=re.I)
-    ]
-    if not preferred:
-        # Fallback to an exhibit press release if the index does not expose the primary doc.
-        preferred = [
-            n for n in names
-            if re.search(r"(?:ex99[-_]?1|ex-99[-.]?1)\.(?:htm|html)$", n, flags=re.I)
-        ]
-    if not preferred:
+    if not filename:
+        directory_url = _filing_directory_url(cik, accession)
+        try:
+            directory_text = _get_jina_text(directory_url)
+            names = _extract_document_names(directory_text)
+            filename = _pick_document(names)
+        except requests.RequestException as exc:
+            print(f"SEC DIRECTORY UNAVAILABLE: {type(exc).__name__}: {exc}", flush=True)
+
+    if not filename:
         print(f"SEC PRIMARY DOC NOT FOUND: accession={accession} docs={names[:8]}", flush=True)
         return ""
 
-    filename = preferred[0]
     document_url = f"{SEC_ARCHIVES}/{int(cik)}/{accession.replace('-', '')}/{filename}"
     print(f"SEC PRIMARY DOC RESOLVED: accession={accession} file={filename}", flush=True)
     return document_url
