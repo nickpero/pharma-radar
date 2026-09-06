@@ -47,7 +47,6 @@ def get_alert_priority(event):
     urgency = str(event.get("urgency", "LOW")).upper()
     confidence = str(event.get("match_confidence", "LOW")).upper()
 
-    # Il catalyst score pesa fino a 20 punti.
     catalyst_component = round(score * 0.20)
     impact_component = IMPACT_SCORE.get(impact, 8)
     urgency_component = URGENCY_SCORE.get(urgency, 4)
@@ -77,9 +76,13 @@ def enrich_alert_priorities(events):
 
 
 def sort_by_alert_priority(events):
-    """Ordina per priorità operativa, poi per catalyst score."""
+    """Ordina per priorità operativa, calcolandola se assente."""
+    prepared = [
+        enrich_alert_priority(event) if "alert_priority" not in event else dict(event)
+        for event in (events or [])
+    ]
     return sorted(
-        events or [],
+        prepared,
         key=lambda event: (
             _bounded_int(event.get("alert_priority", 0)),
             _bounded_int(event.get("score", 0)),
