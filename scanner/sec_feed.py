@@ -10,9 +10,11 @@ import requests
 SEC_ARCHIVES = "https://www.sec.gov/Archives/edgar/data"
 SEC_BROWSE = "https://www.sec.gov/cgi-bin/browse-edgar"
 SEC_PROXY = "https://filingfirehose.com/v1/public/8k"
+JINA_READER = "https://r.jina.ai/"
 REQUEST_TIMEOUT = 20
 DEFAULT_USER_AGENT = "PharmaRadar/1.0 (GitHub Actions; 41898282+github-actions[bot]@users.noreply.github.com)"
 USER_AGENT = os.getenv("SEC_USER_AGENT", DEFAULT_USER_AGENT)
+JINA_API_KEY = os.getenv("JINA_API_KEY", "")
 
 # CIKs for the US-listed issuers in the current Pharma Radar watchlist.
 # ARGX, PHVS, QURE and TLX are foreign issuers and do not use 8-K as their
@@ -47,6 +49,67 @@ def _get_json(url):
     response = requests.get(url, timeout=REQUEST_TIMEOUT, headers=_headers())
     response.raise_for_status()
     return response.json()
+
+
+def _get_jina_text(url):
+    """Read a blocked SEC URL through Jina Reader.
+
+    This is a content-enrichment fallback only. The filing remains SEC/EDGAR
+    data and the original SEC URL is retained on the news item.
+    """
+    headers = {"Accept": "text/plain", "User-Agent": USER_AGENT}
+    if JINA_API_KEY:
+        headers["Authorization"] = f"Bearer {JINA_API_KEY}"
+    response = requests.get(
+        JINA_READER + url,
+        timeout=REQUEST_TIMEOUT,
+        headers=headers,
+    )
+    response.raise_for_status()
+    return normalize_text(response.text)
+
+
+def _filing_index_url(cik, accession):
+    if not accession:
+        return ""
+    return f"{SEC_ARCHIVES}/{int(cik)}/{accession.replace('-', '')}/{accession}-index.html"
+
+
+def _resolve_primary_document(cik, accession):
+    """Resolve the primary 8-K HTML document from the EDGAR filing index."""
+    index_url = _filing_index_url(cik, accession)
+    if not index_url:
+        return ""
+    try:
+        index_text = _get_jina_text(index_url)
+    except requests.RequestException:
+        return ""
+
+    # Jina returns Markdown links for the filing index. Prefer the 8-K document
+    # and avoid exhibit/graphic/XBRL files.
+    candidates = re.findall(r"https?://[^\\s)]+\\.(?:htm|html)", index_text, flags=re.I)
+    if not candidates:
+        candidates = re.findall(r"(?:https?://)?[^\\s)]+\\.(?:htm|html)", index_text, flags=re.I)
+    for candidate in candidates:
+        candidate = candidate.rstrip(".,")
+        name = candidate.rsplit("/", 1)[-1].lower()
+        if "_8k" in name or name.endswith("8-k.htm") or name.endswith("8-k.html"):
+            return candidate if candidate.startswith("http") else f"https://www.sec.gov{candidate if candidate.startswith('/') else '/' + candidate}"
+    return ""
+
+
+def _enrich_proxy_row(row, cik, accession):
+    """Fetch filing body text after the SEC endpoint is blocked."""
+    filing_url = _filing_url(cik, accession)
+    primary_doc_url = _resolve_primary_document(cik, accession)
+    if not primary_doc_url:
+        return "", filing_url
+    try:
+        text = _get_jina_text(primary_doc_url)
+        return text, primary_doc_url
+    except requests.RequestException as exc:
+        print(f"SEC CONTENT UNAVAILABLE: {type(exc).__name__}: {exc}", flush=True)
+        return "", filing_url
 
 
 def get_ticker_cik_map():
@@ -98,7 +161,7 @@ def build_sec_item(ticker, company, cik, accession, form, filing_date, primary_d
     return {
         "source": "SEC",
         "source_type": "PRIMARY_CORPORATE",
-        "provider": "FilingFirehose" if not text else "SEC_EDGAR",
+        "provider": "FilingFirehose" if not text else "SEC_EDGAR_VIA_JINA",
         "ticker": ticker,
         "company": company,
         "cik": cik,
@@ -118,7 +181,6 @@ def build_sec_item(ticker, company, cik, accession, form, filing_date, primary_d
 
 def _fetch_sec_direct(ticker, company, cik, max_filings=3):
     """Try the official SEC endpoint. GitHub Actions currently returns 403."""
-    # Kept as a documented first-party path for environments where SEC access works.
     url = f"https://data.sec.gov/submissions/CIK{cik}.json"
     recent = _get_json(url).get("filings", {}).get("recent", {})
     results = []
@@ -188,6 +250,7 @@ def get_sec_news(watchlist, max_filings_per_company=3):
             if not items:
                 continue
             accession = str(row.get("accession_number", ""))
+            text, content_url = _enrich_proxy_row(row, WATCHLIST_CIK[ticker], accession)
             results.append(build_sec_item(
                 ticker=ticker,
                 company=company_by_ticker[ticker],
@@ -198,8 +261,9 @@ def get_sec_news(watchlist, max_filings_per_company=3):
                 items=items,
                 detected_items=detected,
                 suspected_buried_events=row.get("suspected_buried_events", {}),
+                text=text,
                 title=f"SEC 8-K — {company_by_ticker[ticker]} ({ticker})",
-                url=f"https://www.sec.gov/Archives/edgar/data/{int(WATCHLIST_CIK[ticker])}/{accession.replace('-', '')}/" if accession else "",
+                url=content_url or (f"https://www.sec.gov/Archives/edgar/data/{int(WATCHLIST_CIK[ticker])}/{accession.replace('-', '')}/" if accession else ""),
             ))
         return results
     except (requests.RequestException, ValueError, TypeError, KeyError) as exc:
@@ -224,7 +288,12 @@ def get_sec_filings_for_ticker(ticker, company, max_filings=3):
                     continue
                 items = _extract_items(row.get("filer_reported_items", []))
                 if items:
-                    results.append(build_sec_item(ticker, company, cik, str(row.get("accession_number", "")), "8-K", str(row.get("filed_at", ""))[:10], items=items))
+                    accession = str(row.get("accession_number", ""))
+                    text, content_url = _enrich_proxy_row(row, cik, accession)
+                    results.append(build_sec_item(
+                        ticker, company, cik, accession, "8-K", str(row.get("filed_at", ""))[:10],
+                        items=items, text=text, url=content_url or None,
+                    ))
                 if len(results) >= max_filings:
                     break
             return results
