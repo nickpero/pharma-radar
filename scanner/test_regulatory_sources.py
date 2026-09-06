@@ -1,0 +1,46 @@
+from scanner.ema_feed import build_ema_news_item, parse_ema_rss
+from scanner.sec_feed import build_sec_item
+from scanner.regulatory_pipeline import process_regulatory_news
+
+
+def test_ema_rss_parser():
+    xml = """<rss><channel><item><title>EMA recommends new medicine VYVGART</title><link>/en/news/new-vyvgart</link><pubDate>Mon, 01 Sep 2026 10:00:00 +0000</pubDate><description>argenx announces important regulatory news for VYVGART.</description></item></channel></rss>"""
+    items = parse_ema_rss(xml)
+    assert len(items) == 1
+    assert items[0]["source"] == "EMA"
+    assert items[0]["source_type"] == "PRIMARY_REGULATORY"
+    assert "VYVGART" in items[0]["title"]
+
+
+def test_primary_source_builders():
+    ema = build_ema_news_item("EMA VYVGART update", "/en/news/vyvgart", "2026-09-01")
+    sec = build_sec_item("ARGX", "argenx", "0001743812", "0000000000-26-000001", "8-K", "2026-09-01", "argx-8k.htm", ["8.01"], "argenx VYVGART clinical update")
+    assert ema["source_type"] == "PRIMARY_REGULATORY"
+    assert sec["source_type"] == "PRIMARY_CORPORATE"
+    assert sec["form"] == "8-K"
+
+
+def test_regulatory_pipeline_requires_program_match():
+    watchlist = {"ARGX": {"company": "argenx", "programs": ["VYVGART"]}}
+    items = [build_ema_news_item("argenx reports VYVGART regulatory update", "/en/news/vyvgart", "2026-09-01")]
+    items[0]["content"] = "argenx VYVGART update"
+    events = process_regulatory_news(items, watchlist)
+    assert len(events) == 1
+    assert events[0]["ticker"] == "ARGX"
+    assert events[0]["program"] == "VYVGART"
+    assert events[0]["source"] == "EMA"
+
+
+def test_regulatory_pipeline_rejects_generic_company_only_news():
+    watchlist = {"ARGX": {"company": "argenx", "programs": ["VYVGART"]}}
+    items = [build_ema_news_item("argenx corporate update", "/en/news/corporate", "2026-09-01")]
+    events = process_regulatory_news(items, watchlist)
+    assert events == []
+
+
+if __name__ == "__main__":
+    test_ema_rss_parser()
+    test_primary_source_builders()
+    test_regulatory_pipeline_requires_program_match()
+    test_regulatory_pipeline_rejects_generic_company_only_news()
+    print("Regulatory source tests passed")
