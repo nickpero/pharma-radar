@@ -2,6 +2,7 @@ name: Pharma Radar — Catalyst Tests
 
 on:
   workflow_dispatch:
+  push:
 
 jobs:
   test:
