@@ -1,0 +1,31 @@
+name: Pharma Radar — P0 FDA Live
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  p0:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Syntax check P0 modules
+        run: python -m py_compile scanner/fda_enrichment.py scanner/fda_matcher.py scanner/fda_pipeline.py scanner/fda_feed.py
+
+      - name: P0 live FDA acceptance
+        run: python -m scanner.test_fda_p0
