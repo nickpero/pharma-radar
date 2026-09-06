@@ -99,16 +99,60 @@ def _extract_document_names(index_text):
 
 
 def _pick_document(names):
-    """Recognize common EDGAR 8-K primary-document naming conventions."""
-    patterns = [
+    """Pick the most likely EDGAR primary 8-K HTML document.
+
+    EDGAR filers use several naming conventions. Prefer explicit 8-K names,
+    then issuer/date-style primary documents (e.g. zyme-20260825.htm), then
+    other plausible filing documents. Never select exhibits or R*.htm files
+    as the primary document when a better candidate is present.
+    """
+    cleaned = [str(n).strip() for n in (names or []) if str(n).strip()]
+    if not cleaned:
+        return ""
+
+    def is_noise(name):
+        low = name.lower()
+        return (
+            low.endswith("-index.htm") or low.endswith("-index.html") or
+            re.search(r"(?:^|[-_])r\d+\.(?:htm|html)$", low) is not None or
+            re.search(r"(?:^|[-_])ex(?:hibit)?[-_]?\d", low) is not None or
+            re.search(r"(?:^|[-_])ex99[-_.]?\d", low) is not None or
+            "graphics" in low or "cover" in low
+        )
+
+    candidates = [n for n in cleaned if not is_noise(n)]
+    if not candidates:
+        candidates = cleaned
+
+    explicit_patterns = [
         r"(?:_8k|8-k|d\d+d8k|8k)\.(?:htm|html)$",
-        r"(?:ex99[-_]?1|ex-99[-.]?1)\.(?:htm|html)$",
+        r"(?:currentreport|current-report|form8k|form-8k)\.(?:htm|html)$",
     ]
-    for pattern in patterns:
-        preferred = [n for n in names if re.search(pattern, n, flags=re.I)]
+    for pattern in explicit_patterns:
+        preferred = [n for n in candidates if re.search(pattern, n, flags=re.I)]
         if preferred:
             return preferred[0]
-    return ""
+
+    # Many issuers use ticker/date primary documents such as zyme-20260825.htm
+    # or alms-20260813x8k.htm. These are safer than choosing an arbitrary exhibit.
+    issuer_date = [
+        n for n in candidates
+        if re.search(r"^[a-z]{2,8}[-_]20\d{6}(?:[a-z0-9_-]*)?\.(?:htm|html)$", n, flags=re.I)
+    ]
+    if issuer_date:
+        return issuer_date[0]
+
+    issuer_event = [
+        n for n in candidates
+        if re.search(r"^[a-z]{2,8}[-_].*(?:8k|8-k)\.(?:htm|html)$", n, flags=re.I)
+    ]
+    if issuer_event:
+        return issuer_event[0]
+
+    # Last-resort primary candidate: choose a normal HTML filing document,
+    # excluding known exhibits/noise. This keeps discovery useful for unusual
+    # issuer naming conventions without preferring an exhibit over the filing.
+    return candidates[0] if candidates else ""
 
 
 def _resolve_primary_document(cik, accession):
