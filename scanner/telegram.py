@@ -8,7 +8,7 @@ tramite Telegram Bot API.
 import os
 import requests
 
-from scanner.priority import get_alert_tier, get_alert_tier_icon
+from scanner.priority import get_alert_tier, get_alert_tier_icon, enrich_alert_priority
 
 
 TELEGRAM_API = "https://api.telegram.org"
@@ -102,7 +102,19 @@ def format_catalyst_alert(alert):
     subtype = event.get("subtype", alert.get("subtype", ""))
     trading_impact = event.get("trading_impact", alert.get("trading_impact", "LOW"))
     urgency = event.get("urgency", alert.get("urgency", "LOW"))
-    alert_priority = event.get("alert_priority", alert.get("alert_priority", 0))
+    alert_priority = event.get("alert_priority", alert.get("alert_priority"))
+
+    # Telegram must remain robust for legacy/manual alerts that do not yet
+    # carry the unified P2.1 priority field.
+    if alert_priority is None:
+        priority_event = dict(event)
+        priority_event.update({
+            "score": score,
+            "trading_impact": trading_impact,
+            "urgency": urgency,
+        })
+        alert_priority = enrich_alert_priority(priority_event).get("alert_priority", 0)
+
     alert_tier = event.get("alert_tier", alert.get("alert_tier")) or get_alert_tier(alert_priority)
 
     direction_icon = get_direction_icon(direction)
