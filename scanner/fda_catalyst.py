@@ -12,19 +12,23 @@ FDA_CATALYST_MAP = {
 DEFAULT_EVENT = {"type": "FDA_EVENT", "subtype": "FDA_UPDATE", "severity": "LOW", "direction": "UNKNOWN"}
 CATEGORY_PRIORITY = ["APPROVAL", "REJECTION", "SAFETY", "CLINICAL", "LABEL"]
 
+# Outcome-bearing clinical-result language must take precedence over a bare
+# phase number. "Phase 3" alone can mean advancement; "Phase 3 results"
+# means a clinical readout.
 ADVANCED_RULES = [
     ("TRIAL_HOLD_LIFTED", "POSITIVE", "HIGH", ("clinical hold lifted", "hold lifted", "lifted the clinical hold", "hold is lifted")),
     ("TRIAL_HOLD", "NEGATIVE", "EXTREME", ("clinical hold", "placed on clinical hold", "trial hold", "study hold")),
-    ("PHASE_ADVANCEMENT", "POSITIVE", "HIGH", ("phase advancement", "advanced to phase", "advances to phase", "phase 2", "phase 3")),
-    ("DATE_ACCELERATED", "POSITIVE", "HIGH", ("accelerated timeline", "date accelerated", "accelerated the timeline", "earlier than expected")),
-    ("DATE_DELAYED", "NEGATIVE", "HIGH", ("delayed timeline", "date delayed", "delay in the timeline", "later than expected", "delayed submission")),
     ("REJECTION", "NEGATIVE", "EXTREME", ("complete response letter", r"\bcrl\b", "not approved", "rejected", "rejection", "refused", "refusal", "denied", "denial")),
     ("SAFETY", "NEGATIVE", "EXTREME", ("boxed warning", "safety warning", "drug safety communication", "recall", "serious safety", "safety concern", "contamination")),
     ("APPROVAL", "POSITIVE", "EXTREME", ("approves", "approved", "approval", "authorizes", "authorized", "authorization", "cleared", "clearance")),
     ("LABEL_EXPANSION", "POSITIVE", "HIGH", ("label expansion", "expanded indication", "expanded use", "expanded the indication", "new indication")),
     ("FILING", "POSITIVE", "HIGH", ("new drug application", "biologics license application", "nda submission", "bla submission", "regulatory submission", "submitted the application", "filing accepted")),
-    ("CLINICAL_RESULT", "NEGATIVE", "HIGH", ("failed to meet", "did not meet", "missed the primary endpoint", "failed the primary endpoint", "futility", "negative topline")),
+    ("CLINICAL_RESULT", "NEGATIVE", "HIGH", ("failed to meet", "did not meet", "missed the primary endpoint", "failed the primary endpoint", "futility", "negative topline", "not statistically significant", "no significant benefit")),
     ("CLINICAL_RESULT", "POSITIVE", "HIGH", ("met the primary endpoint", "met its primary endpoint", "positive topline", "positive results", "statistically significant", "clinical benefit")),
+    ("CLINICAL_RESULT", "POSITIVE", "HIGH", ("clinical trial results", "clinical study results", "clinical results", "topline results", "trial results", "phase 2 results", "phase 3 results")),
+    ("PHASE_ADVANCEMENT", "POSITIVE", "HIGH", ("phase advancement", "advanced to phase", "advances to phase", "phase 2", "phase 3")),
+    ("DATE_ACCELERATED", "POSITIVE", "HIGH", ("accelerated timeline", "date accelerated", "accelerated the timeline", "earlier than expected")),
+    ("DATE_DELAYED", "NEGATIVE", "HIGH", ("delayed timeline", "date delayed", "delay in the timeline", "later than expected", "delayed submission")),
 ]
 
 
