@@ -5,6 +5,8 @@ Pipeline completa per le FDA News:
 
 FDA News
     ↓
+FDA Article Enrichment
+    ↓
 FDA Matcher
     ↓
 FDA Catalyst
@@ -20,6 +22,10 @@ al livello principale del Radar.
 
 from scanner.fda_news import (
     filter_fda_catalysts,
+)
+
+from scanner.fda_enrichment import (
+    enrich_fda_news_item,
 )
 
 from scanner.fda_matcher import (
@@ -54,6 +60,8 @@ def process_fda_news_item(
 
     FDA News
         ↓
+    Article Enrichment
+        ↓
     Catalyst relevance
         ↓
     Watchlist matching
@@ -78,11 +86,19 @@ def process_fda_news_item(
         )
 
     # ========================================
+    # ARTICLE ENRICHMENT
+    # ========================================
+
+    enriched_item = enrich_fda_news_item(
+        news_item
+    )
+
+    # ========================================
     # FDA RELEVANCE
     # ========================================
 
     relevant_news = filter_fda_catalysts(
-        [news_item]
+        [enriched_item]
     )
 
     if not relevant_news:
@@ -93,7 +109,7 @@ def process_fda_news_item(
     # ========================================
 
     target = identify_fda_target(
-        news_item,
+        enriched_item,
         watchlist,
     )
 
@@ -105,7 +121,7 @@ def process_fda_news_item(
     # ========================================
 
     catalyst = build_fda_catalyst(
-        news_item
+        enriched_item
     )
 
     # ========================================
