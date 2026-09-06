@@ -66,6 +66,8 @@ def build_fda_catalyst(news_item):
 
     # Preserve legacy category directions for downstream scoring/compatibility.
     # Advanced classification still records the more granular catalyst_type.
+    if selected_category == "APPROVAL" and advanced["catalyst_type"] == "APPROVAL":
+        event["direction"] = FDA_CATALYST_MAP["APPROVAL"]["direction"]
     if selected_category == "LABEL" and advanced["catalyst_type"] == "LABEL_EXPANSION":
         event["direction"] = FDA_CATALYST_MAP["LABEL"]["direction"]
 
