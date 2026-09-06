@@ -19,9 +19,7 @@ def test_live_fda_zidesamtinib_p0():
         url=ZIDESAMTINIB_URL,
         source="FDA LIVE",
     )
-
     item = enrich_fda_news_item(item)
-
     assert len(item.get("content", "")) > 200, "FDA article body was not extracted"
     assert "zidesamtinib" in item["content"].lower(), "FDA article body lacks zidesamtinib"
     assert "nuvalent" in item["content"].lower(), "FDA article body lacks Nuvalent"
@@ -42,12 +40,13 @@ def test_live_fda_zidesamtinib_p0():
 
 def test_rare_false_positive_protection():
     watchlist = load_watchlist()
-    item = build_fda_news_item(
-        title="FDA discusses a rare blood disorder",
-        summary="The agency issued general information about a rare condition.",
-        url="https://www.fda.gov/news-events/press-announcements/example",
-        content="Patients with a rare blood disorder may need specialized care.",
-    )
+    item = {
+        "title": "FDA discusses a rare blood disorder",
+        "summary": "The agency issued general information about a rare condition.",
+        "url": "https://www.fda.gov/news-events/press-announcements/example",
+        "source": "FDA TEST",
+        "content": "Patients with a rare blood disorder may need specialized care.",
+    }
     target = identify_fda_target(item, watchlist)
     assert target is None, "Generic word 'rare' must not match RARE"
 
