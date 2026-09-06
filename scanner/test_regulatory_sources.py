@@ -31,6 +31,26 @@ def test_primary_source_builders():
     assert sec["form"] == "8-K"
 
 
+def test_sec_body_enrichment_preserves_program_text():
+    text = (
+        "Ionis Pharmaceuticals announced that the U.S. Food and Drug Administration "
+        "has approved ZANVASTRO (zilganersen) for the treatment of Alexander disease."
+    )
+    sec = build_sec_item(
+        "IONS",
+        "Ionis Pharmaceuticals",
+        "0000874015",
+        "0001140361-26-035657",
+        "8-K",
+        "2026-09-04",
+        items=["7.01", "8.01"],
+        text=text,
+    )
+    assert sec["provider"] == "SEC_EDGAR_VIA_JINA"
+    assert "zilganersen" in sec["content"].lower()
+    assert "ZANVASTRO" in sec["content"]
+
+
 def test_sec_user_agent_is_declared():
     assert "PharmaRadar" in DEFAULT_USER_AGENT
     assert "@" in DEFAULT_USER_AGENT
@@ -79,6 +99,7 @@ if __name__ == "__main__":
     test_ema_rss_parser()
     test_ema_content_classification()
     test_primary_source_builders()
+    test_sec_body_enrichment_preserves_program_text()
     test_sec_user_agent_is_declared()
     test_sec_watchlist_cik_map_avoids_runtime_ticker_lookup()
     test_fda_score_preserves_label()
