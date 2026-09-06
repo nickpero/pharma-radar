@@ -9,9 +9,9 @@ from scanner.score import score_events
 from scanner.trading_intelligence import enrich_trading_events
 from scanner.priority import enrich_alert_priorities, sort_by_alert_priority
 from scanner.alert_filter import filter_alerts
-
 from scanner.fda_enrichment import get_enriched_fda_news
 from scanner.fda_pipeline import process_fda_news, filter_fda_trading_alerts
+from scanner.regulatory_pipeline import scan_regulatory_sources
 
 WATCHLIST_FILE = Path("data/watchlist.json")
 
@@ -22,12 +22,10 @@ def load_watchlist():
 
 
 def make_trial_key(ticker, program, trial):
-    """Crea una chiave stabile per identificare un trial."""
     return f"{ticker}:{program}:{trial.get('nct_id')}"
 
 
 def build_alert(ticker, company, program, nct_id, event, changes, trial):
-    """Costruisce un alert standardizzato."""
     return {
         "ticker": ticker,
         "company": company.get("company", ticker),
@@ -46,11 +44,12 @@ def build_alert(ticker, company, program, nct_id, event, changes, trial):
         "urgency": event.get("urgency", "LOW"),
         "alert_priority": event.get("alert_priority", 0),
         "alert_tier": event.get("alert_tier", "LOW"),
+        "source": event.get("source", "CLINICALTRIALS"),
+        "source_type": event.get("source_type", "PRIMARY_CLINICAL"),
     }
 
 
 def build_fda_alert(event):
-    """Converte un evento FDA Trading Intelligence nel formato Radar."""
     return {
         "ticker": event.get("ticker", "UNKNOWN"),
         "company": event.get("company", "UNKNOWN"),
@@ -69,7 +68,8 @@ def build_fda_alert(event):
         "urgency": event.get("urgency", "LOW"),
         "alert_priority": event.get("alert_priority", 0),
         "alert_tier": event.get("alert_tier", "LOW"),
-        "source": "FDA",
+        "source": event.get("source", "FDA"),
+        "source_type": event.get("source_type", "PRIMARY_REGULATORY"),
         "title": event.get("title", ""),
         "summary": event.get("summary", ""),
         "url": event.get("url"),
@@ -78,12 +78,10 @@ def build_fda_alert(event):
 
 
 def scan_fda(watchlist, max_items=50):
-    """FDA feed -> enrichment -> matcher -> catalyst -> score -> priority."""
     try:
         news = get_enriched_fda_news(max_news=max_items, max_pages=5)
         events = process_fda_news(news, watchlist)
-        trading_events = filter_fda_trading_alerts(events)
-        trading_events = sort_by_alert_priority(trading_events)
+        trading_events = sort_by_alert_priority(filter_fda_trading_alerts(events))
         alerts = [build_fda_alert(event) for event in trading_events]
         return {"news": news, "events": events, "alerts": alerts, "error": None}
     except Exception as error:
@@ -103,8 +101,7 @@ def scan(baseline=False):
     filtered_trials = 0
 
     for ticker, company in watchlist.items():
-        programs = company.get("programs", [])
-        for program in programs:
+        for program in company.get("programs", []):
             print(f"Searching {ticker} - {program}")
             try:
                 trials = search_program(program)
@@ -118,24 +115,14 @@ def scan(baseline=False):
                 if not nct_id:
                     continue
                 total_trials += 1
-
                 if not is_relevant(trial, company, ticker, program):
                     filtered_trials += 1
                     continue
-
                 relevant_trials += 1
-                relevant_details.append({
-                    "ticker": ticker,
-                    "program": program,
-                    "nct_id": nct_id,
-                    "status": trial.get("status"),
-                    "title": trial.get("title"),
-                })
-
+                relevant_details.append({"ticker": ticker, "program": program, "nct_id": nct_id, "status": trial.get("status"), "title": trial.get("title")})
                 key = make_trial_key(ticker, program, trial)
                 new_state[key] = trial
                 old_trial = old_state.get(key)
-
                 if baseline:
                     continue
 
@@ -143,58 +130,40 @@ def scan(baseline=False):
                     trial_changes = detect_changes(old_trial, trial)
                     if not trial_changes:
                         continue
-
-                    detected_changes.append({
-                        "ticker": ticker,
-                        "program": program,
-                        "nct_id": nct_id,
-                        "changes": trial_changes,
-                    })
-
+                    detected_changes.append({"ticker": ticker, "program": program, "nct_id": nct_id, "changes": trial_changes})
                     catalyst_events = classify_trial_changes(trial_changes)
                     if not catalyst_events:
                         continue
-
                     scored_events = score_events(catalyst_events)
-                    enriched_events = enrich_trading_events(scored_events)
-                    enriched_events = enrich_alert_priorities(enriched_events)
-                    trial_alerts = filter_alerts(enriched_events)
-
-                    for event in trial_alerts:
+                    enriched_events = enrich_alert_priorities(enrich_trading_events(scored_events))
+                    for event in filter_alerts(enriched_events):
                         alerts.append(build_alert(ticker, company, program, nct_id, event, trial_changes, trial))
-
                 else:
-                    new_event = {
-                        "type": "NEW_TRIAL",
-                        "severity": "MEDIUM",
-                        "direction": "UNKNOWN",
-                        "subtype": "NEW_TRIAL",
-                        "field": None,
-                        "old_value": None,
-                        "new_value": None,
-                    }
+                    new_event = {"type": "NEW_TRIAL", "severity": "MEDIUM", "direction": "UNKNOWN", "subtype": "NEW_TRIAL", "field": None, "old_value": None, "new_value": None}
                     scored_events = score_events([new_event])
-                    enriched_events = enrich_trading_events(scored_events)
-                    enriched_events = enrich_alert_priorities(enriched_events)
-                    trial_alerts = filter_alerts(enriched_events)
-
-                    for event in trial_alerts:
+                    enriched_events = enrich_alert_priorities(enrich_trading_events(scored_events))
+                    for event in filter_alerts(enriched_events):
                         alerts.append(build_alert(ticker, company, program, nct_id, event, {}, trial))
 
-    print()
-    print("Searching FDA catalyst news...")
+    print("\nSearching FDA catalyst news...")
     fda_result = scan_fda(watchlist)
-
     if fda_result["error"]:
         errors.append({"ticker": "FDA", "program": "FDA_FEED", "error": fda_result["error"]})
     else:
         alerts.extend(fda_result["alerts"])
 
+    print("\nSearching EMA + SEC catalyst news...")
+    try:
+        regulatory_result = scan_regulatory_sources(watchlist)
+        alerts.extend([build_fda_alert(event) for event in regulatory_result["alerts"]])
+    except Exception as error:
+        regulatory_result = {"ema_news": [], "sec_news": [], "news": [], "events": [], "alerts": []}
+        errors.append({"ticker": "REGULATORY", "program": "EMA_SEC", "error": str(error)})
+
     alerts = sort_by_alert_priority(alerts)
     save_state(new_state)
 
-    print()
-    print("========== SCAN SUMMARY ==========")
+    print("\n========== SCAN SUMMARY ==========")
     print(f"Companies: {len(watchlist)}")
     print(f"Trials found: {total_trials}")
     print(f"Relevant trials: {relevant_trials}")
@@ -202,6 +171,9 @@ def scan(baseline=False):
     print(f"Changes detected: {len(detected_changes)}")
     print(f"FDA news: {len(fda_result['news'])}")
     print(f"FDA events: {len(fda_result['events'])}")
+    print(f"EMA news: {len(regulatory_result['ema_news'])}")
+    print(f"SEC filings: {len(regulatory_result['sec_news'])}")
+    print(f"EMA/SEC events: {len(regulatory_result['events'])}")
     print(f"Alerts: {len(alerts)}")
     print(f"Errors: {len(errors)}")
     print("===================================")
@@ -219,5 +191,9 @@ def scan(baseline=False):
         "fda_news": fda_result["news"],
         "fda_events": fda_result["events"],
         "fda_alerts": fda_result["alerts"],
+        "ema_news": regulatory_result["ema_news"],
+        "sec_news": regulatory_result["sec_news"],
+        "regulatory_events": regulatory_result["events"],
+        "regulatory_alerts": regulatory_result["alerts"],
         "baseline": baseline,
     }
