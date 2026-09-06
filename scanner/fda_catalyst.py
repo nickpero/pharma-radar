@@ -68,6 +68,11 @@ def build_fda_catalyst(news_item):
         event.update(advanced)
     else:
         event.update({"catalyst_type": "NEUTRAL", "classification_source": "category" if selected_category else "fallback"})
+    # LABEL is a legacy trading-catalyst category: keep its established
+    # CATALYST direction even though the advanced classifier describes the
+    # underlying event as POSITIVE. This preserves downstream compatibility.
+    if selected_category == "LABEL" and advanced["catalyst_type"] == "LABEL_EXPANSION":
+        event["direction"] = FDA_CATALYST_MAP["LABEL"]["direction"]
     subtype_map = {
         "CLINICAL_RESULT": "CLINICAL_RESULTS", "LABEL_EXPANSION": "LABEL_EXPANSION",
         "REJECTION": "FDA_REJECTION", "SAFETY": "FDA_SAFETY_WARNING", "APPROVAL": "FDA_APPROVAL",
