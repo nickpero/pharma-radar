@@ -21,7 +21,7 @@ ADVANCED_RULES = [
     ("REJECTION", "NEGATIVE", "EXTREME", ("complete response letter", r"\bcrl\b", "not approved", "rejected", "rejection", "refused", "refusal", "denied", "denial")),
     ("SAFETY", "NEGATIVE", "EXTREME", ("boxed warning", "safety warning", "drug safety communication", "recall", "serious safety", "safety concern", "contamination")),
     ("APPROVAL", "POSITIVE", "EXTREME", ("approves", "approved", "approval", "authorizes", "authorized", "authorization", "cleared", "clearance")),
-    ("LABEL_EXPANSION", "POSITIVE", "HIGH", ("label expansion", "expanded indication", "expanded use", "expanded the indication", "new indication")),
+    ("LABEL_EXPANSION", "POSITIVE", "HIGH", ("label expansion", "expanded indication", "expands indication", "expanded use", "expands use", "expanded the indication", "expands the indication", "new indication")),
     ("FILING", "POSITIVE", "HIGH", ("new drug application", "biologics license application", "nda submission", "bla submission", "regulatory submission", "submitted the application", "filing accepted")),
     ("CLINICAL_RESULT", "NEGATIVE", "HIGH", ("failed to meet", "did not meet", "missed the primary endpoint", "failed the primary endpoint", "futility", "negative topline", "not statistically significant", "no significant benefit")),
     ("CLINICAL_RESULT", "POSITIVE", "HIGH", ("met the primary endpoint", "met its primary endpoint", "positive topline", "positive results", "statistically significant", "clinical benefit")),
@@ -62,7 +62,12 @@ def build_fda_catalyst(news_item):
     selected_category = next((c for c in CATEGORY_PRIORITY if c in normalized_categories), None)
     event = dict(FDA_CATALYST_MAP.get(selected_category, DEFAULT_EVENT))
     advanced = classify_fda_catalyst(news_item)
-    event.update(advanced)
+    # If the text has no advanced classification, preserve the trusted
+    # category-derived event instead of replacing it with NEUTRAL/UNKNOWN.
+    if advanced["catalyst_type"] != "NEUTRAL":
+        event.update(advanced)
+    else:
+        event.update({"catalyst_type": "NEUTRAL", "classification_source": "category" if selected_category else "fallback"})
     subtype_map = {
         "CLINICAL_RESULT": "CLINICAL_RESULTS", "LABEL_EXPANSION": "LABEL_EXPANSION",
         "REJECTION": "FDA_REJECTION", "SAFETY": "FDA_SAFETY_WARNING", "APPROVAL": "FDA_APPROVAL",
