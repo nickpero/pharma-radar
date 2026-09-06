@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import os
 import re
 
 import requests
@@ -11,7 +12,10 @@ SEC_TICKERS_URL = "https://www.sec.gov/files/company_tickers.json"
 SEC_ARCHIVES = "https://www.sec.gov/Archives/edgar/data"
 SEC_DATA = "https://data.sec.gov/submissions"
 REQUEST_TIMEOUT = 20
-USER_AGENT = "PharmaRadar/1.0"
+# SEC requires automated clients to identify themselves with a declared User-Agent.
+# The GitHub Actions bot address is project infrastructure, not a user mailbox.
+DEFAULT_USER_AGENT = "PharmaRadar/1.0 (GitHub Actions; 41898282+github-actions[bot]@users.noreply.github.com)"
+USER_AGENT = os.getenv("SEC_USER_AGENT", DEFAULT_USER_AGENT)
 CATALYST_ITEMS = {"1.01", "1.02", "2.01", "2.03", "3.01", "5.02", "7.01", "8.01"}
 _TICKER_CIK_CACHE = None
 
@@ -22,8 +26,12 @@ def normalize_text(value) -> str:
     return re.sub(r"\s+", " ", str(value)).strip()
 
 
-def _headers():
-    return {"User-Agent": USER_AGENT, "Accept": "application/json,text/html,application/xhtml+xml"}
+def _headers(accept="application/json,text/html,application/xhtml+xml"):
+    return {
+        "User-Agent": USER_AGENT,
+        "Accept": accept,
+        "Accept-Encoding": "gzip, deflate",
+    }
 
 
 def _get_json(url):
@@ -99,7 +107,7 @@ def get_sec_filings_for_ticker(ticker, company, max_filings=3):
             if not items:
                 continue
             url = _filing_url(cik, accession, primary_doc)
-            response = requests.get(url, timeout=REQUEST_TIMEOUT, headers={"User-Agent": USER_AGENT})
+            response = requests.get(url, timeout=REQUEST_TIMEOUT, headers=_headers("text/html,application/xhtml+xml"))
             response.raise_for_status()
             results.append(build_sec_item(ticker, company, cik, accession, form, filing_date, primary_doc, items, _extract_text(response.text)))
             if len(results) >= max_filings:
