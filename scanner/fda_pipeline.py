@@ -14,116 +14,40 @@ FDA Catalyst
 FDA Score
     ↓
 Trading Intelligence
+    ↓
+Unified Alert Priority
 
 Il modulo NON invia Telegram.
-La notifica verrà collegata successivamente
-al livello principale del Radar.
 """
 
-from scanner.fda_news import (
-    filter_fda_catalysts,
-)
-
-from scanner.fda_enrichment import (
-    enrich_fda_news_item,
-)
-
-from scanner.fda_matcher import (
-    identify_fda_target,
-)
-
-from scanner.fda_catalyst import (
-    build_fda_catalyst,
-)
-
-from scanner.fda_score import (
-    score_fda_event,
-)
-
-from scanner.trading_intelligence import (
-    enrich_trading_event,
-)
+from scanner.fda_news import filter_fda_catalysts
+from scanner.fda_enrichment import enrich_fda_news_item
+from scanner.fda_matcher import identify_fda_target
+from scanner.fda_catalyst import build_fda_catalyst
+from scanner.fda_score import score_fda_event
+from scanner.trading_intelligence import enrich_trading_event
+from scanner.priority import enrich_alert_priority, sort_by_alert_priority
 
 
-# ============================================
-# PROCESS SINGLE FDA NEWS
-# ============================================
-
-def process_fda_news_item(
-    news_item,
-    watchlist=None,
-):
-    """
-    Processa una singola FDA News Item.
-
-    Flusso:
-
-    FDA News
-        ↓
-    Article Enrichment
-        ↓
-    Catalyst relevance
-        ↓
-    Watchlist matching
-        ↓
-    Catalyst Event
-        ↓
-    FDA Score
-        ↓
-    Trading Intelligence
-
-    Restituisce None se la news non è
-    rilevante oppure non trova un target
-    nella watchlist.
-    """
-
+def process_fda_news_item(news_item, watchlist=None):
+    """Processa una singola FDA News Item end-to-end."""
     if not isinstance(news_item, dict):
         raise TypeError("news_item must be a dictionary")
 
-    # Se il chiamante ha già eseguito l'enrichment
-    # evitiamo una seconda richiesta HTTP all'articolo FDA.
     has_article_body = any(
         len(str(news_item.get(field) or "").strip()) >= 200
         for field in ("article_text", "content", "body", "text")
     )
+    enriched_item = news_item if has_article_body else enrich_fda_news_item(news_item)
 
-    enriched_item = (
-        news_item
-        if has_article_body
-        else enrich_fda_news_item(news_item)
-    )
-
-    # ========================================
-    # FDA RELEVANCE
-    # ========================================
-
-    relevant_news = filter_fda_catalysts([enriched_item])
-
-    if not relevant_news:
+    if not filter_fda_catalysts([enriched_item]):
         return None
 
-    # ========================================
-    # WATCHLIST MATCH
-    # ========================================
-
-    target = identify_fda_target(
-        enriched_item,
-        watchlist,
-    )
-
+    target = identify_fda_target(enriched_item, watchlist)
     if target is None:
         return None
 
-    # ========================================
-    # BUILD CATALYST
-    # ========================================
-
     catalyst = build_fda_catalyst(enriched_item)
-
-    # ========================================
-    # ATTACH TARGET
-    # ========================================
-
     catalyst["ticker"] = target.get("ticker")
     catalyst["company"] = target.get("company")
     catalyst["program"] = target.get("program")
@@ -132,109 +56,47 @@ def process_fda_news_item(
     catalyst["company_matches"] = target.get("company_matches", [])
     catalyst["program_matches"] = target.get("program_matches", [])
 
-    # ========================================
-    # FDA SCORE
-    # ========================================
-
     scored = score_fda_event(catalyst)
-
-    # ========================================
-    # TRADING INTELLIGENCE
-    # ========================================
-
     trading = enrich_trading_event(scored)
-
-    # ========================================
-    # PIPELINE METADATA
-    # ========================================
-
+    trading = enrich_alert_priority(trading)
     trading["pipeline"] = "FDA_NEWS"
-    trading["pipeline_stage"] = "TRADING_INTELLIGENCE"
-
+    trading["pipeline_stage"] = "ALERT_PRIORITY"
     return trading
 
 
-# ============================================
-# PROCESS MULTIPLE NEWS
-# ============================================
-
-def process_fda_news(
-    news_items,
-    watchlist=None,
-):
+def process_fda_news(news_items, watchlist=None):
     """Processa una lista di FDA News Items."""
-
     if not news_items:
         return []
-
     results = []
-
     for news_item in news_items:
-        result = process_fda_news_item(
-            news_item,
-            watchlist,
-        )
-
+        result = process_fda_news_item(news_item, watchlist)
         if result is not None:
             results.append(result)
-
     return results
 
 
-# ============================================
-# FILTER BY TRADING IMPACT
-# ============================================
-
 def filter_fda_trading_alerts(events):
-    """Restituisce soltanto gli eventi FDA con impatto significativo."""
-
+    """Restituisce gli eventi FDA con impatto significativo."""
     if not events:
         return []
-
     return [
-        event
-        for event in events
+        event for event in events
         if event.get("trading_impact") in {"EXTREME", "HIGH"}
     ]
 
 
-# ============================================
-# SORT BY PRIORITY
-# ============================================
-
 def sort_fda_events(events):
-    """Ordina gli eventi FDA dal più importante al meno importante."""
+    """Ordina gli eventi FDA per priorità operativa unificata."""
+    return sort_by_alert_priority(events)
 
-    priority = {
-        "EXTREME": 4,
-        "HIGH": 3,
-        "MEDIUM": 2,
-        "LOW": 1,
-    }
-
-    return sorted(
-        events or [],
-        key=lambda event: priority.get(
-            event.get("trading_impact", "LOW"),
-            0,
-        ),
-        reverse=True,
-    )
-
-
-# ============================================
-# TOP FDA EVENTS
-# ============================================
 
 def get_top_fda_events(events, limit=10):
-    """Restituisce i migliori eventi FDA secondo l'impatto Trading."""
-
+    """Restituisce i migliori eventi FDA secondo la priorità operativa."""
     try:
         limit = int(limit)
     except (ValueError, TypeError):
         limit = 10
-
     if limit <= 0:
         return []
-
     return sort_fda_events(events)[:limit]
