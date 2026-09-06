@@ -6,6 +6,7 @@ from scanner.sec_feed import (
     _browse_company_url,
     _extract_accessions,
     _extract_filing_date,
+    _pick_document,
     build_sec_item,
     get_ticker_cik_map,
 )
@@ -52,6 +53,23 @@ def test_sec_body_enrichment_preserves_program_text():
     assert sec["provider"] == "SEC_EDGAR_VIA_JINA"
     assert "zilganersen" in sec["content"].lower()
     assert "ZANVASTRO" in sec["content"]
+
+
+def test_sec_primary_document_nonstandard_issuer_date_names():
+    assert _pick_document([
+        "0001937653-26-000051-index-headers.html", "finalgeapr.htm", "R1.htm", "zyme-20260825.htm"
+    ]) == "zyme-20260825.htm"
+    assert _pick_document([
+        "0001599298-26-000001-index-headers.html", "a2026_prx0902xharmoni-2o.htm", "R1.htm", "smmt-20260902.htm"
+    ]) == "smmt-20260902.htm"
+
+
+def test_sec_primary_document_prefers_8k_over_exhibit():
+    assert _pick_document(["ex991q22026_earningsxrelea.htm", "R1.htm", "zyme-20260806.htm", "issuer_8k.htm"]) == "issuer_8k.htm"
+
+
+def test_sec_primary_document_fallback_ignores_exhibits_and_r_files():
+    assert _pick_document(["R1.htm", "ex99-1.htm", "issuer-material-event.htm"]) == "issuer-material-event.htm"
 
 
 def test_sec_user_agent_is_declared():
@@ -145,6 +163,9 @@ if __name__ == "__main__":
     test_ema_content_classification()
     test_primary_source_builders()
     test_sec_body_enrichment_preserves_program_text()
+    test_sec_primary_document_nonstandard_issuer_date_names()
+    test_sec_primary_document_prefers_8k_over_exhibit()
+    test_sec_primary_document_fallback_ignores_exhibits_and_r_files()
     test_sec_user_agent_is_declared()
     test_sec_watchlist_cik_map_avoids_runtime_ticker_lookup()
     test_sec_company_discovery_helpers()
