@@ -6,7 +6,6 @@ program/drug matching can work even when the RSS/listing title is generic.
 
 from __future__ import annotations
 
-import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.parse import urlparse
 
@@ -56,7 +55,7 @@ def _extract_article_text(html: str, title: str = "") -> str:
         ".field--name-body",
         ".field--name-field-body",
         ".usa-prose",
-        \"[role='main']",
+        "[role='main']",
     ):
         candidates.extend(soup.select(selector))
 
@@ -123,19 +122,20 @@ def enrich_fda_news(news_items, max_items=MAX_ENRICH_ITEMS):
     remainder = items[limit:]
     enriched = [None] * len(targets)
 
-    workers = min(8, max(1, len(targets)))
-    with ThreadPoolExecutor(max_workers=workers) as executor:
-        futures = {
-            executor.submit(enrich_fda_news_item, item): index
-            for index, item in enumerate(targets)
-        }
-        for future in as_completed(futures):
-            index = futures[future]
-            try:
-                enriched[index] = future.result()
-            except Exception as exc:
-                print(f"FDA ENRICH UNEXPECTED ERROR index={index}: {type(exc).__name__}: {exc}", flush=True)
-                enriched[index] = targets[index]
+    if targets:
+        workers = min(8, len(targets))
+        with ThreadPoolExecutor(max_workers=workers) as executor:
+            futures = {
+                executor.submit(enrich_fda_news_item, item): index
+                for index, item in enumerate(targets)
+            }
+            for future in as_completed(futures):
+                index = futures[future]
+                try:
+                    enriched[index] = future.result()
+                except Exception as exc:
+                    print(f"FDA ENRICH UNEXPECTED ERROR index={index}: {type(exc).__name__}: {exc}", flush=True)
+                    enriched[index] = targets[index]
 
     return [item for item in enriched + remainder if item is not None]
 
