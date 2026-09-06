@@ -16,9 +16,6 @@ DEFAULT_USER_AGENT = "PharmaRadar/1.0 (GitHub Actions; 41898282+github-actions[b
 USER_AGENT = os.getenv("SEC_USER_AGENT", DEFAULT_USER_AGENT)
 JINA_API_KEY = os.getenv("JINA_API_KEY", "")
 
-# CIKs for the US-listed issuers in the current Pharma Radar watchlist.
-# ARGX, PHVS, QURE and TLX are foreign issuers and do not use 8-K as their
-# primary SEC current-report form, so they are intentionally skipped here.
 WATCHLIST_CIK = {
     "CAPR": "0001133869", "SVRA": "0001160308", "ZYME": "0001937653",
     "MIRM": "0001759425", "TENX": "0000034956", "NUVL": "0001861560",
@@ -52,11 +49,7 @@ def _get_json(url):
 
 
 def _get_jina_text(url):
-    """Read a blocked SEC URL through Jina Reader.
-
-    This is a content-enrichment fallback only. The filing remains SEC/EDGAR
-    data and the original SEC URL is retained on the news item.
-    """
+    """Read a blocked SEC URL through Jina Reader as content enrichment."""
     headers = {"Accept": "text/plain", "User-Agent": USER_AGENT}
     if JINA_API_KEY:
         headers["Authorization"] = f"Bearer {JINA_API_KEY}"
@@ -76,7 +69,7 @@ def _filing_index_url(cik, accession):
 
 
 def _resolve_primary_document(cik, accession):
-    """Resolve the primary 8-K HTML document from the EDGAR filing index."""
+    """Resolve the primary 8-K HTML document from the EDGAR index."""
     index_url = _filing_index_url(cik, accession)
     if not index_url:
         return ""
@@ -85,17 +78,14 @@ def _resolve_primary_document(cik, accession):
     except requests.RequestException:
         return ""
 
-    # Jina returns Markdown links for the filing index. Prefer the 8-K document
-    # and avoid exhibit/graphic/XBRL files.
-    candidates = re.findall(r"https?://[^\\s)]+\\.(?:htm|html)", index_text, flags=re.I)
-    if not candidates:
-        candidates = re.findall(r"(?:https?://)?[^\\s)]+\\.(?:htm|html)", index_text, flags=re.I)
-    for candidate in candidates:
-        candidate = candidate.rstrip(".,")
-        name = candidate.rsplit("/", 1)[-1].lower()
-        if "_8k" in name or name.endswith("8-k.htm") or name.endswith("8-k.html"):
-            return candidate if candidate.startswith("http") else f"https://www.sec.gov{candidate if candidate.startswith('/') else '/' + candidate}"
-    return ""
+    # EDGAR primary documents commonly contain `_8k` in the filename.
+    names = re.findall(r"\b[A-Za-z0-9_.-]+_8k\.(?:htm|html)\b", index_text, flags=re.I)
+    if not names:
+        names = re.findall(r"\b[A-Za-z0-9_.-]+8-k\.(?:htm|html)\b", index_text, flags=re.I)
+    if not names:
+        return ""
+    filename = names[0]
+    return f"{SEC_ARCHIVES}/{int(cik)}/{accession.replace('-', '')}/{filename}"
 
 
 def _enrich_proxy_row(row, cik, accession):
@@ -131,7 +121,7 @@ def _filing_url(cik, accession, primary_doc=""):
         return ""
     if primary_doc:
         return f"{SEC_ARCHIVES}/{int(cik)}/{accession.replace('-', '')}/{primary_doc}"
-    return f"https://www.sec.gov/Archives/edgar/data/{int(cik)}/{accession.replace('-', '')}/"
+    return f"{SEC_ARCHIVES}/{int(cik)}/{accession.replace('-', '')}/"
 
 
 def _item_context(items):
@@ -201,12 +191,7 @@ def _fetch_sec_direct(ticker, company, cik, max_filings=3):
 
 
 def _fetch_proxy(max_filings=50):
-    """Use FilingFirehose public 8-K feed when GitHub cannot reach SEC directly.
-
-    The public tier covers the last 72 hours, requires no API key and is capped
-    at 50 records/request. It is still SEC-derived data; provider metadata is
-    retained so downstream alerts remain auditable.
-    """
+    """Use FilingFirehose public 8-K feed when GitHub cannot reach SEC directly."""
     params = {"limit": min(int(max_filings), 50)}
     data = _get_json(SEC_PROXY + "?limit=" + str(params["limit"]))
     if isinstance(data, dict):
@@ -217,8 +202,6 @@ def _fetch_proxy(max_filings=50):
 
 
 def get_sec_news(watchlist, max_filings_per_company=3):
-    # First try the official SEC API once per issuer. If the GitHub Actions
-    # network blocks SEC, switch to the public SEC-derived proxy in one request.
     try:
         results = []
         for ticker, config in (watchlist or {}).items():
