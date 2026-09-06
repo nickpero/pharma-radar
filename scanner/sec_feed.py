@@ -26,15 +26,13 @@ WATCHLIST_CIK = {
     "RNA": "0001599901", "RGNX": "0001590877", "EYPT": "0001314102",
     "SMMT": "0001599298",
 }
-
 CATALYST_ITEMS = {"1.01", "1.02", "2.01", "2.03", "3.01", "5.02", "7.01", "8.01"}
 DISCOVERY_MAX_FILINGS = 2
-# The public Jina fallback is rate-limited. Keep discovery bounded and sequential.
 DISCOVERY_MAX_TICKERS = 4
 JINA_MIN_INTERVAL = 1.5
-_JINA_RATE_LIMITED = False
-_JINA_LAST_REQUEST = 0.0
 _JINA_LOCK = threading.Lock()
+_JINA_LAST_REQUEST = 0.0
+_JINA_RATE_LIMITED = False
 
 
 def normalize_text(value) -> str:
@@ -44,11 +42,7 @@ def normalize_text(value) -> str:
 
 
 def _headers(accept="application/json,text/html,application/xhtml+xml"):
-    return {
-        "User-Agent": USER_AGENT,
-        "Accept": accept,
-        "Accept-Encoding": "gzip, deflate",
-    }
+    return {"User-Agent": USER_AGENT, "Accept": accept, "Accept-Encoding": "gzip, deflate"}
 
 
 def _get_json(url):
@@ -58,29 +52,23 @@ def _get_json(url):
 
 
 def _get_jina_text(url):
-    """Read a blocked SEC URL through Jina, with a process-wide rate limiter."""
     global _JINA_LAST_REQUEST, _JINA_RATE_LIMITED
-    if _JINA_RATE_LIMITED:
-        raise requests.HTTPError("Jina rate limit active for this scan")
-
     with _JINA_LOCK:
         if _JINA_RATE_LIMITED:
-            raise requests.HTTPError("Jina rate limit active for this scan")
-        now = time.monotonic()
-        wait = JINA_MIN_INTERVAL - (now - _JINA_LAST_REQUEST)
+            raise requests.RequestException("Jina rate limit active for this scan")
+        wait = JINA_MIN_INTERVAL - (time.monotonic() - _JINA_LAST_REQUEST)
         if wait > 0:
             time.sleep(wait)
         _JINA_LAST_REQUEST = time.monotonic()
-
-    headers = {"Accept": "text/plain", "User-Agent": USER_AGENT}
-    if JINA_API_KEY:
-        headers["Authorization"] = f"Bearer {JINA_API_KEY}"
-    response = requests.get(JINA_READER + url, timeout=REQUEST_TIMEOUT, headers=headers)
-    if response.status_code == 429:
-        _JINA_RATE_LIMITED = True
-        print("SEC JINA RATE LIMITED: stopping secondary discovery for this scan", flush=True)
-    response.raise_for_status()
-    return normalize_text(response.text)
+        headers = {"Accept": "text/plain", "User-Agent": USER_AGENT}
+        if JINA_API_KEY:
+            headers["Authorization"] = f"Bearer {JINA_API_KEY}"
+        response = requests.get(JINA_READER + url, timeout=REQUEST_TIMEOUT, headers=headers)
+        if response.status_code == 429:
+            _JINA_RATE_LIMITED = True
+            print("SEC JINA RATE LIMIT: stopping secondary discovery for this scan", flush=True)
+        response.raise_for_status()
+        return normalize_text(response.text)
 
 
 def _filing_index_url(cik, accession):
@@ -101,7 +89,7 @@ def _extract_document_names(index_text):
     for name in names:
         clean = name.strip(".,;:()[]")
         key = clean.lower()
-        if key.endswith("-index.html") or key.endswith("-index.htm"):
+        if "-index." in key or key.endswith("-index.htm") or key.endswith("-index.html"):
             continue
         if key not in seen:
             seen.add(key)
@@ -110,12 +98,15 @@ def _extract_document_names(index_text):
 
 
 def _pick_document(names):
-    preferred = [n for n in names if re.search(r"(?:_8k|8-k)\.(?:htm|html)$", n, flags=re.I)]
-    if preferred:
-        return preferred[0]
-    exhibits = [n for n in names if re.search(r"(?:ex99[-_]?1|ex-99[-.]?1)\.(?:htm|html)$", n, flags=re.I)]
-    if exhibits:
-        return exhibits[0]
+    """Recognize common EDGAR 8-K primary-document naming conventions."""
+    patterns = [
+        r"(?:_8k|8-k|d\d+d8k|8k)\.(?:htm|html)$",
+        r"(?:ex99[-_]?1|ex-99[-.]?1)\.(?:htm|html)$",
+    ]
+    for pattern in patterns:
+        preferred = [n for n in names if re.search(pattern, n, flags=re.I)]
+        if preferred:
+            return preferred[0]
     return ""
 
 
@@ -123,23 +114,20 @@ def _resolve_primary_document(cik, accession):
     index_url = _filing_index_url(cik, accession)
     if not index_url:
         return ""
-    index_text = ""
     try:
         index_text = _get_jina_text(index_url)
     except requests.RequestException as exc:
         print(f"SEC INDEX UNAVAILABLE: {type(exc).__name__}: {exc}", flush=True)
-
+        index_text = ""
     names = _extract_document_names(index_text)
     filename = _pick_document(names)
     if not filename:
-        directory_url = _filing_directory_url(cik, accession)
         try:
-            directory_text = _get_jina_text(directory_url)
+            directory_text = _get_jina_text(_filing_directory_url(cik, accession))
             names = _extract_document_names(directory_text)
             filename = _pick_document(names)
         except requests.RequestException as exc:
             print(f"SEC DIRECTORY UNAVAILABLE: {type(exc).__name__}: {exc}", flush=True)
-
     if not filename:
         print(f"SEC PRIMARY DOC NOT FOUND: accession={accession} docs={names[:8]}", flush=True)
         return ""
@@ -188,12 +176,10 @@ def _filing_url(cik, accession, primary_doc=""):
 
 
 def _item_context(items):
-    labels = {
-        "1.01": "material definitive agreement", "1.02": "termination of material definitive agreement",
-        "2.01": "completion of acquisition or disposition", "2.03": "creation of direct financial obligation",
-        "3.01": "delisting or listing compliance event", "5.02": "director or officer change",
-        "7.01": "Regulation FD disclosure", "8.01": "other material event",
-    }
+    labels = {"1.01": "material definitive agreement", "1.02": "termination of material definitive agreement",
+              "2.01": "completion of acquisition or disposition", "2.03": "creation of direct financial obligation",
+              "3.01": "delisting or listing compliance event", "5.02": "director or officer change",
+              "7.01": "Regulation FD disclosure", "8.01": "other material event"}
     return "; ".join(f"Item {code}: {labels.get(code, 'SEC current report event')}" for code in items)
 
 
@@ -207,34 +193,28 @@ def build_sec_item(ticker, company, cik, accession, form, filing_date, primary_d
     context = _item_context(items or detected_items)
     buried = normalize_text(suspected_buried_events)
     content = normalize_text(" ".join(filter(None, [text, context, buried])))
-    return {
-        "source": "SEC", "source_type": "PRIMARY_CORPORATE",
-        "provider": "FilingFirehose" if not text else "SEC_EDGAR_VIA_JINA",
-        "ticker": ticker, "company": company, "cik": cik, "accession": accession, "form": form,
-        "filing_items": items, "detected_items": detected_items,
-        "suspected_buried_events": suspected_buried_events,
-        "title": title or f"SEC {form} — {company} ({ticker})",
-        "summary": f"SEC filing {form}; items: {', '.join(items or detected_items)}",
-        "content": content, "url": url, "published_at": filing_date,
-        "item_id": hashlib.sha256(raw.encode("utf-8")).hexdigest(),
-    }
+    return {"source": "SEC", "source_type": "PRIMARY_CORPORATE",
+            "provider": "FilingFirehose" if not text else "SEC_EDGAR_VIA_JINA",
+            "ticker": ticker, "company": company, "cik": cik, "accession": accession, "form": form,
+            "filing_items": items, "detected_items": detected_items, "suspected_buried_events": suspected_buried_events,
+            "title": title or f"SEC {form} — {company} ({ticker})",
+            "summary": f"SEC filing {form}; items: {', '.join(items or detected_items)}",
+            "content": content, "url": url, "published_at": filing_date,
+            "item_id": hashlib.sha256(raw.encode("utf-8")).hexdigest()}
 
 
 def _fetch_sec_direct(ticker, company, cik, max_filings=3):
     url = f"https://data.sec.gov/submissions/CIK{cik}.json"
     recent = _get_json(url).get("filings", {}).get("recent", {})
     results = []
-    forms = recent.get("form", [])
-    for idx, form in enumerate(forms):
+    for idx, form in enumerate(recent.get("form", [])):
         if form != "8-K":
             continue
         items = _extract_items(recent.get("items", [""])[idx])
         if not items:
             continue
-        accession = recent["accessionNumber"][idx]
-        filing_date = recent["filingDate"][idx]
-        primary_doc = recent["primaryDocument"][idx]
-        results.append(build_sec_item(ticker, company, cik, accession, form, filing_date, primary_doc, items))
+        results.append(build_sec_item(ticker, company, cik, recent["accessionNumber"][idx], form,
+                                      recent["filingDate"][idx], recent["primaryDocument"][idx], items))
         if len(results) >= max_filings:
             break
     return results
@@ -283,14 +263,11 @@ def _discover_company_filings(ticker, company, cik, max_filings=DISCOVERY_MAX_FI
             primary_doc = _pick_document(names)
             text, content_url = _enrich_proxy_row({}, cik, accession)
             item_match = re.search(r"Items?\s+(.{0,300})", index_text or "", flags=re.I)
-            items = _extract_items(item_match.group(1) if item_match else "")
-            if not items:
-                items = ["7.01", "8.01"]
-            results.append(build_sec_item(
-                ticker=ticker, company=company, cik=cik, accession=accession, form="8-K",
-                filing_date=filing_date, primary_doc=primary_doc, items=items, text=text,
-                title=f"SEC 8-K — {company} ({ticker})", url=content_url or _filing_url(cik, accession, primary_doc),
-            ))
+            items = _extract_items(item_match.group(1) if item_match else "") or ["7.01", "8.01"]
+            results.append(build_sec_item(ticker, company, cik, accession, "8-K", filing_date,
+                                          primary_doc, items, text,
+                                          title=f"SEC 8-K — {company} ({ticker})",
+                                          url=content_url or _filing_url(cik, accession, primary_doc)))
         print(f"SEC DISCOVERY FOUND: ticker={ticker} filings={len(results)}", flush=True)
         return results
     except (requests.RequestException, ValueError, TypeError) as exc:
@@ -299,7 +276,7 @@ def _discover_company_filings(ticker, company, cik, max_filings=DISCOVERY_MAX_FI
 
 
 def _discover_missing_companies(watchlist, existing_tickers):
-    """Discover only a bounded subset of missing tickers; stop immediately after a Jina 429."""
+    """Bound secondary SEC discovery to avoid hammering Jina."""
     missing = []
     for ticker, config in (watchlist or {}).items():
         ticker = str(ticker).upper()
@@ -307,15 +284,8 @@ def _discover_missing_companies(watchlist, existing_tickers):
             continue
         company = config.get("company", ticker) if isinstance(config, dict) else ticker
         missing.append((ticker, company, WATCHLIST_CIK[ticker]))
-
-    if not missing or _JINA_RATE_LIMITED:
-        return []
-
-    # FilingFirehose remains the primary path. Discovery is only a bounded safety net.
     selected = missing[:DISCOVERY_MAX_TICKERS]
-    if len(missing) > len(selected):
-        print(f"SEC DISCOVERY BUDGET: selected={len(selected)} missing={len(missing)}", flush=True)
-
+    print(f"SEC DISCOVERY BUDGET: selected={len(selected)} missing={len(missing)}", flush=True)
     results = []
     for ticker, company, cik in selected:
         if _JINA_RATE_LIMITED:
@@ -336,14 +306,12 @@ def get_sec_news(watchlist, max_filings_per_company=3):
         return results
     except requests.RequestException as exc:
         print(f"SEC DIRECT UNAVAILABLE: {type(exc).__name__}: {exc}", flush=True)
-
     try:
         proxy_rows = _fetch_proxy(max_filings=50)
         by_cik = {str(cik).lstrip("0") or "0": ticker for ticker, cik in WATCHLIST_CIK.items()}
-        company_by_ticker = {
-            ticker: ((watchlist.get(ticker, {}) or {}).get("company", ticker) if isinstance(watchlist.get(ticker, {}), dict) else ticker)
-            for ticker in WATCHLIST_CIK
-        }
+        company_by_ticker = {ticker: ((watchlist.get(ticker, {}) or {}).get("company", ticker)
+                                      if isinstance(watchlist.get(ticker, {}), dict) else ticker)
+                             for ticker in WATCHLIST_CIK}
         results = []
         for row in proxy_rows:
             cik = str(row.get("cik", "")).lstrip("0") or "0"
@@ -357,14 +325,12 @@ def get_sec_news(watchlist, max_filings_per_company=3):
                 continue
             accession = str(row.get("accession_number", ""))
             text, content_url = _enrich_proxy_row(row, WATCHLIST_CIK[ticker], accession)
-            results.append(build_sec_item(
-                ticker=ticker, company=company_by_ticker[ticker], cik=WATCHLIST_CIK[ticker],
-                accession=accession, form=row.get("form_type", "8-K"), filing_date=str(row.get("filed_at", ""))[:10],
-                items=items, detected_items=detected, suspected_buried_events=row.get("suspected_buried_events", {}),
-                text=text, title=f"SEC 8-K — {company_by_ticker[ticker]} ({ticker})",
-                url=content_url or (f"https://www.sec.gov/Archives/edgar/data/{int(WATCHLIST_CIK[ticker])}/{accession.replace('-', '')}/" if accession else ""),
-            ))
-
+            results.append(build_sec_item(ticker, company_by_ticker[ticker], WATCHLIST_CIK[ticker], accession,
+                                          row.get("form_type", "8-K"), str(row.get("filed_at", ""))[:10],
+                                          items=items, detected_items=detected,
+                                          suspected_buried_events=row.get("suspected_buried_events", {}), text=text,
+                                          title=f"SEC 8-K — {company_by_ticker[ticker]} ({ticker})",
+                                          url=content_url or (f"{SEC_ARCHIVES}/{int(WATCHLIST_CIK[ticker])}/{accession.replace('-', '')}/" if accession else "")))
         existing_tickers = {str(item.get("ticker", "")).upper() for item in results}
         discovery_results = _discover_missing_companies(watchlist, existing_tickers)
         results.extend(discovery_results)
@@ -376,7 +342,6 @@ def get_sec_news(watchlist, max_filings_per_company=3):
 
 
 def get_sec_filings_for_ticker(ticker, company, max_filings=3):
-    """Compatibility wrapper used by tests and older callers."""
     cik = WATCHLIST_CIK.get(str(ticker).upper())
     if not cik:
         return []
@@ -394,10 +359,8 @@ def get_sec_filings_for_ticker(ticker, company, max_filings=3):
                 if items:
                     accession = str(row.get("accession_number", ""))
                     text, content_url = _enrich_proxy_row(row, cik, accession)
-                    results.append(build_sec_item(
-                        ticker, company, cik, accession, "8-K", str(row.get("filed_at", ""))[:10],
-                        items=items, text=text, url=content_url or None,
-                    ))
+                    results.append(build_sec_item(ticker, company, cik, accession, "8-K", str(row.get("filed_at", ""))[:10],
+                                                  items=items, text=text, url=content_url or None))
                 if len(results) >= max_filings:
                     break
             if results:
