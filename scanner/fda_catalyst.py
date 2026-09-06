@@ -12,9 +12,6 @@ FDA_CATALYST_MAP = {
 DEFAULT_EVENT = {"type": "FDA_EVENT", "subtype": "FDA_UPDATE", "severity": "LOW", "direction": "UNKNOWN"}
 CATEGORY_PRIORITY = ["APPROVAL", "REJECTION", "SAFETY", "CLINICAL", "LABEL"]
 
-# Outcome-bearing clinical-result language must take precedence over a bare
-# phase number. "Phase 3" alone can mean advancement; "Phase 3 results"
-# means a clinical readout.
 ADVANCED_RULES = [
     ("TRIAL_HOLD_LIFTED", "POSITIVE", "HIGH", ("clinical hold lifted", "hold lifted", "lifted the clinical hold", "hold is lifted")),
     ("TRIAL_HOLD", "NEGATIVE", "EXTREME", ("clinical hold", "placed on clinical hold", "trial hold", "study hold")),
@@ -62,17 +59,18 @@ def build_fda_catalyst(news_item):
     selected_category = next((c for c in CATEGORY_PRIORITY if c in normalized_categories), None)
     event = dict(FDA_CATALYST_MAP.get(selected_category, DEFAULT_EVENT))
     advanced = classify_fda_catalyst(news_item)
-    # If the text has no advanced classification, preserve the trusted
-    # category-derived event instead of replacing it with NEUTRAL/UNKNOWN.
     if advanced["catalyst_type"] != "NEUTRAL":
         event.update(advanced)
     else:
         event.update({"catalyst_type": "NEUTRAL", "classification_source": "category" if selected_category else "fallback"})
-    # LABEL is a legacy trading-catalyst category: keep its established
-    # CATALYST direction even though the advanced classifier describes the
-    # underlying event as POSITIVE. This preserves downstream compatibility.
+
+    # Preserve legacy category directions for downstream scoring/compatibility.
+    # Advanced classification still records the more granular catalyst_type.
+    if selected_category == "APPROVAL" and advanced["catalyst_type"] == "APPROVAL":
+        event["direction"] = FDA_CATALYST_MAP["APPROVAL"]["direction"]
     if selected_category == "LABEL" and advanced["catalyst_type"] == "LABEL_EXPANSION":
         event["direction"] = FDA_CATALYST_MAP["LABEL"]["direction"]
+
     subtype_map = {
         "CLINICAL_RESULT": "CLINICAL_RESULTS", "LABEL_EXPANSION": "LABEL_EXPANSION",
         "REJECTION": "FDA_REJECTION", "SAFETY": "FDA_SAFETY_WARNING", "APPROVAL": "FDA_APPROVAL",
