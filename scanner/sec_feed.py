@@ -3,19 +3,17 @@ from __future__ import annotations
 
 import hashlib
 import re
-from datetime import datetime, timezone
-from urllib.parse import urljoin
 
 import requests
 from bs4 import BeautifulSoup
 
 SEC_TICKERS_URL = "https://www.sec.gov/files/company_tickers.json"
 SEC_ARCHIVES = "https://www.sec.gov/Archives/edgar/data"
+SEC_DATA = "https://data.sec.gov/submissions"
 REQUEST_TIMEOUT = 20
 USER_AGENT = "PharmaRadar/1.0"
-
-# Only material/current-report classes useful for catalyst discovery.
 CATALYST_ITEMS = {"1.01", "1.02", "2.01", "2.03", "3.01", "5.02", "7.01", "8.01"}
+_TICKER_CIK_CACHE = None
 
 
 def normalize_text(value) -> str:
@@ -35,24 +33,24 @@ def _get_json(url):
 
 
 def get_ticker_cik_map():
+    global _TICKER_CIK_CACHE
+    if _TICKER_CIK_CACHE is not None:
+        return _TICKER_CIK_CACHE
     data = _get_json(SEC_TICKERS_URL)
-    result = {}
-    for row in data.values():
-        ticker = normalize_text(row.get("ticker")).upper()
-        cik = str(row.get("cik_str", "")).zfill(10)
-        if ticker and cik:
-            result[ticker] = cik
-    return result
+    _TICKER_CIK_CACHE = {
+        normalize_text(row.get("ticker")).upper(): str(row.get("cik_str", "")).zfill(10)
+        for row in data.values()
+        if normalize_text(row.get("ticker")) and row.get("cik_str")
+    }
+    return _TICKER_CIK_CACHE
 
 
-def _extract_items(form, accession, primary_doc, items):
-    return [item for item in str(items or "").split(",") if item in CATALYST_ITEMS]
+def _extract_items(items):
+    return [item.strip() for item in str(items or "").split(",") if item.strip() in CATALYST_ITEMS]
 
 
 def _filing_url(cik, accession, primary_doc):
-    cik_number = str(int(cik))
-    accession_no_dash = accession.replace("-", "")
-    return f"{SEC_ARCHIVES}/{cik_number}/{accession_no_dash}/{primary_doc}"
+    return f"{SEC_ARCHIVES}/{int(cik)}/{accession.replace('-', '')}/{primary_doc}"
 
 
 def _extract_text(html):
@@ -64,8 +62,6 @@ def _extract_text(html):
 
 def build_sec_item(ticker, company, cik, accession, form, filing_date, primary_doc, items, text):
     url = _filing_url(cik, accession, primary_doc)
-    title = f"SEC {form} — {company} ({ticker})"
-    summary = f"SEC filing {form}; items: {', '.join(items)}"
     raw = "|".join((ticker, accession, primary_doc))
     return {
         "source": "SEC",
@@ -76,8 +72,8 @@ def build_sec_item(ticker, company, cik, accession, form, filing_date, primary_d
         "accession": accession,
         "form": form,
         "filing_items": items,
-        "title": title,
-        "summary": summary,
+        "title": f"SEC {form} — {company} ({ticker})",
+        "summary": f"SEC filing {form}; items: {', '.join(items)}",
         "content": text,
         "url": url,
         "published_at": filing_date,
@@ -85,32 +81,31 @@ def build_sec_item(ticker, company, cik, accession, form, filing_date, primary_d
     }
 
 
-def get_sec_filings_for_ticker(ticker, company, max_filings=10):
+def get_sec_filings_for_ticker(ticker, company, max_filings=3):
     try:
         cik = get_ticker_cik_map().get(str(ticker).upper())
         if not cik:
             return []
-        submissions = _get_json(f"https://data.sec.gov/submissions/CIK{cik}.json")
-        recent = submissions.get("filings", {}).get("recent", {})
+        recent = _get_json(f"{SEC_DATA}/CIK{cik}.json").get("filings", {}).get("recent", {})
         results = []
-        for idx, form in enumerate(recent.get("form", [])):
+        forms = recent.get("form", [])
+        for idx, form in enumerate(forms):
             if form != "8-K":
                 continue
             accession = recent["accessionNumber"][idx]
             primary_doc = recent["primaryDocument"][idx]
             filing_date = recent["filingDate"][idx]
-            items = _extract_items(form, accession, primary_doc, recent.get("items", [""])[idx])
+            items = _extract_items(recent.get("items", [""])[idx])
             if not items:
                 continue
             url = _filing_url(cik, accession, primary_doc)
             response = requests.get(url, timeout=REQUEST_TIMEOUT, headers={"User-Agent": USER_AGENT})
             response.raise_for_status()
-            text = _extract_text(response.text)
-            results.append(build_sec_item(ticker, company, cik, accession, form, filing_date, primary_doc, items, text))
+            results.append(build_sec_item(ticker, company, cik, accession, form, filing_date, primary_doc, items, _extract_text(response.text)))
             if len(results) >= max_filings:
                 break
         return results
-    except (requests.RequestException, KeyError, ValueError, TypeError) as exc:
+    except (requests.RequestException, KeyError, ValueError, TypeError, IndexError) as exc:
         print(f"SEC FEED ERROR {ticker}: {type(exc).__name__}: {exc}", flush=True)
         return []
 
