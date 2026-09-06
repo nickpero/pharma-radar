@@ -24,7 +24,7 @@ def test_fda_approval():
     assert event["type"] == "FDA_EVENT"
     assert event["subtype"] == "FDA_APPROVAL"
     assert event["severity"] == "HIGH"
-    assert event["direction"] == "CATALYST"
+    assert event["direction"] == "POSITIVE"
 
     assert event["source"] == "FDA"
     assert event["title"] == news["title"]
@@ -165,6 +165,7 @@ def test_multiple_catalysts():
     assert events[0]["subtype"] == "FDA_APPROVAL"
     assert events[1]["subtype"] == "FDA_REJECTION"
     assert events[2]["subtype"] == "CLINICAL_RESULTS"
+
 
 
 def test_relevant_catalysts():
