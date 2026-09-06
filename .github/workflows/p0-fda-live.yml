@@ -25,10 +25,13 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Syntax check P0/P1 modules
-        run: python -m py_compile scanner/fda_enrichment.py scanner/fda_matcher.py scanner/fda_pipeline.py scanner/fda_feed.py scanner/test_fda_p1.py
+        run: python -m py_compile scanner/fda_enrichment.py scanner/fda_matcher.py scanner/fda_pipeline.py scanner/fda_feed.py scanner/fda_catalyst.py scanner/test_fda_p1.py scanner/test_fda_p13.py
 
       - name: P0 live FDA acceptance
         run: python -m scanner.test_fda_p0
 
       - name: P1 FDA matcher regression
         run: python -m scanner.test_fda_p1
+
+      - name: P1.3 FDA catalyst regression
+        run: python -m scanner.test_fda_p13
