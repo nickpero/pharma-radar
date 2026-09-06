@@ -1,6 +1,8 @@
 from scanner.ema_feed import build_ema_news_item, classify_ema_text, parse_ema_rss
+import scanner.sec_feed as sec_feed
 from scanner.sec_feed import (
     DEFAULT_USER_AGENT,
+    DISCOVERY_MAX_TICKERS,
     _browse_company_url,
     _extract_accessions,
     _extract_filing_date,
@@ -44,14 +46,8 @@ def test_sec_body_enrichment_preserves_program_text():
         "has approved ZANVASTRO (zilganersen) for the treatment of Alexander disease."
     )
     sec = build_sec_item(
-        "IONS",
-        "Ionis Pharmaceuticals",
-        "0000874015",
-        "0001140361-26-035657",
-        "8-K",
-        "2026-09-04",
-        items=["7.01", "8.01"],
-        text=text,
+        "IONS", "Ionis Pharmaceuticals", "0000874015", "0001140361-26-035657", "8-K", "2026-09-04",
+        items=["7.01", "8.01"], text=text,
     )
     assert sec["provider"] == "SEC_EDGAR_VIA_JINA"
     assert "zilganersen" in sec["content"].lower()
@@ -88,13 +84,39 @@ def test_sec_company_discovery_helpers():
     assert _extract_filing_date(browse_text) == "2026-09-04"
 
 
+def test_sec_discovery_is_bounded(monkeypatch):
+    watchlist = {ticker: {"company": ticker} for ticker in sec_feed.WATCHLIST_CIK}
+    calls = []
+
+    def fake_discover(ticker, company, cik, max_filings=2):
+        calls.append(ticker)
+        return []
+
+    monkeypatch.setattr(sec_feed, "_discover_company_filings", fake_discover)
+    monkeypatch.setattr(sec_feed, "_JINA_RATE_LIMITED", False)
+    sec_feed._discover_missing_companies(watchlist, set())
+    assert len(calls) == DISCOVERY_MAX_TICKERS
+    assert len(calls) < len(watchlist)
+
+
+def test_sec_discovery_stops_after_rate_limit(monkeypatch):
+    watchlist = {ticker: {"company": ticker} for ticker in list(sec_feed.WATCHLIST_CIK)[:6]}
+    calls = []
+
+    def fake_discover(ticker, company, cik, max_filings=2):
+        calls.append(ticker)
+        sec_feed._JINA_RATE_LIMITED = True
+        return []
+
+    monkeypatch.setattr(sec_feed, "_discover_company_filings", fake_discover)
+    monkeypatch.setattr(sec_feed, "_JINA_RATE_LIMITED", False)
+    sec_feed._discover_missing_companies(watchlist, set())
+    assert len(calls) == 1
+    monkeypatch.setattr(sec_feed, "_JINA_RATE_LIMITED", False)
+
+
 def test_fda_score_preserves_label():
-    event = {
-        "type": "FDA_EVENT",
-        "subtype": "FDA_APPROVAL",
-        "severity": "HIGH",
-        "direction": "CATALYST",
-    }
+    event = {"type": "FDA_EVENT", "subtype": "FDA_APPROVAL", "severity": "HIGH", "direction": "CATALYST"}
     scored = score_fda_event(event)
     assert scored["score"] == 100
     assert scored["label"] == "CRITICAL"
