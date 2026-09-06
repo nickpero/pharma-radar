@@ -45,6 +45,7 @@ def build_alert(ticker, company, program, nct_id, event, changes, trial):
         "trading_priority": event.get("trading_priority", 1),
         "urgency": event.get("urgency", "LOW"),
         "alert_priority": event.get("alert_priority", 0),
+        "alert_tier": event.get("alert_tier", "LOW"),
     }
 
 
@@ -67,6 +68,7 @@ def build_fda_alert(event):
         "trading_priority": event.get("trading_priority", 1),
         "urgency": event.get("urgency", "LOW"),
         "alert_priority": event.get("alert_priority", 0),
+        "alert_tier": event.get("alert_tier", "LOW"),
         "source": "FDA",
         "title": event.get("title", ""),
         "summary": event.get("summary", ""),
