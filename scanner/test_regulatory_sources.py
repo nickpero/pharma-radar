@@ -1,5 +1,12 @@
 from scanner.ema_feed import build_ema_news_item, classify_ema_text, parse_ema_rss
-from scanner.sec_feed import DEFAULT_USER_AGENT, build_sec_item, get_ticker_cik_map
+from scanner.sec_feed import (
+    DEFAULT_USER_AGENT,
+    _browse_company_url,
+    _extract_accessions,
+    _extract_filing_date,
+    build_sec_item,
+    get_ticker_cik_map,
+)
 from scanner.regulatory_pipeline import process_regulatory_news
 from scanner.fda_score import score_fda_event
 
@@ -65,6 +72,22 @@ def test_sec_watchlist_cik_map_avoids_runtime_ticker_lookup():
     assert "ARGX" not in mapping
 
 
+def test_sec_company_discovery_helpers():
+    browse_url = _browse_company_url("0000874015", count=10)
+    assert "CIK=0000874015" in browse_url
+    assert "type=8-K" in browse_url
+
+    browse_text = """
+        Filing Date 2026-09-04
+        0001140361-26-035657
+        0001140361-26-035802
+        0001140361-26-035657
+    """
+    accessions = _extract_accessions(browse_text, max_filings=2)
+    assert accessions == ["0001140361-26-035657", "0001140361-26-035802"]
+    assert _extract_filing_date(browse_text) == "2026-09-04"
+
+
 def test_fda_score_preserves_label():
     event = {
         "type": "FDA_EVENT",
@@ -102,6 +125,7 @@ if __name__ == "__main__":
     test_sec_body_enrichment_preserves_program_text()
     test_sec_user_agent_is_declared()
     test_sec_watchlist_cik_map_avoids_runtime_ticker_lookup()
+    test_sec_company_discovery_helpers()
     test_fda_score_preserves_label()
     test_regulatory_pipeline_requires_program_match()
     test_regulatory_pipeline_rejects_generic_company_only_news()
