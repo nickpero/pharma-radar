@@ -13,16 +13,10 @@ from urllib.parse import urljoin, urlparse
 import requests
 from bs4 import BeautifulSoup
 
-FDA_NEWS_URL = "https://www.fda.gov/news-events/fda-newsroom/press-announcements"
+FDA_NEWS_URL = "https://www.fda.gov/news-events/press-announcements"
 FDA_PRESS_ANNOUNCEMENTS_URL = FDA_NEWS_URL
 FDA_NEWSROOM_URL = "https://www.fda.gov/news-events/fda-newsroom"
 FDA_PRESS_RELEASES_RSS_URL = "https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/press-releases/rss.xml"
-FDA_DRUGS_URL = "https://www.fda.gov/drugs/news-events-human-drugs/drug-safety-and-availability"
-FDA_WHATS_NEW_URL = "https://www.fda.gov/drugs/news-events-human-drugs/whats-new-related-drugs"
-FDA_NOTABLE_APPROVALS_URL = "https://www.fda.gov/drugs/news-events-human-drugs/notable-approvals-drugs"
-FDA_NOVEL_APPROVALS_2026_URL = "https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026"
-FDA_ONCOLOGY_APPROVALS_URL = "https://www.fda.gov/drugs/resources-information-approved-drugs/oncology-cancerhematologic-malignancies-approval-notifications"
-
 DEFAULT_MAX_NEWS = 50
 DEFAULT_MAX_PAGES = 5
 REQUEST_TIMEOUT = 20
@@ -71,7 +65,7 @@ def is_fda_press_announcement_url(url) -> bool:
     path = (parsed.path or "").lower().rstrip("/")
     if host not in {"www.fda.gov", "fda.gov"}:
         return False
-    return path.startswith("/news-events/fda-newsroom/press-announcements/")
+    return path.startswith("/news-events/press-announcements/") or path.startswith("/news-events/fda-newsroom/press-announcements/")
 
 
 def is_valid_news_title(title) -> bool:
@@ -366,35 +360,6 @@ def _fetch_press_announcements(max_news=DEFAULT_MAX_NEWS, max_pages=DEFAULT_MAX_
     return deduplicate_fda_news(filtered)[:max_news]
 
 
-def _fetch_source_items(url, max_items=DEFAULT_MAX_NEWS):
-    try:
-        return parse_fda_page(_fetch_html(url), url, max_items)
-    except requests.RequestException:
-        return []
-
-
-def _fetch_novel_approvals_2026(max_items=DEFAULT_MAX_NEWS):
-    try:
-        soup = BeautifulSoup(_fetch_html(FDA_NOVEL_APPROVALS_2026_URL), "html.parser")
-    except requests.RequestException:
-        return []
-    results = []
-    for row in soup.find_all("tr"):
-        cells = row.find_all(["td", "th"])
-        if len(cells) < 2:
-            continue
-        texts = [normalize_text(c.get_text(" ", strip=True)) for c in cells]
-        title = texts[0]
-        if not is_valid_news_title(title):
-            continue
-        link = row.find("a", href=True)
-        url = normalize_url(link.get("href"), FDA_NOVEL_APPROVALS_2026_URL) if link else FDA_NOVEL_APPROVALS_2026_URL
-        results.append(build_fda_news_item(title, url, texts[-1] if len(texts) >= 3 else None, " | ".join(x for x in texts[1:] if x)))
-        if len(results) >= max_items:
-            break
-    return deduplicate_fda_news(results)
-
-
 def deduplicate_fda_news(news_items):
     unique, seen_ids, seen_urls, seen_titles = [], set(), set(), set()
     for item in news_items or []:
@@ -440,5 +405,4 @@ def get_fda_news(max_news=DEFAULT_MAX_NEWS, max_pages=DEFAULT_MAX_PAGES, max_ite
 
 
 def get_fda_catalyst_news(max_news=DEFAULT_MAX_NEWS, max_pages=DEFAULT_MAX_PAGES, max_items=None):
-    """Backward-compatible alias used by the clinical-trial scanner."""
     return get_fda_news(max_news=max_news, max_pages=max_pages, max_items=max_items)
