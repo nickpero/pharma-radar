@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import re
 import time
+import xml.etree.ElementTree as ET
 from datetime import datetime
 from html import unescape
 from urllib.parse import urljoin, urlparse
@@ -15,6 +16,7 @@ from bs4 import BeautifulSoup
 FDA_NEWS_URL = "https://www.fda.gov/news-events/fda-newsroom/press-announcements"
 FDA_PRESS_ANNOUNCEMENTS_URL = FDA_NEWS_URL
 FDA_NEWSROOM_URL = "https://www.fda.gov/news-events/fda-newsroom"
+FDA_PRESS_RELEASES_RSS_URL = "https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/press-releases/rss.xml"
 FDA_DRUGS_URL = "https://www.fda.gov/drugs/news-events-human-drugs/drug-safety-and-availability"
 FDA_WHATS_NEW_URL = "https://www.fda.gov/drugs/news-events-human-drugs/whats-new-related-drugs"
 FDA_NOTABLE_APPROVALS_URL = "https://www.fda.gov/drugs/news-events-human-drugs/notable-approvals-drugs"
@@ -31,7 +33,7 @@ USER_AGENT = "Mozilla/5.0 (compatible; PharmaRadar/1.0; +https://github.com/)"
 SESSION = requests.Session()
 SESSION.headers.update({
     "User-Agent": USER_AGENT,
-    "Accept": "text/html,application/xhtml+xml",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.9",
 })
 
@@ -94,7 +96,7 @@ def _parse_date(value):
         return datetime.fromisoformat(text.replace("Z", "+00:00")).isoformat()
     except ValueError:
         pass
-    for fmt in ("%B %d, %Y", "%b %d, %Y", "%m/%d/%Y", "%Y-%m-%d"):
+    for fmt in ("%B %d, %Y", "%b %d, %Y", "%m/%d/%Y", "%Y-%m-%d", "%a, %d %b %Y %H:%M:%S %z", "%a, %d %b %Y %H:%M:%S GMT"):
         try:
             return datetime.strptime(text, fmt).isoformat()
         except ValueError:
@@ -136,17 +138,25 @@ def extract_link(article, base_url=FDA_NEWS_URL) -> str:
     return normalize_url(link.get("href"), base_url) if link is not None and link.get("href") else ""
 
 
+def _clean_press_anchor_title(title: str) -> tuple[str, str | None]:
+    title = normalize_text(title)
+    match = re.match(r"^((?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4})\s*[-–—]\s*(.+)$", title, re.IGNORECASE)
+    if match:
+        return normalize_text(match.group(2)), match.group(1)
+    return title, None
+
+
 def extract_title(article) -> str:
     if article is None:
         return ""
     heading = article.find(["h1", "h2", "h3", "h4", "h5"])
     if heading is not None:
-        title = normalize_text(heading.get_text(" ", strip=True))
+        title, _ = _clean_press_anchor_title(heading.get_text(" ", strip=True))
         if is_valid_news_title(title):
             return title
     link = article.find("a", href=True)
     if link is not None:
-        title = normalize_text(link.get_text(" ", strip=True))
+        title, _ = _clean_press_anchor_title(link.get_text(" ", strip=True))
         if is_valid_news_title(title):
             return title
     return ""
@@ -211,16 +221,25 @@ def _parse_container(container, base_url=FDA_NEWS_URL):
     url = extract_link(container, base_url)
     if not url:
         return None
-    return build_fda_news_item(title, url, _extract_date(container), _extract_summary(container, title))
+    date = _extract_date(container)
+    if date is None:
+        raw_link = container.find("a", href=True)
+        if raw_link is not None:
+            _, anchor_date = _clean_press_anchor_title(raw_link.get_text(" ", strip=True))
+            date = _parse_date(anchor_date)
+    return build_fda_news_item(title, url, date, _extract_summary(container, title))
 
 
 def _parse_anchor_fallback(soup, base_url=FDA_NEWS_URL):
     results = []
     for link in soup.find_all("a", href=True):
-        title = normalize_text(link.get_text(" ", strip=True))
         href = normalize_url(link.get("href"), base_url)
-        if is_valid_news_title(title) and href and not href.startswith("#"):
-            results.append(build_fda_news_item(title, href))
+        if not is_fda_press_announcement_url(href):
+            continue
+        raw_title = normalize_text(link.get_text(" ", strip=True))
+        title, anchor_date = _clean_press_anchor_title(raw_title)
+        if is_valid_news_title(title):
+            results.append(build_fda_news_item(title, href, anchor_date))
     return results
 
 
@@ -267,6 +286,43 @@ def _fetch_html(url, params=None):
     raise last_error or requests.RequestException(f"Unable to fetch {url}")
 
 
+def _parse_fda_rss(xml_content, max_items=DEFAULT_MAX_NEWS):
+    if not xml_content:
+        return []
+    try:
+        root = ET.fromstring(xml_content)
+    except ET.ParseError as exc:
+        print(f"FDA RSS PARSE ERROR: {type(exc).__name__}: {exc}", flush=True)
+        return []
+    results = []
+    for item in root.iter():
+        if item.tag.rsplit("}", 1)[-1].lower() != "item":
+            continue
+        fields = {}
+        for child in list(item):
+            fields[child.tag.rsplit("}", 1)[-1].lower()] = normalize_text(child.text or "")
+        title = fields.get("title", "")
+        url = normalize_url(fields.get("link", ""), FDA_PRESS_ANNOUNCEMENTS_URL)
+        if not title or not is_fda_press_announcement_url(url):
+            continue
+        published = fields.get("pubdate") or fields.get("published") or fields.get("date")
+        summary = fields.get("description", "")
+        results.append(build_fda_news_item(title, url, published, summary, source="FDA RSS"))
+        if len(results) >= max_items:
+            break
+    results = deduplicate_fda_news(results)[:max_items]
+    print(f"FDA RSS parsed={len(results)}", flush=True)
+    return results
+
+
+def _fetch_press_rss(max_news=DEFAULT_MAX_NEWS):
+    try:
+        xml_content = _fetch_html(FDA_PRESS_RELEASES_RSS_URL)
+    except requests.RequestException:
+        return []
+    return _parse_fda_rss(xml_content, max_news)
+
+
 def _filter_press_announcement_items(items):
     return [item for item in items if is_fda_press_announcement_url(item.get("url"))]
 
@@ -295,6 +351,11 @@ def _fetch_press_announcements(max_news=DEFAULT_MAX_NEWS, max_pages=DEFAULT_MAX_
     results = deduplicate_fda_news(results)[:max_news]
     if results:
         return results
+
+    rss_results = _fetch_press_rss(max_news)
+    if rss_results:
+        return rss_results
+
     try:
         html = _fetch_html(FDA_NEWSROOM_URL)
     except requests.RequestException:
