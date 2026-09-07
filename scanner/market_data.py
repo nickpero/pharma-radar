@@ -9,6 +9,8 @@ from datetime import datetime, timezone
 
 import requests
 
+from scanner.market_profile import get_market_profile
+
 
 YAHOO_CHART_URL = "https://query1.finance.yahoo.com/v8/finance/chart/{ticker}"
 REQUEST_TIMEOUT = 10
@@ -63,9 +65,7 @@ def get_market_snapshot(ticker, session=None):
         if previous is None and len(closes) >= 2:
             previous = _safe_float(closes[-2])
 
-        volume = None
-        if volumes:
-            volume = _safe_float(volumes[-1])
+        volume = _safe_float(volumes[-1]) if volumes else None
         avg_volume = _mean([_safe_float(v) for v in volumes[-21:-1]])
 
         change_pct = None
@@ -92,11 +92,12 @@ def get_market_snapshot(ticker, session=None):
 
 
 def enrich_market_data(events):
-    """Add market snapshots to events with a ticker, best effort."""
+    """Add market snapshot plus market profile to each event, best effort."""
     if not events:
         return []
 
     cache = {}
+    profile_cache = {}
     enriched = []
     for event in events:
         result = dict(event)
@@ -106,5 +107,13 @@ def enrich_market_data(events):
         snapshot = cache.get(ticker)
         if snapshot:
             result["market_data"] = snapshot
+
+        if ticker and ticker not in profile_cache:
+            profile_cache[ticker] = get_market_profile(ticker)
+        profile = profile_cache.get(ticker)
+        if profile:
+            result["market_profile"] = profile
+            result["market_cap"] = profile.get("market_cap")
+            result["short_interest_pct"] = profile.get("short_interest_pct")
         enriched.append(result)
     return enriched
