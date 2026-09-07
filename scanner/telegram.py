@@ -108,6 +108,9 @@ def format_catalyst_alert(alert):
     awareness = alert.get("market_awareness", event.get("market_awareness", "UNKNOWN"))
     price_change = alert.get("price_change_pct", event.get("price_change_pct"))
     volume_ratio = alert.get("volume_ratio", event.get("volume_ratio"))
+    event_surprise = alert.get("event_surprise", event.get("event_surprise", "UNKNOWN"))
+    market_cap = alert.get("market_cap", event.get("market_cap"))
+    short_interest = alert.get("short_interest_pct", event.get("short_interest_pct"))
 
     if alert_priority is None:
         priority_event = dict(event)
@@ -149,15 +152,21 @@ def format_catalyst_alert(alert):
         f"{trading_impact_icon} Trading Impact: {trading_impact}",
         f"{urgency_icon} Urgency: {urgency}",
         "",
+        "📊 TRADING INTELLIGENCE",
         f"🔥 Trading Setup: {setup_score}/100",
         f"⏱ Window: {window}",
         f"👀 Market Awareness: {awareness}",
+        f"🎯 Event Surprise: {event_surprise}",
     ])
 
     if price_change is not None:
         lines.append(f"📈 Price vs prev close: {float(price_change):+.2f}%")
     if volume_ratio is not None:
         lines.append(f"📊 Volume vs 20d avg: {float(volume_ratio):.1f}x")
+    if market_cap is not None:
+        lines.append(f"💰 Market Cap: ${float(market_cap) / 1_000_000:,.0f}M")
+    if short_interest is not None:
+        lines.append(f"🩳 Short Interest: {float(short_interest):.1f}%")
 
     return "\n".join(str(line) for line in lines)
 
