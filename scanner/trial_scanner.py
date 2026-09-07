@@ -8,6 +8,8 @@ from scanner.catalyst import classify_trial_changes
 from scanner.score import score_events
 from scanner.trading_intelligence import enrich_trading_events
 from scanner.trading_setup_41 import enrich_trading_setup
+from scanner.trading_setup_2 import enrich_trading_setup_2
+from scanner.reaction import enrich_reaction_classification
 from scanner.priority import enrich_alert_priorities, sort_by_alert_priority
 from scanner.alert_filter import filter_alerts
 from scanner.fda_enrichment import get_enriched_fda_news
@@ -64,8 +66,11 @@ def build_alert(ticker, company, program, nct_id, event, changes, trial):
         "event_surprise": event.get("event_surprise", "UNKNOWN"),
         "market_cap": event.get("market_cap"), "short_interest_pct": event.get("short_interest_pct"),
         "data_quality": event.get("data_quality", "LOW"), "event_timestamp": event.get("event_timestamp"),
-        "source": event.get("source", "CLINICALTRIALS"),
-        "source_type": event.get("source_type", "PRIMARY_CLINICAL"),
+        "source": event.get("source", "CLINICALTRIALS"), "source_type": event.get("source_type", "PRIMARY_CLINICAL"),
+        "reaction_strength": event.get("reaction_strength", "UNKNOWN"),
+        "reaction_interpretation": event.get("reaction_interpretation", "UNKNOWN"),
+        "reaction_classification": event.get("reaction_classification", "UNKNOWN"),
+        "trading_setup_version": event.get("trading_setup_version", "4"),
     }
     alert.update(_reaction_fields(event))
     return alert
@@ -81,15 +86,17 @@ def build_fda_alert(event):
         "trading_priority": event.get("trading_priority", 1), "urgency": event.get("urgency", "LOW"),
         "alert_priority": event.get("alert_priority", 0), "alert_tier": event.get("alert_tier", "LOW"),
         "trading_setup_score": event.get("trading_setup_score", 0),
-        "trading_window": event.get("trading_window", "UNKNOWN"),
-        "market_awareness": event.get("market_awareness", "UNKNOWN"),
+        "trading_window": event.get("trading_window", "UNKNOWN"), "market_awareness": event.get("market_awareness", "UNKNOWN"),
         "price_change_pct": event.get("price_change_pct"), "volume_ratio": event.get("volume_ratio"),
-        "event_surprise": event.get("event_surprise", "UNKNOWN"),
-        "market_cap": event.get("market_cap"), "short_interest_pct": event.get("short_interest_pct"),
-        "data_quality": event.get("data_quality", "LOW"), "event_timestamp": event.get("published_at"),
-        "source": event.get("source", "FDA"), "source_type": event.get("source_type", "PRIMARY_REGULATORY"),
-        "title": event.get("title", ""), "summary": event.get("summary", ""),
-        "url": event.get("url"), "published_at": event.get("published_at"),
+        "event_surprise": event.get("event_surprise", "UNKNOWN"), "market_cap": event.get("market_cap"),
+        "short_interest_pct": event.get("short_interest_pct"), "data_quality": event.get("data_quality", "LOW"),
+        "event_timestamp": event.get("published_at"), "source": event.get("source", "FDA"),
+        "source_type": event.get("source_type", "PRIMARY_REGULATORY"), "title": event.get("title", ""),
+        "summary": event.get("summary", ""), "url": event.get("url"), "published_at": event.get("published_at"),
+        "reaction_strength": event.get("reaction_strength", "UNKNOWN"),
+        "reaction_interpretation": event.get("reaction_interpretation", "UNKNOWN"),
+        "reaction_classification": event.get("reaction_classification", "UNKNOWN"),
+        "trading_setup_version": event.get("trading_setup_version", "4"),
     }
     alert.update(_reaction_fields(event))
     return alert
@@ -172,7 +179,8 @@ def scan(baseline=False):
 
     alerts = enrich_market_data(alerts)
     alerts = enrich_market_reactions(alerts)
-    alerts = [enrich_trading_setup(alert, market_data=alert.get("market_data")) for alert in alerts]
+    alerts = [enrich_reaction_classification(alert) for alert in alerts]
+    alerts = [enrich_trading_setup_2(alert, market_data=alert.get("market_data")) for alert in alerts]
     alerts = sort_by_alert_priority(alerts)
     save_state(new_state)
 
