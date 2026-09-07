@@ -40,6 +40,14 @@ def test_alert_summary():
                 "ticker": "CAPR",
                 "program": "deramiocel",
                 "nct_id": "NCT05126758",
+                "trading_setup_score": 88,
+                "trading_window": "0-2H",
+                "market_awareness": "LOW",
+                "event_surprise": "UNEXPECTED",
+                "price_change_pct": 5.5,
+                "volume_ratio": 3.2,
+                "market_cap": 250_000_000,
+                "short_interest_pct": 12.5,
                 "event": {
                     "type": "STATUS_CHANGE",
                     "subtype": "TRIAL_COMPLETED",
@@ -60,6 +68,14 @@ def test_alert_summary():
     assert "TRIAL_COMPLETED" in message
     assert "Score: 95/100" in message
     assert "CRITICAL" in message
+    assert "Trading Intelligence: Setup 88/100" in message
+    assert "Window 0-2H" in message
+    assert "Awareness LOW" in message
+    assert "Surprise UNEXPECTED" in message
+    assert "Price: +5.50%" in message
+    assert "Volume: 3.2x 20d" in message
+    assert "Market Cap: $250M" in message
+    assert "Short Interest: 12.5%" in message
     assert "Status: REVIEW" in message
 
     assert "%0A" not in message
@@ -97,4 +113,4 @@ if __name__ == "__main__":
 
     print(
         "✅ Main integration tests passed"
-  )
+    )
