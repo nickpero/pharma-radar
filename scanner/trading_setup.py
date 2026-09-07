@@ -1,6 +1,7 @@
 """Pharma Radar — Trading Setup scoring (Phase 4)."""
 
 from datetime import datetime, timezone
+import re
 
 
 SETUP_MAX = 100
@@ -97,6 +98,81 @@ def market_awareness(price_change_pct, volume_ratio):
     return "LOW"
 
 
+def infer_event_surprise(event):
+    """Infer surprise only from explicit expectation language; otherwise UNKNOWN."""
+    event = dict(event or {})
+    explicit = str(event.get("event_surprise") or "").upper()
+    if explicit in {"UNEXPECTED", "EXPECTED", "MIXED"}:
+        return explicit
+
+    text = " ".join(
+        str(event.get(key) or "")
+        for key in ("title", "summary", "content", "description", "event_text")
+    ).lower()
+    if not text:
+        return "UNKNOWN"
+
+    unexpected = (
+        r"\bunexpect(?:ed|edly)\b",
+        r"\bsurpris(?:e|ing|ed)\b",
+        r"\bahead of (?:expectations|consensus)\b",
+        r"\bbeats? (?:expectations|consensus)\b",
+        r"\babove (?:expectations|consensus)\b",
+        r"\bbelow (?:expectations|consensus)\b",
+        r"\bmiss(?:es|ed)? (?:expectations|consensus)\b",
+    )
+    expected = (
+        r"\bin line with (?:expectations|consensus)\b",
+        r"\bas expected\b",
+        r"\bmet expectations\b",
+        r"\bin line\b",
+    )
+    if any(re.search(pattern, text) for pattern in unexpected):
+        return "UNEXPECTED"
+    if any(re.search(pattern, text) for pattern in expected):
+        return "EXPECTED"
+    return "UNKNOWN"
+
+
+def surprise_score(event_surprise):
+    return {"UNEXPECTED": 7, "MIXED": 4, "EXPECTED": 1, "UNKNOWN": 0}.get(
+        str(event_surprise or "UNKNOWN").upper(), 0
+    )
+
+
+def market_cap_score(market_cap):
+    """Small-cap events receive more attention weight, not a directional signal."""
+    if market_cap is None:
+        return 0
+    try:
+        cap = float(market_cap)
+    except (TypeError, ValueError):
+        return 0
+    if cap < 300_000_000:
+        return 4
+    if cap < 1_000_000_000:
+        return 3
+    if cap < 5_000_000_000:
+        return 2
+    return 1
+
+
+def short_interest_score(short_interest_pct):
+    if short_interest_pct is None:
+        return 0
+    try:
+        value = float(short_interest_pct)
+    except (TypeError, ValueError):
+        return 0
+    if value >= 20:
+        return 4
+    if value >= 10:
+        return 3
+    if value >= 5:
+        return 2
+    return 1
+
+
 def build_trading_setup(event, market_data=None, now=None):
     """Build a deterministic 0-100 setup score from known information."""
     event = dict(event or {})
@@ -117,8 +193,13 @@ def build_trading_setup(event, market_data=None, now=None):
     price_change = market_data.get("price_change_pct")
     volume_ratio = market_data.get("volume_ratio")
 
+    surprise = infer_event_surprise(event)
+    market_cap = event.get("market_cap")
+    short_interest = event.get("short_interest_pct")
+
     total = catalyst_component + impact_component + urgency_component + confidence_component
     total += freshness + reaction_score(price_change, event.get("direction")) + volume_score(volume_ratio)
+    total += surprise_score(surprise) + market_cap_score(market_cap) + short_interest_score(short_interest)
     total = min(SETUP_MAX, total)
 
     return {
@@ -129,9 +210,12 @@ def build_trading_setup(event, market_data=None, now=None):
         "price_change_pct": price_change,
         "volume_ratio": volume_ratio,
         "market_awareness": market_awareness(price_change, volume_ratio),
-        "event_surprise": event.get("event_surprise", "UNKNOWN"),
-        "market_cap": event.get("market_cap"),
-        "short_interest_pct": event.get("short_interest_pct"),
+        "event_surprise": surprise,
+        "event_surprise_score": surprise_score(surprise),
+        "market_cap": market_cap,
+        "market_cap_score": market_cap_score(market_cap),
+        "short_interest_pct": short_interest,
+        "short_interest_score": short_interest_score(short_interest),
     }
 
 
