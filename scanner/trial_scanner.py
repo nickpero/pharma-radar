@@ -7,11 +7,13 @@ from scanner.relevance import is_relevant
 from scanner.catalyst import classify_trial_changes
 from scanner.score import score_events
 from scanner.trading_intelligence import enrich_trading_events
+from scanner.trading_setup import enrich_trading_setup
 from scanner.priority import enrich_alert_priorities, sort_by_alert_priority
 from scanner.alert_filter import filter_alerts
 from scanner.fda_enrichment import get_enriched_fda_news
 from scanner.fda_pipeline import process_fda_news, filter_fda_trading_alerts
 from scanner.regulatory_pipeline import scan_regulatory_sources
+from scanner.market_data import enrich_market_data
 
 WATCHLIST_FILE = Path("data/watchlist.json")
 
@@ -44,6 +46,14 @@ def build_alert(ticker, company, program, nct_id, event, changes, trial):
         "urgency": event.get("urgency", "LOW"),
         "alert_priority": event.get("alert_priority", 0),
         "alert_tier": event.get("alert_tier", "LOW"),
+        "trading_setup_score": event.get("trading_setup_score", 0),
+        "trading_window": event.get("trading_window", "UNKNOWN"),
+        "market_awareness": event.get("market_awareness", "UNKNOWN"),
+        "price_change_pct": event.get("price_change_pct"),
+        "volume_ratio": event.get("volume_ratio"),
+        "event_surprise": event.get("event_surprise", "UNKNOWN"),
+        "market_cap": event.get("market_cap"),
+        "short_interest_pct": event.get("short_interest_pct"),
         "source": event.get("source", "CLINICALTRIALS"),
         "source_type": event.get("source_type", "PRIMARY_CLINICAL"),
     }
@@ -68,6 +78,14 @@ def build_fda_alert(event):
         "urgency": event.get("urgency", "LOW"),
         "alert_priority": event.get("alert_priority", 0),
         "alert_tier": event.get("alert_tier", "LOW"),
+        "trading_setup_score": event.get("trading_setup_score", 0),
+        "trading_window": event.get("trading_window", "UNKNOWN"),
+        "market_awareness": event.get("market_awareness", "UNKNOWN"),
+        "price_change_pct": event.get("price_change_pct"),
+        "volume_ratio": event.get("volume_ratio"),
+        "event_surprise": event.get("event_surprise", "UNKNOWN"),
+        "market_cap": event.get("market_cap"),
+        "short_interest_pct": event.get("short_interest_pct"),
         "source": event.get("source", "FDA"),
         "source_type": event.get("source_type", "PRIMARY_REGULATORY"),
         "title": event.get("title", ""),
@@ -160,6 +178,9 @@ def scan(baseline=False):
         regulatory_result = {"ema_news": [], "sec_news": [], "news": [], "events": [], "alerts": []}
         errors.append({"ticker": "REGULATORY", "program": "EMA_SEC", "error": str(error)})
 
+    # Phase 4: enrich only actionable alerts with live market data.
+    alerts = enrich_market_data(alerts)
+    alerts = [enrich_trading_setup(alert, market_data=alert.get("market_data")) for alert in alerts]
     alerts = sort_by_alert_priority(alerts)
     save_state(new_state)
 
