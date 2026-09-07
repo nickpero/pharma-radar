@@ -5,15 +5,17 @@ from scanner.market_data import build_market_reaction
 
 def _points():
     base = datetime(2026, 9, 7, 14, 0, tzinfo=timezone.utc)
-    prices = [100, 101, 103, 105, 108, 110, 112, 115]
-    return [
-        {
-            "timestamp": base + timedelta(minutes=i * 5),
-            "price": price,
-            "volume": 1000 + i * 100,
-        }
-        for i, price in enumerate(prices)
-    ]
+    key_prices = {0: 100, 1: 101, 5: 103, 15: 105, 30: 110, 35: 115}
+    points = []
+    last_price = 100
+    for minute in range(36):
+        last_price = key_prices.get(minute, last_price)
+        points.append({
+            "timestamp": base + timedelta(minutes=minute),
+            "price": last_price,
+            "volume": 1000 + minute * 10,
+        })
+    return points
 
 
 def test_market_reaction_calculates_event_and_current_move():
@@ -38,9 +40,9 @@ def test_market_reaction_has_multi_window_and_extremes():
         now="2026-09-07T14:35:00+00:00",
     )
     assert result["reaction_1m_pct"] == 1.0
-    assert result["reaction_5m_pct"] == 1.0
+    assert result["reaction_5m_pct"] == 3.0
     assert result["reaction_15m_pct"] == 5.0
-    assert result["reaction_30m_pct"] == 12.0
+    assert result["reaction_30m_pct"] == 10.0
     assert result["post_catalyst_high"] == 115
     assert result["post_catalyst_low"] == 100
     assert result["pre_event_15m_pct"] is None
