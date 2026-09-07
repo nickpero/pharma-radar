@@ -20,7 +20,7 @@ jobs:
           pip install -r requirements.txt
       - name: Check Python syntax
         run: |
-          python -m py_compile scanner/fda_feed.py scanner/priority.py scanner/ema_feed.py scanner/sec_feed.py scanner/regulatory_pipeline.py scanner/market_data.py scanner/market_profile.py scanner/trading_setup.py scanner/trading_setup_41.py scanner/trading_setup_2.py scanner/reaction.py scanner/catalyst_memory.py scanner/historical_stats.py scanner/telegram.py scanner/test_phase4.py scanner/test_phase4_1.py scanner/test_phase5_1.py scanner/test_phase5_2_final.py scanner/test_reaction_pipeline.py scanner/test_phase5_3.py scanner/test_phase5_4.py scanner/test_phase5_5.py
+          python -m py_compile scanner/fda_feed.py scanner/priority.py scanner/ema_feed.py scanner/sec_feed.py scanner/regulatory_pipeline.py scanner/market_data.py scanner/market_profile.py scanner/trading_setup.py scanner/trading_setup_41.py scanner/trading_setup_2.py scanner/reaction.py scanner/catalyst_memory.py scanner/historical_stats.py scanner/telegram.py scanner/telegram_intelligence.py scanner/test_phase4.py scanner/test_phase4_1.py scanner/test_phase5_1.py scanner/test_phase5_2_final.py scanner/test_reaction_pipeline.py scanner/test_phase5_3.py scanner/test_phase5_4.py scanner/test_phase5_5.py scanner/test_telegram_intelligence.py
       - name: Run Catalyst tests
         run: |
           python -m scanner.test_catalyst
@@ -30,6 +30,7 @@ jobs:
           python -m scanner.test_alert_filter
           python -m scanner.test_trial_scanner
           python -m scanner.test_telegram
+          python -m scanner.test_telegram_intelligence
           python -m scanner.test_main
           python -m scanner.test_catalyst_score
           python -m scanner.test_trading_intelligence
