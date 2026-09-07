@@ -57,7 +57,7 @@ def get_urgency_icon(urgency):
 
 
 def format_catalyst_alert(alert):
-    """Crea il messaggio Telegram con Catalyst + Trading Intelligence 4.1."""
+    """Crea il messaggio Telegram con Catalyst + Trading Intelligence 5.1."""
     ticker = alert.get("ticker", "UNKNOWN")
     program = alert.get("program", "UNKNOWN")
     nct_id = alert.get("nct_id")
@@ -83,6 +83,14 @@ def format_catalyst_alert(alert):
     volume_ratio = alert.get("volume_ratio", event.get("volume_ratio"))
     market_cap = alert.get("market_cap", event.get("market_cap"))
     short_interest = alert.get("short_interest_pct", event.get("short_interest_pct"))
+    reaction = alert.get("market_reaction") or event.get("market_reaction") or {}
+    reaction_pct = alert.get("reaction_pct", reaction.get("reaction_pct"))
+    reaction_direction = alert.get("reaction_direction", reaction.get("reaction_direction", "UNKNOWN"))
+    reaction_status = alert.get("reaction_status", reaction.get("reaction_status", "UNAVAILABLE"))
+    reaction_5m = alert.get("reaction_5m_pct", reaction.get("reaction_5m_pct"))
+    reaction_15m = alert.get("reaction_15m_pct", reaction.get("reaction_15m_pct"))
+    reaction_30m = alert.get("reaction_30m_pct", reaction.get("reaction_30m_pct"))
+    reaction_60m = alert.get("reaction_60m_pct", reaction.get("reaction_60m_pct"))
     title = alert.get("title") or event.get("title") or ""
     summary = alert.get("summary") or event.get("summary") or ""
 
@@ -130,6 +138,18 @@ def format_catalyst_alert(alert):
         lines.append(f"💰 Market Cap: ${float(market_cap) / 1_000_000:,.0f}M")
     if short_interest is not None:
         lines.append(f"🩳 Short Interest: {float(short_interest):.1f}%")
+
+    if reaction_status == "AVAILABLE":
+        lines.extend(["", "⚡ MARKET REACTION"])
+        if reaction_pct is not None:
+            lines.append(f"📈 Reaction: {float(reaction_pct):+.2f}% ({reaction_direction})")
+        windows = [("5m", reaction_5m), ("15m", reaction_15m), ("30m", reaction_30m), ("60m", reaction_60m)]
+        available_windows = [f"{label} {float(value):+.2f}%" for label, value in windows if value is not None]
+        if available_windows:
+            lines.append("⏱ " + " | ".join(available_windows))
+    else:
+        lines.append("⚡ MARKET REACTION: UNAVAILABLE")
+
     source = alert.get("source") or event.get("source")
     if source:
         lines.append(f"🔎 Source: {source}")
