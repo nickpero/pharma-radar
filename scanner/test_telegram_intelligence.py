@@ -1,0 +1,57 @@
+from scanner.telegram_intelligence import alert_action, select_intelligent_alerts
+
+
+def _alert(ticker, priority, setup, tier, strength="UNKNOWN", interpretation="UNKNOWN"):
+    return {
+        "ticker": ticker,
+        "program": "drug",
+        "subtype": "FDA_APPROVAL",
+        "alert_priority": priority,
+        "alert_tier": tier,
+        "trading_setup_score": setup,
+        "reaction_strength": strength,
+        "reaction_interpretation": interpretation,
+    }
+
+
+def test_critical_is_immediate():
+    assert alert_action(_alert("NUVL", 100, 60, "CRITICAL")) == "IMMEDIATE"
+
+
+def test_high_strong_reaction_is_immediate():
+    assert alert_action(_alert("CAPR", 70, 65, "HIGH", "STRONG POSITIVE", "CONFIRMED")) == "IMMEDIATE"
+
+
+def test_high_without_strong_reaction_is_fast():
+    assert alert_action(_alert("ZYME", 65, 64, "HIGH")) == "FAST"
+
+
+def test_watch_requires_setup_and_reaction_context():
+    alert = _alert("RNA", 45, 80, "WATCH", "POSITIVE", "CONFIRMED")
+    assert alert_action(alert) == "WATCH"
+    assert alert_action(_alert("RNA", 45, 80, "WATCH")) == "SILENT"
+
+
+def test_deduplicates_by_company_program_subtype_and_keeps_highest_priority():
+    low = _alert("NUVL", 82, 70, "CRITICAL")
+    high = _alert("NUVL", 95, 85, "CRITICAL")
+    other = _alert("CAPR", 90, 80, "CRITICAL")
+    selected = select_intelligent_alerts([low, high, other])
+    assert len(selected) == 2
+    assert selected[0]["ticker"] == "NUVL"
+    assert selected[0]["alert_priority"] == 95
+
+
+def test_silent_alerts_are_filtered():
+    selected = select_intelligent_alerts([_alert("SVRA", 20, 30, "LOW")])
+    assert selected == []
+
+
+if __name__ == "__main__":
+    test_critical_is_immediate()
+    test_high_strong_reaction_is_immediate()
+    test_high_without_strong_reaction_is_fast()
+    test_watch_requires_setup_and_reaction_context()
+    test_deduplicates_by_company_program_subtype_and_keeps_highest_priority()
+    test_silent_alerts_are_filtered()
+    print("✅ Telegram intelligence tests passed")
