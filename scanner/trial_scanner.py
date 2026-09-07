@@ -16,6 +16,7 @@ from scanner.fda_enrichment import get_enriched_fda_news
 from scanner.fda_pipeline import process_fda_news, filter_fda_trading_alerts
 from scanner.regulatory_pipeline import scan_regulatory_sources
 from scanner.market_data import enrich_market_data, enrich_market_reactions
+from scanner.catalyst_memory import record_events, memory_summary
 
 WATCHLIST_FILE = Path("data/watchlist.json")
 
@@ -182,6 +183,11 @@ def scan(baseline=False):
     alerts = [enrich_reaction_classification(alert) for alert in alerts]
     alerts = [enrich_trading_setup_2(alert, market_data=alert.get("market_data")) for alert in alerts]
     alerts = sort_by_alert_priority(alerts)
+
+    memory_added = record_events(alerts)
+    memory_info = memory_summary()
+    print(f"Catalyst memory: +{memory_added} records, total={memory_info['records']}")
+
     save_state(new_state)
 
     print("\n========== SCAN SUMMARY ==========")
@@ -206,5 +212,6 @@ def scan(baseline=False):
         "fda_news": fda_result["news"], "fda_events": fda_result["events"], "fda_alerts": fda_result["alerts"],
         "ema_news": regulatory_result["ema_news"], "sec_news": regulatory_result["sec_news"],
         "regulatory_events": regulatory_result["events"], "regulatory_alerts": regulatory_result["alerts"],
+        "memory_added": memory_added, "memory": memory_info,
         "baseline": baseline,
     }
