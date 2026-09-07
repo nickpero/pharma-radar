@@ -9,7 +9,7 @@ def _event(ts, pct, interpretation="CONFIRMED"):
     return {
         "ticker": "NUVL", "program": "zidesamtinib", "subtype": "FDA_APPROVAL",
         "event_timestamp": ts,
-        "reaction": {"reaction_15m_pct": pct},
+        "market_reaction": {"reaction_15m_pct": pct},
         "reaction_interpretation": interpretation,
     }
 
