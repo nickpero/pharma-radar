@@ -25,11 +25,7 @@ def send_telegram(message):
         raise ValueError("Telegram message is empty")
     if len(message) > MAX_MESSAGE_LENGTH:
         message = message[:MAX_MESSAGE_LENGTH - 20] + "\n\n[TRUNCATED]"
-    response = requests.post(
-        f"{TELEGRAM_API}/bot{token}/sendMessage",
-        data={"chat_id": chat_id, "text": message, "disable_web_page_preview": True},
-        timeout=30,
-    )
+    response = requests.post(f"{TELEGRAM_API}/bot{token}/sendMessage", data={"chat_id": chat_id, "text": message, "disable_web_page_preview": True}, timeout=30)
     response.raise_for_status()
     return response.json()
 
@@ -57,7 +53,7 @@ def get_urgency_icon(urgency):
 
 
 def format_catalyst_alert(alert):
-    """Crea il messaggio Telegram con Catalyst + Trading Intelligence 5.1."""
+    """Crea il messaggio Telegram con Catalyst + Trading Intelligence 5.3."""
     ticker = alert.get("ticker", "UNKNOWN")
     program = alert.get("program", "UNKNOWN")
     nct_id = alert.get("nct_id")
@@ -75,10 +71,13 @@ def format_catalyst_alert(alert):
     urgency = event.get("urgency", alert.get("urgency", "LOW"))
     alert_priority = alert.get("alert_priority", event.get("alert_priority"))
     setup_score = alert.get("trading_setup_score", event.get("trading_setup_score", 0))
+    setup_version = alert.get("trading_setup_version", event.get("trading_setup_version", "4"))
     window = alert.get("trading_window", event.get("trading_window", "UNKNOWN"))
     awareness = alert.get("market_awareness", event.get("market_awareness", "UNKNOWN"))
     event_surprise = alert.get("event_surprise", event.get("event_surprise", "UNKNOWN"))
     data_quality = alert.get("data_quality", event.get("data_quality", "LOW"))
+    reaction_strength = alert.get("reaction_strength", event.get("reaction_strength", "UNKNOWN"))
+    reaction_interpretation = alert.get("reaction_interpretation", event.get("reaction_interpretation", "UNKNOWN"))
     price_change = alert.get("price_change_pct", event.get("price_change_pct"))
     volume_ratio = alert.get("volume_ratio", event.get("volume_ratio"))
     market_cap = alert.get("market_cap", event.get("market_cap"))
@@ -112,9 +111,7 @@ def format_catalyst_alert(alert):
         compact = " ".join(str(summary).split())
         lines.append(f"  {compact[:500]}")
 
-    lines.extend([
-        "", f"Event: {event_type}", f"Subtype: {subtype}",
-    ])
+    lines.extend(["", f"Event: {event_type}", f"Subtype: {subtype}"])
     old_value = event.get("old_value")
     new_value = event.get("new_value")
     if old_value is not None:
@@ -126,9 +123,10 @@ def format_catalyst_alert(alert):
         f"{get_direction_icon(direction)} Direction: {direction}", f"🏷 Label: {label}",
         f"{get_trading_impact_icon(trading_impact)} Trading Impact: {trading_impact}",
         f"{get_urgency_icon(urgency)} Urgency: {urgency}", "", "📊 TRADING INTELLIGENCE",
-        f"🔥 Trading Setup: {setup_score}/100", f"⏱ Window: {window}",
+        f"🔥 Trading Setup {setup_version}: {setup_score}/100", f"⏱ Window: {window}",
         f"👀 Market Awareness: {awareness}", f"🎯 Event Surprise: {event_surprise}",
         f"🧪 Data Quality: {data_quality}",
+        f"⚡ Reaction Strength: {reaction_strength}", f"🧭 Reaction Interpretation: {reaction_interpretation}",
     ])
     if price_change is not None:
         lines.append(f"📈 Price vs prev close: {float(price_change):+.2f}%")
