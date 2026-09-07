@@ -7,25 +7,20 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
       - name: Check Python syntax
         run: |
-          python -m py_compile scanner/fda_feed.py scanner/priority.py scanner/ema_feed.py scanner/sec_feed.py scanner/regulatory_pipeline.py scanner/market_data.py scanner/market_profile.py scanner/trading_setup.py scanner/test_phase4.py
-
+          python -m py_compile scanner/fda_feed.py scanner/priority.py scanner/ema_feed.py scanner/sec_feed.py scanner/regulatory_pipeline.py scanner/market_data.py scanner/market_profile.py scanner/trading_setup.py scanner/trading_setup_41.py scanner/test_phase4.py scanner/test_phase4_1.py
       - name: Run Catalyst tests
         run: |
           python -m scanner.test_catalyst
@@ -50,5 +45,6 @@ jobs:
           python -m scanner.test_regulatory_sources
           python -m scanner.test_trading_setup
           python -m scanner.test_phase4
+          python -m scanner.test_phase4_1
           python -c "from scanner.fda_news import get_fda_news; n=get_fda_news(max_news=50); print('FDA NEWS:', len(n)); [print(x.get('title'), '|', x.get('url')) for x in n]"
           python -m scanner.test_fda_live_matching
