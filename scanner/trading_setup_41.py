@@ -4,6 +4,7 @@ Keeps Phase 4 scoring stable while hardening timestamp resolution and data-quali
 """
 
 from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 
 from scanner.trading_setup import enrich_trading_setup as _base_enrich
 
@@ -23,17 +24,32 @@ def _timestamp(event):
     return None
 
 
-def _minutes_since(value, now=None):
+def _parse_timestamp(value):
+    """Parse ISO, RFC-2822/RSS, and date-only timestamps."""
     if not value:
         return None
+    text = str(value).strip()
     try:
-        dt = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
-        if dt.tzinfo is None:
-            dt = dt.replace(tzinfo=timezone.utc)
-        reference = now or datetime.now(timezone.utc)
-        return max(0.0, (reference - dt).total_seconds() / 60.0)
-    except (TypeError, ValueError):
+        dt = datetime.fromisoformat(text.replace("Z", "+00:00"))
+    except ValueError:
+        try:
+            dt = parsedate_to_datetime(text)
+        except (TypeError, ValueError, OverflowError):
+            return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(timezone.utc)
+
+
+def _minutes_since(value, now=None):
+    dt = _parse_timestamp(value)
+    if dt is None:
         return None
+    reference = now or datetime.now(timezone.utc)
+    if reference.tzinfo is None:
+        reference = reference.replace(tzinfo=timezone.utc)
+    reference = reference.astimezone(timezone.utc)
+    return max(0.0, (reference - dt).total_seconds() / 60.0)
 
 
 def _quality(event, market_data):
