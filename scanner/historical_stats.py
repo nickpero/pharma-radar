@@ -36,11 +36,14 @@ def _prior_only(event, rows):
     return result
 
 
+def _reaction(row):
+    return row.get("market_reaction") or row.get("reaction") or {}
+
+
 def _values(rows, key):
     values = []
     for row in rows:
-        reaction = row.get("reaction") or {}
-        value = _num(reaction.get(key))
+        value = _num(_reaction(row).get(key))
         if value is not None:
             values.append(value)
     return values
@@ -68,8 +71,7 @@ def _rate(rows, predicate):
 
 
 def _reaction_value(row):
-    reaction = row.get("reaction") or {}
-    return _num(reaction.get("reaction_15m_pct"))
+    return _num(_reaction(row).get("reaction_15m_pct"))
 
 
 def calculate_historical_stats(event, rows):
