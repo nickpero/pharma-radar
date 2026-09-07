@@ -44,6 +44,14 @@ def build_summary(result):
 
             tier = alert.get("alert_tier", event.get("alert_tier", "LOW"))
             priority = alert.get("alert_priority", event.get("alert_priority", 0))
+            setup_score = alert.get("trading_setup_score", event.get("trading_setup_score", 0))
+            window = alert.get("trading_window", event.get("trading_window", "UNKNOWN"))
+            awareness = alert.get("market_awareness", event.get("market_awareness", "UNKNOWN"))
+            surprise = alert.get("event_surprise", event.get("event_surprise", "UNKNOWN"))
+            price_change = alert.get("price_change_pct", event.get("price_change_pct"))
+            volume_ratio = alert.get("volume_ratio", event.get("volume_ratio"))
+            market_cap = alert.get("market_cap", event.get("market_cap"))
+            short_interest = alert.get("short_interest_pct", event.get("short_interest_pct"))
 
             lines.append(
                 f"• {alert.get('ticker', 'UNKNOWN')} — "
@@ -61,6 +69,18 @@ def build_summary(result):
                 f"  Score: {event.get('score', 0)}/100 — "
                 f"{event.get('label', 'LOW')}"
             )
+            lines.append(
+                f"  📊 Trading Intelligence: Setup {setup_score}/100 | "
+                f"Window {window} | Awareness {awareness} | Surprise {surprise}"
+            )
+            if price_change is not None:
+                lines.append(f"  📈 Price: {float(price_change):+.2f}%")
+            if volume_ratio is not None:
+                lines.append(f"  📊 Volume: {float(volume_ratio):.1f}x 20d")
+            if market_cap is not None:
+                lines.append(f"  💰 Market Cap: ${float(market_cap) / 1_000_000:,.0f}M")
+            if short_interest is not None:
+                lines.append(f"  🩳 Short Interest: {float(short_interest):.1f}%")
             lines.append("")
     else:
         lines.extend(["🟢 No catalyst alerts", ""])
