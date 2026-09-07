@@ -16,6 +16,21 @@ def test_nested_timestamp_resolves_window():
     assert result["event_timestamp"] == "2026-09-07T12:00:00+00:00"
 
 
+def test_rss_timestamp_resolves_window():
+    event = {
+        "published_at": "Thu, 03 Sep 2026 00:00:00 GMT",
+        "market_cap": 250_000_000,
+    }
+    result = enrich_trading_setup(
+        event,
+        {"price_change_pct": -0.07, "volume_ratio": 1.2},
+        datetime(2026, 9, 7, 14, 8, tzinfo=timezone.utc),
+    )
+    assert result["trading_window"] == "1-7D"
+    assert result["event_timestamp"] == "Thu, 03 Sep 2026 00:00:00 GMT"
+    assert result["data_quality"] == "HIGH"
+
+
 def test_data_quality_levels():
     event = {"published_at": "2026-09-07T12:00:00+00:00", "market_cap": 250_000_000, "short_interest_pct": 25}
     high = enrich_trading_setup(event, {"price_change_pct": 2, "volume_ratio": 2})
@@ -32,6 +47,7 @@ def test_unknown_timestamp_remains_explicit():
 
 if __name__ == "__main__":
     test_nested_timestamp_resolves_window()
+    test_rss_timestamp_resolves_window()
     test_data_quality_levels()
     test_unknown_timestamp_remains_explicit()
     print("Trading Intelligence Phase 4.1 tests passed")
