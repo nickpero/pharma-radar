@@ -130,6 +130,44 @@ def test_priority_tier_is_derived_when_missing():
     assert "PRIORITY: WATCH" in message
 
 
+def test_full_trading_intelligence_is_visible():
+    alert = {
+        "ticker": "NUVL",
+        "program": "zidesamtinib",
+        "nct_id": None,
+        "score": 100,
+        "label": "CRITICAL",
+        "trading_setup_score": 92,
+        "trading_window": "0-2H",
+        "market_awareness": "MEDIUM",
+        "event_surprise": "UNEXPECTED",
+        "price_change_pct": 6.25,
+        "volume_ratio": 3.5,
+        "market_cap": 250_000_000,
+        "short_interest_pct": 25.0,
+        "event": {
+            "type": "FDA_EVENT",
+            "severity": "HIGH",
+            "direction": "CATALYST",
+            "subtype": "FDA_APPROVAL",
+            "score": 100,
+            "label": "CRITICAL",
+            "trading_impact": "EXTREME",
+            "urgency": "IMMEDIATE",
+        },
+    }
+    message = format_catalyst_alert(alert)
+    assert "📊 TRADING INTELLIGENCE" in message
+    assert "Trading Setup: 92/100" in message
+    assert "Window: 0-2H" in message
+    assert "Market Awareness: MEDIUM" in message
+    assert "Event Surprise: UNEXPECTED" in message
+    assert "Price vs prev close: +6.25%" in message
+    assert "Volume vs 20d avg: 3.5x" in message
+    assert "Market Cap: $250M" in message
+    assert "Short Interest: 25.0%" in message
+
+
 if __name__ == "__main__":
     test_catalyst_message_format()
     test_real_newlines()
@@ -137,4 +175,5 @@ if __name__ == "__main__":
     test_unknown_direction()
     test_priority_hierarchy_is_visible()
     test_priority_tier_is_derived_when_missing()
+    test_full_trading_intelligence_is_visible()
     print("✅ Telegram formatter tests passed")
