@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.parse import urlparse
+import re
 
 import requests
 from bs4 import BeautifulSoup
@@ -62,7 +63,6 @@ def _extract_article_published_at(html: str):
         return None
     soup = BeautifulSoup(html, "html.parser")
 
-    # Prefer explicit machine-readable metadata.
     selectors = (
         ("meta", {"property": "article:published_time"}),
         ("meta", {"name": "article:published_time"}),
@@ -79,11 +79,25 @@ def _extract_article_published_at(html: str):
             if value:
                 return value
 
-    # Then inspect semantic time elements.
     for tag in soup.find_all("time"):
         value = tag.get("datetime") or tag.get_text(" ", strip=True)
         if value:
             normalized = normalize_date(value)
+            if normalized:
+                return normalized
+
+    # FDA press announcements expose the release date as visible article text,
+    # commonly immediately after "For Immediate Release:". This is the source
+    # used when machine-readable metadata is absent.
+    article_text = normalize_text(soup.get_text(" ", strip=True))
+    patterns = (
+        r"For Immediate Release:\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4})",
+        r"\b((?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4})\b",
+    )
+    for pattern in patterns:
+        match = re.search(pattern, article_text, re.IGNORECASE)
+        if match:
+            normalized = normalize_date(match.group(1))
             if normalized:
                 return normalized
 
