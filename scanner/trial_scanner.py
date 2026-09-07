@@ -7,7 +7,7 @@ from scanner.relevance import is_relevant
 from scanner.catalyst import classify_trial_changes
 from scanner.score import score_events
 from scanner.trading_intelligence import enrich_trading_events
-from scanner.trading_setup import enrich_trading_setup
+from scanner.trading_setup_41 import enrich_trading_setup
 from scanner.priority import enrich_alert_priorities, sort_by_alert_priority
 from scanner.alert_filter import filter_alerts
 from scanner.fda_enrichment import get_enriched_fda_news
@@ -29,31 +29,20 @@ def make_trial_key(ticker, program, trial):
 
 def build_alert(ticker, company, program, nct_id, event, changes, trial):
     return {
-        "ticker": ticker,
-        "company": company.get("company", ticker),
-        "program": program,
-        "nct_id": nct_id,
-        "event": event,
-        "changes": changes,
-        "trial": trial,
-        "score": event.get("score", 0),
-        "label": event.get("label", "LOW"),
-        "severity": event.get("severity", "LOW"),
-        "direction": event.get("direction", "UNKNOWN"),
-        "subtype": event.get("subtype"),
-        "trading_impact": event.get("trading_impact", "LOW"),
-        "trading_priority": event.get("trading_priority", 1),
-        "urgency": event.get("urgency", "LOW"),
-        "alert_priority": event.get("alert_priority", 0),
-        "alert_tier": event.get("alert_tier", "LOW"),
+        "ticker": ticker, "company": company.get("company", ticker), "program": program,
+        "nct_id": nct_id, "event": event, "changes": changes, "trial": trial,
+        "score": event.get("score", 0), "label": event.get("label", "LOW"),
+        "severity": event.get("severity", "LOW"), "direction": event.get("direction", "UNKNOWN"),
+        "subtype": event.get("subtype"), "trading_impact": event.get("trading_impact", "LOW"),
+        "trading_priority": event.get("trading_priority", 1), "urgency": event.get("urgency", "LOW"),
+        "alert_priority": event.get("alert_priority", 0), "alert_tier": event.get("alert_tier", "LOW"),
         "trading_setup_score": event.get("trading_setup_score", 0),
         "trading_window": event.get("trading_window", "UNKNOWN"),
         "market_awareness": event.get("market_awareness", "UNKNOWN"),
-        "price_change_pct": event.get("price_change_pct"),
-        "volume_ratio": event.get("volume_ratio"),
+        "price_change_pct": event.get("price_change_pct"), "volume_ratio": event.get("volume_ratio"),
         "event_surprise": event.get("event_surprise", "UNKNOWN"),
-        "market_cap": event.get("market_cap"),
-        "short_interest_pct": event.get("short_interest_pct"),
+        "market_cap": event.get("market_cap"), "short_interest_pct": event.get("short_interest_pct"),
+        "data_quality": event.get("data_quality", "LOW"), "event_timestamp": event.get("event_timestamp"),
         "source": event.get("source", "CLINICALTRIALS"),
         "source_type": event.get("source_type", "PRIMARY_CLINICAL"),
     }
@@ -61,37 +50,23 @@ def build_alert(ticker, company, program, nct_id, event, changes, trial):
 
 def build_fda_alert(event):
     return {
-        "ticker": event.get("ticker", "UNKNOWN"),
-        "company": event.get("company", "UNKNOWN"),
-        "program": event.get("program", "UNKNOWN"),
-        "nct_id": None,
-        "event": event,
-        "changes": {},
-        "trial": {},
-        "score": event.get("score", 0),
-        "label": event.get("label", "LOW"),
-        "severity": event.get("severity", "LOW"),
-        "direction": event.get("direction", "UNKNOWN"),
-        "subtype": event.get("subtype"),
-        "trading_impact": event.get("trading_impact", "LOW"),
-        "trading_priority": event.get("trading_priority", 1),
-        "urgency": event.get("urgency", "LOW"),
-        "alert_priority": event.get("alert_priority", 0),
-        "alert_tier": event.get("alert_tier", "LOW"),
+        "ticker": event.get("ticker", "UNKNOWN"), "company": event.get("company", "UNKNOWN"),
+        "program": event.get("program", "UNKNOWN"), "nct_id": None, "event": event,
+        "changes": {}, "trial": {}, "score": event.get("score", 0), "label": event.get("label", "LOW"),
+        "severity": event.get("severity", "LOW"), "direction": event.get("direction", "UNKNOWN"),
+        "subtype": event.get("subtype"), "trading_impact": event.get("trading_impact", "LOW"),
+        "trading_priority": event.get("trading_priority", 1), "urgency": event.get("urgency", "LOW"),
+        "alert_priority": event.get("alert_priority", 0), "alert_tier": event.get("alert_tier", "LOW"),
         "trading_setup_score": event.get("trading_setup_score", 0),
         "trading_window": event.get("trading_window", "UNKNOWN"),
         "market_awareness": event.get("market_awareness", "UNKNOWN"),
-        "price_change_pct": event.get("price_change_pct"),
-        "volume_ratio": event.get("volume_ratio"),
+        "price_change_pct": event.get("price_change_pct"), "volume_ratio": event.get("volume_ratio"),
         "event_surprise": event.get("event_surprise", "UNKNOWN"),
-        "market_cap": event.get("market_cap"),
-        "short_interest_pct": event.get("short_interest_pct"),
-        "source": event.get("source", "FDA"),
-        "source_type": event.get("source_type", "PRIMARY_REGULATORY"),
-        "title": event.get("title", ""),
-        "summary": event.get("summary", ""),
-        "url": event.get("url"),
-        "published_at": event.get("published_at"),
+        "market_cap": event.get("market_cap"), "short_interest_pct": event.get("short_interest_pct"),
+        "data_quality": event.get("data_quality", "LOW"), "event_timestamp": event.get("published_at"),
+        "source": event.get("source", "FDA"), "source_type": event.get("source_type", "PRIMARY_REGULATORY"),
+        "title": event.get("title", ""), "summary": event.get("summary", ""),
+        "url": event.get("url"), "published_at": event.get("published_at"),
     }
 
 
@@ -109,14 +84,8 @@ def scan_fda(watchlist, max_items=50):
 def scan(baseline=False):
     watchlist = load_watchlist()
     old_state = load_state()
-    new_state = {}
-    detected_changes = []
-    alerts = []
-    errors = []
-    relevant_details = []
-    total_trials = 0
-    relevant_trials = 0
-    filtered_trials = 0
+    new_state, detected_changes, alerts, errors, relevant_details = {}, [], [], [], []
+    total_trials = relevant_trials = filtered_trials = 0
 
     for ticker, company in watchlist.items():
         for program in company.get("programs", []):
@@ -127,7 +96,6 @@ def scan(baseline=False):
                 print(f"ERROR searching {ticker} - {program}: {error}")
                 errors.append({"ticker": ticker, "program": program, "error": str(error)})
                 continue
-
             for trial in trials:
                 nct_id = trial.get("nct_id")
                 if not nct_id:
@@ -143,7 +111,6 @@ def scan(baseline=False):
                 old_trial = old_state.get(key)
                 if baseline:
                     continue
-
                 if old_trial:
                     trial_changes = detect_changes(old_trial, trial)
                     if not trial_changes:
@@ -178,7 +145,6 @@ def scan(baseline=False):
         regulatory_result = {"ema_news": [], "sec_news": [], "news": [], "events": [], "alerts": []}
         errors.append({"ticker": "REGULATORY", "program": "EMA_SEC", "error": str(error)})
 
-    # Phase 4: enrich only actionable alerts with live market data.
     alerts = enrich_market_data(alerts)
     alerts = [enrich_trading_setup(alert, market_data=alert.get("market_data")) for alert in alerts]
     alerts = sort_by_alert_priority(alerts)
@@ -200,21 +166,12 @@ def scan(baseline=False):
     print("===================================")
 
     return {
-        "companies": len(watchlist),
-        "total_trials": total_trials,
-        "relevant_trials": relevant_trials,
-        "filtered_trials": filtered_trials,
-        "detected_changes": detected_changes,
-        "changes": alerts,
-        "alerts": alerts,
-        "errors": errors,
-        "relevant_details": relevant_details,
-        "fda_news": fda_result["news"],
-        "fda_events": fda_result["events"],
-        "fda_alerts": fda_result["alerts"],
-        "ema_news": regulatory_result["ema_news"],
-        "sec_news": regulatory_result["sec_news"],
-        "regulatory_events": regulatory_result["events"],
-        "regulatory_alerts": regulatory_result["alerts"],
+        "companies": len(watchlist), "total_trials": total_trials, "relevant_trials": relevant_trials,
+        "filtered_trials": filtered_trials, "detected_changes": detected_changes, "changes": alerts,
+        "alerts": alerts, "errors": errors, "relevant_details": relevant_details,
+        "fda_news": fda_result["news"], "fda_events": fda_result["events"], "fda_alerts": fda_result["alerts"],
+        "ema_news": regulatory_result["ema_news"], "sec_news": regulatory_result["sec_news"],
+        "regulatory_events": regulatory_result["events"], "regulatory_alerts": regulatory_result["alerts"],
         "baseline": baseline,
     }
+
