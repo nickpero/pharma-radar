@@ -13,7 +13,7 @@ from scanner.alert_filter import filter_alerts
 from scanner.fda_enrichment import get_enriched_fda_news
 from scanner.fda_pipeline import process_fda_news, filter_fda_trading_alerts
 from scanner.regulatory_pipeline import scan_regulatory_sources
-from scanner.market_data import enrich_market_data
+from scanner.market_data import enrich_market_data, enrich_market_reactions
 
 WATCHLIST_FILE = Path("data/watchlist.json")
 
@@ -27,8 +27,29 @@ def make_trial_key(ticker, program, trial):
     return f"{ticker}:{program}:{trial.get('nct_id')}"
 
 
-def build_alert(ticker, company, program, nct_id, event, changes, trial):
+def _reaction_fields(event):
+    reaction = event.get("market_reaction") or {}
     return {
+        "market_reaction": reaction,
+        "reaction_status": reaction.get("reaction_status", "UNAVAILABLE"),
+        "reaction_pct": reaction.get("reaction_pct"),
+        "reaction_direction": reaction.get("reaction_direction", "UNKNOWN"),
+        "reaction_1m_pct": reaction.get("reaction_1m_pct"),
+        "reaction_5m_pct": reaction.get("reaction_5m_pct"),
+        "reaction_15m_pct": reaction.get("reaction_15m_pct"),
+        "reaction_30m_pct": reaction.get("reaction_30m_pct"),
+        "reaction_60m_pct": reaction.get("reaction_60m_pct"),
+        "post_catalyst_high": reaction.get("post_catalyst_high"),
+        "post_catalyst_low": reaction.get("post_catalyst_low"),
+        "gap_pct": reaction.get("gap_pct"),
+        "pre_event_15m_pct": reaction.get("pre_event_15m_pct"),
+        "event_price": reaction.get("event_price"),
+        "current_price": reaction.get("current_price"),
+    }
+
+
+def build_alert(ticker, company, program, nct_id, event, changes, trial):
+    alert = {
         "ticker": ticker, "company": company.get("company", ticker), "program": program,
         "nct_id": nct_id, "event": event, "changes": changes, "trial": trial,
         "score": event.get("score", 0), "label": event.get("label", "LOW"),
@@ -46,10 +67,12 @@ def build_alert(ticker, company, program, nct_id, event, changes, trial):
         "source": event.get("source", "CLINICALTRIALS"),
         "source_type": event.get("source_type", "PRIMARY_CLINICAL"),
     }
+    alert.update(_reaction_fields(event))
+    return alert
 
 
 def build_fda_alert(event):
-    return {
+    alert = {
         "ticker": event.get("ticker", "UNKNOWN"), "company": event.get("company", "UNKNOWN"),
         "program": event.get("program", "UNKNOWN"), "nct_id": None, "event": event,
         "changes": {}, "trial": {}, "score": event.get("score", 0), "label": event.get("label", "LOW"),
@@ -68,6 +91,8 @@ def build_fda_alert(event):
         "title": event.get("title", ""), "summary": event.get("summary", ""),
         "url": event.get("url"), "published_at": event.get("published_at"),
     }
+    alert.update(_reaction_fields(event))
+    return alert
 
 
 def scan_fda(watchlist, max_items=50):
@@ -146,6 +171,7 @@ def scan(baseline=False):
         errors.append({"ticker": "REGULATORY", "program": "EMA_SEC", "error": str(error)})
 
     alerts = enrich_market_data(alerts)
+    alerts = enrich_market_reactions(alerts)
     alerts = [enrich_trading_setup(alert, market_data=alert.get("market_data")) for alert in alerts]
     alerts = sort_by_alert_priority(alerts)
     save_state(new_state)
@@ -174,4 +200,3 @@ def scan(baseline=False):
         "regulatory_events": regulatory_result["events"], "regulatory_alerts": regulatory_result["alerts"],
         "baseline": baseline,
     }
-
