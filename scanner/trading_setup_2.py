@@ -22,14 +22,17 @@ def _reaction(event):
 def _parse_timestamp(value):
     if not value:
         return None
-    text = str(value).strip()
-    try:
-        dt = datetime.fromisoformat(text.replace("Z", "+00:00"))
-    except ValueError:
+    if isinstance(value, datetime):
+        dt = value
+    else:
+        text = str(value).strip()
         try:
-            dt = parsedate_to_datetime(text)
-        except (TypeError, ValueError, OverflowError):
-            return None
+            dt = datetime.fromisoformat(text.replace("Z", "+00:00"))
+        except ValueError:
+            try:
+                dt = parsedate_to_datetime(text)
+            except (TypeError, ValueError, OverflowError):
+                return None
     if dt.tzinfo is None:
         dt = dt.replace(tzinfo=timezone.utc)
     return dt.astimezone(timezone.utc)
@@ -39,10 +42,10 @@ def _minutes_since(value, now=None):
     dt = _parse_timestamp(value)
     if dt is None:
         return None
-    reference = now or datetime.now(timezone.utc)
-    if reference.tzinfo is None:
-        reference = reference.replace(tzinfo=timezone.utc)
-    return max(0.0, (reference.astimezone(timezone.utc) - dt).total_seconds() / 60.0)
+    reference = _parse_timestamp(now) if now is not None else datetime.now(timezone.utc)
+    if reference is None:
+        return None
+    return max(0.0, (reference - dt).total_seconds() / 60.0)
 
 
 def reaction_component(event):
