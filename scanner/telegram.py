@@ -123,10 +123,10 @@ def format_catalyst_alert(alert):
         f"{get_direction_icon(direction)} Direction: {direction}", f"🏷 Label: {label}",
         f"{get_trading_impact_icon(trading_impact)} Trading Impact: {trading_impact}",
         f"{get_urgency_icon(urgency)} Urgency: {urgency}", "", "📊 TRADING INTELLIGENCE",
-        f"🔥 Trading Setup {setup_version}: {setup_score}/100", f"⏱ Window: {window}",
+        f"🔥 Trading Setup: {setup_score}/100", f"🧠 Setup Version: {setup_version}", f"⏱ Window: {window}",
         f"👀 Market Awareness: {awareness}", f"🎯 Event Surprise: {event_surprise}",
-        f"🧪 Data Quality: {data_quality}",
-        f"⚡ Reaction Strength: {reaction_strength}", f"🧭 Reaction Interpretation: {reaction_interpretation}",
+        f"🧪 Data Quality: {data_quality}", f"⚡ Reaction Strength: {reaction_strength}",
+        f"🧭 Reaction Interpretation: {reaction_interpretation}",
     ])
     if price_change is not None:
         lines.append(f"📈 Price vs prev close: {float(price_change):+.2f}%")
