@@ -86,7 +86,7 @@ def get_urgency_icon(urgency):
 
 
 def format_catalyst_alert(alert):
-    """Crea il messaggio Telegram con gerarchia operativa P2.2."""
+    """Crea il messaggio Telegram con Catalyst + Trading Intelligence."""
     ticker = alert.get("ticker", "UNKNOWN")
     program = alert.get("program", "UNKNOWN")
     nct_id = alert.get("nct_id", "UNKNOWN")
@@ -102,17 +102,16 @@ def format_catalyst_alert(alert):
     subtype = event.get("subtype", alert.get("subtype", ""))
     trading_impact = event.get("trading_impact", alert.get("trading_impact", "LOW"))
     urgency = event.get("urgency", alert.get("urgency", "LOW"))
-    alert_priority = event.get("alert_priority", alert.get("alert_priority"))
+    alert_priority = alert.get("alert_priority", event.get("alert_priority"))
+    setup_score = alert.get("trading_setup_score", event.get("trading_setup_score", 0))
+    window = alert.get("trading_window", event.get("trading_window", "UNKNOWN"))
+    awareness = alert.get("market_awareness", event.get("market_awareness", "UNKNOWN"))
+    price_change = alert.get("price_change_pct", event.get("price_change_pct"))
+    volume_ratio = alert.get("volume_ratio", event.get("volume_ratio"))
 
-    # Telegram must remain robust for legacy/manual alerts that do not yet
-    # carry the unified P2.1 priority field.
     if alert_priority is None:
         priority_event = dict(event)
-        priority_event.update({
-            "score": score,
-            "trading_impact": trading_impact,
-            "urgency": urgency,
-        })
+        priority_event.update({"score": score, "trading_impact": trading_impact, "urgency": urgency})
         alert_priority = enrich_alert_priority(priority_event).get("alert_priority", 0)
 
     alert_tier = event.get("alert_tier", alert.get("alert_tier")) or get_alert_tier(alert_priority)
@@ -143,13 +142,22 @@ def format_catalyst_alert(alert):
 
     lines.extend([
         "",
-        f"🎯 Score: {score}/100",
+        f"🎯 Catalyst Score: {score}/100",
         f"{severity_icon} Severity: {severity}",
         f"{direction_icon} Direction: {direction}",
         f"🏷 Label: {label}",
         f"{trading_impact_icon} Trading Impact: {trading_impact}",
         f"{urgency_icon} Urgency: {urgency}",
+        "",
+        f"🔥 Trading Setup: {setup_score}/100",
+        f"⏱ Window: {window}",
+        f"👀 Market Awareness: {awareness}",
     ])
+
+    if price_change is not None:
+        lines.append(f"📈 Price vs prev close: {float(price_change):+.2f}%")
+    if volume_ratio is not None:
+        lines.append(f"📊 Volume vs 20d avg: {float(volume_ratio):.1f}x")
 
     return "\n".join(str(line) for line in lines)
 
