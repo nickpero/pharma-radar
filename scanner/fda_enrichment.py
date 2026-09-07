@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 import requests
 from bs4 import BeautifulSoup
 
-from scanner.fda_feed import get_fda_news, is_fda_press_announcement_url, normalize_text
+from scanner.fda_feed import get_fda_news, is_fda_press_announcement_url, normalize_text, normalize_date
 
 FDA_HOSTS = {"www.fda.gov", "fda.gov"}
 FDA_ALLOWED_PREFIXES = (
@@ -56,8 +56,42 @@ def _extract_article_text(html: str, title: str = "") -> str:
     return text[:12000]
 
 
+def _extract_article_published_at(html: str):
+    """Extract the article's own publication timestamp when the RSS item lacks one."""
+    if not html:
+        return None
+    soup = BeautifulSoup(html, "html.parser")
+
+    # Prefer explicit machine-readable metadata.
+    selectors = (
+        ("meta", {"property": "article:published_time"}),
+        ("meta", {"name": "article:published_time"}),
+        ("meta", {"name": "date"}),
+        ("meta", {"name": "dcterms.date"}),
+        ("meta", {"name": "DC.date"}),
+        ("meta", {"name": "publishdate"}),
+        ("meta", {"name": "published"}),
+    )
+    for tag_name, attrs in selectors:
+        tag = soup.find(tag_name, attrs=attrs)
+        if tag and tag.get("content"):
+            value = normalize_date(tag.get("content"))
+            if value:
+                return value
+
+    # Then inspect semantic time elements.
+    for tag in soup.find_all("time"):
+        value = tag.get("datetime") or tag.get_text(" ", strip=True)
+        if value:
+            normalized = normalize_date(value)
+            if normalized:
+                return normalized
+
+    return None
+
+
 def enrich_fda_news_item(news_item: dict) -> dict:
-    """Fetch and attach official FDA article body text to one feed item."""
+    """Fetch and attach official FDA article body text and publication time."""
     if not isinstance(news_item, dict):
         return news_item
     enriched = dict(news_item)
@@ -67,7 +101,13 @@ def enrich_fda_news_item(news_item: dict) -> dict:
     try:
         response = requests.get(url, headers=HEADERS, timeout=ARTICLE_TIMEOUT)
         response.raise_for_status()
-        content = _extract_article_text(response.text, enriched.get("title", ""))
+        html = response.text
+        content = _extract_article_text(html, enriched.get("title", ""))
+        if not enriched.get("published_at"):
+            published_at = _extract_article_published_at(html)
+            if published_at:
+                enriched["published_at"] = published_at
+                enriched["event_timestamp"] = published_at
     except requests.RequestException as exc:
         print(f"FDA ENRICH ERROR url={url} error={type(exc).__name__}: {exc}", flush=True)
         return enriched
