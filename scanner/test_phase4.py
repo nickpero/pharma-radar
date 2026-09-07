@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 
 from scanner.market_profile import get_market_profile
 from scanner.market_data import enrich_market_data
-from scanner.market_profile import get_market_profile
+import scanner.market_data as market_data_module
 from scanner.trading_setup import (
     infer_event_surprise,
     surprise_score,
@@ -84,7 +84,7 @@ def test_phase4_inputs_change_setup_score():
     assert high["short_interest_score"] == 4
 
 
-def test_phase4_end_to_end_market_enrichment_to_setup(monkeypatch):
+def test_phase4_end_to_end_market_enrichment_to_setup():
     alert = {
         "ticker": "TEST",
         "score": 80,
@@ -96,21 +96,24 @@ def test_phase4_end_to_end_market_enrichment_to_setup(monkeypatch):
         "published_at": "2026-09-07T08:00:00+00:00",
     }
 
-    monkeypatch.setattr(
-        "scanner.market_data.get_market_snapshot",
-        lambda ticker: {"price_change_pct": 6.0, "volume_ratio": 3.5},
-    )
-    monkeypatch.setattr(
-        "scanner.market_data.get_market_profile",
-        lambda ticker: {
-            "ticker": ticker,
-            "market_cap": 250_000_000,
-            "short_interest_pct": 25.0,
-            "market_profile_source": "TEST",
-        },
-    )
+    original_snapshot = market_data_module.get_market_snapshot
+    original_profile = market_data_module.get_market_profile
+    market_data_module.get_market_snapshot = lambda ticker: {
+        "price_change_pct": 6.0,
+        "volume_ratio": 3.5,
+    }
+    market_data_module.get_market_profile = lambda ticker: {
+        "ticker": ticker,
+        "market_cap": 250_000_000,
+        "short_interest_pct": 25.0,
+        "market_profile_source": "TEST",
+    }
+    try:
+        enriched = enrich_market_data([alert])
+    finally:
+        market_data_module.get_market_snapshot = original_snapshot
+        market_data_module.get_market_profile = original_profile
 
-    enriched = enrich_market_data([alert])
     assert enriched[0]["market_data"]["volume_ratio"] == 3.5
     assert enriched[0]["market_cap"] == 250_000_000
     assert enriched[0]["short_interest_pct"] == 25.0
@@ -134,4 +137,5 @@ if __name__ == "__main__":
     test_event_surprise_is_conservative()
     test_market_cap_and_short_interest_scores()
     test_phase4_inputs_change_setup_score()
+    test_phase4_end_to_end_market_enrichment_to_setup()
     print("Trading Intelligence Phase 4 tests passed")
