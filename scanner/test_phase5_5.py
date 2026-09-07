@@ -16,11 +16,7 @@ def _event(ts, pct, interpretation="CONFIRMED"):
 
 def test_historical_stats_exclude_future_events():
     current = _event("2026-09-07T14:00:00Z", 0)
-    rows = [
-        _event("2026-08-01T14:00:00Z", 10),
-        _event("2026-08-15T14:00:00Z", -4, "DIVERGENCE"),
-        _event("2026-09-08T14:00:00Z", 100),
-    ]
+    rows = [_event("2026-08-01T14:00:00Z", 10), _event("2026-08-15T14:00:00Z", -4, "DIVERGENCE"), _event("2026-09-08T14:00:00Z", 100)]
     stats = calculate_historical_stats(current, rows)
     assert stats["sample_size"] == 2
     assert stats["reaction_horizons"]["reaction_15m_pct"]["mean_pct"] == 3.0
@@ -42,10 +38,13 @@ def test_enrichment_uses_persistent_memory():
         record_events([_event("2026-08-03T14:00:00Z", -2, "DIVERGENCE")], path)
         current = _event("2026-09-07T14:00:00Z", 0)
         result = enrich_historical_stats(current, path=path)
+        stats = result["historical_stats"]
         assert result["historical_sample_size"] == 3
         assert result["historical_confidence"] == "MEDIUM"
-        assert result["historical_stats"]["positive_rate_15m_pct"] == 66.7
-        assert result["historical_stats"]["divergence_rate_pct"] == 33.3
+        assert stats["reaction_horizons"]["reaction_15m_pct"]["mean_pct"] == 2.67
+        assert stats["positive_rate_15m_pct"] == 66.7
+        assert stats["negative_rate_15m_pct"] == 33.3
+        assert stats["divergence_rate_pct"] == 33.3
 
 
 if __name__ == "__main__":
