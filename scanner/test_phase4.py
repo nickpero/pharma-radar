@@ -1,12 +1,15 @@
 from datetime import datetime, timezone
 
 from scanner.market_profile import get_market_profile
+from scanner.market_data import enrich_market_data
+from scanner.market_profile import get_market_profile
 from scanner.trading_setup import (
     infer_event_surprise,
     surprise_score,
     market_cap_score,
     short_interest_score,
     build_trading_setup,
+    enrich_trading_setup,
 )
 
 
@@ -79,6 +82,51 @@ def test_phase4_inputs_change_setup_score():
     assert high["event_surprise_score"] == 7
     assert high["market_cap_score"] == 4
     assert high["short_interest_score"] == 4
+
+
+def test_phase4_end_to_end_market_enrichment_to_setup(monkeypatch):
+    alert = {
+        "ticker": "TEST",
+        "score": 80,
+        "trading_impact": "EXTREME",
+        "urgency": "IMMEDIATE",
+        "match_confidence": "HIGH",
+        "direction": "POSITIVE",
+        "title": "Results beat expectations",
+        "published_at": "2026-09-07T08:00:00+00:00",
+    }
+
+    monkeypatch.setattr(
+        "scanner.market_data.get_market_snapshot",
+        lambda ticker: {"price_change_pct": 6.0, "volume_ratio": 3.5},
+    )
+    monkeypatch.setattr(
+        "scanner.market_data.get_market_profile",
+        lambda ticker: {
+            "ticker": ticker,
+            "market_cap": 250_000_000,
+            "short_interest_pct": 25.0,
+            "market_profile_source": "TEST",
+        },
+    )
+
+    enriched = enrich_market_data([alert])
+    assert enriched[0]["market_data"]["volume_ratio"] == 3.5
+    assert enriched[0]["market_cap"] == 250_000_000
+    assert enriched[0]["short_interest_pct"] == 25.0
+
+    final = enrich_trading_setup(
+        enriched[0],
+        market_data=enriched[0].get("market_data"),
+        now=datetime(2026, 9, 7, 8, 5, tzinfo=timezone.utc),
+    )
+
+    assert final["event_surprise"] == "UNEXPECTED"
+    assert final["market_awareness"] == "MEDIUM"
+    assert final["trading_window"] == "0-2H"
+    assert final["trading_setup_score"] > 0
+    assert final["market_cap_score"] == 4
+    assert final["short_interest_score"] == 4
 
 
 if __name__ == "__main__":
