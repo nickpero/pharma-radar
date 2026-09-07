@@ -1,25 +1,20 @@
 """
 Pharma Radar — Telegram Alerts
 
-Gestisce l'invio degli alert Pharma Radar
-tramite Telegram Bot API.
+Gestisce l'invio degli alert Pharma Radar tramite Telegram Bot API.
 """
 
 import os
 import requests
-
 from scanner.priority import get_alert_tier, get_alert_tier_icon, enrich_alert_priority
-
 
 TELEGRAM_API = "https://api.telegram.org"
 MAX_MESSAGE_LENGTH = 4096
 
 
 def send_telegram(message):
-    """Invia un messaggio Telegram usando Bot API."""
     token = os.getenv("TELEGRAM_BOT_TOKEN")
     chat_id = os.getenv("TELEGRAM_CHAT_ID")
-
     if not token:
         raise RuntimeError("TELEGRAM_BOT_TOKEN is not configured")
     if not chat_id:
@@ -28,17 +23,13 @@ def send_telegram(message):
         message = str(message)
     if not message.strip():
         raise ValueError("Telegram message is empty")
-
     if len(message) > MAX_MESSAGE_LENGTH:
         message = message[:MAX_MESSAGE_LENGTH - 20] + "\n\n[TRUNCATED]"
-
-    url = f"{TELEGRAM_API}/bot{token}/sendMessage"
-    payload = {
-        "chat_id": chat_id,
-        "text": message,
-        "disable_web_page_preview": True,
-    }
-    response = requests.post(url, data=payload, timeout=30)
+    response = requests.post(
+        f"{TELEGRAM_API}/bot{token}/sendMessage",
+        data={"chat_id": chat_id, "text": message, "disable_web_page_preview": True},
+        timeout=30,
+    )
     response.raise_for_status()
     return response.json()
 
@@ -54,42 +45,22 @@ def get_direction_icon(direction):
 
 def get_severity_icon(label):
     label = str(label or "LOW").upper()
-    if label == "CRITICAL":
-        return "🚨"
-    if label == "HIGH":
-        return "🔴"
-    if label == "MEDIUM":
-        return "🟠"
-    return "⚪"
+    return {"CRITICAL": "🚨", "HIGH": "🔴", "MEDIUM": "🟠"}.get(label, "⚪")
 
 
 def get_trading_impact_icon(impact):
-    impact = str(impact or "LOW").upper()
-    if impact == "EXTREME":
-        return "🔥"
-    if impact == "HIGH":
-        return "🔴"
-    if impact == "MEDIUM":
-        return "🟠"
-    return "⚪"
+    return {"EXTREME": "🔥", "HIGH": "🔴", "MEDIUM": "🟠"}.get(str(impact or "LOW").upper(), "⚪")
 
 
 def get_urgency_icon(urgency):
-    urgency = str(urgency or "LOW").upper()
-    if urgency == "IMMEDIATE":
-        return "⚡"
-    if urgency == "FAST":
-        return "🚀"
-    if urgency == "NORMAL":
-        return "🕐"
-    return "⚪"
+    return {"IMMEDIATE": "⚡", "FAST": "🚀", "NORMAL": "🕐"}.get(str(urgency or "LOW").upper(), "⚪")
 
 
 def format_catalyst_alert(alert):
-    """Crea il messaggio Telegram con Catalyst + Trading Intelligence."""
+    """Crea il messaggio Telegram con Catalyst + Trading Intelligence 4.1."""
     ticker = alert.get("ticker", "UNKNOWN")
     program = alert.get("program", "UNKNOWN")
-    nct_id = alert.get("nct_id", "UNKNOWN")
+    nct_id = alert.get("nct_id")
     event = alert.get("event", {})
     if not isinstance(event, dict):
         event = {}
@@ -106,59 +77,51 @@ def format_catalyst_alert(alert):
     setup_score = alert.get("trading_setup_score", event.get("trading_setup_score", 0))
     window = alert.get("trading_window", event.get("trading_window", "UNKNOWN"))
     awareness = alert.get("market_awareness", event.get("market_awareness", "UNKNOWN"))
+    event_surprise = alert.get("event_surprise", event.get("event_surprise", "UNKNOWN"))
+    data_quality = alert.get("data_quality", event.get("data_quality", "LOW"))
     price_change = alert.get("price_change_pct", event.get("price_change_pct"))
     volume_ratio = alert.get("volume_ratio", event.get("volume_ratio"))
-    event_surprise = alert.get("event_surprise", event.get("event_surprise", "UNKNOWN"))
     market_cap = alert.get("market_cap", event.get("market_cap"))
     short_interest = alert.get("short_interest_pct", event.get("short_interest_pct"))
+    title = alert.get("title") or event.get("title") or ""
+    summary = alert.get("summary") or event.get("summary") or ""
 
     if alert_priority is None:
         priority_event = dict(event)
         priority_event.update({"score": score, "trading_impact": trading_impact, "urgency": urgency})
         alert_priority = enrich_alert_priority(priority_event).get("alert_priority", 0)
-
     alert_tier = event.get("alert_tier", alert.get("alert_tier")) or get_alert_tier(alert_priority)
 
-    direction_icon = get_direction_icon(direction)
-    severity_icon = get_severity_icon(label)
-    trading_impact_icon = get_trading_impact_icon(trading_impact)
-    urgency_icon = get_urgency_icon(urgency)
-    tier_icon = get_alert_tier_icon(alert_tier)
-
     lines = [
-        "🚨 PHARMA RADAR — CATALYST",
-        "",
-        f"{tier_icon} PRIORITY: {alert_tier} — {alert_priority}/100",
-        f"{severity_icon} {ticker} — {program}",
-        f"🧬 {nct_id}",
-        "",
-        f"Event: {event_type}",
-        f"Subtype: {subtype}",
+        "🚨 PHARMA RADAR — CATALYST", "", f"{get_severity_icon(label)} {ticker} — {program}",
+        f"🎯 PRIORITY: {alert_tier} — {alert_priority}/100",
     ]
+    if nct_id:
+        lines.append(f"🧬 {nct_id}")
+    if title:
+        lines.append(f"📰 {title}")
+    if summary:
+        compact = " ".join(str(summary).split())
+        lines.append(f"  {compact[:500]}")
 
+    lines.extend([
+        "", f"Event: {event_type}", f"Subtype: {subtype}",
+    ])
     old_value = event.get("old_value")
     new_value = event.get("new_value")
     if old_value is not None:
         lines.append(f"Old: {old_value}")
     if new_value is not None:
         lines.append(f"New: {new_value}")
-
     lines.extend([
-        "",
-        f"🎯 Catalyst Score: {score}/100",
-        f"{severity_icon} Severity: {severity}",
-        f"{direction_icon} Direction: {direction}",
-        f"🏷 Label: {label}",
-        f"{trading_impact_icon} Trading Impact: {trading_impact}",
-        f"{urgency_icon} Urgency: {urgency}",
-        "",
-        "📊 TRADING INTELLIGENCE",
-        f"🔥 Trading Setup: {setup_score}/100",
-        f"⏱ Window: {window}",
-        f"👀 Market Awareness: {awareness}",
-        f"🎯 Event Surprise: {event_surprise}",
+        "", f"🎯 Catalyst Score: {score}/100", f"{get_severity_icon(label)} Severity: {severity}",
+        f"{get_direction_icon(direction)} Direction: {direction}", f"🏷 Label: {label}",
+        f"{get_trading_impact_icon(trading_impact)} Trading Impact: {trading_impact}",
+        f"{get_urgency_icon(urgency)} Urgency: {urgency}", "", "📊 TRADING INTELLIGENCE",
+        f"🔥 Trading Setup: {setup_score}/100", f"⏱ Window: {window}",
+        f"👀 Market Awareness: {awareness}", f"🎯 Event Surprise: {event_surprise}",
+        f"🧪 Data Quality: {data_quality}",
     ])
-
     if price_change is not None:
         lines.append(f"📈 Price vs prev close: {float(price_change):+.2f}%")
     if volume_ratio is not None:
@@ -167,18 +130,15 @@ def format_catalyst_alert(alert):
         lines.append(f"💰 Market Cap: ${float(market_cap) / 1_000_000:,.0f}M")
     if short_interest is not None:
         lines.append(f"🩳 Short Interest: {float(short_interest):.1f}%")
-
+    source = alert.get("source") or event.get("source")
+    if source:
+        lines.append(f"🔎 Source: {source}")
     return "\n".join(str(line) for line in lines)
 
 
 def send_catalyst_alert(alert):
-    """Formatta e invia un singolo catalyst."""
     return send_telegram(format_catalyst_alert(alert))
 
 
 def send_catalyst_alerts(alerts):
-    """Invia i catalyst individualmente, già ordinati per priorità."""
-    results = []
-    for alert in alerts:
-        results.append(send_catalyst_alert(alert))
-    return results
+    return [send_catalyst_alert(alert) for alert in alerts]
