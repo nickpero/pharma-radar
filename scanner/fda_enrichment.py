@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlunparse
 import re
 
 import requests
@@ -27,15 +27,29 @@ HEADERS = {
 }
 
 
-def _valid_fda_url(url: str) -> bool:
+def _canonical_fda_url(url: str) -> str:
+    """Normalize FDA RSS http links to the canonical https URL."""
     try:
         parsed = urlparse(url or "")
     except Exception:
+        return ""
+    if parsed.netloc.lower() not in FDA_HOSTS:
+        return ""
+    if parsed.scheme not in {"http", "https"}:
+        return ""
+    return urlunparse(("https", parsed.netloc, parsed.path, parsed.params, parsed.query, parsed.fragment))
+
+
+def _valid_fda_url(url: str) -> bool:
+    canonical = _canonical_fda_url(url)
+    if not canonical:
         return False
-    if parsed.scheme != "https" or parsed.netloc.lower() not in FDA_HOSTS:
+    try:
+        parsed = urlparse(canonical)
+    except Exception:
         return False
     path = (parsed.path or "").lower()
-    return is_fda_press_announcement_url(url) or any(path.startswith(prefix) for prefix in FDA_ALLOWED_PREFIXES[2:])
+    return is_fda_press_announcement_url(canonical) or any(path.startswith(prefix) for prefix in FDA_ALLOWED_PREFIXES[2:])
 
 
 def _extract_article_text(html: str, title: str = "") -> str:
@@ -62,7 +76,6 @@ def _extract_article_published_at(html: str):
     if not html:
         return None
     soup = BeautifulSoup(html, "html.parser")
-
     selectors = (
         ("meta", {"property": "article:published_time"}),
         ("meta", {"name": "article:published_time"}),
@@ -86,9 +99,6 @@ def _extract_article_published_at(html: str):
             if normalized:
                 return normalized
 
-    # FDA press announcements expose the release date as visible article text,
-    # commonly immediately after "For Immediate Release:". This is the source
-    # used when machine-readable metadata is absent.
     article_text = normalize_text(soup.get_text(" ", strip=True))
     patterns = (
         r"For Immediate Release:\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4})",
@@ -100,7 +110,6 @@ def _extract_article_published_at(html: str):
             normalized = normalize_date(match.group(1))
             if normalized:
                 return normalized
-
     return None
 
 
@@ -110,10 +119,11 @@ def enrich_fda_news_item(news_item: dict) -> dict:
         return news_item
     enriched = dict(news_item)
     url = enriched.get("url", "")
+    canonical_url = _canonical_fda_url(url)
     if not _valid_fda_url(url):
         return enriched
     try:
-        response = requests.get(url, headers=HEADERS, timeout=ARTICLE_TIMEOUT)
+        response = requests.get(canonical_url, headers=HEADERS, timeout=ARTICLE_TIMEOUT)
         response.raise_for_status()
         html = response.text
         content = _extract_article_text(html, enriched.get("title", ""))
@@ -123,7 +133,7 @@ def enrich_fda_news_item(news_item: dict) -> dict:
                 enriched["published_at"] = published_at
                 enriched["event_timestamp"] = published_at
     except requests.RequestException as exc:
-        print(f"FDA ENRICH ERROR url={url} error={type(exc).__name__}: {exc}", flush=True)
+        print(f"FDA ENRICH ERROR url={canonical_url} error={type(exc).__name__}: {exc}", flush=True)
         return enriched
     if not content:
         return enriched
@@ -131,6 +141,7 @@ def enrich_fda_news_item(news_item: dict) -> dict:
     enriched["article_text"] = content
     enriched["body"] = content
     enriched["text"] = " ".join(part for part in (enriched.get("title", ""), enriched.get("summary", ""), content) if part)
+    enriched["url"] = canonical_url
     return enriched
 
 
