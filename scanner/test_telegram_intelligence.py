@@ -62,7 +62,8 @@ def test_telegram_shows_catalyst_confirmation():
     alert["catalyst_confirmation_score"] = 0
     alert["catalyst_confirmation"] = "UNCONFIRMED"
     message = format_catalyst_alert(alert)
-    assert "Catalyst Confirmation: 0/100 — UNCONFIRMED" in message
+    assert "🧠 CONFIRMATION" in message
+    assert "0/100 — UNCONFIRMED" in message
 
 
 def test_telegram_shows_confirmed_catalyst_confirmation():
@@ -70,7 +71,8 @@ def test_telegram_shows_confirmed_catalyst_confirmation():
     alert["catalyst_confirmation_score"] = 82
     alert["catalyst_confirmation"] = "CONFIRMED"
     message = format_catalyst_alert(alert)
-    assert "Catalyst Confirmation: 82/100 — CONFIRMED" in message
+    assert "🧠 CONFIRMATION" in message
+    assert "82/100 — CONFIRMED" in message
 
 
 if __name__ == "__main__":
