@@ -6,7 +6,7 @@ Gestisce l'invio degli alert Pharma Radar tramite Telegram Bot API.
 
 import os
 import requests
-from scanner.priority import get_alert_tier, get_alert_tier_icon, enrich_alert_priority
+from scanner.priority import get_alert_tier, enrich_alert_priority
 
 TELEGRAM_API = "https://api.telegram.org"
 MAX_MESSAGE_LENGTH = 4096
@@ -25,7 +25,11 @@ def send_telegram(message):
         raise ValueError("Telegram message is empty")
     if len(message) > MAX_MESSAGE_LENGTH:
         message = message[:MAX_MESSAGE_LENGTH - 20] + "\n\n[TRUNCATED]"
-    response = requests.post(f"{TELEGRAM_API}/bot{token}/sendMessage", data={"chat_id": chat_id, "text": message, "disable_web_page_preview": True}, timeout=30)
+    response = requests.post(
+        f"{TELEGRAM_API}/bot{token}/sendMessage",
+        data={"chat_id": chat_id, "text": message, "disable_web_page_preview": True},
+        timeout=30,
+    )
     response.raise_for_status()
     return response.json()
 
@@ -40,16 +44,21 @@ def get_direction_icon(direction):
 
 
 def get_severity_icon(label):
-    label = str(label or "LOW").upper()
-    return {"CRITICAL": "🚨", "HIGH": "🔴", "MEDIUM": "🟠"}.get(label, "⚪")
+    return {"CRITICAL": "🚨", "HIGH": "🔴", "MEDIUM": "🟠"}.get(
+        str(label or "LOW").upper(), "⚪"
+    )
 
 
-def get_trading_impact_icon(impact):
-    return {"EXTREME": "🔥", "HIGH": "🔴", "MEDIUM": "🟠"}.get(str(impact or "LOW").upper(), "⚪")
+def _clean_text(value, limit=None):
+    text = " ".join(str(value or "").split())
+    return text[:limit] if limit else text
 
 
-def get_urgency_icon(urgency):
-    return {"IMMEDIATE": "⚡", "FAST": "🚀", "NORMAL": "🕐"}.get(str(urgency or "LOW").upper(), "⚪")
+def _num(value, digits=2):
+    try:
+        return f"{float(value):+.{digits}f}"
+    except (TypeError, ValueError):
+        return None
 
 
 def _add_explainer(lines, alert):
@@ -57,18 +66,18 @@ def _add_explainer(lines, alert):
     if not explainer:
         return
     lines.extend([
-        "", "💊 COSA SIGNIFICA",
-        f"💊 Cos'è: {explainer.get('what_is', 'Non disponibile')}",
-        f"🩺 Indicazione: {explainer.get('indication', 'Non disponibile')}",
-        f"🧪 Fase: {explainer.get('stage', 'Non disponibile')}",
-        f"🎯 Perché conta: {explainer.get('why_it_matters', 'Non disponibile')}",
-        f"🏢 Impatto potenziale: {explainer.get('company_impact', 'Non disponibile')}",
-        f"📈 Mercato: {explainer.get('market_reaction', 'Non disponibile')}",
+        "",
+        "💊 COSA SIGNIFICA",
+        f"💊 Cos'è: {_clean_text(explainer.get('what_is'), 500) or 'Non disponibile'}",
+        f"🩺 Indicazione: {_clean_text(explainer.get('indication'), 350) or 'Non disponibile'}",
+        f"🧪 Fase: {_clean_text(explainer.get('stage'), 120) or 'Non disponibile'}",
+        f"🎯 Perché conta: {_clean_text(explainer.get('why_it_matters'), 500) or 'Non disponibile'}",
+        f"🏢 Impatto: {_clean_text(explainer.get('company_impact'), 500) or 'Non disponibile'}",
     ])
 
 
 def format_catalyst_alert(alert):
-    """Crea il messaggio Telegram con Catalyst + Trading Intelligence 5.8."""
+    """Crea un alert Telegram gerarchico, leggibile in pochi secondi."""
     ticker = alert.get("ticker", "UNKNOWN")
     program = alert.get("program", "UNKNOWN")
     nct_id = alert.get("nct_id")
@@ -86,7 +95,7 @@ def format_catalyst_alert(alert):
     urgency = event.get("urgency", alert.get("urgency", "LOW"))
     alert_priority = alert.get("alert_priority", event.get("alert_priority"))
     setup_score = alert.get("trading_setup_score", event.get("trading_setup_score", 0))
-    setup_version = alert.get("trading_setup_version", event.get("trading_setup_version", "4"))
+    setup_version = alert.get("trading_setup_version", event.get("trading_setup_version", "5.3"))
     window = alert.get("trading_window", event.get("trading_window", "UNKNOWN"))
     awareness = alert.get("market_awareness", event.get("market_awareness", "UNKNOWN"))
     event_surprise = alert.get("event_surprise", event.get("event_surprise", "UNKNOWN"))
@@ -102,12 +111,8 @@ def format_catalyst_alert(alert):
     reaction = alert.get("market_reaction") or event.get("market_reaction") or {}
     reaction_pct = alert.get("reaction_pct", reaction.get("reaction_pct"))
     reaction_direction = alert.get("reaction_direction", reaction.get("reaction_direction", "UNKNOWN"))
-    reaction_5m = alert.get("reaction_5m_pct", reaction.get("reaction_5m_pct"))
-    reaction_15m = alert.get("reaction_15m_pct", reaction.get("reaction_15m_pct"))
-    reaction_30m = alert.get("reaction_30m_pct", reaction.get("reaction_30m_pct"))
-    reaction_60m = alert.get("reaction_60m_pct", reaction.get("reaction_60m_pct"))
-    title = alert.get("title") or event.get("title") or ""
-    summary = alert.get("summary") or event.get("summary") or ""
+    title = _clean_text(alert.get("title") or event.get("title"), 500)
+    summary = _clean_text(alert.get("summary") or event.get("summary"), 700)
 
     if alert_priority is None:
         priority_event = dict(event)
@@ -116,59 +121,83 @@ def format_catalyst_alert(alert):
     alert_tier = event.get("alert_tier", alert.get("alert_tier")) or get_alert_tier(alert_priority)
 
     lines = [
-        "🚨 PHARMA RADAR — CATALYST", "", f"{get_severity_icon(label)} {ticker} — {program}",
-        f"🎯 PRIORITY: {alert_tier} — {alert_priority}/100",
+        f"🚨 PHARMA RADAR — {alert_tier}",
+        "",
+        f"🧬 {ticker} — {program}",
     ]
     if nct_id:
-        lines.append(f"🧬 {nct_id}")
-    if title:
-        lines.append(f"📰 {title}")
-    if summary:
-        compact = " ".join(str(summary).split())
-        lines.append(f"  {compact[:500]}")
+        lines.append(f"🧪 {nct_id}")
 
-    lines.extend(["", f"Event: {event_type}", f"Subtype: {subtype}"])
-    old_value = event.get("old_value")
-    new_value = event.get("new_value")
-    if old_value is not None:
-        lines.append(f"Old: {old_value}")
-    if new_value is not None:
-        lines.append(f"New: {new_value}")
     lines.extend([
-        "", f"🎯 Catalyst Score: {score}/100", f"{get_severity_icon(label)} Severity: {severity}",
-        f"{get_direction_icon(direction)} Direction: {direction}", f"🏷 Label: {label}",
-        f"{get_trading_impact_icon(trading_impact)} Trading Impact: {trading_impact}",
-        f"{get_urgency_icon(urgency)} Urgency: {urgency}", "", "📊 TRADING INTELLIGENCE",
-        f"🔥 Trading Setup: {setup_score}/100", f"🧠 Setup Version: {setup_version}", f"⏱ Window: {window}",
-        f"👀 Market Awareness: {awareness}", f"🎯 Event Surprise: {event_surprise}",
-        f"🧪 Data Quality: {data_quality}", f"⚡ Reaction Strength: {reaction_strength}",
-        f"🧭 Reaction Interpretation: {reaction_interpretation}",
-        f"🧠 Catalyst Confirmation: {confirmation_score}/100 — {confirmation_label}",
+        "",
+        f"📰 {subtype or event_type}",
+        title or "Catalyst detected",
     ])
-    if price_change is not None:
-        lines.append(f"📈 Price vs prev close: {float(price_change):+.2f}%")
-    if volume_ratio is not None:
-        lines.append(f"📊 Volume vs 20d avg: {float(volume_ratio):.1f}x")
-    if market_cap is not None:
-        lines.append(f"💰 Market Cap: ${float(market_cap) / 1_000_000:,.0f}M")
-    if short_interest is not None:
-        lines.append(f"🩳 Short Interest: {float(short_interest):.1f}%")
+    if summary and summary.lower() != title.lower():
+        lines.append(summary)
 
-    reaction_values = [("1m", reaction.get("reaction_1m_pct")), ("5m", reaction_5m), ("15m", reaction_15m), ("30m", reaction_30m), ("60m", reaction_60m)]
-    available_windows = [f"{label} {float(value):+.2f}%" for label, value in reaction_values if value is not None]
-    if reaction_pct is not None or available_windows:
-        lines.extend(["", "⚡ MARKET REACTION"])
-        if reaction_pct is not None:
-            lines.append(f"📈 Reaction: {float(reaction_pct):+.2f}% ({reaction_direction})")
-        if available_windows:
-            lines.append("⏱ " + " | ".join(available_windows))
+    lines.extend([
+        "",
+        "🎯 CATALYST",
+        f"{score}/100 — {label}",
+        "",
+        "🚨 PRIORITY",
+        f"{alert_priority}/100 — {alert_tier}",
+        "",
+        "🧠 CONFIRMATION",
+        f"{confirmation_score}/100 — {confirmation_label}",
+        "",
+        "📊 TRADING SETUP",
+        f"{setup_score}/100",
+        f"Window: {window} | Quality: {data_quality}",
+        f"Awareness: {awareness} | Surprise: {event_surprise}",
+    ])
+
+    if price_change is not None or volume_ratio is not None:
+        market_bits = []
+        if price_change is not None:
+            value = _num(price_change)
+            if value is not None:
+                market_bits.append(f"Price {value}%")
+        if volume_ratio is not None:
+            try:
+                market_bits.append(f"Volume {float(volume_ratio):.1f}x")
+            except (TypeError, ValueError):
+                pass
+        if market_bits:
+            lines.append(" | ".join(market_bits))
+
+    reaction_values = [
+        ("1m", reaction.get("reaction_1m_pct")),
+        ("5m", reaction.get("reaction_5m_pct")),
+        ("15m", reaction.get("reaction_15m_pct")),
+        ("30m", reaction.get("reaction_30m_pct")),
+        ("60m", reaction.get("reaction_60m_pct")),
+    ]
+    available = []
+    for label_window, value in reaction_values:
+        formatted = _num(value)
+        if formatted is not None:
+            available.append(f"{label_window} {formatted}%")
+
+    lines.extend(["", "📈 MARKET REACTION"])
+    if reaction_pct is not None:
+        formatted = _num(reaction_pct)
+        if formatted is not None:
+            lines.append(f"Overall: {formatted}% ({reaction_direction})")
+    if available:
+        lines.append(" | ".join(available))
     else:
-        lines.append("⚡ MARKET REACTION: UNAVAILABLE")
+        lines.append("Unavailable")
+    lines.append(f"Strength: {reaction_strength} | Interpretation: {reaction_interpretation}")
 
     _add_explainer(lines, alert)
+
     source = alert.get("source") or event.get("source")
     if source:
-        lines.append(f"🔎 Source: {source}")
+        lines.extend(["", f"🔎 Source: {source}"])
+
+    lines.extend(["", "⚠️ Nessuna raccomandazione automatica"])
     return "\n".join(str(line) for line in lines)
 
 
