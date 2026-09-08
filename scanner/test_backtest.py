@@ -24,6 +24,7 @@ def _row():
         "short_interest_pct": 8,
         "event_timestamp": "2026-09-01T14:00:00+00:00",
         "reaction": {
+            "event_timestamp": "2026-09-01T14:00:00+00:00",
             "reaction_1m_pct": 0.8,
             "reaction_5m_pct": 1.5,
             "reaction_15m_pct": 3.0,
@@ -40,6 +41,7 @@ def test_build_dataset_preserves_point_in_time_fields_and_fixed_outcomes():
     assert row["ticker"] == "NUVL"
     assert row["score"] == 100
     assert row["alert_priority"] == 96
+    assert row["reaction_anchor_valid"] is True
     assert row["outcomes"]["15m"] == 3.0
     assert row["outcomes_available"] == 5
 
@@ -48,8 +50,24 @@ def test_missing_reaction_is_safe():
     row = _row()
     row.pop("reaction")
     dataset = build_dataset([row])
+    assert dataset[0]["reaction_anchor_valid"] is False
     assert dataset[0]["outcomes_available"] == 0
     assert summarize_outcomes(dataset, "15m")["observations"] == 0
+
+
+def test_date_only_or_late_reaction_anchor_is_excluded():
+    row = _row()
+    row["event_timestamp"] = "2026-09-01"
+    row["reaction"]["event_timestamp"] = "2026-09-01T14:00:00+00:00"
+    dataset = build_dataset([row])
+    assert dataset[0]["reaction_anchor_valid"] is False
+    assert dataset[0]["outcomes_available"] == 0
+
+    row = _row()
+    row["reaction"]["event_timestamp"] = "2026-09-01T14:10:00+00:00"
+    dataset = build_dataset([row])
+    assert dataset[0]["reaction_anchor_valid"] is False
+    assert dataset[0]["outcomes_available"] == 0
 
 
 def test_summary_is_descriptive_not_optimized():
