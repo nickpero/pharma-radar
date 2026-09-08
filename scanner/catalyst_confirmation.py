@@ -39,13 +39,22 @@ def confirmation_score(event):
     if volume is None:
         volume = _num(event.get("volume_ratio"))
 
+    # Confirmation requires actual market-reaction evidence. A catalyst score
+    # alone must never manufacture confirmation when reaction data is absent.
+    interpretation = str(event.get("reaction_interpretation") or "UNKNOWN").upper()
+    has_reaction_evidence = bool(reaction) and (
+        movement is not None
+        or volume is not None
+        or interpretation != "UNKNOWN"
+    )
+    if not has_reaction_evidence:
+        return 0
+
     if movement is not None:
         if _aligned(event, movement):
             score += 40
         elif abs(movement) < 2:
             score += 10
-        else:
-            score += 0
         if abs(movement) >= 5:
             score += 10
         if abs(movement) >= 20:
@@ -59,7 +68,6 @@ def confirmation_score(event):
         elif volume >= 1:
             score += 6
 
-    interpretation = str(event.get("reaction_interpretation") or "UNKNOWN").upper()
     if interpretation == "CONFIRMED":
         score += 20
     elif interpretation == "UNDERREACTION":
