@@ -31,6 +31,7 @@ def test_alert_summary_is_concise():
         "filtered_trials": 37,
         "alerts": [{
             "ticker": "CAPR", "program": "deramiocel", "nct_id": "NCT05126758",
+            "alert_priority": 100, "alert_tier": "CRITICAL",
             "trading_setup_score": 88, "trading_window": "0-2H", "market_awareness": "LOW",
             "event_surprise": "UNEXPECTED", "price_change_pct": 5.5, "volume_ratio": 3.2,
             "reaction_strength": "POSITIVE", "reaction_interpretation": "CONFIRMED",
@@ -44,7 +45,7 @@ def test_alert_summary_is_concise():
     assert "CAPR — deramiocel" in message
     assert "TRIAL_COMPLETED" in message
     assert "Catalyst 95/100 CRITICAL" in message
-    assert "Priority 0/100" in message
+    assert "Priority 100/100 CRITICAL" in message
     assert "Setup 88/100" in message
     assert "Window 0-2H" in message
     assert "Reaction POSITIVE | CONFIRMED" in message
