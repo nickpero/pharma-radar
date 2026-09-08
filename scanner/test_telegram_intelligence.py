@@ -57,6 +57,22 @@ def test_telegram_shows_reaction_even_without_available_status():
     assert "MARKET REACTION: UNAVAILABLE" not in message
 
 
+def test_telegram_shows_catalyst_confirmation():
+    alert = _alert("IONS", 100, 54, "CRITICAL")
+    alert["catalyst_confirmation_score"] = 0
+    alert["catalyst_confirmation"] = "UNCONFIRMED"
+    message = format_catalyst_alert(alert)
+    assert "Catalyst Confirmation: 0/100 — UNCONFIRMED" in message
+
+
+def test_telegram_shows_confirmed_catalyst_confirmation():
+    alert = _alert("SMMT", 100, 69, "CRITICAL", "STRONG POSITIVE", "CONFIRMED")
+    alert["catalyst_confirmation_score"] = 82
+    alert["catalyst_confirmation"] = "CONFIRMED"
+    message = format_catalyst_alert(alert)
+    assert "Catalyst Confirmation: 82/100 — CONFIRMED" in message
+
+
 if __name__ == "__main__":
     test_critical_is_immediate()
     test_high_strong_reaction_is_immediate()
@@ -65,4 +81,6 @@ if __name__ == "__main__":
     test_deduplicates_by_company_program_subtype_and_keeps_highest_priority()
     test_silent_alerts_are_filtered()
     test_telegram_shows_reaction_even_without_available_status()
+    test_telegram_shows_catalyst_confirmation()
+    test_telegram_shows_confirmed_catalyst_confirmation()
     print("✅ Telegram intelligence tests passed")
