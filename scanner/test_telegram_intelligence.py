@@ -33,14 +33,37 @@ def test_watch_requires_setup_and_reaction_context():
     assert alert_action(_alert("RNA", 45, 80, "WATCH")) == "SILENT"
 
 
-def test_deduplicates_by_company_program_subtype_and_keeps_highest_priority():
-    low = _alert("NUVL", 82, 70, "CRITICAL")
-    high = _alert("NUVL", 95, 85, "CRITICAL")
-    other = _alert("CAPR", 90, 80, "CRITICAL")
-    selected = select_intelligent_alerts([low, high, other])
+def test_deduplicates_same_source_url_and_keeps_best_alert():
+    low = _alert("SMMT", 100, 52, "CRITICAL")
+    high = _alert("SMMT", 100, 54, "CRITICAL")
+    for item in (low, high):
+        item.update({
+            "program": "ivonescimab",
+            "title": "SEC 8-K — Summit Therapeutics (SMMT)",
+            "url": "https://www.sec.gov/Archives/edgar/data/example/8k.htm",
+        })
+    selected = select_intelligent_alerts([low, high])
+    assert len(selected) == 1
+    assert selected[0]["trading_setup_score"] == 54
+
+
+def test_same_title_different_setup_is_collapsed():
+    first = _alert("SMMT", 100, 52, "CRITICAL")
+    second = _alert("SMMT", 100, 54, "CRITICAL")
+    first.update({"program": "ivonescimab", "title": "SEC 8-K — Summit Therapeutics (SMMT)"})
+    second.update({"program": "ivonescimab", "title": "SEC 8-K — Summit Therapeutics (SMMT)"})
+    selected = select_intelligent_alerts([first, second])
+    assert len(selected) == 1
+    assert selected[0]["trading_setup_score"] == 54
+
+
+def test_different_headlines_remain_separate_events():
+    first = _alert("SMMT", 100, 52, "CRITICAL")
+    second = _alert("SMMT", 100, 54, "CRITICAL")
+    first.update({"program": "ivonescimab", "title": "Phase 3 positive results"})
+    second.update({"program": "ivonescimab", "title": "FDA approval announcement"})
+    selected = select_intelligent_alerts([first, second])
     assert len(selected) == 2
-    assert selected[0]["ticker"] == "NUVL"
-    assert selected[0]["alert_priority"] == 95
 
 
 def test_silent_alerts_are_filtered():
@@ -80,7 +103,9 @@ if __name__ == "__main__":
     test_high_strong_reaction_is_immediate()
     test_high_without_strong_reaction_is_fast()
     test_watch_requires_setup_and_reaction_context()
-    test_deduplicates_by_company_program_subtype_and_keeps_highest_priority()
+    test_deduplicates_same_source_url_and_keeps_best_alert()
+    test_same_title_different_setup_is_collapsed()
+    test_different_headlines_remain_separate_events()
     test_silent_alerts_are_filtered()
     test_telegram_shows_reaction_even_without_available_status()
     test_telegram_shows_catalyst_confirmation()
