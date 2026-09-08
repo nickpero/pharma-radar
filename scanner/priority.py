@@ -8,6 +8,11 @@ operativo per ordinare gli alert.
 P2.2: converte la priorità numerica in una gerarchia
 operativa per la distribuzione degli alert.
 
+La freschezza temporale è una dimensione separata:
+un evento può restare un catalyst storico CRITICAL,
+ma non deve restare un Priority Alert operativo quando
+la trading window è EXPIRED.
+
 Non è una previsione del movimento del titolo e
 non costituisce una raccomandazione finanziaria.
 """
@@ -40,10 +45,23 @@ def _bounded_int(value, default=0):
         return default
 
 
+def _is_expired(event):
+    """Return True when the trading window is explicitly expired."""
+    window = str(event.get("trading_window", "")).strip().upper()
+    return window == "EXPIRED"
+
+
 def get_alert_priority(event):
-    """Calcola una priorità operativa 0-100."""
+    """Calcola una priorità operativa 0-100.
+
+    Un evento EXPIRED mantiene il proprio catalyst score per lo storico,
+    ma riceve priorità operativa zero: non deve generare un Priority Alert.
+    """
     if not isinstance(event, dict):
         raise TypeError("event must be a dictionary")
+
+    if _is_expired(event):
+        return 0
 
     score = _bounded_int(event.get("score", 0))
     impact = str(event.get("trading_impact", "LOW")).upper()
