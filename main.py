@@ -3,6 +3,7 @@
 from scanner.trial_scanner import scan
 from scanner.telegram import send_telegram, send_catalyst_alerts
 from scanner.telegram_intelligence import select_intelligent_alerts
+from scanner.pharma_email import send_pharma_intelligence_emails, email_is_configured
 
 
 def _reaction(alert):
@@ -33,6 +34,7 @@ def build_summary(result):
         f"📰 FDA news: {len(result.get('fda_news', []))}",
         f"🚨 Alerts: {len(alerts)}",
         f"🧠 Telegram intelligent alerts: {len(intelligent_alerts)}",
+        f"📧 Pharma Intelligence email: {'READY' if email_is_configured() else 'NOT CONFIGURED'}",
         f"❌ Errors: {len(errors)}", "",
     ]
     if alerts:
@@ -91,6 +93,12 @@ def send_alerts(result):
     return send_catalyst_alerts(alerts) if alerts else []
 
 
+def send_email_alerts(result):
+    """Send Pharma Intelligence emails for CRITICAL/HIGH catalyst alerts."""
+    alerts = result.get("alerts", [])
+    return send_pharma_intelligence_emails(alerts) if alerts else 0
+
+
 def main():
     print("Starting Pharma Radar...")
     result = scan()
@@ -98,6 +106,8 @@ def main():
     print(); print(summary)
     send_telegram(summary)
     send_alerts(result)
+    sent = send_email_alerts(result)
+    print(f"Pharma Intelligence emails sent: {sent}")
 
 
 if __name__ == "__main__":
