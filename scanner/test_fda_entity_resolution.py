@@ -34,6 +34,16 @@ def test_company_and_program_resolution_is_high_confidence():
     assert entity["confidence"] == "HIGH"
 
 
+def test_company_only_match_does_not_invent_program():
+    watchlist = load_watchlist()
+    item = {
+        "title": "FDA action involving Ionis Pharmaceuticals",
+        "content": "Ionis Pharmaceuticals discussed a regulatory update.",
+    }
+    resolved = resolve_fda_entities(item, watchlist)
+    assert "fda_entity_resolution" not in resolved
+
+
 def test_generic_rare_does_not_resolve_to_rare_ticker():
     watchlist = load_watchlist()
     item = {
@@ -69,14 +79,13 @@ def test_live_fda_entity_resolution_sample():
     for title, ticker, program, confidence in details:
         print(f"  RESOLVED {ticker} — {program} — {confidence} — {title}")
 
-    # Coverage smoke test: at least one current watchlist catalyst should be
-    # recoverable from the live article body. This is not a target-rate goal.
     assert resolved_count >= 1, "No watchlist entity resolved from 20 live FDA articles"
 
 
 if __name__ == "__main__":
     test_program_only_resolution_is_high_confidence()
     test_company_and_program_resolution_is_high_confidence()
+    test_company_only_match_does_not_invent_program()
     test_generic_rare_does_not_resolve_to_rare_ticker()
     test_live_fda_entity_resolution_sample()
     print("FDA ENTITY RESOLUTION TESTS PASSED")
