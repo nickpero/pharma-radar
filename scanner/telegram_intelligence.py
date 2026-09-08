@@ -14,13 +14,25 @@ def _reaction(event):
     return event.get("market_reaction") or event.get("reaction") or {}
 
 
+def _is_expired(alert):
+    event = alert.get("event") if isinstance(alert.get("event"), dict) else {}
+    window = alert.get("trading_window", event.get("trading_window", ""))
+    return str(window or "").strip().upper() == "EXPIRED"
+
+
 def alert_action(alert):
     """Classify how aggressively an alert should be delivered to Telegram.
 
     Conservative policy: regulatory/catalyst priority is necessary, while strong
     market reaction can upgrade an alert. Missing reaction data never creates a
     stronger signal by itself.
+
+    EXPIRED events are retained for historical/contextual use but never become
+    operational Telegram alerts.
     """
+    if _is_expired(alert):
+        return "SILENT"
+
     event = alert.get("event") if isinstance(alert.get("event"), dict) else {}
     priority = _num(alert.get("alert_priority", event.get("alert_priority"))) or 0
     setup = _num(alert.get("trading_setup_score", event.get("trading_setup_score"))) or 0
