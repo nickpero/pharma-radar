@@ -53,9 +53,8 @@ def classify_fda_catalyst(news_item):
     title = str(news_item.get("title") or "").lower()
     source_type = str(news_item.get("source_type") or "").upper()
 
-    # SEC 8-Ks can contain boilerplate such as "not approved" even when the
-    # actual catalyst is a clinical readout. Resolve explicit clinical evidence
-    # first for primary-corporate sources, then fall back to the normal rules.
+    # SEC/corporate releases often contain boilerplate such as "not approved".
+    # Resolve explicit clinical evidence first for primary-corporate sources.
     if source_type == "PRIMARY_CORPORATE":
         for source_text, source_name in ((title, "title"), (text, "content")):
             result = _classify(source_text, source_name, CLINICAL_RULES)
