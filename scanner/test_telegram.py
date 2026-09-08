@@ -6,6 +6,8 @@ def test_catalyst_message_format():
         "ticker": "CAPR",
         "program": "deramiocel",
         "nct_id": "NCT05126758",
+        "alert_priority": 100,
+        "alert_tier": "CRITICAL",
         "event": {
             "type": "STATUS_CHANGE",
             "severity": "HIGH",
@@ -25,6 +27,7 @@ def test_catalyst_message_format():
     assert "🎯 CATALYST" in message
     assert "95/100 — CRITICAL" in message
     assert "🚨 PRIORITY" in message
+    assert "100/100 — CRITICAL" in message
     assert "🧠 CONFIRMATION" in message
     assert "0/100 — UNCONFIRMED" in message
     assert "📊 TRADING SETUP" in message
@@ -70,10 +73,10 @@ def test_negative_direction():
         },
     }
     message = format_catalyst_alert(alert)
-    assert "📉" not in message
-    assert "TRIAL_STOPPED" in message
+    assert "🧬 CAPR — deramiocel" in message
+    assert "📰 TRIAL_STOPPED" in message
     assert "95/100 — CRITICAL" in message
-    assert "TERMINATED" not in message
+    assert "📉" not in message
 
 
 def test_unknown_direction():
