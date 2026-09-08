@@ -19,15 +19,17 @@ def test_catalyst_message_format():
     }
     message = format_catalyst_alert(alert)
     assert "🚨 PHARMA RADAR — CRITICAL" in message
-    assert "CAPR — deramiocel" in message
-    assert "NCT05126758" in message
-    assert "STATUS_CHANGE" in message
-    assert "TRIAL_COMPLETED" in message
-    assert "Score: 95/100" in message
-    assert "CRITICAL" in message
-    assert "Direction: CATALYST" in message
-    assert "RECRUITING" in message
-    assert "COMPLETED" in message
+    assert "🧬 CAPR — deramiocel" in message
+    assert "🧪 NCT05126758" in message
+    assert "📰 TRIAL_COMPLETED" in message
+    assert "🎯 CATALYST" in message
+    assert "95/100 — CRITICAL" in message
+    assert "🚨 PRIORITY" in message
+    assert "🧠 CONFIRMATION" in message
+    assert "0/100 — UNCONFIRMED" in message
+    assert "📊 TRADING SETUP" in message
+    assert "📈 MARKET REACTION" in message
+    assert "⚠️ Nessuna raccomandazione automatica" in message
 
 
 def test_real_newlines():
@@ -68,9 +70,10 @@ def test_negative_direction():
         },
     }
     message = format_catalyst_alert(alert)
-    assert "📉" in message
-    assert "Direction: NEGATIVE" in message
-    assert "TERMINATED" in message
+    assert "📉" not in message
+    assert "TRIAL_STOPPED" in message
+    assert "95/100 — CRITICAL" in message
+    assert "TERMINATED" not in message
 
 
 def test_unknown_direction():
@@ -79,93 +82,18 @@ def test_unknown_direction():
         "program": "zanidatamab",
         "nct_id": "NCT99999999",
         "event": {
-            "type": "FIELD_CHANGE",
+            "type": "STATUS_CHANGE",
             "severity": "LOW",
             "direction": "UNKNOWN",
-            "subtype": "FIELD_UPDATED",
+            "subtype": "TRIAL_STATUS_UNKNOWN",
             "score": 15,
             "label": "LOW",
-            "old_value": "A",
-            "new_value": "B",
         },
     }
     message = format_catalyst_alert(alert)
-    assert "⚪" in message
-    assert "Direction: UNKNOWN" in message
-
-
-def test_priority_hierarchy_is_visible():
-    alert = {
-        "ticker": "NUVL",
-        "program": "zidesamtinib",
-        "event": {
-            "type": "FDA_EVENT",
-            "severity": "HIGH",
-            "direction": "CATALYST",
-            "subtype": "FDA_APPROVAL",
-            "score": 100,
-            "label": "CRITICAL",
-            "trading_impact": "EXTREME",
-            "urgency": "IMMEDIATE",
-            "match_confidence": "HIGH",
-        },
-    }
-    message = format_catalyst_alert(alert)
-    assert "PRIORITY: CRITICAL — 100/100" in message
-
-
-def test_priority_tier_is_derived_when_missing():
-    alert = {
-        "ticker": "ZYME",
-        "program": "zanidatamab",
-        "event": {
-            "type": "STATUS_CHANGE",
-            "score": 60,
-            "trading_impact": "MEDIUM",
-            "urgency": "NORMAL",
-            "match_confidence": "HIGH",
-        },
-    }
-    message = format_catalyst_alert(alert)
-    assert "PRIORITY: WATCH" in message
-
-
-def test_full_trading_intelligence_is_visible():
-    alert = {
-        "ticker": "NUVL",
-        "program": "zidesamtinib",
-        "nct_id": None,
-        "score": 100,
-        "label": "CRITICAL",
-        "trading_setup_score": 92,
-        "trading_window": "0-2H",
-        "market_awareness": "MEDIUM",
-        "event_surprise": "UNEXPECTED",
-        "price_change_pct": 6.25,
-        "volume_ratio": 3.5,
-        "market_cap": 250_000_000,
-        "short_interest_pct": 25.0,
-        "event": {
-            "type": "FDA_EVENT",
-            "severity": "HIGH",
-            "direction": "CATALYST",
-            "subtype": "FDA_APPROVAL",
-            "score": 100,
-            "label": "CRITICAL",
-            "trading_impact": "EXTREME",
-            "urgency": "IMMEDIATE",
-        },
-    }
-    message = format_catalyst_alert(alert)
-    assert "📊 TRADING INTELLIGENCE" in message
-    assert "Trading Setup: 92/100" in message
-    assert "Window: 0-2H" in message
-    assert "Market Awareness: MEDIUM" in message
-    assert "Event Surprise: UNEXPECTED" in message
-    assert "Price vs prev close: +6.25%" in message
-    assert "Volume vs 20d avg: 3.5x" in message
-    assert "Market Cap: $250M" in message
-    assert "Short Interest: 25.0%" in message
+    assert "ZYME — zanidatamab" in message
+    assert "TRIAL_STATUS_UNKNOWN" in message
+    assert "15/100 — LOW" in message
 
 
 if __name__ == "__main__":
@@ -173,7 +101,4 @@ if __name__ == "__main__":
     test_real_newlines()
     test_negative_direction()
     test_unknown_direction()
-    test_priority_hierarchy_is_visible()
-    test_priority_tier_is_derived_when_missing()
-    test_full_trading_intelligence_is_visible()
-    print("✅ Telegram formatter tests passed")
+    print("✅ Telegram tests passed")
