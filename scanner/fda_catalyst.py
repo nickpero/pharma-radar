@@ -37,15 +37,44 @@ def _matches(text, pattern):
     return bool(re.search(pattern, text, re.IGNORECASE)) if pattern.startswith(r"\b") else pattern in text
 
 
+def _classify(text, source_name):
+    for catalyst_type, direction, urgency, patterns in ADVANCED_RULES:
+        if any(_matches(text, p) for p in patterns):
+            return {"catalyst_type": catalyst_type, "direction": direction, "urgency": urgency, "classification_source": source_name}
+    return None
+
+
 def classify_fda_catalyst(news_item):
     if not isinstance(news_item, dict):
         raise TypeError("news_item must be a dictionary")
     text = _text(news_item)
     title = str(news_item.get("title") or "").lower()
+    source_type = str(news_item.get("source_type") or "").upper()
+
+    # Corporate 8-Ks frequently quote regulatory status boilerplate such as
+    # "not approved" while the actual catalyst is a clinical readout. For SEC
+    # primary-corporate sources, prioritize explicit clinical-result evidence
+    # before generic approval/rejection language.
+    if source_type == "PRIMARY_CORPORATE":
+        clinical_patterns = (
+            "failed to meet", "did not meet", "missed the primary endpoint",
+            "failed the primary endpoint", "futility", "negative topline",
+            "not statistically significant", "no significant benefit",
+            "met the primary endpoint", "met its primary endpoint", "positive topline",
+            "positive results", "statistically significant", "clinical benefit",
+            "clinical trial results", "clinical study results", "clinical results",
+            "topline results", "trial results", "phase 2 results", "phase 3 results",
+        )
+        if any(pattern in text for pattern in clinical_patterns):
+            for source_text, source_name in ((title, "title"), (text, "content")):
+                result = _classify(source_text, source_name)
+                if result and result["catalyst_type"] == "CLINICAL_RESULT":
+                    return result
+
     for source_text, source_name in ((title, "title"), (text, "content")):
-        for catalyst_type, direction, urgency, patterns in ADVANCED_RULES:
-            if any(_matches(source_text, p) for p in patterns):
-                return {"catalyst_type": catalyst_type, "direction": direction, "urgency": urgency, "classification_source": source_name}
+        result = _classify(source_text, source_name)
+        if result:
+            return result
     return {"catalyst_type": "NEUTRAL", "direction": "UNKNOWN", "urgency": "LOW", "classification_source": "fallback"}
 
 
@@ -64,8 +93,6 @@ def build_fda_catalyst(news_item):
     else:
         event.update({"catalyst_type": "NEUTRAL", "classification_source": "category" if selected_category else "fallback"})
 
-    # Preserve legacy category directions for downstream scoring/compatibility.
-    # Advanced classification still records the more granular catalyst_type.
     if selected_category == "APPROVAL" and advanced["catalyst_type"] == "APPROVAL":
         event["direction"] = FDA_CATALYST_MAP["APPROVAL"]["direction"]
     if selected_category == "LABEL" and advanced["catalyst_type"] == "LABEL_EXPANSION":
