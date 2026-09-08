@@ -1,4 +1,5 @@
 from scanner.telegram_intelligence import alert_action, select_intelligent_alerts
+from scanner.telegram import format_catalyst_alert
 
 
 def _alert(ticker, priority, setup, tier, strength="UNKNOWN", interpretation="UNKNOWN"):
@@ -47,6 +48,15 @@ def test_silent_alerts_are_filtered():
     assert selected == []
 
 
+def test_telegram_shows_reaction_even_without_available_status():
+    alert = _alert("SMMT", 100, 69, "CRITICAL", "STRONG POSITIVE", "CONFIRMED")
+    alert["market_reaction"] = {"reaction_status": "UNAVAILABLE", "reaction_5m_pct": 3.05, "reaction_15m_pct": 2.29}
+    message = format_catalyst_alert(alert)
+    assert "5m +3.05%" in message
+    assert "15m +2.29%" in message
+    assert "MARKET REACTION: UNAVAILABLE" not in message
+
+
 if __name__ == "__main__":
     test_critical_is_immediate()
     test_high_strong_reaction_is_immediate()
@@ -54,4 +64,5 @@ if __name__ == "__main__":
     test_watch_requires_setup_and_reaction_context()
     test_deduplicates_by_company_program_subtype_and_keeps_highest_priority()
     test_silent_alerts_are_filtered()
+    test_telegram_shows_reaction_even_without_available_status()
     print("✅ Telegram intelligence tests passed")
