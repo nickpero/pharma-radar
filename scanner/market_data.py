@@ -36,8 +36,13 @@ def _parse_dt(value):
     if isinstance(value, datetime):
         dt = value
     else:
+        text = str(value or "").strip()
+        # A date-only value is deliberately not sufficient for intraday
+        # reaction measurement: anchoring it at 00:00 can create fake moves.
+        if not any(separator in text for separator in ("T", " ")):
+            return None
         try:
-            dt = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+            dt = datetime.fromisoformat(text.replace("Z", "+00:00"))
         except (TypeError, ValueError):
             return None
     if dt.tzinfo is None:
@@ -167,9 +172,21 @@ def build_market_reaction(points, event_timestamp, now=None, previous_close=None
 
     points = sorted(points, key=lambda p: p["timestamp"])
     reference_now = _parse_dt(now) if now is not None else datetime.now(timezone.utc)
+    if reference_now is None:
+        reference_now = datetime.now(timezone.utc)
     event_point = _nearest_price(points, event_dt, prefer_after=True)
     current_point = _nearest_price(points, reference_now)
     if event_point is None or current_point is None:
+        return {
+            "reaction_status": "UNAVAILABLE",
+            "reaction_direction": "UNKNOWN",
+            "reaction_source": "YAHOO_INTRADAY",
+        }
+
+    # Do not manufacture an event price from a bar that is materially later
+    # than the catalyst. This protects all downstream 1/5/15/30/60m outcomes.
+    anchor_delay = (event_point["timestamp"] - event_dt).total_seconds()
+    if anchor_delay < 0 or anchor_delay > 5 * 60:
         return {
             "reaction_status": "UNAVAILABLE",
             "reaction_direction": "UNKNOWN",
