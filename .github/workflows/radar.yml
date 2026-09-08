@@ -37,6 +37,12 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          PHARMA_SMTP_HOST: ${{ secrets.PHARMA_SMTP_HOST }}
+          PHARMA_SMTP_PORT: ${{ secrets.PHARMA_SMTP_PORT }}
+          PHARMA_SMTP_USERNAME: ${{ secrets.PHARMA_SMTP_USERNAME }}
+          PHARMA_SMTP_PASSWORD: ${{ secrets.PHARMA_SMTP_PASSWORD }}
+          PHARMA_EMAIL_FROM: ${{ secrets.PHARMA_EMAIL_FROM }}
+          PHARMA_EMAIL_TO: ${{ secrets.PHARMA_EMAIL_TO }}
         run: |
           echo "==================================="
           echo "🧬 PHARMA RADAR — PRODUCTION SCAN"
