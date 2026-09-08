@@ -19,6 +19,13 @@ def test_critical_is_immediate():
     assert alert_action(_alert("NUVL", 100, 60, "CRITICAL")) == "IMMEDIATE"
 
 
+def test_expired_is_silent_even_if_priority_is_critical():
+    alert = _alert("ZYME", 100, 52, "CRITICAL")
+    alert["trading_window"] = "EXPIRED"
+    assert alert_action(alert) == "SILENT"
+    assert select_intelligent_alerts([alert]) == []
+
+
 def test_high_strong_reaction_is_immediate():
     assert alert_action(_alert("CAPR", 70, 65, "HIGH", "STRONG POSITIVE", "CONFIRMED")) == "IMMEDIATE"
 
@@ -100,6 +107,7 @@ def test_telegram_shows_confirmed_catalyst_confirmation():
 
 if __name__ == "__main__":
     test_critical_is_immediate()
+    test_expired_is_silent_even_if_priority_is_critical()
     test_high_strong_reaction_is_immediate()
     test_high_without_strong_reaction_is_fast()
     test_watch_requires_setup_and_reaction_context()
