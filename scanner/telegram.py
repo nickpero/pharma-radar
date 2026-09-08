@@ -137,12 +137,14 @@ def format_catalyst_alert(alert):
     if short_interest is not None:
         lines.append(f"🩳 Short Interest: {float(short_interest):.1f}%")
 
-    if reaction_status == "AVAILABLE":
+    # Show any usable reaction data even when the provider did not set a perfect
+    # AVAILABLE status. This avoids hiding real movements behind a status flag.
+    reaction_values = [("1m", reaction.get("reaction_1m_pct")), ("5m", reaction_5m), ("15m", reaction_15m), ("30m", reaction_30m), ("60m", reaction_60m)]
+    available_windows = [f"{label} {float(value):+.2f}%" for label, value in reaction_values if value is not None]
+    if reaction_pct is not None or available_windows:
         lines.extend(["", "⚡ MARKET REACTION"])
         if reaction_pct is not None:
             lines.append(f"📈 Reaction: {float(reaction_pct):+.2f}% ({reaction_direction})")
-        windows = [("5m", reaction_5m), ("15m", reaction_15m), ("30m", reaction_30m), ("60m", reaction_60m)]
-        available_windows = [f"{label} {float(value):+.2f}%" for label, value in windows if value is not None]
         if available_windows:
             lines.append("⏱ " + " | ".join(available_windows))
     else:
