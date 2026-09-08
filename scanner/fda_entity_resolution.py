@@ -27,9 +27,9 @@ def _best_alias_match(text: str, aliases: list[str]) -> str | None:
 def resolve_fda_entities(news_item: dict, watchlist=None) -> dict:
     """Attach structured FDA entity-resolution evidence to a news item.
 
-    Safety rule: this function never invents a ticker/program. It only records
-    entities already present in the supplied watchlist and visible in the
-    official FDA article text.
+    Safety rule: a catalyst entity is resolved only when a specific program or
+    drug is actually present in the supplied FDA article text. A company-only
+    mention never invents a program from the watchlist.
     """
     if not isinstance(news_item, dict):
         raise TypeError("news_item must be a dictionary")
@@ -58,18 +58,17 @@ def resolve_fda_entities(news_item: dict, watchlist=None) -> dict:
                 text,
                 get_program_aliases(ticker, program),
             )
-            if not company_alias and not ticker_match and not program_alias:
+
+            # Never create a program entity from a company-only match.
+            if not program_alias:
                 continue
 
-            if program_alias and (company_alias or ticker_match):
+            if company_alias or ticker_match:
                 confidence = "HIGH"
                 resolution_type = "COMPANY_AND_PROGRAM"
-            elif program_alias:
+            else:
                 confidence = "HIGH"
                 resolution_type = "PROGRAM"
-            else:
-                confidence = "MEDIUM"
-                resolution_type = "COMPANY"
 
             candidates.append({
                 "ticker": ticker,
@@ -86,7 +85,7 @@ def resolve_fda_entities(news_item: dict, watchlist=None) -> dict:
 
     candidates.sort(
         key=lambda item: (
-            2 if item["resolution_type"] == "COMPANY_AND_PROGRAM" else 1 if item["resolution_type"] == "PROGRAM" else 0,
+            2 if item["resolution_type"] == "COMPANY_AND_PROGRAM" else 1,
             len(str(item.get("program_evidence") or "")),
             len(str(item.get("company_evidence") or "")),
         ),
