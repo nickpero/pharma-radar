@@ -54,8 +54,21 @@ def test_market_reaction_handles_bad_timestamp():
     assert result["reaction_direction"] == "UNKNOWN"
 
 
+def test_market_reaction_rejects_date_only_timestamp():
+    result = build_market_reaction(_points(), "2026-09-07")
+    assert result["reaction_status"] == "UNAVAILABLE"
+    assert result["reaction_direction"] == "UNKNOWN"
+
+
+def test_market_reaction_rejects_late_anchor():
+    result = build_market_reaction(_points(), "2026-09-07T12:00:00+00:00")
+    assert result["reaction_status"] == "UNAVAILABLE"
+
+
 if __name__ == "__main__":
     test_market_reaction_calculates_event_and_current_move()
     test_market_reaction_has_multi_window_and_extremes()
     test_market_reaction_handles_bad_timestamp()
+    test_market_reaction_rejects_date_only_timestamp()
+    test_market_reaction_rejects_late_anchor()
     print("Trading Intelligence Phase 5.1 tests passed")
