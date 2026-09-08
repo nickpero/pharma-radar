@@ -14,6 +14,7 @@ from scanner.pharma_email_state import email_delivery_key, load_email_state, sav
 
 
 IMPORTANT_LABELS = {"CRITICAL", "HIGH"}
+EMAIL_STATE_PATH = os.path.join("data", "pharma_email_state.json")
 
 
 def _label(alert):
@@ -128,7 +129,7 @@ def send_pharma_intelligence_email(alert):
 
     host, port, username, password, sender, recipient = _smtp_config()
     key = email_delivery_key(alert)
-    sent_keys = load_email_state()
+    sent_keys = load_email_state(EMAIL_STATE_PATH)
     if key in sent_keys:
         return False
 
@@ -153,7 +154,7 @@ def send_pharma_intelligence_email(alert):
         return False
 
     sent_keys.add(key)
-    save_email_state(sent_keys)
+    save_email_state(sent_keys, EMAIL_STATE_PATH)
     return True
 
 
