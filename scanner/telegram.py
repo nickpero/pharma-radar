@@ -61,33 +61,48 @@ def _num(value, digits=2):
         return None
 
 
+def _known(value):
+    text = _clean_text(value)
+    return text if text and text.upper() not in {"UNKNOWN", "N/A", "NONE", "NULL", "UNAVAILABLE"} else None
+
+
 def _add_explainer(lines, alert):
     explainer = alert.get("catalyst_explainer") or {}
     if not explainer:
         return
-    lines.extend([
-        "",
-        "💊 COSA SIGNIFICA",
-        f"💊 Cos'è: {_clean_text(explainer.get('what_is'), 500) or 'Non disponibile'}",
-        f"🩺 Indicazione: {_clean_text(explainer.get('indication'), 350) or 'Non disponibile'}",
-        f"🧪 Fase: {_clean_text(explainer.get('stage'), 120) or 'Non disponibile'}",
-        f"🎯 Perché conta: {_clean_text(explainer.get('why_it_matters'), 500) or 'Non disponibile'}",
-        f"🏢 Impatto: {_clean_text(explainer.get('company_impact'), 500) or 'Non disponibile'}",
-    ])
+
+    why = _clean_text(explainer.get("why_it_matters"), 600)
+    impact = _clean_text(explainer.get("company_impact"), 600)
+    what_is = _clean_text(explainer.get("what_is"), 450)
+    indication = _clean_text(explainer.get("indication"), 300)
+    stage = _clean_text(explainer.get("stage"), 100)
+
+    if not any((why, impact, what_is, indication, stage)):
+        return
+
+    lines.extend(["", "💡 WHY IT MATTERS"])
+    if why:
+        lines.append(why)
+    elif impact:
+        lines.append(impact)
+    if what_is:
+        lines.append(f"Drug: {what_is}")
+    if indication:
+        lines.append(f"Indication: {indication}")
+    if stage:
+        lines.append(f"Stage: {stage}")
 
 
 def format_catalyst_alert(alert):
-    """Crea un alert Telegram gerarchico, leggibile in pochi secondi."""
-    ticker = alert.get("ticker", "UNKNOWN")
-    program = alert.get("program", "UNKNOWN")
-    nct_id = alert.get("nct_id")
+    """Crea un alert Telegram compatto, gerarchico e leggibile in pochi secondi."""
+    ticker = _clean_text(alert.get("ticker", "UNKNOWN")).upper()
+    program = _clean_text(alert.get("program", "UNKNOWN"))
+    nct_id = _clean_text(alert.get("nct_id"))
     event = alert.get("event", {})
     if not isinstance(event, dict):
         event = {}
 
     event_type = event.get("type", alert.get("event_type", "UNKNOWN"))
-    severity = event.get("severity", alert.get("severity", "UNKNOWN"))
-    direction = event.get("direction", alert.get("direction", "UNKNOWN"))
     score = event.get("score", alert.get("score", 0))
     label = event.get("label", alert.get("label", "LOW"))
     subtype = event.get("subtype", alert.get("subtype", ""))
@@ -95,77 +110,66 @@ def format_catalyst_alert(alert):
     urgency = event.get("urgency", alert.get("urgency", "LOW"))
     alert_priority = alert.get("alert_priority", event.get("alert_priority"))
     setup_score = alert.get("trading_setup_score", event.get("trading_setup_score", 0))
-    setup_version = alert.get("trading_setup_version", event.get("trading_setup_version", "5.3"))
     window = alert.get("trading_window", event.get("trading_window", "UNKNOWN"))
-    awareness = alert.get("market_awareness", event.get("market_awareness", "UNKNOWN"))
-    event_surprise = alert.get("event_surprise", event.get("event_surprise", "UNKNOWN"))
     data_quality = alert.get("data_quality", event.get("data_quality", "LOW"))
     reaction_strength = alert.get("reaction_strength", event.get("reaction_strength", "UNKNOWN"))
     reaction_interpretation = alert.get("reaction_interpretation", event.get("reaction_interpretation", "UNKNOWN"))
-    confirmation_score = alert.get("catalyst_confirmation_score", event.get("catalyst_confirmation_score", 0))
-    confirmation_label = alert.get("catalyst_confirmation", event.get("catalyst_confirmation", "UNCONFIRMED"))
+    confirmation_score = alert.get("catalyst_confirmation_score", event.get("catalyst_confirmation_score"))
+    confirmation_label = alert.get("catalyst_confirmation", event.get("catalyst_confirmation"))
     price_change = alert.get("price_change_pct", event.get("price_change_pct"))
     volume_ratio = alert.get("volume_ratio", event.get("volume_ratio"))
-    market_cap = alert.get("market_cap", event.get("market_cap"))
-    short_interest = alert.get("short_interest_pct", event.get("short_interest_pct"))
     reaction = alert.get("market_reaction") or event.get("market_reaction") or {}
     reaction_pct = alert.get("reaction_pct", reaction.get("reaction_pct"))
     reaction_direction = alert.get("reaction_direction", reaction.get("reaction_direction", "UNKNOWN"))
-    title = _clean_text(alert.get("title") or event.get("title"), 500)
-    summary = _clean_text(alert.get("summary") or event.get("summary"), 700)
+    title = _clean_text(alert.get("title") or event.get("title"), 600)
+    summary = _clean_text(alert.get("summary") or event.get("summary"), 800)
 
     if alert_priority is None:
         priority_event = dict(event)
         priority_event.update({"score": score, "trading_impact": trading_impact, "urgency": urgency})
         alert_priority = enrich_alert_priority(priority_event).get("alert_priority", 0)
     alert_tier = event.get("alert_tier", alert.get("alert_tier")) or get_alert_tier(alert_priority)
+    tier_icon = get_severity_icon(alert_tier)
 
     lines = [
-        f"🚨 PHARMA RADAR — {alert_tier}",
+        f"{tier_icon} PHARMA RADAR — {alert_tier}",
         "",
         f"🧬 {ticker} — {program}",
     ]
     if nct_id:
         lines.append(f"🧪 {nct_id}")
 
-    lines.extend([
-        "",
-        f"📰 {subtype or event_type}",
-        title or "Catalyst detected",
-    ])
+    lines.extend(["", f"📰 {subtype or event_type}", title or "Catalyst detected"])
     if summary and summary.lower() != title.lower():
         lines.append(summary)
 
     lines.extend([
         "",
-        "🎯 CATALYST",
-        f"{score}/100 — {label}",
-        "",
-        "🚨 PRIORITY",
-        f"{alert_priority}/100 — {alert_tier}",
-        "",
-        "🧠 CONFIRMATION",
-        f"{confirmation_score}/100 — {confirmation_label}",
-        "",
-        "📊 TRADING SETUP",
-        f"{setup_score}/100",
-        f"Window: {window} | Quality: {data_quality}",
-        f"Awareness: {awareness} | Surprise: {event_surprise}",
+        f"🎯 Catalyst  {score}/100 {label}",
+        f"🚨 Priority  {alert_priority}/100 {alert_tier}",
+        f"📊 Setup     {setup_score}/100 | Window: {window}",
     ])
 
-    if price_change is not None or volume_ratio is not None:
-        market_bits = []
-        if price_change is not None:
-            value = _num(price_change)
-            if value is not None:
-                market_bits.append(f"Price {value}%")
-        if volume_ratio is not None:
-            try:
-                market_bits.append(f"Volume {float(volume_ratio):.1f}x")
-            except (TypeError, ValueError):
-                pass
-        if market_bits:
-            lines.append(" | ".join(market_bits))
+    if _known(data_quality) and str(data_quality).upper() != "HIGH":
+        lines.append(f"Quality: {data_quality}")
+
+    confirmation = _known(confirmation_label)
+    if confirmation_score is not None or confirmation:
+        if confirmation_score is not None:
+            lines.append(f"🧠 Confirmation  {confirmation_score}/100 | {confirmation or 'PENDING'}")
+        else:
+            lines.append(f"🧠 Confirmation  {confirmation}")
+
+    market_bits = []
+    if price_change is not None:
+        value = _num(price_change)
+        if value is not None:
+            market_bits.append(f"Price {value}%")
+    if volume_ratio is not None:
+        try:
+            market_bits.append(f"Volume {float(volume_ratio):.1f}x")
+        except (TypeError, ValueError):
+            pass
 
     reaction_values = [
         ("1m", reaction.get("reaction_1m_pct")),
@@ -180,24 +184,33 @@ def format_catalyst_alert(alert):
         if formatted is not None:
             available.append(f"{label_window} {formatted}%")
 
-    lines.extend(["", "📈 MARKET REACTION"])
-    if reaction_pct is not None:
-        formatted = _num(reaction_pct)
-        if formatted is not None:
-            lines.append(f"Overall: {formatted}% ({reaction_direction})")
+    overall = _num(reaction_pct)
+    if overall is not None:
+        market_bits.insert(0, f"Overall {overall}%")
     if available:
-        lines.append(" | ".join(available))
+        market_bits.extend(available)
+
+    lines.extend(["", "📈 MARKET"])
+    if market_bits:
+        lines.append(" | ".join(market_bits))
     else:
-        lines.append("Unavailable")
-    lines.append(f"Strength: {reaction_strength} | Interpretation: {reaction_interpretation}")
+        lines.append("Reaction: N/A")
+
+    reaction_context = []
+    if _known(reaction_strength):
+        reaction_context.append(str(reaction_strength))
+    if _known(reaction_interpretation):
+        reaction_context.append(str(reaction_interpretation))
+    if reaction_context:
+        lines.append(" | ".join(reaction_context))
 
     _add_explainer(lines, alert)
 
-    source = alert.get("source") or event.get("source")
+    source = _clean_text(alert.get("source") or event.get("source"))
     if source:
         lines.extend(["", f"🔎 Source: {source}"])
 
-    lines.extend(["", "⚠️ Nessuna raccomandazione automatica"])
+    lines.extend(["", "⚠️ No automatic buy/sell recommendation"])
     return "\n".join(str(line) for line in lines)
 
 
