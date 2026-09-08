@@ -3,13 +3,14 @@ Pharma Radar — Pharma Intelligence Email (5.7.3)
 
 Plain-text Italian intelligence emails for CRITICAL/HIGH catalysts.
 Email is optional: if SMTP settings are not configured, sending is skipped.
-No scientific claims are invented; the email uses the source-grounded catalyst
-explainer already attached to the alert.
+Delivery is persistent/deduplicated and SMTP failures are fail-safe.
 """
 
 import os
 import smtplib
 from email.message import EmailMessage
+
+from scanner.pharma_email_state import email_delivery_key, load_email_state, save_email_state
 
 
 IMPORTANT_LABELS = {"CRITICAL", "HIGH"}
@@ -42,19 +43,24 @@ def format_pharma_intelligence_email(alert):
     explainer = alert.get("catalyst_explainer") or {}
     ticker = alert.get("ticker", "UNKNOWN")
     program = alert.get("program", "UNKNOWN")
+    company = alert.get("company") or event.get("company")
     label = _label(alert)
-    score = event.get("score", alert.get("score", 0))
     priority = alert.get("alert_priority", event.get("alert_priority", 0))
     subtype = event.get("subtype", alert.get("subtype", "UNKNOWN"))
     event_type = event.get("type", alert.get("event_type", "UNKNOWN"))
     title = alert.get("title") or event.get("title") or "Catalyst pharma rilevante"
     summary = alert.get("summary") or event.get("summary") or ""
     source = alert.get("source") or event.get("source") or "Non disponibile"
+    source_url = alert.get("url") or alert.get("source_url") or event.get("url") or event.get("source_url")
 
     lines = [
         "PHARMA RADAR — PHARMA INTELLIGENCE",
         "",
         f"🚨 {ticker} — {program}",
+    ]
+    if company:
+        lines.append(f"🏢 Azienda: {company}")
+    lines += [
         f"Priorità: {priority}/100 — {label}",
         f"Evento: {event_type} — {subtype}",
         "",
@@ -67,6 +73,10 @@ def format_pharma_intelligence_email(alert):
         "",
         "💊 COS'È / COSA FA",
         str(explainer.get("what_is") or "Informazioni sufficienti non disponibili nella fonte analizzata."),
+    ]
+    if explainer.get("mechanism"):
+        lines += ["", "⚙️ MECCANISMO", str(explainer["mechanism"])]
+    lines += [
         "",
         "🩺 INDICAZIONE",
         str(explainer.get("indication") or "Non disponibile nella fonte analizzata."),
@@ -88,6 +98,8 @@ def format_pharma_intelligence_email(alert):
         "",
         f"Fonte: {source}",
     ]
+    if source_url:
+        lines += [f"Link fonte ufficiale: {source_url}"]
     return "\n".join(lines)
 
 
@@ -102,16 +114,22 @@ def _smtp_config():
 
 
 def email_is_configured():
-    host, _port, username, password, sender, recipient = _smtp_config()
+    try:
+        host, _port, username, password, sender, recipient = _smtp_config()
+    except (TypeError, ValueError):
+        return False
     return all((host, username, password, sender, recipient))
 
 
 def send_pharma_intelligence_email(alert):
-    """Send one intelligence email. Returns False when SMTP is not configured."""
-    if _label(alert) not in IMPORTANT_LABELS:
+    """Send one intelligence email. Returns False when skipped or on delivery failure."""
+    if _label(alert) not in IMPORTANT_LABELS or not email_is_configured():
         return False
+
     host, port, username, password, sender, recipient = _smtp_config()
-    if not all((host, username, password, sender, recipient)):
+    key = email_delivery_key(alert)
+    sent_keys = load_email_state()
+    if key in sent_keys:
         return False
 
     ticker = alert.get("ticker", "UNKNOWN")
@@ -126,14 +144,21 @@ def send_pharma_intelligence_email(alert):
     message["To"] = recipient
     message.set_content(format_pharma_intelligence_email(alert))
 
-    with smtplib.SMTP_SSL(host, port, timeout=30) as smtp:
-        smtp.login(username, password)
-        smtp.send_message(message)
+    try:
+        with smtplib.SMTP_SSL(host, port, timeout=30) as smtp:
+            smtp.login(username, password)
+            smtp.send_message(message)
+    except (OSError, smtplib.SMTPException, TimeoutError, ValueError) as exc:
+        print(f"Pharma Intelligence email error for {ticker}: {exc}")
+        return False
+
+    sent_keys.add(key)
+    save_email_state(sent_keys)
     return True
 
 
 def send_pharma_intelligence_emails(alerts):
-    """Send intelligence emails for CRITICAL/HIGH alerts; silently skip if unconfigured."""
+    """Send CRITICAL/HIGH intelligence emails once per unique catalyst."""
     if not email_is_configured():
         return 0
     sent = 0
