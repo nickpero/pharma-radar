@@ -68,7 +68,7 @@ def _add_explainer(lines, alert):
 
 
 def format_catalyst_alert(alert):
-    """Crea il messaggio Telegram con Catalyst + Trading Intelligence 5.3."""
+    """Crea il messaggio Telegram con Catalyst + Trading Intelligence 5.8."""
     ticker = alert.get("ticker", "UNKNOWN")
     program = alert.get("program", "UNKNOWN")
     nct_id = alert.get("nct_id")
@@ -93,6 +93,8 @@ def format_catalyst_alert(alert):
     data_quality = alert.get("data_quality", event.get("data_quality", "LOW"))
     reaction_strength = alert.get("reaction_strength", event.get("reaction_strength", "UNKNOWN"))
     reaction_interpretation = alert.get("reaction_interpretation", event.get("reaction_interpretation", "UNKNOWN"))
+    confirmation_score = alert.get("catalyst_confirmation_score", event.get("catalyst_confirmation_score", 0))
+    confirmation_label = alert.get("catalyst_confirmation", event.get("catalyst_confirmation", "UNCONFIRMED"))
     price_change = alert.get("price_change_pct", event.get("price_change_pct"))
     volume_ratio = alert.get("volume_ratio", event.get("volume_ratio"))
     market_cap = alert.get("market_cap", event.get("market_cap"))
@@ -141,6 +143,7 @@ def format_catalyst_alert(alert):
         f"👀 Market Awareness: {awareness}", f"🎯 Event Surprise: {event_surprise}",
         f"🧪 Data Quality: {data_quality}", f"⚡ Reaction Strength: {reaction_strength}",
         f"🧭 Reaction Interpretation: {reaction_interpretation}",
+        f"🧠 Catalyst Confirmation: {confirmation_score}/100 — {confirmation_label}",
     ])
     if price_change is not None:
         lines.append(f"📈 Price vs prev close: {float(price_change):+.2f}%")
