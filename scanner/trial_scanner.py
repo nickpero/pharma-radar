@@ -20,6 +20,7 @@ from scanner.regulatory_pipeline import scan_regulatory_sources
 from scanner.market_data import enrich_market_data, enrich_market_reactions
 from scanner.catalyst_memory import record_events, memory_summary
 from scanner.catalyst_explainer import enrich_catalyst_explainers
+from scanner.catalyst_confirmation import enrich_catalyst_confirmation
 
 WATCHLIST_FILE = Path("data/watchlist.json")
 
@@ -98,6 +99,7 @@ def build_alert(ticker, company, program, nct_id, event, changes, trial):
         "source": event.get("source", "CLINICALTRIALS"), "source_type": event.get("source_type", "PRIMARY_CLINICAL"),
         "reaction_strength": event.get("reaction_strength", "UNKNOWN"), "reaction_interpretation": event.get("reaction_interpretation", "UNKNOWN"),
         "reaction_classification": event.get("reaction_classification", "UNKNOWN"), "trading_setup_version": event.get("trading_setup_version", "4"),
+        "catalyst_confirmation_score": event.get("catalyst_confirmation_score", 0), "catalyst_confirmation": event.get("catalyst_confirmation", "UNCONFIRMED"),
     }
     alert.update(_reaction_fields(event))
     return alert
@@ -117,6 +119,7 @@ def build_fda_alert(event):
         "title": event.get("title", ""), "summary": event.get("summary", ""), "url": event.get("url"), "published_at": event.get("published_at"),
         "reaction_strength": event.get("reaction_strength", "UNKNOWN"), "reaction_interpretation": event.get("reaction_interpretation", "UNKNOWN"),
         "reaction_classification": event.get("reaction_classification", "UNKNOWN"), "trading_setup_version": event.get("trading_setup_version", "4"),
+        "catalyst_confirmation_score": event.get("catalyst_confirmation_score", 0), "catalyst_confirmation": event.get("catalyst_confirmation", "UNCONFIRMED"),
     }
     alert.update(_reaction_fields(event))
     return alert
@@ -187,6 +190,7 @@ def scan(baseline=False):
     alerts = [enrich_reaction_classification(alert) for alert in alerts]
     alerts = enrich_historical_stats_batch(alerts)
     alerts = [enrich_trading_setup_2(alert, market_data=alert.get("market_data")) for alert in alerts]
+    alerts = [enrich_catalyst_confirmation(alert) for alert in alerts]
     alerts = deduplicate_alerts(alerts)
     alerts = enrich_catalyst_explainers(alerts)
     memory_added = record_events(alerts); memory_info = memory_summary()
