@@ -1,5 +1,7 @@
 """Pharma Radar — Phase 5.6 intelligent Telegram alert policy."""
 
+import re
+
 
 def _num(value):
     try:
@@ -39,12 +41,50 @@ def alert_action(alert):
     return "SILENT"
 
 
-def _dedup_key(alert):
+def _normalise_text(value):
+    return re.sub(r"\s+", " ", str(value or "").strip().lower())
+
+
+def _event_identity(alert):
+    """Build a stable identity for one underlying catalyst/news item."""
     event = alert.get("event") if isinstance(alert.get("event"), dict) else {}
+    source_id = (
+        alert.get("source_item_id") or alert.get("item_id") or
+        event.get("source_item_id") or event.get("item_id")
+    )
+    url = alert.get("url") or event.get("url")
+    title = alert.get("title") or event.get("title")
+    timestamp = alert.get("event_timestamp") or event.get("published_at")
+    if source_id:
+        identity = ("ID", _normalise_text(source_id))
+    elif url:
+        identity = ("URL", _normalise_text(url))
+    elif title:
+        identity = ("TITLE", _normalise_text(title))
+    else:
+        identity = ("TIME", _normalise_text(timestamp))
     return (
-        str(alert.get("ticker", "UNKNOWN")).upper(),
-        str(alert.get("program", "UNKNOWN")).lower(),
-        str(alert.get("subtype", event.get("subtype", ""))).upper(),
+        _normalise_text(alert.get("ticker") or event.get("ticker") or "UNKNOWN").upper(),
+        _normalise_text(alert.get("program") or event.get("program") or "UNKNOWN"),
+        _normalise_text(alert.get("subtype") or event.get("subtype") or ""),
+        identity,
+    )
+
+
+def _dedup_key(alert):
+    return _event_identity(alert)
+
+
+def _rank(alert):
+    reaction = alert.get("market_reaction") or {}
+    available_reaction = any(
+        reaction.get(key) is not None
+        for key in ("reaction_pct", "reaction_5m_pct", "reaction_15m_pct", "reaction_30m_pct", "reaction_60m_pct")
+    )
+    return (
+        _num(alert.get("alert_priority")) or 0,
+        _num(alert.get("trading_setup_score")) or 0,
+        int(available_reaction),
     )
 
 
@@ -59,12 +99,7 @@ def select_intelligent_alerts(alerts):
         item["telegram_action"] = action
         key = _dedup_key(item)
         current = selected.get(key)
-        if current is None:
-            selected[key] = item
-            continue
-        current_priority = _num(current.get("alert_priority")) or 0
-        new_priority = _num(item.get("alert_priority")) or 0
-        if new_priority > current_priority:
+        if current is None or _rank(item) > _rank(current):
             selected[key] = item
     order = {"IMMEDIATE": 0, "FAST": 1, "WATCH": 2}
     return sorted(
