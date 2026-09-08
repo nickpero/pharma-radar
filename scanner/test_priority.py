@@ -22,6 +22,20 @@ def test_extreme_immediate_high_confidence_beats_low():
     assert get_alert_priority(critical) == 100
 
 
+def test_expired_event_has_no_operational_priority():
+    expired = {
+        "score": 100,
+        "trading_impact": "EXTREME",
+        "urgency": "IMMEDIATE",
+        "match_confidence": "HIGH",
+        "trading_window": "EXPIRED",
+    }
+    result = enrich_alert_priority(expired)
+    assert result["score"] == 100
+    assert result["alert_priority"] == 0
+    assert result["alert_tier"] == "LOW"
+
+
 def test_enrichment_preserves_event():
     event = {
         "score": 90,
@@ -47,6 +61,7 @@ def test_sort_uses_priority_then_score():
 
 if __name__ == "__main__":
     test_extreme_immediate_high_confidence_beats_low()
+    test_expired_event_has_no_operational_priority()
     test_enrichment_preserves_event()
     test_sort_uses_priority_then_score()
     print("✅ Alert priority tests passed")
