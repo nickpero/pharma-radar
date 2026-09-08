@@ -52,6 +52,21 @@ def get_urgency_icon(urgency):
     return {"IMMEDIATE": "⚡", "FAST": "🚀", "NORMAL": "🕐"}.get(str(urgency or "LOW").upper(), "⚪")
 
 
+def _add_explainer(lines, alert):
+    explainer = alert.get("catalyst_explainer") or {}
+    if not explainer:
+        return
+    lines.extend([
+        "", "💊 COSA SIGNIFICA",
+        f"💊 Cos'è: {explainer.get('what_is', 'Non disponibile')}",
+        f"🩺 Indicazione: {explainer.get('indication', 'Non disponibile')}",
+        f"🧪 Fase: {explainer.get('stage', 'Non disponibile')}",
+        f"🎯 Perché conta: {explainer.get('why_it_matters', 'Non disponibile')}",
+        f"🏢 Impatto potenziale: {explainer.get('company_impact', 'Non disponibile')}",
+        f"📈 Mercato: {explainer.get('market_reaction', 'Non disponibile')}",
+    ])
+
+
 def format_catalyst_alert(alert):
     """Crea il messaggio Telegram con Catalyst + Trading Intelligence 5.3."""
     ticker = alert.get("ticker", "UNKNOWN")
@@ -85,7 +100,6 @@ def format_catalyst_alert(alert):
     reaction = alert.get("market_reaction") or event.get("market_reaction") or {}
     reaction_pct = alert.get("reaction_pct", reaction.get("reaction_pct"))
     reaction_direction = alert.get("reaction_direction", reaction.get("reaction_direction", "UNKNOWN"))
-    reaction_status = alert.get("reaction_status", reaction.get("reaction_status", "UNAVAILABLE"))
     reaction_5m = alert.get("reaction_5m_pct", reaction.get("reaction_5m_pct"))
     reaction_15m = alert.get("reaction_15m_pct", reaction.get("reaction_15m_pct"))
     reaction_30m = alert.get("reaction_30m_pct", reaction.get("reaction_30m_pct"))
@@ -137,8 +151,6 @@ def format_catalyst_alert(alert):
     if short_interest is not None:
         lines.append(f"🩳 Short Interest: {float(short_interest):.1f}%")
 
-    # Show any usable reaction data even when the provider did not set a perfect
-    # AVAILABLE status. This avoids hiding real movements behind a status flag.
     reaction_values = [("1m", reaction.get("reaction_1m_pct")), ("5m", reaction_5m), ("15m", reaction_15m), ("30m", reaction_30m), ("60m", reaction_60m)]
     available_windows = [f"{label} {float(value):+.2f}%" for label, value in reaction_values if value is not None]
     if reaction_pct is not None or available_windows:
@@ -150,6 +162,7 @@ def format_catalyst_alert(alert):
     else:
         lines.append("⚡ MARKET REACTION: UNAVAILABLE")
 
+    _add_explainer(lines, alert)
     source = alert.get("source") or event.get("source")
     if source:
         lines.append(f"🔎 Source: {source}")
