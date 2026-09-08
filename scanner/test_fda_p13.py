@@ -92,6 +92,20 @@ def test_build_preserves_legacy_approval_subtype():
     assert event["urgency"] == "EXTREME"
 
 
+def test_sec_clinical_result_beats_regulatory_boilerplate():
+    event = build_fda_catalyst({
+        "source": "SEC",
+        "source_type": "PRIMARY_CORPORATE",
+        "title": "SEC 8-K — Summit Therapeutics (SMMT)",
+        "summary": "Positive overall survival results from Phase 3 HARMONi-2; ivonescimab remains investigational and is not approved in the United States.",
+        "content": "The Phase 3 study met its primary endpoint with positive overall survival results. Ivonescimab is investigational and is not approved by any regulatory authority in the United States.",
+        "categories": ["APPROVAL"],
+    })
+    assert event["catalyst_type"] == "CLINICAL_RESULT"
+    assert event["subtype"] == "CLINICAL_RESULTS"
+    assert event["direction"] == "POSITIVE"
+
+
 if __name__ == "__main__":
     test_approval_is_extreme_positive()
     test_rejection_is_extreme_negative()
@@ -104,4 +118,5 @@ if __name__ == "__main__":
     test_negation_protection()
     test_neutral_fallback()
     test_build_preserves_legacy_approval_subtype()
+    test_sec_clinical_result_beats_regulatory_boilerplate()
     print("P1.3 FDA CATALYST TESTS PASSED")
