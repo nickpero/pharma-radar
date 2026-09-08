@@ -18,7 +18,7 @@ def test_catalyst_message_format():
         },
     }
     message = format_catalyst_alert(alert)
-    assert "🚨 PHARMA RADAR — CATALYST" in message
+    assert "🚨 PHARMA RADAR — CRITICAL" in message
     assert "CAPR — deramiocel" in message
     assert "NCT05126758" in message
     assert "STATUS_CHANGE" in message
