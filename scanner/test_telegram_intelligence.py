@@ -78,31 +78,51 @@ def test_silent_alerts_are_filtered():
     assert selected == []
 
 
-def test_telegram_shows_reaction_even_without_available_status():
+def test_telegram_is_compact_and_hierarchical():
+    alert = _alert("IONS", 100, 56, "CRITICAL")
+    alert.update({
+        "program": "zilganersen",
+        "title": "FDA Approves First Drug to Treat Alexander Disease",
+        "trading_window": "1-7D",
+        "source": "FDA RSS",
+    })
+    message = format_catalyst_alert(alert)
+    assert "🚨 PHARMA RADAR — CRITICAL" in message
+    assert "🧬 IONS — zilganersen" in message
+    assert "🎯 Catalyst  100/100 CRITICAL" in message
+    assert "🚨 Priority  100/100 CRITICAL" in message
+    assert "📊 Setup     56/100 | Window: 1-7D" in message
+    assert "COSA SIGNIFICA" not in message
+    assert "Awareness:" not in message
+    assert "Surprise:" not in message
+    assert "Reaction: N/A" in message
+
+
+def test_telegram_shows_market_reaction_compactly():
     alert = _alert("SMMT", 100, 69, "CRITICAL", "STRONG POSITIVE", "CONFIRMED")
     alert["market_reaction"] = {"reaction_status": "UNAVAILABLE", "reaction_5m_pct": 3.05, "reaction_15m_pct": 2.29}
     message = format_catalyst_alert(alert)
     assert "5m +3.05%" in message
     assert "15m +2.29%" in message
     assert "MARKET REACTION: UNAVAILABLE" not in message
+    assert "Reaction: N/A" not in message
 
 
-def test_telegram_shows_catalyst_confirmation():
+def test_telegram_shows_confirmation_only_as_one_line():
     alert = _alert("IONS", 100, 54, "CRITICAL")
     alert["catalyst_confirmation_score"] = 0
     alert["catalyst_confirmation"] = "UNCONFIRMED"
     message = format_catalyst_alert(alert)
-    assert "🧠 CONFIRMATION" in message
-    assert "0/100 — UNCONFIRMED" in message
+    assert "🧠 Confirmation  0/100 | UNCONFIRMED" in message
+    assert "🧠 CONFIRMATION" not in message
 
 
-def test_telegram_shows_confirmed_catalyst_confirmation():
+def test_telegram_shows_confirmed_confirmation_compactly():
     alert = _alert("SMMT", 100, 69, "CRITICAL", "STRONG POSITIVE", "CONFIRMED")
     alert["catalyst_confirmation_score"] = 82
     alert["catalyst_confirmation"] = "CONFIRMED"
     message = format_catalyst_alert(alert)
-    assert "🧠 CONFIRMATION" in message
-    assert "82/100 — CONFIRMED" in message
+    assert "🧠 Confirmation  82/100 | CONFIRMED" in message
 
 
 if __name__ == "__main__":
@@ -115,7 +135,8 @@ if __name__ == "__main__":
     test_same_title_different_setup_is_collapsed()
     test_different_headlines_remain_separate_events()
     test_silent_alerts_are_filtered()
-    test_telegram_shows_reaction_even_without_available_status()
-    test_telegram_shows_catalyst_confirmation()
-    test_telegram_shows_confirmed_catalyst_confirmation()
+    test_telegram_is_compact_and_hierarchical()
+    test_telegram_shows_market_reaction_compactly()
+    test_telegram_shows_confirmation_only_as_one_line()
+    test_telegram_shows_confirmed_confirmation_compactly()
     print("✅ Telegram intelligence tests passed")
