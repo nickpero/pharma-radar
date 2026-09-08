@@ -7,6 +7,8 @@ FDA News
     ↓
 FDA Article Enrichment
     ↓
+FDA Entity Resolution 5.9A
+    ↓
 FDA Matcher
     ↓
 FDA Catalyst
@@ -22,6 +24,7 @@ Il modulo NON invia Telegram.
 
 from scanner.fda_news import filter_fda_catalysts
 from scanner.fda_enrichment import enrich_fda_news_item
+from scanner.fda_entity_resolution import resolve_fda_entities
 from scanner.fda_matcher import identify_fda_target
 from scanner.fda_catalyst import build_fda_catalyst
 from scanner.fda_score import score_fda_event
@@ -43,11 +46,16 @@ def process_fda_news_item(news_item, watchlist=None):
     if not filter_fda_catalysts([enriched_item]):
         return None
 
-    target = identify_fda_target(enriched_item, watchlist)
+    # Resolve only entities supported by the watchlist and visible in the
+    # official FDA article. This enriches evidence without weakening the
+    # existing strict matcher or inventing company/ticker mappings.
+    resolved_item = resolve_fda_entities(enriched_item, watchlist)
+
+    target = identify_fda_target(resolved_item, watchlist)
     if target is None:
         return None
 
-    catalyst = build_fda_catalyst(enriched_item)
+    catalyst = build_fda_catalyst(resolved_item)
     catalyst["ticker"] = target.get("ticker")
     catalyst["company"] = target.get("company")
     catalyst["program"] = target.get("program")
@@ -55,6 +63,8 @@ def process_fda_news_item(news_item, watchlist=None):
     catalyst["match_confidence"] = target.get("confidence")
     catalyst["company_matches"] = target.get("company_matches", [])
     catalyst["program_matches"] = target.get("program_matches", [])
+    if resolved_item.get("fda_entity_resolution"):
+        catalyst["fda_entity_resolution"] = resolved_item["fda_entity_resolution"]
 
     scored = score_fda_event(catalyst)
     trading = enrich_trading_event(scored)
