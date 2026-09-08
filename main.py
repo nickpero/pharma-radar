@@ -14,9 +14,37 @@ def _reaction_line(alert):
     reaction = _reaction(alert)
     values = [("1m", reaction.get("reaction_1m_pct")), ("5m", reaction.get("reaction_5m_pct")), ("15m", reaction.get("reaction_15m_pct")), ("30m", reaction.get("reaction_30m_pct")), ("60m", reaction.get("reaction_60m_pct"))]
     available = [f"{label} {float(value):+.2f}%" for label, value in values if value is not None]
-    if not available:
-        return "  ⚡ Market reaction: UNAVAILABLE"
-    return "  ⚡ Market reaction: " + " | ".join(available)
+    return " | ".join(available) if available else "Unavailable"
+
+
+def _alert_summary_line(alert):
+    event = alert.get("event", {}) if isinstance(alert.get("event", {}), dict) else {}
+    ticker = alert.get("ticker", "UNKNOWN")
+    program = alert.get("program", "UNKNOWN")
+    subtype = event.get("subtype", alert.get("subtype", "UNKNOWN"))
+    priority = alert.get("alert_priority", event.get("alert_priority", 0))
+    tier = alert.get("alert_tier", event.get("alert_tier", "LOW"))
+    setup = alert.get("trading_setup_score", event.get("trading_setup_score", 0))
+    window = alert.get("trading_window", event.get("trading_window", "UNKNOWN"))
+    reaction_strength = alert.get("reaction_strength", event.get("reaction_strength", "UNKNOWN"))
+    reaction_interpretation = alert.get("reaction_interpretation", event.get("reaction_interpretation", "UNKNOWN"))
+    title = alert.get("title") or event.get("title") or "Catalyst detected"
+    score = event.get("score", alert.get("score", 0))
+    label = event.get("label", alert.get("label", "LOW"))
+    lines = [
+        f"• {ticker} — {program}",
+        f"  📰 {title}",
+        f"  🎯 {subtype} | Catalyst {score}/100 {label} | Priority {priority}/100 {tier}",
+        f"  📊 Setup {setup}/100 | Window {window}",
+        f"  📈 Reaction {reaction_strength} | {reaction_interpretation} | {_reaction_line(alert)}",
+    ]
+    price_change = alert.get("price_change_pct", event.get("price_change_pct"))
+    volume_ratio = alert.get("volume_ratio", event.get("volume_ratio"))
+    if price_change is not None:
+        lines.append(f"  💹 Price {float(price_change):+.2f}%")
+    if volume_ratio is not None:
+        lines.append(f"  📊 Volume {float(volume_ratio):.1f}x")
+    return lines
 
 
 def build_summary(result):
@@ -26,65 +54,28 @@ def build_summary(result):
     intelligent_alerts = select_intelligent_alerts(alerts)
     lines = [
         "🧬 PHARMA RADAR — SCAN", "",
-        f"🏢 Companies: {result.get('companies', 0)}",
-        f"🔬 Trials found: {result.get('total_trials', 0)}",
-        f"🎯 Relevant trials: {result.get('relevant_trials', 0)}",
-        f"🧹 Filtered out: {result.get('filtered_trials', 0)}",
-        f"🔄 Changes detected: {len(detected_changes)}",
-        f"📰 FDA news: {len(result.get('fda_news', []))}",
-        f"🚨 Alerts: {len(alerts)}",
-        f"🧠 Telegram intelligent alerts: {len(intelligent_alerts)}",
-        f"📧 Pharma Intelligence email: {'READY' if email_is_configured() else 'NOT CONFIGURED'}",
-        f"❌ Errors: {len(errors)}", "",
+        f"🏢 Companies: {result.get('companies', 0)} | 🔬 Trials: {result.get('total_trials', 0)}",
+        f"🎯 Relevant: {result.get('relevant_trials', 0)} | 🧹 Filtered: {result.get('filtered_trials', 0)}",
+        f"🔄 Changes: {len(detected_changes)} | 📰 FDA news: {len(result.get('fda_news', []))}",
+        f"🚨 Raw alerts: {len(alerts)} | 🧠 Telegram alerts: {len(intelligent_alerts)}",
+        f"📧 Email: {'READY' if email_is_configured() else 'NOT CONFIGURED'} | ❌ Errors: {len(errors)}", "",
     ]
-    if alerts:
-        lines.extend(["🚨 CATALYST ALERTS", ""])
-        for alert in alerts:
-            event = alert.get("event", {}) if isinstance(alert.get("event", {}), dict) else {}
-            tier = alert.get("alert_tier", event.get("alert_tier", "LOW"))
-            priority = alert.get("alert_priority", event.get("alert_priority", 0))
-            setup_score = alert.get("trading_setup_score", event.get("trading_setup_score", 0))
-            window = alert.get("trading_window", event.get("trading_window", "UNKNOWN"))
-            awareness = alert.get("market_awareness", event.get("market_awareness", "UNKNOWN"))
-            surprise = alert.get("event_surprise", event.get("event_surprise", "UNKNOWN"))
-            quality = alert.get("data_quality", event.get("data_quality", "LOW"))
-            action = next((item.get("telegram_action") for item in intelligent_alerts if item.get("ticker") == alert.get("ticker") and item.get("program") == alert.get("program") and item.get("subtype") == alert.get("subtype")), None)
-            price_change = alert.get("price_change_pct", event.get("price_change_pct"))
-            volume_ratio = alert.get("volume_ratio", event.get("volume_ratio"))
-            market_cap = alert.get("market_cap", event.get("market_cap"))
-            short_interest = alert.get("short_interest_pct", event.get("short_interest_pct"))
-            lines.append(f"• {alert.get('ticker', 'UNKNOWN')} — {alert.get('program', 'UNKNOWN')}")
-            if alert.get("nct_id"):
-                lines.append(f"  🧬 {alert['nct_id']}")
-            if alert.get("title") or event.get("title"):
-                lines.append(f"  📰 {alert.get('title') or event.get('title')}")
-            lines.append(f"  {event.get('type', 'UNKNOWN')} — {event.get('subtype', '')}")
-            lines.append(f"  🎯 Alert Priority: {priority}/100 — {tier}")
-            if action:
-                lines.append(f"  🧠 Telegram Action: {action}")
-            lines.append(f"  Score: {event.get('score', 0)}/100 — {event.get('label', 'LOW')}")
-            lines.append(f"  📊 Trading Intelligence: Setup {setup_score}/100 | Window {window} | Awareness {awareness} | Surprise {surprise} | Quality {quality}")
-            lines.append(f"  ⚡ Reaction: {alert.get('reaction_strength', event.get('reaction_strength', 'UNKNOWN'))} | {alert.get('reaction_interpretation', event.get('reaction_interpretation', 'UNKNOWN'))}")
-            lines.append(_reaction_line(alert))
-            if price_change is not None:
-                lines.append(f"  📈 Price: {float(price_change):+.2f}%")
-            if volume_ratio is not None:
-                lines.append(f"  📊 Volume: {float(volume_ratio):.1f}x 20d")
-            if market_cap is not None:
-                lines.append(f"  💰 Market Cap: ${float(market_cap) / 1_000_000:,.0f}M")
-            if short_interest is not None:
-                lines.append(f"  🩳 Short Interest: {float(short_interest):.1f}%")
+    if intelligent_alerts:
+        lines.extend(["🚨 PRIORITY ALERTS", ""])
+        for alert in intelligent_alerts:
+            lines.extend(_alert_summary_line(alert))
             lines.append("")
     else:
         lines.extend(["🟢 No catalyst alerts", ""])
+    if alerts and len(intelligent_alerts) < len(alerts):
+        lines.append(f"ℹ️ {len(alerts) - len(intelligent_alerts)} duplicate/low-priority alerts suppressed")
+        lines.append("")
     if errors:
         lines.append("❌ ERRORS")
         for error in errors:
-            lines.append(f"• {error.get('ticker', 'UNKNOWN')} — {error.get('program', 'UNKNOWN')}")
-            if error.get("error"):
-                lines.append(f"  {error.get('error')}")
+            lines.append(f"• {error.get('ticker', 'UNKNOWN')} — {error.get('program', 'UNKNOWN')}: {error.get('error', '')}")
         lines.append("")
-    lines.append("Status: REVIEW" if alerts else "Status: WARNING" if errors else "Status: CLEAN")
+    lines.append("Status: REVIEW" if intelligent_alerts else "Status: WARNING" if errors else "Status: CLEAN")
     return "\n".join(lines)
 
 
@@ -95,7 +86,7 @@ def send_alerts(result):
 
 def send_email_alerts(result):
     """Send Pharma Intelligence emails for CRITICAL/HIGH catalyst alerts."""
-    alerts = result.get("alerts", [])
+    alerts = select_intelligent_alerts(result.get("alerts", []))
     return send_pharma_intelligence_emails(alerts) if alerts else 0
 
 
