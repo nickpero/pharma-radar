@@ -1,4 +1,5 @@
 import json
+import re
 from pathlib import Path
 
 from scanner.clinical_trials import search_program
@@ -43,6 +44,41 @@ def _reaction_fields(event):
         "pre_event_15m_pct": reaction.get("pre_event_15m_pct"), "event_price": reaction.get("event_price"),
         "current_price": reaction.get("current_price"),
     }
+
+
+def _normalise_text(value):
+    return re.sub(r"\s+", " ", str(value or "").strip().lower())
+
+
+def _dedup_key(alert):
+    """Identify the same catalyst reported more than once upstream."""
+    event = alert.get("event") if isinstance(alert.get("event"), dict) else {}
+    timestamp = _normalise_text(alert.get("event_timestamp") or event.get("published_at"))
+    title = _normalise_text(alert.get("title") or event.get("title"))
+    identity = timestamp or title or _normalise_text(alert.get("url") or event.get("url"))
+    return (
+        _normalise_text(alert.get("ticker", "UNKNOWN")).upper(),
+        _normalise_text(alert.get("program", "UNKNOWN")),
+        _normalise_text(alert.get("subtype") or event.get("subtype")),
+        identity,
+    )
+
+
+def _dedup_rank(alert):
+    reaction = alert.get("market_reaction") or {}
+    available_reaction = any(reaction.get(key) is not None for key in ("reaction_pct", "reaction_5m_pct", "reaction_15m_pct", "reaction_30m_pct", "reaction_60m_pct"))
+    return (float(alert.get("alert_priority") or 0), float(alert.get("trading_setup_score") or 0), int(available_reaction))
+
+
+def deduplicate_alerts(alerts):
+    """Collapse duplicate upstream reports while retaining the richest alert."""
+    unique = {}
+    for alert in alerts or []:
+        key = _dedup_key(alert)
+        current = unique.get(key)
+        if current is None or _dedup_rank(alert) > _dedup_rank(current):
+            unique[key] = alert
+    return sort_by_alert_priority(list(unique.values()))
 
 
 def build_alert(ticker, company, program, nct_id, event, changes, trial):
@@ -150,7 +186,7 @@ def scan(baseline=False):
     alerts = [enrich_reaction_classification(alert) for alert in alerts]
     alerts = enrich_historical_stats_batch(alerts)
     alerts = [enrich_trading_setup_2(alert, market_data=alert.get("market_data")) for alert in alerts]
-    alerts = sort_by_alert_priority(alerts)
+    alerts = deduplicate_alerts(alerts)
     memory_added = record_events(alerts); memory_info = memory_summary()
     print(f"Catalyst memory: +{memory_added} records, total={memory_info['records']}")
     save_state(new_state)
