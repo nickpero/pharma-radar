@@ -5,9 +5,11 @@ historical catalyst-memory records into point-in-time observations and exposes
 only reaction horizons that were actually recorded by the live scanner.
 """
 
+from datetime import datetime, timezone
 from statistics import mean, median
 
 HORIZONS = (1, 5, 15, 30, 60)
+MAX_ANCHOR_DELAY_SECONDS = 5 * 60
 
 
 def _number(value):
@@ -17,8 +19,34 @@ def _number(value):
         return None
 
 
+def _parse_timestamp(value):
+    if isinstance(value, datetime):
+        dt = value
+    else:
+        text = str(value or "").strip()
+        if not any(separator in text for separator in ("T", " ")):
+            return None
+        try:
+            dt = datetime.fromisoformat(text.replace("Z", "+00:00"))
+        except (TypeError, ValueError):
+            return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(timezone.utc)
+
+
 def _reaction(row):
     return row.get("reaction") or row.get("market_reaction") or {}
+
+
+def _aligned_reaction(row, reaction):
+    """Accept outcomes only when the reaction is anchored close to the catalyst."""
+    event_dt = _parse_timestamp(row.get("event_timestamp"))
+    reaction_dt = _parse_timestamp(reaction.get("event_timestamp"))
+    if event_dt is None or reaction_dt is None:
+        return False
+    delay = (reaction_dt - event_dt).total_seconds()
+    return 0 <= delay <= MAX_ANCHOR_DELAY_SECONDS
 
 
 def _point_in_time(row):
@@ -53,8 +81,10 @@ def build_dataset(rows):
             continue
         observation = _point_in_time(row)
         reaction = _reaction(row)
+        valid_anchor = _aligned_reaction(row, reaction)
+        observation["reaction_anchor_valid"] = valid_anchor
         observation["outcomes"] = {
-            f"{minutes}m": _number(reaction.get(f"reaction_{minutes}m_pct"))
+            f"{minutes}m": _number(reaction.get(f"reaction_{minutes}m_pct")) if valid_anchor else None
             for minutes in HORIZONS
         }
         observation["outcomes_available"] = sum(
