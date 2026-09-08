@@ -20,7 +20,7 @@ jobs:
           pip install -r requirements.txt
       - name: Check Python syntax
         run: |
-          python -m py_compile scanner/fda_feed.py scanner/priority.py scanner/ema_feed.py scanner/sec_feed.py scanner/regulatory_pipeline.py scanner/market_data.py scanner/market_profile.py scanner/trading_setup.py scanner/trading_setup_41.py scanner/trading_setup_2.py scanner/reaction.py scanner/catalyst_memory.py scanner/historical_stats.py scanner/backtest.py scanner/telegram.py scanner/telegram_intelligence.py scanner/test_phase4.py scanner/test_phase4_1.py scanner/test_phase5_1.py scanner/test_phase5_2_final.py scanner/test_reaction_pipeline.py scanner/test_phase5_3.py scanner/test_phase5_4.py scanner/test_phase5_5.py scanner/test_backtest.py scanner/test_telegram_intelligence.py
+          python -m py_compile scanner/fda_feed.py scanner/priority.py scanner/ema_feed.py scanner/sec_feed.py scanner/regulatory_pipeline.py scanner/market_data.py scanner/market_profile.py scanner/trading_setup.py scanner/trading_setup_41.py scanner/trading_setup_2.py scanner/reaction.py scanner/catalyst_memory.py scanner/historical_stats.py scanner/backtest.py scanner/telegram.py scanner/telegram_intelligence.py scanner/trial_scanner.py scanner/test_phase4.py scanner/test_phase4_1.py scanner/test_phase5_1.py scanner/test_phase5_2_final.py scanner/test_reaction_pipeline.py scanner/test_phase5_3.py scanner/test_phase5_4.py scanner/test_phase5_5.py scanner/test_backtest.py scanner/test_telegram_intelligence.py scanner/test_alert_dedup.py
       - name: Run Catalyst tests
         run: |
           python -m scanner.test_catalyst
@@ -54,5 +54,6 @@ jobs:
           python -m scanner.test_phase5_4
           python -m scanner.test_phase5_5
           python -m scanner.test_backtest
+          python -m scanner.test_alert_dedup
           python -c "from scanner.fda_news import get_fda_news; n=get_fda_news(max_news=50); print('FDA NEWS:', len(n)); [print(x.get('title'), '|', x.get('url')) for x in n]"
           python -m scanner.test_fda_live_matching
