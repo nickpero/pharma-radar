@@ -5,6 +5,19 @@ from scanner.telegram import send_telegram, send_catalyst_alerts
 from scanner.telegram_intelligence import select_intelligent_alerts
 
 
+def _reaction(alert):
+    return alert.get("market_reaction") or alert.get("reaction") or {}
+
+
+def _reaction_line(alert):
+    reaction = _reaction(alert)
+    values = [("1m", reaction.get("reaction_1m_pct")), ("5m", reaction.get("reaction_5m_pct")), ("15m", reaction.get("reaction_15m_pct")), ("30m", reaction.get("reaction_30m_pct")), ("60m", reaction.get("reaction_60m_pct"))]
+    available = [f"{label} {float(value):+.2f}%" for label, value in values if value is not None]
+    if not available:
+        return "  ⚡ Market reaction: UNAVAILABLE"
+    return "  ⚡ Market reaction: " + " | ".join(available)
+
+
 def build_summary(result):
     alerts = result.get("alerts", [])
     errors = result.get("errors", [])
@@ -49,6 +62,8 @@ def build_summary(result):
                 lines.append(f"  🧠 Telegram Action: {action}")
             lines.append(f"  Score: {event.get('score', 0)}/100 — {event.get('label', 'LOW')}")
             lines.append(f"  📊 Trading Intelligence: Setup {setup_score}/100 | Window {window} | Awareness {awareness} | Surprise {surprise} | Quality {quality}")
+            lines.append(f"  ⚡ Reaction: {alert.get('reaction_strength', event.get('reaction_strength', 'UNKNOWN'))} | {alert.get('reaction_interpretation', event.get('reaction_interpretation', 'UNKNOWN'))}")
+            lines.append(_reaction_line(alert))
             if price_change is not None:
                 lines.append(f"  📈 Price: {float(price_change):+.2f}%")
             if volume_ratio is not None:
