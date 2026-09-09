@@ -1,6 +1,6 @@
 """Historical Edge Engine — pure event/market reaction calculations.
 
-This module intentionally contains no network or broker logic.  It converts a
+This module intentionally contains no network or broker logic. It converts a
 single catalyst event plus normalized price/volume observations into
 benchmark-adjusted reaction metrics, then aggregates those metrics by catalyst
 type/program/company.
@@ -42,6 +42,21 @@ def abnormal_return(
         return float(stock_return) - float(beta) * float(benchmark_return)
     except (TypeError, ValueError):
         return None
+
+
+def directional_return(abnormal: float | None, direction: str | None) -> float | None:
+    """Orient abnormal return so positive means the market moved as expected.
+
+    For negative catalysts (e.g. rejection or trial failure), a negative stock
+    reaction is therefore a positive historical edge. This mirrors event-study
+    practice where unsuccessful outcomes are sign-inverted for comparability.
+    """
+    if abnormal is None:
+        return None
+    normalized = str(direction or "").upper()
+    if normalized == "NEGATIVE":
+        return -float(abnormal)
+    return float(abnormal)
 
 
 def volume_expansion(
@@ -101,19 +116,21 @@ def calculate_event_metrics(
     """Calculate reaction metrics for one event.
 
     ``bars`` should contain an event-day reference price under ``event`` and
-    optional forward observations under ``1D``, ``3D`` and ``5D``.  Benchmark
+    optional forward observations under ``1D``, ``3D`` and ``5D``. Benchmark
     bars use the same shape. Missing observations remain explicit as ``None``.
     """
     event_price = _get_price(bars.get("event", {}))
     event_volume = bars.get("event", {}).get("volume")
     baseline_volume = bars.get("event", {}).get("baseline_volume")
+    direction = event.get("direction") or "UNKNOWN"
 
     metrics: dict[str, Any] = {
         "ticker": event.get("ticker"),
         "company": event.get("company"),
         "program": event.get("program"),
         "subtype": event.get("subtype") or event.get("event_type"),
-        "event_id": event.get("event_id") or event.get("source_item_id") or event.get("url"),
+        "direction": direction,
+        "event_id": event.get("event_id") or event.get("memory_key") or event.get("source_item_id") or event.get("url"),
         "event_timestamp": event.get("event_timestamp") or event.get("timestamp"),
         "event_price": event_price,
         "volume_expansion": volume_expansion(event_volume, baseline_volume),
@@ -127,10 +144,12 @@ def calculate_event_metrics(
             if benchmark_bars
             else None
         )
+        abnormal = abnormal_return(stock_return, benchmark_return, beta)
         metrics["windows"][window] = {
             "stock_return_pct": stock_return,
             "benchmark_return_pct": benchmark_return,
-            "abnormal_return_pct": abnormal_return(stock_return, benchmark_return, beta),
+            "abnormal_return_pct": abnormal,
+            "directional_abnormal_return_pct": directional_return(abnormal, direction),
         }
 
     return metrics
@@ -151,7 +170,7 @@ def aggregate_historical_edge(
         window_stats: dict[str, Any] = {}
         for window in WINDOWS:
             values = [
-                item.get("windows", {}).get(window, {}).get("abnormal_return_pct")
+                item.get("windows", {}).get(window, {}).get("directional_abnormal_return_pct")
                 for item in items
             ]
             values = [float(value) for value in values if value is not None]
@@ -161,6 +180,7 @@ def aggregate_historical_edge(
             win_rate = (wins / n) if n else None
             window_stats[window] = {
                 "n": n,
+                "median_directional_abnormal_return_pct": med,
                 "median_abnormal_return_pct": med,
                 "win_rate": win_rate,
                 "edge": classify_edge(med, win_rate, n),
