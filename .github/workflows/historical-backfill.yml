@@ -34,6 +34,24 @@ jobs:
           python -m scanner.test_historical_edge
           python -m scanner.test_historical_market_data
 
+      - name: Validate local SEC CIK map
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          watchlist = json.loads(Path("data/watchlist.json").read_text())
+          cik_map = json.loads(Path("data/sec_cik_map.json").read_text())
+          missing = sorted(set(watchlist) - set(cik_map))
+          invalid = sorted(k for k, v in cik_map.items() if not str(v).isdigit())
+          print(f"Watchlist tickers: {len(watchlist)}")
+          print(f"Local SEC CIK entries: {len(cik_map)}")
+          if missing:
+              raise SystemExit(f"Missing SEC CIK mappings: {missing}")
+          if invalid:
+              raise SystemExit(f"Invalid SEC CIK mappings: {invalid}")
+          print("Local SEC CIK map: PASS")
+          PY
+
       - name: Discover real SEC and FDA historical catalysts
         env:
           PHARMA_RADAR_HISTORICAL_START_YEAR: "2015"
