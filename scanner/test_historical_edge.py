@@ -6,6 +6,7 @@ from scanner.historical_edge import (
     calculate_event_metrics,
     classify_edge,
     confidence_for_sample,
+    directional_return,
     safe_return,
     volume_expansion,
 )
@@ -21,6 +22,13 @@ def test_abnormal_return():
     assert round(abnormal_return(12, 4), 6) == 8.0
     assert round(abnormal_return(12, 4, beta=1.5), 6) == 6.0
     assert abnormal_return(None, 4) is None
+
+
+def test_directional_return():
+    assert directional_return(8.0, "POSITIVE") == 8.0
+    assert directional_return(-8.0, "NEGATIVE") == 8.0
+    assert directional_return(8.0, "NEGATIVE") == -8.0
+    assert directional_return(8.0, "UNKNOWN") == 8.0
 
 
 def test_volume_expansion():
@@ -44,6 +52,7 @@ def test_calculate_event_metrics():
         "company": "Test Bio",
         "program": "drug-x",
         "subtype": "FDA_APPROVAL",
+        "direction": "POSITIVE",
         "event_id": "evt-1",
         "event_timestamp": "2026-01-02T15:00:00Z",
     }
@@ -62,9 +71,20 @@ def test_calculate_event_metrics():
 
     metrics = calculate_event_metrics(event, bars, benchmark)
     assert metrics["ticker"] == "TEST"
+    assert metrics["direction"] == "POSITIVE"
     assert round(metrics["volume_expansion"], 6) == 3.0
     assert round(metrics["windows"]["1D"]["stock_return_pct"], 6) == 10.0
     assert round(metrics["windows"]["1D"]["abnormal_return_pct"], 6) == 8.0
+    assert round(metrics["windows"]["1D"]["directional_abnormal_return_pct"], 6) == 8.0
+
+
+def test_negative_event_is_scored_in_expected_direction():
+    event = {"ticker": "TEST", "subtype": "FDA_REJECTION", "direction": "NEGATIVE"}
+    bars = {"event": {"close": 100}, "1D": {"close": 90}, "3D": {"close": 92}, "5D": {"close": 95}}
+    benchmark = {"event": {"close": 100}, "1D": {"close": 102}, "3D": {"close": 101}, "5D": {"close": 100}}
+    metrics = calculate_event_metrics(event, bars, benchmark)
+    assert round(metrics["windows"]["1D"]["abnormal_return_pct"], 6) == -12.0
+    assert round(metrics["windows"]["1D"]["directional_abnormal_return_pct"], 6) == 12.0
 
 
 def test_aggregate_historical_edge():
@@ -73,11 +93,12 @@ def test_aggregate_historical_edge():
         metrics.append({
             "ticker": "TEST",
             "subtype": "FDA_APPROVAL",
-            "windows": {"1D": {"abnormal_return_pct": value}},
+            "windows": {"1D": {"directional_abnormal_return_pct": value}},
         })
     result = aggregate_historical_edge(metrics)
     stats = result["FDA_APPROVAL"]["windows"]["1D"]
     assert stats["n"] == 5
+    assert round(stats["median_directional_abnormal_return_pct"], 6) == 4.5
     assert round(stats["median_abnormal_return_pct"], 6) == 4.5
     assert stats["win_rate"] == 1.0
     assert stats["edge"] == "POSITIVE"
@@ -88,9 +109,11 @@ if __name__ == "__main__":
     tests = [
         test_safe_return,
         test_abnormal_return,
+        test_directional_return,
         test_volume_expansion,
         test_confidence_and_edge,
         test_calculate_event_metrics,
+        test_negative_event_is_scored_in_expected_direction,
         test_aggregate_historical_edge,
     ]
     for test in tests:
