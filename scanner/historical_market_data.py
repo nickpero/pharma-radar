@@ -1,14 +1,9 @@
-"""Daily market-data provider for the Historical Edge Engine.
-
-The analytics layer stays vendor-neutral. This module provides a small Yahoo
-Finance chart-API adapter using the already-installed ``requests`` package.
-It is intentionally used by the historical batch job rather than by every
-15-minute production scan.
-"""
+"""Daily market-data provider for the Historical Edge Engine."""
 
 from __future__ import annotations
 
 from datetime import date, datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
 from typing import Any, Mapping
 
 import requests
@@ -35,10 +30,15 @@ class YahooDailyProvider:
         try:
             return datetime.fromisoformat(text.replace("Z", "+00:00")).date()
         except ValueError:
-            try:
-                return date.fromisoformat(text[:10])
-            except ValueError:
-                return None
+            pass
+        try:
+            return parsedate_to_datetime(text).date()
+        except (TypeError, ValueError, OverflowError):
+            pass
+        try:
+            return date.fromisoformat(text[:10])
+        except ValueError:
+            return None
 
     def _fetch_symbol(self, symbol: str, start: date, end: date) -> dict[str, dict[str, Any]]:
         symbol = str(symbol).upper().strip()
@@ -83,12 +83,6 @@ class YahooDailyProvider:
         return YahooDailyProvider._date(event.get("event_timestamp") or event.get("published_at"))
 
     def get_event_bars(self, event: Mapping[str, Any]) -> dict[str, dict[str, Any]]:
-        """Return event-day close plus +1/+3/+5 trading-day closes.
-
-        The event-day close is the daily anchor. The provider deliberately does
-        not pretend to know whether a catalyst arrived before or after the
-        close; intraday timing remains a later enhancement.
-        """
         event_date = self._event_date(event)
         if event_date is None:
             return {"event": {}}
