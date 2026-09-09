@@ -8,7 +8,10 @@ def test_norm_removes_punctuation():
 
 
 def test_tokens_removes_generic_corporate_words():
-    assert _tokens("Avidity Biosciences, Inc.") == ["avidity", "biosciences"]
+    # "biosciences" and "inc" are intentionally excluded because they are
+    # generic corporate descriptors and would create overly broad FDA sponsor
+    # searches. The distinctive sponsor token is "avidity".
+    assert _tokens("Avidity Biosciences, Inc.") == ["avidity"]
     assert _tokens("Moderna, Inc.") == ["moderna"]
 
 
