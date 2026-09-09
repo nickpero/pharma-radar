@@ -1,0 +1,48 @@
+name: Historical Edge Engine
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 22 * * 1-5"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: historical-edge
+  cancel-in-progress: false
+
+jobs:
+  build-historical-edge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Historical Edge tests
+        run: |
+          python -m scanner.test_historical_edge
+          python -m scanner.test_historical_market_data
+
+      - name: Build historical edge dataset
+        run: python -m scanner.build_historical_edge
+
+      - name: Persist historical edge dataset
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/historical_edge.json
+          if git diff --cached --quiet; then
+            echo "No historical edge changes to commit"
+          else
+            git commit -m "Update historical edge dataset [skip ci]"
+            git push
+          fi
