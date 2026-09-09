@@ -5,155 +5,155 @@
   },
   "errors": [
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001133869.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001133869&from=0&size=100",
       "source": "SEC",
       "ticker": "CAPR"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001160308.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001160308&from=0&size=100",
       "source": "SEC",
       "ticker": "SVRA"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001937653.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001937653&from=0&size=100",
       "source": "SEC",
       "ticker": "ZYME"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001759425.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001759425&from=0&size=100",
       "source": "SEC",
       "ticker": "MIRM"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001830487.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001830487&from=0&size=100",
       "source": "SEC",
       "ticker": "PHVS"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0000034956.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0000034956&from=0&size=100",
       "source": "SEC",
       "ticker": "TENX"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001861560.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001861560&from=0&size=100",
       "source": "SEC",
       "ticker": "NUVL"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001515673.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001515673&from=0&size=100",
       "source": "SEC",
       "ticker": "RARE"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0002007191.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0002007191&from=0&size=100",
       "source": "SEC",
       "ticker": "TLX"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0000874015.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0000874015&from=0&size=100",
       "source": "SEC",
       "ticker": "IONS"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001697862.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001697862&from=0&size=100",
       "source": "SEC",
       "ticker": "ARGX"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001590560.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001590560&from=0&size=100",
       "source": "SEC",
       "ticker": "QURE"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001623526.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001623526&from=0&size=100",
       "source": "SEC",
       "ticker": "STOK"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001528115.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001528115&from=0&size=100",
       "source": "SEC",
       "ticker": "ANNX"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001873835.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001873835&from=0&size=100",
       "source": "SEC",
       "ticker": "IMMX"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001847367.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001847367&from=0&size=100",
       "source": "SEC",
       "ticker": "ALMS"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001599901.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001599901&from=0&size=100",
       "source": "SEC",
       "ticker": "RNA"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001590877.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001590877&from=0&size=100",
       "source": "SEC",
       "ticker": "RGNX"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001314102.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001314102&from=0&size=100",
       "source": "SEC",
       "ticker": "EYPT"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001599298.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001599298&from=0&size=100",
       "source": "SEC",
       "ticker": "SMMT"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001682852.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001682852&from=0&size=100",
       "source": "SEC",
       "ticker": "MRNA"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001776985.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001776985&from=0&size=100",
       "source": "SEC",
       "ticker": "BNTX"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001628171.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001628171&from=0&size=100",
       "source": "SEC",
       "ticker": "RVMD"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001635088.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001635088&from=0&size=100",
       "source": "SEC",
       "ticker": "ROIV"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0000872589.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0000872589&from=0&size=100",
       "source": "SEC",
       "ticker": "REGN"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001178670.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001178670&from=0&size=100",
       "source": "SEC",
       "ticker": "ALNY"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001104506.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001104506&from=0&size=100",
       "source": "SEC",
       "ticker": "INSM"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001674416.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0001674416&from=0&size=100",
       "source": "SEC",
       "ticker": "CRSP"
     },
     {
-      "error": "403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0000875320.json",
+      "error": "403 Client Error: Forbidden for url: https://efts.sec.gov/LATEST/search-index?q=%28%22complete+response+letter%22+OR+%22not+approved%22+OR+rejected+OR+rejection+OR+refused+OR+denied+OR+%22failed+to+meet%22+OR+%22did+not+meet%22+OR+%22missed+the+primary+endpoint%22+OR+%22failed+the+primary+endpoint%22+OR+futility+OR+%22negative+topline%22%29&forms=8-K%2C6-K&dateRange=custom&startdt=2015-01-01&enddt=2026-09-09&ciks=0000875320&from=0&size=100",
       "source": "SEC",
       "ticker": "VRTX"
     }
   ],
   "events": [],
   "events_count": 0,
-  "generated_at": "2026-09-09T20:10:29.926566+00:00",
+  "generated_at": "2026-09-09T20:13:57.046488+00:00",
   "start_year": 2015,
   "tickers": 29,
-  "version": "1.1"
+  "version": "1.2"
 }
