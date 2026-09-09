@@ -66,7 +66,14 @@ def _html_text(value: str) -> str:
 
 
 def _headers(source: str) -> dict[str, str]:
-    return {"User-Agent": f"Pharma-Radar/1.0 {source}", "Accept-Encoding": "gzip, deflate"}
+    # SEC requires automated clients to declare an identifying User-Agent with
+    # a contact address. Keep it configurable so the workflow can override it
+    # without changing source code.
+    user_agent = os.getenv(
+        "SEC_USER_AGENT",
+        "Pharma Radar/1.0 (103763934+nickpero@users.noreply.github.com)",
+    )
+    return {"User-Agent": user_agent, "Accept-Encoding": "gzip, deflate"}
 
 
 def _event_id(item: dict[str, Any]) -> str:
