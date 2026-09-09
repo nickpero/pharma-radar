@@ -29,6 +29,28 @@
       "Placebo"
     ]
   },
+  "CAPR:deramiocel:NCT04428476": {
+    "nct_id": "NCT04428476",
+    "title": "Open-label Extension of the HOPE-2 Trial",
+    "official_title": "Open-Label Extension of the HOPE-2 Duchenne Muscular Dystrophy Trial",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2025-11-03",
+    "start_date": "2020-08-05",
+    "completion_date": "2026-05",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 13,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Capricor Inc.",
+    "conditions": [
+      "Duchenne Muscular Dystrophy"
+    ],
+    "interventions": [
+      "Deramiocel (CAP-1002)"
+    ]
+  },
   "CAPR:deramiocel:NCT03406780": {
     "nct_id": "NCT03406780",
     "title": "A Study of CAP-1002 in Ambulatory and Non-Ambulatory Patients With Duchenne Muscular Dystrophy",
@@ -57,108 +79,6 @@
     "interventions": [
       "CAP-1002",
       "Placebo"
-    ]
-  },
-  "CAPR:deramiocel:NCT04428476": {
-    "nct_id": "NCT04428476",
-    "title": "Open-label Extension of the HOPE-2 Trial",
-    "official_title": "Open-Label Extension of the HOPE-2 Duchenne Muscular Dystrophy Trial",
-    "status": "ACTIVE_NOT_RECRUITING",
-    "last_update": "2025-11-03",
-    "start_date": "2020-08-05",
-    "completion_date": "2026-05",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 13,
-    "enrollment_type": "ACTUAL",
-    "sponsor": "Capricor Inc.",
-    "conditions": [
-      "Duchenne Muscular Dystrophy"
-    ],
-    "interventions": [
-      "Deramiocel (CAP-1002)"
-    ]
-  },
-  "ZYME:zanidatamab:NCT06282575": {
-    "nct_id": "NCT06282575",
-    "title": "Efficacy and Safety of Zanidatamab With Standard-of-care Therapy Against Standard-of-care Therapy for Advanced HER2-positive Biliary Tract Cancer",
-    "official_title": "An Open-label Randomized Trial of the Efficacy and Safety of Zanidatamab With Standard-of-care Therapy Against Standard-of-care Therapy Alone for Advanced HER2-positive Biliary Tract Cancer",
-    "status": "RECRUITING",
-    "last_update": "2026-07-14",
-    "start_date": "2024-07-19",
-    "completion_date": "2030-04-01",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE3"
-    ],
-    "enrollment": 286,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Jazz Pharmaceuticals",
-    "conditions": [
-      "Biliary Tract Cancer"
-    ],
-    "interventions": [
-      "Zanidatamab",
-      "Cisplatin",
-      "Gemcitabine",
-      "Pembrolizumab",
-      "Durvalumab"
-    ]
-  },
-  "ZYME:zanidatamab:NCT07176312": {
-    "nct_id": "NCT07176312",
-    "title": "Zanidatamab in Combination With Pembrolizumab and Chemotherapy in HER2 and PD-L1 Positive Metastatic Gastroesophageal Adenocarcinoma (GEA) Patients",
-    "official_title": "- ZANGEA - Phase II Study of Zanidatamab in Combination With Pembrolizumab and Chemotherapy in HER2 and PD-L1 Positive Metastatic Gastroesophageal Adenocarcinoma (GEA) Patients",
-    "status": "RECRUITING",
-    "last_update": "2026-06-30",
-    "start_date": "2026-01-16",
-    "completion_date": "2029-03",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 80,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Institut für Klinische Krebsforschung IKF GmbH at Krankenhaus Nordwest",
-    "conditions": [
-      "Gastroesophageal Adenocarcinoma",
-      "First Line Therapy",
-      "HER2 + Gastric Cancer",
-      "PDL-1",
-      "Metastases"
-    ],
-    "interventions": [
-      "Zanidatamab",
-      "Pembrolizumab",
-      "mFOLFOX"
-    ]
-  },
-  "ZYME:zanidatamab:NCT07192068": {
-    "nct_id": "NCT07192068",
-    "title": "Clinical Trial Evaluating the Activity of Zanidatamab for the Treatment of Patients With Solid Tumors With an Alteration of the HER2 Gene.",
-    "official_title": "Widening Treatment Options Among Adult Patients With HER2-overexpressing or Mutant Solid Cancers.",
-    "status": "RECRUITING",
-    "last_update": "2025-12-19",
-    "start_date": "2025-10-30",
-    "completion_date": "2030-06-24",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 105,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "UNICANCER",
-    "conditions": [
-      "Non-Small Cell Lung Cancer",
-      "Sarcoma",
-      "Head &Amp; Neck Cancer",
-      "Colorectal Carcinoma",
-      "Endometrial"
-    ],
-    "interventions": [
-      "Zanidatamab"
     ]
   },
   "ZYME:zanidatamab:NCT06695845": {
@@ -194,172 +114,113 @@
       "Zanidatamab"
     ]
   },
-  "ZYME:zanidatamab:NCT07102381": {
-    "nct_id": "NCT07102381",
-    "title": "A Phase 2 Neoadjuvant Study of Zanidatamab in Combination With Chemotherapy in Participants With HER2-positive Breast Cancer",
-    "official_title": "A Phase 2, Randomized, Multicenter, Open-label Neoadjuvant Study Evaluating Zanidatamab in Combination With Chemotherapy in Participants With HER2-positive Breast Cancer",
-    "status": "RECRUITING",
-    "last_update": "2026-08-25",
-    "start_date": "2025-09-24",
-    "completion_date": "2030-08-01",
+  "ZYME:zanidatamab:NCT07243938": {
+    "nct_id": "NCT07243938",
+    "title": "Phase II Basket Trial: Zanidatamab Plus Tislelizumab in HER2-Positive GI Tumors (UNION-HER2-BASKET)",
+    "official_title": "A Prospective, Multi-cohort Clinical Study to Explore the Preliminary Efficacy and Safety of Zanidatamab in Combination With Tislelizumab for HER2-Positive GI Tumors: the UNION-HER2-BASKET Study",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2025-11-24",
+    "start_date": "2026-01-15",
+    "completion_date": "2031-06-01",
     "study_type": "INTERVENTIONAL",
     "phases": [
       "PHASE2"
     ],
-    "enrollment": 125,
+    "enrollment": 70,
     "enrollment_type": "ESTIMATED",
-    "sponsor": "Jazz Pharmaceuticals",
+    "sponsor": "Tao Zhang",
     "conditions": [
-      "HER2-positive Breast Cancer",
-      "Breast Cancer"
+      "Locally Advanced Rectal Cancer (LARC)",
+      "Locally Advanced Gastric/Gastroesophageal Junction Adenocarcinoma",
+      "Metastatic Colorectal Cancer (mCRC)",
+      "Neoadjuvant Therapy"
     ],
     "interventions": [
+      "short-course radiotherapy",
       "Zanidatamab",
-      "Paclitaxel",
-      "Docetaxel",
-      "Carboplatin",
-      "Trastuzumab",
-      "Pertuzumab"
+      "Tisleizumab(BGB-A317)",
+      "Capecitabine",
+      "Oxaliplatin",
+      "TME surgery",
+      "S-1",
+      "D2"
     ]
   },
-  "ZYME:zanidatamab:NCT06324357": {
-    "nct_id": "NCT06324357",
-    "title": "Beamion BCGC-1: A Study to Find a Suitable Dose of Zongertinib Used Alone and in Combination With Other Treatments to Test Whether it Helps People With Different Types of HER2+ Cancer That Has Spread",
-    "official_title": "Beamion BCGC-1: A Phase Ib Dose Escalation and Phase II Dose Optimization, Randomized, Open-label, Multicenter Trial of Oral Zongertinib (BI 1810631) Alone or in Combination With Other Agents for the Treatment of Patients With Advanced HER2+ Metastatic Breast Cancer (mBC), Metastatic Gastric, Gastroesophageal Junction, or Esophageal Adenocarcinoma (mGEAC), or Metastatic Colorectal Cancer (mCRC)",
-    "status": "RECRUITING",
-    "last_update": "2026-08-06",
-    "start_date": "2024-06-28",
-    "completion_date": "2029-01-08",
+  "ZYME:zanidatamab:NCT04276493": {
+    "nct_id": "NCT04276493",
+    "title": "Anti-HER2 Bispecific Antibody Zanidatamab (ZW25) Activity in Combination With Chemotherapy With/Without Tislelizumab",
+    "official_title": "Phase 1b/2 Study Investigating Safety, Tolerability, Pharmacokinetics and Preliminary Antitumor Activity of Anti-HER2 Bispecific Antibody ZW25 in Combination With Chemotherapy With/Without Tislelizumab in Patients With Advanced HER2-positive Breast Cancer or Gastric/Gastroesophageal Junction Adenocarcinoma",
+    "status": "COMPLETED",
+    "last_update": "2026-09-02",
+    "start_date": "2020-03-23",
+    "completion_date": "2024-10-31",
     "study_type": "INTERVENTIONAL",
     "phases": [
       "PHASE1",
       "PHASE2"
     ],
-    "enrollment": 768,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Boehringer Ingelheim",
-    "conditions": [
-      "Metastatic Breast Cancer",
-      "Metastatic Gastric Adenocarcinoma",
-      "Gastroesophageal Junction Adenocarcinoma",
-      "Esophageal Adenocarcinoma",
-      "Colorectal Cancer"
-    ],
-    "interventions": [
-      "Zongertinib",
-      "Trastuzumab deruxtecan",
-      "Trastuzumab emtansine",
-      "Trastuzumab",
-      "Capecitabine",
-      "mFOLFOX6",
-      "zanidatamab"
-    ]
-  },
-  "ZYME:zanidatamab:NCT05035836": {
-    "nct_id": "NCT05035836",
-    "title": "A Phase 2 Single-Arm Open-Label Pilot Trial Evaluating Zanidatamab (ZW25) in Patients With Early Stage HER2/Neu Positive (HER2+) Breast Cancer (BC)",
-    "official_title": "A Phase 2 Single-Arm Open-Label Pilot Trial Evaluating Zanidatamab (ZW25) in Patients With Early Stage HER2/Neu Positive (HER2+) Breast Cancer (BC)",
-    "status": "RECRUITING",
-    "last_update": "2026-08-24",
-    "start_date": "2021-11-16",
-    "completion_date": "2028-12-29",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 20,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "M.D. Anderson Cancer Center",
+    "enrollment": 71,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "BeiGene",
     "conditions": [
       "Breast Cancer",
-      "HER2-positive"
+      "Gastric Cancer",
+      "Gastroesophageal Junction Cancer"
     ],
     "interventions": [
       "Zanidatamab",
-      "Letrozole",
-      "Tamoxifen"
+      "Docetaxel",
+      "Tislelizumab",
+      "Capecitabine",
+      "Oxaliplatin"
     ]
   },
-  "ZYME:zanidatamab:NCT04224272": {
-    "nct_id": "NCT04224272",
-    "title": "A Study of ZW25 (Zanidatamab) With Palbociclib Plus Fulvestrant in Patients With HER2+/HR+ Advanced Breast Cancer",
-    "official_title": "Phase 2a Study of ZW25 in Combination With Palbociclib Plus Fulvestrant",
-    "status": "COMPLETED",
-    "last_update": "2025-08-01",
-    "start_date": "2020-06-10",
-    "completion_date": "2025-06-30",
+  "ZYME:zanidatamab:NCT06282575": {
+    "nct_id": "NCT06282575",
+    "title": "Efficacy and Safety of Zanidatamab With Standard-of-care Therapy Against Standard-of-care Therapy for Advanced HER2-positive Biliary Tract Cancer",
+    "official_title": "An Open-label Randomized Trial of the Efficacy and Safety of Zanidatamab With Standard-of-care Therapy Against Standard-of-care Therapy Alone for Advanced HER2-positive Biliary Tract Cancer",
+    "status": "RECRUITING",
+    "last_update": "2026-07-14",
+    "start_date": "2024-07-19",
+    "completion_date": "2030-04-01",
     "study_type": "INTERVENTIONAL",
     "phases": [
-      "PHASE2"
+      "PHASE3"
     ],
-    "enrollment": 51,
-    "enrollment_type": "ACTUAL",
+    "enrollment": 286,
+    "enrollment_type": "ESTIMATED",
     "sponsor": "Jazz Pharmaceuticals",
     "conditions": [
-      "HER2+/HR+ Breast Cancer"
+      "Biliary Tract Cancer"
     ],
     "interventions": [
-      "ZW25 (Zanidatamab)",
-      "Palbociclib",
-      "Fulvestrant"
+      "Zanidatamab",
+      "Cisplatin",
+      "Gemcitabine",
+      "Pembrolizumab",
+      "Durvalumab"
     ]
   },
-  "ZYME:zanidatamab:NCT05868226": {
-    "nct_id": "NCT05868226",
-    "title": "PRE-ISPY Phase I/II Oncology Platform Program",
-    "official_title": "PRE-Investigation of Serial Studies to Predict Your Therapeutic Response With Imaging And moLecular Analysis: A Phase I/II Platform Trial",
-    "status": "RECRUITING",
-    "last_update": "2026-09-02",
-    "start_date": "2023-02-15",
-    "completion_date": "2031-12-30",
+  "ZYME:zanidatamab:NCT07273981": {
+    "nct_id": "NCT07273981",
+    "title": "Zanidatamab Combined With Chemotherapy as Neoadjuvant Therapy for HER2-high Expression G/GEJC",
+    "official_title": "Phase II Clinical Study of Zanidatamab Combined With Chemotherapy as Neoadjuvant Therapy for Locally Advanced HER2-high Expression (IHC3+/2+FISH+) Gastric/Gastroesophageal Junction Adenocarcinoma",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2025-12-10",
+    "start_date": "2026-01-01",
+    "completion_date": "2029-07-31",
     "study_type": "INTERVENTIONAL",
     "phases": [
-      "PHASE1",
       "PHASE2"
     ],
-    "enrollment": 280,
+    "enrollment": 30,
     "enrollment_type": "ESTIMATED",
-    "sponsor": "QuantumLeap Healthcare Collaborative",
+    "sponsor": "Xijing Hospital",
     "conditions": [
-      "HER2-positive Breast Cancer",
-      "Metastatic Cancer",
-      "Metastatic Breast Cancer",
-      "Metastatic",
-      "HER2-positive Metastatic Breast Cancer",
-      "HER2 Mutation-Related Tumors",
-      "HER-2 Protein Overexpression",
-      "HER2-negative Breast Cancer",
-      "Triple Negative Breast Cancer",
-      "HR Positive",
-      "Hormone Receptor-positive Breast Cancer",
-      "Estrogen Receptor Positive Tumor",
-      "Progesterone Receptor-positive Breast Cancer",
-      "Hormone Receptor Negative Breast Carcinoma",
-      "Solid Tumor",
-      "Solid Tumor, Adult",
-      "Solid Carcinoma",
-      "HER2 Low Breast Cancer",
-      "HER2 Low Breast Carcinoma",
-      "ER Positive Breast Cancer",
-      "PR-positive Breast Cancer",
-      "Minimal Residual Disease",
-      "Colo-rectal Cancer",
-      "Colon Cancer",
-      "Rectal Cancer",
-      "ctDNA Monitoring",
-      "Colorectal Neoplasms",
-      "Colonic Neoplasms",
-      "Rectal Neoplasms",
-      "Neoplasm, Residual",
-      "Adenocarcinoma of Colon",
-      "Adenocarcinoma"
+      "Gastric/Gastroesophageal Junction Adenocarcinoma"
     ],
     "interventions": [
-      "ALX148",
-      "Fam-Trastuzumab Deruxtecan-Nxki",
-      "Zanidatamab",
-      "Tucatinib",
-      "TTX-MC138"
+      "Zanidatamab Combined with Chemotherapy"
     ]
   },
   "ZYME:zanidatamab:NCT03929666": {
@@ -389,136 +250,6 @@
       "Oxaliplatin",
       "Bevacizumab",
       "Gemcitabine"
-    ]
-  },
-  "ZYME:zanidatamab:NCT07631871": {
-    "nct_id": "NCT07631871",
-    "title": "An Exploratory Study of Zanidatamab in HER2-positive Advanced Tumor After at Least One Line of Standard Therapy",
-    "official_title": "An Exploratory Study of Zanidatamab in HER2-positive Advanced Tumor After at Least One Line of Standard Therapy",
-    "status": "NOT_YET_RECRUITING",
-    "last_update": "2026-06-08",
-    "start_date": "2026-06-15",
-    "completion_date": "2029-12-31",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 10,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Haihua Yuan",
-    "conditions": [
-      "Neoplasms",
-      "Solid Tumors",
-      "HER2 Positive Solid Tumor",
-      "Endometrial Neoplasm",
-      "Urothelial Carcinoma (UC)",
-      "Pancreatic Neoplasms",
-      "Colorectal Neoplasms",
-      "Head and Neck Neoplasms",
-      "Cervical Neoplasms",
-      "Ovarian Neoplasms"
-    ],
-    "interventions": [
-      "Zanidatamab"
-    ]
-  },
-  "ZYME:zanidatamab:NCT05027139": {
-    "nct_id": "NCT05027139",
-    "title": "A Study of Zanidatamab (ZW25) With Evorpacept (ALX148) in Patients With Advanced HER2-expressing Cancer",
-    "official_title": "A Phase 1b/2, 2-part Open-label Study to Assess the Safety and Antitumor Activity of Zanidatamab in Combination With ALX148 in Advanced HER2-expressing Cancer",
-    "status": "COMPLETED",
-    "last_update": "2026-07-01",
-    "start_date": "2021-09-15",
-    "completion_date": "2025-09-30",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE1",
-      "PHASE2"
-    ],
-    "enrollment": 52,
-    "enrollment_type": "ACTUAL",
-    "sponsor": "Jazz Pharmaceuticals",
-    "conditions": [
-      "HER2-expressing Cancers"
-    ],
-    "interventions": [
-      "Zanidatamab",
-      "Evorpacept"
-    ]
-  },
-  "ZYME:zanidatamab:NCT07273981": {
-    "nct_id": "NCT07273981",
-    "title": "Zanidatamab Combined With Chemotherapy as Neoadjuvant Therapy for HER2-high Expression G/GEJC",
-    "official_title": "Phase II Clinical Study of Zanidatamab Combined With Chemotherapy as Neoadjuvant Therapy for Locally Advanced HER2-high Expression (IHC3+/2+FISH+) Gastric/Gastroesophageal Junction Adenocarcinoma",
-    "status": "NOT_YET_RECRUITING",
-    "last_update": "2025-12-10",
-    "start_date": "2026-01-01",
-    "completion_date": "2029-07-31",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 30,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Xijing Hospital",
-    "conditions": [
-      "Gastric/Gastroesophageal Junction Adenocarcinoma"
-    ],
-    "interventions": [
-      "Zanidatamab Combined with Chemotherapy"
-    ]
-  },
-  "ZYME:zanidatamab:NCT07477444": {
-    "nct_id": "NCT07477444",
-    "title": "Perioperative Zanidatamab and Chemotherapy for HER2 Positive Gastroesophageal Cancer",
-    "official_title": "Perioperative Zanidatamab Combined With Chemotherapy in Operable HER2 Positive Locally Advanced Operable Gastroesophageal Adenocarcinoma (GEA): A Phase 1b/2a Single-Arm Trial",
-    "status": "NOT_YET_RECRUITING",
-    "last_update": "2026-03-20",
-    "start_date": "2026-06-01",
-    "completion_date": "2033-06",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE1",
-      "PHASE2"
-    ],
-    "enrollment": 29,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Universitaire Ziekenhuizen KU Leuven",
-    "conditions": [
-      "Gastroesophageal Cancer"
-    ],
-    "interventions": [
-      "Zanidatamab Combined with Chemotherapy"
-    ]
-  },
-  "ZYME:zanidatamab:NCT05152147": {
-    "nct_id": "NCT05152147",
-    "title": "A Study of Zanidatamab in Combination With Chemotherapy Plus or Minus Tislelizumab in Patients With HER2-positive Advanced or Metastatic Gastric and Esophageal Cancers",
-    "official_title": "A Randomized, Multicenter, Phase 3 Study of Zanidatamab in Combination With Chemotherapy With or Without Tislelizumab in Subjects With HER2-positive Unresectable Locally Advanced or Metastatic Gastroesophageal Adenocarcinoma (GEA)",
-    "status": "ACTIVE_NOT_RECRUITING",
-    "last_update": "2026-09-01",
-    "start_date": "2021-12-02",
-    "completion_date": "2027-09-30",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE3"
-    ],
-    "enrollment": 920,
-    "enrollment_type": "ACTUAL",
-    "sponsor": "Jazz Pharmaceuticals",
-    "conditions": [
-      "Gastric Neoplasms",
-      "Gastroesophageal Adenocarcinoma",
-      "Esophageal Adenocarcinoma"
-    ],
-    "interventions": [
-      "Zanidatamab",
-      "Tislelizumab",
-      "Trastuzumab",
-      "Capecitabine",
-      "Oxaliplatin",
-      "Cisplatin",
-      "5-Fluorouracil"
     ]
   },
   "ZYME:zanidatamab:NCT01042379": {
@@ -598,143 +329,412 @@
       "Ivonescimab (20mg/kg Q3W)"
     ]
   },
-  "ZYME:zanidatamab:NCT05615818": {
-    "nct_id": "NCT05615818",
-    "title": "Personalized Medicine for Advanced Biliary Cancer Patients",
-    "official_title": "Molecular Targeted Maintenance Therapy Versus Standard of Care in Advanced Biliary Cancer: an International, Randomised, Controlled, Open-label, Platform Phase 3 Trial",
+  "ZYME:zanidatamab:NCT06043427": {
+    "nct_id": "NCT06043427",
+    "title": "Paclitaxel and Ramucirumab +/- Zanidatamab in HER2 Postive Advanced Gastroesophageal Adenocarcinoma",
+    "official_title": "A Randomized Phase II Study of Paclitaxel and Ramucirumab +/- Zanidatamab in HER2 Positive Advanced Gastroesophageal Adenocarcinoma",
     "status": "RECRUITING",
-    "last_update": "2026-05-19",
-    "start_date": "2024-07-18",
-    "completion_date": "2028-06",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE3"
-    ],
-    "enrollment": 800,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "UNICANCER",
-    "conditions": [
-      "Biliary Tract Neoplasms"
-    ],
-    "interventions": [
-      "Futibatinib",
-      "Ivosidenib",
-      "Zanidatamab",
-      "Trastuzumab",
-      "Neratinib",
-      "Encorafenib",
-      "Binimetinib",
-      "Niraparib",
-      "Cisplatin",
-      "Gemcitabine"
-    ]
-  },
-  "ZYME:zanidatamab:NCT07243938": {
-    "nct_id": "NCT07243938",
-    "title": "Phase II Basket Trial: Zanidatamab Plus Tislelizumab in HER2-Positive GI Tumors (UNION-HER2-BASKET)",
-    "official_title": "A Prospective, Multi-cohort Clinical Study to Explore the Preliminary Efficacy and Safety of Zanidatamab in Combination With Tislelizumab for HER2-Positive GI Tumors: the UNION-HER2-BASKET Study",
-    "status": "NOT_YET_RECRUITING",
-    "last_update": "2025-11-24",
-    "start_date": "2026-01-15",
-    "completion_date": "2031-06-01",
+    "last_update": "2026-08-11",
+    "start_date": "2024-04-16",
+    "completion_date": "2027-07-31",
     "study_type": "INTERVENTIONAL",
     "phases": [
       "PHASE2"
     ],
-    "enrollment": 70,
+    "enrollment": 168,
     "enrollment_type": "ESTIMATED",
-    "sponsor": "Tao Zhang",
+    "sponsor": "Canadian Cancer Trials Group",
     "conditions": [
-      "Locally Advanced Rectal Cancer (LARC)",
-      "Locally Advanced Gastric/Gastroesophageal Junction Adenocarcinoma",
-      "Metastatic Colorectal Cancer (mCRC)",
-      "Neoadjuvant Therapy"
+      "Gastroesophageal Adenocarcinoma"
     ],
     "interventions": [
-      "short-course radiotherapy",
-      "Zanidatamab",
-      "Tisleizumab(BGB-A317)",
-      "Capecitabine",
-      "Oxaliplatin",
-      "TME surgery",
-      "S-1",
-      "D2"
+      "Paclitaxel",
+      "Ramucirumab",
+      "Zanidatamab"
     ]
   },
-  "ZYME:zanidatamab:NCT04164199": {
-    "nct_id": "NCT04164199",
-    "title": "Study of Tislelizumab, Pamiparib, and Other Investigational Agents in Participants With Advanced Malignancies",
-    "official_title": "An Open-Label, Multicenter, Long-Term Extension Study of Treatment With Tislelizumab, Pamiparib, and Other Investigational Agents in Patients With Advanced Malignancies",
-    "status": "COMPLETED",
-    "last_update": "2026-06-03",
-    "start_date": "2019-12-19",
-    "completion_date": "2026-05-23",
+  "ZYME:zanidatamab:NCT07290985": {
+    "nct_id": "NCT07290985",
+    "title": "AACR Adaptive Biomarker-Driven Organ Preservation Trial in Gastroesophageal Adenocarcinomas",
+    "official_title": "AACR Adaptive Biomarker-Driven Organ Preservation Trial In Gastroesophageal Adenocarcinomas (AACR-ADOPT-GEA)",
+    "status": "RECRUITING",
+    "last_update": "2026-07-23",
+    "start_date": "2026-07-20",
+    "completion_date": "2028-12-01",
     "study_type": "INTERVENTIONAL",
     "phases": [
-      "PHASE3"
+      "PHASE2"
     ],
-    "enrollment": 404,
-    "enrollment_type": "ACTUAL",
-    "sponsor": "BeOne Medicines",
+    "enrollment": 242,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "American Association for Cancer Research",
     "conditions": [
-      "Advanced Malignancies"
+      "Gastroesophageal Adenocarcinoma"
     ],
     "interventions": [
       "Tislelizumab",
-      "Pamiparib",
-      "Temozolomide",
-      "Sitravatinib",
-      "Ociperlimab",
-      "BAT1706",
-      "Fruquintinib",
-      "BGB-15025",
+      "Leucovorin",
+      "Oxaliplatin",
+      "Fluorouracil",
       "Zanidatamab",
-      "BGB-A445",
-      "Surzebiclimab",
-      "Lenvatinib",
-      "LBL-007"
+      "Zolbetuximab"
     ]
   },
-  "MIRM:maralixibat:NCT03905330": {
-    "nct_id": "NCT03905330",
-    "title": "A Study to Evaluate the Efficacy and Safety of Maralixibat in Subjects With Progressive Familial Intrahepatic Cholestasis (MARCH-PFIC)",
-    "official_title": "MRX-502: Randomized Double-blind Placebo-controlled Phase 3 Study to Evaluate the Efficacy and Safety of Maralixibat in the Treatment of Subjects With Progressive Familial Intrahepatic Cholestasis (PFIC) - MARCH-PFIC",
+  "ZYME:zanidatamab:NCT05027139": {
+    "nct_id": "NCT05027139",
+    "title": "A Study of Zanidatamab (ZW25) With Evorpacept (ALX148) in Patients With Advanced HER2-expressing Cancer",
+    "official_title": "A Phase 1b/2, 2-part Open-label Study to Assess the Safety and Antitumor Activity of Zanidatamab in Combination With ALX148 in Advanced HER2-expressing Cancer",
     "status": "COMPLETED",
-    "last_update": "2023-12-11",
-    "start_date": "2019-07-09",
-    "completion_date": "2022-09-01",
+    "last_update": "2026-07-01",
+    "start_date": "2021-09-15",
+    "completion_date": "2025-09-30",
     "study_type": "INTERVENTIONAL",
     "phases": [
-      "PHASE3"
+      "PHASE1",
+      "PHASE2"
     ],
-    "enrollment": 93,
+    "enrollment": 52,
     "enrollment_type": "ACTUAL",
-    "sponsor": "Mirum Pharmaceuticals, Inc.",
+    "sponsor": "Jazz Pharmaceuticals",
     "conditions": [
-      "Progressive Familial Intrahepatic Cholestasis (PFIC)"
+      "HER2-expressing Cancers"
     ],
     "interventions": [
-      "Maralixibat",
-      "Placebo"
+      "Zanidatamab",
+      "Evorpacept"
     ]
   },
-  "MIRM:maralixibat:NCT03353454": {
-    "nct_id": "NCT03353454",
-    "title": "A Placebo-controlled Study of Maralixibat (SHP625) in Pediatric Subjects With Progressive Familial Intrahepatic Cholestasis (PFIC)",
-    "official_title": "Randomized Double-blind Placebo-controlled Phase 3 Study to Evaluate the Efficacy and Safety of Maralixibat (SHP625) in the Treatment of Pediatric Subjects With Progressive Familial Intrahepatic Cholestasis (PFIC)",
-    "status": "WITHDRAWN",
-    "last_update": "2019-03-18",
-    "start_date": "2018-10-25",
-    "completion_date": "2020-06-15",
+  "ZYME:zanidatamab:NCT07102381": {
+    "nct_id": "NCT07102381",
+    "title": "A Phase 2 Neoadjuvant Study of Zanidatamab in Combination With Chemotherapy in Participants With HER2-positive Breast Cancer",
+    "official_title": "A Phase 2, Randomized, Multicenter, Open-label Neoadjuvant Study Evaluating Zanidatamab in Combination With Chemotherapy in Participants With HER2-positive Breast Cancer",
+    "status": "RECRUITING",
+    "last_update": "2026-08-25",
+    "start_date": "2025-09-24",
+    "completion_date": "2030-08-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 125,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Jazz Pharmaceuticals",
+    "conditions": [
+      "HER2-positive Breast Cancer",
+      "Breast Cancer"
+    ],
+    "interventions": [
+      "Zanidatamab",
+      "Paclitaxel",
+      "Docetaxel",
+      "Carboplatin",
+      "Trastuzumab",
+      "Pertuzumab"
+    ]
+  },
+  "ZYME:zanidatamab:NCT07296705": {
+    "nct_id": "NCT07296705",
+    "title": "Neoadjuvant Zanidatamab + Tislelizumab + Chemotherapy for Selective Bladder Preservation in HER2-Positive MIBC",
+    "official_title": "Selective Bladder Preservation After Neoadjuvant Zanidatamab Combined With Tislelizumab and Chemotherapy in Patients With HER2-Positive Muscle-Invasive Bladder Cancer: A Multicenter Study",
+    "status": "RECRUITING",
+    "last_update": "2025-12-22",
+    "start_date": "2025-10-25",
+    "completion_date": "2029-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 25,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Fujian Medical University Union Hospital",
+    "conditions": [
+      "Muscle Invasive Bladder Cancer (MIBC)"
+    ],
+    "interventions": [
+      "Zanidatamab",
+      "Tislelizumab",
+      "Cisplatin",
+      "Gemcitabine",
+      "Nab-paclitaxel"
+    ]
+  },
+  "ZYME:zanidatamab:NCT05868226": {
+    "nct_id": "NCT05868226",
+    "title": "PRE-ISPY Phase I/II Oncology Platform Program",
+    "official_title": "PRE-Investigation of Serial Studies to Predict Your Therapeutic Response With Imaging And moLecular Analysis: A Phase I/II Platform Trial",
+    "status": "RECRUITING",
+    "last_update": "2026-09-02",
+    "start_date": "2023-02-15",
+    "completion_date": "2031-12-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 280,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "QuantumLeap Healthcare Collaborative",
+    "conditions": [
+      "HER2-positive Breast Cancer",
+      "Metastatic Cancer",
+      "Metastatic Breast Cancer",
+      "Metastatic",
+      "HER2-positive Metastatic Breast Cancer",
+      "HER2 Mutation-Related Tumors",
+      "HER-2 Protein Overexpression",
+      "HER2-negative Breast Cancer",
+      "Triple Negative Breast Cancer",
+      "HR Positive",
+      "Hormone Receptor-positive Breast Cancer",
+      "Estrogen Receptor Positive Tumor",
+      "Progesterone Receptor-positive Breast Cancer",
+      "Hormone Receptor Negative Breast Carcinoma",
+      "Solid Tumor",
+      "Solid Tumor, Adult",
+      "Solid Carcinoma",
+      "HER2 Low Breast Cancer",
+      "HER2 Low Breast Carcinoma",
+      "ER Positive Breast Cancer",
+      "PR-positive Breast Cancer",
+      "Minimal Residual Disease",
+      "Colo-rectal Cancer",
+      "Colon Cancer",
+      "Rectal Cancer",
+      "ctDNA Monitoring",
+      "Colorectal Neoplasms",
+      "Colonic Neoplasms",
+      "Rectal Neoplasms",
+      "Neoplasm, Residual",
+      "Adenocarcinoma of Colon",
+      "Adenocarcinoma"
+    ],
+    "interventions": [
+      "ALX148",
+      "Fam-Trastuzumab Deruxtecan-Nxki",
+      "Zanidatamab",
+      "Tucatinib",
+      "TTX-MC138"
+    ]
+  },
+  "ZYME:zanidatamab:NCT07176312": {
+    "nct_id": "NCT07176312",
+    "title": "Zanidatamab in Combination With Pembrolizumab and Chemotherapy in HER2 and PD-L1 Positive Metastatic Gastroesophageal Adenocarcinoma (GEA) Patients",
+    "official_title": "- ZANGEA - Phase II Study of Zanidatamab in Combination With Pembrolizumab and Chemotherapy in HER2 and PD-L1 Positive Metastatic Gastroesophageal Adenocarcinoma (GEA) Patients",
+    "status": "RECRUITING",
+    "last_update": "2026-06-30",
+    "start_date": "2026-01-16",
+    "completion_date": "2029-03",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 80,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Institut für Klinische Krebsforschung IKF GmbH at Krankenhaus Nordwest",
+    "conditions": [
+      "Gastroesophageal Adenocarcinoma",
+      "First Line Therapy",
+      "HER2 + Gastric Cancer",
+      "PDL-1",
+      "Metastases"
+    ],
+    "interventions": [
+      "Zanidatamab",
+      "Pembrolizumab",
+      "mFOLFOX"
+    ]
+  },
+  "ZYME:zanidatamab:NCT05035836": {
+    "nct_id": "NCT05035836",
+    "title": "A Phase 2 Single-Arm Open-Label Pilot Trial Evaluating Zanidatamab (ZW25) in Patients With Early Stage HER2/Neu Positive (HER2+) Breast Cancer (BC)",
+    "official_title": "A Phase 2 Single-Arm Open-Label Pilot Trial Evaluating Zanidatamab (ZW25) in Patients With Early Stage HER2/Neu Positive (HER2+) Breast Cancer (BC)",
+    "status": "RECRUITING",
+    "last_update": "2026-08-24",
+    "start_date": "2021-11-16",
+    "completion_date": "2028-12-29",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 20,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "M.D. Anderson Cancer Center",
+    "conditions": [
+      "Breast Cancer",
+      "HER2-positive"
+    ],
+    "interventions": [
+      "Zanidatamab",
+      "Letrozole",
+      "Tamoxifen"
+    ]
+  },
+  "ZYME:zanidatamab:NCT04578444": {
+    "nct_id": "NCT04578444",
+    "title": "An Expanded Access Treatment Protocol of Zanidatamab (ZW25) in Patients With HER2-Positive Advanced Biliary Tract Cancer",
+    "official_title": "Expanded Access Use of Zanidatamab for the Treatment of HER2-Positive Advanced Solid Tumor",
+    "status": "NO_LONGER_AVAILABLE",
+    "last_update": "2025-05-25",
+    "start_date": null,
+    "completion_date": null,
+    "study_type": "EXPANDED_ACCESS",
+    "phases": [],
+    "enrollment": null,
+    "enrollment_type": null,
+    "sponsor": "Jazz Pharmaceuticals",
+    "conditions": [
+      "HER2-Positive Advanced Biliary Tract Cancer"
+    ],
+    "interventions": [
+      "Zanidatamab"
+    ]
+  },
+  "ZYME:zanidatamab:NCT07780968": {
+    "nct_id": "NCT07780968",
+    "title": "Zanidatamab Outcomes and Lived Experiences in Advanced HER2+ GEA",
+    "official_title": "Real-World Utilization, Treatment Patterns, Tolerability, and Effectiveness of Zanidatamab in Patients With Unresectable Locally Advanced, Recurrent or Metastatic HER2-Positive Gastroesophageal Adenocarcinoma in the United States",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-08-25",
+    "start_date": "2026-10-01",
+    "completion_date": "2031-10-01",
+    "study_type": "OBSERVATIONAL",
+    "phases": [],
+    "enrollment": 300,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Jazz Pharmaceuticals",
+    "conditions": [
+      "Esophageal Cancer",
+      "GastroEsophageal Cancer",
+      "Gastroesophageal-junction Cancer",
+      "HER2-positive Gastric Cancer",
+      "Stomach Cancer"
+    ],
+    "interventions": [
+      "Zanidatamab"
+    ]
+  },
+  "ZYME:zanidatamab:NCT07405476": {
+    "nct_id": "NCT07405476",
+    "title": "Zanidatamab Before Surgery for the Treatment of HER2 Positive Colon and Rectal Cancer in Patients Planned for Curative Intent Treatment",
+    "official_title": "A Phase II Clinical Trial of Neoadjuvant Zanidatamab for HER2+ Localized Colorectal Cancer",
+    "status": "RECRUITING",
+    "last_update": "2026-04-17",
+    "start_date": "2026-04-07",
+    "completion_date": "2029-12-18",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 38,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Emory University",
+    "conditions": [
+      "Colon Carcinoma",
+      "Colorectal Carcinoma",
+      "Rectal Carcinoma",
+      "Stage I Colon Cancer AJCC v8",
+      "Stage I Colorectal Cancer AJCC v8",
+      "Stage I Rectal Cancer AJCC v8",
+      "Stage II Colon Cancer AJCC v8",
+      "Stage II Colorectal Cancer AJCC v8",
+      "Stage II Rectal Cancer AJCC v8",
+      "Stage III Colon Cancer AJCC v8",
+      "Stage III Colorectal Cancer AJCC v8",
+      "Stage III Rectal Cancer AJCC v8"
+    ],
+    "interventions": [
+      "Zanidatamab",
+      "Resection",
+      "Patient Observation",
+      "Echocardiography Test",
+      "Multigated Acquisition Scan",
+      "Endoscopic Procedure",
+      "Computed Tomography",
+      "Magnetic Resonance Imaging",
+      "Biospecimen Collection",
+      "Biopsy Procedure",
+      "Digital Rectal Examination",
+      "Electronic Health Record Review"
+    ]
+  },
+  "ZYME:zanidatamab:NCT05152147": {
+    "nct_id": "NCT05152147",
+    "title": "A Study of Zanidatamab in Combination With Chemotherapy Plus or Minus Tislelizumab in Patients With HER2-positive Advanced or Metastatic Gastric and Esophageal Cancers",
+    "official_title": "A Randomized, Multicenter, Phase 3 Study of Zanidatamab in Combination With Chemotherapy With or Without Tislelizumab in Subjects With HER2-positive Unresectable Locally Advanced or Metastatic Gastroesophageal Adenocarcinoma (GEA)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-09-01",
+    "start_date": "2021-12-02",
+    "completion_date": "2027-09-30",
     "study_type": "INTERVENTIONAL",
     "phases": [
       "PHASE3"
     ],
-    "enrollment": 0,
+    "enrollment": 920,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Jazz Pharmaceuticals",
+    "conditions": [
+      "Gastric Neoplasms",
+      "Gastroesophageal Adenocarcinoma",
+      "Esophageal Adenocarcinoma"
+    ],
+    "interventions": [
+      "Zanidatamab",
+      "Tislelizumab",
+      "Trastuzumab",
+      "Capecitabine",
+      "Oxaliplatin",
+      "Cisplatin",
+      "5-Fluorouracil"
+    ]
+  },
+  "ZYME:zanidatamab:NCT07631871": {
+    "nct_id": "NCT07631871",
+    "title": "An Exploratory Study of Zanidatamab in HER2-positive Advanced Tumor After at Least One Line of Standard Therapy",
+    "official_title": "An Exploratory Study of Zanidatamab in HER2-positive Advanced Tumor After at Least One Line of Standard Therapy",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-06-08",
+    "start_date": "2026-06-15",
+    "completion_date": "2029-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 10,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Haihua Yuan",
+    "conditions": [
+      "Neoplasms",
+      "Solid Tumors",
+      "HER2 Positive Solid Tumor",
+      "Endometrial Neoplasm",
+      "Urothelial Carcinoma (UC)",
+      "Pancreatic Neoplasms",
+      "Colorectal Neoplasms",
+      "Head and Neck Neoplasms",
+      "Cervical Neoplasms",
+      "Ovarian Neoplasms"
+    ],
+    "interventions": [
+      "Zanidatamab"
+    ]
+  },
+  "MIRM:maralixibat:NCT04524390": {
+    "nct_id": "NCT04524390",
+    "title": "Evaluation of Maralixibat in Biliary Atresia Response Post-Kasai",
+    "official_title": "Randomized, Double-Blind, Placebo-Controlled Phase 2 Study to Evaluate the Efficacy and Safety of Maralixibat in the Treatment of Subjects With Biliary Atresia After Hepatoportoenterostomy",
+    "status": "COMPLETED",
+    "last_update": "2025-03-19",
+    "start_date": "2021-07-08",
+    "completion_date": "2024-02-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 75,
     "enrollment_type": "ACTUAL",
     "sponsor": "Mirum Pharmaceuticals, Inc.",
     "conditions": [
-      "Progressive Familial Intrahepatic Cholestasis (PFIC)"
+      "Biliary Atresia"
     ],
     "interventions": [
       "Maralixibat",
@@ -761,117 +761,49 @@
       "maralixibat"
     ]
   },
-  "MIRM:maralixibat:NCT06413368": {
-    "nct_id": "NCT06413368",
-    "title": "Maralixibat in Patients With Cystic Fibrosis and Constipation",
-    "official_title": "Maralixibat in Patients With Cystic Fibrosis and Constipation, A Within-Subjects Pilot Study",
-    "status": "RECRUITING",
-    "last_update": "2026-04-21",
-    "start_date": "2025-04-09",
-    "completion_date": "2027-06-30",
+  "MIRM:maralixibat:NCT03905330": {
+    "nct_id": "NCT03905330",
+    "title": "A Study to Evaluate the Efficacy and Safety of Maralixibat in Subjects With Progressive Familial Intrahepatic Cholestasis (MARCH-PFIC)",
+    "official_title": "MRX-502: Randomized Double-blind Placebo-controlled Phase 3 Study to Evaluate the Efficacy and Safety of Maralixibat in the Treatment of Subjects With Progressive Familial Intrahepatic Cholestasis (PFIC) - MARCH-PFIC",
+    "status": "COMPLETED",
+    "last_update": "2023-12-11",
+    "start_date": "2019-07-09",
+    "completion_date": "2022-09-01",
     "study_type": "INTERVENTIONAL",
     "phases": [
-      "PHASE2",
       "PHASE3"
     ],
-    "enrollment": 20,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Children's Hospital Los Angeles",
-    "conditions": [
-      "Constipation Chronic Idiopathic",
-      "Cystic Fibrosis"
-    ],
-    "interventions": [
-      "Maralixibat 9.5 MG/ML [Livmarli]"
-    ]
-  },
-  "MIRM:maralixibat:NCT02475317": {
-    "nct_id": "NCT02475317",
-    "title": "Study to Assess the Relative Potency of Multiple Oral Doses of LUM001 and SHP626 in Overweight and Obese Adults as Assessed by Fecal Bile Acid Excretion",
-    "official_title": "A Randomized, Blinded, Placebo-controlled, Phase 1 Study to Assess the Relative Potency of Multiple Oral Doses of LUM001 and SHP626 in Overweight and Obese Adult Subjects, as Assessed by Fecal Bile Acid Excretion",
-    "status": "COMPLETED",
-    "last_update": "2019-04-04",
-    "start_date": "2015-06-01",
-    "completion_date": "2015-12-01",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE1"
-    ],
-    "enrollment": 84,
+    "enrollment": 93,
     "enrollment_type": "ACTUAL",
     "sponsor": "Mirum Pharmaceuticals, Inc.",
     "conditions": [
-      "Healthy Volunteers"
+      "Progressive Familial Intrahepatic Cholestasis (PFIC)"
     ],
     "interventions": [
-      "Placebo",
       "Maralixibat",
-      "Volixibat"
+      "Placebo"
     ]
   },
-  "MIRM:maralixibat:NCT02047318": {
-    "nct_id": "NCT02047318",
-    "title": "An Extension Study to Evaluate the Long-Term Safety and Durability of Effect of LUM001 in the Treatment of Cholestatic Liver Disease in Subjects With Alagille Syndrome (ALGS)",
-    "official_title": "A Multicentre Extension Study to Evaluate the Long-Term Safety and Durability of the Therapeutic Effect of LUM001 Also Known as Maralixibat (MRX), an Apical Sodium-Dependent Bile Acid Transporter Inhibitor (ASBTi), in the Treatment of Cholestatic Liver Disease in Pediatric Subjects With Alagille Syndrome",
-    "status": "COMPLETED",
-    "last_update": "2021-11-19",
-    "start_date": "2013-12-20",
-    "completion_date": "2020-06-17",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 19,
-    "enrollment_type": "ACTUAL",
-    "sponsor": "Mirum Pharmaceuticals, Inc.",
-    "conditions": [
-      "Alagille Syndrome"
-    ],
-    "interventions": [
-      "LUM001 (Maralixibat)"
-    ]
-  },
-  "MIRM:maralixibat:NCT07293897": {
-    "nct_id": "NCT07293897",
-    "title": "A Database Study of Maralixibat (TAK-625) in Participants With Alagille Syndrome (ALGS) and Progressive Familial Intrahepatic Cholestasis (PFIC)",
-    "official_title": "A Cohort Study to Investigate the Risk of Liver Disorder of Livmarli Oral Solution in Patients With Japan Alagille Syndrome (ALGS) and Progressive Familial Intrahepatic Cholestasis (PFIC) Registered in the Comprehensive and Informative Registry System for Childhood Liver Disease (CIRCLe)",
+  "MIRM:maralixibat:NCT06193928": {
+    "nct_id": "NCT06193928",
+    "title": "Long-Term SafEty and Clinical Outcomes of LivmArli in Patients in the United States (LEAP-US)",
+    "official_title": "Long-Term SafEty and Clinical Outcomes of LivmArli in Patients in the United States (LEAP-US)",
     "status": "RECRUITING",
-    "last_update": "2026-02-20",
-    "start_date": "2026-01-13",
-    "completion_date": "2031-06-30",
+    "last_update": "2025-05-25",
+    "start_date": "2023-09-21",
+    "completion_date": "2030-09-20",
     "study_type": "OBSERVATIONAL",
     "phases": [],
-    "enrollment": 50,
+    "enrollment": 70,
     "enrollment_type": "ESTIMATED",
-    "sponsor": "Takeda",
-    "conditions": [
-      "Alagille Syndrome (ALGS)",
-      "Progressive Familial Intrahepatic Cholestasis (PFIC)"
-    ],
-    "interventions": [
-      "Maralixibat"
-    ]
-  },
-  "MIRM:maralixibat:NCT02057718": {
-    "nct_id": "NCT02057718",
-    "title": "Open Label Study to Evaluate Efficacy and Long Term Safety of LUM001 (Maralixibat) in the Treatment of Cholestatic Liver Disease in Patients With Progressive Familial Intrahepatic Cholestasis",
-    "official_title": "Open Label Study of the Efficacy and Long Term Safety of LUM001 (Maralixibat), an Apical Sodium-Dependent Bile Acid Transporter Inhibitor (ASBTi), in the Treatment of Cholestatic Liver Disease in Pediatric Patients With Progressive Familial Intrahepatic Cholestasis",
-    "status": "COMPLETED",
-    "last_update": "2023-10-23",
-    "start_date": "2014-03-01",
-    "completion_date": "2020-05-08",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 33,
-    "enrollment_type": "ACTUAL",
     "sponsor": "Mirum Pharmaceuticals, Inc.",
     "conditions": [
-      "Progressive Familial Intrahepatic Cholestasis (PFIC)"
+      "Alagille Syndrome",
+      "Progressive Familial Intrahepatic Cholestasis"
     ],
     "interventions": [
-      "LUM001 (Maralixibat)"
+      "Livmarli",
+      "Livmarli"
     ]
   },
   "MIRM:maralixibat:NCT02160782": {
@@ -920,6 +852,52 @@
       "Livmarli Oral Product"
     ]
   },
+  "MIRM:maralixibat:NCT07389031": {
+    "nct_id": "NCT07389031",
+    "title": "Maralixibat for Intrahepatic Cholestasis of Pregnancy",
+    "official_title": "Maralixibat for the trEatment of inTrAhePatic cHOlestasis of pRegnancy (METAPHOR)",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-02-05",
+    "start_date": "2026-04-01",
+    "completion_date": "2028-03-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 28,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Imperial College London",
+    "conditions": [
+      "Intrahepatic Cholestasis of Pregnancy"
+    ],
+    "interventions": [
+      "Maralixibat"
+    ]
+  },
+  "MIRM:maralixibat:NCT02475317": {
+    "nct_id": "NCT02475317",
+    "title": "Study to Assess the Relative Potency of Multiple Oral Doses of LUM001 and SHP626 in Overweight and Obese Adults as Assessed by Fecal Bile Acid Excretion",
+    "official_title": "A Randomized, Blinded, Placebo-controlled, Phase 1 Study to Assess the Relative Potency of Multiple Oral Doses of LUM001 and SHP626 in Overweight and Obese Adult Subjects, as Assessed by Fecal Bile Acid Excretion",
+    "status": "COMPLETED",
+    "last_update": "2019-04-04",
+    "start_date": "2015-06-01",
+    "completion_date": "2015-12-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 84,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Mirum Pharmaceuticals, Inc.",
+    "conditions": [
+      "Healthy Volunteers"
+    ],
+    "interventions": [
+      "Placebo",
+      "Maralixibat",
+      "Volixibat"
+    ]
+  },
   "MIRM:maralixibat:NCT06553768": {
     "nct_id": "NCT06553768",
     "title": "Evaluation of Maralixibat in Pruritus Associated With General Cholestatic Liver Disease (EXPAND)",
@@ -943,50 +921,73 @@
       "Placebo"
     ]
   },
-  "MIRM:maralixibat:NCT04185363": {
-    "nct_id": "NCT04185363",
-    "title": "An Extension Study of Maralixibat in Patients With Progressive Familial Intrahepatic Cholestasis (PFIC)",
-    "official_title": "An Open-label Extension Study to Evaluate the Long-term Safety and Efficacy of Maralixibat in the Treatment of Subjects With Progressive Familial Intrahepatic Cholestasis (PFIC)",
-    "status": "COMPLETED",
-    "last_update": "2026-06-23",
-    "start_date": "2020-01-08",
-    "completion_date": "2025-04-23",
+  "MIRM:maralixibat:NCT06413368": {
+    "nct_id": "NCT06413368",
+    "title": "Maralixibat in Patients With Cystic Fibrosis and Constipation",
+    "official_title": "Maralixibat in Patients With Cystic Fibrosis and Constipation, A Within-Subjects Pilot Study",
+    "status": "RECRUITING",
+    "last_update": "2026-04-21",
+    "start_date": "2025-04-09",
+    "completion_date": "2027-06-30",
     "study_type": "INTERVENTIONAL",
     "phases": [
+      "PHASE2",
       "PHASE3"
     ],
-    "enrollment": 84,
+    "enrollment": 20,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Children's Hospital Los Angeles",
+    "conditions": [
+      "Constipation Chronic Idiopathic",
+      "Cystic Fibrosis"
+    ],
+    "interventions": [
+      "Maralixibat 9.5 MG/ML [Livmarli]"
+    ]
+  },
+  "MIRM:maralixibat:NCT02057718": {
+    "nct_id": "NCT02057718",
+    "title": "Open Label Study to Evaluate Efficacy and Long Term Safety of LUM001 (Maralixibat) in the Treatment of Cholestatic Liver Disease in Patients With Progressive Familial Intrahepatic Cholestasis",
+    "official_title": "Open Label Study of the Efficacy and Long Term Safety of LUM001 (Maralixibat), an Apical Sodium-Dependent Bile Acid Transporter Inhibitor (ASBTi), in the Treatment of Cholestatic Liver Disease in Pediatric Patients With Progressive Familial Intrahepatic Cholestasis",
+    "status": "COMPLETED",
+    "last_update": "2023-10-23",
+    "start_date": "2014-03-01",
+    "completion_date": "2020-05-08",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 33,
     "enrollment_type": "ACTUAL",
     "sponsor": "Mirum Pharmaceuticals, Inc.",
     "conditions": [
       "Progressive Familial Intrahepatic Cholestasis (PFIC)"
     ],
     "interventions": [
-      "Maralixibat"
+      "LUM001 (Maralixibat)"
     ]
   },
-  "MIRM:maralixibat:NCT04729751": {
-    "nct_id": "NCT04729751",
-    "title": "A Study to Evaluate the Safety and Tolerability of Maralixibat in Infant Participants With Cholestatic Liver Diseases Including Progressive Familial Intrahepatic Cholestasis (PFIC) and Alagille Syndrome (ALGS).",
-    "official_title": "Open-Label, Phase 2 Study to Evaluate the Safety and Tolerability of Maralixibat in the Treatment of Infants With Cholestatic Liver Diseases Including Progressive Familial Intrahepatic Cholestasis and Alagille Syndrome",
-    "status": "COMPLETED",
-    "last_update": "2026-06-02",
-    "start_date": "2021-09-09",
-    "completion_date": "2024-12-17",
+  "MIRM:maralixibat:NCT03353454": {
+    "nct_id": "NCT03353454",
+    "title": "A Placebo-controlled Study of Maralixibat (SHP625) in Pediatric Subjects With Progressive Familial Intrahepatic Cholestasis (PFIC)",
+    "official_title": "Randomized Double-blind Placebo-controlled Phase 3 Study to Evaluate the Efficacy and Safety of Maralixibat (SHP625) in the Treatment of Pediatric Subjects With Progressive Familial Intrahepatic Cholestasis (PFIC)",
+    "status": "WITHDRAWN",
+    "last_update": "2019-03-18",
+    "start_date": "2018-10-25",
+    "completion_date": "2020-06-15",
     "study_type": "INTERVENTIONAL",
     "phases": [
-      "PHASE2"
+      "PHASE3"
     ],
-    "enrollment": 27,
+    "enrollment": 0,
     "enrollment_type": "ACTUAL",
     "sponsor": "Mirum Pharmaceuticals, Inc.",
     "conditions": [
-      "Progressive Familial Intrahepatic Cholestasis",
-      "Alagille Syndrome",
-      "Cholestatic Liver Disease"
+      "Progressive Familial Intrahepatic Cholestasis (PFIC)"
     ],
     "interventions": [
-      "Maralixibat"
+      "Maralixibat",
+      "Placebo"
     ]
   },
   "MIRM:maralixibat:NCT04168385": {
@@ -1011,27 +1012,69 @@
       "Maralixibat"
     ]
   },
-  "MIRM:maralixibat:NCT04524390": {
-    "nct_id": "NCT04524390",
-    "title": "Evaluation of Maralixibat in Biliary Atresia Response Post-Kasai",
-    "official_title": "Randomized, Double-Blind, Placebo-Controlled Phase 2 Study to Evaluate the Efficacy and Safety of Maralixibat in the Treatment of Subjects With Biliary Atresia After Hepatoportoenterostomy",
+  "MIRM:maralixibat:NCT02047318": {
+    "nct_id": "NCT02047318",
+    "title": "An Extension Study to Evaluate the Long-Term Safety and Durability of Effect of LUM001 in the Treatment of Cholestatic Liver Disease in Subjects With Alagille Syndrome (ALGS)",
+    "official_title": "A Multicentre Extension Study to Evaluate the Long-Term Safety and Durability of the Therapeutic Effect of LUM001 Also Known as Maralixibat (MRX), an Apical Sodium-Dependent Bile Acid Transporter Inhibitor (ASBTi), in the Treatment of Cholestatic Liver Disease in Pediatric Subjects With Alagille Syndrome",
     "status": "COMPLETED",
-    "last_update": "2025-03-19",
-    "start_date": "2021-07-08",
-    "completion_date": "2024-02-07",
+    "last_update": "2021-11-19",
+    "start_date": "2013-12-20",
+    "completion_date": "2020-06-17",
     "study_type": "INTERVENTIONAL",
     "phases": [
       "PHASE2"
     ],
-    "enrollment": 75,
+    "enrollment": 19,
     "enrollment_type": "ACTUAL",
     "sponsor": "Mirum Pharmaceuticals, Inc.",
     "conditions": [
-      "Biliary Atresia"
+      "Alagille Syndrome"
     ],
     "interventions": [
-      "Maralixibat",
-      "Placebo"
+      "LUM001 (Maralixibat)"
+    ]
+  },
+  "MIRM:maralixibat:NCT07293897": {
+    "nct_id": "NCT07293897",
+    "title": "A Database Study of Maralixibat (TAK-625) in Participants With Alagille Syndrome (ALGS) and Progressive Familial Intrahepatic Cholestasis (PFIC)",
+    "official_title": "A Cohort Study to Investigate the Risk of Liver Disorder of Livmarli Oral Solution in Patients With Japan Alagille Syndrome (ALGS) and Progressive Familial Intrahepatic Cholestasis (PFIC) Registered in the Comprehensive and Informative Registry System for Childhood Liver Disease (CIRCLe)",
+    "status": "RECRUITING",
+    "last_update": "2026-02-20",
+    "start_date": "2026-01-13",
+    "completion_date": "2031-06-30",
+    "study_type": "OBSERVATIONAL",
+    "phases": [],
+    "enrollment": 50,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Takeda",
+    "conditions": [
+      "Alagille Syndrome (ALGS)",
+      "Progressive Familial Intrahepatic Cholestasis (PFIC)"
+    ],
+    "interventions": [
+      "Maralixibat"
+    ]
+  },
+  "MIRM:maralixibat:NCT04185363": {
+    "nct_id": "NCT04185363",
+    "title": "An Extension Study of Maralixibat in Patients With Progressive Familial Intrahepatic Cholestasis (PFIC)",
+    "official_title": "An Open-label Extension Study to Evaluate the Long-term Safety and Efficacy of Maralixibat in the Treatment of Subjects With Progressive Familial Intrahepatic Cholestasis (PFIC)",
+    "status": "COMPLETED",
+    "last_update": "2026-06-23",
+    "start_date": "2020-01-08",
+    "completion_date": "2025-04-23",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 84,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Mirum Pharmaceuticals, Inc.",
+    "conditions": [
+      "Progressive Familial Intrahepatic Cholestasis (PFIC)"
+    ],
+    "interventions": [
+      "Maralixibat"
     ]
   },
   "MIRM:maralixibat:NCT02117713": {
@@ -1056,26 +1099,28 @@
       "LUM001 (Maralixibat)"
     ]
   },
-  "MIRM:maralixibat:NCT07389031": {
-    "nct_id": "NCT07389031",
-    "title": "Maralixibat for Intrahepatic Cholestasis of Pregnancy",
-    "official_title": "Maralixibat for the trEatment of inTrAhePatic cHOlestasis of pRegnancy (METAPHOR)",
-    "status": "NOT_YET_RECRUITING",
-    "last_update": "2026-02-05",
-    "start_date": "2026-04-01",
-    "completion_date": "2028-03-31",
+  "MIRM:brelovitug:NCT07298330": {
+    "nct_id": "NCT07298330",
+    "title": "A Trial Evaluating Brelovitug vs Delayed Treatment for the Treatment of Chronic Hepatitis Delta Infection (AZURE-4)",
+    "official_title": "A Randomized, Open-label, Multicenter, Phase 3 Trial Evaluating Brelovitug vs Delayed Treatment for the Treatment of Chronic Hepatitis Delta Infection (AZURE-4)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-06-29",
+    "start_date": "2026-01-14",
+    "completion_date": "2029-01",
     "study_type": "INTERVENTIONAL",
     "phases": [
-      "PHASE2"
+      "PHASE3"
     ],
-    "enrollment": 28,
+    "enrollment": 80,
     "enrollment_type": "ESTIMATED",
-    "sponsor": "Imperial College London",
+    "sponsor": "Mirum Pharmaceuticals, Inc.",
     "conditions": [
-      "Intrahepatic Cholestasis of Pregnancy"
+      "Chronic Hepatitis D Infection"
     ],
     "interventions": [
-      "Maralixibat"
+      "Brelovitug 300 mg",
+      "Brelovitug 900 mg",
+      "Delayed Treatment with Brelovitug 300mg"
     ]
   },
   "MIRM:brelovitug:NCT07454837": {
@@ -1125,30 +1170,6 @@
       "Bulevirtide 2 mg and Brelovitug - 300 mg"
     ]
   },
-  "MIRM:brelovitug:NCT07298330": {
-    "nct_id": "NCT07298330",
-    "title": "A Trial Evaluating Brelovitug vs Delayed Treatment for the Treatment of Chronic Hepatitis Delta Infection (AZURE-4)",
-    "official_title": "A Randomized, Open-label, Multicenter, Phase 3 Trial Evaluating Brelovitug vs Delayed Treatment for the Treatment of Chronic Hepatitis Delta Infection (AZURE-4)",
-    "status": "ACTIVE_NOT_RECRUITING",
-    "last_update": "2026-06-29",
-    "start_date": "2026-01-14",
-    "completion_date": "2029-01",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE3"
-    ],
-    "enrollment": 80,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Mirum Pharmaceuticals, Inc.",
-    "conditions": [
-      "Chronic Hepatitis D Infection"
-    ],
-    "interventions": [
-      "Brelovitug 300 mg",
-      "Brelovitug 900 mg",
-      "Delayed Treatment with Brelovitug 300mg"
-    ]
-  },
   "MIRM:brelovitug:NCT06907290": {
     "nct_id": "NCT06907290",
     "title": "A Trial Evaluating BJT-778 vs Delayed Treatment for the Treatment of Chronic Hepatitis Delta Infection",
@@ -1172,26 +1193,6 @@
       "Brelovitug 300 mg",
       "Brelovitug 900 mg",
       "Delayed Treatment with Brelovitug 300mg"
-    ]
-  },
-  "PHVS:deucrictibant:NCT07759141": {
-    "nct_id": "NCT07759141",
-    "title": "EAP for Deucrictibant Immediate-release",
-    "official_title": "Expanded Access for Deucrictibant IR Capsule",
-    "status": "AVAILABLE",
-    "last_update": "2026-08-12",
-    "start_date": null,
-    "completion_date": null,
-    "study_type": "EXPANDED_ACCESS",
-    "phases": [],
-    "enrollment": null,
-    "enrollment_type": null,
-    "sponsor": "Pharvaris Netherlands B.V.",
-    "conditions": [
-      "Hereditary Angioedema"
-    ],
-    "interventions": [
-      "Deucrictibant IR"
     ]
   },
   "PHVS:deucrictibant:NCT04618211": {
@@ -1226,33 +1227,44 @@
       "Placebo"
     ]
   },
-  "PHVS:deucrictibant:NCT07046806": {
-    "nct_id": "NCT07046806",
-    "title": "Oral Deucrictibant for Prophylactic and Acute Treatment in Hereditary Angioedema Patients",
-    "official_title": "Oral Deucrictibant for the Prophylactic and Acute Treatment in Patients With Bradykinin Mediated Angioedema With Normal C1 Inhibitor (BK-AE-nC1INH)",
-    "status": "RECRUITING",
-    "last_update": "2025-07-02",
-    "start_date": "2025-03-10",
-    "completion_date": "2026-04-01",
+  "PHVS:deucrictibant:NCT05396105": {
+    "nct_id": "NCT05396105",
+    "title": "Extension Study of Oral PHA-022121 for Acute Treatment of Angioedema Attacks in Patients With Hereditary Angioedema",
+    "official_title": "A Phase II/III, Extension Study of Orally Administered PHA-022121 for Acute Treatment of Angioedema Attacks in Patients With Hereditary Angioedema",
+    "status": "ENROLLING_BY_INVITATION",
+    "last_update": "2026-07-21",
+    "start_date": "2022-12-28",
+    "completion_date": "2027-06",
     "study_type": "INTERVENTIONAL",
     "phases": [
-      "PHASE1",
-      "PHASE2"
+      "PHASE2",
+      "PHASE3"
     ],
-    "enrollment": 10,
+    "enrollment": 150,
     "enrollment_type": "ESTIMATED",
-    "sponsor": "Institute for Asthma and Allergy",
+    "sponsor": "Pharvaris Netherlands B.V.",
     "conditions": [
+      "Hereditary Angioedema",
+      "Hereditary Angioedema Type I",
+      "Hereditary Angioedema Type II",
+      "Hereditary Angioedema Types I and II",
+      "Hereditary Angioedema Attack",
+      "Hereditary Angioedema With C1 Esterase Inhibitor Deficiency",
+      "Hereditary Angioedema - Type 1",
+      "Hereditary Angioedema - Type 2",
+      "Hereditary Angioedema - Type 3",
+      "C1 Esterase Inhibitor [C1-INH] Deficiency",
+      "C1 Esterase Inhibitor Deficiency",
+      "C1 Esterase Inhibitor, Deficiency of",
+      "C1 Inhibitor Deficiency",
+      "Hereditary Angioedema Type III",
       "Hereditary Angioedema (HAE)",
-      "Angioedema",
-      "Bradykinin-mediated Angioedema",
-      "C1 Inhibitor Deficiency"
+      "Hereditary Angioedema Type I and II",
+      "HAE With Normal C1 Esterase Inhibitor"
     ],
     "interventions": [
-      "Deucrictibant XR tablet",
-      "Placebo comparator to XR tablet",
-      "Deucrictibant 20 mg capsule",
-      "Placebo comparator to 20 mg capsule"
+      "deucrictibant",
+      "deucrictibant"
     ]
   },
   "PHVS:deucrictibant:NCT06343779": {
@@ -1313,46 +1325,6 @@
       "Placebo"
     ]
   },
-  "PHVS:deucrictibant:NCT05396105": {
-    "nct_id": "NCT05396105",
-    "title": "Extension Study of Oral PHA-022121 for Acute Treatment of Angioedema Attacks in Patients With Hereditary Angioedema",
-    "official_title": "A Phase II/III, Extension Study of Orally Administered PHA-022121 for Acute Treatment of Angioedema Attacks in Patients With Hereditary Angioedema",
-    "status": "ENROLLING_BY_INVITATION",
-    "last_update": "2026-07-21",
-    "start_date": "2022-12-28",
-    "completion_date": "2027-06",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2",
-      "PHASE3"
-    ],
-    "enrollment": 150,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Pharvaris Netherlands B.V.",
-    "conditions": [
-      "Hereditary Angioedema",
-      "Hereditary Angioedema Type I",
-      "Hereditary Angioedema Type II",
-      "Hereditary Angioedema Types I and II",
-      "Hereditary Angioedema Attack",
-      "Hereditary Angioedema With C1 Esterase Inhibitor Deficiency",
-      "Hereditary Angioedema - Type 1",
-      "Hereditary Angioedema - Type 2",
-      "Hereditary Angioedema - Type 3",
-      "C1 Esterase Inhibitor [C1-INH] Deficiency",
-      "C1 Esterase Inhibitor Deficiency",
-      "C1 Esterase Inhibitor, Deficiency of",
-      "C1 Inhibitor Deficiency",
-      "Hereditary Angioedema Type III",
-      "Hereditary Angioedema (HAE)",
-      "Hereditary Angioedema Type I and II",
-      "HAE With Normal C1 Esterase Inhibitor"
-    ],
-    "interventions": [
-      "deucrictibant",
-      "deucrictibant"
-    ]
-  },
   "PHVS:deucrictibant:NCT06679881": {
     "nct_id": "NCT06679881",
     "title": "Long-Term, Open-label Study of Oral Deucrictibant Extended-Release Tablet for Prophylaxis Against Angioedema Attacks in Adolescents and Adults With HAE",
@@ -1373,6 +1345,26 @@
     ],
     "interventions": [
       "Deucrictibant"
+    ]
+  },
+  "PHVS:deucrictibant:NCT07759141": {
+    "nct_id": "NCT07759141",
+    "title": "EAP for Deucrictibant Immediate-release",
+    "official_title": "Expanded Access for Deucrictibant IR Capsule",
+    "status": "AVAILABLE",
+    "last_update": "2026-08-12",
+    "start_date": null,
+    "completion_date": null,
+    "study_type": "EXPANDED_ACCESS",
+    "phases": [],
+    "enrollment": null,
+    "enrollment_type": null,
+    "sponsor": "Pharvaris Netherlands B.V.",
+    "conditions": [
+      "Hereditary Angioedema"
+    ],
+    "interventions": [
+      "Deucrictibant IR"
     ]
   },
   "PHVS:deucrictibant:NCT05047185": {
@@ -1408,6 +1400,35 @@
       "Placebo"
     ]
   },
+  "PHVS:deucrictibant:NCT07046806": {
+    "nct_id": "NCT07046806",
+    "title": "Oral Deucrictibant for Prophylactic and Acute Treatment in Hereditary Angioedema Patients",
+    "official_title": "Oral Deucrictibant for the Prophylactic and Acute Treatment in Patients With Bradykinin Mediated Angioedema With Normal C1 Inhibitor (BK-AE-nC1INH)",
+    "status": "RECRUITING",
+    "last_update": "2025-07-02",
+    "start_date": "2025-03-10",
+    "completion_date": "2026-04-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 10,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Institute for Asthma and Allergy",
+    "conditions": [
+      "Hereditary Angioedema (HAE)",
+      "Angioedema",
+      "Bradykinin-mediated Angioedema",
+      "C1 Inhibitor Deficiency"
+    ],
+    "interventions": [
+      "Deucrictibant XR tablet",
+      "Placebo comparator to XR tablet",
+      "Deucrictibant 20 mg capsule",
+      "Placebo comparator to 20 mg capsule"
+    ]
+  },
   "PHVS:deucrictibant:NCT07266805": {
     "nct_id": "NCT07266805",
     "title": "Study of Oral Deucrictibant XR Tablet for Prophylaxis and Deucrictibant IR Capsule for On-Demand Treatment of Angioedema Attacks in Adults With Acquired Angioedema Due to C1 Inhibitor Deficiency",
@@ -1434,35 +1455,12 @@
       "Deucrictibant"
     ]
   },
-  "TENX:TNX-103:NCT05983250": {
-    "nct_id": "NCT05983250",
-    "title": "LEVosimendan to Improve Exercise Limitation in Patients With PH-HFpEF",
-    "official_title": "A Phase 3, Double-Blind, Randomized, Placebo-Controlled Study of Levosimendan in Pulmonary Hypertension Patients With Heart Failure With Preserved Left Ventricular Ejection Fraction (PH-HFpEF)",
-    "status": "ACTIVE_NOT_RECRUITING",
-    "last_update": "2026-07-24",
-    "start_date": "2024-01-10",
-    "completion_date": "2028-10-30",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE3"
-    ],
-    "enrollment": 230,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Tenax Therapeutics, Inc.",
-    "conditions": [
-      "Pulmonary Hypertension"
-    ],
-    "interventions": [
-      "TNX-103",
-      "Placebo"
-    ]
-  },
   "TENX:TNX-103:NCT07436689": {
     "nct_id": "NCT07436689",
     "title": "Long-Term Open-Label Extension Study of Oral Levosimendan",
     "official_title": "A Multicenter, Open-Label, Long-Term Extension Study for Oral Levosimendan (TNX-103)",
     "status": "ENROLLING_BY_INVITATION",
-    "last_update": "2026-07-20",
+    "last_update": "2026-09-09",
     "start_date": "2026-03-13",
     "completion_date": "2029-03",
     "study_type": "INTERVENTIONAL",
@@ -1502,25 +1500,27 @@
       "Placebo"
     ]
   },
-  "NUVL:zidesamtinib:NCT06797362": {
-    "nct_id": "NCT06797362",
-    "title": "Expanded Access Program of Zidesamtinib (NVL-520) for Patients With Advanced ROS1+ NSCLC or Other ROS1+ Solid Tumors",
-    "official_title": "Expanded Access Treatment of Zidesamtinib (NVL-520) in Patients With Advanced ROS1+ NSCLC or Other ROS1+ Solid Tumors",
-    "status": "AVAILABLE",
-    "last_update": "2026-08-25",
-    "start_date": null,
-    "completion_date": null,
-    "study_type": "EXPANDED_ACCESS",
-    "phases": [],
-    "enrollment": null,
-    "enrollment_type": null,
-    "sponsor": "Nuvalent Inc.",
+  "TENX:TNX-103:NCT05983250": {
+    "nct_id": "NCT05983250",
+    "title": "LEVosimendan to Improve Exercise Limitation in Patients With PH-HFpEF",
+    "official_title": "A Phase 3, Double-Blind, Randomized, Placebo-Controlled Study of Levosimendan in Pulmonary Hypertension Patients With Heart Failure With Preserved Left Ventricular Ejection Fraction (PH-HFpEF)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-07-24",
+    "start_date": "2024-01-10",
+    "completion_date": "2028-10-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 230,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Tenax Therapeutics, Inc.",
     "conditions": [
-      "Non Small Cell Lung Cancer",
-      "ROS1-positive Non-Small Cell Lung Cancer (NSCLC)"
+      "Pulmonary Hypertension"
     ],
     "interventions": [
-      "NVL-520"
+      "TNX-103",
+      "Placebo"
     ]
   },
   "NUVL:zidesamtinib:NCT05118789": {
@@ -1547,6 +1547,27 @@
       "Zidesamtinib (NVL-520)"
     ]
   },
+  "NUVL:zidesamtinib:NCT06797362": {
+    "nct_id": "NCT06797362",
+    "title": "Expanded Access Program of Zidesamtinib (NVL-520) for Patients With Advanced ROS1+ NSCLC or Other ROS1+ Solid Tumors",
+    "official_title": "Expanded Access Treatment of Zidesamtinib (NVL-520) in Patients With Advanced ROS1+ NSCLC or Other ROS1+ Solid Tumors",
+    "status": "AVAILABLE",
+    "last_update": "2026-08-25",
+    "start_date": null,
+    "completion_date": null,
+    "study_type": "EXPANDED_ACCESS",
+    "phases": [],
+    "enrollment": null,
+    "enrollment_type": null,
+    "sponsor": "Nuvalent Inc.",
+    "conditions": [
+      "Non Small Cell Lung Cancer",
+      "ROS1-positive Non-Small Cell Lung Cancer (NSCLC)"
+    ],
+    "interventions": [
+      "NVL-520"
+    ]
+  },
   "RARE:UX111:NCT04360265": {
     "nct_id": "NCT04360265",
     "title": "Follow-up Study of AAV-Mediated Gene Transfer (UX111; Previously Known as ABO-102) for MPS Type IIIA",
@@ -1571,6 +1592,32 @@
     "interventions": [
       "No Investigational Product",
       "Adjuvant Immunomodulatory (IM) Therapy"
+    ]
+  },
+  "RARE:UX111:NCT04088734": {
+    "nct_id": "NCT04088734",
+    "title": "Gene Transfer Study of ABO-102 in Patients With Middle and Advanced Phases of MPS IIIA Disease",
+    "official_title": "A Phase I/II Open Label, Single-dose, Gene Transfer Study of scAAV9.U1a.hSGSH (ABO-102) in Patients With Middle and Advanced Phases of MPS IIIA Disease",
+    "status": "TERMINATED",
+    "last_update": "2023-07-25",
+    "start_date": "2019-09-18",
+    "completion_date": "2022-03-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 5,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Ultragenyx Pharmaceutical Inc",
+    "conditions": [
+      "MPS IIIA",
+      "Sanfilippo Syndrome",
+      "Sanfilippo A",
+      "Mucopolysaccharidosis III"
+    ],
+    "interventions": [
+      "ABO-102"
     ]
   },
   "RARE:UX111:NCT02716246": {
@@ -1602,30 +1649,28 @@
       "Adjuvant IM Therapy"
     ]
   },
-  "RARE:UX111:NCT04088734": {
-    "nct_id": "NCT04088734",
-    "title": "Gene Transfer Study of ABO-102 in Patients With Middle and Advanced Phases of MPS IIIA Disease",
-    "official_title": "A Phase I/II Open Label, Single-dose, Gene Transfer Study of scAAV9.U1a.hSGSH (ABO-102) in Patients With Middle and Advanced Phases of MPS IIIA Disease",
-    "status": "TERMINATED",
-    "last_update": "2023-07-25",
-    "start_date": "2019-09-18",
-    "completion_date": "2022-03-10",
+  "TLX:TLX101:NCT05450744": {
+    "nct_id": "NCT05450744",
+    "title": "131I-TLX-101 for Treatment of Newly Diagnosed Glioblastoma (IPAX-2)",
+    "official_title": "A Phase 1 Safety and Dose Finding Study of 131I -TLX101 Plus Standard of Care in Patients With Newly Diagnosed Glioblastoma",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-08-13",
+    "start_date": "2023-04-01",
+    "completion_date": "2027-06",
     "study_type": "INTERVENTIONAL",
     "phases": [
-      "PHASE1",
-      "PHASE2"
+      "PHASE1"
     ],
-    "enrollment": 5,
-    "enrollment_type": "ACTUAL",
-    "sponsor": "Ultragenyx Pharmaceutical Inc",
+    "enrollment": 12,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Telix Pharmaceuticals (Innovations) Pty Limited",
     "conditions": [
-      "MPS IIIA",
-      "Sanfilippo Syndrome",
-      "Sanfilippo A",
-      "Mucopolysaccharidosis III"
+      "Neoplastic Disease",
+      "Glioblastoma",
+      "Glioblastoma Multiforme"
     ],
     "interventions": [
-      "ABO-102"
+      "131I-IPA"
     ]
   },
   "TLX:TLX101:NCT06743100": {
@@ -1646,6 +1691,29 @@
     ],
     "interventions": [
       "18F-Floretyrosine"
+    ]
+  },
+  "TLX:TLX101:NCT03849105": {
+    "nct_id": "NCT03849105",
+    "title": "131I-IPA and Concurrent XRT in Recurrent GBM",
+    "official_title": "A Multi-centre, Open-label, Single-arm, Dose-finding Phase I/II Study to Evaluate Safety, Tolerability, Dosing Schedule, and Preliminary Efficacy of Carrier-added 4-L-[131I]Iodo-phenylalanine (131I-IPA), Administered as Single or Repetitive Injections in Patients With Recurrent Glioblastoma Multiforme (GBM), Concomitantly to 2nd Line External Radiation Therapy (XRT) - IPAX- 1",
+    "status": "COMPLETED",
+    "last_update": "2023-04-14",
+    "start_date": "2019-04-09",
+    "completion_date": "2022-10-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 10,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Telix Pharmaceuticals (Innovations) Pty Limited",
+    "conditions": [
+      "Glioblastoma Multiforme"
+    ],
+    "interventions": [
+      "4-L-[131I]iodo-phenylalanine (131I-IPA)"
     ]
   },
   "TLX:TLX101:NCT07100730": {
@@ -1674,53 +1742,6 @@
     "interventions": [
       "TLX-101-Tx + Lomustine",
       "TLX101-Tx"
-    ]
-  },
-  "TLX:TLX101:NCT03849105": {
-    "nct_id": "NCT03849105",
-    "title": "131I-IPA and Concurrent XRT in Recurrent GBM",
-    "official_title": "A Multi-centre, Open-label, Single-arm, Dose-finding Phase I/II Study to Evaluate Safety, Tolerability, Dosing Schedule, and Preliminary Efficacy of Carrier-added 4-L-[131I]Iodo-phenylalanine (131I-IPA), Administered as Single or Repetitive Injections in Patients With Recurrent Glioblastoma Multiforme (GBM), Concomitantly to 2nd Line External Radiation Therapy (XRT) - IPAX- 1",
-    "status": "COMPLETED",
-    "last_update": "2023-04-14",
-    "start_date": "2019-04-09",
-    "completion_date": "2022-10-31",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE1",
-      "PHASE2"
-    ],
-    "enrollment": 10,
-    "enrollment_type": "ACTUAL",
-    "sponsor": "Telix Pharmaceuticals (Innovations) Pty Limited",
-    "conditions": [
-      "Glioblastoma Multiforme"
-    ],
-    "interventions": [
-      "4-L-[131I]iodo-phenylalanine (131I-IPA)"
-    ]
-  },
-  "TLX:TLX101:NCT05450744": {
-    "nct_id": "NCT05450744",
-    "title": "131I-TLX-101 for Treatment of Newly Diagnosed Glioblastoma (IPAX-2)",
-    "official_title": "A Phase 1 Safety and Dose Finding Study of 131I -TLX101 Plus Standard of Care in Patients With Newly Diagnosed Glioblastoma",
-    "status": "ACTIVE_NOT_RECRUITING",
-    "last_update": "2026-08-13",
-    "start_date": "2023-04-01",
-    "completion_date": "2027-06",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE1"
-    ],
-    "enrollment": 12,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Telix Pharmaceuticals (Innovations) Pty Limited",
-    "conditions": [
-      "Neoplastic Disease",
-      "Glioblastoma",
-      "Glioblastoma Multiforme"
-    ],
-    "interventions": [
-      "131I-IPA"
     ]
   },
   "IONS:zilganersen:NCT04849741": {
@@ -1766,29 +1787,6 @@
       "zilganersen"
     ]
   },
-  "ARGX:VYVGART:NCT05701189": {
-    "nct_id": "NCT05701189",
-    "title": "Evaluating Efgartigimod in Patients With Guillain-Barré Syndrome",
-    "official_title": "Phase 2, Randomized, Patient- and Rater-blinded Single-site Trial Evaluating Safety and Efficacy of Efgartigimod in Patients With Guillain-Barré Syndrome.",
-    "status": "WITHDRAWN",
-    "last_update": "2026-03-12",
-    "start_date": "2024-09-10",
-    "completion_date": "2026-02-20",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 0,
-    "enrollment_type": "ACTUAL",
-    "sponsor": "Chafic Karam",
-    "conditions": [
-      "Guillain-Barre Syndrome"
-    ],
-    "interventions": [
-      "Efgartigimod Alfa-Fcab",
-      "Intravenous Immunoglobulin (IVIg)"
-    ]
-  },
   "ARGX:VYVGART:NCT06860633": {
     "nct_id": "NCT06860633",
     "title": "Treatment of Myasthenia Gravis Exacerbation or Crisis With Efgartigimod",
@@ -1813,50 +1811,23 @@
       "Efgartigimod"
     ]
   },
-  "ARGX:VYVGART:NCT06765161": {
-    "nct_id": "NCT06765161",
-    "title": "Efgartigimod in IVIG Dependent Myasthenia Gravis Patients",
-    "official_title": "Efgartigimod in IVIG Dependent Myasthenia Gravis Patients",
-    "status": "RECRUITING",
-    "last_update": "2025-07-29",
-    "start_date": "2025-02-06",
-    "completion_date": "2027-01-06",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE3"
-    ],
-    "enrollment": 30,
+  "ARGX:VYVGART:NCT07226830": {
+    "nct_id": "NCT07226830",
+    "title": "Quantification of Change in MG Disease Activity in Individuals With Generalized Myasthenia Gravis (gMG) After Administration of VYVGART® or VYVGART Hytrulo® Using BioDigit MG",
+    "official_title": "Quantification of Change in MG Disease Activity in Individuals With Generalized Myasthenia Gravis (gMG) After Administration of VYVGART® or VYVGART Hytrulo® Using BioDigit MG",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2025-11-12",
+    "start_date": "2026-01-15",
+    "completion_date": "2028-03-31",
+    "study_type": "OBSERVATIONAL",
+    "phases": [],
+    "enrollment": 25,
     "enrollment_type": "ESTIMATED",
-    "sponsor": "Clinique Neuro-Outaouais",
+    "sponsor": "BioSensics",
     "conditions": [
-      "Myasthaenia Gravis"
+      "Myasthenia Gravis Generalized"
     ],
-    "interventions": [
-      "efgartigimod administration"
-    ]
-  },
-  "ARGX:VYVGART:NCT06453694": {
-    "nct_id": "NCT06453694",
-    "title": "Efgartigimod for the Treatment of Acute Optic Neuritis",
-    "official_title": "A Pilot Randomized Trial of Efgartigimod Alfa for the Treatment of Incident Moderate to Severe Acute Optic Neuritis",
-    "status": "RECRUITING",
-    "last_update": "2025-11-10",
-    "start_date": "2025-08-12",
-    "completion_date": "2027-07",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 20,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Anastasia Vishnevetsky, MD, MPH",
-    "conditions": [
-      "Optic Neuritis"
-    ],
-    "interventions": [
-      "Efgartigimod Alfa",
-      "Placebo"
-    ]
+    "interventions": []
   },
   "ARGX:VYVGART:NCT07011589": {
     "nct_id": "NCT07011589",
@@ -1884,6 +1855,29 @@
       "Efgartigimod"
     ]
   },
+  "ARGX:VYVGART:NCT06453694": {
+    "nct_id": "NCT06453694",
+    "title": "Efgartigimod for the Treatment of Acute Optic Neuritis",
+    "official_title": "A Pilot Randomized Trial of Efgartigimod Alfa for the Treatment of Incident Moderate to Severe Acute Optic Neuritis",
+    "status": "RECRUITING",
+    "last_update": "2025-11-10",
+    "start_date": "2025-08-12",
+    "completion_date": "2027-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 20,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Anastasia Vishnevetsky, MD, MPH",
+    "conditions": [
+      "Optic Neuritis"
+    ],
+    "interventions": [
+      "Efgartigimod Alfa",
+      "Placebo"
+    ]
+  },
   "ARGX:VYVGART:NCT06688253": {
     "nct_id": "NCT06688253",
     "title": "Intravenous Human IgG1 Fc Fragment (Efgartigimod) in Myasthenic Crisis",
@@ -1906,46 +1900,49 @@
       "IV efgartigimod"
     ]
   },
-  "ARGX:VYVGART:NCT07226830": {
-    "nct_id": "NCT07226830",
-    "title": "Quantification of Change in MG Disease Activity in Individuals With Generalized Myasthenia Gravis (gMG) After Administration of VYVGART® or VYVGART Hytrulo® Using BioDigit MG",
-    "official_title": "Quantification of Change in MG Disease Activity in Individuals With Generalized Myasthenia Gravis (gMG) After Administration of VYVGART® or VYVGART Hytrulo® Using BioDigit MG",
-    "status": "NOT_YET_RECRUITING",
-    "last_update": "2025-11-12",
-    "start_date": "2026-01-15",
-    "completion_date": "2028-03-31",
-    "study_type": "OBSERVATIONAL",
-    "phases": [],
-    "enrollment": 25,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "BioSensics",
-    "conditions": [
-      "Myasthenia Gravis Generalized"
-    ],
-    "interventions": []
-  },
-  "QURE:AMT-130:NCT04120493": {
-    "nct_id": "NCT04120493",
-    "title": "Safety and Proof-of-Concept (POC) Study With AMT-130 in Adults With Early Manifest Huntington's Disease",
-    "official_title": "A Phase 1/2, Randomized, Double-Blind, Sham Control and Open-Label Study to Explore Safety, Tolerability, and Efficacy Signals of Multiple Doses of Striatally-Administered rAAV5-miHTT Total Huntingtin Gene (HTT) Lowering Therapy (AMT-130) in Early Manifest Huntington's Disease",
-    "status": "ACTIVE_NOT_RECRUITING",
-    "last_update": "2025-10-21",
-    "start_date": "2019-09-06",
-    "completion_date": "2029-12",
+  "ARGX:VYVGART:NCT05701189": {
+    "nct_id": "NCT05701189",
+    "title": "Evaluating Efgartigimod in Patients With Guillain-Barré Syndrome",
+    "official_title": "Phase 2, Randomized, Patient- and Rater-blinded Single-site Trial Evaluating Safety and Efficacy of Efgartigimod in Patients With Guillain-Barré Syndrome.",
+    "status": "WITHDRAWN",
+    "last_update": "2026-03-12",
+    "start_date": "2024-09-10",
+    "completion_date": "2026-02-20",
     "study_type": "INTERVENTIONAL",
     "phases": [
-      "PHASE1",
       "PHASE2"
     ],
-    "enrollment": 43,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "UniQure Biopharma B.V.",
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Chafic Karam",
     "conditions": [
-      "Huntington's Disease"
+      "Guillain-Barre Syndrome"
     ],
     "interventions": [
-      "intra-striatal rAAV5-miHTT",
-      "Imitation (sham) surgery"
+      "Efgartigimod Alfa-Fcab",
+      "Intravenous Immunoglobulin (IVIg)"
+    ]
+  },
+  "ARGX:VYVGART:NCT06765161": {
+    "nct_id": "NCT06765161",
+    "title": "Efgartigimod in IVIG Dependent Myasthenia Gravis Patients",
+    "official_title": "Efgartigimod in IVIG Dependent Myasthenia Gravis Patients",
+    "status": "RECRUITING",
+    "last_update": "2025-07-29",
+    "start_date": "2025-02-06",
+    "completion_date": "2027-01-06",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 30,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Clinique Neuro-Outaouais",
+    "conditions": [
+      "Myasthaenia Gravis"
+    ],
+    "interventions": [
+      "efgartigimod administration"
     ]
   },
   "QURE:AMT-130:NCT05243017": {
@@ -1971,26 +1968,28 @@
       "intra-striatal rAAV5-miHTT"
     ]
   },
-  "STOK:zorevunersen:NCT04740476": {
-    "nct_id": "NCT04740476",
-    "title": "An Open-Label Extension Study of STK-001 for Patients With Dravet Syndrome",
-    "official_title": "An Open-Label Extension Study for Patients With Dravet Syndrome Who Previously Participated in Studies of STK-001",
+  "QURE:AMT-130:NCT04120493": {
+    "nct_id": "NCT04120493",
+    "title": "Safety and Proof-of-Concept (POC) Study With AMT-130 in Adults With Early Manifest Huntington's Disease",
+    "official_title": "A Phase 1/2, Randomized, Double-Blind, Sham Control and Open-Label Study to Explore Safety, Tolerability, and Efficacy Signals of Multiple Doses of Striatally-Administered rAAV5-miHTT Total Huntingtin Gene (HTT) Lowering Therapy (AMT-130) in Early Manifest Huntington's Disease",
     "status": "ACTIVE_NOT_RECRUITING",
-    "last_update": "2026-02-04",
-    "start_date": "2021-01-20",
-    "completion_date": "2029-03-31",
+    "last_update": "2025-10-21",
+    "start_date": "2019-09-06",
+    "completion_date": "2029-12",
     "study_type": "INTERVENTIONAL",
     "phases": [
+      "PHASE1",
       "PHASE2"
     ],
-    "enrollment": 60,
+    "enrollment": 43,
     "enrollment_type": "ESTIMATED",
-    "sponsor": "Stoke Therapeutics, Inc",
+    "sponsor": "UniQure Biopharma B.V.",
     "conditions": [
-      "Dravet Syndrome"
+      "Huntington's Disease"
     ],
     "interventions": [
-      "zorevunersen (STK-001)"
+      "intra-striatal rAAV5-miHTT",
+      "Imitation (sham) surgery"
     ]
   },
   "STOK:zorevunersen:NCT06872125": {
@@ -2014,6 +2013,75 @@
     "interventions": [
       "zorevunersen",
       "Sham Comparator"
+    ]
+  },
+  "STOK:zorevunersen:NCT04740476": {
+    "nct_id": "NCT04740476",
+    "title": "An Open-Label Extension Study of STK-001 for Patients With Dravet Syndrome",
+    "official_title": "An Open-Label Extension Study for Patients With Dravet Syndrome Who Previously Participated in Studies of STK-001",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-02-04",
+    "start_date": "2021-01-20",
+    "completion_date": "2029-03-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 60,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Stoke Therapeutics, Inc",
+    "conditions": [
+      "Dravet Syndrome"
+    ],
+    "interventions": [
+      "zorevunersen (STK-001)"
+    ]
+  },
+  "ANNX:ANX007:NCT04188015": {
+    "nct_id": "NCT04188015",
+    "title": "Study of ANX007 in Participants With Primary Open-angle Glaucoma",
+    "official_title": "A Phase 1b, Randomized, Double-masked, Sham-controlled Study of ANX007 Administered as Intravitreal Injections to Assess Safety and Tolerability in Participants With Primary Open-angle Glaucoma",
+    "status": "COMPLETED",
+    "last_update": "2020-08-20",
+    "start_date": "2018-07-25",
+    "completion_date": "2019-06-03",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 17,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Annexon, Inc.",
+    "conditions": [
+      "Open Angle Glaucoma"
+    ],
+    "interventions": [
+      "2.5mg ANX007",
+      "5.0mg ANX007",
+      "Sham Procedure"
+    ]
+  },
+  "ANNX:ANX007:NCT06510816": {
+    "nct_id": "NCT06510816",
+    "title": "A Study Investigating the Efficacy and Safety of Intravitreal (IVT) Injections of Vonaprument (Formerly ANX007) in Participants With Dry Age-Related Macular Degeneration (AMD) With Geographic Atrophy (GA)",
+    "official_title": "A Phase 3, Multicenter, Randomized, Parallel-Group, Double-Masked, 2-Arm, Sham Controlled Study of the Efficacy, Safety, and Tolerability of ANX007 (Vonaprument) Administered by Intravitreal Injection in Participants With Dry Age-Related Macular Degeneration With Geographic Atrophy",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-05-04",
+    "start_date": "2024-07-30",
+    "completion_date": "2027-07-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 659,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Annexon, Inc.",
+    "conditions": [
+      "Geographic Atrophy"
+    ],
+    "interventions": [
+      "Vonaprument",
+      "Sham Administration"
     ]
   },
   "ANNX:ANX007:NCT03488550": {
@@ -2083,74 +2151,26 @@
       "Sham comparator"
     ]
   },
-  "ANNX:ANX007:NCT04188015": {
-    "nct_id": "NCT04188015",
-    "title": "Study of ANX007 in Participants With Primary Open-angle Glaucoma",
-    "official_title": "A Phase 1b, Randomized, Double-masked, Sham-controlled Study of ANX007 Administered as Intravitreal Injections to Assess Safety and Tolerability in Participants With Primary Open-angle Glaucoma",
-    "status": "COMPLETED",
-    "last_update": "2020-08-20",
-    "start_date": "2018-07-25",
-    "completion_date": "2019-06-03",
+  "IMMX:NXC-201:NCT04720313": {
+    "nct_id": "NCT04720313",
+    "title": "NXC-201 (formerly HBI0101) Multiple Myeloma",
+    "official_title": "A Phase 1 Dose Escalation and Safety Study of NXC-201 (formerly HBI0101) CART in BCMA-Expressing Multiple Myeloma Patients",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2025-03-14",
+    "start_date": "2021-01-01",
+    "completion_date": "2027-01",
     "study_type": "INTERVENTIONAL",
     "phases": [
       "PHASE1"
     ],
-    "enrollment": 17,
-    "enrollment_type": "ACTUAL",
-    "sponsor": "Annexon, Inc.",
-    "conditions": [
-      "Open Angle Glaucoma"
-    ],
-    "interventions": [
-      "2.5mg ANX007",
-      "5.0mg ANX007",
-      "Sham Procedure"
-    ]
-  },
-  "ANNX:ANX007:NCT06510816": {
-    "nct_id": "NCT06510816",
-    "title": "A Study Investigating the Efficacy and Safety of Intravitreal (IVT) Injections of Vonaprument (Formerly ANX007) in Participants With Dry Age-Related Macular Degeneration (AMD) With Geographic Atrophy (GA)",
-    "official_title": "A Phase 3, Multicenter, Randomized, Parallel-Group, Double-Masked, 2-Arm, Sham Controlled Study of the Efficacy, Safety, and Tolerability of ANX007 (Vonaprument) Administered by Intravitreal Injection in Participants With Dry Age-Related Macular Degeneration With Geographic Atrophy",
-    "status": "ACTIVE_NOT_RECRUITING",
-    "last_update": "2026-05-04",
-    "start_date": "2024-07-30",
-    "completion_date": "2027-07-31",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE3"
-    ],
-    "enrollment": 659,
-    "enrollment_type": "ACTUAL",
-    "sponsor": "Annexon, Inc.",
-    "conditions": [
-      "Geographic Atrophy"
-    ],
-    "interventions": [
-      "Vonaprument",
-      "Sham Administration"
-    ]
-  },
-  "IMMX:NXC-201:NCT07709715": {
-    "nct_id": "NCT07709715",
-    "title": "A Randomized Phase 3 Study to Evaluate the Efficacy and Safety of NXC-201 Compared With Daratumumab With Cyclophosphamide, Bortezomib and Dexamethasone (CyBorD) in Newly Diagnosed Systemic AL Amyloidosis",
-    "official_title": "A Randomized Phase 3 Study to Evaluate the Efficacy and Safety of NXC-201 Compared With Daratumumab With Cyclophosphamide, Bortezomib and Dexamethasone (CyBorD) in Newly Diagnosed Systemic AL Amyloidosis [NEXICART-3]",
-    "status": "NOT_YET_RECRUITING",
-    "last_update": "2026-07-16",
-    "start_date": "2027-01",
-    "completion_date": "2032-12",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE3"
-    ],
-    "enrollment": 260,
+    "enrollment": 160,
     "enrollment_type": "ESTIMATED",
-    "sponsor": "Nexcella Inc.",
+    "sponsor": "Hadassah Medical Organization",
     "conditions": [
-      "Light Chain (AL) Amyloidosis"
+      "Dose Escalation and Safety"
     ],
     "interventions": [
-      "NXC-201",
-      "Dara-CyBorD"
+      "NXC-201 (formerly HBI0101)"
     ]
   },
   "IMMX:NXC-201:NCT06971380": {
@@ -2177,28 +2197,6 @@
       "HBI0101 CART"
     ]
   },
-  "IMMX:NXC-201:NCT04720313": {
-    "nct_id": "NCT04720313",
-    "title": "NXC-201 (formerly HBI0101) Multiple Myeloma",
-    "official_title": "A Phase 1 Dose Escalation and Safety Study of NXC-201 (formerly HBI0101) CART in BCMA-Expressing Multiple Myeloma Patients",
-    "status": "ACTIVE_NOT_RECRUITING",
-    "last_update": "2025-03-14",
-    "start_date": "2021-01-01",
-    "completion_date": "2027-01",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE1"
-    ],
-    "enrollment": 160,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Hadassah Medical Organization",
-    "conditions": [
-      "Dose Escalation and Safety"
-    ],
-    "interventions": [
-      "NXC-201 (formerly HBI0101)"
-    ]
-  },
   "IMMX:NXC-201:NCT06097832": {
     "nct_id": "NCT06097832",
     "title": "Study of NXC-201 CAR-T in Patients With Light Chain (AL) Amyloidosis",
@@ -2222,95 +2220,27 @@
       "NXC-201 CAR-T"
     ]
   },
-  "ALMS:ESK-001:NCT05431634": {
-    "nct_id": "NCT05431634",
-    "title": "Multiple Dose Study to Determine Safety and Tolerability of ESK-001 in Healthy Participants",
-    "official_title": "A Blinded, Randomized, Placebo-controlled, Multiple Dose Study to Determine the Safety, Tolerability, Pharmacokinetics, and Pharmacodynamics of ESK-001 Tablets Administered Over 14days to Healthy Participants",
-    "status": "COMPLETED",
-    "last_update": "2023-05-09",
-    "start_date": "2022-05-12",
-    "completion_date": "2022-12-31",
+  "IMMX:NXC-201:NCT07709715": {
+    "nct_id": "NCT07709715",
+    "title": "A Randomized Phase 3 Study to Evaluate the Efficacy and Safety of NXC-201 Compared With Daratumumab With Cyclophosphamide, Bortezomib and Dexamethasone (CyBorD) in Newly Diagnosed Systemic AL Amyloidosis",
+    "official_title": "A Randomized Phase 3 Study to Evaluate the Efficacy and Safety of NXC-201 Compared With Daratumumab With Cyclophosphamide, Bortezomib and Dexamethasone (CyBorD) in Newly Diagnosed Systemic AL Amyloidosis [NEXICART-3]",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-07-16",
+    "start_date": "2027-01",
+    "completion_date": "2032-12",
     "study_type": "INTERVENTIONAL",
     "phases": [
-      "PHASE1"
+      "PHASE3"
     ],
-    "enrollment": 49,
-    "enrollment_type": "ACTUAL",
-    "sponsor": "Alumis Inc",
+    "enrollment": 260,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Nexcella Inc.",
     "conditions": [
-      "Safety and Tolerability"
+      "Light Chain (AL) Amyloidosis"
     ],
     "interventions": [
-      "Experimental drug: ESK-001",
-      "Placebo"
-    ]
-  },
-  "ALMS:ESK-001:NCT06952634": {
-    "nct_id": "NCT06952634",
-    "title": "An Investigational Study of ESK-001 in Participants With Normal Liver Function and Participants With Mild, Moderate, and Severe Liver Damage",
-    "official_title": "A Phase 1, Open Label, Single Dose Study to Investigate the Effect of Hepatic Impairment on the Pharmacokinetics of ESK001",
-    "status": "COMPLETED",
-    "last_update": "2026-05-12",
-    "start_date": "2025-04-29",
-    "completion_date": "2026-03-24",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE1"
-    ],
-    "enrollment": 32,
-    "enrollment_type": "ACTUAL",
-    "sponsor": "Alumis Inc",
-    "conditions": [
-      "Hepatic Impairment"
-    ],
-    "interventions": [
-      "envudeucitinib"
-    ]
-  },
-  "ALMS:ESK-001:NCT05966480": {
-    "nct_id": "NCT05966480",
-    "title": "Phase 2 Placebo-Controlled Study to Assess the Safety and Efficacy of ESK-001 in Active Systemic Lupus Erythematosus",
-    "official_title": "A Phase 2, Multicenter, Multinational, Randomized, Double-blind, Placebo-Controlled Study to Assess the Safety, Efficacy, and Pharmacokinetics of Multiple Dose Levels of ESK-001 in Adult Patients With Systemic Lupus Erythematosus",
-    "status": "ACTIVE_NOT_RECRUITING",
-    "last_update": "2026-07-21",
-    "start_date": "2023-06-26",
-    "completion_date": "2027-09-01",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 408,
-    "enrollment_type": "ACTUAL",
-    "sponsor": "Alumis Inc",
-    "conditions": [
-      "SLE"
-    ],
-    "interventions": [
-      "Envudeucitinib",
-      "Placebo"
-    ]
-  },
-  "ALMS:ESK-001:NCT05330858": {
-    "nct_id": "NCT05330858",
-    "title": "Relative Bioavailability of ESK-001 Tablet Versus Liquid in Healthy Participants",
-    "official_title": "The Relative Bioavailability of an ESK-001 Tablet Versus Liquid Formulation, and the Effect of Food or Gastric Acid Reduction on the Pharmacokinetics of ESK-001 in Healthy Participants",
-    "status": "COMPLETED",
-    "last_update": "2023-05-09",
-    "start_date": "2022-03-17",
-    "completion_date": "2022-09-20",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE1"
-    ],
-    "enrollment": 14,
-    "enrollment_type": "ACTUAL",
-    "sponsor": "Alumis Inc",
-    "conditions": [
-      "Pharmacokinetics"
-    ],
-    "interventions": [
-      "ESK-001",
-      "Rabeprazole"
+      "NXC-201",
+      "Dara-CyBorD"
     ]
   },
   "ALMS:ESK-001:NCT06846541": {
@@ -2341,27 +2271,49 @@
       "Placebo"
     ]
   },
-  "ALMS:ESK-001:NCT05600036": {
-    "nct_id": "NCT05600036",
-    "title": "A Study to Evaluate the Efficacy and Safety of ESK-001 in Patients With Plaque Psoriasis",
-    "official_title": "A Randomized, Double-Blind, Placebo-Controlled Study to Evaluate the Efficacy and Safety of ESK-001 in Patients With Moderate to Severe Plaque Psoriasis",
-    "status": "COMPLETED",
-    "last_update": "2025-06-18",
-    "start_date": "2022-09-27",
-    "completion_date": "2023-07-25",
+  "ALMS:ESK-001:NCT05739435": {
+    "nct_id": "NCT05739435",
+    "title": "Open-Label Extension Study to Evaluate the Long Term Safety and Efficacy of ESK-001 in Plaque Psoriasis",
+    "official_title": "A Study to Evaluate the Long Term Safety and Efficacy of ESK-001 in Patients With Plaque Psoriasis",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-07-28",
+    "start_date": "2023-01-17",
+    "completion_date": "2027-12-31",
     "study_type": "INTERVENTIONAL",
     "phases": [
       "PHASE2"
     ],
-    "enrollment": 228,
+    "enrollment": 165,
     "enrollment_type": "ACTUAL",
     "sponsor": "Alumis Inc",
     "conditions": [
       "Plaque Psoriasis"
     ],
     "interventions": [
+      "envudeucitinib"
+    ]
+  },
+  "ALMS:ESK-001:NCT05330858": {
+    "nct_id": "NCT05330858",
+    "title": "Relative Bioavailability of ESK-001 Tablet Versus Liquid in Healthy Participants",
+    "official_title": "The Relative Bioavailability of an ESK-001 Tablet Versus Liquid Formulation, and the Effect of Food or Gastric Acid Reduction on the Pharmacokinetics of ESK-001 in Healthy Participants",
+    "status": "COMPLETED",
+    "last_update": "2023-05-09",
+    "start_date": "2022-03-17",
+    "completion_date": "2022-09-20",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 14,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Alumis Inc",
+    "conditions": [
+      "Pharmacokinetics"
+    ],
+    "interventions": [
       "ESK-001",
-      "Placebo"
+      "Rabeprazole"
     ]
   },
   "ALMS:ESK-001:NCT05953688": {
@@ -2388,27 +2340,71 @@
       "ESK-001"
     ]
   },
-  "ALMS:ESK-001:NCT06586112": {
-    "nct_id": "NCT06586112",
-    "title": "A Study to Evaluate the Efficacy and Safety of ESK-001 in Patients With Moderate to Severe Plaque Psoriasis",
-    "official_title": "A Multicenter, Randomized, Double-Blind, Placebo and Active Comparator Controlled Phase 3 Study to Evaluate the Efficacy and Safety of ESK-001 in Patients With Moderate to Severe Plaque Psoriasis (ONWARD1)",
-    "status": "COMPLETED",
-    "last_update": "2026-08-10",
-    "start_date": "2024-07-25",
-    "completion_date": "2025-11-20",
+  "ALMS:ESK-001:NCT05966480": {
+    "nct_id": "NCT05966480",
+    "title": "Phase 2 Placebo-Controlled Study to Assess the Safety and Efficacy of ESK-001 in Active Systemic Lupus Erythematosus",
+    "official_title": "A Phase 2, Multicenter, Multinational, Randomized, Double-blind, Placebo-Controlled Study to Assess the Safety, Efficacy, and Pharmacokinetics of Multiple Dose Levels of ESK-001 in Adult Patients With Systemic Lupus Erythematosus",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-07-21",
+    "start_date": "2023-06-26",
+    "completion_date": "2027-09-01",
     "study_type": "INTERVENTIONAL",
     "phases": [
-      "PHASE3"
+      "PHASE2"
     ],
-    "enrollment": 912,
+    "enrollment": 408,
     "enrollment_type": "ACTUAL",
     "sponsor": "Alumis Inc",
     "conditions": [
-      "Plaque Psoriasis"
+      "SLE"
     ],
     "interventions": [
       "Envudeucitinib",
-      "Apremilast",
+      "Placebo"
+    ]
+  },
+  "ALMS:ESK-001:NCT06962774": {
+    "nct_id": "NCT06962774",
+    "title": "An Investigational Study of ESK-001 in Participants With Normal Renal Function and Participants With Mild, Moderate, and Severe Impaired Renal Function",
+    "official_title": "A Phase 1, Open-label, Single-dose Study to Investigate the Effect of Renal Impairment on the Pharmacokinetics of a Single Oral Dose of ESK-001",
+    "status": "COMPLETED",
+    "last_update": "2025-12-10",
+    "start_date": "2025-04-23",
+    "completion_date": "2025-08-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 16,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Alumis Inc",
+    "conditions": [
+      "Renal Impairment"
+    ],
+    "interventions": [
+      "ESK-001"
+    ]
+  },
+  "ALMS:ESK-001:NCT05431634": {
+    "nct_id": "NCT05431634",
+    "title": "Multiple Dose Study to Determine Safety and Tolerability of ESK-001 in Healthy Participants",
+    "official_title": "A Blinded, Randomized, Placebo-controlled, Multiple Dose Study to Determine the Safety, Tolerability, Pharmacokinetics, and Pharmacodynamics of ESK-001 Tablets Administered Over 14days to Healthy Participants",
+    "status": "COMPLETED",
+    "last_update": "2023-05-09",
+    "start_date": "2022-05-12",
+    "completion_date": "2022-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 49,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Alumis Inc",
+    "conditions": [
+      "Safety and Tolerability"
+    ],
+    "interventions": [
+      "Experimental drug: ESK-001",
       "Placebo"
     ]
   },
@@ -2460,79 +2456,72 @@
       "Placebo"
     ]
   },
-  "ALMS:ESK-001:NCT06962774": {
-    "nct_id": "NCT06962774",
-    "title": "An Investigational Study of ESK-001 in Participants With Normal Renal Function and Participants With Mild, Moderate, and Severe Impaired Renal Function",
-    "official_title": "A Phase 1, Open-label, Single-dose Study to Investigate the Effect of Renal Impairment on the Pharmacokinetics of a Single Oral Dose of ESK-001",
+  "ALMS:ESK-001:NCT06952634": {
+    "nct_id": "NCT06952634",
+    "title": "An Investigational Study of ESK-001 in Participants With Normal Liver Function and Participants With Mild, Moderate, and Severe Liver Damage",
+    "official_title": "A Phase 1, Open Label, Single Dose Study to Investigate the Effect of Hepatic Impairment on the Pharmacokinetics of ESK001",
     "status": "COMPLETED",
-    "last_update": "2025-12-10",
-    "start_date": "2025-04-23",
-    "completion_date": "2025-08-01",
+    "last_update": "2026-05-12",
+    "start_date": "2025-04-29",
+    "completion_date": "2026-03-24",
     "study_type": "INTERVENTIONAL",
     "phases": [
       "PHASE1"
     ],
-    "enrollment": 16,
+    "enrollment": 32,
     "enrollment_type": "ACTUAL",
     "sponsor": "Alumis Inc",
     "conditions": [
-      "Renal Impairment"
+      "Hepatic Impairment"
     ],
     "interventions": [
-      "ESK-001"
+      "envudeucitinib"
     ]
   },
-  "ALMS:ESK-001:NCT05739435": {
-    "nct_id": "NCT05739435",
-    "title": "Open-Label Extension Study to Evaluate the Long Term Safety and Efficacy of ESK-001 in Plaque Psoriasis",
-    "official_title": "A Study to Evaluate the Long Term Safety and Efficacy of ESK-001 in Patients With Plaque Psoriasis",
-    "status": "ACTIVE_NOT_RECRUITING",
-    "last_update": "2026-07-28",
-    "start_date": "2023-01-17",
-    "completion_date": "2027-12-31",
+  "ALMS:ESK-001:NCT06586112": {
+    "nct_id": "NCT06586112",
+    "title": "A Study to Evaluate the Efficacy and Safety of ESK-001 in Patients With Moderate to Severe Plaque Psoriasis",
+    "official_title": "A Multicenter, Randomized, Double-Blind, Placebo and Active Comparator Controlled Phase 3 Study to Evaluate the Efficacy and Safety of ESK-001 in Patients With Moderate to Severe Plaque Psoriasis (ONWARD1)",
+    "status": "COMPLETED",
+    "last_update": "2026-08-10",
+    "start_date": "2024-07-25",
+    "completion_date": "2025-11-20",
     "study_type": "INTERVENTIONAL",
     "phases": [
-      "PHASE2"
+      "PHASE3"
     ],
-    "enrollment": 165,
+    "enrollment": 912,
     "enrollment_type": "ACTUAL",
     "sponsor": "Alumis Inc",
     "conditions": [
       "Plaque Psoriasis"
     ],
     "interventions": [
-      "envudeucitinib"
+      "Envudeucitinib",
+      "Apremilast",
+      "Placebo"
     ]
   },
-  "RNA:delpacibart:NCT06411288": {
-    "nct_id": "NCT06411288",
-    "title": "Global Study of Del-desiran for the Treatment of DM1",
-    "official_title": "A Phase 3 Randomized, Double-Blind, Placebo-Controlled, Global Study to Evaluate the Efficacy and Safety of Intravenous AOC 1001 for the Treatment of Myotonic Dystrophy Type 1",
+  "ALMS:ESK-001:NCT05600036": {
+    "nct_id": "NCT05600036",
+    "title": "A Study to Evaluate the Efficacy and Safety of ESK-001 in Patients With Plaque Psoriasis",
+    "official_title": "A Randomized, Double-Blind, Placebo-Controlled Study to Evaluate the Efficacy and Safety of ESK-001 in Patients With Moderate to Severe Plaque Psoriasis",
     "status": "COMPLETED",
-    "last_update": "2026-09-01",
-    "start_date": "2024-05-30",
-    "completion_date": "2026-07-29",
+    "last_update": "2025-06-18",
+    "start_date": "2022-09-27",
+    "completion_date": "2023-07-25",
     "study_type": "INTERVENTIONAL",
     "phases": [
-      "PHASE3"
+      "PHASE2"
     ],
-    "enrollment": 159,
+    "enrollment": 228,
     "enrollment_type": "ACTUAL",
-    "sponsor": "Avidity Biosciences, Inc.",
+    "sponsor": "Alumis Inc",
     "conditions": [
-      "DM1",
-      "Myotonic Dystrophy",
-      "Myotonic Dystrophy 1",
-      "Myotonia",
-      "Myotonic Dystrophy Type 1 (DM1)",
-      "Dystrophy Myotonic",
-      "Myotonic Disorders",
-      "Steinert Disease",
-      "Steinert",
-      "Myotonic Muscular Dystrophy"
+      "Plaque Psoriasis"
     ],
     "interventions": [
-      "AOC 1001 (del-desiran)",
+      "ESK-001",
       "Placebo"
     ]
   },
@@ -2584,6 +2573,131 @@
       "AOC 1020"
     ]
   },
+  "RNA:delpacibart:NCT07250737": {
+    "nct_id": "NCT07250737",
+    "title": "Managed Access Program for Del-zota in Participants With DMD Mutations Amenable to Exon 44 Skipping",
+    "official_title": "Managed Access to Investigational Use of AOC 1044 in Participants With DMD Mutations Amenable to Exon 44 Skipping",
+    "status": "AVAILABLE",
+    "last_update": "2026-09-01",
+    "start_date": null,
+    "completion_date": null,
+    "study_type": "EXPANDED_ACCESS",
+    "phases": [],
+    "enrollment": null,
+    "enrollment_type": null,
+    "sponsor": "Avidity Biosciences, Inc.",
+    "conditions": [
+      "Muscular Disorders, Atrophic",
+      "Muscular Diseases",
+      "Musculoskeletal Diseases",
+      "Neuromuscular Diseases",
+      "Nervous System Diseases",
+      "Genetic Diseases, Inborn",
+      "Genetic Diseases, X-Linked",
+      "Muscular Dystrophies",
+      "Muscular Dystrophy, Duchenne"
+    ],
+    "interventions": [
+      "delpacibart zotadirsen"
+    ]
+  },
+  "RNA:delpacibart:NCT06411288": {
+    "nct_id": "NCT06411288",
+    "title": "Global Study of Del-desiran for the Treatment of DM1",
+    "official_title": "A Phase 3 Randomized, Double-Blind, Placebo-Controlled, Global Study to Evaluate the Efficacy and Safety of Intravenous AOC 1001 for the Treatment of Myotonic Dystrophy Type 1",
+    "status": "COMPLETED",
+    "last_update": "2026-09-01",
+    "start_date": "2024-05-30",
+    "completion_date": "2026-07-29",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 159,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Avidity Biosciences, Inc.",
+    "conditions": [
+      "DM1",
+      "Myotonic Dystrophy",
+      "Myotonic Dystrophy 1",
+      "Myotonia",
+      "Myotonic Dystrophy Type 1 (DM1)",
+      "Dystrophy Myotonic",
+      "Myotonic Disorders",
+      "Steinert Disease",
+      "Steinert",
+      "Myotonic Muscular Dystrophy"
+    ],
+    "interventions": [
+      "AOC 1001 (del-desiran)",
+      "Placebo"
+    ]
+  },
+  "RNA:delpacibart:NCT07008469": {
+    "nct_id": "NCT07008469",
+    "title": "Global Open-Label Extension Study of Del-desiran for the Treatment of DM1",
+    "official_title": "A Global Phase 3 Open-Label Extension Study to Assess the Long-Term Safety, Tolerability, and Efficacy of Intravenous AOC 1001 for the Treatment of Myotonic Dystrophy Type 1",
+    "status": "ENROLLING_BY_INVITATION",
+    "last_update": "2026-08-19",
+    "start_date": "2025-06-26",
+    "completion_date": "2030-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 199,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Avidity Biosciences, Inc.",
+    "conditions": [
+      "Myotonic Dystrophy Type 1",
+      "DM1",
+      "Myotonic Dystrophy",
+      "Myotonia",
+      "Myotonic Dystrophy 1",
+      "Myotonic Disorders",
+      "Steinert Myotonic Dystrophy",
+      "Steinert Disease"
+    ],
+    "interventions": [
+      "Del-desiran (AOC 1001)"
+    ]
+  },
+  "RNA:delpacibart:NCT07587242": {
+    "nct_id": "NCT07587242",
+    "title": "A Phase 3 Study to Evaluate the Safety and Efficacy of AOC 1044 (Also Referred to as Delpacibart Zotadirsen) in Participants With DMD With Gene Mutations Amenable to Exon 44 Skipping",
+    "official_title": "A Phase 3, Randomized, Double-Blind, Placebo-Controlled, Global Study With an Open-Label Extension to Evaluate the Efficacy and Safety of Intravenous AOC 1044 (Delpacibart Zotadirsen) for the Treatment of DMD With Gene Mutations Amenable to Exon 44 Skipping",
+    "status": "RECRUITING",
+    "last_update": "2026-09-08",
+    "start_date": "2026-09-01",
+    "completion_date": "2030-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 70,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Avidity Biosciences, Inc.",
+    "conditions": [
+      "Muscular Dystrophies",
+      "Muscular Dystrophies (Duchenne, Becker, Myotonic Dystrophy)",
+      "Muscular Disorders, Atrophic",
+      "Muscular Disease",
+      "Musculoskeletal Diseases",
+      "Neuromuscular Diseases (NMD)",
+      "Nervous System Diseases",
+      "Genetic Diseases",
+      "X-Linked",
+      "Hereditary",
+      "Neonatal Disease",
+      "Duchene Muscular Dystrophy",
+      "Congenital",
+      "DMD"
+    ],
+    "interventions": [
+      "AOC 1044",
+      "Placebo"
+    ]
+  },
   "RNA:delpacibart:NCT07038200": {
     "nct_id": "NCT07038200",
     "title": "A Study to Evaluate Del-brax (Also Referred to as AOC 1020) in Participants With FSHD",
@@ -2623,97 +2737,27 @@
       "Placebo"
     ]
   },
-  "RNA:delpacibart:NCT07250737": {
-    "nct_id": "NCT07250737",
-    "title": "Managed Access Program for Del-zota in Participants With DMD Mutations Amenable to Exon 44 Skipping",
-    "official_title": "Managed Access to Investigational Use of AOC 1044 in Participants With DMD Mutations Amenable to Exon 44 Skipping",
-    "status": "AVAILABLE",
-    "last_update": "2026-09-01",
-    "start_date": null,
-    "completion_date": null,
-    "study_type": "EXPANDED_ACCESS",
-    "phases": [],
-    "enrollment": null,
-    "enrollment_type": null,
-    "sponsor": "Avidity Biosciences, Inc.",
-    "conditions": [
-      "Muscular Disorders, Atrophic",
-      "Muscular Diseases",
-      "Musculoskeletal Diseases",
-      "Neuromuscular Diseases",
-      "Nervous System Diseases",
-      "Genetic Diseases, Inborn",
-      "Genetic Diseases, X-Linked",
-      "Muscular Dystrophies",
-      "Muscular Dystrophy, Duchenne"
-    ],
-    "interventions": [
-      "delpacibart zotadirsen"
-    ]
-  },
-  "RNA:delpacibart:NCT07587242": {
-    "nct_id": "NCT07587242",
-    "title": "A Phase 3 Study to Evaluate the Safety and Efficacy of AOC 1044 (Also Referred to as Delpacibart Zotadirsen) in Participants With DMD With Gene Mutations Amenable to Exon 44 Skipping",
-    "official_title": "A Phase 3, Randomized, Double-Blind, Placebo-Controlled, Global Study With an Open-Label Extension to Evaluate the Efficacy and Safety of Intravenous AOC 1044 (Delpacibart Zotadirsen) for the Treatment of DMD With Gene Mutations Amenable to Exon 44 Skipping",
+  "RGNX:surabgene:NCT07007065": {
+    "nct_id": "NCT07007065",
+    "title": "Study to Assess the Injection Burden, Adverse Events, Change in Disease Activity, and Long-Term Preservation of Visual Acuity of Surabgene Lomparvovec in Adult Participants With Neovascular Age-Related Macular Degeneration (nAMD)",
+    "official_title": "A Randomized, Controlled, Partially Masked, Phase 3b Study to Assess the Injection Burden, Efficacy, Safety, and Long-Term Preservation of Visual Acuity of Surabgene Lomparvovec (ABBV-RGX-314) in a Real-World Context in Subjects With Neovascular Age-Related Macular Degeneration (nAMD)",
     "status": "RECRUITING",
     "last_update": "2026-09-08",
-    "start_date": "2026-09-01",
-    "completion_date": "2030-07",
+    "start_date": "2025-11-05",
+    "completion_date": "2033-03",
     "study_type": "INTERVENTIONAL",
     "phases": [
       "PHASE3"
     ],
-    "enrollment": 70,
+    "enrollment": 561,
     "enrollment_type": "ESTIMATED",
-    "sponsor": "Avidity Biosciences, Inc.",
+    "sponsor": "AbbVie",
     "conditions": [
-      "Muscular Dystrophies",
-      "Muscular Dystrophies (Duchenne, Becker, Myotonic Dystrophy)",
-      "Muscular Disorders, Atrophic",
-      "Muscular Disease",
-      "Musculoskeletal Diseases",
-      "Neuromuscular Diseases (NMD)",
-      "Nervous System Diseases",
-      "Genetic Diseases",
-      "X-Linked",
-      "Hereditary",
-      "Neonatal Disease",
-      "Duchene Muscular Dystrophy",
-      "Congenital",
-      "DMD"
+      "Neovascular Age-related Macular Degeneration"
     ],
     "interventions": [
-      "AOC 1044",
-      "Placebo"
-    ]
-  },
-  "RNA:delpacibart:NCT07008469": {
-    "nct_id": "NCT07008469",
-    "title": "Global Open-Label Extension Study of Del-desiran for the Treatment of DM1",
-    "official_title": "A Global Phase 3 Open-Label Extension Study to Assess the Long-Term Safety, Tolerability, and Efficacy of Intravenous AOC 1001 for the Treatment of Myotonic Dystrophy Type 1",
-    "status": "ENROLLING_BY_INVITATION",
-    "last_update": "2026-08-19",
-    "start_date": "2025-06-26",
-    "completion_date": "2030-10",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE3"
-    ],
-    "enrollment": 199,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Avidity Biosciences, Inc.",
-    "conditions": [
-      "Myotonic Dystrophy Type 1",
-      "DM1",
-      "Myotonic Dystrophy",
-      "Myotonia",
-      "Myotonic Dystrophy 1",
-      "Myotonic Disorders",
-      "Steinert Myotonic Dystrophy",
-      "Steinert Disease"
-    ],
-    "interventions": [
-      "Del-desiran (AOC 1001)"
+      "Surabgene Lomparvovec (ABBV-RGX-314)",
+      "Ranibizumab Control"
     ]
   },
   "RGNX:surabgene:NCT07592273": {
@@ -2742,131 +2786,6 @@
       "Artificial Tears"
     ]
   },
-  "RGNX:surabgene:NCT07007065": {
-    "nct_id": "NCT07007065",
-    "title": "Study to Assess the Injection Burden, Adverse Events, Change in Disease Activity, and Long-Term Preservation of Visual Acuity of Surabgene Lomparvovec in Adult Participants With Neovascular Age-Related Macular Degeneration (nAMD)",
-    "official_title": "A Randomized, Controlled, Partially Masked, Phase 3b Study to Assess the Injection Burden, Efficacy, Safety, and Long-Term Preservation of Visual Acuity of Surabgene Lomparvovec (ABBV-RGX-314) in a Real-World Context in Subjects With Neovascular Age-Related Macular Degeneration (nAMD)",
-    "status": "RECRUITING",
-    "last_update": "2026-09-08",
-    "start_date": "2025-11-05",
-    "completion_date": "2033-03",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE3"
-    ],
-    "enrollment": 561,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "AbbVie",
-    "conditions": [
-      "Neovascular Age-related Macular Degeneration"
-    ],
-    "interventions": [
-      "Surabgene Lomparvovec (ABBV-RGX-314)",
-      "Ranibizumab Control"
-    ]
-  },
-  "EYPT:vorolanib:NCT04373369": {
-    "nct_id": "NCT04373369",
-    "title": "Vorolanib + Atezolizumab as Maintenance Therapy for Extensive-Stage Small Cell Lung Cancer",
-    "official_title": "A Phase II Study of Maintenance Vorolanib and Atezolizumab in Patients With Extensive-stage SCLC",
-    "status": "TERMINATED",
-    "last_update": "2025-11-03",
-    "start_date": "2020-10-07",
-    "completion_date": "2025-08-11",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 11,
-    "enrollment_type": "ACTUAL",
-    "sponsor": "Washington University School of Medicine",
-    "conditions": [
-      "Extensive-stage Small Cell Lung Cancer"
-    ],
-    "interventions": [
-      "Vorolanib",
-      "Atezolizumab"
-    ]
-  },
-  "EYPT:vorolanib:NCT07386158": {
-    "nct_id": "NCT07386158",
-    "title": "Pucotenlimab Combination With Vorolanib as Neoadjuvant Therapy for ccRCC",
-    "official_title": "Phase II Single-arm Clinical Study of the Efficacy and Safety of Pucotenlimab in Combination With Vorolanib Neoadjuvant Therapy for Patients With High-risk Renal Carcinoma Indicating Partial Nephrectomy",
-    "status": "RECRUITING",
-    "last_update": "2026-02-04",
-    "start_date": "2025-07-10",
-    "completion_date": "2026-12-31",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 21,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Sun Yat-sen University",
-    "conditions": [
-      "Vorolanib",
-      "Clear Cell Renal Cell Carcinoma (ccRCC)",
-      "Neoadjuvant Therapy"
-    ],
-    "interventions": [
-      "Pucotenlimab combination with Vorolanib"
-    ]
-  },
-  "EYPT:vorolanib:NCT06099184": {
-    "nct_id": "NCT06099184",
-    "title": "Study of EYP-1901 in Patients With Diabetic Macular Edema (DME)",
-    "official_title": "A Phase 2, Multicenter, Prospective, Randomized, Double-Masked, Parallel Study of EYP-1901, a Tyrosine Kinase Inhibitor (TKI), Compared to Aflibercept in Subjects With Diabetic Macular Edema (DME)",
-    "status": "COMPLETED",
-    "last_update": "2025-03-04",
-    "start_date": "2024-01-15",
-    "completion_date": "2024-10-24",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 27,
-    "enrollment_type": "ACTUAL",
-    "sponsor": "EyePoint Pharmaceuticals, Inc.",
-    "conditions": [
-      "Diabetic Macular Edema"
-    ],
-    "interventions": [
-      "EYP-1901",
-      "Aflibercept 2Mg/0.05Ml Inj,Oph"
-    ]
-  },
-  "EYPT:vorolanib:NCT06676527": {
-    "nct_id": "NCT06676527",
-    "title": "Vorolanib in the Second-line Treatment of Patients With Unresectable or Metastatic Renal Cell Carcinoma",
-    "official_title": "An Observational Study of the Efficacy and Safety of Vorolanib in the Second-line Treatment of Patients With Unresectable or Metastatic Renal Cell Carcinoma",
-    "status": "RECRUITING",
-    "last_update": "2025-12-05",
-    "start_date": "2024-09-01",
-    "completion_date": "2026-09-01",
-    "study_type": "OBSERVATIONAL",
-    "phases": [],
-    "enrollment": 39,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Jinling Hospital, China",
-    "conditions": [
-      "Neoplasms",
-      "Kidney Neoplasms",
-      "Urologic Neoplasms",
-      "Urogenital Neoplasms",
-      "Female Urogenital Diseases",
-      "Male Urogenital Diseases",
-      "Urogenital Diseases",
-      "Kidney Diseases",
-      "Urologic Diseases",
-      "Carcinoma",
-      "Renal Cell Cancer",
-      "Carcinoma, Renal Cell",
-      "Antineoplastic Agents"
-    ],
-    "interventions": [
-      "Follow-up study of the treated cohort"
-    ]
-  },
   "EYPT:vorolanib:NCT06577961": {
     "nct_id": "NCT06577961",
     "title": "Vorolanib Combined With Cadonilimab in the Treatment of Untreated Advanced RCC Patients",
@@ -2891,126 +2810,6 @@
     "interventions": [
       "Vorolanib",
       "cadonilimab"
-    ]
-  },
-  "EYPT:vorolanib:NCT06523049": {
-    "nct_id": "NCT06523049",
-    "title": "Vorolanib Plus Sintilimab for Advanced Renal Cell Carcinoma After Failure of Prior Immune Checkpoint Inhibitors Based Combination Therapy",
-    "official_title": "A Prospective, Multicenter, Phase II Clinical Trial of Vorolanib in Combination With Sintilimab for Advanced Renal Cell Carcinoma After Failure of Prior Immune Checkpoint Inhibitors Based Combination Therapy",
-    "status": "NOT_YET_RECRUITING",
-    "last_update": "2024-07-26",
-    "start_date": "2024-08",
-    "completion_date": "2026-09",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 67,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Hao Zeng",
-    "conditions": [
-      "Renal Cell Carcinoma",
-      "Immunotherapy",
-      "Molecular Targeted Therapy"
-    ],
-    "interventions": [
-      "Vorolanib Tablets",
-      "Sintilimab Injection"
-    ]
-  },
-  "EYPT:vorolanib:NCT06728852": {
-    "nct_id": "NCT06728852",
-    "title": "Efficacy and Safety of Vorolanib Monotherapy As Third-line or Later Treatment for Advanced Non-small Cell Lung Cancer Patients: a Single-arm, Prospective, Open-label Phase II Clinical Study",
-    "official_title": "Efficacy and Safety of Vorolanib Monotherapy As Third-line or Later Treatment for Advanced Non-small Cell Lung Cancer Patients: a Single-arm, Prospective, Open-label Phase II Clinical Study",
-    "status": "RECRUITING",
-    "last_update": "2024-12-11",
-    "start_date": "2024-12-01",
-    "completion_date": "2026-12-01",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 32,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Li-kun Chen",
-    "conditions": [
-      "Advanced Non-small Cell Lung Cancer (NSCLC)",
-      "Recurrent or Metastatic Lung Cancer",
-      "Third-line and Beyond Therapy",
-      "Angiogenesis Inhibition in Oncology"
-    ],
-    "interventions": [
-      "Administration of Vorolanib"
-    ]
-  },
-  "EYPT:vorolanib:NCT07165418": {
-    "nct_id": "NCT07165418",
-    "title": "A Comparison of Vorolanib Tablets Combined With Everolimus Versus Sunitinib in Patients With Advanced Renal Cell Carcinoma Who Have Progressed After Treatment With Immunotherapy Monotherapy or in Combination With TKI",
-    "official_title": "A Multicenter, Randomized Controlled Study Comparing Vorolanib Tablets Plus Everolimus With Sunitinib in Patients With Advanced Renal Cell Carcinoma Who Have Progressed on Immunotherapy Monotherapy or in Combination With TKI",
-    "status": "NOT_YET_RECRUITING",
-    "last_update": "2025-09-10",
-    "start_date": "2025-09-25",
-    "completion_date": "2029-12-30",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE3"
-    ],
-    "enrollment": 116,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Peking University Cancer Hospital & Institute",
-    "conditions": [
-      "Renal Cell Carcinoma (RCC)"
-    ],
-    "interventions": [
-      "Vorolanib Tablets+Everolimus",
-      "Sunitinib"
-    ]
-  },
-  "EYPT:vorolanib:NCT07047001": {
-    "nct_id": "NCT07047001",
-    "title": "Vorolanib Monotherapy or in Combination With Toripalimab as Adjuvant Therapy for Patients With Intermediate-high Risk of Recurrence in Renal Cell Carcinoma",
-    "official_title": "The Efficacy and Safety of Vorolanib Monotherapy or in Combination With Toripalimab for Postoperative Adjuvant Treatment of Renal Cell Carcinoma Patients With Intermediate-high Risk Recurrence Factors: A Multicenter, Randomized, Double-arm, Phase II Exploratory Study",
-    "status": "ACTIVE_NOT_RECRUITING",
-    "last_update": "2025-07-09",
-    "start_date": "2025-04-24",
-    "completion_date": "2032-06-30",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 60,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Dong Wen",
-    "conditions": [
-      "Renal Cell Carcinoma (RCC)",
-      "Adjuvant"
-    ],
-    "interventions": [
-      "Vorolanib Tablets",
-      "Vorolanib + Toripalimab"
-    ]
-  },
-  "EYPT:vorolanib:NCT06406673": {
-    "nct_id": "NCT06406673",
-    "title": "A Phase II Clinical Study of Cadonilimab in Treatment-naïve or Relapsed Extensive Small Cell Lung Cancer",
-    "official_title": "A Phase II Clinical Study of Cadonilimab(PD-1/CTLA-4 Bi-Specific Antibody) in Treatment-naïve or Relapsed Extensive Small Cell Lung Cancer",
-    "status": "UNKNOWN",
-    "last_update": "2024-05-09",
-    "start_date": "2023-10-16",
-    "completion_date": "2024-12-31",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 70,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Henan Cancer Hospital",
-    "conditions": [
-      "Extensive Small Cell Lung Cancer"
-    ],
-    "interventions": [
-      "Cadonilimab+EC/ET+RT",
-      "Cadonilimab+vorolanib"
     ]
   },
   "EYPT:vorolanib:NCT03511222": {
@@ -3040,188 +2839,298 @@
       "Pembrolizumab"
     ]
   },
-  "SMMT:ivonescimab:NCT06820762": {
-    "nct_id": "NCT06820762",
-    "title": "Irinotecan Liposome(II) Combined With Ivonescimab as Second-line Treatment for Small Cell Lung Cancer : A Prospective, Single-arm, Multicenter Clinical Study",
-    "official_title": "Irinotecan Liposome(II) Combined With Ivonescimab as Second-line Treatment for Small Cell Lung Cancer : A Prospective, Single-arm, Multicenter Clinical Study",
-    "status": "NOT_YET_RECRUITING",
-    "last_update": "2025-02-11",
-    "start_date": "2025-02-28",
-    "completion_date": "2027-12-31",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 40,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "The Second Affiliated Hospital of Dalian Medical University",
-    "conditions": [
-      "SCLC"
-    ],
-    "interventions": [
-      "irinotecan liposome(II) plus Ivonescimab via intravenously (IV) Q3W for 4-6 cycles, followed by Ivonescimab until disease progression or intolerable toxicity"
-    ]
-  },
-  "SMMT:ivonescimab:NCT06925724": {
-    "nct_id": "NCT06925724",
-    "title": "A Study of Ivonescimab in People With Endometrial and Cervical Cancers",
-    "official_title": "A Phase 2 Study of Ivonescimab (Bispecific Antibody Against PD1 and VEGF) For the Treatment of Endometrial (EC) and Cervical (CC) Cancers",
-    "status": "RECRUITING",
-    "last_update": "2026-08-26",
-    "start_date": "2025-04-04",
-    "completion_date": "2027-04-04",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 50,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Memorial Sloan Kettering Cancer Center",
-    "conditions": [
-      "Endometrial Cancer",
-      "Cervical Cancer"
-    ],
-    "interventions": [
-      "Ivonescimab"
-    ]
-  },
-  "SMMT:ivonescimab:NCT06990620": {
-    "nct_id": "NCT06990620",
-    "title": "TACE Plus Ivonescimab for Unresectable Non-Metastatic HCC",
-    "official_title": "A Prospective, Multicenter, Single-Arm Study on the Efficacy and Safety of Transarterial Chemoembolization Combined With Ivonescimab in Unresectable, Non-Metastatic Hepatocellular Carcinoma",
-    "status": "NOT_YET_RECRUITING",
-    "last_update": "2025-05-25",
-    "start_date": "2025-06",
-    "completion_date": "2027-12",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE1"
-    ],
-    "enrollment": 56,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Fudan University",
-    "conditions": [
-      "Hepatocellular Carcinoma (HCC)"
-    ],
-    "interventions": [
-      "TACE+AK112"
-    ]
-  },
-  "SMMT:ivonescimab:NCT06980077": {
-    "nct_id": "NCT06980077",
-    "title": "Ivonescimab for the Treatment of Thymic Cancer",
-    "official_title": "UCLA L-11: A Phase II Trial of Ivonescimab for Previously Treated Thymic Carcinoma",
-    "status": "RECRUITING",
-    "last_update": "2026-07-07",
-    "start_date": "2025-07-15",
-    "completion_date": "2028-06-17",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 25,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Jonsson Comprehensive Cancer Center",
-    "conditions": [
-      "Thymus Carcinoma"
-    ],
-    "interventions": [
-      "Biopsy Procedure",
-      "Biospecimen Collection",
-      "Computed Tomography",
-      "Ivonescimab",
-      "Magnetic Resonance Imaging",
-      "Questionnaire Administration"
-    ]
-  },
-  "SMMT:ivonescimab:NCT07095803": {
-    "nct_id": "NCT07095803",
-    "title": "Ivonescimab (PD-1/VEGF Bispecific Antibody) Plus Radiofrequency Ablation for Multiple Advanced Tumors After PD-1 Therapy Failure",
-    "official_title": "Ivonescimab (PD-1/VEGF Bispecific Antibody) Plus Radiofrequency Ablation for Multiple Advanced Tumors After PD-1 Therapy Failure: A Multicohort, Multicenter, Single-Arm Phase II Study",
-    "status": "NOT_YET_RECRUITING",
-    "last_update": "2025-07-31",
-    "start_date": "2025-08-01",
-    "completion_date": "2027-02-01",
+  "EYPT:vorolanib:NCT07047001": {
+    "nct_id": "NCT07047001",
+    "title": "Vorolanib Monotherapy or in Combination With Toripalimab as Adjuvant Therapy for Patients With Intermediate-high Risk of Recurrence in Renal Cell Carcinoma",
+    "official_title": "The Efficacy and Safety of Vorolanib Monotherapy or in Combination With Toripalimab for Postoperative Adjuvant Treatment of Renal Cell Carcinoma Patients With Intermediate-high Risk Recurrence Factors: A Multicenter, Randomized, Double-arm, Phase II Exploratory Study",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2025-07-09",
+    "start_date": "2025-04-24",
+    "completion_date": "2032-06-30",
     "study_type": "INTERVENTIONAL",
     "phases": [
       "PHASE2"
     ],
     "enrollment": 60,
     "enrollment_type": "ESTIMATED",
-    "sponsor": "Sheng Zhang",
+    "sponsor": "Dong Wen",
     "conditions": [
-      "Multiple Advanced Tumors After PD-1 Therapy Failure"
+      "Renal Cell Carcinoma (RCC)",
+      "Adjuvant"
     ],
     "interventions": [
-      "Ivonescimab (20mg/kg Q3W)",
-      "radiofrequency ablation"
+      "Vorolanib Tablets",
+      "Vorolanib + Toripalimab"
     ]
   },
-  "SMMT:ivonescimab:NCT07489703": {
-    "nct_id": "NCT07489703",
-    "title": "SHR-A1811 + AK112 in HER2-Altered Advanced/Metastatic NSCLC",
-    "official_title": "A Phase II Clinical Trial to Evaluate the Efficacy and Safety of SHR-A1811 Combined With Ivonescimab (AK112) in Locally Advanced or Metastatic Non-Small Cell Lung Cancer With HER2 Abnormalities",
-    "status": "NOT_YET_RECRUITING",
-    "last_update": "2026-03-24",
-    "start_date": "2026-04-30",
-    "completion_date": "2028-12-31",
+  "EYPT:vorolanib:NCT07809789": {
+    "nct_id": "NCT07809789",
+    "title": "Drug-Drug Interaction Study of Vorolanib Tablets in Healthy Participants",
+    "official_title": "A Single-Center, Open-Label, Same-Subject Sequential Crossover Clinical Trial to Evaluate the Effects of Rifampicin or Itraconazole on the Pharmacokinetics of Vorolanib Tablets in Healthy Participants",
+    "status": "RECRUITING",
+    "last_update": "2026-09-09",
+    "start_date": "2026-09",
+    "completion_date": "2027-03",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 36,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Betta Pharmaceuticals Co., Ltd.",
+    "conditions": [
+      "DDI (Drug-Drug Interaction)"
+    ],
+    "interventions": [
+      "vorolanib and rifampicin",
+      "vorolanib and itraconazole"
+    ]
+  },
+  "EYPT:vorolanib:NCT07809802": {
+    "nct_id": "NCT07809802",
+    "title": "Pharmacokinetic Study of Vorolanib Tablets in Trial Participants With Hepatic Impairment",
+    "official_title": "Phase I Clinical Study to Compare and Evaluate the Pharmacokinetics and Safety of Orally Administered Vorolanib Tablets in Participants With Mild (Child-Pugh A) or Moderate (Child-Pugh B) Hepatic Impairment and Participants With Normal Hepatic Function",
+    "status": "RECRUITING",
+    "last_update": "2026-09-09",
+    "start_date": "2026-09",
+    "completion_date": "2027-06",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 36,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Betta Pharmaceuticals Co., Ltd.",
+    "conditions": [
+      "Hepatic Impairment (HI)"
+    ],
+    "interventions": [
+      "vorolanib",
+      "vorolanib",
+      "Vorolanib"
+    ]
+  },
+  "EYPT:vorolanib:NCT06099184": {
+    "nct_id": "NCT06099184",
+    "title": "Study of EYP-1901 in Patients With Diabetic Macular Edema (DME)",
+    "official_title": "A Phase 2, Multicenter, Prospective, Randomized, Double-Masked, Parallel Study of EYP-1901, a Tyrosine Kinase Inhibitor (TKI), Compared to Aflibercept in Subjects With Diabetic Macular Edema (DME)",
+    "status": "COMPLETED",
+    "last_update": "2025-03-04",
+    "start_date": "2024-01-15",
+    "completion_date": "2024-10-24",
     "study_type": "INTERVENTIONAL",
     "phases": [
       "PHASE2"
     ],
-    "enrollment": 30,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Sun Yat-sen University",
+    "enrollment": 27,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "EyePoint Pharmaceuticals, Inc.",
     "conditions": [
-      "Non-Small Cell Lung Cancer"
+      "Diabetic Macular Edema"
     ],
     "interventions": [
-      "SHR-A1811 plus AK112"
+      "EYP-1901",
+      "Aflibercept 2Mg/0.05Ml Inj,Oph"
     ]
   },
-  "SMMT:ivonescimab:NCT06977542": {
-    "nct_id": "NCT06977542",
-    "title": "Neoadjuvant Therapy With Ivonescimab Combined With Chemotherapy for Triple-Negative Breast Cancer",
-    "official_title": "A Single-Arm, Phase II Clinical Study of Neoadjuvant Therapy With Ivonescimab Combined With Chemotherapy in Patients With Early or Locally Advanced Triple-Negative Breast Cancer",
-    "status": "NOT_YET_RECRUITING",
-    "last_update": "2025-05-18",
-    "start_date": "2025-06",
-    "completion_date": "2032-01",
+  "EYPT:vorolanib:NCT04373369": {
+    "nct_id": "NCT04373369",
+    "title": "Vorolanib + Atezolizumab as Maintenance Therapy for Extensive-Stage Small Cell Lung Cancer",
+    "official_title": "A Phase II Study of Maintenance Vorolanib and Atezolizumab in Patients With Extensive-stage SCLC",
+    "status": "TERMINATED",
+    "last_update": "2025-11-03",
+    "start_date": "2020-10-07",
+    "completion_date": "2025-08-11",
     "study_type": "INTERVENTIONAL",
     "phases": [
       "PHASE2"
     ],
-    "enrollment": 53,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Fudan University",
+    "enrollment": 11,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Washington University School of Medicine",
     "conditions": [
-      "TNBC, Triple Negative Breast Cancer"
+      "Extensive-stage Small Cell Lung Cancer"
+    ],
+    "interventions": [
+      "Vorolanib",
+      "Atezolizumab"
+    ]
+  },
+  "EYPT:vorolanib:NCT05383209": {
+    "nct_id": "NCT05383209",
+    "title": "Study of EYP-1901 in Patients With Nonproliferative Diabetic Retinopathy (NPDR)",
+    "official_title": "A Phase 2, Multicenter, Prospective, Double-masked, Parallel Study of EYP-1901, a Tyrosine Kinase Inhibitor (TKI), Compared to Sham for the Improvement of Moderately Severe to Severe Nonproliferative Diabetic Retinopathy (NPDR)",
+    "status": "COMPLETED",
+    "last_update": "2025-08-15",
+    "start_date": "2022-09-28",
+    "completion_date": "2024-05-06",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 77,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "EyePoint Pharmaceuticals, Inc.",
+    "conditions": [
+      "Nonproliferative Diabetic Retinopathy"
+    ],
+    "interventions": [
+      "EYP-1901",
+      "Sham IVT"
+    ]
+  },
+  "EYPT:vorolanib:NCT06728852": {
+    "nct_id": "NCT06728852",
+    "title": "Efficacy and Safety of Vorolanib Monotherapy As Third-line or Later Treatment for Advanced Non-small Cell Lung Cancer Patients: a Single-arm, Prospective, Open-label Phase II Clinical Study",
+    "official_title": "Efficacy and Safety of Vorolanib Monotherapy As Third-line or Later Treatment for Advanced Non-small Cell Lung Cancer Patients: a Single-arm, Prospective, Open-label Phase II Clinical Study",
+    "status": "RECRUITING",
+    "last_update": "2024-12-11",
+    "start_date": "2024-12-01",
+    "completion_date": "2026-12-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 32,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Li-kun Chen",
+    "conditions": [
+      "Advanced Non-small Cell Lung Cancer (NSCLC)",
+      "Recurrent or Metastatic Lung Cancer",
+      "Third-line and Beyond Therapy",
+      "Angiogenesis Inhibition in Oncology"
+    ],
+    "interventions": [
+      "Administration of Vorolanib"
+    ]
+  },
+  "EYPT:vorolanib:NCT03583086": {
+    "nct_id": "NCT03583086",
+    "title": "Phase I/II Eval Safety & Prelim Activity Nivolumab Comb W/Vorolanib Pts W/Refractory Thoracic Tumors",
+    "official_title": "Phase 1/2 Study to Evaluate the Safety and Preliminary Activity of Nivolumab in Combination With Vorolanib in Patients With Refractory Thoracic Tumors",
+    "status": "COMPLETED",
+    "last_update": "2024-10-08",
+    "start_date": "2018-07-10",
+    "completion_date": "2024-04-27",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 88,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Vanderbilt-Ingram Cancer Center",
+    "conditions": [
+      "Thymic Carcinoma",
+      "Non-small Cell Lung Cancer",
+      "Refractory Thoracic Tumors",
+      "Small-Cell Lung Cancer"
+    ],
+    "interventions": [
+      "Vorolanib",
+      "Nivolumab"
+    ]
+  },
+  "EYPT:vorolanib:NCT06523049": {
+    "nct_id": "NCT06523049",
+    "title": "Vorolanib Plus Sintilimab for Advanced Renal Cell Carcinoma After Failure of Prior Immune Checkpoint Inhibitors Based Combination Therapy",
+    "official_title": "A Prospective, Multicenter, Phase II Clinical Trial of Vorolanib in Combination With Sintilimab for Advanced Renal Cell Carcinoma After Failure of Prior Immune Checkpoint Inhibitors Based Combination Therapy",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2024-07-26",
+    "start_date": "2024-08",
+    "completion_date": "2026-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 67,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Hao Zeng",
+    "conditions": [
+      "Renal Cell Carcinoma",
+      "Immunotherapy",
+      "Molecular Targeted Therapy"
+    ],
+    "interventions": [
+      "Vorolanib Tablets",
+      "Sintilimab Injection"
+    ]
+  },
+  "SMMT:ivonescimab:NCT07226544": {
+    "nct_id": "NCT07226544",
+    "title": "Ivonescimab Prior to Surgery for the Treatment of High-Risk Localized Clear Cell Renal Cell Cancer",
+    "official_title": "A Phase II Study of Neoadjuvant Ivonescimab in Patients With High-Risk, Localized RCC",
+    "status": "RECRUITING",
+    "last_update": "2026-08-05",
+    "start_date": "2026-10-01",
+    "completion_date": "2027-09-08",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 31,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "City of Hope Medical Center",
+    "conditions": [
+      "Localized Clear Cell Renal Cell Carcinoma",
+      "Resectable Clear Cell Renal Cell Carcinoma",
+      "Stage II Renal Cell Cancer AJCC v8",
+      "Stage III Renal Cell Cancer AJCC v8",
+      "Stage IV Renal Cell Cancer AJCC v8"
+    ],
+    "interventions": [
+      "Biopsy Procedure",
+      "Biospecimen Collection",
+      "Computed Tomography",
+      "Echocardiography Test",
+      "Ivonescimab",
+      "Nephrectomy",
+      "Questionnaire Administration"
+    ]
+  },
+  "SMMT:ivonescimab:NCT06844422": {
+    "nct_id": "NCT06844422",
+    "title": "Adapted Guided Stereotactic Body Radiotherapy Combined With Chemotherapy and Enhancement of Novel Drug Ivonescimab for Pancreatic Cancer (ASCEND)",
+    "official_title": "Adapted Guided Stereotactic Body Radiotherapy Combined With Chemotherapy and Enhancement of Novel Drug Ivonescimab for Pancreatic Cancer (ASCEND) -A Single-Arm Phase Ib/II Trial",
+    "status": "RECRUITING",
+    "last_update": "2026-04-28",
+    "start_date": "2025-02-08",
+    "completion_date": "2028-02-18",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 37,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Shandong Cancer Hospital and Institute",
+    "conditions": [
+      "Pancreatic Cancer"
     ],
     "interventions": [
       "Ivonescimab"
     ]
   },
-  "SMMT:ivonescimab:NCT07742956": {
-    "nct_id": "NCT07742956",
-    "title": "Phase II Clinical Study to Evaluate the Safety, Tolerability, Pharmacokinetics and Antitumor Activity of ALK201 for Injection in Combination With Ivonescimab Injection in sqNSCLC Participants.",
-    "official_title": "An Open-label, Multicenter Phase II Clinical Trial to Evaluate ALK201 for Injection Combined With Ivonescimab Injection in Subjects With Locally Advanced or Metastatic Squamous Non-Small Cell Lung Cancer",
-    "status": "NOT_YET_RECRUITING",
-    "last_update": "2026-08-03",
-    "start_date": "2026-08-20",
-    "completion_date": "2029-12-31",
+  "SMMT:ivonescimab:NCT07669051": {
+    "nct_id": "NCT07669051",
+    "title": "A Phase II Clinical Trial of Ivonescimab Plus Third-generation EGFR-TKIs in Advanced Non-small Cell Lung Cancer With Gradual or Potential Progression After EGFR-TKIs Treatment",
+    "official_title": "A Phase II Clinical Trial of Ivonescimab Plus Third-generation EGFR-TKIs in Advanced Non-small Cell Lung Cancer With Gradual or Potential Progression After EGFR-TKIs Treatment",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-06-25",
+    "start_date": "2026-01-01",
+    "completion_date": "2029-01-01",
     "study_type": "INTERVENTIONAL",
     "phases": [
       "PHASE2"
     ],
-    "enrollment": 156,
+    "enrollment": 36,
     "enrollment_type": "ESTIMATED",
-    "sponsor": "Shanghai Allink Biotherapeutics Co., Ltd.",
+    "sponsor": "Shandong Cancer Hospital and Institute",
     "conditions": [
       "NSCLC (Advanced Non-small Cell Lung Cancer)"
     ],
     "interventions": [
-      "ALK201 for injection",
-      "Ivonescimab Injection"
+      "ivonescimab plus EGFR-TKI."
     ]
   },
   "SMMT:ivonescimab:NCT07535437": {
@@ -3247,6 +3156,349 @@
       "Ivonescimab",
       "Dato-DXd",
       "Osimertinib"
+    ]
+  },
+  "SMMT:ivonescimab:NCT07686575": {
+    "nct_id": "NCT07686575",
+    "title": "Objective Response Rate of Ivonescimab With Chemotherapy in Locally Advanced Resectable Oral and Oropharyngeal Squamous Cell Carcinoma",
+    "official_title": "Objective Response Rate of Ivonescimab With Chemotherapy in Locally Advanced Resectable Oral and Oropharyngeal Squamous Cell Carcinoma",
+    "status": "RECRUITING",
+    "last_update": "2026-07-07",
+    "start_date": "2026-01-26",
+    "completion_date": "2028-08-30",
+    "study_type": "OBSERVATIONAL",
+    "phases": [],
+    "enrollment": 20,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Zhujiang Hospital",
+    "conditions": [
+      "HNSCC",
+      "OSCC",
+      "OPSCC",
+      "Ivonescimab"
+    ],
+    "interventions": [
+      "Ivonescimab（AK112，a PD-1/VEGF bispecific antibody）"
+    ]
+  },
+  "SMMT:ivonescimab:NCT07359456": {
+    "nct_id": "NCT07359456",
+    "title": "Testing Ivonescimab in Combination With Chemotherapy in Patients With Metastatic Colorectal Cancers Without Liver Metastases",
+    "official_title": "Randomized Phase 2 Study of Second-line Chemotherapy Comparing FOLFIRI + Ivonescimab Versus FOLFIRI + Bevacizumab in Microsatellite Stable (MSS)/ Proficient MisMatch Repair (pMMR) BRAF Wild Type (BRAFwt) Advanced Colorectal Cancer (mCRC) Without Liver Metastases",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-05-19",
+    "start_date": "2026-08-31",
+    "completion_date": "2033-08",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 130,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "UNICANCER",
+    "conditions": [
+      "Metastatic Colorectal Cancer"
+    ],
+    "interventions": [
+      "Ivonescimab",
+      "Bevacizumab",
+      "FOLFIRI Protocol"
+    ]
+  },
+  "SMMT:ivonescimab:NCT06790212": {
+    "nct_id": "NCT06790212",
+    "title": "Neoadjuvant CAPOX Plus Ivonescimab Versus CAPOX for Locally Advanced Colon Cancer",
+    "official_title": "A Prospective, Randomized Phase II Study Evaluating CAPOX Combined with Ivonescimab (a PD-1/VEGF-A Bispecific Antibody) Versus CAPOX Alone As Neoadjuvant Therapy in Patients with Locally Advanced Colon Cancer.",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2025-03-17",
+    "start_date": "2025-04-28",
+    "completion_date": "2028-06-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 168,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Sun Yat-sen University",
+    "conditions": [
+      "Colon Cancer"
+    ],
+    "interventions": [
+      "Ivonescimab",
+      "Oxaliplatin",
+      "Capecitabine"
+    ]
+  },
+  "SMMT:ivonescimab:NCT06767514": {
+    "nct_id": "NCT06767514",
+    "title": "Clinical Study of Ivonescimab for First-line Treatment of Metastatic NSCLC Patients With High PD-L1",
+    "official_title": "A Randomized, Double-blinded, Multiregional Phase 3 Study of Ivonescimab Versus Pembrolizumab for the First-line Treatment of Metastatic Non-small Cell Lung Cancer in Patients Whose Tumors Demonstrate High PD-L1 Expression",
+    "status": "RECRUITING",
+    "last_update": "2026-08-19",
+    "start_date": "2025-02-27",
+    "completion_date": "2029-06",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 780,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Summit Therapeutics",
+    "conditions": [
+      "Non-Small Cell Lung Cancer"
+    ],
+    "interventions": [
+      "Ivonescimab Injection",
+      "Pembrolizumab Injection"
+    ]
+  },
+  "SMMT:ivonescimab:NCT06769971": {
+    "nct_id": "NCT06769971",
+    "title": "Phase II Study of Ivonescimab and Cadonilimab in Combination with Chemotherapy in Patients with ES-SCLC",
+    "official_title": "Phase II Study of Ivonescimab (PD1/VEGF Bispecific) and Cadonilimab（PDL1/CTLA4 Bispecific）in Combination with Etoposide and Carboplatin As First-line Therapy in Patients with Extensive Stage Small Cell Lung Cancer",
+    "status": "RECRUITING",
+    "last_update": "2025-01-10",
+    "start_date": "2025-02-01",
+    "completion_date": "2027-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 80,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Sichuan University",
+    "conditions": [
+      "Small Cell Lung Cancer"
+    ],
+    "interventions": [
+      "Ivonescimab",
+      "Cadonilimab",
+      "Etoposide",
+      "Carboplatin"
+    ]
+  },
+  "SMMT:ivonescimab:NCT07743138": {
+    "nct_id": "NCT07743138",
+    "title": "STOMP OUT: A Phase 2 Study To Evaluate The Effects Of Ivonescimab In Patients With Unresectable/Metastatic Adrenocortical Carcinoma (ACC) Or Unresectable Pheochromocytoma/Paraganglioma (PPGL)",
+    "official_title": "STOMP OUT: A Phase 2 Study To Evaluate The Effects Of Ivonescimab In Patients With Unresectable/Metastatic Adrenocortical Carcinoma (ACC) Or Unresectable Pheochromocytoma/Paraganglioma (PPGL)",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-08-03",
+    "start_date": "2027-02-07",
+    "completion_date": "2030-05-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 20,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "M.D. Anderson Cancer Center",
+    "conditions": [
+      "Phase II",
+      "Ivonescimab",
+      "Evaluate",
+      "Unresectable/Metastatic Adrenocortical Carcinoma",
+      "ACC",
+      "Unresectable Pheochromocytoma",
+      "PPGL"
+    ],
+    "interventions": [
+      "Ivonescimab"
+    ]
+  },
+  "SMMT:ivonescimab:NCT07743632": {
+    "nct_id": "NCT07743632",
+    "title": "Neoadjuvant Angiogenesis-Targeting Bispecific Chemoimmunotherapy for TNBC",
+    "official_title": "Neoadjuvant Angiogenesis-Targeting Bispecific Chemoimmunotherapy for TNBC (NeoASPECT)",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-08-04",
+    "start_date": "2026-09",
+    "completion_date": "2033-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 110,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "University of Kansas Medical Center",
+    "conditions": [
+      "Breast Cancer",
+      "Triple Negative Breast Cancer"
+    ],
+    "interventions": [
+      "Carboplatin",
+      "Docetaxel",
+      "Doxorubicin",
+      "Cyclophosphamide",
+      "Ivonescimab"
+    ]
+  },
+  "SMMT:ivonescimab:NCT06560112": {
+    "nct_id": "NCT06560112",
+    "title": "An Exploratory, Multi-cohort Phase II Study of Combination Therapy With AK104 and AK112 for Recurrent Ovarian Cancer",
+    "official_title": "An Exploratory, Multi-cohort Phase II Study of Combination Therapy With AK104 and AK112 for Recurrent Ovarian Cancer",
+    "status": "RECRUITING",
+    "last_update": "2025-03-12",
+    "start_date": "2024-11-12",
+    "completion_date": "2027-05-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 172,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Akeso",
+    "conditions": [
+      "Recurrent Ovarian Cancer"
+    ],
+    "interventions": [
+      "AK104",
+      "AK112",
+      "Chemotherapy"
+    ]
+  },
+  "SMMT:ivonescimab:NCT06940518": {
+    "nct_id": "NCT06940518",
+    "title": "Phase II Trial of Ivonescimab in Previously Treated Patients With Advanced Clear Cell Renal Cell Carcinoma",
+    "official_title": "Phase II Trial of Ivonescimab in Previously Treated Patients With Advanced Clear Cell Renal Cell Carcinoma",
+    "status": "RECRUITING",
+    "last_update": "2026-08-20",
+    "start_date": "2025-07-02",
+    "completion_date": "2030-01-19",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 40,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "M.D. Anderson Cancer Center",
+    "conditions": [
+      "Ivonescimab",
+      "Clear Cell Renal Carcinoma"
+    ],
+    "interventions": [
+      "Ivonescimab"
+    ]
+  },
+  "SMMT:ivonescimab:NCT07245446": {
+    "nct_id": "NCT07245446",
+    "title": "A Study of Ivonescimab in First-Line ES-SCLC",
+    "official_title": "A Phase II Clinical Study of Ivonescimab Combination Therapy as First-Line Treatment for Extensive-Stage Small Cell Lung Cancer (ES-SCLC)",
+    "status": "RECRUITING",
+    "last_update": "2025-11-24",
+    "start_date": "2025-10-29",
+    "completion_date": "2028-06",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 180,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Akeso",
+    "conditions": [
+      "Extensive-stage Small Cell Lung Cancer (ES-SCLC)"
+    ],
+    "interventions": [
+      "Ivonescimab",
+      "Cadonilimab",
+      "AK117",
+      "Etoposide",
+      "Carboplatin (AUC 5)"
+    ]
+  },
+  "SMMT:ivonescimab:NCT06919510": {
+    "nct_id": "NCT06919510",
+    "title": "A Phase ll Study of Neoadjuvant Short-course Radiotherapy Followed by Ivonescimab and Chemotherapy in pMMR/MSS Locally Advanced Rectal Cancer",
+    "official_title": "A Phase ll Study of Neoadjuvant Short-course Radiotherapy Followed by Lvonescimab and Chemotherapy Versus Neoadjuvant Short-course Radiotherapy Followed by Chemotherapy in pMMR/MSS Locally Advanced Rectal Cancer",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2025-04-09",
+    "start_date": "2025-04-01",
+    "completion_date": "2028-12-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 90,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Sun Yat-sen University",
+    "conditions": [
+      "Rectal Adenocarcinoma"
+    ],
+    "interventions": [
+      "lvonescimab",
+      "CAPOX (oxaliplatin/capecitabine)",
+      "radiotherapy",
+      "Surgery or watch&wait"
+    ]
+  },
+  "SMMT:ivonescimab:NCT06925724": {
+    "nct_id": "NCT06925724",
+    "title": "A Study of Ivonescimab in People With Endometrial and Cervical Cancers",
+    "official_title": "A Phase 2 Study of Ivonescimab (Bispecific Antibody Against PD1 and VEGF) For the Treatment of Endometrial (EC) and Cervical (CC) Cancers",
+    "status": "RECRUITING",
+    "last_update": "2026-08-26",
+    "start_date": "2025-04-04",
+    "completion_date": "2027-04-04",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 50,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Memorial Sloan Kettering Cancer Center",
+    "conditions": [
+      "Endometrial Cancer",
+      "Cervical Cancer"
+    ],
+    "interventions": [
+      "Ivonescimab"
+    ]
+  },
+  "SMMT:ivonescimab:NCT07244978": {
+    "nct_id": "NCT07244978",
+    "title": "Neoadjuvant Ivonescimab（AK112） Combined With Chemotherapy in Patients With Resectable Esophageal Squamous Cell Carcinoma",
+    "official_title": "A Prospective, Single-arm, Single-center, Exploratory Study of the Safety and Efficacy of Ivonescimab（AK112） Combined With Chemotherapy in Patients With Resectable Esophageal Squamous Cell Carcinoma",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-04-24",
+    "start_date": "2026-06-01",
+    "completion_date": "2032-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 49,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Second Affiliated Hospital, Zhejiang University, School of Medicine",
+    "conditions": [
+      "Esophageal Squamous Cell Carcinoma",
+      "Neoadjuvant Therapy"
+    ],
+    "interventions": [
+      "Ivonescimab（AK112), Albumin paclitaxel, carboplatin AUC=5, neoadjuvant therapy",
+      "Esophagectomy",
+      "Sample"
+    ]
+  },
+  "SMMT:ivonescimab:NCT06478043": {
+    "nct_id": "NCT06478043",
+    "title": "A Study to Investigate the Efficacy and Safety of Ivonescimab Combined With Irinotecan Liposome as Second-line Regimen for SCLC",
+    "official_title": "Phase II Study of AK112 Combined With Irinotecan Liposome in Patients With SCLC Who Progressed on Immune Checkpoint Inhibitors and Chemotherapy.",
+    "status": "COMPLETED",
+    "last_update": "2026-08-27",
+    "start_date": "2024-10-16",
+    "completion_date": "2026-06-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 60,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Zhejiang Cancer Hospital",
+    "conditions": [
+      "Small-cell Lung Cancer"
+    ],
+    "interventions": [
+      "ivonescimab",
+      "irinotecan liposome"
     ]
   },
   "SMMT:ivonescimab:NCT06196697": {
@@ -3275,217 +3527,28 @@
       "SOX"
     ]
   },
-  "SMMT:ivonescimab:NCT06814158": {
-    "nct_id": "NCT06814158",
-    "title": "Neoadjuvant Ivonescimab and Chemotherapy in Resectable Esophageal Cancer",
-    "official_title": "A Phase II Study of Neoadjuvant Ivonescimab Combined with Chemotherapy in Locally Advanced Esophageal Squamous Cell Carcinoma",
+  "SMMT:ivonescimab:NCT07602855": {
+    "nct_id": "NCT07602855",
+    "title": "A Study of Risvutatug Rezetecan in Combination With Ivonescimab in Participants With Advanced Solid Tumors (EMBOLD PanTumour-103)",
+    "official_title": "A Phase 1/2 Clinical Study to Evaluate the Safety, Tolerability, Pharmacokinetics, and Clinical Activity of Risvutatug Rezetecan in Combination With Ivonescimab in Participants With Advanced Solid Tumors",
     "status": "NOT_YET_RECRUITING",
-    "last_update": "2025-02-07",
-    "start_date": "2025-03-01",
-    "completion_date": "2026-12-31",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 57,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Tianjin Medical University Cancer Institute and Hospital",
-    "conditions": [
-      "Esophageal Squamour Cell Cancer"
-    ],
-    "interventions": [
-      "Ivonescimab Combined With Chemotherapy"
-    ]
-  },
-  "SMMT:ivonescimab:NCT07244965": {
-    "nct_id": "NCT07244965",
-    "title": "Neoadjuvant Ivonescimab Plus Chemotherapy Followed by Concurrent Chemoradiotherapy in High-Risk Locally Advanced Cervical Cancer",
-    "official_title": "Neoadjuvant Ivonescimab Combined With Paclitaxel and Cisplatin, Followed by Concurrent Chemoradiotherapy in Patients With High-Risk Locally Advanced Cervical Cancer：A Phase II, Single-Arm Study",
-    "status": "NOT_YET_RECRUITING",
-    "last_update": "2025-11-24",
-    "start_date": "2025-12-01",
-    "completion_date": "2029-07-01",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 42,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Women's Hospital School Of Medicine Zhejiang University",
-    "conditions": [
-      "LOCALLY ADVANCED CERVICAL CANCERS"
-    ],
-    "interventions": [
-      "Ivonescimab Combined With Chemotherapy",
-      "CONCURRENT CHEMORADIATION (CISPLATIN)"
-    ]
-  },
-  "SMMT:ivonescimab:NCT06760520": {
-    "nct_id": "NCT06760520",
-    "title": "Short-course Radiotherapy Followed by CAPOX and Ivonescimab for Locally Advanced Rectal Cancer",
-    "official_title": "A Single-arm, Prospective, Phase II Clinical Study of Short-course Radiotherapy Followed by CAPOX and Ivonescimab for Locally Advanced Low-middle Rectal Cancer with a High Risk of Recurrence",
-    "status": "NOT_YET_RECRUITING",
-    "last_update": "2025-01-08",
-    "start_date": "2025-01-20",
-    "completion_date": "2031-12-20",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 40,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "The First Affiliated Hospital of Zhengzhou University",
-    "conditions": [
-      "Locally Advanced Rectal Cancer"
-    ],
-    "interventions": [
-      "Ivonescimab (SMT112 or AK112) Injection"
-    ]
-  },
-  "SMMT:ivonescimab:NCT07669051": {
-    "nct_id": "NCT07669051",
-    "title": "A Phase II Clinical Trial of Ivonescimab Plus Third-generation EGFR-TKIs in Advanced Non-small Cell Lung Cancer With Gradual or Potential Progression After EGFR-TKIs Treatment",
-    "official_title": "A Phase II Clinical Trial of Ivonescimab Plus Third-generation EGFR-TKIs in Advanced Non-small Cell Lung Cancer With Gradual or Potential Progression After EGFR-TKIs Treatment",
-    "status": "ACTIVE_NOT_RECRUITING",
-    "last_update": "2026-06-25",
-    "start_date": "2026-01-01",
-    "completion_date": "2029-01-01",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 36,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Shandong Cancer Hospital and Institute",
-    "conditions": [
-      "NSCLC (Advanced Non-small Cell Lung Cancer)"
-    ],
-    "interventions": [
-      "ivonescimab plus EGFR-TKI."
-    ]
-  },
-  "SMMT:ivonescimab:NCT07204548": {
-    "nct_id": "NCT07204548",
-    "title": "The IVO-LUNG Study",
-    "official_title": "Ivonescimab Consolidation After Concurrent/Sequential Chemoradiation for Unresectable Stage III NSCLC- A Phase II Study",
-    "status": "NOT_YET_RECRUITING",
-    "last_update": "2025-10-02",
-    "start_date": "2025-10",
-    "completion_date": "2029-10",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 63,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Sun Yat-sen University",
-    "conditions": [
-      "Non Small Cell Lung Cancer (Stage III)"
-    ],
-    "interventions": [
-      "Ivonescimab"
-    ]
-  },
-  "SMMT:ivonescimab:NCT06686030": {
-    "nct_id": "NCT06686030",
-    "title": "Combination Therapy of AK112 With Chemotherapy and/or Olaparib in Platinum-sensitive Ovarian Cancer",
-    "official_title": "An Exploratory, Multi-cohort Phase II Study of Combination Therapy of AK112 With Chemotherapy and/or Olaparib in Platinum-sensitive Ovarian Cancer",
-    "status": "RECRUITING",
-    "last_update": "2025-04-16",
-    "start_date": "2025-02-17",
-    "completion_date": "2028-07",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 150,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Akeso",
-    "conditions": [
-      "Platinum-sensitive Ovarian Cancer"
-    ],
-    "interventions": [
-      "AK112 low dose",
-      "Chemotherapy",
-      "Olaparib",
-      "AK112 high dose"
-    ]
-  },
-  "SMMT:ivonescimab:NCT06844422": {
-    "nct_id": "NCT06844422",
-    "title": "Adapted Guided Stereotactic Body Radiotherapy Combined With Chemotherapy and Enhancement of Novel Drug Ivonescimab for Pancreatic Cancer (ASCEND)",
-    "official_title": "Adapted Guided Stereotactic Body Radiotherapy Combined With Chemotherapy and Enhancement of Novel Drug Ivonescimab for Pancreatic Cancer (ASCEND) -A Single-Arm Phase Ib/II Trial",
-    "status": "RECRUITING",
-    "last_update": "2026-04-28",
-    "start_date": "2025-02-08",
-    "completion_date": "2028-02-18",
+    "last_update": "2026-05-22",
+    "start_date": "2026-09-08",
+    "completion_date": "2030-01-04",
     "study_type": "INTERVENTIONAL",
     "phases": [
       "PHASE1",
       "PHASE2"
     ],
-    "enrollment": 37,
+    "enrollment": 184,
     "enrollment_type": "ESTIMATED",
-    "sponsor": "Shandong Cancer Hospital and Institute",
+    "sponsor": "GlaxoSmithKline",
     "conditions": [
-      "Pancreatic Cancer"
+      "Solid Tumors"
     ],
     "interventions": [
+      "Ris-Rez",
       "Ivonescimab"
-    ]
-  },
-  "SMMT:ivonescimab:NCT07130240": {
-    "nct_id": "NCT07130240",
-    "title": "Ivonescimab Combined With Paclitaxel and Cisplatin as Neoadjuvant Therapy Followed by Type A Hysterectomy in Stage IB2 and IIA1 Cervical Cancer",
-    "official_title": "Ivonescimab Combined With Paclitaxel and Cisplatin as Neoadjuvant Therapy Followed by Type A Hysterectomy in Stage IB2 and IIA1 Cervical Cancer: A Phase II Trial",
-    "status": "RECRUITING",
-    "last_update": "2025-08-19",
-    "start_date": "2025-08-15",
-    "completion_date": "2030-08-31",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE2"
-    ],
-    "enrollment": 20,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "Obstetrics & Gynecology Hospital of Fudan University",
-    "conditions": [
-      "Cervical Cancers"
-    ],
-    "interventions": [
-      "Neoadjuvant Chemotherapy Combined with Immunotherapy"
-    ]
-  },
-  "SMMT:ivonescimab:NCT07363408": {
-    "nct_id": "NCT07363408",
-    "title": "Ivonescimab and ADG126, Alone, and in Combination With Leucovorin and Fluorouracil or FOLFIRI Regimen for the Treatment of Microsatellite Stable Advanced/Metastatic Colorectal Cancer",
-    "official_title": "A Phase I Clinical Trial of Ivonescimab and ADG126, Alone, and in Combination With 5-FU/LV or FOLFIRI in MSS Advanced/Metastatic Colorectal Cancer",
-    "status": "NOT_YET_RECRUITING",
-    "last_update": "2026-09-02",
-    "start_date": "2026-12-01",
-    "completion_date": "2027-07-21",
-    "study_type": "INTERVENTIONAL",
-    "phases": [
-      "PHASE1"
-    ],
-    "enrollment": 30,
-    "enrollment_type": "ESTIMATED",
-    "sponsor": "City of Hope Medical Center",
-    "conditions": [
-      "Advanced Microsatellite Stable Colorectal Carcinoma",
-      "Metastatic Microsatellite Stable Colorectal Carcinoma",
-      "Stage III Colorectal Cancer AJCC v8",
-      "Stage IV Colorectal Cancer AJCC v8"
-    ],
-    "interventions": [
-      "Biospecimen Collection",
-      "Computed Tomography",
-      "Fluorouracil",
-      "Irinotecan",
-      "Ivonescimab",
-      "Leucovorin Calcium",
-      "Magnetic Resonance Imaging",
-      "Muzastotug"
     ]
   }
 }
