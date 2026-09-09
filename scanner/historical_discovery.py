@@ -1,19 +1,15 @@
-"""Discover real historical pharma catalysts from SEC EDGAR and FDA Drugs@FDA.
-
-The discovery layer is deliberately conservative: it only emits events backed by
-primary regulatory/corporate sources and never invents prices or market returns.
-Market prices are resolved later by the Historical Edge builder.
-"""
+"""Discover real historical pharma catalysts from SEC EDGAR and FDA Drugs@FDA."""
 from __future__ import annotations
 
+import hashlib
 import json
+import os
 import re
-from datetime import date, datetime, timedelta, timezone
+from datetime import date, datetime, timezone
 from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
-from urllib.parse import quote
 
 import requests
 
@@ -24,8 +20,7 @@ SEC_TICKERS_URL = "https://www.sec.gov/files/company_tickers.json"
 SEC_SUBMISSIONS_URL = "https://data.sec.gov/submissions/CIK{cik}.json"
 SEC_ARCHIVE_URL = "https://www.sec.gov/Archives/edgar/data/{cik}/{accession}/{document}"
 FDA_URL = "https://api.fda.gov/drug/drugsfda.json"
-DEFAULT_START_YEAR = 2018
-
+DEFAULT_START_YEAR = 2015
 CATALYST_ITEMS = {"1.01", "1.02", "2.02", "7.01", "8.01"}
 FORMS = {"8-K", "8-K/A", "6-K", "6-K/A"}
 
@@ -37,7 +32,7 @@ PATTERNS = [
     ("CLINICAL_RESULTS", "POSITIVE", ("met the primary endpoint", "met its primary endpoint", "positive topline", "positive results", "statistically significant", "clinical benefit", "topline results", "clinical trial results")),
     ("FDA_APPROVAL", "POSITIVE", ("fda approves", "fda approved", "receives fda approval", "received fda approval", "full approval", "granted approval")),
     ("LABEL_EXPANSION", "POSITIVE", ("label expansion", "expanded indication", "new indication", "expanded use")),
-    ("PHASE_ADVANCED", "POSITIVE", ("advanced to phase", "advances to phase", "phase 2", "phase 3")),
+    ("PHASE_ADVANCED", "POSITIVE", ("advanced to phase", "advances to phase", "progressed to phase")),
     ("DATE_ACCELERATED", "POSITIVE", ("accelerated timeline", "earlier than expected", "accelerated the timeline")),
     ("DATE_DELAYED", "NEGATIVE", ("delayed timeline", "delay in the timeline", "later than expected", "delayed submission")),
     ("REGULATORY_FILING", "POSITIVE", ("nda submission", "bla submission", "regulatory submission", "submitted the application", "filing accepted")),
@@ -75,14 +70,12 @@ def _headers(source: str) -> dict[str, str]:
 
 
 def _event_id(item: dict[str, Any]) -> str:
-    import hashlib
     raw = "|".join(str(item.get(k) or "") for k in ("ticker", "program", "subtype", "event_timestamp", "source", "url"))
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:24]
 
 
 def _classify(text: str) -> tuple[str, str] | None:
     normalized = text.lower()
-    # Reject boilerplate-only hits: look for the strongest phrase first.
     for subtype, direction, phrases in PATTERNS:
         if any(phrase in normalized for phrase in phrases):
             return subtype, direction
@@ -170,8 +163,7 @@ def discover_sec(session: requests.Session, ticker: str, company: str, programs:
         document = str(row.get("primaryDocument") or "")
         if not accession or not document:
             continue
-        archive_cik = str(int(cik))
-        url = SEC_ARCHIVE_URL.format(cik=archive_cik, accession=accession.replace("-", ""), document=document)
+        url = SEC_ARCHIVE_URL.format(cik=str(int(cik)), accession=accession.replace("-", ""), document=document)
         try:
             response = session.get(url, headers=_headers("sec-filing"), timeout=30)
             if not response.ok:
@@ -186,20 +178,11 @@ def discover_sec(session: requests.Session, ticker: str, company: str, programs:
         subtype, direction = classified
         program = _program_from_text(text, programs) or _program_from_text(title, programs)
         event = {
-            "event_id": None,
-            "ticker": ticker,
-            "company": company,
-            "program": program,
-            "subtype": subtype,
-            "direction": direction,
+            "event_id": None, "ticker": ticker, "company": company, "program": program,
+            "subtype": subtype, "direction": direction,
             "event_timestamp": row.get("acceptanceDateTime") or row.get("filingDate"),
-            "source": "SEC",
-            "source_type": "PRIMARY_CORPORATE",
-            "url": url,
-            "accession_number": accession,
-            "form": row.get("form"),
-            "items": row.get("items"),
-            "title": title,
+            "source": "SEC", "source_type": "PRIMARY_CORPORATE", "url": url,
+            "accession_number": accession, "form": row.get("form"), "items": row.get("items"), "title": title,
         }
         event["event_id"] = _event_id(event)
         events.append(event)
@@ -240,26 +223,19 @@ def discover_fda(session: requests.Session, ticker: str, company: str, start_dat
             subtype = "FDA_APPROVAL" if str(submission.get("submission_type") or "").upper() == "ORIG" else "LABEL_EXPANSION"
             program = generic or brand or app
             event = {
-                "event_id": None,
-                "ticker": ticker,
-                "company": company,
-                "program": program,
-                "subtype": subtype,
-                "direction": "POSITIVE",
-                "event_timestamp": event_date.isoformat(),
-                "source": "FDA",
-                "source_type": "PRIMARY_REGULATORY",
+                "event_id": None, "ticker": ticker, "company": company, "program": program,
+                "subtype": subtype, "direction": "POSITIVE", "event_timestamp": event_date.isoformat(),
+                "source": "FDA", "source_type": "PRIMARY_REGULATORY",
                 "url": f"https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo={app.replace('NDA','').replace('BLA','')}",
-                "application_number": app,
-                "brand_name": brand,
-                "generic_name": generic,
+                "application_number": app, "brand_name": brand, "generic_name": generic,
             }
             event["event_id"] = _event_id(event)
             events.append(event)
     return events
 
 
-def discover(start_year: int = DEFAULT_START_YEAR) -> dict[str, Any]:
+def discover(start_year: int | None = None) -> dict[str, Any]:
+    start_year = start_year or int(os.getenv("PHARMA_RADAR_HISTORICAL_START_YEAR", str(DEFAULT_START_YEAR)))
     start_date = date(start_year, 1, 1)
     watchlist = _load(WATCHLIST)
     session = requests.Session()
@@ -271,8 +247,7 @@ def discover(start_year: int = DEFAULT_START_YEAR) -> dict[str, Any]:
         company = str(item.get("company") or ticker)
         programs = [str(x) for x in item.get("programs") or []]
         try:
-            sec = sec_map.get(ticker, {})
-            cik = sec.get("cik")
+            cik = (sec_map.get(ticker) or {}).get("cik")
             if cik:
                 for event in discover_sec(session, ticker, company, programs, cik, start_date):
                     events[event["event_id"]] = event
@@ -286,12 +261,8 @@ def discover(start_year: int = DEFAULT_START_YEAR) -> dict[str, Any]:
 
     ordered = sorted(events.values(), key=lambda x: str(x.get("event_timestamp") or ""))
     payload = {
-        "version": "1.0",
-        "generated_at": datetime.now(timezone.utc).isoformat(),
-        "start_year": start_year,
-        "tickers": len(watchlist),
-        "events": ordered,
-        "events_count": len(ordered),
+        "version": "1.0", "generated_at": datetime.now(timezone.utc).isoformat(), "start_year": start_year,
+        "tickers": len(watchlist), "events": ordered, "events_count": len(ordered),
         "by_source": {source: sum(1 for x in ordered if x.get("source") == source) for source in ("SEC", "FDA")},
         "errors": errors[:200],
     }
