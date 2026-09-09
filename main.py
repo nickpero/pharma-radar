@@ -1,8 +1,11 @@
 """Pharma Radar — Main entry point."""
 
+from datetime import datetime, timezone
+
 from scanner.trial_scanner import scan
 from scanner.telegram import send_telegram, send_catalyst_alerts
-from scanner.telegram_intelligence import select_intelligent_alerts
+from scanner.telegram_intelligence import select_intelligent_alerts, _dedup_key
+from scanner.alert_state import load_sent_alerts, save_sent_alerts, filter_unsent, mark_sent
 from scanner.pharma_email import send_pharma_intelligence_emails, email_is_configured
 
 
@@ -91,9 +94,29 @@ def build_summary(result):
     return "\n".join(lines)
 
 
+def _new_telegram_alerts(result):
+    """Select actionable alerts that have never been delivered before."""
+    intelligent_alerts = select_intelligent_alerts(result.get("alerts", []))
+    state = load_sent_alerts()
+    return filter_unsent(intelligent_alerts, state, lambda alert: repr(_dedup_key(alert)))
+
+
 def send_alerts(result):
-    alerts = select_intelligent_alerts(result.get("alerts", []))
-    return send_catalyst_alerts(alerts) if alerts else []
+    """Send only previously undelivered Telegram catalyst alerts.
+
+    The state is written only after Telegram successfully accepts every alert,
+    preventing a failed delivery from being permanently marked as sent.
+    """
+    alerts = _new_telegram_alerts(result)
+    if not alerts:
+        return []
+
+    responses = send_catalyst_alerts(alerts)
+    state = load_sent_alerts()
+    timestamp = datetime.now(timezone.utc).isoformat()
+    mark_sent(alerts, state, lambda alert: repr(_dedup_key(alert)), timestamp)
+    save_sent_alerts(state)
+    return responses
 
 
 def send_email_alerts(result):
@@ -109,7 +132,8 @@ def main():
     print()
     print(summary)
     send_telegram(summary)
-    send_alerts(result)
+    sent = send_alerts(result)
+    print(f"Telegram catalyst alerts sent: {len(sent)}")
     sent = send_email_alerts(result)
     print(f"Pharma Intelligence emails sent: {sent}")
 
