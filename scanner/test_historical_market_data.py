@@ -32,7 +32,15 @@ def test_window_bars_uses_next_session_for_weekend_event():
     assert bars["1D"]["close"] == 120.0
 
 
+def test_window_bars_calculates_twenty_session_volume_baseline():
+    rows = {f"2026-08-{day:02d}": {"close": 100.0, "volume": day} for day in range(1, 22)}
+    bars = YahooDailyProvider._window_bars(rows, date(2026, 8, 21))
+    assert bars["event"]["volume"] == 21
+    assert bars["event"]["baseline_volume"] == sum(range(1, 21)) / 20
+
+
 if __name__ == "__main__":
     test_window_bars_skips_weekends_and_maps_forward_sessions()
     test_window_bars_uses_next_session_for_weekend_event()
+    test_window_bars_calculates_twenty_session_volume_baseline()
     print("Historical market-data tests passed")
