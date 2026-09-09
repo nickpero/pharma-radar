@@ -6,7 +6,7 @@ from scanner.trial_scanner import scan
 from scanner.telegram import send_telegram, send_catalyst_alerts
 from scanner.telegram_intelligence import select_intelligent_alerts, _dedup_key
 from scanner.alert_state import load_sent_alerts, save_sent_alerts, filter_unsent, mark_sent
-from scanner.pharma_email import send_pharma_intelligence_emails, email_is_configured
+from scanner.pharma_email import send_pharma_intelligence_emails
 
 
 def _reaction(alert):
@@ -43,11 +43,13 @@ def _alert_summary_line(alert):
     ]
 
 
-def build_summary(result):
+def build_summary(result, intelligent_alerts=None):
+    """Build the periodic scan message using only NEW actionable alerts."""
     alerts = result.get("alerts", [])
     errors = result.get("errors", [])
     detected_changes = result.get("detected_changes", [])
-    intelligent_alerts = select_intelligent_alerts(alerts)
+    if intelligent_alerts is None:
+        intelligent_alerts = select_intelligent_alerts(alerts)
 
     lines = [
         "🧬 PHARMA RADAR — SCAN",
@@ -58,7 +60,7 @@ def build_summary(result):
         f"📰 FDA news: {len(result.get('fda_news', []))}",
         f"🔄 Changes: {len(detected_changes)}",
         "",
-        f"🚨 ACTIONABLE ALERTS: {len(intelligent_alerts)}",
+        f"🚨 NEW ACTIONABLE ALERTS: {len(intelligent_alerts)}",
     ]
 
     if errors:
@@ -67,9 +69,9 @@ def build_summary(result):
     if intelligent_alerts:
         lines.extend(["", "━━━━━━━━━━━━━━━━━━", ""])
         lines.append(
-            f"🚨 {len(intelligent_alerts)} PRIORITY ALERT"
+            f"🚨 {len(intelligent_alerts)} NEW PRIORITY ALERT"
             if len(intelligent_alerts) == 1
-            else f"🚨 {len(intelligent_alerts)} PRIORITY ALERTS"
+            else f"🚨 {len(intelligent_alerts)} NEW PRIORITY ALERTS"
         )
         lines.append("")
         for index, alert in enumerate(intelligent_alerts):
@@ -77,10 +79,7 @@ def build_summary(result):
             if index < len(intelligent_alerts) - 1:
                 lines.extend(["", "──────────────", ""])
     else:
-        lines.extend(["", "━━━━━━━━━━━━━━━━━━", "", "🟢 NO ACTIONABLE CATALYSTS"])
-
-    if alerts and len(intelligent_alerts) < len(alerts):
-        lines.extend(["", f"ℹ️ {len(alerts) - len(intelligent_alerts)} alert(s) suppressed"])
+        lines.extend(["", "━━━━━━━━━━━━━━━━━━", "", "🟢 NO NEW ACTIONABLE CATALYSTS"])
 
     if errors:
         lines.extend(["", "❌ ERRORS"])
@@ -101,13 +100,13 @@ def _new_telegram_alerts(result):
     return filter_unsent(intelligent_alerts, state, lambda alert: repr(_dedup_key(alert)))
 
 
-def send_alerts(result):
+def send_alerts(result, alerts=None):
     """Send only previously undelivered Telegram catalyst alerts.
 
     The state is written only after Telegram successfully accepts every alert,
     preventing a failed delivery from being permanently marked as sent.
     """
-    alerts = _new_telegram_alerts(result)
+    alerts = _new_telegram_alerts(result) if alerts is None else alerts
     if not alerts:
         return []
 
@@ -128,11 +127,12 @@ def send_email_alerts(result):
 def main():
     print("Starting Pharma Radar...")
     result = scan()
-    summary = build_summary(result)
+    new_alerts = _new_telegram_alerts(result)
+    summary = build_summary(result, intelligent_alerts=new_alerts)
     print()
     print(summary)
     send_telegram(summary)
-    sent = send_alerts(result)
+    sent = send_alerts(result, alerts=new_alerts)
     print(f"Telegram catalyst alerts sent: {len(sent)}")
     sent = send_email_alerts(result)
     print(f"Pharma Intelligence emails sent: {sent}")
