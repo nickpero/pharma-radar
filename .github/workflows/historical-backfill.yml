@@ -61,6 +61,9 @@ jobs:
       - name: Build Historical Edge dataset
         run: python -m scanner.build_historical_edge
 
+      - name: Audit Historical Edge dataset
+        run: python -m scanner.audit_historical_edge
+
       - name: Report dataset size
         run: |
           python - <<'PY'
