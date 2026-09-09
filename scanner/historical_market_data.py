@@ -1,9 +1,9 @@
 """Daily market-data provider for the Historical Edge Engine.
 
-The analytics layer stays vendor-neutral.  This module provides a small
-Yahoo Finance chart-API adapter using the already-installed ``requests``
-package.  It is intentionally used by the historical batch job rather than
-by every 15-minute production scan.
+The analytics layer stays vendor-neutral. This module provides a small Yahoo
+Finance chart-API adapter using the already-installed ``requests`` package.
+It is intentionally used by the historical batch job rather than by every
+15-minute production scan.
 """
 
 from __future__ import annotations
@@ -23,7 +23,7 @@ class YahooDailyProvider:
     def __init__(self, timeout: int = 15, session: requests.Session | None = None):
         self.timeout = timeout
         self.session = session or requests.Session()
-        self._cache: dict[str, dict[str, dict[str, Any]]] = {}
+        self._cache: dict[tuple[str, date, date], dict[str, dict[str, Any]]] = {}
 
     @staticmethod
     def _date(value: Any) -> date | None:
@@ -44,10 +44,9 @@ class YahooDailyProvider:
         symbol = str(symbol).upper().strip()
         if not symbol:
             return {}
-        cache_key = symbol
-        cached = self._cache.get(cache_key)
-        if cached:
-            return cached
+        cache_key = (symbol, start, end)
+        if cache_key in self._cache:
+            return self._cache[cache_key]
 
         period1 = int(datetime.combine(start, datetime.min.time(), tzinfo=timezone.utc).timestamp())
         period2 = int(datetime.combine(end + timedelta(days=1), datetime.min.time(), tzinfo=timezone.utc).timestamp())
@@ -66,11 +65,13 @@ class YahooDailyProvider:
         chart = result[0]
         timestamps = chart.get("timestamp") or []
         quote = ((chart.get("indicators") or {}).get("quote") or [{}])[0]
+        closes = quote.get("close") or []
+        volumes = quote.get("volume") or []
         rows: dict[str, dict[str, Any]] = {}
         for index, timestamp in enumerate(timestamps):
             day = datetime.fromtimestamp(timestamp, tz=timezone.utc).date().isoformat()
-            close = (quote.get("close") or [None] * len(timestamps))[index]
-            volume = (quote.get("volume") or [None] * len(timestamps))[index]
+            close = closes[index] if index < len(closes) else None
+            volume = volumes[index] if index < len(volumes) else None
             if close is None:
                 continue
             rows[day] = {"close": float(close), "volume": volume}
@@ -84,21 +85,29 @@ class YahooDailyProvider:
     def get_event_bars(self, event: Mapping[str, Any]) -> dict[str, dict[str, Any]]:
         """Return event-day close plus +1/+3/+5 trading-day closes.
 
-        The event-day close is the daily anchor.  The provider deliberately
-        does not pretend to know whether a catalyst arrived before or after
-        the close; intraday timing remains a later enhancement.
+        The event-day close is the daily anchor. The provider deliberately does
+        not pretend to know whether a catalyst arrived before or after the
+        close; intraday timing remains a later enhancement.
         """
         event_date = self._event_date(event)
         if event_date is None:
             return {"event": {}}
-        rows = self._fetch_symbol(str(event.get("ticker") or ""), event_date - timedelta(days=7), event_date + timedelta(days=10))
+        rows = self._fetch_symbol(
+            str(event.get("ticker") or ""),
+            event_date - timedelta(days=7),
+            event_date + timedelta(days=10),
+        )
         return self._window_bars(rows, event_date)
 
     def get_benchmark_bars(self, event: Mapping[str, Any], benchmark: str) -> dict[str, dict[str, Any]]:
         event_date = self._event_date(event)
         if event_date is None:
             return {"event": {}}
-        rows = self._fetch_symbol(benchmark, event_date - timedelta(days=7), event_date + timedelta(days=10))
+        rows = self._fetch_symbol(
+            benchmark,
+            event_date - timedelta(days=7),
+            event_date + timedelta(days=10),
+        )
         return self._window_bars(rows, event_date)
 
     @staticmethod
