@@ -98,5 +98,50 @@
     "company": "Summit Therapeutics",
     "programs": ["ivonescimab"],
     "priority": "RED"
+  },
+  "MRNA": {
+    "company": "Moderna",
+    "programs": ["intismeran autogene", "mRNA-1010"],
+    "priority": "RED"
+  },
+  "BNTX": {
+    "company": "BioNTech",
+    "programs": ["BNT122", "BNT113"],
+    "priority": "ORANGE"
+  },
+  "RVMD": {
+    "company": "Revolution Medicines",
+    "programs": ["daraxonrasib", "RMC-6236"],
+    "priority": "RED"
+  },
+  "ROIV": {
+    "company": "Roivant Sciences",
+    "programs": ["mosliciguat"],
+    "priority": "ORANGE"
+  },
+  "REGN": {
+    "company": "Regeneron Pharmaceuticals",
+    "programs": ["linvoseltamab", "odronextamab"],
+    "priority": "ORANGE"
+  },
+  "ALNY": {
+    "company": "Alnylam Pharmaceuticals",
+    "programs": ["vutrisiran"],
+    "priority": "ORANGE"
+  },
+  "INSM": {
+    "company": "Insmed",
+    "programs": ["brensocatib"],
+    "priority": "RED"
+  },
+  "CRSP": {
+    "company": "CRISPR Therapeutics",
+    "programs": ["exa-cel", "Casgevy"],
+    "priority": "ORANGE"
+  },
+  "VRTX": {
+    "company": "Vertex Pharmaceuticals",
+    "programs": ["suzetrigine", "vanzacaftor"],
+    "priority": "ORANGE"
   }
 }
