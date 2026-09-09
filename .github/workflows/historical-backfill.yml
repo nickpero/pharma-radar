@@ -33,6 +33,7 @@ jobs:
           python -m scanner.test_historical_discovery
           python -m scanner.test_historical_edge
           python -m scanner.test_historical_market_data
+          python -m scanner.test_historical_fda
 
       - name: Validate local SEC CIK map
         run: |
@@ -55,11 +56,13 @@ jobs:
       - name: Discover historical catalysts from FDA and ClinicalTrials.gov
         env:
           PHARMA_RADAR_HISTORICAL_START_YEAR: "2015"
-        run: |
-          python -m scanner.historical_multisource
+        run: python -m scanner.historical_multisource
 
       - name: Build Historical Edge dataset
         run: python -m scanner.build_historical_edge
+
+      - name: Build clean Historical Catalyst dataset
+        run: python -m scanner.build_historical_catalyst_dataset
 
       - name: Audit Historical Edge dataset
         run: python -m scanner.audit_historical_edge
@@ -71,19 +74,21 @@ jobs:
           from pathlib import Path
           p = json.loads(Path("data/historical_edge.json").read_text())
           d = json.loads(Path("data/historical_discovered_events.json").read_text())
+          c = json.loads(Path("data/historical_catalyst_dataset.json").read_text())
           print(f"Discovered events: {d.get('events_count', 0)}")
           print(f"Events by source: {d.get('by_source', {})}")
           print(f"Events with market metrics: {p.get('events_with_metrics', 0)}")
           print(f"Failures: {p.get('failures', 0)}")
-          print(f"Tickers with subtype history: {len(p.get('by_ticker', {}))}")
+          print(f"Tradable catalysts: {c.get('counts', {}).get('tradable', 0)}")
+          print(f"Tradable catalysts with market metrics: {c.get('counts', {}).get('tradable_with_market_metrics', 0)}")
+          print(f"Catalysts by subtype: {c.get('by_subtype', {})}")
           PY
 
       - name: Persist historical datasets
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data/historical_discovered_events.json data/historical_edge.json 2>/dev/null || true
-          git add -A data/historical_discovered_events.json data/historical_edge.json
+          git add -A data/historical_discovered_events.json data/historical_edge.json data/historical_catalyst_dataset.json
           if git diff --cached --quiet; then
             echo "No historical backfill changes to commit"
           else
