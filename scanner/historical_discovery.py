@@ -15,8 +15,8 @@ import requests
 
 ROOT = Path(__file__).resolve().parents[1]
 WATCHLIST = ROOT / "data" / "watchlist.json"
+SEC_CIK_MAP = ROOT / "data" / "sec_cik_map.json"
 OUTPUT = ROOT / "data" / "historical_discovered_events.json"
-SEC_TICKERS_URL = "https://www.sec.gov/files/company_tickers.json"
 SEC_SUBMISSIONS_URL = "https://data.sec.gov/submissions/CIK{cik}.json"
 SEC_ARCHIVE_URL = "https://www.sec.gov/Archives/edgar/data/{cik}/{accession}/{document}"
 FDA_URL = "https://api.fda.gov/drug/drugsfda.json"
@@ -67,8 +67,7 @@ def _html_text(value: str) -> str:
 
 def _headers(source: str) -> dict[str, str]:
     # SEC requires automated clients to declare an identifying User-Agent with
-    # a contact address. Keep it configurable so the workflow can override it
-    # without changing source code.
+    # a contact address. Keep it configurable so the workflow can override it.
     user_agent = os.getenv(
         "SEC_USER_AGENT",
         "Pharma Radar/1.0 (103763934+nickpero@users.noreply.github.com)",
@@ -109,15 +108,23 @@ def _parse_date(value: str | None) -> date | None:
             return None
 
 
-def _sec_company_map(session: requests.Session) -> dict[str, dict[str, str]]:
-    response = session.get(SEC_TICKERS_URL, headers=_headers("sec-ticker-map"), timeout=30)
-    response.raise_for_status()
-    payload = response.json()
+def _sec_company_map(session: requests.Session | None = None) -> dict[str, dict[str, str]]:
+    """Return the watchlist's local ticker→CIK map.
+
+    We deliberately do not call SEC company_tickers.json here. GitHub Actions
+    runners can receive 403 responses from that endpoint even with a valid
+    identifying User-Agent. The watchlist is intentionally small and stable,
+    so the CIK mapping is version-controlled locally in data/sec_cik_map.json.
+    """
+    payload = _load(SEC_CIK_MAP)
+    if not isinstance(payload, dict):
+        raise ValueError("data/sec_cik_map.json must contain a JSON object")
     result: dict[str, dict[str, str]] = {}
-    for row in payload.values():
-        ticker = str(row.get("ticker") or "").upper()
-        if ticker:
-            result[ticker] = {"cik": str(row.get("cik_str") or ""), "name": str(row.get("title") or "")}
+    for ticker, cik in payload.items():
+        ticker_key = str(ticker).upper().strip()
+        cik_value = str(cik).strip()
+        if ticker_key and cik_value.isdigit():
+            result[ticker_key] = {"cik": cik_value, "name": ticker_key}
     return result
 
 
@@ -255,7 +262,9 @@ def discover(start_year: int | None = None) -> dict[str, Any]:
         programs = [str(x) for x in item.get("programs") or []]
         try:
             cik = (sec_map.get(ticker) or {}).get("cik")
-            if cik:
+            if not cik:
+                errors.append({"ticker": ticker, "source": "SEC", "error": "Missing local SEC CIK mapping"})
+            else:
                 for event in discover_sec(session, ticker, company, programs, cik, start_date):
                     events[event["event_id"]] = event
         except Exception as exc:
@@ -268,7 +277,7 @@ def discover(start_year: int | None = None) -> dict[str, Any]:
 
     ordered = sorted(events.values(), key=lambda x: str(x.get("event_timestamp") or ""))
     payload = {
-        "version": "1.0", "generated_at": datetime.now(timezone.utc).isoformat(), "start_year": start_year,
+        "version": "1.1", "generated_at": datetime.now(timezone.utc).isoformat(), "start_year": start_year,
         "tickers": len(watchlist), "events": ordered, "events_count": len(ordered),
         "by_source": {source: sum(1 for x in ordered if x.get("source") == source) for source in ("SEC", "FDA")},
         "errors": errors[:200],
