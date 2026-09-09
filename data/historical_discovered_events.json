@@ -56454,7 +56454,7 @@
     }
   ],
   "events_count": 3528,
-  "generated_at": "2026-09-09T20:18:37.732875+00:00",
+  "generated_at": "2026-09-09T20:37:50.105531+00:00",
   "notes": [
     "SEC historical discovery is intentionally excluded from this runner because both data.sec.gov and efts.sec.gov return 403 on GitHub-hosted runners.",
     "FDA sponsor discovery includes exact and token-based matching.",
