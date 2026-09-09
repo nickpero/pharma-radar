@@ -2,12 +2,12 @@
 
 This module intentionally avoids SEC and uses public trial records as a second
 historical source. Current study records expose dated milestones that can be
-converted into conservative catalyst events for the Historical Edge engine.
+converted into conservative historical events for the Historical Edge engine.
 """
 from __future__ import annotations
 
 import hashlib
-from datetime import date, datetime
+from datetime import date
 from typing import Any
 
 import requests
@@ -87,20 +87,21 @@ def _milestones(study: dict[str, Any]) -> list[tuple[str, str, str]]:
     results = _date(((study.get("resultsSection") or {}).get("statusModule") or {}).get("resultsFirstPostDateStruct", {}).get("date"))
     last_update = _date((status.get("lastUpdatePostDateStruct") or {}).get("date"))
 
+    # A dated trial milestone is not an efficacy outcome. Keep it NEUTRAL until
+    # actual results evidence or an external catalyst source establishes direction.
     if start:
-        out.append(("TRIAL_STARTED", "POSITIVE", start))
+        out.append(("TRIAL_STARTED", "NEUTRAL", start))
     if primary:
-        out.append(("PRIMARY_COMPLETION", "POSITIVE", primary))
+        out.append(("PRIMARY_COMPLETION", "NEUTRAL", primary))
     if completion:
-        out.append(("TRIAL_COMPLETED", "POSITIVE", completion))
+        out.append(("TRIAL_COMPLETED", "NEUTRAL", completion))
     if results:
-        out.append(("TRIAL_RESULTS_POSTED", "POSITIVE", results))
+        out.append(("TRIAL_RESULTS_POSTED", "NEUTRAL", results))
     if last_update and not any(last_update == x[2] for x in out):
-        # Last update is useful only when no stronger dated milestone exists.
         out.append(("TRIAL_UPDATED", "NEUTRAL", last_update))
     phases = [str(x).upper() for x in (design.get("phases") or [])]
     if phases and primary:
-        out.append(("PHASE_MILESTONE", "POSITIVE", primary))
+        out.append(("PHASE_MILESTONE", "NEUTRAL", primary))
     return out
 
 
@@ -114,18 +115,13 @@ def discover_clinical_trials(
 ) -> list[dict[str, Any]]:
     """Return conservative dated milestones for trials matching company/programs.
 
-    Searches by company and by program. Results are deduplicated by NCT ID and
-    milestone date. We do not infer positive/negative efficacy from a trial's
-    existence or completion; the generated events are informational milestones.
+    Trial milestones are informational by default. Direction must come from
+    actual efficacy/safety evidence or another validated catalyst source.
     """
     studies: dict[str, dict[str, Any]] = {}
     queries = [company] + [p for p in programs if p]
     for query in queries:
-        params = {
-            "query.term": query,
-            "pageSize": min(max_studies, 100),
-            "format": "json",
-        }
+        params = {"query.term": query, "pageSize": min(max_studies, 100), "format": "json"}
         response = session.get(API_URL, params=params, timeout=30)
         response.raise_for_status()
         payload = response.json()
@@ -142,7 +138,6 @@ def discover_clinical_trials(
         title = str(ident.get("briefTitle") or ident.get("officialTitle") or "")
         sponsor = str(((protocol.get("sponsorCollaboratorsModule") or {}).get("leadSponsor") or {}).get("name") or "")
         haystack = f"{title} {sponsor} {ident.get('nctId') or ''}"
-        # Keep company/program matching strict enough to avoid unrelated studies.
         if company.lower() not in haystack.lower() and not _program_match(haystack, programs):
             continue
         for subtype, direction, event_date in _milestones(study):
@@ -152,3 +147,7 @@ def discover_clinical_trials(
             if event:
                 events[event["event_id"]] = event
     return sorted(events.values(), key=lambda x: str(x.get("event_timestamp") or ""))
+
+
+if __name__ == "__main__":
+    print("Use scanner.historical_multisource to run historical discovery.")
