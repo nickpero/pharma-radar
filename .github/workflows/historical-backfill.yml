@@ -8,8 +8,6 @@ on:
 permissions:
   contents: write
 
-timeout-minutes: 120
-
 concurrency:
   group: historical-backfill
   cancel-in-progress: false
@@ -17,6 +15,7 @@ concurrency:
 jobs:
   backfill:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
     steps:
       - name: Checkout
         uses: actions/checkout@v4
