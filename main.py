@@ -32,11 +32,11 @@ def _alert_summary_line(alert):
     return [
         f"🧬 {ticker} · {program}",
         f"📰 {subtype}",
-        f"{title}",
-        f"🎯 Catalyst {score} · {label}",
-        f"🚨 Priority {priority} · {tier}",
-        f"📊 Setup {setup} · {window}",
-        f"📈 Reaction {_reaction_line(alert)}",
+        title,
+        f"🎯 Catalyst: {score}/100 · {label}",
+        f"🚨 Priority: {priority}/100 · {tier}",
+        f"📊 Setup: {setup}/100 · {window}",
+        f"📈 Reaction: {_reaction_line(alert)}",
     ]
 
 
@@ -45,27 +45,36 @@ def build_summary(result):
     errors = result.get("errors", [])
     detected_changes = result.get("detected_changes", [])
     intelligent_alerts = select_intelligent_alerts(alerts)
+
     lines = [
         "🧬 PHARMA RADAR — SCAN",
+        "━━━━━━━━━━━━━━━━━━",
+        f"🏢 Companies: {result.get('companies', 0)}",
+        f"🔬 Trials: {result.get('total_trials', 0)}",
+        f"🎯 Relevant: {result.get('relevant_trials', 0)}",
+        f"📰 FDA news: {len(result.get('fda_news', []))}",
+        f"🔄 Changes: {len(detected_changes)}",
         "",
-        f"🏢 {result.get('companies', 0)} companies · 🔬 {result.get('total_trials', 0)} trials",
-        f"🎯 {result.get('relevant_trials', 0)} relevant · 🧹 {result.get('filtered_trials', 0)} filtered",
-        f"📰 {len(result.get('fda_news', []))} FDA news · 🔄 {len(detected_changes)} changes",
-        f"🚨 {len(intelligent_alerts)} actionable alert(s)",
+        f"🚨 ACTIONABLE ALERTS: {len(intelligent_alerts)}",
     ]
+
     if errors:
-        lines.append(f"❌ {len(errors)} error(s)")
-    lines.extend(["", "━━━━━━━━━━━━━━━━━━", ""])
+        lines.append(f"❌ Errors: {len(errors)}")
 
     if intelligent_alerts:
-        lines.append(f"🚨 {len(intelligent_alerts)} PRIORITY ALERT" if len(intelligent_alerts) == 1 else f"🚨 {len(intelligent_alerts)} PRIORITY ALERTS")
+        lines.extend(["", "━━━━━━━━━━━━━━━━━━", ""])
+        lines.append(
+            f"🚨 {len(intelligent_alerts)} PRIORITY ALERT"
+            if len(intelligent_alerts) == 1
+            else f"🚨 {len(intelligent_alerts)} PRIORITY ALERTS"
+        )
         lines.append("")
         for index, alert in enumerate(intelligent_alerts):
             lines.extend(_alert_summary_line(alert))
             if index < len(intelligent_alerts) - 1:
                 lines.extend(["", "──────────────", ""])
     else:
-        lines.append("🟢 NO ACTIONABLE CATALYSTS")
+        lines.extend(["", "━━━━━━━━━━━━━━━━━━", "", "🟢 NO ACTIONABLE CATALYSTS"])
 
     if alerts and len(intelligent_alerts) < len(alerts):
         lines.extend(["", f"ℹ️ {len(alerts) - len(intelligent_alerts)} alert(s) suppressed"])
@@ -73,9 +82,12 @@ def build_summary(result):
     if errors:
         lines.extend(["", "❌ ERRORS"])
         for error in errors:
-            lines.append(f"• {error.get('ticker', 'UNKNOWN')} — {error.get('program', 'UNKNOWN')}: {error.get('error', '')}")
+            lines.append(
+                f"• {error.get('ticker', 'UNKNOWN')} — "
+                f"{error.get('program', 'UNKNOWN')}: {error.get('error', '')}"
+            )
 
-    lines.extend(["", "━━━━━━━━━━━━━━━━━━", "Status: REVIEW" if intelligent_alerts else "Status: WARNING" if errors else "Status: CLEAN"])
+    lines.extend(["", "━━━━━━━━━━━━━━━━━━"])
     return "\n".join(lines)
 
 
@@ -94,7 +106,8 @@ def main():
     print("Starting Pharma Radar...")
     result = scan()
     summary = build_summary(result)
-    print(); print(summary)
+    print()
+    print(summary)
     send_telegram(summary)
     send_alerts(result)
     sent = send_email_alerts(result)
