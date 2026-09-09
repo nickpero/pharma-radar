@@ -14,12 +14,10 @@ from collections import defaultdict
 from statistics import median
 from typing import Any, Iterable, Mapping, Sequence
 
-
 WINDOWS = ("1D", "3D", "5D")
 
 
 def safe_return(start_price: float | None, end_price: float | None) -> float | None:
-    """Return percentage return, or None when inputs are unusable."""
     try:
         start = float(start_price)  # type: ignore[arg-type]
         end = float(end_price)  # type: ignore[arg-type]
@@ -30,12 +28,7 @@ def safe_return(start_price: float | None, end_price: float | None) -> float | N
     return (end / start - 1.0) * 100.0
 
 
-def abnormal_return(
-    stock_return: float | None,
-    benchmark_return: float | None,
-    beta: float = 1.0,
-) -> float | None:
-    """Return simple beta-adjusted abnormal return in percentage points."""
+def abnormal_return(stock_return: float | None, benchmark_return: float | None, beta: float = 1.0) -> float | None:
     if stock_return is None or benchmark_return is None:
         return None
     try:
@@ -45,25 +38,15 @@ def abnormal_return(
 
 
 def directional_return(abnormal: float | None, direction: str | None) -> float | None:
-    """Orient abnormal return so positive means the market moved as expected.
-
-    For negative catalysts (e.g. rejection or trial failure), a negative stock
-    reaction is therefore a positive historical edge. This mirrors event-study
-    practice where unsuccessful outcomes are sign-inverted for comparability.
-    """
+    """Orient abnormal return so positive means the market moved as expected."""
     if abnormal is None:
         return None
-    normalized = str(direction or "").upper()
-    if normalized == "NEGATIVE":
+    if str(direction or "").upper() == "NEGATIVE":
         return -float(abnormal)
     return float(abnormal)
 
 
-def volume_expansion(
-    event_volume: float | None,
-    baseline_volume: float | None,
-) -> float | None:
-    """Return event-volume / baseline-volume multiple."""
+def volume_expansion(event_volume: float | None, baseline_volume: float | None) -> float | None:
     try:
         event = float(event_volume)  # type: ignore[arg-type]
         baseline = float(baseline_volume)  # type: ignore[arg-type]
@@ -75,7 +58,6 @@ def volume_expansion(
 
 
 def confidence_for_sample(n: int) -> str:
-    """Translate observation count into a deliberately conservative confidence."""
     if n >= 25:
         return "HIGH"
     if n >= 10:
@@ -83,12 +65,7 @@ def confidence_for_sample(n: int) -> str:
     return "LOW"
 
 
-def classify_edge(
-    median_return: float | None,
-    win_rate: float | None,
-    n: int,
-) -> str:
-    """Classify historical edge without turning it into a trading recommendation."""
+def classify_edge(median_return: float | None, win_rate: float | None, n: int) -> str:
     if median_return is None or win_rate is None or n < 5:
         return "NEUTRAL"
     if median_return >= 3.0 and win_rate >= 0.60:
@@ -113,15 +90,10 @@ def calculate_event_metrics(
     benchmark_bars: Mapping[str, Mapping[str, Any]] | None = None,
     beta: float = 1.0,
 ) -> dict[str, Any]:
-    """Calculate reaction metrics for one event.
-
-    ``bars`` should contain an event-day reference price under ``event`` and
-    optional forward observations under ``1D``, ``3D`` and ``5D``. Benchmark
-    bars use the same shape. Missing observations remain explicit as ``None``.
-    """
-    event_price = _get_price(bars.get("event", {}))
-    event_volume = bars.get("event", {}).get("volume")
-    baseline_volume = bars.get("event", {}).get("baseline_volume")
+    event_bar = bars.get("event", {})
+    event_price = _get_price(event_bar)
+    event_volume = event_bar.get("volume")
+    baseline_volume = event_bar.get("baseline_volume")
     direction = event.get("direction") or "UNKNOWN"
 
     metrics: dict[str, Any] = {
@@ -130,6 +102,9 @@ def calculate_event_metrics(
         "program": event.get("program"),
         "subtype": event.get("subtype") or event.get("event_type"),
         "direction": direction,
+        "source": event.get("source"),
+        "source_type": event.get("source_type"),
+        "url": event.get("url"),
         "event_id": event.get("event_id") or event.get("memory_key") or event.get("source_item_id") or event.get("url"),
         "event_timestamp": event.get("event_timestamp") or event.get("timestamp"),
         "event_price": event_price,
@@ -155,11 +130,7 @@ def calculate_event_metrics(
     return metrics
 
 
-def aggregate_historical_edge(
-    metrics: Iterable[Mapping[str, Any]],
-    group_by: str = "subtype",
-) -> dict[str, dict[str, Any]]:
-    """Aggregate event metrics by catalyst dimension and reaction window."""
+def aggregate_historical_edge(metrics: Iterable[Mapping[str, Any]], group_by: str = "subtype") -> dict[str, dict[str, Any]]:
     groups: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
     for item in metrics:
         key = item.get(group_by) or "UNKNOWN"
@@ -169,10 +140,7 @@ def aggregate_historical_edge(
     for key, items in groups.items():
         window_stats: dict[str, Any] = {}
         for window in WINDOWS:
-            values = [
-                item.get("windows", {}).get(window, {}).get("directional_abnormal_return_pct")
-                for item in items
-            ]
+            values = [item.get("windows", {}).get(window, {}).get("directional_abnormal_return_pct") for item in items]
             values = [float(value) for value in values if value is not None]
             wins = sum(value > 0 for value in values)
             n = len(values)
@@ -186,36 +154,16 @@ def aggregate_historical_edge(
                 "edge": classify_edge(med, win_rate, n),
                 "confidence": confidence_for_sample(n),
             }
-
-        result[key] = {
-            "group": key,
-            "events": len(items),
-            "windows": window_stats,
-        }
-
+        result[key] = {"group": key, "events": len(items), "windows": window_stats}
     return result
 
 
-def build_historical_edge(
-    events: Sequence[Mapping[str, Any]],
-    market_data_provider: Any,
-    benchmark: str = "XBI",
-) -> dict[str, Any]:
-    """Build event metrics using an injected market-data provider.
-
-    Provider contract:
-      provider.get_event_bars(event) -> mapping with event/1D/3D/5D bars
-      provider.get_benchmark_bars(event, benchmark) -> same mapping
-
-    Keeping the provider outside this module makes the engine testable and
-    lets us change market-data vendors without changing the analytics layer.
-    """
+def build_historical_edge(events: Sequence[Mapping[str, Any]], market_data_provider: Any, benchmark: str = "XBI") -> dict[str, Any]:
     metrics = []
     for event in events:
         bars = market_data_provider.get_event_bars(event)
         benchmark_bars = market_data_provider.get_benchmark_bars(event, benchmark)
         metrics.append(calculate_event_metrics(event, bars, benchmark_bars))
-
     return {
         "benchmark": benchmark,
         "events": metrics,
