@@ -46,8 +46,8 @@
         "3D": {
           "confidence": "LOW",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": 1.9905043422015822,
-          "median_directional_abnormal_return_pct": 1.9905043422015822,
+          "median_abnormal_return_pct": 2.3027752477765397,
+          "median_directional_abnormal_return_pct": 2.3027752477765397,
           "n": 2,
           "win_rate": 0.5
         },
@@ -90,6 +90,36 @@
           "win_rate": 1.0
         }
       }
+    },
+    "zilganersen": {
+      "events": 2,
+      "group": "zilganersen",
+      "windows": {
+        "1D": {
+          "confidence": "LOW",
+          "edge": "NEUTRAL",
+          "median_abnormal_return_pct": 0.27794909969036663,
+          "median_directional_abnormal_return_pct": 0.27794909969036663,
+          "n": 2,
+          "win_rate": 1.0
+        },
+        "3D": {
+          "confidence": "LOW",
+          "edge": "NEUTRAL",
+          "median_abnormal_return_pct": -0.683820876799579,
+          "median_directional_abnormal_return_pct": -0.683820876799579,
+          "n": 2,
+          "win_rate": 0.0
+        },
+        "5D": {
+          "confidence": "LOW",
+          "edge": "NEUTRAL",
+          "median_abnormal_return_pct": null,
+          "median_directional_abnormal_return_pct": null,
+          "n": 0,
+          "win_rate": null
+        }
+      }
     }
   },
   "by_subtype": {
@@ -124,24 +154,24 @@
       }
     },
     "FDA_APPROVAL": {
-      "events": 3,
+      "events": 5,
       "group": "FDA_APPROVAL",
       "windows": {
         "1D": {
           "confidence": "LOW",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": 3.119677339299942,
-          "median_directional_abnormal_return_pct": 3.119677339299942,
-          "n": 3,
+          "median_abnormal_return_pct": 0.7977630860132257,
+          "median_directional_abnormal_return_pct": 0.7977630860132257,
+          "n": 5,
           "win_rate": 1.0
         },
         "3D": {
           "confidence": "LOW",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": 4.769892547550924,
-          "median_directional_abnormal_return_pct": 4.769892547550924,
-          "n": 3,
-          "win_rate": 0.6666666666666666
+          "median_abnormal_return_pct": -0.683820876799579,
+          "median_directional_abnormal_return_pct": -0.683820876799579,
+          "n": 5,
+          "win_rate": 0.4
         },
         "5D": {
           "confidence": "LOW",
@@ -155,6 +185,36 @@
     }
   },
   "by_ticker": {
+    "IONS": {
+      "events": 2,
+      "group": "IONS",
+      "windows": {
+        "1D": {
+          "confidence": "LOW",
+          "edge": "NEUTRAL",
+          "median_abnormal_return_pct": 0.27794909969036663,
+          "median_directional_abnormal_return_pct": 0.27794909969036663,
+          "n": 2,
+          "win_rate": 1.0
+        },
+        "3D": {
+          "confidence": "LOW",
+          "edge": "NEUTRAL",
+          "median_abnormal_return_pct": -0.683820876799579,
+          "median_directional_abnormal_return_pct": -0.683820876799579,
+          "n": 2,
+          "win_rate": 0.0
+        },
+        "5D": {
+          "confidence": "LOW",
+          "edge": "NEUTRAL",
+          "median_abnormal_return_pct": null,
+          "median_directional_abnormal_return_pct": null,
+          "n": 0,
+          "win_rate": null
+        }
+      }
+    },
     "SMMT": {
       "events": 2,
       "group": "SMMT",
@@ -170,8 +230,8 @@
         "3D": {
           "confidence": "LOW",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": 1.9905043422015822,
-          "median_directional_abnormal_return_pct": 1.9905043422015822,
+          "median_abnormal_return_pct": 2.3027752477765397,
+          "median_directional_abnormal_return_pct": 2.3027752477765397,
           "n": 2,
           "win_rate": 0.5
         },
@@ -247,6 +307,37 @@
     }
   },
   "events": [
+    {
+      "company": "Tenax Therapeutics",
+      "direction": "POSITIVE",
+      "event_id": "ce0482cddbe5bce29e300ab8",
+      "event_price": 1.375,
+      "event_timestamp": "2026-08-10",
+      "program": "TNX-103",
+      "subtype": "CLINICAL_RESULTS",
+      "ticker": "TENX",
+      "volume_expansion": null,
+      "windows": {
+        "1D": {
+          "abnormal_return_pct": 17.792865107938425,
+          "benchmark_return_pct": 0.025317057034057733,
+          "directional_abnormal_return_pct": 17.792865107938425,
+          "stock_return_pct": 17.818182164972484
+        },
+        "3D": {
+          "abnormal_return_pct": 33.83127681240657,
+          "benchmark_return_pct": -0.7403646003815489,
+          "directional_abnormal_return_pct": 33.83127681240657,
+          "stock_return_pct": 33.090912212025025
+        },
+        "5D": {
+          "abnormal_return_pct": 23.41445226737584,
+          "benchmark_return_pct": 0.9491868705858053,
+          "directional_abnormal_return_pct": 23.41445226737584,
+          "stock_return_pct": 24.363639137961645
+        }
+      }
+    },
     {
       "company": "Zymeworks",
       "direction": "POSITIVE",
@@ -327,10 +418,10 @@
           "stock_return_pct": 2.77291538085791
         },
         "3D": {
-          "abnormal_return_pct": 4.769892547550924,
-          "benchmark_return_pct": -2.90181538555222,
-          "directional_abnormal_return_pct": 4.769892547550924,
-          "stock_return_pct": 1.8680771619987047
+          "abnormal_return_pct": 5.394434358700839,
+          "benchmark_return_pct": -2.9717785743512692,
+          "directional_abnormal_return_pct": 5.394434358700839,
+          "stock_return_pct": 2.42265578434957
         },
         "5D": {
           "abnormal_return_pct": null,
@@ -341,49 +432,71 @@
       }
     },
     {
-      "company": "Tenax Therapeutics",
-      "direction": "POSITIVE",
-      "event_id": "ce0482cddbe5bce29e300ab8",
-      "event_price": 1.375,
-      "event_timestamp": "2026-08-10",
-      "program": "TNX-103",
-      "subtype": "CLINICAL_RESULTS",
-      "ticker": "TENX",
+      "company": "Ionis Pharmaceuticals",
+      "direction": "CATALYST",
+      "event_id": "823094d991c867e9b85f73ec",
+      "event_price": 58.130001068115234,
+      "event_timestamp": "Thu, 03 Sep 2026 15:48:27 EDT",
+      "program": "zilganersen",
+      "subtype": "FDA_APPROVAL",
+      "ticker": "IONS",
       "volume_expansion": null,
       "windows": {
         "1D": {
-          "abnormal_return_pct": 17.792865107938425,
-          "benchmark_return_pct": 0.025317057034057733,
-          "directional_abnormal_return_pct": 17.792865107938425,
-          "stock_return_pct": 17.818182164972484
+          "abnormal_return_pct": 0.27794909969036663,
+          "benchmark_return_pct": -0.3467619584420323,
+          "directional_abnormal_return_pct": 0.27794909969036663,
+          "stock_return_pct": -0.06881285875166565
         },
         "3D": {
-          "abnormal_return_pct": 33.83127681240657,
-          "benchmark_return_pct": -0.7403646003815489,
-          "directional_abnormal_return_pct": 33.83127681240657,
-          "stock_return_pct": 33.090912212025025
+          "abnormal_return_pct": -0.683820876799579,
+          "benchmark_return_pct": -2.9717785743512692,
+          "directional_abnormal_return_pct": -0.683820876799579,
+          "stock_return_pct": -3.6555994511508483
         },
         "5D": {
-          "abnormal_return_pct": 23.41445226737584,
-          "benchmark_return_pct": 0.9491868705858053,
-          "directional_abnormal_return_pct": 23.41445226737584,
-          "stock_return_pct": 24.363639137961645
+          "abnormal_return_pct": null,
+          "benchmark_return_pct": null,
+          "directional_abnormal_return_pct": null,
+          "stock_return_pct": null
+        }
+      }
+    },
+    {
+      "company": "Ionis Pharmaceuticals",
+      "direction": "CATALYST",
+      "event_id": "ffaa1edbf6c7ee4e306235fc",
+      "event_price": 58.130001068115234,
+      "event_timestamp": "Thu, 03 Sep 2026 15:48:27 EDT",
+      "program": "zilganersen",
+      "subtype": "FDA_APPROVAL",
+      "ticker": "IONS",
+      "volume_expansion": null,
+      "windows": {
+        "1D": {
+          "abnormal_return_pct": 0.27794909969036663,
+          "benchmark_return_pct": -0.3467619584420323,
+          "directional_abnormal_return_pct": 0.27794909969036663,
+          "stock_return_pct": -0.06881285875166565
+        },
+        "3D": {
+          "abnormal_return_pct": -0.683820876799579,
+          "benchmark_return_pct": -2.9717785743512692,
+          "directional_abnormal_return_pct": -0.683820876799579,
+          "stock_return_pct": -3.6555994511508483
+        },
+        "5D": {
+          "abnormal_return_pct": null,
+          "benchmark_return_pct": null,
+          "directional_abnormal_return_pct": null,
+          "stock_return_pct": null
         }
       }
     }
   ],
   "events_processed": 6,
-  "events_with_metrics": 4,
-  "failed_events": [
-    {
-      "event_id": "823094d991c867e9b85f73ec",
-      "reason": "missing_event_price"
-    },
-    {
-      "event_id": "ffaa1edbf6c7ee4e306235fc",
-      "reason": "missing_event_price"
-    }
-  ],
-  "failures": 2,
-  "version": "1.0"
+  "events_with_metrics": 6,
+  "failed_events": [],
+  "failures": 0,
+  "version": "1.1"
 }
