@@ -12,6 +12,26 @@ TELEGRAM_API = "https://api.telegram.org"
 MAX_MESSAGE_LENGTH = 4096
 
 
+# Display-only aliases. The underlying entity/program identity remains unchanged.
+DRUG_DISPLAY_NAMES = {
+    "zilganersen": "Zilganersen (Zanvastro)",
+}
+
+EVENT_DISPLAY_NAMES = {
+    "FDA_APPROVAL": "FDA APPROVAL",
+    "FDA_REJECTION": "FDA REJECTION",
+    "FDA_SAFETY_WARNING": "FDA SAFETY WARNING",
+    "CLINICAL_RESULTS": "CLINICAL RESULTS",
+    "LABEL_EXPANSION": "LABEL EXPANSION",
+    "REGULATORY_FILING": "REGULATORY FILING",
+    "TRIAL_HOLD": "TRIAL HOLD",
+    "TRIAL_HOLD_LIFTED": "TRIAL HOLD LIFTED",
+    "PHASE_ADVANCED": "PHASE ADVANCED",
+    "DATE_ACCELERATED": "DATE ACCELERATED",
+    "DATE_DELAYED": "DATE DELAYED",
+}
+
+
 def send_telegram(message):
     token = os.getenv("TELEGRAM_BOT_TOKEN")
     chat_id = os.getenv("TELEGRAM_CHAT_ID")
@@ -72,15 +92,35 @@ def _drug_name(alert, program):
         value = _clean_text(alert.get(key), 100)
         if value and len(value) <= 100:
             return value
-    return program
+    return DRUG_DISPLAY_NAMES.get(str(program).strip().lower(), program)
 
 
-def _why_it_matters(alert, event):
+def _event_display_name(subtype, event_type):
+    raw = _clean_text(subtype or event_type, 100).upper()
+    if raw in EVENT_DISPLAY_NAMES:
+        return EVENT_DISPLAY_NAMES[raw]
+    return raw.replace("_", " ") if raw else "CATALYST"
+
+
+def _why_it_matters(alert, event, subtype):
     explainer = alert.get("catalyst_explainer") or {}
     why = _clean_text(explainer.get("why_it_matters"), 280)
     if why:
         return why
-    return _clean_text(event.get("why_it_matters") or event.get("trading_impact_reason"), 280)
+
+    why = _clean_text(event.get("why_it_matters") or event.get("trading_impact_reason"), 280)
+    if why:
+        return why
+
+    # Keep the fallback specific to the catalyst rather than generic boilerplate.
+    fallback = {
+        "FDA_APPROVAL": "FDA approval converts the program into an approved product and marks a major regulatory and commercial milestone.",
+        "FDA_REJECTION": "FDA rejection is a major regulatory setback that can materially change the program's commercial outlook.",
+        "FDA_SAFETY_WARNING": "A new FDA safety warning can materially affect the product's risk profile, label and commercial outlook.",
+        "CLINICAL_RESULTS": "Clinical results can materially change the probability of success and valuation of the program.",
+        "LABEL_EXPANSION": "A label expansion increases the addressable patient population and can materially change the product's commercial opportunity.",
+    }
+    return fallback.get(str(subtype).upper())
 
 
 def format_catalyst_alert(alert):
@@ -105,7 +145,8 @@ def format_catalyst_alert(alert):
     reaction_pct = alert.get("reaction_pct", reaction.get("reaction_pct"))
     reaction_direction = alert.get("reaction_direction", reaction.get("reaction_direction", "UNKNOWN"))
     title = _clean_text(alert.get("title") or event.get("title"), 260)
-    why = _why_it_matters(alert, event)
+    why = _why_it_matters(alert, event, subtype)
+    event_display = _event_display_name(subtype, event_type)
 
     if alert_priority is None:
         priority_event = dict(event)
@@ -122,7 +163,7 @@ def format_catalyst_alert(alert):
         f"🧬 {ticker}",
         f"💊 {drug_name}",
         "",
-        f"📰 {subtype or event_type}",
+        f"📰 {event_display}",
         title or "Catalyst detected",
         "",
         f"🎯 Catalyst: {score}/100 · {label}",
