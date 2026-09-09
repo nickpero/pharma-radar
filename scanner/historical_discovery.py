@@ -5,6 +5,7 @@ import hashlib
 import json
 import os
 import re
+import time
 from datetime import date, datetime, timezone
 from html import unescape
 from html.parser import HTMLParser
@@ -18,6 +19,7 @@ WATCHLIST = ROOT / "data" / "watchlist.json"
 SEC_CIK_MAP = ROOT / "data" / "sec_cik_map.json"
 OUTPUT = ROOT / "data" / "historical_discovered_events.json"
 SEC_SUBMISSIONS_URL = "https://data.sec.gov/submissions/CIK{cik}.json"
+SEC_EFTS_URL = "https://efts.sec.gov/LATEST/search-index"
 SEC_ARCHIVE_URL = "https://www.sec.gov/Archives/edgar/data/{cik}/{accession}/{document}"
 FDA_URL = "https://api.fda.gov/drug/drugsfda.json"
 DEFAULT_START_YEAR = 2015
@@ -37,6 +39,16 @@ PATTERNS = [
     ("DATE_DELAYED", "NEGATIVE", ("delayed timeline", "delay in the timeline", "later than expected", "delayed submission")),
     ("REGULATORY_FILING", "POSITIVE", ("nda submission", "bla submission", "regulatory submission", "submitted the application", "filing accepted")),
 ]
+
+# Narrow queries are used by the EFTS fallback.  They let the query itself
+# provide the catalyst class even though we do not download the filing body.
+EFTS_QUERIES = (
+    ("NEGATIVE", '"complete response letter" OR "not approved" OR rejected OR rejection OR refused OR denied OR "failed to meet" OR "did not meet" OR "missed the primary endpoint" OR "failed the primary endpoint" OR futility OR "negative topline"'),
+    ("HOLD_SAFETY", '"clinical hold" OR "placed on hold" OR "study hold" OR "boxed warning" OR "safety warning" OR "serious safety signal" OR "safety concern"'),
+    ("POSITIVE_CLINICAL", '"met the primary endpoint" OR "met its primary endpoint" OR "positive topline" OR "positive results" OR "statistically significant" OR "clinical benefit" OR "topline results" OR "clinical trial results"'),
+    ("REGULATORY", '"fda approves" OR "fda approved" OR "receives fda approval" OR "received fda approval" OR "full approval" OR "granted approval" OR "label expansion" OR "expanded indication" OR "new indication" OR "expanded use" OR "advanced to phase" OR "advances to phase" OR "progressed to phase" OR "nda submission" OR "bla submission" OR "regulatory submission" OR "submitted the application" OR "filing accepted"'),
+    ("TIMING", '"accelerated timeline" OR "earlier than expected" OR "accelerated the timeline" OR "delayed timeline" OR "delay in the timeline" OR "later than expected" OR "delayed submission"'),
+)
 
 
 def _load(path: Path) -> Any:
@@ -72,7 +84,11 @@ def _headers(source: str) -> dict[str, str]:
         "SEC_USER_AGENT",
         "Pharma Radar/1.0 (103763934+nickpero@users.noreply.github.com)",
     )
-    return {"User-Agent": user_agent, "Accept-Encoding": "gzip, deflate"}
+    return {
+        "User-Agent": user_agent,
+        "Accept": "application/json, text/plain, */*",
+        "Accept-Encoding": "gzip, deflate",
+    }
 
 
 def _event_id(item: dict[str, Any]) -> str:
@@ -155,6 +171,131 @@ def _all_sec_rows(session: requests.Session, cik: str, start_date: date) -> list
             except Exception:
                 continue
     return [row for row in rows if (_parse_date(row.get("filingDate")) or date.min) >= start_date]
+
+
+def _efts_accession_document(hit: dict[str, Any]) -> tuple[str, str]:
+    raw_id = str(hit.get("_id") or "")
+    if ":" in raw_id:
+        accession, document = raw_id.split(":", 1)
+        return accession, document
+    source = hit.get("_source") or {}
+    accession = str(source.get("adsh") or source.get("accession_number") or "")
+    document = str(source.get("file_name") or source.get("document") or "")
+    return accession, document
+
+
+def _efts_classification(category: str, title: str) -> tuple[str, str]:
+    # Prefer the filing title when it explicitly identifies the event; otherwise
+    # fall back to the query bucket that produced the hit.
+    classified = _classify(title)
+    if classified:
+        return classified
+    if category == "NEGATIVE":
+        return "CLINICAL_RESULTS", "NEGATIVE"
+    if category == "HOLD_SAFETY":
+        lower = title.lower()
+        if "safety" in lower or "warning" in lower:
+            return "FDA_SAFETY_WARNING", "NEGATIVE"
+        return "TRIAL_HOLD", "NEGATIVE"
+    if category == "POSITIVE_CLINICAL":
+        return "CLINICAL_RESULTS", "POSITIVE"
+    if category == "REGULATORY":
+        lower = title.lower()
+        if "approval" in lower or "approves" in lower or "approved" in lower:
+            return "FDA_APPROVAL", "POSITIVE"
+        if "label" in lower or "indication" in lower:
+            return "LABEL_EXPANSION", "POSITIVE"
+        if "phase" in lower:
+            return "PHASE_ADVANCED", "POSITIVE"
+        return "REGULATORY_FILING", "POSITIVE"
+    if "delay" in title.lower() or "delayed" in title.lower():
+        return "DATE_DELAYED", "NEGATIVE"
+    return "DATE_ACCELERATED", "POSITIVE"
+
+
+def discover_sec_efts(
+    session: requests.Session,
+    ticker: str,
+    company: str,
+    programs: list[str],
+    cik: str,
+    start_date: date,
+    max_pages_per_query: int = 5,
+) -> list[dict[str, Any]]:
+    """Discover catalysts from SEC's Full-Text Search index without archive downloads.
+
+    This is the GitHub Actions-safe path when data.sec.gov/submissions is blocked.
+    EFTS is a separate SEC host and returns filing metadata for matching full-text
+    phrases, so we can build conservative catalyst events without downloading the
+    filing HTML from www.sec.gov.
+    """
+    padded = str(cik).zfill(10)
+    end_date = date.today()
+    events: dict[str, dict[str, Any]] = {}
+
+    for category, query in EFTS_QUERIES:
+        offset = 0
+        for _ in range(max_pages_per_query):
+            params = {
+                "q": f"({query})",
+                "forms": "8-K,6-K",
+                "dateRange": "custom",
+                "startdt": start_date.isoformat(),
+                "enddt": end_date.isoformat(),
+                "ciks": padded,
+                "from": offset,
+                "size": 100,
+            }
+            response = session.get(SEC_EFTS_URL, params=params, headers=_headers("sec-efts"), timeout=30)
+            response.raise_for_status()
+            payload = response.json()
+            hits = ((payload.get("hits") or {}).get("hits") or [])
+            if not hits:
+                break
+
+            for hit in hits:
+                source = hit.get("_source") or {}
+                accession, document = _efts_accession_document(hit)
+                file_date = str(source.get("file_date") or source.get("display_date_filed") or "")
+                if not accession or not file_date:
+                    continue
+                if not document:
+                    document = ""
+                title = str(source.get("file_description") or source.get("file_type") or document or "SEC filing")
+                subtype, direction = _efts_classification(category, title)
+                program = _program_from_text(title, programs)
+                accession_path = accession.replace("-", "")
+                if document:
+                    url = SEC_ARCHIVE_URL.format(cik=str(int(cik)), accession=accession_path, document=document)
+                else:
+                    url = f"https://www.sec.gov/Archives/edgar/data/{int(cik)}/{accession_path}/"
+                event = {
+                    "event_id": None,
+                    "ticker": ticker,
+                    "company": company,
+                    "program": program,
+                    "subtype": subtype,
+                    "direction": direction,
+                    "event_timestamp": file_date,
+                    "source": "SEC",
+                    "source_type": "SEC_EFTS",
+                    "url": url,
+                    "accession_number": accession,
+                    "form": source.get("form_type"),
+                    "items": source.get("items"),
+                    "title": title,
+                }
+                event["event_id"] = _event_id(event)
+                events[event["event_id"]] = event
+
+            offset += len(hits)
+            total = ((payload.get("hits") or {}).get("total") or {}).get("value")
+            if len(hits) < 100 or (isinstance(total, int) and offset >= total):
+                break
+            time.sleep(0.2)
+        time.sleep(0.2)
+
+    return list(events.values())
 
 
 def discover_sec(session: requests.Session, ticker: str, company: str, programs: list[str], cik: str, start_date: date, max_filings: int = 300) -> list[dict[str, Any]]:
@@ -265,7 +406,17 @@ def discover(start_year: int | None = None) -> dict[str, Any]:
             if not cik:
                 errors.append({"ticker": ticker, "source": "SEC", "error": "Missing local SEC CIK mapping"})
             else:
-                for event in discover_sec(session, ticker, company, programs, cik, start_date):
+                try:
+                    sec_events = discover_sec(session, ticker, company, programs, cik, start_date)
+                except requests.HTTPError as exc:
+                    if getattr(exc.response, "status_code", None) == 403:
+                        # GitHub-hosted runners can be blocked by data.sec.gov even
+                        # with a compliant User-Agent. Fall back to SEC EFTS, which
+                        # searches the filing text on its separate search service.
+                        sec_events = discover_sec_efts(session, ticker, company, programs, cik, start_date)
+                    else:
+                        raise
+                for event in sec_events:
                     events[event["event_id"]] = event
         except Exception as exc:
             errors.append({"ticker": ticker, "source": "SEC", "error": str(exc)})
@@ -277,7 +428,7 @@ def discover(start_year: int | None = None) -> dict[str, Any]:
 
     ordered = sorted(events.values(), key=lambda x: str(x.get("event_timestamp") or ""))
     payload = {
-        "version": "1.1", "generated_at": datetime.now(timezone.utc).isoformat(), "start_year": start_year,
+        "version": "1.2", "generated_at": datetime.now(timezone.utc).isoformat(), "start_year": start_year,
         "tickers": len(watchlist), "events": ordered, "events_count": len(ordered),
         "by_source": {source: sum(1 for x in ordered if x.get("source") == source) for source in ("SEC", "FDA")},
         "errors": errors[:200],
