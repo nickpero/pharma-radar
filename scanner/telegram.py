@@ -125,41 +125,29 @@ def format_catalyst_alert(alert):
         f"📰 {subtype or event_type}",
         title or "Catalyst detected",
         "",
-        "🎯 CATALYST",
-        f"{score}/100 · {label}",
+        f"🎯 Catalyst: {score}/100 · {label}",
+        f"🚨 Priority: {alert_priority}/100 · {alert_tier}",
+        f"📊 Setup: {setup_score}/100 · Window: {window}",
         "",
-        "🚨 PRIORITY",
-        f"{alert_priority}/100 · {alert_tier}",
-        "",
-        "📊 TRADING SETUP",
-        f"{setup_score}/100 · Window: {window}",
-        "",
-        "📈 MARKET REACTION",
+        "📈 Market reaction: " + (
+            f"{_num(reaction_pct)}% · {reaction_direction}"
+            if reaction_pct is not None and _num(reaction_pct) is not None
+            else " | ".join(
+                f"{label_window} {_num(reaction.get(f'reaction_{label_window}_pct'))}%"
+                for label_window in ("1m", "5m", "15m", "30m", "60m")
+                if _num(reaction.get(f"reaction_{label_window}_pct")) is not None
+            ) or "N/A"
+        ),
     ]
-
-    if reaction_pct is not None:
-        formatted = _num(reaction_pct)
-        lines.append(f"{formatted}% · {reaction_direction}" if formatted else "N/A")
-    else:
-        available = []
-        for label_window in ("1m", "5m", "15m", "30m", "60m"):
-            formatted = _num(reaction.get(f"reaction_{label_window}_pct"))
-            if formatted is not None:
-                available.append(f"{label_window} {formatted}%")
-        lines.append(" | ".join(available) if available else "N/A")
 
     if why:
         lines.extend(["", "💡 WHY IT MATTERS", why])
 
     source = _clean_text(alert.get("source") or event.get("source"))
     if source:
-        lines.extend(["", f"🔎 {source}"])
+        lines.extend(["", f"🔎 Source: {source}"])
 
-    lines.extend([
-        "",
-        "⚠️ Informational only — no automatic buy/sell signal.",
-        "━━━━━━━━━━━━━━━━━━",
-    ])
+    lines.extend(["", "⚠️ Informational only — no automatic buy/sell signal.", "━━━━━━━━━━━━━━━━━━"])
     return "\n".join(str(line) for line in lines)
 
 
