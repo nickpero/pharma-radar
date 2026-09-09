@@ -392,32 +392,32 @@
       }
     },
     "daraxonrasib": {
-      "events": 14,
+      "events": 15,
       "group": "daraxonrasib",
       "windows": {
         "1D": {
           "confidence": "MEDIUM",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": -0.516244110855224,
-          "median_directional_abnormal_return_pct": -0.516244110855224,
-          "n": 14,
-          "win_rate": 0.5
+          "median_abnormal_return_pct": 0.11462870322257457,
+          "median_directional_abnormal_return_pct": 0.11462870322257457,
+          "n": 15,
+          "win_rate": 0.5333333333333333
         },
         "3D": {
           "confidence": "MEDIUM",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": -1.1919450003573084,
-          "median_directional_abnormal_return_pct": -1.1919450003573084,
-          "n": 13,
-          "win_rate": 0.23076923076923078
+          "median_abnormal_return_pct": -1.1909584376603277,
+          "median_directional_abnormal_return_pct": -1.1909584376603277,
+          "n": 14,
+          "win_rate": 0.21428571428571427
         },
         "5D": {
           "confidence": "MEDIUM",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": 0.1487939544150274,
-          "median_directional_abnormal_return_pct": 0.1487939544150274,
-          "n": 13,
-          "win_rate": 0.5384615384615384
+          "median_abnormal_return_pct": -0.034155514381750685,
+          "median_directional_abnormal_return_pct": -0.034155514381750685,
+          "n": 14,
+          "win_rate": 0.5
         }
       }
     },
@@ -1054,15 +1054,15 @@
       }
     },
     "FDA_APPROVAL": {
-      "events": 5,
+      "events": 6,
       "group": "FDA_APPROVAL",
       "windows": {
         "1D": {
           "confidence": "LOW",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": 0.7977630860132257,
-          "median_directional_abnormal_return_pct": 0.7977630860132257,
-          "n": 5,
+          "median_abnormal_return_pct": 1.7715843417156152,
+          "median_directional_abnormal_return_pct": 1.7715843417156152,
+          "n": 6,
           "win_rate": 1.0
         },
         "3D": {
@@ -1070,16 +1070,16 @@
           "edge": "NEUTRAL",
           "median_abnormal_return_pct": -0.5880637891883533,
           "median_directional_abnormal_return_pct": -0.5880637891883533,
-          "n": 5,
-          "win_rate": 0.4
+          "n": 6,
+          "win_rate": 0.3333333333333333
         },
         "5D": {
           "confidence": "LOW",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": 7.88656906844415,
-          "median_directional_abnormal_return_pct": 7.88656906844415,
-          "n": 2,
-          "win_rate": 1.0
+          "median_abnormal_return_pct": 4.393604741547175,
+          "median_directional_abnormal_return_pct": 4.393604741547175,
+          "n": 3,
+          "win_rate": 0.6666666666666666
         }
       }
     },
@@ -1836,32 +1836,32 @@
       }
     },
     "RVMD": {
-      "events": 28,
+      "events": 29,
       "group": "RVMD",
       "windows": {
         "1D": {
           "confidence": "HIGH",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": 0.5534108486184741,
-          "median_directional_abnormal_return_pct": 0.5534108486184741,
-          "n": 28,
-          "win_rate": 0.6071428571428571
+          "median_abnormal_return_pct": 0.7524632420896182,
+          "median_directional_abnormal_return_pct": 0.7524632420896182,
+          "n": 29,
+          "win_rate": 0.6206896551724138
         },
         "3D": {
           "confidence": "HIGH",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": 0.4333594380913075,
-          "median_directional_abnormal_return_pct": 0.4333594380913075,
-          "n": 27,
-          "win_rate": 0.5185185185185185
+          "median_abnormal_return_pct": 0.1313511177798321,
+          "median_directional_abnormal_return_pct": 0.1313511177798321,
+          "n": 28,
+          "win_rate": 0.5
         },
         "5D": {
           "confidence": "HIGH",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": 2.1317933885551588,
-          "median_directional_abnormal_return_pct": 2.1317933885551588,
-          "n": 27,
-          "win_rate": 0.6666666666666666
+          "median_abnormal_return_pct": 1.9326511385933942,
+          "median_directional_abnormal_return_pct": 1.9326511385933942,
+          "n": 28,
+          "win_rate": 0.6428571428571429
         }
       }
     },
@@ -95351,7 +95351,7 @@
       "subtype": "TRIAL_UPDATED",
       "ticker": "TENX",
       "url": "https://clinicaltrials.gov/study/NCT07436689",
-      "volume_expansion": 0.9633901310532841,
+      "volume_expansion": 0.9697901607838245,
       "windows": {
         "1D": {
           "abnormal_return_pct": null,
@@ -95385,7 +95385,7 @@
       "subtype": "TRIAL_UPDATED",
       "ticker": "RARE",
       "url": "https://clinicaltrials.gov/study/NCT07157254",
-      "volume_expansion": 1.0782471840024952,
+      "volume_expansion": 1.0947686623562012,
       "windows": {
         "1D": {
           "abnormal_return_pct": null,
@@ -95419,7 +95419,7 @@
       "subtype": "TRIAL_UPDATED",
       "ticker": "RARE",
       "url": "https://clinicaltrials.gov/study/NCT05345171",
-      "volume_expansion": 1.0782471840024952,
+      "volume_expansion": 1.0947686623562012,
       "windows": {
         "1D": {
           "abnormal_return_pct": null,
@@ -95453,7 +95453,7 @@
       "subtype": "TRIAL_UPDATED",
       "ticker": "RARE",
       "url": "https://clinicaltrials.gov/study/NCT06415344",
-      "volume_expansion": 1.0782471840024952,
+      "volume_expansion": 1.0947686623562012,
       "windows": {
         "1D": {
           "abnormal_return_pct": null,
@@ -95487,7 +95487,7 @@
       "subtype": "TRIAL_UPDATED",
       "ticker": "EYPT",
       "url": "https://clinicaltrials.gov/study/NCT07809789",
-      "volume_expansion": 0.4224123612575536,
+      "volume_expansion": 0.42289987302019205,
       "windows": {
         "1D": {
           "abnormal_return_pct": null,
@@ -95521,7 +95521,7 @@
       "subtype": "TRIAL_UPDATED",
       "ticker": "EYPT",
       "url": "https://clinicaltrials.gov/study/NCT07809802",
-      "volume_expansion": 0.4224123612575536,
+      "volume_expansion": 0.42289987302019205,
       "windows": {
         "1D": {
           "abnormal_return_pct": null,
@@ -95555,7 +95555,7 @@
       "subtype": "TRIAL_UPDATED",
       "ticker": "BNTX",
       "url": "https://clinicaltrials.gov/study/NCT06750185",
-      "volume_expansion": 0.4109883458701314,
+      "volume_expansion": 0.4112257933101512,
       "windows": {
         "1D": {
           "abnormal_return_pct": null,
@@ -95589,7 +95589,7 @@
       "subtype": "TRIAL_UPDATED",
       "ticker": "ROIV",
       "url": "https://clinicaltrials.gov/study/NCT06635850",
-      "volume_expansion": 1.278761281961974,
+      "volume_expansion": 1.282512135655895,
       "windows": {
         "1D": {
           "abnormal_return_pct": null,
@@ -95623,7 +95623,7 @@
       "subtype": "TRIAL_UPDATED",
       "ticker": "ALNY",
       "url": "https://clinicaltrials.gov/study/NCT07358078",
-      "volume_expansion": 0.8090153190555655,
+      "volume_expansion": 0.81347649596092,
       "windows": {
         "1D": {
           "abnormal_return_pct": null,
@@ -95657,7 +95657,7 @@
       "subtype": "TRIAL_UPDATED",
       "ticker": "CRSP",
       "url": "https://clinicaltrials.gov/study/NCT07804004",
-      "volume_expansion": 0.8234133524756685,
+      "volume_expansion": 0.8245800127538131,
       "windows": {
         "1D": {
           "abnormal_return_pct": null,
@@ -95691,7 +95691,7 @@
       "subtype": "TRIAL_UPDATED",
       "ticker": "VRTX",
       "url": "https://clinicaltrials.gov/study/NCT07378865",
-      "volume_expansion": 0.8938689319454332,
+      "volume_expansion": 0.896147999923037,
       "windows": {
         "1D": {
           "abnormal_return_pct": null,
@@ -95780,10 +95780,44 @@
           "stock_return_pct": null
         }
       }
+    },
+    {
+      "company": "Revolution Medicines",
+      "direction": "CATALYST",
+      "event_id": "588b7401de7fddd6dfe0d17c",
+      "event_price": 215.44000244140625,
+      "event_timestamp": "Wed, 26 Aug 2026 10:33:36 EDT",
+      "program": "daraxonrasib",
+      "source": "FDA RSS",
+      "source_type": "PRIMARY_REGULATORY",
+      "subtype": "FDA_APPROVAL",
+      "ticker": "RVMD",
+      "url": "https://www.fda.gov/news-events/press-announcements/fda-approves-first-class-targeted-therapy-metastatic-pancreatic-cancer",
+      "volume_expansion": 2.1232204074009364,
+      "windows": {
+        "1D": {
+          "abnormal_return_pct": 2.7454055974180047,
+          "benchmark_return_pct": -0.09501969397787136,
+          "directional_abnormal_return_pct": 2.7454055974180047,
+          "stock_return_pct": 2.6503859034401334
+        },
+        "3D": {
+          "abnormal_return_pct": -1.0834875643653152,
+          "benchmark_return_pct": -3.4978320630663973,
+          "directional_abnormal_return_pct": -1.0834875643653152,
+          "stock_return_pct": -4.5813196274317125
+        },
+        "5D": {
+          "abnormal_return_pct": -1.089017949906823,
+          "benchmark_return_pct": -1.7934582121309717,
+          "directional_abnormal_return_pct": -1.089017949906823,
+          "stock_return_pct": -2.8824761620377948
+        }
+      }
     }
   ],
-  "events_processed": 3534,
-  "events_with_metrics": 2756,
+  "events_processed": 3535,
+  "events_with_metrics": 2757,
   "failed_events": [
     {
       "event_id": "ce6d557d8aef8417ed6b1437",

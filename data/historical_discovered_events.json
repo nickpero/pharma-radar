@@ -56454,13 +56454,13 @@
     }
   ],
   "events_count": 3528,
-  "generated_at": "2026-09-09T20:50:36.734054+00:00",
+  "generated_at": "2026-09-09T21:14:22.389131+00:00",
   "notes": [
-    "SEC historical discovery is intentionally excluded from this runner because both data.sec.gov and efts.sec.gov return 403 on GitHub-hosted runners.",
-    "FDA sponsor discovery includes exact and token-based matching.",
-    "ClinicalTrials.gov events are dated trial milestones and are conservative informational events, not inferred efficacy outcomes."
+    "SEC historical discovery is intentionally excluded from this runner because data.sec.gov and efts.sec.gov returned 403 on GitHub-hosted runners.",
+    "FDA discovery uses wildcard sponsor matching against Drugs@FDA/openFDA and excludes generic ANDA approvals.",
+    "ClinicalTrials.gov events are conservative informational milestones; they do not imply positive or negative efficacy."
   ],
   "start_year": 2015,
   "tickers": 29,
-  "version": "2.0-multisource"
+  "version": "3.0-multisource"
 }
