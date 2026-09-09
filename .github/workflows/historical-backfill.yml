@@ -8,6 +8,8 @@ on:
 permissions:
   contents: write
 
+timeout-minutes: 120
+
 concurrency:
   group: historical-backfill
   cancel-in-progress: false
@@ -27,20 +29,41 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Build conservative backfill queue
-        run: python -m scanner.backfill_historical_events
+      - name: Run discovery tests
+        run: |
+          python -m scanner.test_historical_discovery
+          python -m scanner.test_historical_edge
+          python -m scanner.test_historical_market_data
+
+      - name: Discover real SEC and FDA historical catalysts
+        env:
+          PHARMA_RADAR_HISTORICAL_START_YEAR: "2015"
+        run: python -m scanner.historical_discovery
 
       - name: Build Historical Edge dataset
         run: python -m scanner.build_historical_edge
 
-      - name: Persist backfill metadata
+      - name: Report dataset size
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = json.loads(Path("data/historical_edge.json").read_text())
+          d = json.loads(Path("data/historical_discovered_events.json").read_text())
+          print(f"Discovered events: {d.get('events_count', 0)}")
+          print(f"Events with market metrics: {p.get('events_with_metrics', 0)}")
+          print(f"Failures: {p.get('failures', 0)}")
+          print(f"Tickers with subtype history: {len(p.get('by_ticker', {}))}")
+          PY
+
+      - name: Persist historical datasets
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/historical_backfill_queue.json data/historical_edge.json
+          git add data/historical_discovered_events.json data/historical_edge.json data/historical_backfill_queue.json
           if git diff --cached --quiet; then
             echo "No historical backfill changes to commit"
           else
-            git commit -m "Refresh historical backfill dataset [skip ci]"
+            git commit -m "Refresh real historical catalyst dataset [skip ci]"
             git push
           fi
