@@ -8,7 +8,6 @@ from typing import Any, Mapping
 
 import requests
 
-
 YAHOO_CHART_URL = "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
 
 
@@ -88,7 +87,7 @@ class YahooDailyProvider:
             return {"event": {}}
         rows = self._fetch_symbol(
             str(event.get("ticker") or ""),
-            event_date - timedelta(days=7),
+            event_date - timedelta(days=40),
             event_date + timedelta(days=10),
         )
         return self._window_bars(rows, event_date)
@@ -99,7 +98,7 @@ class YahooDailyProvider:
             return {"event": {}}
         rows = self._fetch_symbol(
             benchmark,
-            event_date - timedelta(days=7),
+            event_date - timedelta(days=40),
             event_date + timedelta(days=10),
         )
         return self._window_bars(rows, event_date)
@@ -112,7 +111,15 @@ class YahooDailyProvider:
         if not future:
             return result
         event_day = future[0]
-        result["event"] = dict(rows[event_day.isoformat()])
+        event_row = dict(rows[event_day.isoformat()])
+        prior = [
+            rows[value.isoformat()].get("volume")
+            for value in dates
+            if value < event_day and rows[value.isoformat()].get("volume") is not None
+        ][-20:]
+        if prior:
+            event_row["baseline_volume"] = sum(float(value) for value in prior) / len(prior)
+        result["event"] = event_row
         for offset, window in ((1, "1D"), (3, "3D"), (5, "5D")):
             if len(future) > offset:
                 result[window] = dict(rows[future[offset].isoformat()])
