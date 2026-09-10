@@ -242,32 +242,32 @@
       }
     },
     "UNKNOWN": {
-      "events": 3770,
+      "events": 3780,
       "group": "UNKNOWN",
       "windows": {
         "1D": {
           "confidence": "HIGH",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": 0.011596309399086735,
-          "median_directional_abnormal_return_pct": 0.011596309399086735,
-          "n": 3765,
-          "win_rate": 0.5025232403718459
+          "median_abnormal_return_pct": 0.014283316078489428,
+          "median_directional_abnormal_return_pct": 0.014283316078489428,
+          "n": 3775,
+          "win_rate": 0.503046357615894
         },
         "3D": {
           "confidence": "HIGH",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": -0.03305466667429258,
-          "median_directional_abnormal_return_pct": -0.03305466667429258,
-          "n": 3744,
-          "win_rate": 0.49599358974358976
+          "median_abnormal_return_pct": -0.023947129248513832,
+          "median_directional_abnormal_return_pct": -0.023947129248513832,
+          "n": 3754,
+          "win_rate": 0.4968034096963239
         },
         "5D": {
           "confidence": "HIGH",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": -0.12484946944115727,
-          "median_directional_abnormal_return_pct": -0.12484946944115727,
-          "n": 3722,
-          "win_rate": 0.491671144545943
+          "median_abnormal_return_pct": -0.11183139238895023,
+          "median_directional_abnormal_return_pct": -0.11183139238895023,
+          "n": 3732,
+          "win_rate": 0.4922293676312969
         }
       }
     },
@@ -976,8 +976,8 @@
         "3D": {
           "confidence": "LOW",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": -0.5445455228363034,
-          "median_directional_abnormal_return_pct": -0.5445455228363034,
+          "median_abnormal_return_pct": -0.5566260515096229,
+          "median_directional_abnormal_return_pct": -0.5566260515096229,
           "n": 9,
           "win_rate": 0.4444444444444444
         },
@@ -1038,8 +1038,8 @@
         "3D": {
           "confidence": "LOW",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": 2.4453295408601474,
-          "median_directional_abnormal_return_pct": 2.4453295408601474,
+          "median_abnormal_return_pct": 2.4392892765234877,
+          "median_directional_abnormal_return_pct": 2.4392892765234877,
           "n": 4,
           "win_rate": 0.5
         },
@@ -1080,6 +1080,36 @@
           "median_directional_abnormal_return_pct": -0.5043700041746868,
           "n": 14,
           "win_rate": 0.5
+        }
+      }
+    },
+    "FDA_REJECTION": {
+      "events": 10,
+      "group": "FDA_REJECTION",
+      "windows": {
+        "1D": {
+          "confidence": "MEDIUM",
+          "edge": "NEUTRAL",
+          "median_abnormal_return_pct": 1.2658550592628937,
+          "median_directional_abnormal_return_pct": 1.2658550592628937,
+          "n": 10,
+          "win_rate": 0.7
+        },
+        "3D": {
+          "confidence": "MEDIUM",
+          "edge": "NEUTRAL",
+          "median_abnormal_return_pct": 2.9086141403085684,
+          "median_directional_abnormal_return_pct": 2.9086141403085684,
+          "n": 10,
+          "win_rate": 0.8
+        },
+        "5D": {
+          "confidence": "MEDIUM",
+          "edge": "NEUTRAL",
+          "median_abnormal_return_pct": 2.3388508922380535,
+          "median_directional_abnormal_return_pct": 2.3388508922380535,
+          "n": 10,
+          "win_rate": 0.7
         }
       }
     },
@@ -1416,32 +1446,32 @@
       }
     },
     "CAPR": {
-      "events": 4,
+      "events": 5,
       "group": "CAPR",
       "windows": {
         "1D": {
           "confidence": "LOW",
-          "edge": "NEUTRAL",
-          "median_abnormal_return_pct": -17.77282482528687,
-          "median_directional_abnormal_return_pct": -17.77282482528687,
-          "n": 4,
-          "win_rate": 0.25
+          "edge": "NEGATIVE",
+          "median_abnormal_return_pct": -5.063628212449611,
+          "median_directional_abnormal_return_pct": -5.063628212449611,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
           "confidence": "LOW",
-          "edge": "NEUTRAL",
-          "median_abnormal_return_pct": -16.016207926917268,
-          "median_directional_abnormal_return_pct": -16.016207926917268,
-          "n": 4,
-          "win_rate": 0.25
+          "edge": "NEGATIVE",
+          "median_abnormal_return_pct": -8.099771226361085,
+          "median_directional_abnormal_return_pct": -8.099771226361085,
+          "n": 5,
+          "win_rate": 0.4
         },
         "5D": {
           "confidence": "LOW",
-          "edge": "NEUTRAL",
+          "edge": "NEGATIVE",
           "median_abnormal_return_pct": -15.974329322643378,
           "median_directional_abnormal_return_pct": -15.974329322643378,
-          "n": 4,
-          "win_rate": 0.0
+          "n": 5,
+          "win_rate": 0.2
         }
       }
     },
@@ -1716,37 +1746,37 @@
       }
     },
     "RARE": {
-      "events": 200,
+      "events": 201,
       "group": "RARE",
       "windows": {
         "1D": {
           "confidence": "HIGH",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": -0.011337700472374701,
-          "median_directional_abnormal_return_pct": -0.011337700472374701,
-          "n": 200,
-          "win_rate": 0.5
+          "median_abnormal_return_pct": 0.02328852942812265,
+          "median_directional_abnormal_return_pct": 0.02328852942812265,
+          "n": 201,
+          "win_rate": 0.5024875621890548
         },
         "3D": {
           "confidence": "HIGH",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": 0.8179549329184743,
-          "median_directional_abnormal_return_pct": 0.8179549329184743,
-          "n": 197,
-          "win_rate": 0.5888324873096447
+          "median_abnormal_return_pct": 0.8235214858941746,
+          "median_directional_abnormal_return_pct": 0.8235214858941746,
+          "n": 198,
+          "win_rate": 0.5909090909090909
         },
         "5D": {
           "confidence": "HIGH",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": 0.553865391211017,
-          "median_directional_abnormal_return_pct": 0.553865391211017,
-          "n": 196,
-          "win_rate": 0.5918367346938775
+          "median_abnormal_return_pct": 0.5727549626454165,
+          "median_directional_abnormal_return_pct": 0.5727549626454165,
+          "n": 197,
+          "win_rate": 0.5939086294416244
         }
       }
     },
     "REGN": {
-      "events": 1207,
+      "events": 1212,
       "group": "REGN",
       "windows": {
         "1D": {
@@ -1754,54 +1784,54 @@
           "edge": "NEUTRAL",
           "median_abnormal_return_pct": -0.0550007040065803,
           "median_directional_abnormal_return_pct": -0.0550007040065803,
-          "n": 1205,
-          "win_rate": 0.4829875518672199
+          "n": 1210,
+          "win_rate": 0.4834710743801653
         },
         "3D": {
           "confidence": "HIGH",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": 0.0011100263544339128,
-          "median_directional_abnormal_return_pct": 0.0011100263544339128,
-          "n": 1203,
-          "win_rate": 0.5012468827930174
+          "median_abnormal_return_pct": 0.002782778607324232,
+          "median_directional_abnormal_return_pct": 0.002782778607324232,
+          "n": 1208,
+          "win_rate": 0.5016556291390728
         },
         "5D": {
           "confidence": "HIGH",
           "edge": "NEUTRAL",
           "median_abnormal_return_pct": -0.22027314018520094,
           "median_directional_abnormal_return_pct": -0.22027314018520094,
-          "n": 1201,
-          "win_rate": 0.47626977518734387
+          "n": 1206,
+          "win_rate": 0.4759535655058043
         }
       }
     },
     "RGNX": {
-      "events": 55,
+      "events": 56,
       "group": "RGNX",
       "windows": {
         "1D": {
           "confidence": "HIGH",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": -0.19196146101988498,
-          "median_directional_abnormal_return_pct": -0.19196146101988498,
-          "n": 54,
-          "win_rate": 0.4074074074074074
+          "median_abnormal_return_pct": -0.09951816451840845,
+          "median_directional_abnormal_return_pct": -0.09951816451840845,
+          "n": 55,
+          "win_rate": 0.41818181818181815
         },
         "3D": {
           "confidence": "HIGH",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": 0.06817071693123733,
-          "median_directional_abnormal_return_pct": 0.06817071693123733,
-          "n": 53,
-          "win_rate": 0.5283018867924528
+          "median_abnormal_return_pct": 0.199795546412751,
+          "median_directional_abnormal_return_pct": 0.199795546412751,
+          "n": 54,
+          "win_rate": 0.5370370370370371
         },
         "5D": {
           "confidence": "HIGH",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": -0.7894176532335928,
-          "median_directional_abnormal_return_pct": -0.7894176532335928,
-          "n": 53,
-          "win_rate": 0.4528301886792453
+          "median_abnormal_return_pct": -0.5639002375767532,
+          "median_directional_abnormal_return_pct": -0.5639002375767532,
+          "n": 54,
+          "win_rate": 0.46296296296296297
         }
       }
     },
@@ -2016,7 +2046,7 @@
       }
     },
     "TLX": {
-      "events": 38,
+      "events": 40,
       "group": "TLX",
       "windows": {
         "1D": {
@@ -2024,24 +2054,24 @@
           "edge": "NEUTRAL",
           "median_abnormal_return_pct": 0.4380862820891729,
           "median_directional_abnormal_return_pct": 0.4380862820891729,
-          "n": 38,
-          "win_rate": 0.5789473684210527
+          "n": 40,
+          "win_rate": 0.575
         },
         "3D": {
           "confidence": "HIGH",
           "edge": "NEUTRAL",
-          "median_abnormal_return_pct": -1.4353205598345964,
-          "median_directional_abnormal_return_pct": -1.4353205598345964,
-          "n": 37,
-          "win_rate": 0.35135135135135137
+          "median_abnormal_return_pct": -1.0824637112671898,
+          "median_directional_abnormal_return_pct": -1.0824637112671898,
+          "n": 39,
+          "win_rate": 0.38461538461538464
         },
         "5D": {
           "confidence": "HIGH",
           "edge": "NEUTRAL",
           "median_abnormal_return_pct": -2.8091586922941447,
           "median_directional_abnormal_return_pct": -2.8091586922941447,
-          "n": 37,
-          "win_rate": 0.24324324324324326
+          "n": 39,
+          "win_rate": 0.28205128205128205
         }
       }
     },
@@ -71537,6 +71567,40 @@
     },
     {
       "company": "Regeneron Pharmaceuticals",
+      "direction": "NEGATIVE",
+      "event_id": "6a6810d941cd3bb03649b742",
+      "event_price": 716.0900268554688,
+      "event_timestamp": "2023-06-27",
+      "program": null,
+      "source": "FDA_CRL",
+      "source_type": "PRIMARY_REGULATORY",
+      "subtype": "FDA_REJECTION",
+      "ticker": "REGN",
+      "url": "https://open.fda.gov/crltable/",
+      "volume_expansion": 3.731076409583979,
+      "windows": {
+        "1D": {
+          "abnormal_return_pct": -3.5210812807904723,
+          "benchmark_return_pct": 1.2783468540707998,
+          "directional_abnormal_return_pct": 3.5210812807904723,
+          "stock_return_pct": -2.2427344267196725
+        },
+        "3D": {
+          "abnormal_return_pct": 0.004455530860214552,
+          "benchmark_return_pct": 0.3376734026529826,
+          "directional_abnormal_return_pct": -0.004455530860214552,
+          "stock_return_pct": 0.3421289335131972
+        },
+        "5D": {
+          "abnormal_return_pct": 0.1344417068738668,
+          "benchmark_return_pct": 0.10854313708712482,
+          "directional_abnormal_return_pct": -0.1344417068738668,
+          "stock_return_pct": 0.24298484396099163
+        }
+      }
+    },
+    {
+      "company": "Regeneron Pharmaceuticals",
       "direction": "NEUTRAL",
       "event_id": "6eb3ae21fa53c897f0ee8bdb",
       "event_price": 716.0900268554688,
@@ -84014,6 +84078,74 @@
       }
     },
     {
+      "company": "Regeneron Pharmaceuticals",
+      "direction": "NEGATIVE",
+      "event_id": "403e44e3c4f9462a6a6b2f9a",
+      "event_price": 967.239990234375,
+      "event_timestamp": "2024-03-22",
+      "program": null,
+      "source": "FDA_CRL",
+      "source_type": "PRIMARY_REGULATORY",
+      "subtype": "FDA_REJECTION",
+      "ticker": "REGN",
+      "url": "https://open.fda.gov/crltable/",
+      "volume_expansion": 0.578475809001792,
+      "windows": {
+        "1D": {
+          "abnormal_return_pct": 0.315434591213104,
+          "benchmark_return_pct": -0.9512605952036957,
+          "directional_abnormal_return_pct": -0.315434591213104,
+          "stock_return_pct": -0.6358260039905916
+        },
+        "3D": {
+          "abnormal_return_pct": -1.5401148806160836,
+          "benchmark_return_pct": 1.442930887925864,
+          "directional_abnormal_return_pct": 1.5401148806160836,
+          "stock_return_pct": -0.0971839926902196
+        },
+        "5D": {
+          "abnormal_return_pct": -0.09595074889034994,
+          "benchmark_return_pct": 0.30996250865198416,
+          "directional_abnormal_return_pct": 0.09595074889034994,
+          "stock_return_pct": 0.21401175976163422
+        }
+      }
+    },
+    {
+      "company": "Regeneron Pharmaceuticals",
+      "direction": "NEGATIVE",
+      "event_id": "360a86117eb4f45cc3ffbd1a",
+      "event_price": 967.239990234375,
+      "event_timestamp": "2024-03-22",
+      "program": null,
+      "source": "FDA_CRL",
+      "source_type": "PRIMARY_REGULATORY",
+      "subtype": "FDA_REJECTION",
+      "ticker": "REGN",
+      "url": "https://open.fda.gov/crltable/",
+      "volume_expansion": 0.578475809001792,
+      "windows": {
+        "1D": {
+          "abnormal_return_pct": 0.315434591213104,
+          "benchmark_return_pct": -0.9512605952036957,
+          "directional_abnormal_return_pct": -0.315434591213104,
+          "stock_return_pct": -0.6358260039905916
+        },
+        "3D": {
+          "abnormal_return_pct": -1.5401148806160836,
+          "benchmark_return_pct": 1.442930887925864,
+          "directional_abnormal_return_pct": 1.5401148806160836,
+          "stock_return_pct": -0.0971839926902196
+        },
+        "5D": {
+          "abnormal_return_pct": -0.09595074889034994,
+          "benchmark_return_pct": 0.30996250865198416,
+          "directional_abnormal_return_pct": 0.09595074889034994,
+          "stock_return_pct": 0.21401175976163422
+        }
+      }
+    },
+    {
       "company": "argenx",
       "direction": "NEUTRAL",
       "event_id": "c231217b677666b9bed1345f",
@@ -92612,6 +92744,40 @@
           "benchmark_return_pct": 0.23802227453260105,
           "directional_abnormal_return_pct": -3.3149424170731634,
           "stock_return_pct": -3.0769201425405623
+        }
+      }
+    },
+    {
+      "company": "Regeneron Pharmaceuticals",
+      "direction": "NEGATIVE",
+      "event_id": "cc284b2698d065950030f778",
+      "event_price": 1192.22998046875,
+      "event_timestamp": "2024-08-20",
+      "program": null,
+      "source": "FDA_CRL",
+      "source_type": "PRIMARY_REGULATORY",
+      "subtype": "FDA_REJECTION",
+      "ticker": "REGN",
+      "url": "https://open.fda.gov/crltable/",
+      "volume_expansion": 0.7362205892533947,
+      "windows": {
+        "1D": {
+          "abnormal_return_pct": -1.5597583663543801,
+          "benchmark_return_pct": 0.9818485032146773,
+          "directional_abnormal_return_pct": 1.5597583663543801,
+          "stock_return_pct": -0.5779098631397028
+        },
+        "3D": {
+          "abnormal_return_pct": -0.096492886862376,
+          "benchmark_return_pct": 0.6744027500020788,
+          "directional_abnormal_return_pct": 0.096492886862376,
+          "stock_return_pct": 0.5779098631397028
+        },
+        "5D": {
+          "abnormal_return_pct": 0.5613226046431441,
+          "benchmark_return_pct": 0.23802227453260105,
+          "directional_abnormal_return_pct": -0.5613226046431441,
+          "stock_return_pct": 0.7993448791757451
         }
       }
     },
@@ -106386,6 +106552,40 @@
       }
     },
     {
+      "company": "Telix Pharmaceuticals",
+      "direction": "NEGATIVE",
+      "event_id": "ca9fdaa31ed05b3be43d3816",
+      "event_price": 18.799999237060547,
+      "event_timestamp": "2025-04-25",
+      "program": null,
+      "source": "FDA_CRL",
+      "source_type": "PRIMARY_REGULATORY",
+      "subtype": "FDA_REJECTION",
+      "ticker": "TLX",
+      "url": "https://open.fda.gov/crltable/",
+      "volume_expansion": 0.9323865390552639,
+      "windows": {
+        "1D": {
+          "abnormal_return_pct": -7.93819307390089,
+          "benchmark_return_pct": 1.3956420518156154,
+          "directional_abnormal_return_pct": 7.93819307390089,
+          "stock_return_pct": -6.5425510220852745
+        },
+        "3D": {
+          "abnormal_return_pct": -10.811288962244415,
+          "benchmark_return_pct": 3.364482178494943,
+          "directional_abnormal_return_pct": 10.811288962244415,
+          "stock_return_pct": -7.446806783749471
+        },
+        "5D": {
+          "abnormal_return_pct": -4.581751035585757,
+          "benchmark_return_pct": 4.049844236760114,
+          "directional_abnormal_return_pct": 4.581751035585757,
+          "stock_return_pct": -0.5319067988256432
+        }
+      }
+    },
+    {
       "company": "Regeneron Pharmaceuticals",
       "direction": "NEUTRAL",
       "event_id": "f2546a48b66b8edb79b300bd",
@@ -111010,6 +111210,40 @@
       }
     },
     {
+      "company": "Ultragenyx",
+      "direction": "NEGATIVE",
+      "event_id": "e34e4b0b1f2ec7fbb07a96e9",
+      "event_price": 39.61000061035156,
+      "event_timestamp": "2025-07-07",
+      "program": null,
+      "source": "FDA_CRL",
+      "source_type": "PRIMARY_REGULATORY",
+      "subtype": "FDA_REJECTION",
+      "ticker": "RARE",
+      "url": "https://open.fda.gov/crltable/",
+      "volume_expansion": 0.9679672161389361,
+      "windows": {
+        "1D": {
+          "abnormal_return_pct": -1.831677775375684,
+          "benchmark_return_pct": 1.3519947698758195,
+          "directional_abnormal_return_pct": 1.831677775375684,
+          "stock_return_pct": -0.47968300549986465
+        },
+        "3D": {
+          "abnormal_return_pct": -27.391570300178405,
+          "benchmark_return_pct": 5.742995115106364,
+          "directional_abnormal_return_pct": 27.391570300178405,
+          "stock_return_pct": -21.64857518507204
+        },
+        "5D": {
+          "abnormal_return_pct": -31.816889908081535,
+          "benchmark_return_pct": 5.611383954611404,
+          "directional_abnormal_return_pct": 31.816889908081535,
+          "stock_return_pct": -26.20550595347013
+        }
+      }
+    },
+    {
       "company": "Regeneron Pharmaceuticals",
       "direction": "NEUTRAL",
       "event_id": "f0950c5bc8153909cf62eede",
@@ -111482,6 +111716,40 @@
           "benchmark_return_pct": 1.416603223475521,
           "directional_abnormal_return_pct": -1.3782605538897208,
           "stock_return_pct": 0.03834266958580024
+        }
+      }
+    },
+    {
+      "company": "Capricor Therapeutics",
+      "direction": "NEGATIVE",
+      "event_id": "69f6bd4c81d08e81eb097937",
+      "event_price": 11.420000076293945,
+      "event_timestamp": "2025-07-09",
+      "program": null,
+      "source": "FDA_CRL",
+      "source_type": "PRIMARY_REGULATORY",
+      "subtype": "FDA_REJECTION",
+      "ticker": "CAPR",
+      "url": "https://open.fda.gov/crltable/",
+      "volume_expansion": 0.7375165846930458,
+      "windows": {
+        "1D": {
+          "abnormal_return_pct": -0.755531954044153,
+          "benchmark_return_pct": 0.5803965982643433,
+          "directional_abnormal_return_pct": 0.755531954044153,
+          "stock_return_pct": -0.17513535577980965
+        },
+        "3D": {
+          "abnormal_return_pct": -35.74417930177216,
+          "benchmark_return_pct": 0.4552109752835154,
+          "directional_abnormal_return_pct": 35.74417930177216,
+          "stock_return_pct": -35.28896832648864
+        },
+        "5D": {
+          "abnormal_return_pct": -36.545548553433484,
+          "benchmark_return_pct": -0.05690571320684512,
+          "directional_abnormal_return_pct": 36.545548553433484,
+          "stock_return_pct": -36.60245426664033
         }
       }
     },
@@ -113012,6 +113280,40 @@
           "benchmark_return_pct": -0.1275517313037544,
           "directional_abnormal_return_pct": -16.793139351797315,
           "stock_return_pct": -16.92069108310107
+        }
+      }
+    },
+    {
+      "company": "Regeneron Pharmaceuticals",
+      "direction": "NEGATIVE",
+      "event_id": "3c8192b68adb39edc6981be6",
+      "event_price": 554.5800170898438,
+      "event_timestamp": "2025-07-30",
+      "program": null,
+      "source": "FDA_CRL",
+      "source_type": "PRIMARY_REGULATORY",
+      "subtype": "FDA_REJECTION",
+      "ticker": "REGN",
+      "url": "https://open.fda.gov/crltable/",
+      "volume_expansion": 0.6392332369598795,
+      "windows": {
+        "1D": {
+          "abnormal_return_pct": -0.9719517521714072,
+          "benchmark_return_pct": -0.672535037137123,
+          "directional_abnormal_return_pct": 0.9719517521714072,
+          "stock_return_pct": -1.6444867893085302
+        },
+        "3D": {
+          "abnormal_return_pct": 2.3856191250814396,
+          "benchmark_return_pct": 0.6725438838378617,
+          "directional_abnormal_return_pct": -2.3856191250814396,
+          "stock_return_pct": 3.0581630089193013
+        },
+        "5D": {
+          "abnormal_return_pct": 0.22672367692394557,
+          "benchmark_return_pct": -0.1275517313037544,
+          "directional_abnormal_return_pct": -0.22672367692394557,
+          "stock_return_pct": 0.09917194562019116
         }
       }
     },
@@ -128520,6 +128822,40 @@
       }
     },
     {
+      "company": "REGENXBIO",
+      "direction": "NEGATIVE",
+      "event_id": "f0fd6a970e246f8f65296088",
+      "event_price": 10.3100004196167,
+      "event_timestamp": "2026-02-07",
+      "program": null,
+      "source": "FDA_CRL",
+      "source_type": "PRIMARY_REGULATORY",
+      "subtype": "FDA_REJECTION",
+      "ticker": "RGNX",
+      "url": "https://open.fda.gov/crltable/",
+      "volume_expansion": 0.878847949370116,
+      "windows": {
+        "1D": {
+          "abnormal_return_pct": -13.55042707133971,
+          "benchmark_return_pct": -0.6105814516963348,
+          "directional_abnormal_return_pct": 13.55042707133971,
+          "stock_return_pct": -14.161008523036045
+        },
+        "3D": {
+          "abnormal_return_pct": -16.68730013084324,
+          "benchmark_return_pct": -2.323368718575103,
+          "directional_abnormal_return_pct": 16.68730013084324,
+          "stock_return_pct": -19.010668849418344
+        },
+        "5D": {
+          "abnormal_return_pct": -20.843881043705036,
+          "benchmark_return_pct": -1.1735812780672594,
+          "directional_abnormal_return_pct": 20.843881043705036,
+          "stock_return_pct": -22.017462321772296
+        }
+      }
+    },
+    {
       "company": "EyePoint Pharmaceuticals",
       "direction": "NEUTRAL",
       "event_id": "336c745351b65b67ae145e8e",
@@ -135248,6 +135584,40 @@
           "benchmark_return_pct": 2.7613406064343815,
           "directional_abnormal_return_pct": 23.701635839340376,
           "stock_return_pct": 26.462976445774757
+        }
+      }
+    },
+    {
+      "company": "Telix Pharmaceuticals",
+      "direction": "NEGATIVE",
+      "event_id": "7ccbe645ea6d7edb4d2827c4",
+      "event_price": 10.539999961853027,
+      "event_timestamp": "2026-04-10",
+      "program": null,
+      "source": "FDA_CRL",
+      "source_type": "PRIMARY_REGULATORY",
+      "subtype": "FDA_REJECTION",
+      "ticker": "TLX",
+      "url": "https://open.fda.gov/crltable/",
+      "volume_expansion": 2.035716806663373,
+      "windows": {
+        "1D": {
+          "abnormal_return_pct": 4.624985760069533,
+          "benchmark_return_pct": 2.01637867824751,
+          "directional_abnormal_return_pct": -4.624985760069533,
+          "stock_return_pct": 6.641364438317043
+        },
+        "3D": {
+          "abnormal_return_pct": -4.2771134000010536,
+          "benchmark_return_pct": 5.4156322424431025,
+          "directional_abnormal_return_pct": 4.2771134000010536,
+          "stock_return_pct": 1.138518842442049
+        },
+        "5D": {
+          "abnormal_return_pct": -5.233182095195499,
+          "benchmark_return_pct": 7.130713499265595,
+          "directional_abnormal_return_pct": 5.233182095195499,
+          "stock_return_pct": 1.8975314040700964
         }
       }
     },
@@ -158296,10 +158666,10 @@
           "stock_return_pct": -9.46859484363488
         },
         "5D": {
-          "abnormal_return_pct": -8.823535210063692,
-          "benchmark_return_pct": -5.025093913019085,
-          "directional_abnormal_return_pct": -8.823535210063692,
-          "stock_return_pct": -13.848629123082778
+          "abnormal_return_pct": -8.91883340579821,
+          "benchmark_return_pct": -5.25185814539042,
+          "directional_abnormal_return_pct": -8.91883340579821,
+          "stock_return_pct": -14.17069155118863
         }
       }
     },
@@ -158330,10 +158700,10 @@
           "stock_return_pct": -7.533022352271768
         },
         "5D": {
-          "abnormal_return_pct": -4.676521259486333,
-          "benchmark_return_pct": -5.025093913019085,
-          "directional_abnormal_return_pct": -4.676521259486333,
-          "stock_return_pct": -9.701615172505418
+          "abnormal_return_pct": -4.678029300828756,
+          "benchmark_return_pct": -5.25185814539042,
+          "directional_abnormal_return_pct": -4.678029300828756,
+          "stock_return_pct": -9.929887446219176
         }
       }
     },
@@ -158364,10 +158734,10 @@
           "stock_return_pct": 18.35616599419565
         },
         "5D": {
-          "abnormal_return_pct": 21.566182577946932,
-          "benchmark_return_pct": -5.025093913019085,
-          "directional_abnormal_return_pct": 21.566182577946932,
-          "stock_return_pct": 16.541088664927848
+          "abnormal_return_pct": 20.5258272136833,
+          "benchmark_return_pct": -5.25185814539042,
+          "directional_abnormal_return_pct": 20.5258272136833,
+          "stock_return_pct": 15.273969068292882
         }
       }
     },
@@ -158398,10 +158768,10 @@
           "stock_return_pct": -4.960980654659542
         },
         "5D": {
-          "abnormal_return_pct": -2.3043504206946563,
-          "benchmark_return_pct": -5.025093913019085,
-          "directional_abnormal_return_pct": -2.3043504206946563,
-          "stock_return_pct": -7.329444333713742
+          "abnormal_return_pct": -2.290762397723123,
+          "benchmark_return_pct": -5.25185814539042,
+          "directional_abnormal_return_pct": -2.290762397723123,
+          "stock_return_pct": -7.542620543113543
         }
       }
     },
@@ -158432,10 +158802,10 @@
           "stock_return_pct": -4.960980654659542
         },
         "5D": {
-          "abnormal_return_pct": -2.3043504206946563,
-          "benchmark_return_pct": -5.025093913019085,
-          "directional_abnormal_return_pct": -2.3043504206946563,
-          "stock_return_pct": -7.329444333713742
+          "abnormal_return_pct": -2.290762397723123,
+          "benchmark_return_pct": -5.25185814539042,
+          "directional_abnormal_return_pct": -2.290762397723123,
+          "stock_return_pct": -7.542620543113543
         }
       }
     },
@@ -158466,10 +158836,10 @@
           "stock_return_pct": 21.357516594156166
         },
         "5D": {
-          "abnormal_return_pct": 23.04732853096121,
-          "benchmark_return_pct": -5.025093913019085,
-          "directional_abnormal_return_pct": 23.04732853096121,
-          "stock_return_pct": 18.022234617942125
+          "abnormal_return_pct": 24.137165221821192,
+          "benchmark_return_pct": -5.25185814539042,
+          "directional_abnormal_return_pct": 24.137165221821192,
+          "stock_return_pct": 18.88530707643077
         }
       }
     },
@@ -158500,10 +158870,10 @@
           "stock_return_pct": -5.002240787775037
         },
         "5D": {
-          "abnormal_return_pct": -2.035525316185005,
-          "benchmark_return_pct": -5.025093913019085,
-          "directional_abnormal_return_pct": -2.035525316185005,
-          "stock_return_pct": -7.06061922920409
+          "abnormal_return_pct": -1.7858598819445621,
+          "benchmark_return_pct": -5.25185814539042,
+          "directional_abnormal_return_pct": -1.7858598819445621,
+          "stock_return_pct": -7.037718027334982
         }
       }
     },
@@ -159038,10 +159408,10 @@
           "stock_return_pct": -2.375625864159614
         },
         "3D": {
-          "abnormal_return_pct": -0.5445455228363034,
-          "benchmark_return_pct": -4.120627617728623,
-          "directional_abnormal_return_pct": -0.5445455228363034,
-          "stock_return_pct": -4.665173140564926
+          "abnormal_return_pct": -0.5566260515096229,
+          "benchmark_return_pct": -4.349551374269101,
+          "directional_abnormal_return_pct": -0.5566260515096229,
+          "stock_return_pct": -4.906177425778724
         },
         "5D": {
           "abnormal_return_pct": null,
@@ -159072,10 +159442,10 @@
           "stock_return_pct": -2.375625864159614
         },
         "3D": {
-          "abnormal_return_pct": -0.5445455228363034,
-          "benchmark_return_pct": -4.120627617728623,
-          "directional_abnormal_return_pct": -0.5445455228363034,
-          "stock_return_pct": -4.665173140564926
+          "abnormal_return_pct": -0.5566260515096229,
+          "benchmark_return_pct": -4.349551374269101,
+          "directional_abnormal_return_pct": -0.5566260515096229,
+          "stock_return_pct": -4.906177425778724
         },
         "5D": {
           "abnormal_return_pct": null,
@@ -159106,10 +159476,10 @@
           "stock_return_pct": -4.9151873256759515
         },
         "3D": {
-          "abnormal_return_pct": -3.1641646007597,
-          "benchmark_return_pct": -4.120627617728623,
-          "directional_abnormal_return_pct": -3.1641646007597,
-          "stock_return_pct": -7.284792218488323
+          "abnormal_return_pct": -3.1485197698334346,
+          "benchmark_return_pct": -4.349551374269101,
+          "directional_abnormal_return_pct": -3.1485197698334346,
+          "stock_return_pct": -7.498071144102536
         },
         "5D": {
           "abnormal_return_pct": null,
@@ -159140,10 +159510,10 @@
           "stock_return_pct": -2.2584568707961106
         },
         "3D": {
-          "abnormal_return_pct": -1.8994354747959186,
-          "benchmark_return_pct": -4.120627617728623,
-          "directional_abnormal_return_pct": -1.8994354747959186,
-          "stock_return_pct": -6.020063092524541
+          "abnormal_return_pct": -2.8204112812316824,
+          "benchmark_return_pct": -4.349551374269101,
+          "directional_abnormal_return_pct": -2.8204112812316824,
+          "stock_return_pct": -7.169962655500783
         },
         "5D": {
           "abnormal_return_pct": null,
@@ -159174,10 +159544,10 @@
           "stock_return_pct": -1.1085608644625267
         },
         "3D": {
-          "abnormal_return_pct": 4.900579002011529,
-          "benchmark_return_pct": -4.120627617728623,
-          "directional_abnormal_return_pct": 4.900579002011529,
-          "stock_return_pct": 0.7799513842829064
+          "abnormal_return_pct": 5.006770334628319,
+          "benchmark_return_pct": -4.349551374269101,
+          "directional_abnormal_return_pct": 5.006770334628319,
+          "stock_return_pct": 0.6572189603592182
         },
         "5D": {
           "abnormal_return_pct": null,
@@ -159208,10 +159578,10 @@
           "stock_return_pct": -1.1085608644625267
         },
         "3D": {
-          "abnormal_return_pct": 4.900579002011529,
-          "benchmark_return_pct": -4.120627617728623,
-          "directional_abnormal_return_pct": 4.900579002011529,
-          "stock_return_pct": 0.7799513842829064
+          "abnormal_return_pct": 5.006770334628319,
+          "benchmark_return_pct": -4.349551374269101,
+          "directional_abnormal_return_pct": 5.006770334628319,
+          "stock_return_pct": 0.6572189603592182
         },
         "5D": {
           "abnormal_return_pct": null,
@@ -159746,10 +160116,10 @@
       "volume_expansion": 0.9712330476193004,
       "windows": {
         "1D": {
-          "abnormal_return_pct": -4.178163176552896,
-          "benchmark_return_pct": -1.4556451582019903,
-          "directional_abnormal_return_pct": -4.178163176552896,
-          "stock_return_pct": -5.633808334754886
+          "abnormal_return_pct": -6.468697290321822,
+          "benchmark_return_pct": -1.69093188709607,
+          "directional_abnormal_return_pct": -6.468697290321822,
+          "stock_return_pct": -8.159629177417893
         },
         "3D": {
           "abnormal_return_pct": null,
@@ -159780,10 +160150,10 @@
       "volume_expansion": 1.097273370680038,
       "windows": {
         "1D": {
-          "abnormal_return_pct": 2.2243359580041644,
-          "benchmark_return_pct": -1.4556451582019903,
-          "directional_abnormal_return_pct": 2.2243359580041644,
-          "stock_return_pct": 0.7686907998021741
+          "abnormal_return_pct": 1.1318761565965563,
+          "benchmark_return_pct": -1.69093188709607,
+          "directional_abnormal_return_pct": 1.1318761565965563,
+          "stock_return_pct": -0.5590557304995136
         },
         "3D": {
           "abnormal_return_pct": null,
@@ -159814,10 +160184,10 @@
       "volume_expansion": 1.097273370680038,
       "windows": {
         "1D": {
-          "abnormal_return_pct": 2.2243359580041644,
-          "benchmark_return_pct": -1.4556451582019903,
-          "directional_abnormal_return_pct": 2.2243359580041644,
-          "stock_return_pct": 0.7686907998021741
+          "abnormal_return_pct": 1.1318761565965563,
+          "benchmark_return_pct": -1.69093188709607,
+          "directional_abnormal_return_pct": 1.1318761565965563,
+          "stock_return_pct": -0.5590557304995136
         },
         "3D": {
           "abnormal_return_pct": null,
@@ -159848,10 +160218,10 @@
       "volume_expansion": 1.097273370680038,
       "windows": {
         "1D": {
-          "abnormal_return_pct": 2.2243359580041644,
-          "benchmark_return_pct": -1.4556451582019903,
-          "directional_abnormal_return_pct": 2.2243359580041644,
-          "stock_return_pct": 0.7686907998021741
+          "abnormal_return_pct": 1.1318761565965563,
+          "benchmark_return_pct": -1.69093188709607,
+          "directional_abnormal_return_pct": 1.1318761565965563,
+          "stock_return_pct": -0.5590557304995136
         },
         "3D": {
           "abnormal_return_pct": null,
@@ -159882,10 +160252,10 @@
       "volume_expansion": 0.42293062594242825,
       "windows": {
         "1D": {
-          "abnormal_return_pct": -2.807026184545036,
-          "benchmark_return_pct": -1.4556451582019903,
-          "directional_abnormal_return_pct": -2.807026184545036,
-          "stock_return_pct": -4.262671342747026
+          "abnormal_return_pct": -0.2675942686297117,
+          "benchmark_return_pct": -1.69093188709607,
+          "directional_abnormal_return_pct": -0.2675942686297117,
+          "stock_return_pct": -1.9585261557257816
         },
         "3D": {
           "abnormal_return_pct": null,
@@ -159916,10 +160286,10 @@
       "volume_expansion": 0.42293062594242825,
       "windows": {
         "1D": {
-          "abnormal_return_pct": -2.807026184545036,
-          "benchmark_return_pct": -1.4556451582019903,
-          "directional_abnormal_return_pct": -2.807026184545036,
-          "stock_return_pct": -4.262671342747026
+          "abnormal_return_pct": -0.2675942686297117,
+          "benchmark_return_pct": -1.69093188709607,
+          "directional_abnormal_return_pct": -0.2675942686297117,
+          "stock_return_pct": -1.9585261557257816
         },
         "3D": {
           "abnormal_return_pct": null,
@@ -159950,10 +160320,10 @@
       "volume_expansion": 0.2560135265651709,
       "windows": {
         "1D": {
-          "abnormal_return_pct": 1.249171610501476,
-          "benchmark_return_pct": -1.4556451582019903,
-          "directional_abnormal_return_pct": 1.249171610501476,
-          "stock_return_pct": -0.20647354770051418
+          "abnormal_return_pct": 1.2226813864117836,
+          "benchmark_return_pct": -1.69093188709607,
+          "directional_abnormal_return_pct": 1.2226813864117836,
+          "stock_return_pct": -0.4682505006842863
         },
         "3D": {
           "abnormal_return_pct": null,
@@ -159984,10 +160354,10 @@
       "volume_expansion": 0.41140096899506773,
       "windows": {
         "1D": {
-          "abnormal_return_pct": -0.5098044827779535,
-          "benchmark_return_pct": -1.4556451582019903,
-          "directional_abnormal_return_pct": -0.5098044827779535,
-          "stock_return_pct": -1.9654496409799438
+          "abnormal_return_pct": -0.5000331151061355,
+          "benchmark_return_pct": -1.69093188709607,
+          "directional_abnormal_return_pct": -0.5000331151061355,
+          "stock_return_pct": -2.1909650022022054
         },
         "3D": {
           "abnormal_return_pct": null,
@@ -160018,10 +160388,10 @@
       "volume_expansion": 0.9515715324834424,
       "windows": {
         "1D": {
-          "abnormal_return_pct": 0.05899698685345456,
-          "benchmark_return_pct": -1.4556451582019903,
-          "directional_abnormal_return_pct": 0.05899698685345456,
-          "stock_return_pct": -1.3966481713485357
+          "abnormal_return_pct": 0.5109617256652044,
+          "benchmark_return_pct": -1.69093188709607,
+          "directional_abnormal_return_pct": 0.5109617256652044,
+          "stock_return_pct": -1.1799701614308655
         },
         "3D": {
           "abnormal_return_pct": null,
@@ -160052,10 +160422,10 @@
       "volume_expansion": 0.9515715324834424,
       "windows": {
         "1D": {
-          "abnormal_return_pct": 0.05899698685345456,
-          "benchmark_return_pct": -1.4556451582019903,
-          "directional_abnormal_return_pct": 0.05899698685345456,
-          "stock_return_pct": -1.3966481713485357
+          "abnormal_return_pct": 0.5109617256652044,
+          "benchmark_return_pct": -1.69093188709607,
+          "directional_abnormal_return_pct": 0.5109617256652044,
+          "stock_return_pct": -1.1799701614308655
         },
         "3D": {
           "abnormal_return_pct": null,
@@ -160086,10 +160456,10 @@
       "volume_expansion": 0.823579681608472,
       "windows": {
         "1D": {
-          "abnormal_return_pct": -1.6102477340884658,
-          "benchmark_return_pct": -1.4556451582019903,
-          "directional_abnormal_return_pct": -1.6102477340884658,
-          "stock_return_pct": -3.065892892290456
+          "abnormal_return_pct": -2.5183706750557033,
+          "benchmark_return_pct": -1.69093188709607,
+          "directional_abnormal_return_pct": -2.5183706750557033,
+          "stock_return_pct": -4.209302562151773
         },
         "3D": {
           "abnormal_return_pct": null,
@@ -160120,10 +160490,10 @@
       "volume_expansion": 0.8247465789464514,
       "windows": {
         "1D": {
-          "abnormal_return_pct": -1.0324795002505716,
-          "benchmark_return_pct": -1.4556451582019903,
-          "directional_abnormal_return_pct": -1.0324795002505716,
-          "stock_return_pct": -2.488124658452562
+          "abnormal_return_pct": -0.5073828374852929,
+          "benchmark_return_pct": -1.69093188709607,
+          "directional_abnormal_return_pct": -0.5073828374852929,
+          "stock_return_pct": -2.198314724581363
         },
         "3D": {
           "abnormal_return_pct": null,
@@ -160154,10 +160524,10 @@
       "volume_expansion": 0.8247465789464514,
       "windows": {
         "1D": {
-          "abnormal_return_pct": -1.0324795002505716,
-          "benchmark_return_pct": -1.4556451582019903,
-          "directional_abnormal_return_pct": -1.0324795002505716,
-          "stock_return_pct": -2.488124658452562
+          "abnormal_return_pct": -0.5073828374852929,
+          "benchmark_return_pct": -1.69093188709607,
+          "directional_abnormal_return_pct": -0.5073828374852929,
+          "stock_return_pct": -2.198314724581363
         },
         "3D": {
           "abnormal_return_pct": null,
@@ -160188,10 +160558,10 @@
       "volume_expansion": 0.921920997440979,
       "windows": {
         "1D": {
-          "abnormal_return_pct": 0.7494752337580568,
-          "benchmark_return_pct": -1.4556451582019903,
-          "directional_abnormal_return_pct": 0.7494752337580568,
-          "stock_return_pct": -0.7061699244439334
+          "abnormal_return_pct": 0.9732487681564539,
+          "benchmark_return_pct": -1.69093188709607,
+          "directional_abnormal_return_pct": 0.9732487681564539,
+          "stock_return_pct": -0.717683118939616
         },
         "3D": {
           "abnormal_return_pct": null,
@@ -160222,10 +160592,10 @@
       "volume_expansion": 0.921920997440979,
       "windows": {
         "1D": {
-          "abnormal_return_pct": 0.7494752337580568,
-          "benchmark_return_pct": -1.4556451582019903,
-          "directional_abnormal_return_pct": 0.7494752337580568,
-          "stock_return_pct": -0.7061699244439334
+          "abnormal_return_pct": 0.9732487681564539,
+          "benchmark_return_pct": -1.69093188709607,
+          "directional_abnormal_return_pct": 0.9732487681564539,
+          "stock_return_pct": -0.717683118939616
         },
         "3D": {
           "abnormal_return_pct": null,
@@ -160256,10 +160626,10 @@
       "volume_expansion": 0.921920997440979,
       "windows": {
         "1D": {
-          "abnormal_return_pct": 0.7494752337580568,
-          "benchmark_return_pct": -1.4556451582019903,
-          "directional_abnormal_return_pct": 0.7494752337580568,
-          "stock_return_pct": -0.7061699244439334
+          "abnormal_return_pct": 0.9732487681564539,
+          "benchmark_return_pct": -1.69093188709607,
+          "directional_abnormal_return_pct": 0.9732487681564539,
+          "stock_return_pct": -0.717683118939616
         },
         "3D": {
           "abnormal_return_pct": null,
@@ -160279,7 +160649,7 @@
       "company": "Mirum Pharmaceuticals",
       "direction": "NEUTRAL",
       "event_id": "9836b2203f7b695e3df3941d",
-      "event_price": 99.9800033569336,
+      "event_price": 100.26499938964844,
       "event_timestamp": "2026-09-10",
       "program": "brelovitug",
       "source": "ClinicalTrials.gov",
@@ -160287,7 +160657,7 @@
       "subtype": "TRIAL_UPDATED",
       "ticker": "MIRM",
       "url": "https://clinicaltrials.gov/study/NCT07454837",
-      "volume_expansion": 0.475490618826526,
+      "volume_expansion": 0.6409983854955326,
       "windows": {
         "1D": {
           "abnormal_return_pct": null,
@@ -160313,7 +160683,7 @@
       "company": "REGENXBIO",
       "direction": "NEUTRAL",
       "event_id": "6f6eaee6e224a1740e195cd1",
-      "event_price": 8.510000228881836,
+      "event_price": 8.539999961853027,
       "event_timestamp": "2026-09-10",
       "program": "surabgene",
       "source": "ClinicalTrials.gov",
@@ -160321,7 +160691,7 @@
       "subtype": "TRIAL_UPDATED",
       "ticker": "RGNX",
       "url": "https://clinicaltrials.gov/study/NCT07592273",
-      "volume_expansion": 0.36224843965840803,
+      "volume_expansion": 0.4971865483657526,
       "windows": {
         "1D": {
           "abnormal_return_pct": null,
@@ -160347,7 +160717,7 @@
       "company": "Summit Therapeutics",
       "direction": "NEUTRAL",
       "event_id": "d150ca2070fe46f28957e6bd",
-      "event_price": 17.014999389648438,
+      "event_price": 16.829999923706055,
       "event_timestamp": "2026-09-10",
       "program": "ivonescimab",
       "source": "ClinicalTrials.gov",
@@ -160355,7 +160725,7 @@
       "subtype": "TRIAL_UPDATED",
       "ticker": "SMMT",
       "url": "https://clinicaltrials.gov/study/NCT07602855",
-      "volume_expansion": 0.2707235933900307,
+      "volume_expansion": 0.41021775241129904,
       "windows": {
         "1D": {
           "abnormal_return_pct": null,
@@ -160381,7 +160751,7 @@
       "company": "Moderna",
       "direction": "NEUTRAL",
       "event_id": "df044fd3b5907ad35d33dbbd",
-      "event_price": 135.3300018310547,
+      "event_price": 134.97500610351562,
       "event_timestamp": "2026-09-10",
       "program": null,
       "source": "ClinicalTrials.gov",
@@ -160389,7 +160759,7 @@
       "subtype": "TRIAL_UPDATED",
       "ticker": "MRNA",
       "url": "https://clinicaltrials.gov/study/NCT07737717",
-      "volume_expansion": 0.1462863479805555,
+      "volume_expansion": 0.1773159619014237,
       "windows": {
         "1D": {
           "abnormal_return_pct": null,
@@ -160415,7 +160785,7 @@
       "company": "Revolution Medicines",
       "direction": "NEUTRAL",
       "event_id": "aadb86a7ad0c2c05c6c68876",
-      "event_price": 203.8699951171875,
+      "event_price": 203.11000061035156,
       "event_timestamp": "2026-09-10",
       "program": null,
       "source": "ClinicalTrials.gov",
@@ -160423,7 +160793,7 @@
       "subtype": "TRIAL_UPDATED",
       "ticker": "RVMD",
       "url": "https://clinicaltrials.gov/study/NCT07621718",
-      "volume_expansion": 0.18828515098534643,
+      "volume_expansion": 0.24907646128004898,
       "windows": {
         "1D": {
           "abnormal_return_pct": null,
@@ -160449,7 +160819,7 @@
       "company": "Roivant Sciences",
       "direction": "NEUTRAL",
       "event_id": "be3c67fd641d1de076cf5592",
-      "event_price": 40.34000015258789,
+      "event_price": 40.64030075073242,
       "event_timestamp": "2026-09-10",
       "program": "mosliciguat",
       "source": "ClinicalTrials.gov",
@@ -160457,7 +160827,7 @@
       "subtype": "TRIAL_UPDATED",
       "ticker": "ROIV",
       "url": "https://clinicaltrials.gov/study/NCT06635850",
-      "volume_expansion": 0.3592595617979079,
+      "volume_expansion": 0.4607411745215074,
       "windows": {
         "1D": {
           "abnormal_return_pct": null,
@@ -160483,7 +160853,7 @@
       "company": "Regeneron Pharmaceuticals",
       "direction": "NEUTRAL",
       "event_id": "cd1682bc5814927ebd649a9b",
-      "event_price": 796.3699951171875,
+      "event_price": 798.1199951171875,
       "event_timestamp": "2026-09-10",
       "program": null,
       "source": "ClinicalTrials.gov",
@@ -160491,7 +160861,7 @@
       "subtype": "TRIAL_UPDATED",
       "ticker": "REGN",
       "url": "https://clinicaltrials.gov/study/NCT06269133",
-      "volume_expansion": 0.31136641868349185,
+      "volume_expansion": 0.3865037511378975,
       "windows": {
         "1D": {
           "abnormal_return_pct": null,
@@ -160517,7 +160887,7 @@
       "company": "Regeneron Pharmaceuticals",
       "direction": "NEUTRAL",
       "event_id": "a6e496ec192bb1c845a6d13f",
-      "event_price": 796.3699951171875,
+      "event_price": 798.1199951171875,
       "event_timestamp": "2026-09-10",
       "program": null,
       "source": "ClinicalTrials.gov",
@@ -160525,7 +160895,7 @@
       "subtype": "TRIAL_STARTED",
       "ticker": "REGN",
       "url": "https://clinicaltrials.gov/study/NCT07543055",
-      "volume_expansion": 0.31136641868349185,
+      "volume_expansion": 0.3865037511378975,
       "windows": {
         "1D": {
           "abnormal_return_pct": null,
@@ -160551,7 +160921,7 @@
       "company": "Vertex Pharmaceuticals",
       "direction": "NEUTRAL",
       "event_id": "855cb424cd23f3f42b45d011",
-      "event_price": 517.4400024414062,
+      "event_price": 517.3800048828125,
       "event_timestamp": "2026-09-10",
       "program": null,
       "source": "ClinicalTrials.gov",
@@ -160559,7 +160929,7 @@
       "subtype": "TRIAL_UPDATED",
       "ticker": "VRTX",
       "url": "https://clinicaltrials.gov/study/NCT05331183",
-      "volume_expansion": 0.21916439819940914,
+      "volume_expansion": 0.30007204297435947,
       "windows": {
         "1D": {
           "abnormal_return_pct": null,
@@ -160684,8 +161054,8 @@
       }
     }
   ],
-  "events_processed": 5825,
-  "events_with_metrics": 4664,
+  "events_processed": 5835,
+  "events_with_metrics": 4674,
   "failed_events": [
     {
       "event_id": "ce6d557d8aef8417ed6b1437",

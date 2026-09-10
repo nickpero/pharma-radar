@@ -1,7 +1,8 @@
 {
   "by_source": {
     "ClinicalTrials.gov": 5772,
-    "FDA": 43
+    "FDA": 43,
+    "FDA_CRL": 10
   },
   "errors": [],
   "events": [
@@ -34619,6 +34620,24 @@
       "url": "https://clinicaltrials.gov/study/NCT03197870"
     },
     {
+      "application_number": [
+        "BLA 761355"
+      ],
+      "company": "Regeneron Pharmaceuticals",
+      "company_name": "Regeneron Pharmaceuticals, Inc.",
+      "direction": "NEGATIVE",
+      "event_id": "6a6810d941cd3bb03649b742",
+      "event_timestamp": "2023-06-27",
+      "letter_file": "761355_2024_Orig1s000OtherActionLtrs.pdf",
+      "letter_type": "COMPLETE RESPONSE",
+      "program": null,
+      "source": "FDA_CRL",
+      "source_type": "PRIMARY_REGULATORY",
+      "subtype": "FDA_REJECTION",
+      "ticker": "REGN",
+      "url": "https://open.fda.gov/crltable/"
+    },
+    {
       "company": "Regeneron Pharmaceuticals",
       "direction": "NEUTRAL",
       "event_id": "6eb3ae21fa53c897f0ee8bdb",
@@ -40807,6 +40826,42 @@
       "url": "https://clinicaltrials.gov/study/NCT04470427"
     },
     {
+      "application_number": [
+        "BLA 761303/Original 1"
+      ],
+      "company": "Regeneron Pharmaceuticals",
+      "company_name": "Regeneron Pharmaceuticals, Inc.",
+      "direction": "NEGATIVE",
+      "event_id": "403e44e3c4f9462a6a6b2f9a",
+      "event_timestamp": "2024-03-22",
+      "letter_file": "CRL_BLA761303Original1_20240322.pdf",
+      "letter_type": "COMPLETE RESPONSE",
+      "program": null,
+      "source": "FDA_CRL",
+      "source_type": "PRIMARY_REGULATORY",
+      "subtype": "FDA_REJECTION",
+      "ticker": "REGN",
+      "url": "https://open.fda.gov/crltable/"
+    },
+    {
+      "application_number": [
+        "BLA 761303/Original 2"
+      ],
+      "company": "Regeneron Pharmaceuticals",
+      "company_name": "Regeneron Pharmaceuticals, Inc.",
+      "direction": "NEGATIVE",
+      "event_id": "360a86117eb4f45cc3ffbd1a",
+      "event_timestamp": "2024-03-22",
+      "letter_file": "CRL_BLA761303Original2_20240322.pdf",
+      "letter_type": "COMPLETE RESPONSE",
+      "program": null,
+      "source": "FDA_CRL",
+      "source_type": "PRIMARY_REGULATORY",
+      "subtype": "FDA_REJECTION",
+      "ticker": "REGN",
+      "url": "https://open.fda.gov/crltable/"
+    },
+    {
       "company": "Telix Pharmaceuticals",
       "direction": "NEUTRAL",
       "event_id": "ddd2ecbea6c19bebb0c97a6b",
@@ -45034,6 +45089,24 @@
       "ticker": "ALMS",
       "title": "A Study in Patients With Moderate to Severe Plaque Psoriasis to Evaluate the Efficacy and Safety of ESK-001",
       "url": "https://clinicaltrials.gov/study/NCT06588738"
+    },
+    {
+      "application_number": [
+        "BLA 761400"
+      ],
+      "company": "Regeneron Pharmaceuticals",
+      "company_name": "Regeneron Pharmaceuticals, Inc.",
+      "direction": "NEGATIVE",
+      "event_id": "cc284b2698d065950030f778",
+      "event_timestamp": "2024-08-20",
+      "letter_file": "CRL_BLA761400_20240820.pdf",
+      "letter_type": "COMPLETE RESPONSE",
+      "program": null,
+      "source": "FDA_CRL",
+      "source_type": "PRIMARY_REGULATORY",
+      "subtype": "FDA_REJECTION",
+      "ticker": "REGN",
+      "url": "https://open.fda.gov/crltable/"
     },
     {
       "company": "Annexon",
@@ -51604,6 +51677,24 @@
       "url": "https://clinicaltrials.gov/study/NCT06834009"
     },
     {
+      "application_number": [
+        "NDA 218592"
+      ],
+      "company": "Telix Pharmaceuticals",
+      "company_name": "Telix Pharmaceuticals (US) Inc.",
+      "direction": "NEGATIVE",
+      "event_id": "ca9fdaa31ed05b3be43d3816",
+      "event_timestamp": "2025-04-25",
+      "letter_file": "CRL_NDA218592_20250425.pdf",
+      "letter_type": "COMPLETE RESPONSE",
+      "program": null,
+      "source": "FDA_CRL",
+      "source_type": "PRIMARY_REGULATORY",
+      "subtype": "FDA_REJECTION",
+      "ticker": "TLX",
+      "url": "https://open.fda.gov/crltable/"
+    },
+    {
       "company": "Regeneron Pharmaceuticals",
       "direction": "NEUTRAL",
       "event_id": "f2546a48b66b8edb79b300bd",
@@ -53815,6 +53906,24 @@
       "url": "https://clinicaltrials.gov/study/NCT02680184"
     },
     {
+      "application_number": [
+        "BL 125845"
+      ],
+      "company": "Ultragenyx",
+      "company_name": "Ultragenyx Pharmaceutical Inc.",
+      "direction": "NEGATIVE",
+      "event_id": "e34e4b0b1f2ec7fbb07a96e9",
+      "event_timestamp": "2025-07-07",
+      "letter_file": "CRL_BLA125845_20250707.pdf",
+      "letter_type": "COMPLETE RESPONSE",
+      "program": null,
+      "source": "FDA_CRL",
+      "source_type": "PRIMARY_REGULATORY",
+      "subtype": "FDA_REJECTION",
+      "ticker": "RARE",
+      "url": "https://open.fda.gov/crltable/"
+    },
+    {
       "company": "Regeneron Pharmaceuticals",
       "direction": "NEUTRAL",
       "event_id": "f0950c5bc8153909cf62eede",
@@ -54037,6 +54146,24 @@
       "ticker": "REGN",
       "title": "A Study to Test How Safe Pozelimab and Cemdisiran Combination Therapy and Cemdisiran Alone Are and How Well They Work in Adult Patients With Generalized Myasthenia Gravis",
       "url": "https://clinicaltrials.gov/study/NCT05070858"
+    },
+    {
+      "application_number": [
+        "BL 125842"
+      ],
+      "company": "Capricor Therapeutics",
+      "company_name": "Capricor, Inc.",
+      "direction": "NEGATIVE",
+      "event_id": "69f6bd4c81d08e81eb097937",
+      "event_timestamp": "2025-07-09",
+      "letter_file": "CRL_BLA125842_20250709.pdf",
+      "letter_type": "COMPLETE RESPONSE",
+      "program": null,
+      "source": "FDA_CRL",
+      "source_type": "PRIMARY_REGULATORY",
+      "subtype": "FDA_REJECTION",
+      "ticker": "CAPR",
+      "url": "https://open.fda.gov/crltable/"
     },
     {
       "company": "EyePoint Pharmaceuticals",
@@ -54789,6 +54916,24 @@
       "ticker": "MRNA",
       "title": "A Study to Evaluate the Safety and Immune Response of mRNA-1345, a Vaccine Targeting Respiratory Syncytial Virus (RSV), When Co-administered With a Fluzone HD, in Adults \u226565 Years of Age",
       "url": "https://clinicaltrials.gov/study/NCT06060457"
+    },
+    {
+      "application_number": [
+        "BLA 761303"
+      ],
+      "company": "Regeneron Pharmaceuticals",
+      "company_name": "Regeneron Pharmaceuticals, Inc.",
+      "direction": "NEGATIVE",
+      "event_id": "3c8192b68adb39edc6981be6",
+      "event_timestamp": "2025-07-30",
+      "letter_file": "CRL_BLA761303_20250730.pdf",
+      "letter_type": "COMPLETE RESPONSE",
+      "program": null,
+      "source": "FDA_CRL",
+      "source_type": "PRIMARY_REGULATORY",
+      "subtype": "FDA_REJECTION",
+      "ticker": "REGN",
+      "url": "https://open.fda.gov/crltable/"
     },
     {
       "company": "Summit Therapeutics",
@@ -62166,6 +62311,24 @@
       "url": "https://clinicaltrials.gov/study/NCT06097364"
     },
     {
+      "application_number": [
+        "BL 125840"
+      ],
+      "company": "REGENXBIO",
+      "company_name": "REGENXBIO, Inc.",
+      "direction": "NEGATIVE",
+      "event_id": "f0fd6a970e246f8f65296088",
+      "event_timestamp": "2026-02-07",
+      "letter_file": "CRL_BLA125840_20260207.pdf",
+      "letter_type": "COMPLETE RESPONSE",
+      "program": null,
+      "source": "FDA_CRL",
+      "source_type": "PRIMARY_REGULATORY",
+      "subtype": "FDA_REJECTION",
+      "ticker": "RGNX",
+      "url": "https://open.fda.gov/crltable/"
+    },
+    {
       "company": "EyePoint Pharmaceuticals",
       "direction": "NEUTRAL",
       "event_id": "336c745351b65b67ae145e8e",
@@ -65357,6 +65520,24 @@
       "ticker": "SMMT",
       "title": "Ivonescimab in Combination With Docetaxel in Advanced Non-Small Cell Lung Cancer",
       "url": "https://clinicaltrials.gov/study/NCT06928389"
+    },
+    {
+      "application_number": [
+        "BLA 761401"
+      ],
+      "company": "Telix Pharmaceuticals",
+      "company_name": "Telix Pharmaceuticals (US) Inc.",
+      "direction": "NEGATIVE",
+      "event_id": "7ccbe645ea6d7edb4d2827c4",
+      "event_timestamp": "2026-04-10",
+      "letter_file": "CRL_BLA761401_20260410.pdf",
+      "letter_type": "COMPLETE RESPONSE",
+      "program": null,
+      "source": "FDA_CRL",
+      "source_type": "PRIMARY_REGULATORY",
+      "subtype": "FDA_REJECTION",
+      "ticker": "TLX",
+      "url": "https://open.fda.gov/crltable/"
     },
     {
       "company": "Summit Therapeutics",
@@ -93175,14 +93356,15 @@
       "url": "https://clinicaltrials.gov/study/NCT06379789"
     }
   ],
-  "events_count": 5815,
-  "generated_at": "2026-09-10T17:21:08.317701+00:00",
+  "events_count": 5825,
+  "generated_at": "2026-09-10T19:09:34.249632+00:00",
   "notes": [
     "SEC historical discovery is intentionally excluded from this runner because data.sec.gov and efts.sec.gov returned 403 on GitHub-hosted runners.",
-    "FDA discovery uses sponsor-name plus watchlist program/brand/active-ingredient searches against Drugs@FDA/openFDA and excludes generic ANDA approvals.",
+    "FDA Drugs@FDA discovery uses sponsor-name plus watchlist program/brand/active-ingredient searches and excludes generic ANDA approvals.",
+    "FDA Complete Response Letters are treated as negative regulatory catalysts; the CRL dataset currently covers recent historical years rather than the full 2015-present period.",
     "ClinicalTrials.gov events are conservative informational milestones; they do not imply positive or negative efficacy."
   ],
   "start_year": 2015,
   "tickers": 29,
-  "version": "3.1-multisource"
+  "version": "3.2-multisource"
 }
