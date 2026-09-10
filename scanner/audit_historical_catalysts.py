@@ -36,6 +36,33 @@ def _metrics(event: dict[str, Any]) -> dict[str, Any]:
     return event.get("market_metrics") or {}
 
 
+def _window_values(events: list[dict[str, Any]]) -> dict[str, list[float]]:
+    values: dict[str, list[float]] = defaultdict(list)
+    for event in events:
+        metrics = _metrics(event)
+        for window in WINDOWS:
+            row = (metrics.get("windows") or {}).get(window) or {}
+            value = row.get("directional_abnormal_return_pct")
+            if value is not None:
+                try:
+                    values[window].append(float(value))
+                except (TypeError, ValueError):
+                    pass
+    return values
+
+
+def _edge_summary(events: list[dict[str, Any]]) -> dict[str, Any]:
+    values = _window_values(events)
+    return {
+        window: {
+            "n": len(items),
+            "median": median(items) if items else None,
+            "win_rate": (sum(x > 0 for x in items) / len(items)) if items else None,
+        }
+        for window, items in values.items()
+    }
+
+
 def audit() -> dict[str, Any]:
     payload = _load()
     events = list(payload.get("tradable_catalysts") or [])
@@ -46,7 +73,6 @@ def audit() -> dict[str, Any]:
     source_counts: Counter[str] = Counter()
     direction_counts: Counter[str] = Counter()
     year_counts: Counter[str] = Counter()
-    directional_signs: dict[str, list[float]] = defaultdict(list)
     window_values: dict[str, list[float]] = defaultdict(list)
     volume_values: list[float] = []
     missing_metrics = 0
@@ -85,15 +111,10 @@ def audit() -> dict[str, Any]:
                 missing_windows[window] += 1
             else:
                 try:
-                    numeric = float(value)
-                    directional_signs[window].append(numeric)
-                    window_values[window].append(numeric)
+                    window_values[window].append(float(value))
                 except (TypeError, ValueError):
                     missing_windows[window] += 1
 
-        # A negative event should only count as directionally successful when
-        # the raw abnormal return is negative. The engine stores the inverted
-        # directional value, so a negative raw return should become positive.
         if direction == "NEGATIVE":
             for window in WINDOWS:
                 row = (metrics.get("windows") or {}).get(window) or {}
@@ -123,6 +144,25 @@ def audit() -> dict[str, Any]:
             "events": count,
             "subtypes": dict(Counter(str(e.get("subtype") or "UNKNOWN") for e in subset)),
             "directions": dict(Counter(str(e.get("direction") or "UNKNOWN").upper() for e in subset)),
+            "edge": _edge_summary([e for e in subset if _metrics(e)]),
+        }
+
+    # Leave-one-ticker-out is the key anti-concentration check. It shows how
+    # the aggregate edge changes when each company is removed from the sample.
+    leave_one_out: dict[str, Any] = {}
+    for ticker in sorted(ticker_counts):
+        subset = [e for e in events if str(e.get("ticker") or "UNKNOWN") != ticker and _metrics(e)]
+        leave_one_out[ticker] = {
+            "remaining_events": len(subset),
+            "edge": _edge_summary(subset),
+        }
+
+    by_subtype_edge: dict[str, Any] = {}
+    for subtype in sorted(subtype_counts):
+        subset = [e for e in events if str(e.get("subtype") or "UNKNOWN") == subtype and _metrics(e)]
+        by_subtype_edge[subtype] = {
+            "events": len(subset),
+            "edge": _edge_summary(subset),
         }
 
     summary = {
@@ -144,7 +184,7 @@ def audit() -> dict[str, Any]:
     }
 
     result = {
-        "version": "1.0",
+        "version": "1.1",
         "summary": summary,
         "by_subtype": dict(subtype_counts),
         "by_source": dict(source_counts),
@@ -152,6 +192,8 @@ def audit() -> dict[str, Any]:
         "by_year": dict(sorted(year_counts.items())),
         "top_tickers": dict(ticker_counts.most_common(20)),
         "per_ticker": per_ticker,
+        "leave_one_ticker_out": leave_one_out,
+        "by_subtype_edge": by_subtype_edge,
         "duplicates": duplicates,
         "methodology_flags": {
             "generic_trial_milestones_in_tradable_sample": suspicious_generic,
@@ -182,6 +224,12 @@ def main() -> None:
     print(f"By direction: {result['by_direction']}")
     print(f"By year: {result['by_year']}")
     print(f"Top tickers: {result['top_tickers']}")
+    print("-- LEAVE-ONE-TICKER-OUT --")
+    for ticker, data in result["leave_one_ticker_out"].items():
+        edge = data["edge"]
+        one = edge.get("1D", {})
+        three = edge.get("3D", {})
+        print(f"{ticker}: n={data['remaining_events']} 1D={one.get('median')}%/{one.get('win_rate')} 3D={three.get('median')}%/{three.get('win_rate')}")
     print("===============================================")
 
     if summary["events"] == 0:
