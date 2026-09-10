@@ -166,21 +166,19 @@
     "duplicate_event_rows": 0,
     "duplicates": 0,
     "events": 53,
-    "events_with_market_metrics": 52,
+    "events_with_market_metrics": 45,
     "median_directional_abnormal_return": {
-      "1D": 1.3570109923513374,
+      "1D": 1.2840254788957894,
       "3D": 1.5401148806160836,
-      "5D": 0.7452812087819005
+      "5D": 0.09595074889034994
     },
-    "median_volume_expansion": 1.1236228038922413,
-    "missing_market_metrics": 1,
-    "missing_windows": {
-      "5D": 1
-    },
+    "median_volume_expansion": 1.0334993666902377,
+    "missing_market_metrics": 8,
+    "missing_windows": {},
     "win_rate_directional": {
-      "1D": 0.6923076923076923,
-      "3D": 0.6346153846153846,
-      "5D": 0.5882352941176471
+      "1D": 0.6666666666666666,
+      "3D": 0.6444444444444445,
+      "5D": 0.5777777777777777
     }
   },
   "top_tickers": {

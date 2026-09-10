@@ -93357,7 +93357,7 @@
     }
   ],
   "events_count": 5825,
-  "generated_at": "2026-09-10T19:41:07.474321+00:00",
+  "generated_at": "2026-09-10T20:09:21.672953+00:00",
   "notes": [
     "SEC historical discovery is intentionally excluded from this runner because data.sec.gov and efts.sec.gov returned 403 on GitHub-hosted runners.",
     "FDA Drugs@FDA discovery uses sponsor-name plus watchlist program/brand/active-ingredient searches and excludes generic ANDA approvals.",
