@@ -37,7 +37,8 @@ def test_negative_direction_is_oriented_correctly(tmp_path, monkeypatch):
         ]
     }
     path = tmp_path / "historical_catalyst_dataset.json"
-    path.write_text(__import__("json").dumps(dataset), encoding="utf-8")
+    import json
+    path.write_text(json.dumps(dataset), encoding="utf-8")
     monkeypatch.setattr(module, "DATASET", path)
     monkeypatch.setattr(module, "OUTPUT", tmp_path / "audit.json")
     result = audit()
@@ -46,4 +47,4 @@ def test_negative_direction_is_oriented_correctly(tmp_path, monkeypatch):
 
 
 if __name__ == "__main__":
-    test_audit_empty_dataset_fails_cleanly(__import__("tempfile").TemporaryDirectory(), None)
+    print("Run with pytest or the GitHub Actions workflow.")
