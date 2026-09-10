@@ -29,6 +29,17 @@ def _tokens(company: str) -> list[str]:
     return out[:3]
 
 
+def _program_tokens(programs: list[str]) -> list[str]:
+    """Return conservative searchable tokens for watchlist drug/program names."""
+    out: list[str] = []
+    for program in programs:
+        for raw in re.findall(r"[A-Za-z0-9]+", str(program or "")):
+            token = raw.lower()
+            if len(token) >= 4 and token not in out and token not in GENERIC_TOKENS:
+                out.append(token)
+    return out[:12]
+
+
 def _event_id(event: dict[str, Any]) -> str:
     raw = "|".join(str(event.get(k) or "") for k in (
         "ticker", "application_number", "submission_number", "subtype", "event_timestamp"
@@ -55,74 +66,147 @@ def _product(result: dict[str, Any]) -> tuple[str, str]:
     return generic, brand
 
 
+def _program_match(result: dict[str, Any], programs: list[str]) -> str | None:
+    """Match a returned FDA product to a watchlist program by brand/ingredient."""
+    if not programs:
+        return None
+    haystack = " ".join(
+        [
+            str(result.get("sponsor_name") or ""),
+            *[
+                str(x.get("brand_name") or "")
+                for x in (result.get("products") or [])
+                if isinstance(x, dict)
+            ],
+            *[
+                str(ingredient.get("name") or "")
+                for product in (result.get("products") or [])
+                if isinstance(product, dict)
+                for ingredient in (product.get("active_ingredients") or [])
+                if isinstance(ingredient, dict)
+            ],
+        ]
+    ).lower()
+    for program in programs:
+        if program and str(program).lower() in haystack:
+            return program
+    return None
+
+
+def _query_pages(
+    session: requests.Session,
+    search: str,
+    max_pages: int,
+) -> list[dict[str, Any]]:
+    """Page through an openFDA search, whose maximum limit is 99 per call."""
+    results: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    skip = 0
+    for _ in range(max_pages):
+        params = {"search": search, "limit": 99, "skip": skip}
+        response = session.get(API_URL, params=params, timeout=30)
+        if response.status_code == 404:
+            break
+        response.raise_for_status()
+        payload = response.json()
+        page = payload.get("results") or []
+        if not page:
+            break
+        for result in page:
+            key = str(result.get("application_number") or repr(result))
+            if key not in seen:
+                seen.add(key)
+                results.append(result)
+        if len(page) < 99:
+            break
+        skip += 99
+    return results
+
+
+def _build_events(
+    ticker: str,
+    company: str,
+    result: dict[str, Any],
+    start_date: date,
+    matched_program: str | None,
+) -> list[dict[str, Any]]:
+    application = str(result.get("application_number") or "")
+    if not (application.startswith("NDA") or application.startswith("BLA")):
+        return []
+
+    generic, brand = _product(result)
+    sponsor = str(result.get("sponsor_name") or "")
+    events: list[dict[str, Any]] = []
+    for submission in result.get("submissions") or []:
+        if str(submission.get("submission_status") or "").upper() != "AP":
+            continue
+        event_date = _submission_date(submission.get("submission_status_date"))
+        if event_date is None or event_date < start_date:
+            continue
+        submission_type = str(submission.get("submission_type") or "").upper()
+        subtype = "FDA_APPROVAL" if submission_type == "ORIG" else "LABEL_EXPANSION"
+        event = {
+            "event_id": None,
+            "ticker": ticker,
+            "company": company,
+            "program": matched_program or generic or brand or application,
+            "subtype": subtype,
+            "direction": "POSITIVE",
+            "event_timestamp": event_date.isoformat(),
+            "source": "FDA",
+            "source_type": "PRIMARY_REGULATORY",
+            "url": "https://www.accessdata.fda.gov/scripts/cder/daf/",
+            "application_number": application,
+            "submission_number": str(submission.get("submission_number") or ""),
+            "submission_type": submission_type,
+            "sponsor_name": sponsor,
+            "brand_name": brand,
+            "generic_name": generic,
+            "association": "PROGRAM_MATCH" if matched_program else "SPONSOR_MATCH",
+        }
+        event["event_id"] = _event_id(event)
+        events.append(event)
+    return events
+
+
 def discover_fda(
     session: requests.Session,
     ticker: str,
     company: str,
     start_date: date,
-    max_pages_per_token: int = 3,
+    programs: list[str] | None = None,
+    max_pages_per_token: int = 5,
 ) -> list[dict[str, Any]]:
-    """Return FDA approval/label events matching the watchlist company.
+    """Return historical NDA/BLA approval and label catalysts.
 
-    Uses wildcard sponsor searches because sponsor names in Drugs@FDA often
-    differ from the current public company name. Only approved NDA/BLA
-    submissions are emitted; generic ANDA approvals are excluded because they
-    are usually poor proxies for a biotech/company-specific trading catalyst.
+    Discovery uses two complementary paths:
+    1. sponsor-name searches for the current/known company name;
+    2. program/brand/active-ingredient searches for watchlist programs.
+
+    The second path is important for historical records where the FDA sponsor
+    name differs from the company's current public name (renaming, acquisition,
+    subsidiary, licensing, etc.). Generic ANDA applications remain excluded.
     """
+    programs = programs or []
     events: dict[str, dict[str, Any]] = {}
+
     for token in _tokens(company):
-        skip = 0
-        for _ in range(max_pages_per_token):
-            params = {
-                "search": f'sponsor_name:*{token}* AND submissions.submission_status:AP',
-                "limit": 99,
-                "skip": skip,
-            }
-            response = session.get(API_URL, params=params, timeout=30)
-            if response.status_code == 404:
-                break
-            response.raise_for_status()
-            payload = response.json()
-            results = payload.get("results") or []
-            if not results:
-                break
-            for result in results:
-                application = str(result.get("application_number") or "")
-                if not (application.startswith("NDA") or application.startswith("BLA")):
+        search = f'sponsor_name:*{token}* AND submissions.submission_status:AP'
+        for result in _query_pages(session, search, max_pages_per_token):
+            for event in _build_events(ticker, company, result, start_date, None):
+                events[event["event_id"]] = event
+
+    for token in _program_tokens(programs):
+        queries = (
+            f'products.brand_name:*{token}* AND submissions.submission_status:AP',
+            f'products.active_ingredients.name:*{token}* AND submissions.submission_status:AP',
+        )
+        for search in queries:
+            for result in _query_pages(session, search, max_pages_per_token):
+                matched = _program_match(result, programs)
+                if not matched:
                     continue
-                sponsor = str(result.get("sponsor_name") or "")
-                if token not in _norm(sponsor):
-                    continue
-                generic, brand = _product(result)
-                for submission in result.get("submissions") or []:
-                    if str(submission.get("submission_status") or "").upper() != "AP":
-                        continue
-                    event_date = _submission_date(submission.get("submission_status_date"))
-                    if event_date is None or event_date < start_date:
-                        continue
-                    submission_type = str(submission.get("submission_type") or "").upper()
-                    subtype = "FDA_APPROVAL" if submission_type == "ORIG" else "LABEL_EXPANSION"
-                    event = {
-                        "event_id": None,
-                        "ticker": ticker,
-                        "company": company,
-                        "program": generic or brand or application,
-                        "subtype": subtype,
-                        "direction": "POSITIVE",
-                        "event_timestamp": event_date.isoformat(),
-                        "source": "FDA",
-                        "source_type": "PRIMARY_REGULATORY",
-                        "url": "https://www.accessdata.fda.gov/scripts/cder/daf/",
-                        "application_number": application,
-                        "submission_number": str(submission.get("submission_number") or ""),
-                        "submission_type": submission_type,
-                        "sponsor_name": sponsor,
-                        "brand_name": brand,
-                        "generic_name": generic,
-                    }
-                    event["event_id"] = _event_id(event)
+                for event in _build_events(ticker, company, result, start_date, matched):
                     events[event["event_id"]] = event
-            if len(results) < 99:
-                break
-            skip += 99
+
     return sorted(events.values(), key=lambda x: str(x.get("event_timestamp") or ""))
