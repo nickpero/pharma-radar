@@ -15,6 +15,7 @@ import requests
 
 from .historical_clinical_trials import discover_clinical_trials
 from .historical_fda import discover_fda
+from .historical_fda_crl import discover_fda_crl
 
 ROOT = Path(__file__).resolve().parents[1]
 WATCHLIST = ROOT / "data" / "watchlist.json"
@@ -43,11 +44,18 @@ def discover(start_year: int = 2015) -> dict[str, Any]:
     for ticker, item in watchlist.items():
         company = str(item.get("company") or ticker)
         programs = [str(x) for x in item.get("programs") or []]
+
         try:
             for event in discover_fda(session, ticker, company, start_date, programs=programs):
                 events[_event_key(event)] = event
         except Exception as exc:
             errors.append({"ticker": ticker, "source": "FDA", "error": str(exc)})
+
+        try:
+            for event in discover_fda_crl(session, ticker, company, start_date):
+                events[_event_key(event)] = event
+        except Exception as exc:
+            errors.append({"ticker": ticker, "source": "FDA_CRL", "error": str(exc)})
 
         try:
             for event in discover_clinical_trials(session, ticker, company, programs, start_date):
@@ -61,7 +69,7 @@ def discover(start_year: int = 2015) -> dict[str, Any]:
         source_counts[source] = source_counts.get(source, 0) + 1
 
     payload = {
-        "version": "3.1-multisource",
+        "version": "3.2-multisource",
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "start_year": start_year,
         "tickers": len(watchlist),
@@ -71,7 +79,8 @@ def discover(start_year: int = 2015) -> dict[str, Any]:
         "errors": errors[:500],
         "notes": [
             "SEC historical discovery is intentionally excluded from this runner because data.sec.gov and efts.sec.gov returned 403 on GitHub-hosted runners.",
-            "FDA discovery uses sponsor-name plus watchlist program/brand/active-ingredient searches against Drugs@FDA/openFDA and excludes generic ANDA approvals.",
+            "FDA Drugs@FDA discovery uses sponsor-name plus watchlist program/brand/active-ingredient searches and excludes generic ANDA approvals.",
+            "FDA Complete Response Letters are treated as negative regulatory catalysts; the CRL dataset currently covers recent historical years rather than the full 2015-present period.",
             "ClinicalTrials.gov events are conservative informational milestones; they do not imply positive or negative efficacy.",
         ],
     }
