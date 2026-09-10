@@ -44,7 +44,7 @@ def discover(start_year: int = 2015) -> dict[str, Any]:
         company = str(item.get("company") or ticker)
         programs = [str(x) for x in item.get("programs") or []]
         try:
-            for event in discover_fda(session, ticker, company, start_date):
+            for event in discover_fda(session, ticker, company, start_date, programs=programs):
                 events[_event_key(event)] = event
         except Exception as exc:
             errors.append({"ticker": ticker, "source": "FDA", "error": str(exc)})
@@ -61,7 +61,7 @@ def discover(start_year: int = 2015) -> dict[str, Any]:
         source_counts[source] = source_counts.get(source, 0) + 1
 
     payload = {
-        "version": "3.0-multisource",
+        "version": "3.1-multisource",
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "start_year": start_year,
         "tickers": len(watchlist),
@@ -71,7 +71,7 @@ def discover(start_year: int = 2015) -> dict[str, Any]:
         "errors": errors[:500],
         "notes": [
             "SEC historical discovery is intentionally excluded from this runner because data.sec.gov and efts.sec.gov returned 403 on GitHub-hosted runners.",
-            "FDA discovery uses wildcard sponsor matching against Drugs@FDA/openFDA and excludes generic ANDA approvals.",
+            "FDA discovery uses sponsor-name plus watchlist program/brand/active-ingredient searches against Drugs@FDA/openFDA and excludes generic ANDA approvals.",
             "ClinicalTrials.gov events are conservative informational milestones; they do not imply positive or negative efficacy.",
         ],
     }
