@@ -34,6 +34,7 @@ jobs:
           python -m scanner.test_historical_edge
           python -m scanner.test_historical_market_data
           python -m scanner.test_historical_fda
+          python -m scanner.test_historical_fda_crl
 
       - name: Validate local SEC CIK map
         run: |
