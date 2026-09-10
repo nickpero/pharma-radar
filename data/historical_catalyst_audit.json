@@ -1,0 +1,203 @@
+{
+  "by_direction": {
+    "NEGATIVE": 10,
+    "POSITIVE": 43
+  },
+  "by_source": {
+    "FDA": 43,
+    "FDA_CRL": 10
+  },
+  "by_subtype": {
+    "FDA_APPROVAL": 13,
+    "FDA_REJECTION": 10,
+    "LABEL_EXPANSION": 30
+  },
+  "by_year": {
+    "2021": 2,
+    "2022": 2,
+    "2023": 6,
+    "2024": 15,
+    "2025": 14,
+    "2026": 14
+  },
+  "duplicates": {},
+  "methodology_flags": {
+    "generic_trial_milestones_in_tradable_sample": 0,
+    "negative_direction_mismatches": 0
+  },
+  "per_ticker": {
+    "ALNY": {
+      "directions": {
+        "POSITIVE": 4
+      },
+      "events": 4,
+      "subtypes": {
+        "FDA_APPROVAL": 1,
+        "LABEL_EXPANSION": 3
+      }
+    },
+    "ARGX": {
+      "directions": {
+        "POSITIVE": 15
+      },
+      "events": 15,
+      "subtypes": {
+        "FDA_APPROVAL": 2,
+        "LABEL_EXPANSION": 13
+      }
+    },
+    "CAPR": {
+      "directions": {
+        "NEGATIVE": 1
+      },
+      "events": 1,
+      "subtypes": {
+        "FDA_REJECTION": 1
+      }
+    },
+    "INSM": {
+      "directions": {
+        "POSITIVE": 1
+      },
+      "events": 1,
+      "subtypes": {
+        "FDA_APPROVAL": 1
+      }
+    },
+    "IONS": {
+      "directions": {
+        "POSITIVE": 1
+      },
+      "events": 1,
+      "subtypes": {
+        "FDA_APPROVAL": 1
+      }
+    },
+    "MIRM": {
+      "directions": {
+        "POSITIVE": 9
+      },
+      "events": 9,
+      "subtypes": {
+        "FDA_APPROVAL": 2,
+        "LABEL_EXPANSION": 7
+      }
+    },
+    "NUVL": {
+      "directions": {
+        "POSITIVE": 1
+      },
+      "events": 1,
+      "subtypes": {
+        "FDA_APPROVAL": 1
+      }
+    },
+    "RARE": {
+      "directions": {
+        "NEGATIVE": 1
+      },
+      "events": 1,
+      "subtypes": {
+        "FDA_REJECTION": 1
+      }
+    },
+    "REGN": {
+      "directions": {
+        "NEGATIVE": 5,
+        "POSITIVE": 2
+      },
+      "events": 7,
+      "subtypes": {
+        "FDA_APPROVAL": 1,
+        "FDA_REJECTION": 5,
+        "LABEL_EXPANSION": 1
+      }
+    },
+    "RGNX": {
+      "directions": {
+        "NEGATIVE": 1
+      },
+      "events": 1,
+      "subtypes": {
+        "FDA_REJECTION": 1
+      }
+    },
+    "RVMD": {
+      "directions": {
+        "POSITIVE": 1
+      },
+      "events": 1,
+      "subtypes": {
+        "FDA_APPROVAL": 1
+      }
+    },
+    "TLX": {
+      "directions": {
+        "NEGATIVE": 2
+      },
+      "events": 2,
+      "subtypes": {
+        "FDA_REJECTION": 2
+      }
+    },
+    "VRTX": {
+      "directions": {
+        "POSITIVE": 6
+      },
+      "events": 6,
+      "subtypes": {
+        "FDA_APPROVAL": 2,
+        "LABEL_EXPANSION": 4
+      }
+    },
+    "ZYME": {
+      "directions": {
+        "POSITIVE": 3
+      },
+      "events": 3,
+      "subtypes": {
+        "FDA_APPROVAL": 1,
+        "LABEL_EXPANSION": 2
+      }
+    }
+  },
+  "summary": {
+    "direction_mismatches": 0,
+    "duplicate_event_rows": 0,
+    "duplicates": 0,
+    "events": 53,
+    "events_with_market_metrics": 52,
+    "median_directional_abnormal_return": {
+      "1D": 1.3570109923513374,
+      "3D": 1.5401148806160836,
+      "5D": 0.7452812087819005
+    },
+    "median_volume_expansion": 1.1236228038922413,
+    "missing_market_metrics": 1,
+    "missing_windows": {
+      "5D": 1
+    },
+    "win_rate_directional": {
+      "1D": 0.6923076923076923,
+      "3D": 0.6346153846153846,
+      "5D": 0.5882352941176471
+    }
+  },
+  "top_tickers": {
+    "ALNY": 4,
+    "ARGX": 15,
+    "CAPR": 1,
+    "INSM": 1,
+    "IONS": 1,
+    "MIRM": 9,
+    "NUVL": 1,
+    "RARE": 1,
+    "REGN": 7,
+    "RGNX": 1,
+    "RVMD": 1,
+    "TLX": 2,
+    "VRTX": 6,
+    "ZYME": 3
+  },
+  "version": "1.0"
+}

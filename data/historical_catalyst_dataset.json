@@ -234820,10 +234820,10 @@
             "stock_return_pct": -9.46859484363488
           },
           "5D": {
-            "abnormal_return_pct": -8.91883340579821,
-            "benchmark_return_pct": -5.25185814539042,
-            "directional_abnormal_return_pct": -8.91883340579821,
-            "stock_return_pct": -14.17069155118863
+            "abnormal_return_pct": -9.47343811024296,
+            "benchmark_return_pct": -5.212550868783083,
+            "directional_abnormal_return_pct": -9.47343811024296,
+            "stock_return_pct": -14.685988979026043
           }
         }
       },
@@ -234871,10 +234871,10 @@
             "stock_return_pct": -7.533022352271768
           },
           "5D": {
-            "abnormal_return_pct": -4.678029300828756,
-            "benchmark_return_pct": -5.25185814539042,
-            "directional_abnormal_return_pct": -4.678029300828756,
-            "stock_return_pct": -9.929887446219176
+            "abnormal_return_pct": -4.521675517103297,
+            "benchmark_return_pct": -5.212550868783083,
+            "directional_abnormal_return_pct": -4.521675517103297,
+            "stock_return_pct": -9.73422638588638
           }
         }
       },
@@ -234922,10 +234922,10 @@
             "stock_return_pct": 18.35616599419565
           },
           "5D": {
-            "abnormal_return_pct": 20.5258272136833,
-            "benchmark_return_pct": -5.25185814539042,
-            "directional_abnormal_return_pct": 20.5258272136833,
-            "stock_return_pct": 15.273969068292882
+            "abnormal_return_pct": 21.75363953371093,
+            "benchmark_return_pct": -5.212550868783083,
+            "directional_abnormal_return_pct": 21.75363953371093,
+            "stock_return_pct": 16.541088664927848
           }
         }
       },
@@ -234973,10 +234973,10 @@
             "stock_return_pct": -4.960980654659542
           },
           "5D": {
-            "abnormal_return_pct": -2.290762397723123,
-            "benchmark_return_pct": -5.25185814539042,
-            "directional_abnormal_return_pct": -2.290762397723123,
-            "stock_return_pct": -7.542620543113543
+            "abnormal_return_pct": -2.1325990968511963,
+            "benchmark_return_pct": -5.212550868783083,
+            "directional_abnormal_return_pct": -2.1325990968511963,
+            "stock_return_pct": -7.345149965634279
           }
         }
       },
@@ -235024,10 +235024,10 @@
             "stock_return_pct": -4.960980654659542
           },
           "5D": {
-            "abnormal_return_pct": -2.290762397723123,
-            "benchmark_return_pct": -5.25185814539042,
-            "directional_abnormal_return_pct": -2.290762397723123,
-            "stock_return_pct": -7.542620543113543
+            "abnormal_return_pct": -2.1325990968511963,
+            "benchmark_return_pct": -5.212550868783083,
+            "directional_abnormal_return_pct": -2.1325990968511963,
+            "stock_return_pct": -7.345149965634279
           }
         }
       },
@@ -235075,10 +235075,10 @@
             "stock_return_pct": 21.357516594156166
           },
           "5D": {
-            "abnormal_return_pct": 24.137165221821192,
-            "benchmark_return_pct": -5.25185814539042,
-            "directional_abnormal_return_pct": 24.137165221821192,
-            "stock_return_pct": 18.88530707643077
+            "abnormal_return_pct": 23.90769227485504,
+            "benchmark_return_pct": -5.212550868783083,
+            "directional_abnormal_return_pct": 23.90769227485504,
+            "stock_return_pct": 18.695141406071958
           }
         }
       },
@@ -235126,10 +235126,10 @@
             "stock_return_pct": -5.002240787775037
           },
           "5D": {
-            "abnormal_return_pct": -1.7858598819445621,
-            "benchmark_return_pct": -5.25185814539042,
-            "directional_abnormal_return_pct": -1.7858598819445621,
-            "stock_return_pct": -7.037718027334982
+            "abnormal_return_pct": -2.2225671431163274,
+            "benchmark_return_pct": -5.212550868783083,
+            "directional_abnormal_return_pct": -2.2225671431163274,
+            "stock_return_pct": -7.4351180118994105
           }
         }
       },
@@ -235800,10 +235800,10 @@
             "stock_return_pct": -2.375625864159614
           },
           "3D": {
-            "abnormal_return_pct": -0.5566260515096229,
-            "benchmark_return_pct": -4.349551374269101,
-            "directional_abnormal_return_pct": -0.5566260515096229,
-            "stock_return_pct": -4.906177425778724
+            "abnormal_return_pct": -0.3897334962120853,
+            "benchmark_return_pct": -4.309869766079711,
+            "directional_abnormal_return_pct": -0.3897334962120853,
+            "stock_return_pct": -4.699603262291796
           },
           "5D": {
             "abnormal_return_pct": null,
@@ -235851,10 +235851,10 @@
             "stock_return_pct": -4.9151873256759515
           },
           "3D": {
-            "abnormal_return_pct": -3.1485197698334346,
-            "benchmark_return_pct": -4.349551374269101,
-            "directional_abnormal_return_pct": -3.1485197698334346,
-            "stock_return_pct": -7.498071144102536
+            "abnormal_return_pct": -2.990635651885875,
+            "benchmark_return_pct": -4.309869766079711,
+            "directional_abnormal_return_pct": -2.990635651885875,
+            "stock_return_pct": -7.300505417965586
           },
           "5D": {
             "abnormal_return_pct": null,
@@ -235902,10 +235902,10 @@
             "stock_return_pct": -2.2584568707961106
           },
           "3D": {
-            "abnormal_return_pct": -2.8204112812316824,
-            "benchmark_return_pct": -4.349551374269101,
-            "directional_abnormal_return_pct": -2.8204112812316824,
-            "stock_return_pct": -7.169962655500783
+            "abnormal_return_pct": -2.813119830580435,
+            "benchmark_return_pct": -4.309869766079711,
+            "directional_abnormal_return_pct": -2.813119830580435,
+            "stock_return_pct": -7.122989596660146
           },
           "5D": {
             "abnormal_return_pct": null,
@@ -235953,10 +235953,10 @@
             "stock_return_pct": -1.1085608644625267
           },
           "3D": {
-            "abnormal_return_pct": 5.006770334628319,
-            "benchmark_return_pct": -4.349551374269101,
-            "directional_abnormal_return_pct": 5.006770334628319,
-            "stock_return_pct": 0.6572189603592182
+            "abnormal_return_pct": 5.1887996910973015,
+            "benchmark_return_pct": -4.309869766079711,
+            "directional_abnormal_return_pct": 5.1887996910973015,
+            "stock_return_pct": 0.8789299250175908
           },
           "5D": {
             "abnormal_return_pct": null,
@@ -236004,10 +236004,10 @@
             "stock_return_pct": -1.1085608644625267
           },
           "3D": {
-            "abnormal_return_pct": 5.006770334628319,
-            "benchmark_return_pct": -4.349551374269101,
-            "directional_abnormal_return_pct": 5.006770334628319,
-            "stock_return_pct": 0.6572189603592182
+            "abnormal_return_pct": 5.1887996910973015,
+            "benchmark_return_pct": -4.309869766079711,
+            "directional_abnormal_return_pct": 5.1887996910973015,
+            "stock_return_pct": 0.8789299250175908
           },
           "5D": {
             "abnormal_return_pct": null,
@@ -236811,13 +236811,13 @@
         "subtype": "TRIAL_UPDATED",
         "ticker": "TENX",
         "url": "https://clinicaltrials.gov/study/NCT07436689",
-        "volume_expansion": 0.9712330476193004,
+        "volume_expansion": 0.9742167197126755,
         "windows": {
           "1D": {
-            "abnormal_return_pct": -6.468697290321822,
-            "benchmark_return_pct": -1.69093188709607,
-            "directional_abnormal_return_pct": -6.468697290321822,
-            "stock_return_pct": -8.159629177417893
+            "abnormal_return_pct": -5.626851845388636,
+            "benchmark_return_pct": -1.650147322273121,
+            "directional_abnormal_return_pct": -5.626851845388636,
+            "stock_return_pct": -7.276999167661757
           },
           "3D": {
             "abnormal_return_pct": null,
@@ -236865,10 +236865,10 @@
         "volume_expansion": 1.097273370680038,
         "windows": {
           "1D": {
-            "abnormal_return_pct": 1.1318761565965563,
-            "benchmark_return_pct": -1.69093188709607,
-            "directional_abnormal_return_pct": 1.1318761565965563,
-            "stock_return_pct": -0.5590557304995136
+            "abnormal_return_pct": 2.1742549887014406,
+            "benchmark_return_pct": -1.650147322273121,
+            "directional_abnormal_return_pct": 2.1742549887014406,
+            "stock_return_pct": 0.5241076664283195
           },
           "3D": {
             "abnormal_return_pct": null,
@@ -236916,10 +236916,10 @@
         "volume_expansion": 1.097273370680038,
         "windows": {
           "1D": {
-            "abnormal_return_pct": 1.1318761565965563,
-            "benchmark_return_pct": -1.69093188709607,
-            "directional_abnormal_return_pct": 1.1318761565965563,
-            "stock_return_pct": -0.5590557304995136
+            "abnormal_return_pct": 2.1742549887014406,
+            "benchmark_return_pct": -1.650147322273121,
+            "directional_abnormal_return_pct": 2.1742549887014406,
+            "stock_return_pct": 0.5241076664283195
           },
           "3D": {
             "abnormal_return_pct": null,
@@ -236967,10 +236967,10 @@
         "volume_expansion": 1.097273370680038,
         "windows": {
           "1D": {
-            "abnormal_return_pct": 1.1318761565965563,
-            "benchmark_return_pct": -1.69093188709607,
-            "directional_abnormal_return_pct": 1.1318761565965563,
-            "stock_return_pct": -0.5590557304995136
+            "abnormal_return_pct": 2.1742549887014406,
+            "benchmark_return_pct": -1.650147322273121,
+            "directional_abnormal_return_pct": 2.1742549887014406,
+            "stock_return_pct": 0.5241076664283195
           },
           "3D": {
             "abnormal_return_pct": null,
@@ -237018,10 +237018,10 @@
         "volume_expansion": 0.42293062594242825,
         "windows": {
           "1D": {
-            "abnormal_return_pct": -0.2675942686297117,
-            "benchmark_return_pct": -1.69093188709607,
-            "directional_abnormal_return_pct": -0.2675942686297117,
-            "stock_return_pct": -1.9585261557257816
+            "abnormal_return_pct": -0.07796980826598743,
+            "benchmark_return_pct": -1.650147322273121,
+            "directional_abnormal_return_pct": -0.07796980826598743,
+            "stock_return_pct": -1.7281171305391085
           },
           "3D": {
             "abnormal_return_pct": null,
@@ -237069,10 +237069,10 @@
         "volume_expansion": 0.42293062594242825,
         "windows": {
           "1D": {
-            "abnormal_return_pct": -0.2675942686297117,
-            "benchmark_return_pct": -1.69093188709607,
-            "directional_abnormal_return_pct": -0.2675942686297117,
-            "stock_return_pct": -1.9585261557257816
+            "abnormal_return_pct": -0.07796980826598743,
+            "benchmark_return_pct": -1.650147322273121,
+            "directional_abnormal_return_pct": -0.07796980826598743,
+            "stock_return_pct": -1.7281171305391085
           },
           "3D": {
             "abnormal_return_pct": null,
@@ -237117,13 +237117,13 @@
         "subtype": "TRIAL_UPDATED",
         "ticker": "MRNA",
         "url": "https://clinicaltrials.gov/study/NCT07808697",
-        "volume_expansion": 0.2560135265651709,
+        "volume_expansion": 0.25687467512057194,
         "windows": {
           "1D": {
-            "abnormal_return_pct": 1.2226813864117836,
-            "benchmark_return_pct": -1.69093188709607,
-            "directional_abnormal_return_pct": 1.2226813864117836,
-            "stock_return_pct": -0.4682505006842863
+            "abnormal_return_pct": 2.08153638741152,
+            "benchmark_return_pct": -1.650147322273121,
+            "directional_abnormal_return_pct": 2.08153638741152,
+            "stock_return_pct": 0.4313890651383989
           },
           "3D": {
             "abnormal_return_pct": null,
@@ -237171,10 +237171,10 @@
         "volume_expansion": 0.41140096899506773,
         "windows": {
           "1D": {
-            "abnormal_return_pct": -0.5000331151061355,
-            "benchmark_return_pct": -1.69093188709607,
-            "directional_abnormal_return_pct": -0.5000331151061355,
-            "stock_return_pct": -2.1909650022022054
+            "abnormal_return_pct": -0.3319170303848207,
+            "benchmark_return_pct": -1.650147322273121,
+            "directional_abnormal_return_pct": -0.3319170303848207,
+            "stock_return_pct": -1.9820643526579418
           },
           "3D": {
             "abnormal_return_pct": null,
@@ -237222,10 +237222,10 @@
         "volume_expansion": 0.9515715324834424,
         "windows": {
           "1D": {
-            "abnormal_return_pct": 0.5109617256652044,
-            "benchmark_return_pct": -1.69093188709607,
-            "directional_abnormal_return_pct": 0.5109617256652044,
-            "stock_return_pct": -1.1799701614308655
+            "abnormal_return_pct": 0.08697025072418318,
+            "benchmark_return_pct": -1.650147322273121,
+            "directional_abnormal_return_pct": 0.08697025072418318,
+            "stock_return_pct": -1.563177071548938
           },
           "3D": {
             "abnormal_return_pct": null,
@@ -237273,10 +237273,10 @@
         "volume_expansion": 0.9515715324834424,
         "windows": {
           "1D": {
-            "abnormal_return_pct": 0.5109617256652044,
-            "benchmark_return_pct": -1.69093188709607,
-            "directional_abnormal_return_pct": 0.5109617256652044,
-            "stock_return_pct": -1.1799701614308655
+            "abnormal_return_pct": 0.08697025072418318,
+            "benchmark_return_pct": -1.650147322273121,
+            "directional_abnormal_return_pct": 0.08697025072418318,
+            "stock_return_pct": -1.563177071548938
           },
           "3D": {
             "abnormal_return_pct": null,
@@ -237324,10 +237324,10 @@
         "volume_expansion": 0.823579681608472,
         "windows": {
           "1D": {
-            "abnormal_return_pct": -2.5183706750557033,
-            "benchmark_return_pct": -1.69093188709607,
-            "directional_abnormal_return_pct": -2.5183706750557033,
-            "stock_return_pct": -4.209302562151773
+            "abnormal_return_pct": -2.55334152296065,
+            "benchmark_return_pct": -1.650147322273121,
+            "directional_abnormal_return_pct": -2.55334152296065,
+            "stock_return_pct": -4.203488845233771
           },
           "3D": {
             "abnormal_return_pct": null,
@@ -237375,10 +237375,10 @@
         "volume_expansion": 0.8247465789464514,
         "windows": {
           "1D": {
-            "abnormal_return_pct": -0.5073828374852929,
-            "benchmark_return_pct": -1.69093188709607,
-            "directional_abnormal_return_pct": -0.5073828374852929,
-            "stock_return_pct": -2.198314724581363
+            "abnormal_return_pct": -0.6697809485728068,
+            "benchmark_return_pct": -1.650147322273121,
+            "directional_abnormal_return_pct": -0.6697809485728068,
+            "stock_return_pct": -2.319928270845928
           },
           "3D": {
             "abnormal_return_pct": null,
@@ -237426,10 +237426,10 @@
         "volume_expansion": 0.8247465789464514,
         "windows": {
           "1D": {
-            "abnormal_return_pct": -0.5073828374852929,
-            "benchmark_return_pct": -1.69093188709607,
-            "directional_abnormal_return_pct": -0.5073828374852929,
-            "stock_return_pct": -2.198314724581363
+            "abnormal_return_pct": -0.6697809485728068,
+            "benchmark_return_pct": -1.650147322273121,
+            "directional_abnormal_return_pct": -0.6697809485728068,
+            "stock_return_pct": -2.319928270845928
           },
           "3D": {
             "abnormal_return_pct": null,
@@ -237477,10 +237477,10 @@
         "volume_expansion": 0.921920997440979,
         "windows": {
           "1D": {
-            "abnormal_return_pct": 0.9732487681564539,
-            "benchmark_return_pct": -1.69093188709607,
-            "directional_abnormal_return_pct": 0.9732487681564539,
-            "stock_return_pct": -0.717683118939616
+            "abnormal_return_pct": 0.5438733925727135,
+            "benchmark_return_pct": -1.650147322273121,
+            "directional_abnormal_return_pct": 0.5438733925727135,
+            "stock_return_pct": -1.1062739297004076
           },
           "3D": {
             "abnormal_return_pct": null,
@@ -237528,10 +237528,10 @@
         "volume_expansion": 0.921920997440979,
         "windows": {
           "1D": {
-            "abnormal_return_pct": 0.9732487681564539,
-            "benchmark_return_pct": -1.69093188709607,
-            "directional_abnormal_return_pct": 0.9732487681564539,
-            "stock_return_pct": -0.717683118939616
+            "abnormal_return_pct": 0.5438733925727135,
+            "benchmark_return_pct": -1.650147322273121,
+            "directional_abnormal_return_pct": 0.5438733925727135,
+            "stock_return_pct": -1.1062739297004076
           },
           "3D": {
             "abnormal_return_pct": null,
@@ -237579,10 +237579,10 @@
         "volume_expansion": 0.921920997440979,
         "windows": {
           "1D": {
-            "abnormal_return_pct": 0.9732487681564539,
-            "benchmark_return_pct": -1.69093188709607,
-            "directional_abnormal_return_pct": 0.9732487681564539,
-            "stock_return_pct": -0.717683118939616
+            "abnormal_return_pct": 0.5438733925727135,
+            "benchmark_return_pct": -1.650147322273121,
+            "directional_abnormal_return_pct": 0.5438733925727135,
+            "stock_return_pct": -1.1062739297004076
           },
           "3D": {
             "abnormal_return_pct": null,
@@ -237619,7 +237619,7 @@
         "company": "Mirum Pharmaceuticals",
         "direction": "NEUTRAL",
         "event_id": "9836b2203f7b695e3df3941d",
-        "event_price": 100.26499938964844,
+        "event_price": 100.44999694824219,
         "event_timestamp": "2026-09-10",
         "program": "brelovitug",
         "source": "ClinicalTrials.gov",
@@ -237627,7 +237627,7 @@
         "subtype": "TRIAL_UPDATED",
         "ticker": "MIRM",
         "url": "https://clinicaltrials.gov/study/NCT07454837",
-        "volume_expansion": 0.6409983854955326,
+        "volume_expansion": 0.7861633958744898,
         "windows": {
           "1D": {
             "abnormal_return_pct": null,
@@ -237670,7 +237670,7 @@
         "company": "REGENXBIO",
         "direction": "NEUTRAL",
         "event_id": "6f6eaee6e224a1740e195cd1",
-        "event_price": 8.539999961853027,
+        "event_price": 8.531499862670898,
         "event_timestamp": "2026-09-10",
         "program": "surabgene",
         "source": "ClinicalTrials.gov",
@@ -237678,7 +237678,7 @@
         "subtype": "TRIAL_UPDATED",
         "ticker": "RGNX",
         "url": "https://clinicaltrials.gov/study/NCT07592273",
-        "volume_expansion": 0.4971865483657526,
+        "volume_expansion": 0.5601914586533662,
         "windows": {
           "1D": {
             "abnormal_return_pct": null,
@@ -237721,7 +237721,7 @@
         "company": "Summit Therapeutics",
         "direction": "NEUTRAL",
         "event_id": "d150ca2070fe46f28957e6bd",
-        "event_price": 16.829999923706055,
+        "event_price": 17.014999389648438,
         "event_timestamp": "2026-09-10",
         "program": "ivonescimab",
         "source": "ClinicalTrials.gov",
@@ -237729,7 +237729,7 @@
         "subtype": "TRIAL_UPDATED",
         "ticker": "SMMT",
         "url": "https://clinicaltrials.gov/study/NCT07602855",
-        "volume_expansion": 0.41021775241129904,
+        "volume_expansion": 0.47354594103651537,
         "windows": {
           "1D": {
             "abnormal_return_pct": null,
@@ -237772,7 +237772,7 @@
         "company": "Moderna",
         "direction": "NEUTRAL",
         "event_id": "df044fd3b5907ad35d33dbbd",
-        "event_price": 134.97500610351562,
+        "event_price": 136.1501007080078,
         "event_timestamp": "2026-09-10",
         "program": null,
         "source": "ClinicalTrials.gov",
@@ -237780,7 +237780,7 @@
         "subtype": "TRIAL_UPDATED",
         "ticker": "MRNA",
         "url": "https://clinicaltrials.gov/study/NCT07737717",
-        "volume_expansion": 0.1773159619014237,
+        "volume_expansion": 0.19253623337492023,
         "windows": {
           "1D": {
             "abnormal_return_pct": null,
@@ -237831,7 +237831,7 @@
         "subtype": "TRIAL_UPDATED",
         "ticker": "RVMD",
         "url": "https://clinicaltrials.gov/study/NCT07621718",
-        "volume_expansion": 0.24907646128004898,
+        "volume_expansion": 0.2893659273587794,
         "windows": {
           "1D": {
             "abnormal_return_pct": null,
@@ -237874,7 +237874,7 @@
         "company": "Roivant Sciences",
         "direction": "NEUTRAL",
         "event_id": "be3c67fd641d1de076cf5592",
-        "event_price": 40.64030075073242,
+        "event_price": 40.56999969482422,
         "event_timestamp": "2026-09-10",
         "program": "mosliciguat",
         "source": "ClinicalTrials.gov",
@@ -237882,7 +237882,7 @@
         "subtype": "TRIAL_UPDATED",
         "ticker": "ROIV",
         "url": "https://clinicaltrials.gov/study/NCT06635850",
-        "volume_expansion": 0.4607411745215074,
+        "volume_expansion": 0.507912327367612,
         "windows": {
           "1D": {
             "abnormal_return_pct": null,
@@ -237925,7 +237925,7 @@
         "company": "Regeneron Pharmaceuticals",
         "direction": "NEUTRAL",
         "event_id": "cd1682bc5814927ebd649a9b",
-        "event_price": 798.1199951171875,
+        "event_price": 795.0250244140625,
         "event_timestamp": "2026-09-10",
         "program": null,
         "source": "ClinicalTrials.gov",
@@ -237933,7 +237933,7 @@
         "subtype": "TRIAL_UPDATED",
         "ticker": "REGN",
         "url": "https://clinicaltrials.gov/study/NCT06269133",
-        "volume_expansion": 0.3865037511378975,
+        "volume_expansion": 0.4283438490755564,
         "windows": {
           "1D": {
             "abnormal_return_pct": null,
@@ -237976,7 +237976,7 @@
         "company": "Regeneron Pharmaceuticals",
         "direction": "NEUTRAL",
         "event_id": "a6e496ec192bb1c845a6d13f",
-        "event_price": 798.1199951171875,
+        "event_price": 795.0250244140625,
         "event_timestamp": "2026-09-10",
         "program": null,
         "source": "ClinicalTrials.gov",
@@ -237984,7 +237984,7 @@
         "subtype": "TRIAL_STARTED",
         "ticker": "REGN",
         "url": "https://clinicaltrials.gov/study/NCT07543055",
-        "volume_expansion": 0.3865037511378975,
+        "volume_expansion": 0.4283438490755564,
         "windows": {
           "1D": {
             "abnormal_return_pct": null,
@@ -238027,7 +238027,7 @@
         "company": "Vertex Pharmaceuticals",
         "direction": "NEUTRAL",
         "event_id": "855cb424cd23f3f42b45d011",
-        "event_price": 517.3800048828125,
+        "event_price": 515.3200073242188,
         "event_timestamp": "2026-09-10",
         "program": null,
         "source": "ClinicalTrials.gov",
@@ -238035,7 +238035,7 @@
         "subtype": "TRIAL_UPDATED",
         "ticker": "VRTX",
         "url": "https://clinicaltrials.gov/study/NCT05331183",
-        "volume_expansion": 0.30007204297435947,
+        "volume_expansion": 0.35314499011222267,
         "windows": {
           "1D": {
             "abnormal_return_pct": null,
