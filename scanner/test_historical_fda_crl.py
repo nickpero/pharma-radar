@@ -8,7 +8,7 @@ def test_date_parses_fda_format():
 
 
 def test_tokens_remove_generic_words():
-    assert _tokens("Acme Therapeutics, Inc.") == ["acme"]
+    assert _tokens("Avidity Therapeutics, Inc.") == ["avidity"]
 
 
 if __name__ == "__main__":
