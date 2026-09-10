@@ -67,21 +67,30 @@ jobs:
       - name: Audit Historical Edge dataset
         run: python -m scanner.audit_historical_edge
 
-      - name: Report dataset size
+      - name: Validate catalyst dataset
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
-          p = json.loads(Path("data/historical_edge.json").read_text())
           d = json.loads(Path("data/historical_discovered_events.json").read_text())
+          p = json.loads(Path("data/historical_edge.json").read_text())
           c = json.loads(Path("data/historical_catalyst_dataset.json").read_text())
-          print(f"Discovered events: {d.get('events_count', 0)}")
+          discovered = int(d.get("events_count", 0))
+          tradable = int(c.get("counts", {}).get("tradable", 0))
+          tradable_metrics = int(c.get("counts", {}).get("tradable_with_market_metrics", 0))
+          print(f"Discovered events: {discovered}")
           print(f"Events by source: {d.get('by_source', {})}")
           print(f"Events with market metrics: {p.get('events_with_metrics', 0)}")
           print(f"Failures: {p.get('failures', 0)}")
-          print(f"Tradable catalysts: {c.get('counts', {}).get('tradable', 0)}")
-          print(f"Tradable catalysts with market metrics: {c.get('counts', {}).get('tradable_with_market_metrics', 0)}")
+          print(f"Tradable catalysts: {tradable}")
+          print(f"Tradable catalysts with market metrics: {tradable_metrics}")
           print(f"Catalysts by subtype: {c.get('by_subtype', {})}")
+          if discovered == 0:
+              raise SystemExit("Historical discovery returned zero events")
+          if tradable == 0:
+              raise SystemExit("Historical catalyst dataset is empty: no tradable catalysts discovered")
+          if tradable_metrics == 0:
+              raise SystemExit("Historical catalyst dataset has no tradable catalysts with market metrics")
           PY
 
       - name: Persist historical datasets
