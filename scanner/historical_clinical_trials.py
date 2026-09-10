@@ -13,6 +13,8 @@ from typing import Any
 import requests
 
 API_URL = "https://clinicaltrials.gov/api/v2/studies"
+MAX_PAGE_SIZE = 1000
+MAX_PAGES = 100
 
 
 def _date(value: Any) -> str | None:
@@ -105,27 +107,72 @@ def _milestones(study: dict[str, Any]) -> list[tuple[str, str, str]]:
     return out
 
 
+def _fetch_studies(
+    session: requests.Session,
+    query: str,
+    max_studies: int,
+) -> list[dict[str, Any]]:
+    """Fetch all matching studies up to the requested cap using API pagination."""
+    if max_studies <= 0:
+        return []
+
+    page_size = min(max_studies, MAX_PAGE_SIZE)
+    params: dict[str, Any] = {
+        "query.term": query,
+        "pageSize": page_size,
+        "format": "json",
+    }
+    studies: list[dict[str, Any]] = []
+    seen_ids: set[str] = set()
+
+    for _ in range(MAX_PAGES):
+        response = session.get(API_URL, params=params, timeout=30)
+        response.raise_for_status()
+        payload = response.json()
+
+        page_studies = payload.get("studies") or []
+        for study in page_studies:
+            protocol = study.get("protocolSection") or {}
+            nct_id = str((protocol.get("identificationModule") or {}).get("nctId") or "")
+            key = nct_id or hashlib.sha256(repr(study).encode("utf-8")).hexdigest()
+            if key in seen_ids:
+                continue
+            seen_ids.add(key)
+            studies.append(study)
+            if len(studies) >= max_studies:
+                return studies
+
+        next_token = payload.get("nextPageToken")
+        if not next_token or not page_studies:
+            break
+        params["pageToken"] = next_token
+
+    return studies
+
+
 def discover_clinical_trials(
     session: requests.Session,
     ticker: str,
     company: str,
     programs: list[str],
     start_date: date,
-    max_studies: int = 100,
+    max_studies: int = 1000,
 ) -> list[dict[str, Any]]:
     """Return conservative dated milestones for trials matching company/programs.
 
     Trial milestones are informational by default. Direction must come from
     actual efficacy/safety evidence or another validated catalyst source.
+
+    ClinicalTrials.gov search results are paginated. This function follows
+    ``nextPageToken`` until the requested per-query study cap is reached or the
+    API reports that there are no more pages. The modern API supports up to
+    1000 studies per response, so larger historical result sets are traversed
+    page-by-page rather than silently stopping at the first page.
     """
     studies: dict[str, dict[str, Any]] = {}
     queries = [company] + [p for p in programs if p]
     for query in queries:
-        params = {"query.term": query, "pageSize": min(max_studies, 100), "format": "json"}
-        response = session.get(API_URL, params=params, timeout=30)
-        response.raise_for_status()
-        payload = response.json()
-        for study in payload.get("studies") or []:
+        for study in _fetch_studies(session, query, max_studies):
             protocol = study.get("protocolSection") or {}
             nct_id = str((protocol.get("identificationModule") or {}).get("nctId") or "")
             if nct_id:
