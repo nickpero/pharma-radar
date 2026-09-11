@@ -46,5 +46,43 @@ def test_negative_direction_is_oriented_correctly(tmp_path, monkeypatch):
     assert result["summary"]["win_rate_directional"]["1D"] == 1.0
 
 
+def test_dataset_builder_matches_edge_without_explicit_event_id(tmp_path, monkeypatch):
+    import json
+    import scanner.build_historical_catalyst_dataset as module
+
+    event = {
+        "ticker": "TEST",
+        "program": "drug",
+        "subtype": "FDA_APPROVAL",
+        "event_timestamp": "2025-01-01",
+        "source": "FDA",
+        "url": "https://example.test/event",
+        "direction": "POSITIVE",
+    }
+    edge_event = {
+        **event,
+        "event_id": "",
+        "event_price": 100.0,
+        "windows": {
+            "1D": {"directional_abnormal_return_pct": 5.0},
+            "3D": {"directional_abnormal_return_pct": 6.0},
+            "5D": {"directional_abnormal_return_pct": 7.0},
+        },
+    }
+    discovered_path = tmp_path / "discovered.json"
+    edge_path = tmp_path / "edge.json"
+    output_path = tmp_path / "dataset.json"
+    discovered_path.write_text(json.dumps({"events": [event]}), encoding="utf-8")
+    edge_path.write_text(json.dumps({"events": [edge_event]}), encoding="utf-8")
+    monkeypatch.setattr(module, "DISCOVERED", discovered_path)
+    monkeypatch.setattr(module, "EDGE", edge_path)
+    monkeypatch.setattr(module, "OUTPUT", output_path)
+
+    payload = module.build()
+    assert payload["counts"]["tradable"] == 1
+    assert payload["counts"]["tradable_with_market_metrics"] == 1
+    assert payload["tradable_catalysts"][0]["market_metrics"]["event_price"] == 100.0
+
+
 if __name__ == "__main__":
     print("Run with pytest or the GitHub Actions workflow.")
