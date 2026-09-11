@@ -1,6 +1,7 @@
 """Build the clean historical catalyst dataset used for trading analysis."""
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 from typing import Any
@@ -27,9 +28,19 @@ def _load(path: Path) -> dict[str, Any]:
 
 
 def _event_key(event: dict[str, Any]) -> str:
-    return str(event.get("event_id") or "|".join(str(event.get(k) or "") for k in (
-        "ticker", "program", "subtype", "event_timestamp", "source"
-    )))
+    """Use the exact fallback key used by the Historical Edge builder.
+
+    Historical discovery events often do not carry an event_id. The previous
+    dataset builder used a different fallback representation from
+    build_historical_edge.py, causing most valid market metrics to be missed.
+    """
+    explicit = event.get("event_id")
+    if explicit:
+        return str(explicit)
+    raw = "|".join(str(event.get(k) or "") for k in (
+        "ticker", "program", "subtype", "event_timestamp", "source", "url"
+    ))
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:24]
 
 
 def build() -> dict[str, Any]:
@@ -66,7 +77,7 @@ def build() -> dict[str, Any]:
         by_direction[direction] = by_direction.get(direction, 0) + 1
 
     payload = {
-        "version": "1.0",
+        "version": "1.1",
         "tradable_catalysts": tradable,
         "informational_milestones": informational,
         "excluded": excluded,
