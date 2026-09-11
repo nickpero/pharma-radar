@@ -3,7 +3,9 @@ name: Pharma Radar
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/15 * * * *"
+    # Avoid the heavy :00/:15/:30/:45 boundaries where GitHub reports
+    # scheduled workflows can be delayed or dropped under high load.
+    - cron: "7,22,37,52 * * * *"
 
 concurrency:
   group: pharma-radar-production
@@ -47,22 +49,20 @@ jobs:
           echo "==================================="
           echo "🧬 PHARMA RADAR — PRODUCTION SCAN"
           echo "==================================="
+          echo "Event: ${{ github.event_name }}"
+          echo "Scheduled expression: ${{ github.event.schedule }}"
+          echo "UTC start: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
           python main.py
 
       - name: Commit updated state
         run: |
           echo "Checking repository changes..."
-
           if git diff --quiet && [ -z "$(git status --porcelain)" ]; then
             echo "No changes to commit."
             exit 0
           fi
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
           git add -A
-
           git commit -m "Update Pharma Radar state [skip ci]" || true
-
           git push
