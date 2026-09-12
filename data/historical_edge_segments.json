@@ -6,34 +6,34 @@
     "slippage_bps": 0,
     "windows": {
       "1D": {
-        "arithmetic_sum_pct": 158.17797663436664,
-        "compound_if_serial_pct": 353.65475063993006,
+        "arithmetic_sum_pct": 140.95483755017366,
+        "compound_if_serial_pct": 283.8659067757621,
         "max_single_gain_pct": 14.057585440449937,
         "max_single_loss_pct": -6.287859366740511,
-        "mean_return_pct": 1.977224707929583,
-        "median_return_pct": 1.2725582431865168,
-        "n": 80,
-        "win_rate": 0.6625
+        "mean_return_pct": 1.854668915133864,
+        "median_return_pct": 1.1893142435463855,
+        "n": 76,
+        "win_rate": 0.6447368421052632
       },
       "3D": {
-        "arithmetic_sum_pct": 204.72146808987387,
-        "compound_if_serial_pct": 528.2105565956708,
+        "arithmetic_sum_pct": 192.62051416447352,
+        "compound_if_serial_pct": 459.1833085181868,
         "max_single_gain_pct": 35.74417930177216,
         "max_single_loss_pct": -8.137064514317371,
-        "mean_return_pct": 2.5590183511234232,
+        "mean_return_pct": 2.534480449532546,
         "median_return_pct": 1.2814133468825541,
-        "n": 80,
-        "win_rate": 0.6125
+        "n": 76,
+        "win_rate": 0.618421052631579
       },
       "5D": {
-        "arithmetic_sum_pct": 175.0290112900638,
-        "compound_if_serial_pct": 342.05736133845954,
+        "arithmetic_sum_pct": 155.12619250767946,
+        "compound_if_serial_pct": 266.74730785470075,
         "max_single_gain_pct": 36.545548553433484,
         "max_single_loss_pct": -9.784628954631836,
-        "mean_return_pct": 2.1878626411257978,
+        "mean_return_pct": 2.0411341119431508,
         "median_return_pct": 0.09595074889034994,
-        "n": 80,
-        "win_rate": 0.5375
+        "n": 76,
+        "win_rate": 0.5394736842105263
       }
     }
   },
@@ -65,82 +65,82 @@
     },
     "POSITIVE": {
       "1D": {
-        "loss_rate": 0.30952380952380953,
-        "mean_directional_ar_pct": 2.138812014462044,
-        "median_directional_ar_pct": 1.3570109923513374,
-        "n": 42,
-        "win_rate": 0.6904761904761905
+        "loss_rate": 0.34210526315789475,
+        "mean_directional_ar_pct": 1.910709619031918,
+        "median_directional_ar_pct": 1.3147476070436315,
+        "n": 38,
+        "win_rate": 0.6578947368421053
       },
       "3D": {
-        "loss_rate": 0.40476190476190477,
-        "mean_directional_ar_pct": 1.9559953705934359,
+        "loss_rate": 0.39473684210526316,
+        "mean_directional_ar_pct": 1.843443464197998,
         "median_directional_ar_pct": 0.8584085773801153,
-        "n": 42,
-        "win_rate": 0.5952380952380952
+        "n": 38,
+        "win_rate": 0.6052631578947368
       },
       "5D": {
-        "loss_rate": 0.4523809523809524,
-        "mean_directional_ar_pct": 1.8796731837955742,
+        "loss_rate": 0.4473684210526316,
+        "mean_directional_ar_pct": 1.5537751299218356,
         "median_directional_ar_pct": 0.412779575169675,
-        "n": 42,
-        "win_rate": 0.5476190476190477
+        "n": 38,
+        "win_rate": 0.5526315789473685
       },
-      "events": 42,
-      "median_volume_expansion": 1.1826372563355567
+      "events": 38,
+      "median_volume_expansion": 1.1513270165287912
     }
   },
   "by_market_cap": {
     "UNKNOWN": {
       "1D": {
-        "loss_rate": 0.3375,
-        "mean_directional_ar_pct": 1.977224707929583,
-        "median_directional_ar_pct": 1.2725582431865168,
-        "n": 80,
-        "win_rate": 0.6625
+        "loss_rate": 0.35526315789473684,
+        "mean_directional_ar_pct": 1.854668915133864,
+        "median_directional_ar_pct": 1.1893142435463855,
+        "n": 76,
+        "win_rate": 0.6447368421052632
       },
       "3D": {
-        "loss_rate": 0.3875,
-        "mean_directional_ar_pct": 2.5590183511234232,
+        "loss_rate": 0.3815789473684211,
+        "mean_directional_ar_pct": 2.534480449532546,
         "median_directional_ar_pct": 1.2814133468825541,
-        "n": 80,
-        "win_rate": 0.6125
+        "n": 76,
+        "win_rate": 0.618421052631579
       },
       "5D": {
-        "loss_rate": 0.4625,
-        "mean_directional_ar_pct": 2.1878626411257978,
+        "loss_rate": 0.4605263157894737,
+        "mean_directional_ar_pct": 2.0411341119431508,
         "median_directional_ar_pct": 0.09595074889034994,
-        "n": 80,
-        "win_rate": 0.5375
+        "n": 76,
+        "win_rate": 0.5394736842105263
       },
-      "events": 80,
-      "median_volume_expansion": 1.0451511453276832
+      "events": 76,
+      "median_volume_expansion": 1.0363491512126526
     }
   },
   "by_source": {
     "FDA": {
       "1D": {
-        "loss_rate": 0.30952380952380953,
-        "mean_directional_ar_pct": 2.138812014462044,
-        "median_directional_ar_pct": 1.3570109923513374,
-        "n": 42,
-        "win_rate": 0.6904761904761905
+        "loss_rate": 0.34210526315789475,
+        "mean_directional_ar_pct": 1.910709619031918,
+        "median_directional_ar_pct": 1.3147476070436315,
+        "n": 38,
+        "win_rate": 0.6578947368421053
       },
       "3D": {
-        "loss_rate": 0.40476190476190477,
-        "mean_directional_ar_pct": 1.9559953705934359,
+        "loss_rate": 0.39473684210526316,
+        "mean_directional_ar_pct": 1.843443464197998,
         "median_directional_ar_pct": 0.8584085773801153,
-        "n": 42,
-        "win_rate": 0.5952380952380952
+        "n": 38,
+        "win_rate": 0.6052631578947368
       },
       "5D": {
-        "loss_rate": 0.4523809523809524,
-        "mean_directional_ar_pct": 1.8796731837955742,
+        "loss_rate": 0.4473684210526316,
+        "mean_directional_ar_pct": 1.5537751299218356,
         "median_directional_ar_pct": 0.412779575169675,
-        "n": 42,
-        "win_rate": 0.5476190476190477
+        "n": 38,
+        "win_rate": 0.5526315789473685
       },
-      "events": 42,
-      "median_volume_expansion": 1.1826372563355567
+      "events": 38,
+      "median_volume_expansion": 1.1513270165287912
     },
     "FDA_CRL": {
       "1D": {
@@ -171,28 +171,28 @@
   "by_subtype": {
     "FDA_APPROVAL": {
       "1D": {
-        "loss_rate": 0.3333333333333333,
-        "mean_directional_ar_pct": 1.5456865199842553,
-        "median_directional_ar_pct": 0.8117094174409201,
-        "n": 12,
-        "win_rate": 0.6666666666666666
+        "loss_rate": 0.4,
+        "mean_directional_ar_pct": 1.5524883542702692,
+        "median_directional_ar_pct": 0.7073498340863849,
+        "n": 10,
+        "win_rate": 0.6
       },
       "3D": {
-        "loss_rate": 0.4166666666666667,
-        "mean_directional_ar_pct": 0.988654875471325,
-        "median_directional_ar_pct": 0.2622309221252672,
-        "n": 12,
-        "win_rate": 0.5833333333333334
+        "loss_rate": 0.3,
+        "mean_directional_ar_pct": 1.3535409859209568,
+        "median_directional_ar_pct": 1.0413082465219936,
+        "n": 10,
+        "win_rate": 0.7
       },
       "5D": {
-        "loss_rate": 0.5833333333333334,
-        "mean_directional_ar_pct": 0.23863127043876234,
-        "median_directional_ar_pct": -1.4107260785528204,
-        "n": 12,
-        "win_rate": 0.4166666666666667
+        "loss_rate": 0.5,
+        "mean_directional_ar_pct": 0.5719823253563028,
+        "median_directional_ar_pct": -0.8260781328206841,
+        "n": 10,
+        "win_rate": 0.5
       },
-      "events": 12,
-      "median_volume_expansion": 1.2269358724231436
+      "events": 10,
+      "median_volume_expansion": 0.9683516503650076
     },
     "FDA_REJECTION": {
       "1D": {
@@ -221,28 +221,28 @@
     },
     "LABEL_EXPANSION": {
       "1D": {
-        "loss_rate": 0.3,
-        "mean_directional_ar_pct": 2.3760622122531596,
-        "median_directional_ar_pct": 1.3685522495112012,
-        "n": 30,
-        "win_rate": 0.7
+        "loss_rate": 0.32142857142857145,
+        "mean_directional_ar_pct": 2.038645785018221,
+        "median_directional_ar_pct": 1.3262888642034953,
+        "n": 28,
+        "win_rate": 0.6785714285714286
       },
       "3D": {
-        "loss_rate": 0.4,
-        "mean_directional_ar_pct": 2.3429315686422796,
-        "median_directional_ar_pct": 1.5335133684514501,
-        "n": 30,
-        "win_rate": 0.6
+        "loss_rate": 0.42857142857142855,
+        "mean_directional_ar_pct": 2.018408635011227,
+        "median_directional_ar_pct": 0.7991484704464702,
+        "n": 28,
+        "win_rate": 0.5714285714285714
       },
       "5D": {
-        "loss_rate": 0.4,
-        "mean_directional_ar_pct": 2.5360899491382995,
-        "median_directional_ar_pct": 2.6082460029979435,
-        "n": 30,
-        "win_rate": 0.6
+        "loss_rate": 0.42857142857142855,
+        "mean_directional_ar_pct": 1.904415417266669,
+        "median_directional_ar_pct": 1.5370867446824588,
+        "n": 28,
+        "win_rate": 0.5714285714285714
       },
-      "events": 30,
-      "median_volume_expansion": 1.1826372563355567
+      "events": 28,
+      "median_volume_expansion": 1.166982136432174
     }
   },
   "by_year": {
@@ -498,28 +498,28 @@
     },
     "2026": {
       "1D": {
-        "loss_rate": 0.26666666666666666,
-        "mean_directional_ar_pct": 2.560163872128045,
-        "median_directional_ar_pct": 2.5770239899197245,
-        "n": 15,
-        "win_rate": 0.7333333333333333
+        "loss_rate": 0.36363636363636365,
+        "mean_directional_ar_pct": 1.9253926361570637,
+        "median_directional_ar_pct": 1.9402791641312978,
+        "n": 11,
+        "win_rate": 0.6363636363636364
       },
       "3D": {
-        "loss_rate": 0.3333333333333333,
-        "mean_directional_ar_pct": 2.209038453520688,
+        "loss_rate": 0.2727272727272727,
+        "mean_directional_ar_pct": 1.9122384434009043,
         "median_directional_ar_pct": 1.2885356845626306,
-        "n": 15,
-        "win_rate": 0.6666666666666666
+        "n": 11,
+        "win_rate": 0.7272727272727273
       },
       "5D": {
-        "loss_rate": 0.4666666666666667,
-        "mean_directional_ar_pct": 2.25464900304501,
+        "loss_rate": 0.45454545454545453,
+        "mean_directional_ar_pct": 1.2651742057537079,
         "median_directional_ar_pct": 0.7452812087819005,
-        "n": 15,
-        "win_rate": 0.5333333333333333
+        "n": 11,
+        "win_rate": 0.5454545454545454
       },
-      "events": 15,
-      "median_volume_expansion": 1.3157262080571488
+      "events": 11,
+      "median_volume_expansion": 1.1513270165287912
     }
   },
   "methodology": {
@@ -535,28 +535,28 @@
   },
   "summary": {
     "1D": {
-      "loss_rate": 0.3375,
-      "mean_directional_ar_pct": 1.977224707929583,
-      "median_directional_ar_pct": 1.2725582431865168,
-      "n": 80,
-      "win_rate": 0.6625
+      "loss_rate": 0.35526315789473684,
+      "mean_directional_ar_pct": 1.854668915133864,
+      "median_directional_ar_pct": 1.1893142435463855,
+      "n": 76,
+      "win_rate": 0.6447368421052632
     },
     "3D": {
-      "loss_rate": 0.3875,
-      "mean_directional_ar_pct": 2.5590183511234232,
+      "loss_rate": 0.3815789473684211,
+      "mean_directional_ar_pct": 2.534480449532546,
       "median_directional_ar_pct": 1.2814133468825541,
-      "n": 80,
-      "win_rate": 0.6125
+      "n": 76,
+      "win_rate": 0.618421052631579
     },
     "5D": {
-      "loss_rate": 0.4625,
-      "mean_directional_ar_pct": 2.1878626411257978,
+      "loss_rate": 0.4605263157894737,
+      "mean_directional_ar_pct": 2.0411341119431508,
       "median_directional_ar_pct": 0.09595074889034994,
-      "n": 80,
-      "win_rate": 0.5375
+      "n": 76,
+      "win_rate": 0.5394736842105263
     },
-    "events": 80,
-    "median_volume_expansion": 1.0451511453276832
+    "events": 76,
+    "median_volume_expansion": 1.0363491512126526
   },
   "ticker_concentration": {
     "counts": {
@@ -571,7 +571,6 @@
       "EDIT": 1,
       "GILD": 2,
       "INSM": 1,
-      "IONS": 1,
       "IOVA": 4,
       "LLY": 4,
       "MIRM": 9,
@@ -582,12 +581,11 @@
       "RCKT": 1,
       "REGN": 7,
       "RGNX": 1,
-      "RVMD": 1,
       "SNY": 1,
       "SRPT": 1,
       "TLX": 2,
       "VRTX": 6,
-      "ZYME": 3
+      "ZYME": 1
     },
     "top_5": {
       "ARGX": 15,
@@ -596,8 +594,8 @@
       "REGN": 7,
       "VRTX": 6
     },
-    "top_5_share": 0.5125,
-    "unique_tickers": 28
+    "top_5_share": 0.5394736842105263,
+    "unique_tickers": 26
   },
   "version": "1.0"
 }
