@@ -12,6 +12,7 @@ from scanner.trading_setup_41 import enrich_trading_setup
 from scanner.trading_setup_2 import enrich_trading_setup_2
 from scanner.reaction import enrich_reaction_classification
 from scanner.historical_stats import enrich_historical_stats_batch
+from scanner.historical_edge_score import enrich_historical_edges
 from scanner.priority import enrich_alert_priorities, sort_by_alert_priority
 from scanner.alert_filter import filter_alerts
 from scanner.fda_enrichment import get_enriched_fda_news
@@ -100,6 +101,11 @@ def build_alert(ticker, company, program, nct_id, event, changes, trial):
         "reaction_strength": event.get("reaction_strength", "UNKNOWN"), "reaction_interpretation": event.get("reaction_interpretation", "UNKNOWN"),
         "reaction_classification": event.get("reaction_classification", "UNKNOWN"), "trading_setup_version": event.get("trading_setup_version", "4"),
         "catalyst_confirmation_score": event.get("catalyst_confirmation_score", 0), "catalyst_confirmation": event.get("catalyst_confirmation", "UNCONFIRMED"),
+        "historical_edge_version": event.get("historical_edge_version"), "historical_edge_score": event.get("historical_edge_score"),
+        "historical_edge_label": event.get("historical_edge_label"), "historical_edge_confidence": event.get("historical_edge_confidence"),
+        "historical_edge_sample": event.get("historical_edge_sample"), "historical_edge_median_1d_pct": event.get("historical_edge_median_1d_pct"),
+        "historical_edge_win_rate_1d": event.get("historical_edge_win_rate_1d"), "historical_edge_direction_adjustment": event.get("historical_edge_direction_adjustment"),
+        "historical_edge_ticker_sample": event.get("historical_edge_ticker_sample"), "historical_edge_ticker_adjustment": event.get("historical_edge_ticker_adjustment"),
     }
     alert.update(_reaction_fields(event))
     return alert
@@ -120,6 +126,11 @@ def build_fda_alert(event):
         "reaction_strength": event.get("reaction_strength", "UNKNOWN"), "reaction_interpretation": event.get("reaction_interpretation", "UNKNOWN"),
         "reaction_classification": event.get("reaction_classification", "UNKNOWN"), "trading_setup_version": event.get("trading_setup_version", "4"),
         "catalyst_confirmation_score": event.get("catalyst_confirmation_score", 0), "catalyst_confirmation": event.get("catalyst_confirmation", "UNCONFIRMED"),
+        "historical_edge_version": event.get("historical_edge_version"), "historical_edge_score": event.get("historical_edge_score"),
+        "historical_edge_label": event.get("historical_edge_label"), "historical_edge_confidence": event.get("historical_edge_confidence"),
+        "historical_edge_sample": event.get("historical_edge_sample"), "historical_edge_median_1d_pct": event.get("historical_edge_median_1d_pct"),
+        "historical_edge_win_rate_1d": event.get("historical_edge_win_rate_1d"), "historical_edge_direction_adjustment": event.get("historical_edge_direction_adjustment"),
+        "historical_edge_ticker_sample": event.get("historical_edge_ticker_sample"), "historical_edge_ticker_adjustment": event.get("historical_edge_ticker_adjustment"),
     }
     alert.update(_reaction_fields(event))
     return alert
@@ -189,6 +200,7 @@ def scan(baseline=False):
     alerts = enrich_market_reactions(alerts)
     alerts = [enrich_reaction_classification(alert) for alert in alerts]
     alerts = enrich_historical_stats_batch(alerts)
+    alerts = enrich_historical_edges(alerts)
     alerts = [enrich_trading_setup_2(alert, market_data=alert.get("market_data")) for alert in alerts]
     alerts = [enrich_catalyst_confirmation(alert) for alert in alerts]
     alerts = deduplicate_alerts(alerts)
