@@ -47,7 +47,7 @@ def test_small_ticker_sample_is_not_used_for_adjustment():
     assert result["historical_edge_ticker_adjustment"] == 0
 
 
-def test_unknown_subtype_falls_back_to_global():
+def test_unknown_subtype_falls_back_to_global_but_stays_unknown():
     result = calculate_historical_edge(
         {"ticker": "UNKNOWN", "subtype": "NOT_IN_DATA", "direction": "UNKNOWN"},
         segments(),
@@ -55,6 +55,7 @@ def test_unknown_subtype_falls_back_to_global():
     )
     assert result["historical_edge_sample"] == 0
     assert result["historical_edge_confidence"] == "UNKNOWN"
+    assert result["historical_edge_label"] == "UNKNOWN"
     assert result["historical_edge_score"] == 62.0
 
 
@@ -67,6 +68,6 @@ def test_enrich_preserves_event_fields():
 if __name__ == "__main__":
     test_positive_historical_edge_and_ticker_adjustment()
     test_small_ticker_sample_is_not_used_for_adjustment()
-    test_unknown_subtype_falls_back_to_global()
+    test_unknown_subtype_falls_back_to_global_but_stays_unknown()
     test_enrich_preserves_event_fields()
     print("OK — Historical Edge Score tests passed")
