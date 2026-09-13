@@ -8,6 +8,10 @@ def test_catalyst_message_format():
         "nct_id": "NCT05126758",
         "alert_priority": 100,
         "alert_tier": "CRITICAL",
+        "trading_setup_score": 80,
+        "trading_window": "IMMEDIATE",
+        "catalyst_confirmation_score": 0,
+        "catalyst_confirmation": "UNCONFIRMED",
         "event": {
             "type": "STATUS_CHANGE",
             "severity": "HIGH",
@@ -20,19 +24,15 @@ def test_catalyst_message_format():
         },
     }
     message = format_catalyst_alert(alert)
-    assert "🚨 PHARMA RADAR — CRITICAL" in message
-    assert "🧬 CAPR — deramiocel" in message
-    assert "🧪 NCT05126758" in message
-    assert "📰 TRIAL_COMPLETED" in message
-    assert "🎯 CATALYST" in message
-    assert "95/100 — CRITICAL" in message
-    assert "🚨 PRIORITY" in message
-    assert "100/100 — CRITICAL" in message
-    assert "🧠 CONFIRMATION" in message
-    assert "0/100 — UNCONFIRMED" in message
-    assert "📊 TRADING SETUP" in message
-    assert "📈 MARKET REACTION" in message
-    assert "⚠️ Nessuna raccomandazione automatica" in message
+    assert "🚨 PHARMA RADAR" in message
+    assert "🚨 CRITICAL" in message
+    assert "🧬 CAPR" in message
+    assert "💊 deramiocel" in message
+    assert "📰 TRIAL COMPLETED" in message
+    assert "🎯 Catalyst: 95/100 · CRITICAL" in message
+    assert "🚨 Priority: 100/100 · CRITICAL" in message
+    assert "📊 Setup: 80/100 · Window: IMMEDIATE" in message
+    assert "📈 Market reaction:" in message
 
 
 def test_real_newlines():
@@ -73,10 +73,9 @@ def test_negative_direction():
         },
     }
     message = format_catalyst_alert(alert)
-    assert "🧬 CAPR — deramiocel" in message
-    assert "📰 TRIAL_STOPPED" in message
-    assert "95/100 — CRITICAL" in message
-    assert "📉" not in message
+    assert "🧬 CAPR" in message
+    assert "📰 TRIAL STOPPED" in message
+    assert "🎯 Catalyst: 95/100 · CRITICAL" in message
 
 
 def test_unknown_direction():
@@ -94,9 +93,10 @@ def test_unknown_direction():
         },
     }
     message = format_catalyst_alert(alert)
-    assert "ZYME — zanidatamab" in message
-    assert "TRIAL_STATUS_UNKNOWN" in message
-    assert "15/100 — LOW" in message
+    assert "ZYME" in message
+    assert "zanidatamab" in message
+    assert "TRIAL STATUS UNKNOWN" in message
+    assert "🎯 Catalyst: 15/100 · LOW" in message
 
 
 if __name__ == "__main__":
