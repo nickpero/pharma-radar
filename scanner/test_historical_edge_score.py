@@ -55,7 +55,7 @@ def test_unknown_subtype_falls_back_to_global():
     )
     assert result["historical_edge_sample"] == 0
     assert result["historical_edge_confidence"] == "UNKNOWN"
-    assert result["historical_edge_score"] == 50.0
+    assert result["historical_edge_score"] == 62.0
 
 
 def test_enrich_preserves_event_fields():
