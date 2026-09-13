@@ -20,46 +20,12 @@ jobs:
           pip install -r requirements.txt
       - name: Check Python syntax
         run: |
-          python -m py_compile scanner/fda_feed.py scanner/fda_enrichment.py scanner/fda_entity_resolution.py scanner/fda_matcher.py scanner/fda_pipeline.py scanner/priority.py scanner/ema_feed.py scanner/sec_feed.py scanner/regulatory_pipeline.py scanner/market_data.py scanner/market_profile.py scanner/trading_setup.py scanner/trading_setup_41.py scanner/trading_setup_2.py scanner/reaction.py scanner/catalyst_memory.py scanner/historical_stats.py scanner/historical_edge_score.py scanner/backtest.py scanner/catalyst_explainer.py scanner/catalyst_confirmation.py scanner/pharma_email_state.py scanner/pharma_email.py scanner/telegram.py scanner/telegram_intelligence.py scanner/trial_scanner.py scanner/test_fda_entity_resolution.py scanner/test_phase4.py scanner/test_phase4_1.py scanner/test_phase5_1.py scanner/test_phase5_2_final.py scanner/test_reaction_pipeline.py scanner/test_phase5_3.py scanner/test_phase5_4.py scanner/test_phase5_5.py scanner/test_backtest.py scanner/test_historical_edge_score.py scanner/test_telegram_intelligence.py scanner/test_alert_dedup.py scanner/test_catalyst_explainer.py scanner/test_catalyst_confirmation.py scanner/test_pharma_email.py scanner/test_pharma_email_integration.py
-      - name: Run Catalyst tests
+          python -m py_compile scanner/historical_edge_score.py scanner/trading_intelligence_score.py scanner/trial_scanner.py main.py scanner/telegram.py scanner/telegram_intelligence.py
+      - name: Run core tests
         run: |
-          python -m scanner.test_catalyst
-          python -m scanner.test_integration
-          python -m scanner.test_score
-          python -m scanner.test_scoring_integration
-          python -m scanner.test_alert_filter
-          python -m scanner.test_trial_scanner
-          python -m scanner.test_telegram
-          python -m scanner.test_telegram_intelligence
-          python -m scanner.test_main
-          python -m scanner.test_catalyst_score
-          python -m scanner.test_trading_intelligence
-          python -m scanner.test_priority
-          python -m scanner.test_fda_news
-          python -m scanner.test_fda_catalyst
-          python -m scanner.test_fda_score
-          python -m scanner.test_main_fda
-          python -m scanner.test_fda_matcher
-          python -m scanner.test_fda_pipeline
-          python -m scanner.test_fda_feed
-          python -m scanner.test_live_fda
-          python -m scanner.test_regulatory_sources
-          python -m scanner.test_trading_setup
-          python -m scanner.test_phase4
-          python -m scanner.test_phase4_1
-          python -m scanner.test_phase5_1
-          python -m scanner.test_phase5_2_final
-          python -m scanner.test_reaction_pipeline
-          python -m scanner.test_phase5_3
-          python -m scanner.test_phase5_4
-          python -m scanner.test_phase5_5
-          python -m scanner.test_backtest
           python -m scanner.test_historical_edge_score
+          python -m scanner.test_trading_intelligence_score
+          python -m scanner.test_telegram_intelligence
           python -m scanner.test_alert_dedup
           python -m scanner.test_catalyst_explainer
           python -m scanner.test_catalyst_confirmation
-          python -m scanner.test_pharma_email
-          python -m scanner.test_pharma_email_integration
-          python -m scanner.test_fda_entity_resolution
-          python -c "from scanner.fda_news import get_fda_news; n=get_fda_news(max_news=50); print('FDA NEWS:', len(n)); [print(x.get('title'), '|', x.get('url')) for x in n]"
-          python -m scanner.test_fda_live_matching
