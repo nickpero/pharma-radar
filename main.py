@@ -128,14 +128,25 @@ def main():
     print("Starting Pharma Radar...")
     result = scan()
     new_alerts = _new_telegram_alerts(result)
-    summary = build_summary(result, intelligent_alerts=new_alerts)
-    print()
-    print(summary)
-    send_telegram(summary)
+
+    # Telegram is an alert channel, not a periodic heartbeat channel.
+    # Do not send a "NO NEW ACTIONABLE CATALYSTS" message every 15 minutes.
+    # The full scan summary remains available in the GitHub Actions log.
+    if new_alerts:
+        summary = build_summary(result, intelligent_alerts=new_alerts)
+        print()
+        print(summary)
+        send_telegram(summary)
+
     sent = send_alerts(result, alerts=new_alerts)
     print(f"Telegram catalyst alerts sent: {len(sent)}")
+
     sent = send_email_alerts(result)
     print(f"Pharma Intelligence emails sent: {sent}")
+
+    if not new_alerts:
+        print()
+        print(build_summary(result, intelligent_alerts=[]))
 
 
 if __name__ == "__main__":
