@@ -2,10 +2,8 @@ name: Pharma Radar
 
 on:
   workflow_dispatch:
-  schedule:
-    # Avoid the heavy :00/:15/:30/:45 boundaries where GitHub reports
-    # scheduled workflows can be delayed or dropped under high load.
-    - cron: "7,22,37,52 * * * *"
+  repository_dispatch:
+    types: [pharma_radar_tick]
 
 concurrency:
   group: pharma-radar-production
@@ -50,7 +48,6 @@ jobs:
           echo "🧬 PHARMA RADAR — PRODUCTION SCAN"
           echo "==================================="
           echo "Event: ${{ github.event_name }}"
-          echo "Scheduled expression: ${{ github.event.schedule }}"
           echo "UTC start: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
           python main.py
 
