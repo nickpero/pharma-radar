@@ -20,6 +20,7 @@ WINDOW = "1D"
 PRIOR_N = 20
 MIN_TICKER_SAMPLE = 5
 MAX_TICKER_ADJUSTMENT = 10.0
+MIN_LABEL_SAMPLE = 5
 VERSION = "1.0"
 
 
@@ -80,8 +81,8 @@ def _confidence(n: int) -> str:
     return "UNKNOWN"
 
 
-def _label(median_ar: float | None, win_rate: float | None) -> str:
-    if median_ar is None or win_rate is None:
+def _label(median_ar: float | None, win_rate: float | None, n: int) -> str:
+    if n < MIN_LABEL_SAMPLE or median_ar is None or win_rate is None:
         return "UNKNOWN"
     if median_ar >= 3.0 and win_rate >= 0.60:
         return "STRONG_POSITIVE"
@@ -138,7 +139,7 @@ def calculate_historical_edge(event: dict[str, Any], segments: dict[str, Any] | 
     return {
         "historical_edge_version": VERSION,
         "historical_edge_score": round(final_score, 1),
-        "historical_edge_label": _label(adj_median, adj_win),
+        "historical_edge_label": _label(adj_median, adj_win, subtype_n),
         "historical_edge_confidence": _confidence(subtype_n),
         "historical_edge_sample": subtype_n,
         "historical_edge_median_1d_pct": round(adj_median, 4) if adj_median is not None else None,
