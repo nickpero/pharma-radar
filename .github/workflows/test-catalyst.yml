@@ -20,7 +20,7 @@ jobs:
           pip install -r requirements.txt
       - name: Check Python syntax
         run: |
-          python -m py_compile scanner/fda_feed.py scanner/fda_enrichment.py scanner/fda_entity_resolution.py scanner/fda_matcher.py scanner/fda_pipeline.py scanner/priority.py scanner/ema_feed.py scanner/sec_feed.py scanner/regulatory_pipeline.py scanner/market_data.py scanner/market_profile.py scanner/trading_setup.py scanner/trading_setup_41.py scanner/trading_setup_2.py scanner/reaction.py scanner/catalyst_memory.py scanner/historical_stats.py scanner/backtest.py scanner/catalyst_explainer.py scanner/catalyst_confirmation.py scanner/pharma_email_state.py scanner/pharma_email.py scanner/telegram.py scanner/telegram_intelligence.py scanner/trial_scanner.py scanner/test_fda_entity_resolution.py scanner/test_phase4.py scanner/test_phase4_1.py scanner/test_phase5_1.py scanner/test_phase5_2_final.py scanner/test_reaction_pipeline.py scanner/test_phase5_3.py scanner/test_phase5_4.py scanner/test_phase5_5.py scanner/test_backtest.py scanner/test_telegram_intelligence.py scanner/test_alert_dedup.py scanner/test_catalyst_explainer.py scanner/test_catalyst_confirmation.py scanner/test_pharma_email.py scanner/test_pharma_email_integration.py
+          python -m py_compile scanner/fda_feed.py scanner/fda_enrichment.py scanner/fda_entity_resolution.py scanner/fda_matcher.py scanner/fda_pipeline.py scanner/priority.py scanner/ema_feed.py scanner/sec_feed.py scanner/regulatory_pipeline.py scanner/market_data.py scanner/market_profile.py scanner/trading_setup.py scanner/trading_setup_41.py scanner/trading_setup_2.py scanner/reaction.py scanner/catalyst_memory.py scanner/historical_stats.py scanner/historical_edge_score.py scanner/backtest.py scanner/catalyst_explainer.py scanner/catalyst_confirmation.py scanner/pharma_email_state.py scanner/pharma_email.py scanner/telegram.py scanner/telegram_intelligence.py scanner/trial_scanner.py scanner/test_fda_entity_resolution.py scanner/test_phase4.py scanner/test_phase4_1.py scanner/test_phase5_1.py scanner/test_phase5_2_final.py scanner/test_reaction_pipeline.py scanner/test_phase5_3.py scanner/test_phase5_4.py scanner/test_phase5_5.py scanner/test_backtest.py scanner/test_historical_edge_score.py scanner/test_telegram_intelligence.py scanner/test_alert_dedup.py scanner/test_catalyst_explainer.py scanner/test_catalyst_confirmation.py scanner/test_pharma_email.py scanner/test_pharma_email_integration.py
       - name: Run Catalyst tests
         run: |
           python -m scanner.test_catalyst
@@ -54,6 +54,7 @@ jobs:
           python -m scanner.test_phase5_4
           python -m scanner.test_phase5_5
           python -m scanner.test_backtest
+          python -m scanner.test_historical_edge_score
           python -m scanner.test_alert_dedup
           python -m scanner.test_catalyst_explainer
           python -m scanner.test_catalyst_confirmation
