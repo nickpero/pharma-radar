@@ -76,6 +76,9 @@ jobs:
       - name: Segment Historical Edge and run baseline backtest
         run: python -m scanner.audit_historical_edge_segments
 
+      - name: Run robust historical backtest
+        run: python -m scanner.robust_historical_backtest
+
       - name: Validate catalyst dataset
         run: |
           python - <<'PY'
@@ -86,11 +89,13 @@ jobs:
           c = json.loads(Path("data/historical_catalyst_dataset.json").read_text())
           a = json.loads(Path("data/historical_catalyst_audit.json").read_text())
           s = json.loads(Path("data/historical_edge_segments.json").read_text())
+          r = json.loads(Path("data/robust_historical_backtest.json").read_text())
           discovered = int(d.get("events_count", 0))
           tradable = int(c.get("counts", {}).get("tradable", 0))
           tradable_metrics = int(c.get("counts", {}).get("tradable_with_market_metrics", 0))
           audit_events = int(a.get("summary", {}).get("events", 0))
           segment_events = int(s.get("summary", {}).get("events", 0))
+          robust_events = int(r.get("sample", {}).get("events", 0))
           print(f"Discovered events: {discovered}")
           print(f"Events by source: {d.get('by_source', {})}")
           print(f"Events with market metrics: {p.get('events_with_metrics', 0)}")
@@ -99,6 +104,8 @@ jobs:
           print(f"Tradable catalysts with market metrics: {tradable_metrics}")
           print(f"Audited tradable catalysts: {audit_events}")
           print(f"Segmented market-matched catalysts: {segment_events}")
+          print(f"Robust-backtest catalysts: {robust_events}")
+          print(f"Qualifying robust segments: {len(r.get('qualifying_segments', []))}")
           print(f"Catalysts by subtype: {c.get('by_subtype', {})}")
           if discovered == 0:
               raise SystemExit("Historical discovery returned zero events")
@@ -110,6 +117,8 @@ jobs:
               raise SystemExit("Historical catalyst audit count does not match dataset")
           if segment_events != tradable_metrics:
               raise SystemExit("Historical edge segmentation count does not match market-matched catalysts")
+          if robust_events != tradable_metrics:
+              raise SystemExit("Robust backtest count does not match market-matched catalysts")
           if int(a.get("summary", {}).get("duplicates", 0)) != 0:
               raise SystemExit("Historical catalyst audit found duplicates")
           if int(a.get("summary", {}).get("direction_mismatches", 0)) != 0:
@@ -120,19 +129,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data/historical_discovered_events.json data/historical_edge.json data/historical_catalyst_dataset.json data/historical_catalyst_audit.json data/historical_edge_segments.json
+          git add -A data/historical_discovered_events.json data/historical_edge.json data/historical_catalyst_dataset.json data/historical_catalyst_audit.json data/historical_edge_segments.json data/robust_historical_backtest.json
           if git diff --cached --quiet; then
             echo "No historical backfill changes to commit"
           else
             git commit -m "Refresh real historical catalyst dataset [skip ci]"
-
-            # Preserve any local modifications left outside the five
-            # explicitly persisted historical datasets before rebasing.
-            if ! git diff --quiet || [ -n "$(git ls-files --others --exclude-standard)" ]; then
-              echo "Local modifications detected after commit; stashing them before rebase..."
-              git stash push -u -m "historical-backfill-local-residue"
-            fi
-
             for attempt in 1 2 3; do
               git fetch origin main
               if git rebase origin/main; then
