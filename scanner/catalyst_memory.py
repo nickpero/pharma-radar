@@ -37,8 +37,10 @@ def load_memory(path=MEMORY_FILE):
 
 def _snapshot(event):
     reaction = event.get("market_reaction") or {}
+    rule_checks = event.get("trading_intelligence_rule_checks") or {}
+    rule_failed = event.get("trading_intelligence_rule_failed") or []
     return {
-        "memory_version": "5.4",
+        "memory_version": "5.5",
         "memory_key": _key(event),
         "recorded_at": datetime.now(timezone.utc).isoformat(),
         "ticker": event.get("ticker"),
@@ -66,6 +68,20 @@ def _snapshot(event):
         "market_cap": event.get("market_cap"),
         "short_interest_pct": event.get("short_interest_pct"),
         "reaction": reaction,
+        "trading_intelligence_version": event.get("trading_intelligence_version"),
+        "trading_intelligence_score": event.get("trading_intelligence_score"),
+        "trading_intelligence_label": event.get("trading_intelligence_label"),
+        "trading_intelligence_qualified": bool(event.get("trading_intelligence_qualified", False)),
+        "trading_intelligence_rule_checks": rule_checks,
+        "trading_intelligence_rule_failed": rule_failed,
+        "trading_intelligence_market_confirmations": event.get("trading_intelligence_market_confirmations"),
+        "historical_edge_version": event.get("historical_edge_version"),
+        "historical_edge_score": event.get("historical_edge_score"),
+        "historical_edge_label": event.get("historical_edge_label"),
+        "historical_edge_confidence": event.get("historical_edge_confidence"),
+        "historical_edge_sample": event.get("historical_edge_sample"),
+        "historical_edge_median_1d_pct": event.get("historical_edge_median_1d_pct"),
+        "historical_edge_win_rate_1d": event.get("historical_edge_win_rate_1d"),
         "url": event.get("url"),
     }
 
