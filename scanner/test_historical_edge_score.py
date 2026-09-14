@@ -18,8 +18,8 @@ def segments():
 def edge_data():
     return {
         "by_ticker": {
-            "TEST": {"events": 10, "windows": {"1D": {"n": 10, "median_directional_abnormal_return_pct": 4.0, "win_rate": 0.80}}},
-            "WEAK": {"events": 2, "windows": {"1D": {"n": 2, "median_directional_abnormal_return_pct": -5.0, "win_rate": 0.0}}},
+            "TEST": {"events": 10, "1D": {"n": 10, "median_directional_abnormal_return_pct": 4.0, "win_rate": 0.80}},
+            "WEAK": {"events": 2, "1D": {"n": 2, "median_directional_abnormal_return_pct": -5.0, "win_rate": 0.0}},
         }
     }
 
