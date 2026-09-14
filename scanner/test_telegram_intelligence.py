@@ -7,6 +7,7 @@ def _alert(ticker, priority, setup, tier, strength="UNKNOWN", interpretation="UN
         "ticker": ticker,
         "program": "drug",
         "subtype": "FDA_APPROVAL",
+        "score": 100,
         "alert_priority": priority,
         "alert_tier": tier,
         "trading_setup_score": setup,
