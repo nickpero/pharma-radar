@@ -32,7 +32,7 @@ def test_positive_historical_edge_and_ticker_adjustment():
     )
     assert result["historical_edge_score"] > 70
     assert result["historical_edge_label"] == "POSITIVE"
-    assert result["historical_edge_confidence"] == "MEDIUM"
+    assert result["historical_edge_confidence"] == "HIGH"
     assert result["historical_edge_ticker_adjustment"] > 0
     assert result["historical_edge_ticker_sample"] == 10
 
