@@ -1,7 +1,18 @@
-"""Daily market-data provider for the Historical Edge Engine."""
+"""Daily market-data provider for the Historical Edge Engine.
+
+The historical backfill can contain many catalysts for the same ticker across
+many years. Fetching a separate Yahoo request for every event/date pair makes
+the provider unnecessarily request-heavy and can trigger rate limits. This
+adapter therefore caches fixed multi-year chunks per symbol and retries
+transient failures. A Stooq CSV fallback is used when Yahoo cannot provide a
+chunk.
+"""
 
 from __future__ import annotations
 
+import csv
+import io
+import time
 from datetime import date, datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from typing import Any, Mapping
@@ -9,15 +20,20 @@ from typing import Any, Mapping
 import requests
 
 YAHOO_CHART_URL = "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
+STOOQ_DAILY_URL = "https://stooq.com/q/d/l/"
+CHUNK_YEARS = 5
+MAX_RETRIES = 3
+RETRY_DELAYS = (1.0, 2.0, 4.0)
 
 
 class YahooDailyProvider:
     """Fetch and cache daily OHLCV observations for one historical run."""
 
-    def __init__(self, timeout: int = 15, session: requests.Session | None = None):
+    def __init__(self, timeout: int = 20, session: requests.Session | None = None):
         self.timeout = timeout
         self.session = session or requests.Session()
         self._cache: dict[tuple[str, date, date], dict[str, dict[str, Any]]] = {}
+        self._symbol_cache: dict[str, dict[str, dict[str, Any]]] = {}
 
     @staticmethod
     def _date(value: Any) -> date | None:
@@ -39,28 +55,42 @@ class YahooDailyProvider:
         except ValueError:
             return None
 
-    def _fetch_symbol(self, symbol: str, start: date, end: date) -> dict[str, dict[str, Any]]:
-        symbol = str(symbol).upper().strip()
-        if not symbol:
-            return {}
-        cache_key = (symbol, start, end)
-        if cache_key in self._cache:
-            return self._cache[cache_key]
+    @staticmethod
+    def _chunks(start: date, end: date):
+        cursor = date(start.year, 1, 1)
+        while cursor <= end:
+            chunk_end = date(cursor.year + CHUNK_YEARS - 1, 12, 31)
+            yield max(cursor, start), min(chunk_end, end)
+            cursor = date(cursor.year + CHUNK_YEARS, 1, 1)
 
+    def _request(self, method: str, url: str, **kwargs):
+        last_error: Exception | None = None
+        for attempt in range(MAX_RETRIES):
+            try:
+                response = self.session.request(method, url, timeout=self.timeout, **kwargs)
+                if response.status_code in {429, 500, 502, 503, 504}:
+                    raise requests.HTTPError(f"HTTP {response.status_code}", response=response)
+                response.raise_for_status()
+                return response
+            except (requests.RequestException, ValueError) as error:
+                last_error = error
+                if attempt < MAX_RETRIES - 1:
+                    time.sleep(RETRY_DELAYS[attempt])
+        raise last_error or RuntimeError("market-data request failed")
+
+    def _fetch_yahoo_chunk(self, symbol: str, start: date, end: date) -> dict[str, dict[str, Any]]:
         period1 = int(datetime.combine(start, datetime.min.time(), tzinfo=timezone.utc).timestamp())
         period2 = int(datetime.combine(end + timedelta(days=1), datetime.min.time(), tzinfo=timezone.utc).timestamp())
-        response = self.session.get(
+        response = self._request(
+            "GET",
             YAHOO_CHART_URL.format(symbol=symbol),
             params={"period1": period1, "period2": period2, "interval": "1d", "events": "history"},
-            headers={"User-Agent": "Pharma-Radar/1.0"},
-            timeout=self.timeout,
+            headers={"User-Agent": "Mozilla/5.0 (compatible; Pharma-Radar/1.0)"},
         )
-        response.raise_for_status()
         payload = response.json()
         result = (payload.get("chart") or {}).get("result") or []
         if not result:
             raise ValueError(f"No Yahoo chart data for {symbol}")
-
         chart = result[0]
         timestamps = chart.get("timestamp") or []
         quote = ((chart.get("indicators") or {}).get("quote") or [{}])[0]
@@ -74,6 +104,65 @@ class YahooDailyProvider:
             if close is None:
                 continue
             rows[day] = {"close": float(close), "volume": volume}
+        return rows
+
+    def _fetch_stooq_chunk(self, symbol: str, start: date, end: date) -> dict[str, dict[str, Any]]:
+        stooq_symbol = f"{symbol.lower()}.us"
+        response = self._request(
+            "GET",
+            STOOQ_DAILY_URL,
+            params={"s": stooq_symbol, "d1": start.strftime("%Y%m%d"), "d2": end.strftime("%Y%m%d"), "i": "d"},
+            headers={"User-Agent": "Mozilla/5.0 (compatible; Pharma-Radar/1.0)"},
+        )
+        text = response.text.strip()
+        if not text or text.lower().startswith("no data"):
+            raise ValueError(f"No Stooq data for {symbol}")
+        rows: dict[str, dict[str, Any]] = {}
+        for row in csv.DictReader(io.StringIO(text)):
+            day = str(row.get("Date") or "").strip()
+            close = row.get("Close")
+            if not day or close in (None, ""):
+                continue
+            try:
+                rows[day] = {"close": float(close), "volume": float(row["Volume"]) if row.get("Volume") else None}
+            except (TypeError, ValueError):
+                continue
+        if not rows:
+            raise ValueError(f"No Stooq rows for {symbol}")
+        return rows
+
+    def _fetch_chunk(self, symbol: str, start: date, end: date) -> dict[str, dict[str, Any]]:
+        try:
+            return self._fetch_yahoo_chunk(symbol, start, end)
+        except Exception as yahoo_error:
+            try:
+                return self._fetch_stooq_chunk(symbol, start, end)
+            except Exception as stooq_error:
+                raise RuntimeError(
+                    f"No market data for {symbol} {start}..{end}; "
+                    f"Yahoo={yahoo_error}; Stooq={stooq_error}"
+                ) from stooq_error
+
+    def _fetch_symbol(self, symbol: str, start: date, end: date) -> dict[str, dict[str, Any]]:
+        symbol = str(symbol).upper().strip()
+        if not symbol:
+            return {}
+        cache_key = (symbol, start, end)
+        if cache_key in self._cache:
+            return self._cache[cache_key]
+
+        combined = self._symbol_cache.setdefault(symbol, {})
+        for chunk_start, chunk_end in self._chunks(start, end):
+            chunk_key = f"{chunk_start.isoformat()}:{chunk_end.isoformat()}"
+            if chunk_key not in combined:
+                combined[chunk_key] = self._fetch_chunk(symbol, chunk_start, chunk_end)
+
+        rows: dict[str, dict[str, Any]] = {}
+        for chunk_rows in combined.values():
+            for day, row in chunk_rows.items():
+                day_value = self._date(day)
+                if day_value is not None and start <= day_value <= end:
+                    rows[day] = dict(row)
         self._cache[cache_key] = rows
         return rows
 
