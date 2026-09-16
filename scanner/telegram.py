@@ -5,6 +5,8 @@ Gestisce l'invio degli alert Pharma Radar tramite Telegram Bot API.
 """
 
 import os
+from datetime import date
+
 import requests
 from scanner.priority import get_alert_tier, enrich_alert_priority
 
@@ -102,6 +104,51 @@ def _event_display_name(subtype, event_type):
     return raw.replace("_", " ") if raw else "CATALYST"
 
 
+def _parse_iso_date(value):
+    try:
+        return date.fromisoformat(str(value).strip())
+    except (TypeError, ValueError):
+        return None
+
+
+def _timeline_details(alert, event, subtype):
+    """Return trader-readable details for clinical-trial timeline changes."""
+    if str(subtype or "").upper() not in {"DATE_ACCELERATED", "DATE_DELAYED"}:
+        return None
+
+    old_value = event.get("old_value")
+    new_value = event.get("new_value")
+    old_date = _parse_iso_date(old_value)
+    new_date = _parse_iso_date(new_value)
+    field = _clean_text(event.get("field") or alert.get("changed_field"), 100)
+
+    field_labels = {
+        "primary_completion_date": "Primary Completion",
+        "study_completion_date": "Study Completion",
+        "completion_date": "Completion",
+    }
+    field_display = field_labels.get(field, field.replace("_", " ").title() if field else "Trial Timeline")
+
+    details = [
+        "🚨 TRIAL TIMELINE CHANGE",
+        f"📌 Field: {field_display}",
+    ]
+    if old_value:
+        details.append(f"📅 Old date: {old_value}")
+    if new_value:
+        details.append(f"📅 New date: {new_value}")
+    if old_date and new_date:
+        delta_days = (new_date - old_date).days
+        if delta_days < 0:
+            details.append(f"⏩ Accelerated: {abs(delta_days)} days")
+        elif delta_days > 0:
+            details.append(f"⏳ Delayed: {delta_days} days")
+        else:
+            details.append("↔️ Change: 0 days")
+    details.append("ℹ️ Timeline change only — clinical outcome not yet reported.")
+    return details
+
+
 def _why_it_matters(alert, event, subtype):
     explainer = alert.get("catalyst_explainer") or {}
     why = _clean_text(explainer.get("why_it_matters"), 280)
@@ -112,7 +159,6 @@ def _why_it_matters(alert, event, subtype):
     if why:
         return why
 
-    # Keep the fallback specific to the catalyst rather than generic boilerplate.
     fallback = {
         "FDA_APPROVAL": "FDA approval converts the program into an approved product and marks a major regulatory and commercial milestone.",
         "FDA_REJECTION": "FDA rejection is a major regulatory setback that can materially change the program's commercial outlook.",
@@ -165,6 +211,13 @@ def format_catalyst_alert(alert):
         "",
         f"📰 {event_display}",
         title or "Catalyst detected",
+    ]
+
+    timeline_details = _timeline_details(alert, event, subtype)
+    if timeline_details:
+        lines.extend(["", *timeline_details])
+
+    lines.extend([
         "",
         f"🎯 Catalyst: {score}/100 · {label}",
         f"🚨 Priority: {alert_priority}/100 · {alert_tier}",
@@ -179,7 +232,7 @@ def format_catalyst_alert(alert):
                 if _num(reaction.get(f"reaction_{label_window}_pct")) is not None
             ) or "N/A"
         ),
-    ]
+    ])
 
     if why:
         lines.extend(["", "💡 WHY IT MATTERS", why])
