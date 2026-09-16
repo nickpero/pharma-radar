@@ -1,14 +1,14 @@
 {
   "by_direction": {
     "NEGATIVE": 38,
-    "POSITIVE": 43
+    "POSITIVE": 44
   },
   "by_source": {
-    "FDA": 43,
+    "FDA": 44,
     "FDA_CRL": 38
   },
   "by_subtype": {
-    "FDA_APPROVAL": 13,
+    "FDA_APPROVAL": 14,
     "FDA_REJECTION": 38,
     "LABEL_EXPANSION": 30
   },
@@ -20,22 +20,22 @@
     "FDA_REJECTION": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "events": 4
+      "events": 5
     },
     "LABEL_EXPANSION": {
       "edge": {},
@@ -53,269 +53,269 @@
     "2023": 10,
     "2024": 19,
     "2025": 19,
-    "2026": 16
+    "2026": 17
   },
   "duplicates": {},
   "leave_one_ticker_out": {
     "ABBV": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "ALKS": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "ALNY": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "AMGN": {
       "edge": {
         "1D": {
-          "median": -1.442397874267809,
-          "n": 1,
-          "win_rate": 0.0
+          "median": 0.09331846128249888,
+          "n": 2,
+          "win_rate": 0.5
         },
         "3D": {
-          "median": -3.0376529982857003,
-          "n": 1,
-          "win_rate": 0.0
+          "median": -0.9532470842369856,
+          "n": 2,
+          "win_rate": 0.5
         },
         "5D": {
-          "median": -1.583577307955386,
-          "n": 1,
+          "median": -3.0369028700874487,
+          "n": 2,
           "win_rate": 0.0
         }
       },
-      "remaining_events": 1
+      "remaining_events": 2
     },
     "ARGX": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "AZN": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "BIIB": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "CAPR": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "EDIT": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "GILD": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "INSM": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "IONS": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "IOVA": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "LLY": {
       "edge": {
@@ -340,302 +340,302 @@
     "MIRM": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "NUVL": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "NVO": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "NVS": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "PFE": {
       "edge": {
         "1D": {
-          "median": -0.12105642809341344,
-          "n": 3,
-          "win_rate": 0.3333333333333333
+          "median": 0.7539891843696966,
+          "n": 4,
+          "win_rate": 0.5
         },
         "3D": {
-          "median": 1.021465817225442,
-          "n": 3,
-          "win_rate": 0.6666666666666666
+          "median": 1.0763123235185856,
+          "n": 4,
+          "win_rate": 0.75
         },
         "5D": {
-          "median": -0.34056811399596487,
-          "n": 3,
-          "win_rate": 0.3333333333333333
+          "median": -0.7866527005242596,
+          "n": 4,
+          "win_rate": 0.25
         }
       },
-      "remaining_events": 3
+      "remaining_events": 4
     },
     "RARE": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "RCKT": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "REGN": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "RGNX": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "RVMD": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "SNY": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "SRPT": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "TLX": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "VRTX": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     },
     "ZYME": {
       "edge": {
         "1D": {
-          "median": -0.7270003185654905,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -0.12105642809341344,
+          "n": 5,
+          "win_rate": 0.4
         },
         "3D": {
-          "median": -0.7924644719830343,
-          "n": 4,
-          "win_rate": 0.5
+          "median": 1.021465817225442,
+          "n": 5,
+          "win_rate": 0.6
         },
         "5D": {
-          "median": -0.7866527005242596,
-          "n": 4,
-          "win_rate": 0.25
+          "median": -1.2327372870525544,
+          "n": 5,
+          "win_rate": 0.2
         }
       },
-      "remaining_events": 4
+      "remaining_events": 5
     }
   },
   "methodology_flags": {
@@ -795,7 +795,23 @@
       "directions": {
         "NEGATIVE": 4
       },
-      "edge": {},
+      "edge": {
+        "1D": {
+          "median": 1.6290347968328067,
+          "n": 1,
+          "win_rate": 1.0
+        },
+        "3D": {
+          "median": 1.1311588298117292,
+          "n": 1,
+          "win_rate": 1.0
+        },
+        "5D": {
+          "median": -4.490228432219512,
+          "n": 1,
+          "win_rate": 0.0
+        }
+      },
       "events": 4,
       "subtypes": {
         "FDA_REJECTION": 4
@@ -943,11 +959,13 @@
     },
     "TLX": {
       "directions": {
-        "NEGATIVE": 2
+        "NEGATIVE": 2,
+        "POSITIVE": 1
       },
       "edge": {},
-      "events": 2,
+      "events": 3,
       "subtypes": {
+        "FDA_APPROVAL": 1,
         "FDA_REJECTION": 2
       }
     },
@@ -978,20 +996,20 @@
     "direction_mismatches": 0,
     "duplicate_event_rows": 0,
     "duplicates": 0,
-    "events": 81,
-    "events_with_market_metrics": 4,
+    "events": 82,
+    "events_with_market_metrics": 5,
     "median_directional_abnormal_return": {
-      "1D": -0.7270003185654905,
-      "3D": -0.7924644719830343,
-      "5D": -0.7866527005242596
+      "1D": -0.12105642809341344,
+      "3D": 1.021465817225442,
+      "5D": -1.2327372870525544
     },
-    "median_volume_expansion": 0.9150535188220268,
+    "median_volume_expansion": 1.0223871319350335,
     "missing_market_metrics": 77,
     "missing_windows": {},
     "win_rate_directional": {
-      "1D": 0.25,
-      "3D": 0.5,
-      "5D": 0.25
+      "1D": 0.4,
+      "3D": 0.6,
+      "5D": 0.2
     }
   },
   "top_tickers": {
@@ -1012,7 +1030,7 @@
     "REGN": 7,
     "SNY": 1,
     "SRPT": 1,
-    "TLX": 2,
+    "TLX": 3,
     "VRTX": 6,
     "ZYME": 3
   },
