@@ -39,8 +39,18 @@ def test_window_bars_calculates_twenty_session_volume_baseline():
     assert bars["event"]["baseline_volume"] == sum(range(1, 21)) / 20
 
 
+def test_chunks_use_five_year_ranges():
+    chunks = list(YahooDailyProvider._chunks(date(2015, 6, 1), date(2026, 9, 1)))
+    assert chunks == [
+        (date(2015, 6, 1), date(2019, 12, 31)),
+        (date(2020, 1, 1), date(2024, 12, 31)),
+        (date(2025, 1, 1), date(2026, 9, 1)),
+    ]
+
+
 if __name__ == "__main__":
     test_window_bars_skips_weekends_and_maps_forward_sessions()
     test_window_bars_uses_next_session_for_weekend_event()
     test_window_bars_calculates_twenty_session_volume_baseline()
+    test_chunks_use_five_year_ranges()
     print("Historical market-data tests passed")
