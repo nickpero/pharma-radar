@@ -49,11 +49,61 @@ def test_real_newlines():
             "label": "CRITICAL",
             "old_value": "2027-06-30",
             "new_value": "2027-03-31",
+            "field": "primary_completion_date",
         },
     }
     message = format_catalyst_alert(alert)
     assert "\n" in message
     assert "%0A" not in message
+
+
+def test_timeline_acceleration_details():
+    alert = {
+        "ticker": "VRTX",
+        "program": "suzetrigine",
+        "nct_id": "NCT12345678",
+        "event": {
+            "type": "DATE_CHANGE",
+            "severity": "HIGH",
+            "direction": "POSITIVE",
+            "subtype": "DATE_ACCELERATED",
+            "score": 100,
+            "label": "CRITICAL",
+            "old_value": "2027-06-30",
+            "new_value": "2027-04-30",
+            "field": "primary_completion_date",
+        },
+    }
+    message = format_catalyst_alert(alert)
+    assert "🚨 TRIAL TIMELINE CHANGE" in message
+    assert "📌 Field: Primary Completion" in message
+    assert "📅 Old date: 2027-06-30" in message
+    assert "📅 New date: 2027-04-30" in message
+    assert "⏩ Accelerated: 61 days" in message
+    assert "ℹ️ Timeline change only — clinical outcome not yet reported." in message
+
+
+def test_timeline_delay_details():
+    alert = {
+        "ticker": "SVRA",
+        "program": "molgramostim",
+        "nct_id": "NCT04544293",
+        "event": {
+            "type": "DATE_CHANGE",
+            "severity": "HIGH",
+            "direction": "NEGATIVE",
+            "subtype": "DATE_DELAYED",
+            "score": 100,
+            "label": "CRITICAL",
+            "old_value": "2027-03-31",
+            "new_value": "2027-06-30",
+            "field": "study_completion_date",
+        },
+    }
+    message = format_catalyst_alert(alert)
+    assert "🚨 TRIAL TIMELINE CHANGE" in message
+    assert "📌 Field: Study Completion" in message
+    assert "⏳ Delayed: 91 days" in message
 
 
 def test_negative_direction():
@@ -102,6 +152,8 @@ def test_unknown_direction():
 if __name__ == "__main__":
     test_catalyst_message_format()
     test_real_newlines()
+    test_timeline_acceleration_details()
+    test_timeline_delay_details()
     test_negative_direction()
     test_unknown_direction()
     print("✅ Telegram tests passed")
