@@ -1,9 +1,11 @@
 name: Pharma Radar
 
+# PAUSED: external cron repository_dispatch is intentionally disabled
+# until the GitHub Actions quota is available again.
+# workflow_dispatch remains available for manual testing.
+
 on:
   workflow_dispatch:
-  repository_dispatch:
-    types: [pharma_radar_tick]
 
 concurrency:
   group: pharma-radar-production
