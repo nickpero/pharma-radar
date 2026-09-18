@@ -22,6 +22,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: Phase 1 historical catalogue
         run: python -m scanner.psig_phase1
+          python -m scanner.psig_event_study
       - name: Live PSIG scan
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
