@@ -86,7 +86,7 @@ def compute_live_signal(bars,catalyst=False,catalyst_type=None):
 
 def format_telegram_signal(s):
     icon={"WATCH":"🟢","SETUP":"🟠","EXTREME":"🚨"}[s["status"]]; catalyst=s.get("catalyst_type") if s.get("catalyst") else "none identified"; price="$" + format(s["price"],".2f")
-    return "\n".join([f"{icon} PSIG RADAR — {s["status"]}","━━━━━━━━━━━━━━━━━━",f"💰 Price: {price}",f"📈 Move: {s["move_pct"]:+.2f}%",f"📊 RVOL 20D: {s["rvol_20"]:.2f}×",f"⚡ Intraday range: {s["intraday_range_pct"]:.2f}%",f"🚀 Breakout: {"YES" if s["breakout"] else "NO"}",f"🧨 Catalyst: {catalyst}",f"🎯 PSIG Score: {s["score"]:.0f}/100","", "⚠️ Informational only — no automatic buy/sell signal.","━━━━━━━━━━━━━━━━━━"])
+    return "\n".join([f"{icon} PSIG RADAR — {s['status']}","━━━━━━━━━━━━━━━━━━",f"💰 Price: {price}",f"📈 Move: {s['move_pct']:+.2f}%",f"📊 RVOL 20D: {s['rvol_20']:.2f}×",f"⚡ Intraday range: {s['intraday_range_pct']:.2f}%",f"🚀 Breakout: {'YES' if s['breakout'] else 'NO'}",f"🧨 Catalyst: {catalyst}",f"🎯 PSIG Score: {s['score']:.0f}/100","", "⚠️ Informational only — no automatic buy/sell signal.","━━━━━━━━━━━━━━━━━━"])
 
 def load_state():
     try: return json.loads(STATE_PATH.read_text(encoding="utf-8"))
