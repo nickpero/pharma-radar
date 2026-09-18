@@ -1,8 +1,8 @@
 name: Pharma Radar — Catalyst Tests
 
 on:
+  # PAUSED: automatic push-triggered CI is disabled to conserve Actions quota.
   workflow_dispatch:
-  push:
 
 jobs:
   test:
