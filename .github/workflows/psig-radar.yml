@@ -30,7 +30,7 @@ jobs:
           python - <<'PY'
           from scanner.psig_radar import fetch_yahoo, compute_live_signal, format_telegram_signal, load_state, save_state, should_alert
           from scanner.telegram import send_telegram
-          bars=fetch_yahoo("PSIG","5m",5)
+          bars=fetch_yahoo("PSIG","5m",59)
           if len(bars)>=21:
               signal=compute_live_signal(bars)
               print(format_telegram_signal(signal))
