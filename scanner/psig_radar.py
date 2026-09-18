@@ -41,6 +41,18 @@ def _rvol(bars, lookback=20):
     baseline=_mean([b.volume for b in bars[-lookback-1:-1]])
     return bars[-1].volume/baseline if baseline else 0.0
 
+def _intraday_rvol(bars, sessions=20):
+    """Compare the latest 5m bar with the same UTC minute slot on prior sessions."""
+    if not bars: return 0.0
+    latest=bars[-1]
+    slot=(latest.ts.weekday(), latest.ts.hour, latest.ts.minute)
+    prior=[b.volume for b in bars[:-1] if (b.ts.weekday(), b.ts.hour, b.ts.minute)==slot]
+    if len(prior)<5:
+        slot2=(latest.ts.hour, latest.ts.minute)
+        prior=[b.volume for b in bars[:-1] if (b.ts.hour,b.ts.minute)==slot2]
+    prior=prior[-sessions:]
+    return latest.volume/_mean(prior) if prior and _mean(prior)>0 else 0.0
+
 def classify_episode(criteria):
     s=set(criteria)
     if "EXTREME_INTRADAY_50" in s and "FAILED_SPIKE" in s: return "EXTREME_REVERSAL"
@@ -67,7 +79,7 @@ def detect_daily_episodes(bars):
 
 def compute_live_signal(bars,catalyst=False,catalyst_type=None):
     if len(bars)<21: raise ValueError("At least 21 bars are required")
-    b,prev=bars[-1],bars[-2]; rvol=_rvol(bars,20); move=(b.close/prev.close-1)*100 if prev.close else 0; intraday=(b.high/b.low-1)*100 if b.low else 0
+    b,prev=bars[-1],bars[-2]; rvol=_intraday_rvol(bars,20); move=(b.close/prev.close-1)*100 if prev.close else 0; intraday=(b.high/b.low-1)*100 if b.low else 0
     momentum=min(20,max(0,move)*0.8); volume_score=min(25,max(0,(rvol-1)*4)); range_score=min(10,max(0,(intraday-10)*0.25)); breakout=10 if b.close>=max(x.high for x in bars[-21:-1]) else 0; catalyst_score=15 if catalyst else 0; accel=10 if b.close>prev.close and b.volume>_mean([x.volume for x in bars[-6:-1]])*2 else 0
     score=round(min(100,momentum+volume_score+range_score+breakout+catalyst_score+accel),1); status="EXTREME" if score>=80 else "SETUP" if score>=60 else "WATCH"
     return {"ticker":SYMBOL,"timestamp":b.ts.isoformat(),"price":b.close,"move_pct":round(move,2),"intraday_range_pct":round(intraday,2),"rvol_20":round(rvol,2),"breakout":bool(breakout),"catalyst":catalyst,"catalyst_type":catalyst_type,"score":score,"status":status,"informational_only":True}
