@@ -1,8 +1,7 @@
 name: Pharma Radar — P0 FDA Live
 
 on:
-  push:
-    branches: [main]
+  # PAUSED: automatic push-triggered validation is disabled to conserve Actions quota.
   workflow_dispatch:
 
 permissions:
