@@ -114,6 +114,26 @@ def _period_robustness(rows: list[dict[str, Any]]) -> dict[str, Any]:
     return out
 
 
+
+def _holdout_breakdown(rows: list[dict[str, Any]], threshold: float = 0.75) -> dict[str, Any]:
+    evaluated = [r for r in rows if r["prior_subtype_sample"] >= 10 and r["prior_subtype_win_rate_1d"] is not None and r["prior_subtype_win_rate_1d"] >= 0.55]
+    dates = sorted(r["event_timestamp"] for r in evaluated)
+    if len(dates) < 4:
+        return {"status": "INSUFFICIENT_SAMPLE"}
+    split_date = dates[max(0, len(dates) // 2 - 1)]
+    test = [r for r in evaluated if r["event_timestamp"] > split_date and r["prior_subtype_median_net_1d_pct"] is not None and r["prior_subtype_median_net_1d_pct"] >= threshold]
+    tickers = {}
+    for r in test:
+        tickers.setdefault(r["ticker"], []).append(r)
+    return {
+        "status": "OK",
+        "threshold_pct": threshold,
+        "split_date": split_date,
+        "test_events": len(test),
+        "by_ticker": {t: {"n": len(v), "forward_1d": _portfolio_stats(v, "1d")} for t, v in sorted(tickers.items())},
+    }
+
+
 def _portfolio_stats(rows: list[dict[str, Any]], window: str = "1d") -> dict[str, Any]:
     values = [r[f"forward_{window}_net_pct"] for r in rows if r.get(f"forward_{window}_net_pct") is not None]
     if not values:
@@ -294,6 +314,7 @@ def build() -> dict[str, Any]:
         "sensitivity": _sensitivity(rows),
         "robustness": _robustness(rows),
         "temporal_holdout": _period_robustness(rows),
+        "holdout_breakdown": _holdout_breakdown(rows, 0.75),
         "events": rows,
     }
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
