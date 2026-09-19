@@ -58,6 +58,7 @@ jobs:
                   f"qualified={row['qualified']} "
                   f"failures={row['failure_reasons']}"
               )
+          print("Sensitivity:", p.get("sensitivity", {}))
           print("======================================")
           if sample["events"] == 0:
               raise SystemExit("PIT replay returned zero events")
