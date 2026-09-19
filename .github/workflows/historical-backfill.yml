@@ -83,6 +83,9 @@ jobs:
       - name: Audit Trading Intelligence historical gate
         run: python -m scanner.trading_intelligence_history
 
+      - name: Run point-in-time Trading Intelligence replay
+        run: python -m scanner.trading_intelligence_pit_replay
+
       - name: Validate catalyst dataset
         run: |
           python - <<'PY'
@@ -95,6 +98,7 @@ jobs:
           s = json.loads(Path("data/historical_edge_segments.json").read_text())
           r = json.loads(Path("data/robust_historical_backtest.json").read_text())
           ti = json.loads(Path("data/trading_intelligence_history_audit.json").read_text())
+          pit = json.loads(Path("data/trading_intelligence_pit_replay.json").read_text())
           discovered = int(d.get("events_count", 0))
           tradable = int(c.get("counts", {}).get("tradable", 0))
           tradable_metrics = int(c.get("counts", {}).get("tradable_with_market_metrics", 0))
@@ -113,6 +117,8 @@ jobs:
           print(f"Qualifying robust segments: {len(r.get('qualifying_segments', []))}")
           print(f"Trading Intelligence historical-gate segments: {ti.get('qualifying_segment_count', 0)}")
           print(f"Trading Intelligence historical-gate detail: {ti.get('qualifying_historical_segments', [])}")
+          print(f"Trading Intelligence point-in-time events: {pit.get('sample', {}).get('events', 0)}")
+          print(f"Trading Intelligence point-in-time qualified: {pit.get('sample', {}).get('qualified_historical_edge_events', 0)}")
           print(f"Catalysts by subtype: {c.get('by_subtype', {})}")
           if discovered == 0:
               raise SystemExit("Historical discovery returned zero events")
@@ -132,13 +138,15 @@ jobs:
               raise SystemExit("Historical catalyst audit found direction mismatches")
           if int(ti.get("sample", {}).get("events", 0)) != robust_events:
               raise SystemExit("Trading Intelligence history audit sample does not match robust backtest")
+          if int(pit.get("sample", {}).get("events", 0)) != robust_events:
+              raise SystemExit("Trading Intelligence point-in-time replay sample does not match robust backtest")
           PY
 
       - name: Persist historical datasets and audit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data/historical_discovered_events.json data/historical_edge.json data/historical_catalyst_dataset.json data/historical_catalyst_audit.json data/historical_edge_segments.json data/robust_historical_backtest.json data/trading_intelligence_history_audit.json
+          git add -A data/historical_discovered_events.json data/historical_edge.json data/historical_catalyst_dataset.json data/historical_catalyst_audit.json data/historical_edge_segments.json data/robust_historical_backtest.json data/trading_intelligence_history_audit.json data/trading_intelligence_pit_replay.json
           if git diff --cached --quiet; then
             echo "No historical backfill changes to commit"
           else
