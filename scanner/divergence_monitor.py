@@ -34,6 +34,8 @@ def classify_divergence(alert, threshold_pct=2.0):
         "ticker": str(alert.get("ticker", "UNKNOWN")).upper(),
         "program": alert.get("program", "UNKNOWN"),
         "direction": direction,
+        "event_timestamp": alert.get("event_timestamp") or alert.get("published_at") or alert.get("timestamp"),
+        "event_date": alert.get("event_timestamp") or alert.get("published_at") or alert.get("timestamp"),
         "daily_pct": daily_pct,
         "threshold_pct": abs(threshold_pct),
         "status": "DIVERGENT",
