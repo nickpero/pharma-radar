@@ -316,6 +316,12 @@ def main() -> None:
         f = row["forward"]["1d"]
         loo = row["leave_one_ticker_out_1d"]
         print(f"{threshold}%: n={row['selected_events']} tickers={row['tickers']} median={f['median_pct']}% win={f['win_rate']} PF={f['profit_factor']} compound={f['compound_return_pct']}% DD={f['max_drawdown_pct']}% LOO_min_PF={loo['min_profit_factor']} LOO_all_positive_median={loo['all_leave_one_ticker_out_positive_median']}")
+    holdout = report["temporal_holdout"]
+    print("---------- TEMPORAL HOLDOUT ----------")
+    print(f"split={holdout.get('split_date')} train={holdout.get('train_events')} test={holdout.get('test_events')}")
+    for threshold, row in holdout.get("thresholds", {}).items():
+        fwd = row["test"]["forward_1d"]
+        print(f"{threshold}%: TEST n={row['test']['n']} median={fwd['median_pct']}% win={fwd['win_rate']} PF={fwd['profit_factor']} DD={fwd['max_drawdown_pct']}% subtypes={row['test_by_subtype']}")
     print("Lookahead control: PASS")
     print("=========================================================")
 
