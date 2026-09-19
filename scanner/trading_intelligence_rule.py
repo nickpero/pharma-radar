@@ -29,14 +29,26 @@ def _market_confirmation(event):
     daily_price = _num(event.get("price_change_pct"))
     if daily_price is None:
         daily_price = _num((event.get("market_data") or {}).get("price_change_pct"))
+    daily_direction_known = direction in {"POSITIVE", "NEGATIVE", "CATALYST"}
+    daily_expected_positive = direction in {"POSITIVE", "CATALYST"}
     daily_price_direction = (
-        direction in {"POSITIVE", "NEGATIVE"}
+        daily_direction_known
         and daily_price is not None
         and abs(daily_price) >= 1.0
-        and ((direction == "POSITIVE" and daily_price > 0) or (direction == "NEGATIVE" and daily_price < 0))
+        and ((daily_expected_positive and daily_price > 0) or (direction == "NEGATIVE" and daily_price < 0))
+    )
+    daily_divergent = (
+        daily_direction_known
+        and daily_price is not None
+        and abs(daily_price) >= 2.0
+        and ((daily_expected_positive and daily_price < 0) or (direction == "NEGATIVE" and daily_price > 0))
     )
     price_direction = price_direction_intraday if intraday_available else daily_price_direction
-    price_source = "INTRADAY" if price_direction_intraday and intraday_available else "DAILY_SNAPSHOT" if daily_price_direction else "NONE"
+    price_source = "INTRADAY" if price_direction_intraday and intraday_available else "DAILY_SNAPSHOT" if (daily_price_direction or daily_divergent) else "NONE"
+    if intraday_available:
+        market_status = "CONFIRMED" if price_direction_intraday else "DIVERGENT" if direction in {"POSITIVE", "NEGATIVE", "CATALYST"} and reaction_direction != direction else "UNAVAILABLE"
+    else:
+        market_status = "CONFIRMED" if daily_price_direction else "DIVERGENT" if daily_divergent else "UNAVAILABLE"
 
     volume_ratio = _num(event.get("volume_ratio"))
     if volume_ratio is None:
@@ -51,7 +63,7 @@ def _market_confirmation(event):
         "volume": bool(volume_confirmation),
         "coherent_reaction": bool(coherent_reaction),
     }
-    return checks, sum(checks.values()), price_source
+    return checks, sum(checks.values()), price_source, market_status
 
 
 def qualify_trading_intelligence(event):
@@ -63,7 +75,7 @@ def qualify_trading_intelligence(event):
     edge_median = _num(event.get("historical_edge_median_1d_pct"), 0.0) or 0.0
     edge_win_rate = _num(event.get("historical_edge_win_rate_1d"), 0.0) or 0.0
     source_ok = _source_reliable(event)
-    market_checks, market_confirmations, market_confirmation_source = _market_confirmation(event)
+    market_checks, market_confirmations, market_confirmation_source, market_status = _market_confirmation(event)
 
     checks = {
         "priority": alert_tier in {"CRITICAL", "HIGH"} or priority >= 60,
@@ -94,6 +106,7 @@ def qualify_trading_intelligence(event):
         "trading_intelligence_market_confirmation_count": market_confirmations,
         "trading_intelligence_market_confirmation": market_checks,
         "trading_intelligence_market_confirmation_source": market_confirmation_source,
+        "trading_intelligence_market_status": market_status,
     }
 
 
