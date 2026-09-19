@@ -25,8 +25,10 @@ def _reaction_score(event):
         if daily is None:
             daily = _num((event.get("market_data") or {}).get("price_change_pct"))
         direction = str(event.get("direction") or "UNKNOWN").upper()
-        if daily is None or direction not in {"POSITIVE", "NEGATIVE"}:
+        if daily is None or direction not in {"POSITIVE", "NEGATIVE", "CATALYST"}:
             return 50.0
+        if direction == "CATALYST":
+            direction = "POSITIVE"
         magnitude = min(abs(daily), 10.0) / 10.0 * 100.0
         aligned = (direction == "POSITIVE" and daily > 0) or (direction == "NEGATIVE" and daily < 0)
         return 50.0 + min(magnitude / 2.0, 12.0) if aligned else 50.0 - min(magnitude / 2.0, 12.0)
