@@ -1,0 +1,137 @@
+{
+  "version": "1.0",
+  "purpose": "historical evidence audit for Trading Intelligence Rule V1.0",
+  "methodology": {
+    "historical_gate": {
+      "minimum_sample": 30,
+      "minimum_median_net_1d_pct": 1,
+      "minimum_win_rate_1d": 0.55,
+      "friction_included_in_input": true
+    },
+    "not_tested_historically": [
+      "live trading_intelligence_score >= 80",
+      "primary/reliable source classification at alert time",
+      "2-of-3 live market confirmations"
+    ],
+    "warning": "Historical segment statistics are descriptive evidence, not a validated live trading strategy."
+  },
+  "sample": {
+    "events": 81,
+    "unique_tickers": 28,
+    "top_5": {
+      "ARGX": 15,
+      "MIRM": 9,
+      "REGN": 7,
+      "VRTX": 6,
+      "LLY": 4
+    },
+    "top_5_share": 0.5061728395061729
+  },
+  "overall_1d": {
+    "n": 81,
+    "median_net_return_pct": 0.9840254788957894,
+    "win_rate": 0.6049382716049383,
+    "profit_factor": 3.9822952735837847
+  },
+  "segments": {
+    "subtype": [
+      {
+        "field": "subtype",
+        "value": "FDA_APPROVAL",
+        "n": 13,
+        "median_net_return_1d_pct": 1.0454697351914735,
+        "win_rate_1d": 0.5384615384615384,
+        "profit_factor_1d": 2.3663267606346206,
+        "qualifies_historical_gate": false
+      },
+      {
+        "field": "subtype",
+        "value": "FDA_REJECTION",
+        "n": 38,
+        "median_net_return_1d_pct": 0.56374185310778,
+        "win_rate_1d": 0.5789473684210527,
+        "profit_factor_1d": 4.2345384648037285,
+        "qualifies_historical_gate": false
+      },
+      {
+        "field": "subtype",
+        "value": "LABEL_EXPANSION",
+        "n": 30,
+        "median_net_return_1d_pct": 1.0685522495112012,
+        "win_rate_1d": 0.6666666666666666,
+        "profit_factor_1d": 5.098002344895565,
+        "qualifies_historical_gate": true
+      }
+    ],
+    "source": [
+      {
+        "field": "source",
+        "value": "FDA",
+        "n": 43,
+        "median_net_return_1d_pct": 1.0685522495112012,
+        "win_rate_1d": 0.627906976744186,
+        "profit_factor_1d": 3.826137811291516,
+        "qualifies_historical_gate": true
+      },
+      {
+        "field": "source",
+        "value": "FDA_CRL",
+        "n": 38,
+        "median_net_return_1d_pct": 0.56374185310778,
+        "win_rate_1d": 0.5789473684210527,
+        "profit_factor_1d": 4.2345384648037285,
+        "qualifies_historical_gate": false
+      }
+    ],
+    "direction": [
+      {
+        "field": "direction",
+        "value": "NEGATIVE",
+        "n": 38,
+        "median_net_return_1d_pct": 0.56374185310778,
+        "win_rate_1d": 0.5789473684210527,
+        "profit_factor_1d": 4.2345384648037285,
+        "qualifies_historical_gate": false
+      },
+      {
+        "field": "direction",
+        "value": "POSITIVE",
+        "n": 43,
+        "median_net_return_1d_pct": 1.0685522495112012,
+        "win_rate_1d": 0.627906976744186,
+        "profit_factor_1d": 3.826137811291516,
+        "qualifies_historical_gate": true
+      }
+    ]
+  },
+  "qualifying_historical_segments": [
+    {
+      "field": "subtype",
+      "value": "LABEL_EXPANSION",
+      "n": 30,
+      "median_net_return_1d_pct": 1.0685522495112012,
+      "win_rate_1d": 0.6666666666666666,
+      "profit_factor_1d": 5.098002344895565,
+      "qualifies_historical_gate": true
+    },
+    {
+      "field": "source",
+      "value": "FDA",
+      "n": 43,
+      "median_net_return_1d_pct": 1.0685522495112012,
+      "win_rate_1d": 0.627906976744186,
+      "profit_factor_1d": 3.826137811291516,
+      "qualifies_historical_gate": true
+    },
+    {
+      "field": "direction",
+      "value": "POSITIVE",
+      "n": 43,
+      "median_net_return_1d_pct": 1.0685522495112012,
+      "win_rate_1d": 0.627906976744186,
+      "profit_factor_1d": 3.826137811291516,
+      "qualifies_historical_gate": true
+    }
+  ],
+  "qualifying_segment_count": 3
+}
