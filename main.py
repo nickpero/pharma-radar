@@ -118,7 +118,9 @@ def send_alerts(result, alerts=None):
 
 
 def send_email_alerts(result):
-    alerts = select_intelligent_alerts(result.get("alerts", []))
+    # Pharma Intelligence email is knowledge-first and intentionally independent
+    # of Trading Intelligence qualification, market reaction, and TI score.
+    alerts = result.get("alerts", [])
     return send_pharma_intelligence_emails(alerts) if alerts else 0
 
 
