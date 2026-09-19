@@ -42,9 +42,9 @@ def test_window_bars_calculates_twenty_session_volume_baseline():
 def test_chunks_use_five_year_ranges():
     chunks = list(YahooDailyProvider._chunks(date(2015, 6, 1), date(2026, 9, 1)))
     assert chunks == [
-        (date(2015, 6, 1), date(2019, 12, 31)),
+        (date(2015, 1, 1), date(2019, 12, 31)),
         (date(2020, 1, 1), date(2024, 12, 31)),
-        (date(2025, 1, 1), date(2026, 9, 1)),
+        (date(2025, 1, 1), date(2029, 12, 31)),
     ]
 
 
