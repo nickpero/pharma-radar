@@ -2459,5 +2459,113 @@
       "win_rate_threshold": 0.55
     }
   },
+  "temporal_holdout": {
+    "split_date": "2025-10-17",
+    "status": "OK",
+    "test_events": 13,
+    "thresholds": {
+      "0.50": {
+        "test": {
+          "forward_1d": {
+            "compound_return_pct": 34.795,
+            "max_drawdown_pct": -7.3762,
+            "max_gain_pct": 13.2504,
+            "max_loss_pct": -4.925,
+            "mean_pct": 2.4215,
+            "median_pct": 2.277,
+            "n": 13,
+            "profit_factor": 4.3881,
+            "win_rate": 0.6154
+          },
+          "n": 13
+        },
+        "test_by_subtype": {
+          "FDA_REJECTION": 4,
+          "LABEL_EXPANSION": 9
+        },
+        "train": {
+          "forward_1d": {
+            "compound_return_pct": 13.6711,
+            "max_drawdown_pct": -5.0126,
+            "max_gain_pct": 10.8371,
+            "max_loss_pct": -1.811,
+            "mean_pct": 0.9631,
+            "median_pct": 0.2853,
+            "n": 14,
+            "profit_factor": 3.3642,
+            "win_rate": 0.6429
+          },
+          "n": 14
+        }
+      },
+      "0.75": {
+        "test": {
+          "forward_1d": {
+            "compound_return_pct": 25.6415,
+            "max_drawdown_pct": -0.9486,
+            "max_gain_pct": 6.7999,
+            "max_loss_pct": -0.9486,
+            "mean_pct": 2.6061,
+            "median_pct": 2.7072,
+            "n": 9,
+            "profit_factor": 14.1189,
+            "win_rate": 0.6667
+          },
+          "n": 9
+        },
+        "test_by_subtype": {
+          "LABEL_EXPANSION": 9
+        },
+        "train": {
+          "forward_1d": {
+            "compound_return_pct": 9.7504,
+            "max_drawdown_pct": -5.0034,
+            "max_gain_pct": 10.8371,
+            "max_loss_pct": -1.811,
+            "mean_pct": 0.9934,
+            "median_pct": 0.2819,
+            "n": 10,
+            "profit_factor": 2.7447,
+            "win_rate": 0.6
+          },
+          "n": 10
+        }
+      },
+      "1.00": {
+        "test": {
+          "forward_1d": {
+            "compound_return_pct": 12.2316,
+            "max_drawdown_pct": -1.6048,
+            "max_gain_pct": 6.7999,
+            "max_loss_pct": -0.9486,
+            "mean_pct": 2.9972,
+            "median_pct": 3.0687,
+            "n": 4,
+            "profit_factor": 8.4412,
+            "win_rate": 0.5
+          },
+          "n": 4
+        },
+        "test_by_subtype": {
+          "LABEL_EXPANSION": 4
+        },
+        "train": {
+          "forward_1d": {
+            "compound_return_pct": 9.2527,
+            "max_drawdown_pct": -5.0034,
+            "max_gain_pct": 10.8371,
+            "max_loss_pct": -1.811,
+            "mean_pct": 1.0531,
+            "median_pct": 0.1083,
+            "n": 9,
+            "profit_factor": 2.6647,
+            "win_rate": 0.5556
+          },
+          "n": 9
+        }
+      }
+    },
+    "train_events": 14
+  },
   "version": "1.5"
 }
