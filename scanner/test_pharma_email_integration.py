@@ -72,6 +72,33 @@ def test_unconfigured_is_noop(tmp_path):
         smtp_cls.assert_not_called()
 
 
+def test_low_priority_development_event_is_sent_for_knowledge():
+    alert = {
+        "ticker": "IONS",
+        "program": "zilganersen",
+        "label": "LOW",
+        "alert_priority": 15,
+        "title": "Trial completed",
+        "source": "ClinicalTrials.gov",
+        "source_type": "PRIMARY_CLINICAL",
+        "nct_id": "NCT00000000",
+        "trial": {
+            "phase": "PHASE3",
+            "status": "COMPLETED",
+            "brief_summary": "Studio clinico completato.",
+            "conditions": ["Rare disease"],
+        },
+        "event": {
+            "type": "STATUS_CHANGE",
+            "subtype": "TRIAL_COMPLETED",
+            "old_value": "ACTIVE_NOT_RECRUITING",
+            "new_value": "COMPLETED",
+        },
+    }
+    assert pharma_email.is_pharma_intelligence_event(alert) is True
+    assert "DEVELOPMENT" in pharma_email.format_pharma_intelligence_email(alert)
+
+
 if __name__ == "__main__":
     import tempfile
     with tempfile.TemporaryDirectory() as directory:
