@@ -124,3 +124,18 @@ def test_equal_timestamp_events_cannot_qualify_each_other():
         assert report["events"][31]["historical_edge_gate"] is True
         assert report["events"][30]["prior_subtype_sample"] == 30
         assert report["events"][31]["prior_subtype_sample"] == 30
+
+
+def test_portfolio_stats_and_leave_one_ticker_out():
+    rows = [
+        {"ticker": "A", "forward_1d_net_pct": 2.0},
+        {"ticker": "A", "forward_1d_net_pct": -1.0},
+        {"ticker": "B", "forward_1d_net_pct": 3.0},
+    ]
+    stats = mod._portfolio_stats(rows, "1d")
+    assert stats["n"] == 3
+    assert stats["profit_factor"] == 5.0
+    assert stats["win_rate"] == 2 / 3
+    loo = mod._loo(rows, "1d")
+    assert loo["tickers"] == 2
+    assert loo["all_leave_one_ticker_out_positive_median"] is True
