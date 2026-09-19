@@ -1,0 +1,35 @@
+{
+  "events": [
+    {
+      "catalyst_score": 100,
+      "created_at": "2026-09-19T19:08:54.725276+00:00",
+      "daily_pct": -4.941176470588241,
+      "direction": "CATALYST",
+      "event_date": "Thu, 03 Sep 2026 15:48:27 EDT",
+      "event_timestamp": "Thu, 03 Sep 2026 15:48:27 EDT",
+      "historical_edge_median_1d_pct": 1.3082,
+      "historical_edge_win_rate_1d": 0.6768,
+      "program": "zilganersen",
+      "status": "PENDING",
+      "threshold_pct": 2.0,
+      "ticker": "IONS",
+      "trading_intelligence_score": 70.3
+    },
+    {
+      "catalyst_score": 100,
+      "created_at": "2026-09-19T19:08:54.725284+00:00",
+      "daily_pct": -3.0415366950086296,
+      "direction": "CATALYST",
+      "event_date": "Wed, 26 Aug 2026 10:33:36 EDT",
+      "event_timestamp": "Wed, 26 Aug 2026 10:33:36 EDT",
+      "historical_edge_median_1d_pct": 1.3082,
+      "historical_edge_win_rate_1d": 0.6768,
+      "program": "daraxonrasib",
+      "status": "PENDING",
+      "threshold_pct": 2.0,
+      "ticker": "RVMD",
+      "trading_intelligence_score": 72.2
+    }
+  ],
+  "version": "1.0"
+}
