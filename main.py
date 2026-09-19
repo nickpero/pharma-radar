@@ -135,7 +135,24 @@ def main():
         ticker = str(alert.get("ticker", "UNKNOWN")).upper()
         failed_watch = alert.get("trading_intelligence_watch_failed", [])
         failed_rule = alert.get("trading_intelligence_rule_failed", [])
-        print(f"TI diagnostics {ticker}: WATCH_FAILED={failed_watch or []} RULE_FAILED={failed_rule or []}")
+        market_checks = alert.get("trading_intelligence_market_confirmation", {})
+        print(
+            f"TI diagnostics {ticker}: "
+            f"TI={alert.get('trading_intelligence_score', 'N/A')} "
+            f"catalyst={alert.get('ti_catalyst_score', 'N/A')} "
+            f"edge_score={alert.get('ti_historical_edge_score', 'N/A')} "
+            f"reaction={alert.get('ti_market_reaction_score', 'N/A')} "
+            f"volume={alert.get('ti_volume_score', 'N/A')} "
+            f"surprise={alert.get('ti_surprise_score', 'N/A')} "
+            f"quality={alert.get('ti_data_quality_score', 'N/A')} "
+            f"priority={alert.get('alert_priority', 'N/A')} "
+            f"hist_n={alert.get('historical_edge_sample', 'N/A')} "
+            f"hist_med={alert.get('historical_edge_median_1d_pct', 'N/A')} "
+            f"hist_win={alert.get('historical_edge_win_rate_1d', 'N/A')} "
+            f"market={market_checks} "
+            f"WATCH_FAILED={failed_watch or []} "
+            f"RULE_FAILED={failed_rule or []}"
+        )
 
     record_events(result["alerts"])
     new_alerts = _new_telegram_alerts(result)
