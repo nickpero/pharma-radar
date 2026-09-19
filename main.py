@@ -6,10 +6,11 @@ from scanner.trial_scanner import scan
 from scanner.trading_intelligence_score import enrich_trading_intelligence_scores
 from scanner.trading_intelligence_rule import enrich_trading_intelligence_rules
 from scanner.catalyst_memory import record_events
-from scanner.telegram import send_telegram, send_catalyst_alerts
+from scanner.telegram import send_telegram, send_catalyst_alerts, send_divergence_alerts
 from scanner.telegram_intelligence import select_intelligent_alerts, _dedup_key
 from scanner.alert_state import load_sent_alerts, save_sent_alerts, filter_unsent, mark_sent
 from scanner.pharma_email import send_pharma_intelligence_emails
+from scanner.divergence_monitor import detect_divergences
 
 
 def _reaction(alert):
@@ -117,6 +118,32 @@ def send_email_alerts(result):
     return send_pharma_intelligence_emails(alerts) if alerts else 0
 
 
+def _new_divergence_alerts(result):
+    divergences = detect_divergences(result.get("alerts", []))
+    state = load_sent_alerts()
+    today = datetime.now(timezone.utc).date().isoformat()
+    fresh = []
+    for item in divergences:
+        key = repr(("DIVERGENCE_V1", today, item.get("ticker"), item.get("program")))
+        if key not in state:
+            item["_dedup_key"] = key
+            fresh.append(item)
+    return fresh
+
+
+def send_divergence_alerts_once(result):
+    divergences = _new_divergence_alerts(result)
+    if not divergences:
+        return []
+    responses = send_divergence_alerts(divergences)
+    state = load_sent_alerts()
+    timestamp = datetime.now(timezone.utc).isoformat()
+    for item in divergences:
+        state[item["_dedup_key"]] = timestamp
+    save_sent_alerts(state)
+    return responses
+
+
 def main():
     print("Starting Pharma Radar...")
     result = scan()
@@ -167,10 +194,22 @@ def main():
         print(summary)
         send_telegram(summary)
 
+    divergence_sent = send_divergence_alerts_once(result)
+    print(f"Telegram divergence alerts sent: {len(divergence_sent)}")
+
     sent = send_alerts(result, alerts=new_alerts)
     print(f"Telegram catalyst alerts sent: {len(sent)}")
     sent = send_email_alerts(result)
     print(f"Pharma Intelligence emails sent: {sent}")
+
+    divergences = detect_divergences(result.get("alerts", []))
+    print(f"Divergence Monitor V1.0: {len(divergences)} detected")
+    for item in divergences:
+        print(
+            f"DIVERGENCE {item['ticker']}: daily={item['daily_pct']:+.2f}% "
+            f"catalyst={item['catalyst_score']} TI={item['trading_intelligence_score']} "
+            f"status={item['status']}"
+        )
 
     if not new_alerts:
         print()
