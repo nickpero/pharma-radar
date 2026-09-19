@@ -161,5 +161,26 @@ def aggregate_historical_edge(metrics: Iterable[Mapping[str, Any]], group_by: st
 def build_historical_edge(events: Sequence[Mapping[str, Any]], market_data_provider: Any, benchmark: str = "XBI") -> dict[str, Any]:
     metrics = []
     for event in events:
-        bars = market_data_provider.get_event_bars(event)\n        benchmark_bars = market_data_provider.get_benchmark_bars(event, benchmark)\n        item = calculate_event_metrics(event, bars, benchmark_bars)\n        event_date = market_data_provider._event_date(event) if hasattr(market_data_provider, "_event_date") else None\n        item["market_data_source"] = market_data_provider.source_for(event.get("ticker"), event_date) if hasattr(market_data_provider, "source_for") else "UNKNOWN"\n        item["market_data_available"] = bool(item.get("event_price")) and all(\n            item.get("windows", {}).get(window, {}).get("stock_return_pct") is not None for window in WINDOWS\n        )\n        metrics.append(item)\n    output = {\n        "benchmark": benchmark,\n        "events": metrics,\n        "by_subtype": aggregate_historical_edge(metrics, "subtype"),
-        "by_ticker": aggregate_historical_edge(metrics, "ticker"),\n    }\n    if hasattr(market_data_provider, "stats"):\n        output["market_data"] = market_data_provider.stats()\n    return output\n
+        bars = market_data_provider.get_event_bars(event)
+        benchmark_bars = market_data_provider.get_benchmark_bars(event, benchmark)
+        item = calculate_event_metrics(event, bars, benchmark_bars)
+        event_date = market_data_provider._event_date(event) if hasattr(market_data_provider, "_event_date") else None
+        item["market_data_source"] = (
+            market_data_provider.source_for(event.get("ticker"), event_date)
+            if hasattr(market_data_provider, "source_for")
+            else "UNKNOWN"
+        )
+        item["market_data_available"] = bool(item.get("event_price")) and all(
+            item.get("windows", {}).get(window, {}).get("stock_return_pct") is not None
+            for window in WINDOWS
+        )
+        metrics.append(item)
+    output = {
+        "benchmark": benchmark,
+        "events": metrics,
+        "by_subtype": aggregate_historical_edge(metrics, "subtype"),
+        "by_ticker": aggregate_historical_edge(metrics, "ticker"),
+    }
+    if hasattr(market_data_provider, "stats"):
+        output["market_data"] = market_data_provider.stats()
+    return output
