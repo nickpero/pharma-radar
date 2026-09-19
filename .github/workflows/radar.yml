@@ -31,9 +31,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install --disable-pip-version-check
           if [ -f requirements.txt ]; then
-            pip install --disable-pip-version-check -r requirements.txt
+            echo "requirements.txt found — installing dependencies"
+            python -m pip install --disable-pip-version-check -r requirements.txt
+          else
+            echo "No requirements.txt found — no third-party dependencies to install"
           fi
 
       - name: Run Pharma Radar
