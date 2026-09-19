@@ -92,6 +92,68 @@ def _stats(values: list[float]) -> dict[str, Any]:
     }
 
 
+
+def _portfolio_stats(rows: list[dict[str, Any]], window: str = "1d") -> dict[str, Any]:
+    values = [r[f"forward_{window}_net_pct"] for r in rows if r.get(f"forward_{window}_net_pct") is not None]
+    if not values:
+        return {"n": 0, "median_pct": None, "mean_pct": None, "win_rate": None, "profit_factor": None, "compound_return_pct": None, "max_drawdown_pct": None, "max_gain_pct": None, "max_loss_pct": None}
+    gains = sum(v for v in values if v > 0)
+    losses = sum(-v for v in values if v < 0)
+    equity = 1.0
+    peak = 1.0
+    max_dd = 0.0
+    for value in values:
+        equity *= 1.0 + value / 100.0
+        peak = max(peak, equity)
+        max_dd = min(max_dd, (equity / peak - 1.0) * 100.0)
+    return {
+        "n": len(values),
+        "median_pct": round(median(values), 4),
+        "mean_pct": round(sum(values) / len(values), 4),
+        "win_rate": round(sum(v > 0 for v in values) / len(values), 4),
+        "profit_factor": round(gains / losses, 4) if losses else None,
+        "compound_return_pct": round((equity - 1.0) * 100.0, 4),
+        "max_drawdown_pct": round(max_dd, 4),
+        "max_gain_pct": round(max(values), 4),
+        "max_loss_pct": round(min(values), 4),
+    }
+
+
+def _loo(rows: list[dict[str, Any]], window: str = "1d") -> dict[str, Any]:
+    tickers = sorted({str(r.get("ticker") or "UNKNOWN") for r in rows})
+    results = {}
+    for ticker in tickers:
+        subset = [r for r in rows if str(r.get("ticker") or "UNKNOWN") != ticker]
+        results[ticker] = _portfolio_stats(subset, window)
+    pf = [v["profit_factor"] for v in results.values() if v["profit_factor"] is not None]
+    medians = [v["median_pct"] for v in results.values() if v["median_pct"] is not None]
+    return {
+        "tickers": len(tickers),
+        "min_profit_factor": round(min(pf), 4) if pf else None,
+        "median_profit_factor": round(median(pf), 4) if pf else None,
+        "min_median_pct": round(min(medians), 4) if medians else None,
+        "all_leave_one_ticker_out_positive_median": bool(medians) and all(v > 0 for v in medians),
+        "by_ticker": results,
+    }
+
+
+def _robustness(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    evaluated = [r for r in rows if r["prior_subtype_sample"] >= 10 and r["prior_subtype_win_rate_1d"] is not None and r["prior_subtype_win_rate_1d"] >= 0.55]
+    result = {}
+    for threshold in (0.50, 0.75, 1.00):
+        selected = [r for r in evaluated if r["prior_subtype_median_net_1d_pct"] is not None and r["prior_subtype_median_net_1d_pct"] >= threshold]
+        key = f"{threshold:.2f}"
+        result[key] = {
+            "threshold_pct": threshold,
+            "selected_events": len(selected),
+            "tickers": len({str(r.get("ticker") or "UNKNOWN") for r in selected}),
+            "by_subtype": {s: sum(r["subtype"] == s for r in selected) for s in sorted({r["subtype"] for r in selected})},
+            "forward": {window: _portfolio_stats(selected, window) for window in ("1d", "3d", "5d")},
+            "leave_one_ticker_out_1d": _loo(selected, "1d"),
+        }
+    return result
+
+
 def _sensitivity(rows: list[dict[str, Any]]) -> dict[str, Any]:
     evaluated = [r for r in rows if r["prior_subtype_sample"] >= 10]
     result: dict[str, Any] = {}
@@ -193,7 +255,7 @@ def build() -> dict[str, Any]:
         failure_reasons[row["gate_failure_reason"]] += 1
 
     report = {
-        "version": "1.4",
+        "version": "1.5",
         "purpose": "point-in-time historical-edge replay with warm-up diagnostics, threshold sensitivity, and forward outcome validation",
         "methodology": {
             "friction_bps": FRICTION_BPS,
@@ -209,6 +271,7 @@ def build() -> dict[str, Any]:
         "by_stage": by_stage,
         "by_subtype": by_subtype,
         "sensitivity": _sensitivity(rows),
+        "robustness": _robustness(rows),
         "events": rows,
     }
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
@@ -226,6 +289,11 @@ def main() -> None:
             f"Median >= {threshold}%: qualified={row['qualified_events']} "
             f"subtypes={row['by_subtype']} outcomes={row['forward_outcomes']}"
         )
+    print("---------- ROBUSTNESS (0.50 / 0.75 / 1.00) ----------")
+    for threshold, row in report["robustness"].items():
+        f = row["forward"]["1d"]
+        loo = row["leave_one_ticker_out_1d"]
+        print(f"{threshold}%: n={row['selected_events']} tickers={row['tickers']} median={f['median_pct']}% win={f['win_rate']} PF={f['profit_factor']} compound={f['compound_return_pct']}% DD={f['max_drawdown_pct']}% LOO_min_PF={loo['min_profit_factor']} LOO_all_positive_median={loo['all_leave_one_ticker_out_positive_median']}")
     print("Lookahead control: PASS")
     print("=========================================================")
 
