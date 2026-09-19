@@ -115,6 +115,19 @@ def _period_robustness(rows: list[dict[str, Any]]) -> dict[str, Any]:
 
 
 
+def _rolling_oos(rows: list[dict[str, Any]], threshold: float = 0.75) -> dict[str, Any]:
+    evaluated = [r for r in rows if r["prior_subtype_sample"] >= 10 and r["prior_subtype_win_rate_1d"] is not None and r["prior_subtype_win_rate_1d"] >= 0.55 and r["prior_subtype_median_net_1d_pct"] is not None and r["prior_subtype_median_net_1d_pct"] >= threshold]
+    if not evaluated:
+        return {"status": "INSUFFICIENT_SAMPLE"}
+    out = {"status": "OK", "threshold_pct": threshold, "windows": []}
+    years = sorted({int(r["event_timestamp"][:4]) for r in evaluated})
+    for test_year in range(min(years) + 1, max(years) + 1):
+        train = [r for r in rows if int(r["event_timestamp"][:4]) < test_year and r["prior_subtype_sample"] >= 10 and r["prior_subtype_win_rate_1d"] is not None and r["prior_subtype_win_rate_1d"] >= 0.55 and r["prior_subtype_median_net_1d_pct"] is not None and r["prior_subtype_median_net_1d_pct"] >= threshold]
+        test = [r for r in rows if int(r["event_timestamp"][:4]) == test_year and r["prior_subtype_sample"] >= 10 and r["prior_subtype_win_rate_1d"] is not None and r["prior_subtype_win_rate_1d"] >= 0.55 and r["prior_subtype_median_net_1d_pct"] is not None and r["prior_subtype_median_net_1d_pct"] >= threshold]
+        if test:
+            out["windows"].append({"train_through": test_year - 1, "test_year": test_year, "train_n": len(train), "test_n": len(test), "test_1d": _portfolio_stats(test, "1d")})
+    return out
+
 def _holdout_breakdown(rows: list[dict[str, Any]], threshold: float = 0.75) -> dict[str, Any]:
     evaluated = [r for r in rows if r["prior_subtype_sample"] >= 10 and r["prior_subtype_win_rate_1d"] is not None and r["prior_subtype_win_rate_1d"] >= 0.55]
     dates = sorted(r["event_timestamp"] for r in evaluated)
@@ -315,6 +328,7 @@ def build() -> dict[str, Any]:
         "robustness": _robustness(rows),
         "temporal_holdout": _period_robustness(rows),
         "holdout_breakdown": _holdout_breakdown(rows, 0.75),
+        "rolling_oos": _rolling_oos(rows, 0.75),
         "events": rows,
     }
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
