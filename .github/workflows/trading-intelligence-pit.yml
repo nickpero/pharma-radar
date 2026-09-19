@@ -59,6 +59,17 @@ jobs:
                   f"failures={row['failure_reasons']}"
               )
           print("Sensitivity:", p.get("sensitivity", {}))
+          print("========== ROBUSTNESS ===========")
+          for threshold, row in p.get("robustness", {}).items():
+              fwd = row["forward"]["1d"]
+              loo = row["leave_one_ticker_out_1d"]
+              print(
+                  f"{threshold}%: n={row['selected_events']} tickers={row['tickers']} "
+                  f"median={fwd['median_pct']}% win={fwd['win_rate']} PF={fwd['profit_factor']} "
+                  f"compound={fwd['compound_return_pct']}% DD={fwd['max_drawdown_pct']}% "
+                  f"LOO_min_PF={loo['min_profit_factor']} "
+                  f"LOO_all_positive_median={loo['all_leave_one_ticker_out_positive_median']}"
+              )
           print("======================================")
           if sample["events"] == 0:
               raise SystemExit("PIT replay returned zero events")
