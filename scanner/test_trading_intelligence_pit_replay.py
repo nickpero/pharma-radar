@@ -56,3 +56,18 @@ def test_missing_metrics_are_excluded():
         )
         report = mod.build()
         assert report["sample"]["events"] == 1
+
+def test_equal_timestamp_events_cannot_qualify_each_other():
+    with tempfile.TemporaryDirectory() as tmp:
+        root = Path(tmp)
+        mod.INPUT = root / "dataset.json"
+        mod.OUTPUT = root / "replay.json"
+        events = []
+        for i in range(30):
+            events.append(_event(f"2020-01-{i+1:02d}T10:00:00+00:00", 1.5))
+        events.append(_event("2020-02-01T10:00:00+00:00", 1.5))
+        events.append(_event("2020-02-01T10:00:00+00:00", 1.5))
+        mod.INPUT.write_text(json.dumps({"tradable_catalysts": events}), encoding="utf-8")
+        report = mod.build()
+        assert report["events"][30]["historical_edge_gate"] is True
+        assert report["events"][31]["historical_edge_gate"] is True
