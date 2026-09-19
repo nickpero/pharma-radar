@@ -1,7 +1,7 @@
-"""Pharma Radar — point-in-time Trading Intelligence replay V1.1.
+"""Pharma Radar — point-in-time Trading Intelligence replay V1.2.
 
 Research-only replay of the historical-edge prerequisite used by
-Trading Intelligence Rule V1.0.
+Trading Intelligence Rule V1.0, with explicit warm-up diagnostics.
 
 Warm-up rule:
 - N < 10: WARMUP — no historical qualification.
@@ -11,10 +11,8 @@ Warm-up rule:
 
 Only strictly earlier timestamps contribute. Equal-timestamp events are
 processed as a batch and cannot contribute to each other.
-
-This module validates historical availability in real time; it does not
-generate a buy/sell decision.
 """
+
 from __future__ import annotations
 
 import json
@@ -27,8 +25,6 @@ from typing import Any
 INPUT = Path("data/historical_catalyst_dataset.json")
 OUTPUT = Path("data/trading_intelligence_pit_replay.json")
 
-# Warm-up policy: stronger evidence is required while the historical sample
-# is still small. The full Rule V1.0 thresholds become available at N >= 30.
 WARMUP_THRESHOLDS = (
     {"stage": "WARMUP", "min_sample": 0, "max_sample": 9, "median": None, "win_rate": None},
     {"stage": "PROVISIONAL", "min_sample": 10, "max_sample": 19, "median": 2.00, "win_rate": 0.65},
@@ -71,7 +67,6 @@ def _return_1d(event: dict[str, Any]) -> float | None:
 
 
 def warmup_policy(n: int) -> dict[str, Any]:
-    """Return the explicit PIT warm-up stage and thresholds for prior sample N."""
     for rule in WARMUP_THRESHOLDS:
         if n >= rule["min_sample"] and (
             rule["max_sample"] is None or n <= rule["max_sample"]
@@ -80,16 +75,38 @@ def warmup_policy(n: int) -> dict[str, Any]:
     raise AssertionError(f"No warm-up policy stage for sample size {n}")
 
 
-def _qualifies(n: int, med: float | None, win: float | None) -> bool:
-    rule = warmup_policy(n)
-    if rule["median"] is None or rule["win_rate"] is None:
-        return False
-    return (
-        med is not None
-        and med >= rule["median"]
-        and win is not None
-        and win >= rule["win_rate"]
+def _diagnostics(n: int, med: float | None, win: float | None) -> dict[str, Any]:
+    policy = warmup_policy(n)
+    median_pass = (
+        policy["median"] is not None
+        and med is not None
+        and med >= policy["median"]
     )
+    win_rate_pass = (
+        policy["win_rate"] is not None
+        and win is not None
+        and win >= policy["win_rate"]
+    )
+    if policy["median"] is None or policy["win_rate"] is None:
+        reason = "WARMUP_SAMPLE"
+    elif median_pass and win_rate_pass:
+        reason = "PASS"
+    elif not median_pass and not win_rate_pass:
+        reason = "BOTH"
+    elif not median_pass:
+        reason = "MEDIAN"
+    else:
+        reason = "WIN_RATE"
+    return {
+        "median_pass": median_pass,
+        "win_rate_pass": win_rate_pass,
+        "gate_result": bool(median_pass and win_rate_pass),
+        "gate_failure_reason": reason,
+    }
+
+
+def _qualifies(n: int, med: float | None, win: float | None) -> bool:
+    return _diagnostics(n, med, win)["gate_result"]
 
 
 def build() -> dict[str, Any]:
@@ -105,8 +122,6 @@ def build() -> dict[str, Any]:
     rows: list[dict[str, Any]] = []
     index = 0
 
-    # Equal-timestamp events are a batch: none can see another event from
-    # the same timestamp as historical information.
     while index < len(events):
         timestamp = _ts(events[index])
         batch: list[dict[str, Any]] = []
@@ -122,7 +137,7 @@ def build() -> dict[str, Any]:
             med = median(prior) if prior else None
             win = (sum(v > 0 for v in prior) / n) if n else None
             policy = warmup_policy(n)
-            qualified = _qualifies(n, med, win)
+            diagnostics = _diagnostics(n, med, win)
 
             rows.append(
                 {
@@ -137,7 +152,8 @@ def build() -> dict[str, Any]:
                     "warmup_required_win_rate_1d": policy["win_rate"],
                     "prior_subtype_median_net_1d_pct": med,
                     "prior_subtype_win_rate_1d": win,
-                    "historical_edge_gate": qualified,
+                    **diagnostics,
+                    "historical_edge_gate": diagnostics["gate_result"],
                 }
             )
 
@@ -156,11 +172,17 @@ def build() -> dict[str, Any]:
             {
                 "events": 0,
                 "qualified": 0,
+                "median_pass": 0,
+                "win_rate_pass": 0,
+                "failure_reasons": {"WARMUP_SAMPLE": 0, "MEDIAN": 0, "WIN_RATE": 0, "BOTH": 0, "PASS": 0},
                 "first_qualification_timestamp": None,
                 "first_qualification_stage": None,
             },
         )
         bucket["events"] += 1
+        bucket["median_pass"] += int(row["median_pass"])
+        bucket["win_rate_pass"] += int(row["win_rate_pass"])
+        bucket["failure_reasons"][row["gate_failure_reason"]] += 1
         if row["historical_edge_gate"]:
             bucket["qualified"] += 1
             if bucket["first_qualification_timestamp"] is None:
@@ -169,24 +191,33 @@ def build() -> dict[str, Any]:
 
     by_stage: dict[str, dict[str, int]] = {}
     for row in rows:
-        bucket = by_stage.setdefault(row["warmup_stage"], {"events": 0, "qualified": 0})
+        bucket = by_stage.setdefault(
+            row["warmup_stage"],
+            {"events": 0, "median_pass": 0, "win_rate_pass": 0, "qualified": 0},
+        )
         bucket["events"] += 1
-        if row["historical_edge_gate"]:
-            bucket["qualified"] += 1
+        bucket["median_pass"] += int(row["median_pass"])
+        bucket["win_rate_pass"] += int(row["win_rate_pass"])
+        bucket["qualified"] += int(row["historical_edge_gate"])
+
+    failure_reasons = {"WARMUP_SAMPLE": 0, "MEDIAN": 0, "WIN_RATE": 0, "BOTH": 0, "PASS": 0}
+    for row in rows:
+        failure_reasons[row["gate_failure_reason"]] += 1
 
     report = {
-        "version": "1.1",
-        "purpose": "point-in-time replay of the historical-edge prerequisite for Trading Intelligence Rule V1.0 with explicit progressive warm-up",
+        "version": "1.2",
+        "purpose": "point-in-time replay of the historical-edge prerequisite with progressive warm-up and gate diagnostics",
         "methodology": {
             "friction_bps": FRICTION_BPS,
             "warmup_policy": [dict(rule) for rule in WARMUP_THRESHOLDS],
             "lookahead_control": "Only strictly earlier timestamps contribute to each event's subtype statistics; equal-timestamp events are batched.",
-            "warning": "This replays only the historical-edge gate; it is not a live trading backtest.",
+            "warning": "Research-only. This replays the historical-edge gate; it is not a live trading backtest.",
         },
         "sample": {
             "events": len(rows),
             "qualified_historical_edge_events": len(qualified),
         },
+        "failure_reasons": failure_reasons,
         "by_stage": by_stage,
         "by_subtype": by_subtype,
         "events": rows,
@@ -200,18 +231,22 @@ def main() -> None:
     report = build()
     print("========== TRADING INTELLIGENCE POINT-IN-TIME REPLAY ==========")
     print(f"Events: {report['sample']['events']}")
-    print(
-        "Historical-edge-qualified events: "
-        f"{report['sample']['qualified_historical_edge_events']}"
-    )
+    print(f"Historical-edge-qualified events: {report['sample']['qualified_historical_edge_events']}")
+    print(f"Failure reasons: {report['failure_reasons']}")
     for stage, row in report["by_stage"].items():
-        print(f"- {stage}: events={row['events']} qualified={row['qualified']}")
+        print(
+            f"- {stage}: events={row['events']} "
+            f"median_pass={row['median_pass']} "
+            f"win_rate_pass={row['win_rate_pass']} "
+            f"qualified={row['qualified']}"
+        )
     for subtype, row in sorted(report["by_subtype"].items()):
         print(
             f"- {subtype}: events={row['events']} "
+            f"median_pass={row['median_pass']} "
+            f"win_rate_pass={row['win_rate_pass']} "
             f"qualified={row['qualified']} "
-            f"first={row['first_qualification_timestamp']} "
-            f"stage={row['first_qualification_stage']}"
+            f"failures={row['failure_reasons']}"
         )
     print("Lookahead control: PASS — prior events only")
     print("===============================================================")
