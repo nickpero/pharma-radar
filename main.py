@@ -136,6 +136,7 @@ def main():
         failed_watch = alert.get("trading_intelligence_watch_failed", [])
         failed_rule = alert.get("trading_intelligence_rule_failed", [])
         market_checks = alert.get("trading_intelligence_market_confirmation", {})
+        market_data = alert.get("market_data") or {}
         print(
             f"TI diagnostics {ticker}: "
             f"TI={alert.get('trading_intelligence_score', 'N/A')} "
@@ -149,6 +150,9 @@ def main():
             f"hist_n={alert.get('historical_edge_sample', 'N/A')} "
             f"hist_med={alert.get('historical_edge_median_1d_pct', 'N/A')} "
             f"hist_win={alert.get('historical_edge_win_rate_1d', 'N/A')} "
+            f"daily_pct={market_data.get('price_change_pct', 'N/A')} "
+            f"market_source={alert.get('trading_intelligence_market_confirmation_source', 'N/A')} "
+            f"reaction_source={alert.get('ti_market_reaction_source', 'N/A')} "
             f"market={market_checks} "
             f"WATCH_FAILED={failed_watch or []} "
             f"RULE_FAILED={failed_rule or []}"
