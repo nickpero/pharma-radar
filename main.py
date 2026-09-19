@@ -11,6 +11,7 @@ from scanner.telegram_intelligence import select_intelligent_alerts, _dedup_key
 from scanner.alert_state import load_sent_alerts, save_sent_alerts, filter_unsent, mark_sent
 from scanner.pharma_email import send_pharma_intelligence_emails
 from scanner.divergence_monitor import detect_divergences
+from scanner.divergence_outcomes import track_divergence_outcomes
 
 
 def _reaction(alert):
@@ -203,7 +204,9 @@ def main():
     print(f"Pharma Intelligence emails sent: {sent}")
 
     divergences = detect_divergences(result.get("alerts", []))
+    outcome = track_divergence_outcomes(divergences)
     print(f"Divergence Monitor V1.0: {len(divergences)} detected")
+    print(f"Divergence Outcomes V1.0: added={outcome["added"]} updated={outcome["updated"]} summary={outcome["summary"]}")
     for item in divergences:
         print(
             f"DIVERGENCE {item['ticker']}: daily={item['daily_pct']:+.2f}% "
