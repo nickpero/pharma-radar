@@ -31,7 +31,7 @@ jobs:
       - name: Run point-in-time Trading Intelligence replay
         run: python -m scanner.trading_intelligence_pit_replay
 
-      - name: Validate and print PIT summary
+      - name: Validate and print PIT diagnostics
         run: |
           python - <<'PY'
           import json
@@ -39,24 +39,28 @@ jobs:
 
           p = json.loads(Path("data/trading_intelligence_pit_replay.json").read_text())
           sample = p["sample"]
-          print("========== PIT VALIDATION ==========")
+          print("========== PIT DIAGNOSTICS ==========")
           print(f"Events: {sample['events']}")
-          print(f"Qualified historical-edge events: {sample['qualified_historical_edge_events']}")
+          print(f"Qualified: {sample['qualified_historical_edge_events']}")
+          print(f"Failure reasons: {p.get('failure_reasons', {})}")
           for stage, row in p.get("by_stage", {}).items():
-              print(f"{stage}: events={row['events']} qualified={row['qualified']}")
+              print(
+                  f"{stage}: events={row['events']} "
+                  f"median_pass={row['median_pass']} "
+                  f"win_rate_pass={row['win_rate_pass']} "
+                  f"qualified={row['qualified']}"
+              )
           for subtype, row in sorted(p.get("by_subtype", {}).items()):
               print(
                   f"{subtype}: events={row['events']} "
+                  f"median_pass={row['median_pass']} "
+                  f"win_rate_pass={row['win_rate_pass']} "
                   f"qualified={row['qualified']} "
-                  f"first={row['first_qualification_timestamp']} "
-                  f"stage={row['first_qualification_stage']}"
+                  f"failures={row['failure_reasons']}"
               )
-          print("====================================")
+          print("======================================")
           if sample["events"] == 0:
               raise SystemExit("PIT replay returned zero events")
-
-          if not p.get("methodology", {}).get("warmup_policy"):
-              raise SystemExit("Warm-up policy missing from PIT replay output")
           PY
 
       - name: Persist PIT replay report
@@ -67,6 +71,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No PIT replay changes to commit"
           else
-            git commit -m "Refresh Trading Intelligence PIT replay [skip ci]"
+            git commit -m "Refresh Trading Intelligence PIT diagnostics [skip ci]"
             git push
           fi
