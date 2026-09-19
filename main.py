@@ -12,6 +12,7 @@ from scanner.alert_state import load_sent_alerts, save_sent_alerts, filter_unsen
 from scanner.pharma_email import send_pharma_intelligence_emails
 from scanner.divergence_monitor import detect_divergences
 from scanner.divergence_outcomes import track_divergence_outcomes
+from scanner.data_quality_audit import audit_alerts
 
 
 def _reaction(alert):
@@ -186,6 +187,12 @@ def main():
             f"WATCH_FAILED={failed_watch or []} "
             f"RULE_FAILED={failed_rule or []}"
         )
+
+    quality = audit_alerts(result["alerts"])
+    print(f"Data Quality Audit V1.0: {quality['status']} — alerts={quality['alerts']} warnings={quality['warnings']}")
+    for row in quality["rows"]:
+        if row["issues"]:
+            print(f"DATA QUALITY {row['ticker']}: {row['issues']}")
 
     record_events(result["alerts"])
     new_alerts = _new_telegram_alerts(result)
