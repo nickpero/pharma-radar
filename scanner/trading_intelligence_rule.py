@@ -62,10 +62,22 @@ def qualify_trading_intelligence(event):
         "market_confirmation": market_confirmations >= 2,
     }
     qualified = all(checks.values())
+    watch_checks = {
+        "priority": alert_tier in {"CRITICAL", "HIGH"} or priority >= 60,
+        "ti_score": ti_score >= 75,
+        "source": source_ok,
+        "historical_sample": edge_sample >= 10,
+        "historical_edge": edge_median >= 0.75 and edge_win_rate >= 0.55,
+        "market_confirmation": market_confirmations >= 2,
+    }
+    watch = all(watch_checks.values())
     failed = [name for name, passed in checks.items() if not passed]
     return {
-        "trading_intelligence_rule_version": "1.0",
+        "trading_intelligence_rule_version": "1.1",
         "trading_intelligence_qualified": qualified,
+        "trading_intelligence_watch": watch,
+        "trading_intelligence_watch_checks": watch_checks,
+        "trading_intelligence_watch_failed": [name for name, passed in watch_checks.items() if not passed],
         "trading_intelligence_rule_checks": checks,
         "trading_intelligence_rule_failed": failed,
         "trading_intelligence_market_confirmation_count": market_confirmations,
