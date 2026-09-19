@@ -24,7 +24,8 @@ def _market_confirmation(event):
     direction = str(event.get("direction") or "UNKNOWN").upper()
     reaction_direction = str(reaction.get("reaction_direction") or "UNKNOWN").upper()
     intraday_available = reaction.get("reaction_status") == "AVAILABLE"
-    price_direction_intraday = direction in {"POSITIVE", "NEGATIVE"} and reaction_direction == direction
+    expected_reaction_direction = "POSITIVE" if direction == "CATALYST" else direction
+    price_direction_intraday = expected_reaction_direction in {"POSITIVE", "NEGATIVE"} and reaction_direction == expected_reaction_direction
 
     daily_price = _num(event.get("price_change_pct"))
     if daily_price is None:
@@ -46,7 +47,7 @@ def _market_confirmation(event):
     price_direction = price_direction_intraday if intraday_available else daily_price_direction
     price_source = "INTRADAY" if price_direction_intraday and intraday_available else "DAILY_SNAPSHOT" if (daily_price_direction or daily_divergent) else "NONE"
     if intraday_available:
-        market_status = "CONFIRMED" if price_direction_intraday else "DIVERGENT" if direction in {"POSITIVE", "NEGATIVE", "CATALYST"} and reaction_direction != direction else "UNAVAILABLE"
+        market_status = "CONFIRMED" if price_direction_intraday else "DIVERGENT" if direction in {"POSITIVE", "NEGATIVE", "CATALYST"} and reaction_direction != expected_reaction_direction else "UNAVAILABLE"
     else:
         market_status = "CONFIRMED" if daily_price_direction else "DIVERGENT" if daily_divergent else "UNAVAILABLE"
 
