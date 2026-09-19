@@ -22,6 +22,7 @@ def test_qualified_event_passes():
     assert result["trading_intelligence_qualified"] is True
     assert result["trading_intelligence_rule_failed"] == []
     assert result["trading_intelligence_market_confirmation_count"] == 3
+    assert result["trading_intelligence_market_confirmation_source"] == "INTRADAY"
 
 
 def test_insufficient_history_fails():
@@ -42,6 +43,17 @@ def test_watch_gate_uses_075_edge_and_10_sample():
     result = qualify_trading_intelligence(event)
     assert result["trading_intelligence_watch"] is True
     assert result["trading_intelligence_qualified"] is False
+
+
+def test_daily_snapshot_can_confirm_direction_when_intraday_is_unavailable():
+    event = _qualified()
+    event["reaction_interpretation"] = "UNKNOWN"
+    event["market_reaction"] = {"reaction_status": "UNAVAILABLE", "reaction_direction": "UNKNOWN"}
+    event["price_change_pct"] = 2.0
+    result = qualify_trading_intelligence(event)
+    assert result["trading_intelligence_market_confirmation_count"] == 2
+    assert result["trading_intelligence_market_confirmation_source"] == "DAILY_SNAPSHOT"
+    assert result["trading_intelligence_market_confirmation"]["price_direction"] is True
 
 
 def test_two_of_three_market_checks_are_required():
