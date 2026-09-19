@@ -35,8 +35,6 @@
         "WARMUP_SAMPLE": 10,
         "WIN_RATE": 0
       },
-      "first_qualification_stage": null,
-      "first_qualification_timestamp": null,
       "median_pass": 0,
       "qualified": 0,
       "win_rate_pass": 0
@@ -50,8 +48,6 @@
         "WARMUP_SAMPLE": 10,
         "WIN_RATE": 0
       },
-      "first_qualification_stage": null,
-      "first_qualification_timestamp": null,
       "median_pass": 0,
       "qualified": 0,
       "win_rate_pass": 8
@@ -65,8 +61,6 @@
         "WARMUP_SAMPLE": 12,
         "WIN_RATE": 0
       },
-      "first_qualification_stage": null,
-      "first_qualification_timestamp": null,
       "median_pass": 0,
       "qualified": 0,
       "win_rate_pass": 18
@@ -1541,7 +1535,16 @@
   },
   "methodology": {
     "friction_bps": 30.0,
-    "lookahead_control": "Only strictly earlier timestamps contribute to each event's subtype statistics; equal-timestamp events are batched.",
+    "lookahead_control": "Only strictly earlier timestamps contribute; equal-timestamp events are batched.",
+    "sensitivity_median_thresholds_pct": [
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      1.5,
+      2.0
+    ],
+    "sensitivity_win_rate_threshold": 0.55,
     "warmup_policy": [
       {
         "max_sample": 9,
@@ -1572,12 +1575,68 @@
         "win_rate": 0.55
       }
     ],
-    "warning": "Research-only. This replays the historical-edge gate; it is not a live trading backtest."
+    "warning": "Research-only; not a live trading backtest."
   },
-  "purpose": "point-in-time replay of the historical-edge prerequisite with progressive warm-up and gate diagnostics",
+  "purpose": "point-in-time historical-edge replay with warm-up diagnostics and median-threshold sensitivity",
   "sample": {
     "events": 81,
     "qualified_historical_edge_events": 0
   },
-  "version": "1.2"
+  "sensitivity": {
+    "0.50": {
+      "by_subtype": {
+        "FDA_REJECTION": 9,
+        "LABEL_EXPANSION": 18
+      },
+      "evaluated_events": 49,
+      "median_threshold_pct": 0.5,
+      "qualified_events": 27,
+      "win_rate_threshold": 0.55
+    },
+    "0.75": {
+      "by_subtype": {
+        "FDA_REJECTION": 1,
+        "LABEL_EXPANSION": 18
+      },
+      "evaluated_events": 49,
+      "median_threshold_pct": 0.75,
+      "qualified_events": 19,
+      "win_rate_threshold": 0.55
+    },
+    "1.00": {
+      "by_subtype": {
+        "LABEL_EXPANSION": 13
+      },
+      "evaluated_events": 49,
+      "median_threshold_pct": 1.0,
+      "qualified_events": 13,
+      "win_rate_threshold": 0.55
+    },
+    "1.25": {
+      "by_subtype": {
+        "LABEL_EXPANSION": 2
+      },
+      "evaluated_events": 49,
+      "median_threshold_pct": 1.25,
+      "qualified_events": 2,
+      "win_rate_threshold": 0.55
+    },
+    "1.50": {
+      "by_subtype": {
+        "LABEL_EXPANSION": 2
+      },
+      "evaluated_events": 49,
+      "median_threshold_pct": 1.5,
+      "qualified_events": 2,
+      "win_rate_threshold": 0.55
+    },
+    "2.00": {
+      "by_subtype": {},
+      "evaluated_events": 49,
+      "median_threshold_pct": 2.0,
+      "qualified_events": 0,
+      "win_rate_threshold": 0.55
+    }
+  },
+  "version": "1.3"
 }
