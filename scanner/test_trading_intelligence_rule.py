@@ -32,6 +32,18 @@ def test_insufficient_history_fails():
     assert "historical_sample" in result["trading_intelligence_rule_failed"]
 
 
+
+def test_watch_gate_uses_075_edge_and_10_sample():
+    event = _qualified()
+    event["historical_edge_sample"] = 10
+    event["historical_edge_median_1d_pct"] = 0.75
+    event["historical_edge_win_rate_1d"] = 0.55
+    event["trading_intelligence_score"] = 75
+    result = qualify_trading_intelligence(event)
+    assert result["trading_intelligence_watch"] is True
+    assert result["trading_intelligence_qualified"] is False
+
+
 def test_two_of_three_market_checks_are_required():
     event = _qualified()
     event["reaction_interpretation"] = "UNKNOWN"
