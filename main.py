@@ -49,8 +49,9 @@ def build_summary(result, intelligent_alerts=None):
     alerts = result.get("alerts", []); errors = result.get("errors", []); detected_changes = result.get("detected_changes", [])
     if intelligent_alerts is None: intelligent_alerts = select_intelligent_alerts(alerts)
     qualified = sum(1 for alert in alerts if alert.get("trading_intelligence_qualified") is True)
+    watched = sum(1 for alert in alerts if alert.get("trading_intelligence_watch") is True)
     if intelligent_alerts:
-        lines = ["🧬 PHARMA RADAR — SCAN", "━━━━━━━━━━━━━━━━━━", f"🏢 Companies: {result.get('companies', 0)}", f"🔬 Trials: {result.get('total_trials', 0)}", f"🎯 Relevant: {result.get('relevant_trials', 0)}", f"📰 FDA news: {len(result.get('fda_news', []))}", f"🔄 Changes: {len(detected_changes)}", f"🧠 TI Qualified: {qualified}", "", f"🚨 NEW ACTIONABLE ALERTS: {len(intelligent_alerts)}"]
+        lines = ["🧬 PHARMA RADAR — SCAN", "━━━━━━━━━━━━━━━━━━", f"🏢 Companies: {result.get('companies', 0)}", f"🔬 Trials: {result.get('total_trials', 0)}", f"🎯 Relevant: {result.get('relevant_trials', 0)}", f"📰 FDA news: {len(result.get('fda_news', []))}", f"🔄 Changes: {len(detected_changes)}", f"🧠 TI Qualified: {qualified}", f"👀 TI Watch: {watched}", "", f"🚨 NEW ACTIONABLE ALERTS: {len(intelligent_alerts)}"]
     else:
         lines = ["🧬 PHARMA RADAR — SCAN", "━━━━━━━━━━━━━━━━━━", f"🏢 Companies: {result.get('companies', 0)}", f"🔬 Trials: {result.get('total_trials', 0)}", f"🎯 Relevant: {result.get('relevant_trials', 0)}", f"📰 FDA news: {len(result.get('fda_news', []))}", f"🔄 Changes: {len(detected_changes)}", f"🧠 TI Qualified: {qualified}", "", "🚨 NEW ACTIONABLE ALERTS: 0"]
     if errors: lines.append(f"❌ Errors: {len(errors)}")
