@@ -29,6 +29,52 @@
       "threshold_pct": 2.0,
       "ticker": "RVMD",
       "trading_intelligence_score": 72.2
+    },
+    {
+      "catalyst_score": 100,
+      "created_at": "2026-09-19T21:02:48.328074+00:00",
+      "daily_pct": -3.311497661554444,
+      "direction": "POSITIVE",
+      "event_date": "2026-08-25",
+      "event_price": null,
+      "event_price_timestamp": null,
+      "event_timestamp": "2026-08-25",
+      "historical_edge_median_1d_pct": 1.3082,
+      "historical_edge_win_rate_1d": 0.6768,
+      "outcomes_snapshot": {
+        "entry_close": 27.469999313354492,
+        "entry_date": "2026-08-25",
+        "event_price": 27.469999313354492,
+        "event_price_source": "DAILY_CLOSE_FALLBACK",
+        "event_price_timestamp": "2026-08-25",
+        "event_to_close_pct": 0.0,
+        "max_adverse_pct": 2.9122721674778513,
+        "max_favorable_pct": 8.008739781329105,
+        "max_recovery": true,
+        "outcomes": {
+          "t1": {
+            "close": 29.30500030517578,
+            "date": "2026-08-26",
+            "return_pct": 6.680018338876356
+          },
+          "t3": {
+            "close": 28.270000457763672,
+            "date": "2026-08-28",
+            "return_pct": 2.9122721674778513
+          },
+          "t5": {
+            "close": 29.670000076293945,
+            "date": "2026-09-01",
+            "return_pct": 8.008739781329105
+          }
+        },
+        "recovered_by_t5": true
+      },
+      "program": "zanidatamab",
+      "status": "COMPLETE",
+      "threshold_pct": 2.0,
+      "ticker": "ZYME",
+      "trading_intelligence_score": 69.7
     }
   ],
   "version": "1.0"
