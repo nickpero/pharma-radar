@@ -93,6 +93,27 @@ def _stats(values: list[float]) -> dict[str, Any]:
 
 
 
+
+def _period_robustness(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    evaluated = [r for r in rows if r["prior_subtype_sample"] >= 10 and r["prior_subtype_win_rate_1d"] is not None and r["prior_subtype_win_rate_1d"] >= 0.55]
+    dates = sorted(r["event_timestamp"] for r in evaluated)
+    if len(dates) < 4:
+        return {"status": "INSUFFICIENT_SAMPLE", "events": len(evaluated)}
+    split_date = dates[max(0, len(dates) // 2 - 1)]
+    train = [r for r in evaluated if r["event_timestamp"] <= split_date]
+    test = [r for r in evaluated if r["event_timestamp"] > split_date]
+    out = {"status": "OK", "split_date": split_date, "train_events": len(train), "test_events": len(test), "thresholds": {}}
+    for threshold in (0.50, 0.75, 1.00):
+        train_selected = [r for r in train if r["prior_subtype_median_net_1d_pct"] is not None and r["prior_subtype_median_net_1d_pct"] >= threshold]
+        test_selected = [r for r in test if r["prior_subtype_median_net_1d_pct"] is not None and r["prior_subtype_median_net_1d_pct"] >= threshold]
+        out["thresholds"][f"{threshold:.2f}"] = {
+            "train": {"n": len(train_selected), "forward_1d": _portfolio_stats(train_selected, "1d")},
+            "test": {"n": len(test_selected), "forward_1d": _portfolio_stats(test_selected, "1d")},
+            "test_by_subtype": {s: sum(r["subtype"] == s for r in test_selected) for s in sorted({r["subtype"] for r in test_selected})},
+        }
+    return out
+
+
 def _portfolio_stats(rows: list[dict[str, Any]], window: str = "1d") -> dict[str, Any]:
     values = [r[f"forward_{window}_net_pct"] for r in rows if r.get(f"forward_{window}_net_pct") is not None]
     if not values:
@@ -272,6 +293,7 @@ def build() -> dict[str, Any]:
         "by_subtype": by_subtype,
         "sensitivity": _sensitivity(rows),
         "robustness": _robustness(rows),
+        "temporal_holdout": _period_robustness(rows),
         "events": rows,
     }
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
