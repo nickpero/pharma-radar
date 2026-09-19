@@ -40,7 +40,8 @@ jobs:
 
       - name: Validate Trading Intelligence Rule
         run: |
-          python -m py_compile main.py scanner/trading_intelligence_rule.py scanner/trading_intelligence_score.py
+          python -m py_compile main.py scanner/trading_intelligence_rule.py scanner/trading_intelligence_score.py scanner/data_quality_audit.py scanner/divergence_monitor.py scanner/divergence_outcomes.py
+          python -m pytest -q scanner/test_data_quality_audit.py scanner/test_divergence_monitor.py scanner/test_divergence_outcomes.py
           python - <<'PY'
           from scanner.trading_intelligence_rule import qualify_trading_intelligence
 
