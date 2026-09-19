@@ -2,6 +2,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from scanner import pharma_email
+from scanner import pharma_email_state
 
 
 def _alert(title="FDA catalyst", label="CRITICAL"):
@@ -97,6 +98,30 @@ def test_low_priority_development_event_is_sent_for_knowledge():
     }
     assert pharma_email.is_pharma_intelligence_event(alert) is True
     assert "DEVELOPMENT" in pharma_email.format_pharma_intelligence_email(alert)
+
+
+def test_same_drug_new_trial_event_is_not_suppressed():
+    a = {
+        "ticker": "IONS", "program": "zilganersen", "nct_id": "NCT1",
+        "event": {"type": "STATUS_CHANGE", "subtype": "TRIAL_RECRUITING",
+                  "old_value": "NOT_YET_RECRUITING", "new_value": "RECRUITING"},
+    }
+    b = {
+        **a,
+        "event": {"type": "STATUS_CHANGE", "subtype": "TRIAL_COMPLETED",
+                  "old_value": "ACTIVE_NOT_RECRUITING", "new_value": "COMPLETED"},
+    }
+    assert pharma_email_state.email_delivery_key(a) != pharma_email_state.email_delivery_key(b)
+
+
+def test_same_event_with_new_feed_timestamp_is_suppressed():
+    a = {
+        "ticker": "SMMT", "program": "ivonescimab",
+        "event": {"type": "FDA_EVENT", "subtype": "FDA_APPROVAL"},
+        "url": "https://fda.gov/item/123", "event_timestamp": "2026-09-19T10:00:00Z",
+    }
+    b = {**a, "event_timestamp": "2026-09-19T10:10:00Z", "title": "Updated feed copy"}
+    assert pharma_email_state.email_delivery_key(a) == pharma_email_state.email_delivery_key(b)
 
 
 if __name__ == "__main__":
