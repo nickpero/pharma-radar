@@ -1,4 +1,4 @@
-"""Pharma Radar — point-in-time Trading Intelligence replay V1.3."""
+"""Pharma Radar — point-in-time Trading Intelligence replay V1.4."""
 
 from __future__ import annotations
 
@@ -41,12 +41,20 @@ def _sort_key(event: dict[str, Any]) -> tuple[int, str]:
         return 0, raw
 
 
-def _return_1d(event: dict[str, Any]) -> float | None:
+def _return(event: dict[str, Any], window: str) -> float | None:
     try:
-        value = float(((event.get("market_metrics") or {}).get("windows") or {}).get("1D", {}).get("directional_abnormal_return_pct"))
+        value = float(
+            ((event.get("market_metrics") or {}).get("windows") or {})
+            .get(window, {})
+            .get("directional_abnormal_return_pct")
+        )
     except (TypeError, ValueError):
         return None
     return value - FRICTION_BPS / 100.0
+
+
+def _return_1d(event: dict[str, Any]) -> float | None:
+    return _return(event, "1D")
 
 
 def warmup_policy(n: int) -> dict[str, Any]:
@@ -73,21 +81,44 @@ def _diagnostics(n: int, med: float | None, win: float | None) -> dict[str, Any]
     return {"median_pass": median_pass, "win_rate_pass": win_rate_pass, "gate_result": median_pass and win_rate_pass, "gate_failure_reason": reason}
 
 
+def _stats(values: list[float]) -> dict[str, Any]:
+    if not values:
+        return {"n": 0, "median_pct": None, "win_rate": None, "mean_pct": None}
+    return {
+        "n": len(values),
+        "median_pct": round(median(values), 4),
+        "win_rate": round(sum(v > 0 for v in values) / len(values), 4),
+        "mean_pct": round(sum(values) / len(values), 4),
+    }
+
+
 def _sensitivity(rows: list[dict[str, Any]]) -> dict[str, Any]:
     evaluated = [r for r in rows if r["prior_subtype_sample"] >= 10]
     result: dict[str, Any] = {}
     for threshold in SENSITIVITY_MEDIANS:
         key = f"{threshold:.2f}"
-        all_pass = [r for r in evaluated if r["prior_subtype_median_net_1d_pct"] is not None and r["prior_subtype_median_net_1d_pct"] >= threshold and r["prior_subtype_win_rate_1d"] is not None and r["prior_subtype_win_rate_1d"] >= 0.55]
+        selected = [
+            r for r in evaluated
+            if r["prior_subtype_median_net_1d_pct"] is not None
+            and r["prior_subtype_median_net_1d_pct"] >= threshold
+            and r["prior_subtype_win_rate_1d"] is not None
+            and r["prior_subtype_win_rate_1d"] >= 0.55
+        ]
         by_subtype: dict[str, int] = {}
-        for row in all_pass:
+        outcomes = {w: [] for w in ("1D", "3D", "5D")}
+        for row in selected:
             by_subtype[row["subtype"]] = by_subtype.get(row["subtype"], 0) + 1
+            for window in outcomes:
+                value = row.get(f"forward_{window.lower()}_net_pct")
+                if value is not None:
+                    outcomes[window].append(value)
         result[key] = {
             "median_threshold_pct": threshold,
             "win_rate_threshold": 0.55,
             "evaluated_events": len(evaluated),
-            "qualified_events": len(all_pass),
+            "qualified_events": len(selected),
             "by_subtype": by_subtype,
+            "forward_outcomes": {w: _stats(v) for w, v in outcomes.items()},
         }
     return result
 
@@ -129,6 +160,9 @@ def build() -> dict[str, Any]:
                 "prior_subtype_win_rate_1d": win,
                 **diagnostics,
                 "historical_edge_gate": diagnostics["gate_result"],
+                "forward_1d_net_pct": _return(event, "1D"),
+                "forward_3d_net_pct": _return(event, "3D"),
+                "forward_5d_net_pct": _return(event, "5D"),
             })
             value = _return_1d(event)
             if value is not None:
@@ -159,15 +193,16 @@ def build() -> dict[str, Any]:
         failure_reasons[row["gate_failure_reason"]] += 1
 
     report = {
-        "version": "1.3",
-        "purpose": "point-in-time historical-edge replay with warm-up diagnostics and median-threshold sensitivity",
+        "version": "1.4",
+        "purpose": "point-in-time historical-edge replay with warm-up diagnostics, threshold sensitivity, and forward outcome validation",
         "methodology": {
             "friction_bps": FRICTION_BPS,
             "warmup_policy": [dict(r) for r in WARMUP_THRESHOLDS],
             "sensitivity_median_thresholds_pct": list(SENSITIVITY_MEDIANS),
             "sensitivity_win_rate_threshold": 0.55,
+            "forward_validation": "Each event is selected using only strictly prior history; its own 1D/3D/5D market outcome is evaluated afterward.",
             "lookahead_control": "Only strictly earlier timestamps contribute; equal-timestamp events are batched.",
-            "warning": "Research-only; not a live trading backtest.",
+            "warning": "Research-only; forward outcome validation is not a live trading backtest.",
         },
         "sample": {"events": len(rows), "qualified_historical_edge_events": len(qualified)},
         "failure_reasons": failure_reasons,
@@ -183,13 +218,16 @@ def build() -> dict[str, Any]:
 
 def main() -> None:
     report = build()
-    print("========== PIT THRESHOLD SENSITIVITY ==========")
+    print("========== PIT THRESHOLD + FORWARD VALIDATION ==========")
     print(f"Events: {report['sample']['events']}")
     print(f"Current qualified: {report['sample']['qualified_historical_edge_events']}")
     for threshold, row in report["sensitivity"].items():
-        print(f"Median >= {threshold}%: qualified={row['qualified_events']} by_subtype={row['by_subtype']}")
+        print(
+            f"Median >= {threshold}%: qualified={row['qualified_events']} "
+            f"subtypes={row['by_subtype']} outcomes={row['forward_outcomes']}"
+        )
     print("Lookahead control: PASS")
-    print("===============================================")
+    print("=========================================================")
 
 
 if __name__ == "__main__":
