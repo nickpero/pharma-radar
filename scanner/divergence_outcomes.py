@@ -1,4 +1,4 @@
-"""Pharma Radar — Divergence Outcomes V1.0.
+"""Pharma Radar — Divergence Outcomes V1.1.
 
 Research-only tracker for forward T+1/T+3/T+5 outcomes after a detected
 positive-catalyst / negative-market-reaction divergence.
@@ -46,6 +46,13 @@ def _date(value):
             return None
 
 
+def _num(value, default=None):
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
 def _pct(start, end):
     if start in (None, 0) or end is None:
         return None
@@ -54,6 +61,8 @@ def _pct(start, end):
 
 def _outcomes_for_event(event, points):
     event_date = _date(event.get("event_date") or event.get("event_timestamp"))
+    event_price = _num(event.get("event_price"))
+    event_price_timestamp = event.get("event_price_timestamp") or event.get("event_timestamp")
     if event_date is None:
         return None
     rows = sorted(
@@ -71,10 +80,15 @@ def _outcomes_for_event(event, points):
         return None
 
     entry_date, entry_close = event_rows[0]
+    anchor_price = event_price if event_price is not None and event_price > 0 else entry_close
     future = [(date, close) for date, close in rows if date > entry_date][:5]
     result = {
         "entry_date": entry_date.isoformat(),
         "entry_close": entry_close,
+        "event_price": anchor_price,
+        "event_price_source": "EVENT_INTRADAY" if event_price is not None and event_price > 0 else "DAILY_CLOSE_FALLBACK",
+        "event_price_timestamp": event_price_timestamp,
+        "event_to_close_pct": _pct(anchor_price, entry_close),
         "outcomes": {},
     }
     for n in FORWARD_DAYS:
@@ -83,14 +97,14 @@ def _outcomes_for_event(event, points):
             result["outcomes"][f"t{n}"] = {
                 "date": date.isoformat(),
                 "close": close,
-                "return_pct": _pct(entry_close, close),
+                "return_pct": _pct(anchor_price, close),
             }
 
     path = [close for _, close in future]
     result["max_favorable_pct"] = max((_pct(entry_close, close) for close in path), default=None)
     result["max_adverse_pct"] = min((_pct(entry_close, close) for close in path), default=None)
-    result["recovered_by_t5"] = bool(len(future) >= 5 and future[-1][1] > entry_close)
-    result["max_recovery"] = bool(path and max(path) > entry_close)
+    result["recovered_by_t5"] = bool(len(future) >= 5 and future[-1][1] > anchor_price)
+    result["max_recovery"] = bool(path and max(path) > anchor_price)
     return result
 
 
