@@ -152,6 +152,7 @@ def main():
             f"hist_win={alert.get('historical_edge_win_rate_1d', 'N/A')} "
             f"daily_pct={market_data.get('price_change_pct', 'N/A')} "
             f"market_source={alert.get('trading_intelligence_market_confirmation_source', 'N/A')} "
+            f"market_status={alert.get('trading_intelligence_market_status', 'N/A')} "
             f"reaction_source={alert.get('ti_market_reaction_source', 'N/A')} "
             f"market={market_checks} "
             f"WATCH_FAILED={failed_watch or []} "
