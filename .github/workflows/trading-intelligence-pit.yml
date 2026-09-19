@@ -70,6 +70,8 @@ jobs:
                   f"LOO_min_PF={loo['min_profit_factor']} "
                   f"LOO_all_positive_median={loo['all_leave_one_ticker_out_positive_median']}"
               )
+          h = p.get("temporal_holdout", {})
+          print("Temporal holdout:", h)
           print("======================================")
           if sample["events"] == 0:
               raise SystemExit("PIT replay returned zero events")
