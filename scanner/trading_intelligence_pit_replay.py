@@ -72,25 +72,40 @@ def build() -> dict[str, Any]:
 
     history: dict[str, list[float]] = defaultdict(list)
     rows: list[dict[str, Any]] = []
+    index = 0
 
-    for event in events:
-        subtype = str(event.get("subtype") or "UNKNOWN").upper()
-        prior = history[subtype]
-        n = len(prior)
-        med = median(prior) if prior else None
-        win = (sum(v > 0 for v in prior) / n) if n else None
-        row = {
-            "event_timestamp": _ts(event),
-            "ticker": event.get("ticker"),
-            "subtype": subtype,
-            "prior_subtype_sample": n,
-            "prior_subtype_median_net_1d_pct": med,
-            "prior_subtype_win_rate_1d": win,
-            "historical_edge_gate": _qualifies(n, med, win),
-        }
-        rows.append(row)
-        value = _return_1d(event)
-        if value is not None:
+    # Process equal-timestamp events as a batch so no event can see another
+    # event from the same timestamp as historical information.
+    while index < len(events):
+        timestamp = _ts(events[index])
+        batch: list[dict[str, Any]] = []
+        while index < len(events) and _ts(events[index]) == timestamp:
+            batch.append(events[index])
+            index += 1
+
+        batch_values: list[tuple[str, float]] = []
+        for event in batch:
+            subtype = str(event.get("subtype") or "UNKNOWN").upper()
+            prior = history[subtype]
+            n = len(prior)
+            med = median(prior) if prior else None
+            win = (sum(v > 0 for v in prior) / n) if n else None
+            rows.append(
+                {
+                    "event_timestamp": timestamp,
+                    "ticker": event.get("ticker"),
+                    "subtype": subtype,
+                    "prior_subtype_sample": n,
+                    "prior_subtype_median_net_1d_pct": med,
+                    "prior_subtype_win_rate_1d": win,
+                    "historical_edge_gate": _qualifies(n, med, win),
+                }
+            )
+            value = _return_1d(event)
+            if value is not None:
+                batch_values.append((subtype, value))
+
+        for subtype, value in batch_values:
             history[subtype].append(value)
 
     qualified = [r for r in rows if r["historical_edge_gate"]]
@@ -114,7 +129,7 @@ def build() -> dict[str, Any]:
             "minimum_sample": MIN_SAMPLE,
             "minimum_median_net_1d_pct": MIN_MEDIAN_NET_1D,
             "minimum_win_rate_1d": MIN_WIN_RATE_1D,
-            "lookahead_control": "Only strictly earlier events contribute to each event's subtype statistics.",
+            "lookahead_control": "Only strictly earlier timestamps contribute to each event's subtype statistics; equal-timestamp events are batched.",
             "warning": "This replays only the historical-edge gate; it is not a live trading backtest.",
         },
         "sample": {"events": len(rows), "qualified_historical_edge_events": len(qualified)},
