@@ -123,6 +123,46 @@ def get_market_snapshot(ticker, session=None):
         return None
 
 
+
+def get_daily_series(ticker, session=None, range_="3mo"):
+    """Return daily OHLCV points for a ticker, best effort."""
+    ticker = str(ticker or "").strip().upper()
+    if not ticker or ticker in {"UNKNOWN", "N/A"}:
+        return []
+    client = session or requests
+    try:
+        response = client.get(
+            YAHOO_CHART_URL.format(ticker=ticker),
+            params={"range": range_, "interval": "1d", "events": "history"},
+            timeout=REQUEST_TIMEOUT,
+            headers={"User-Agent": USER_AGENT},
+        )
+        response.raise_for_status()
+        result = response.json()["chart"]["result"][0]
+        timestamps = result.get("timestamp", [])
+        quote = result.get("indicators", {}).get("quote", [{}])[0]
+        closes = quote.get("close", [])
+        opens = quote.get("open", [])
+        highs = quote.get("high", [])
+        lows = quote.get("low", [])
+        volumes = quote.get("volume", [])
+        points = []
+        for i, timestamp in enumerate(timestamps):
+            close = _safe_float(closes[i]) if i < len(closes) else None
+            if close is None:
+                continue
+            points.append({
+                "date": datetime.fromtimestamp(int(timestamp), tz=timezone.utc).date(),
+                "open": _safe_float(opens[i]) if i < len(opens) else None,
+                "high": _safe_float(highs[i]) if i < len(highs) else None,
+                "low": _safe_float(lows[i]) if i < len(lows) else None,
+                "close": close,
+                "volume": _safe_float(volumes[i]) if i < len(volumes) else None,
+            })
+        return points
+    except (requests.RequestException, ValueError, TypeError, KeyError, IndexError, OverflowError):
+        return []
+
 def get_intraday_series(ticker, session=None, range_=INTRADAY_RANGE, interval=INTRADAY_INTERVAL):
     """Return timestamped intraday OHLCV points, best effort."""
     ticker = str(ticker or "").strip().upper()
