@@ -46,38 +46,69 @@ def _alert_summary_line(alert):
 
 
 def build_summary(result, intelligent_alerts=None):
-    alerts = result.get("alerts", []); errors = result.get("errors", []); detected_changes = result.get("detected_changes", [])
-    if intelligent_alerts is None: intelligent_alerts = select_intelligent_alerts(alerts)
+    alerts = result.get("alerts", [])
+    errors = result.get("errors", [])
+    detected_changes = result.get("detected_changes", [])
+    if intelligent_alerts is None:
+        intelligent_alerts = select_intelligent_alerts(alerts)
+
     qualified = sum(1 for alert in alerts if alert.get("trading_intelligence_qualified") is True)
     watched = sum(1 for alert in alerts if alert.get("trading_intelligence_watch") is True)
+
+    lines = [
+        "🧬 PHARMA RADAR — SCAN",
+        "━━━━━━━━━━━━━━━━━━",
+        f"🏢 Companies: {result.get('companies', 0)}",
+        f"🔬 Trials: {result.get('total_trials', 0)}",
+        f"🎯 Relevant: {result.get('relevant_trials', 0)}",
+        f"📰 FDA news: {len(result.get('fda_news', []))}",
+        f"🔄 Changes: {len(detected_changes)}",
+        f"🧠 TI Qualified: {qualified}",
+        f"👀 TI Watch: {watched}",
+        "",
+        f"🚨 NEW ACTIONABLE ALERTS: {len(intelligent_alerts)}",
+    ]
+
+    if errors:
+        lines.append(f"❌ Errors: {len(errors)}")
+
     if intelligent_alerts:
-        lines = ["🧬 PHARMA RADAR — SCAN", "━━━━━━━━━━━━━━━━━━", f"🏢 Companies: {result.get('companies', 0)}", f"🔬 Trials: {result.get('total_trials', 0)}", f"🎯 Relevant: {result.get('relevant_trials', 0)}", f"📰 FDA news: {len(result.get('fda_news', []))}", f"🔄 Changes: {len(detected_changes)}", f"🧠 TI Qualified: {qualified}", f"👀 TI Watch: {watched}", "", f"🚨 NEW ACTIONABLE ALERTS: {len(intelligent_alerts)}"]
-    else:
-        lines = ["🧬 PHARMA RADAR — SCAN", "━━━━━━━━━━━━━━━━━━", f"🏢 Companies: {result.get('companies', 0)}", f"🔬 Trials: {result.get('total_trials', 0)}", f"🎯 Relevant: {result.get('relevant_trials', 0)}", f"📰 FDA news: {len(result.get('fda_news', []))}", f"🔄 Changes: {len(detected_changes)}", f"🧠 TI Qualified: {qualified}", "", "🚨 NEW ACTIONABLE ALERTS: 0"]
-    if errors: lines.append(f"❌ Errors: {len(errors)}")
-    if intelligent_alerts:
-        lines.extend(["", "━━━━━━━━━━━━━━━━━━", "", f"🚨 {len(intelligent_alerts)} NEW PRIORITY ALERT" if len(intelligent_alerts) == 1 else f"🚨 {len(intelligent_alerts)} NEW PRIORITY ALERTS", ""])
+        lines.extend([
+            "", "━━━━━━━━━━━━━━━━━━", "",
+            f"🚨 {len(intelligent_alerts)} NEW PRIORITY ALERT" if len(intelligent_alerts) == 1 else f"🚨 {len(intelligent_alerts)} NEW PRIORITY ALERTS",
+            "",
+        ])
         for index, alert in enumerate(intelligent_alerts):
             lines.extend(_alert_summary_line(alert))
-            if index < len(intelligent_alerts) - 1: lines.extend(["", "──────────────", ""])
-    else: lines.extend(["", "━━━━━━━━━━━━━━━━━━", "", "🟢 NO NEW ACTIONABLE CATALYSTS"])
+            if index < len(intelligent_alerts) - 1:
+                lines.extend(["", "──────────────", ""])
+    else:
+        lines.extend(["", "━━━━━━━━━━━━━━━━━━", "", "🟢 NO NEW ACTIONABLE CATALYSTS"])
+
     if errors:
         lines.extend(["", "❌ ERRORS"])
-        for error in errors: lines.append(f"• {error.get('ticker', 'UNKNOWN')} — {error.get('program', 'UNKNOWN')}: {error.get('error', '')}")
+        for error in errors:
+            lines.append(f"• {error.get('ticker', 'UNKNOWN')} — {error.get('program', 'UNKNOWN')}: {error.get('error', '')}")
+
     lines.extend(["", "━━━━━━━━━━━━━━━━━━"])
     return "\n".join(lines)
 
 
 def _new_telegram_alerts(result):
-    intelligent_alerts = select_intelligent_alerts(result.get("alerts", [])); state = load_sent_alerts()
+    intelligent_alerts = select_intelligent_alerts(result.get("alerts", []))
+    state = load_sent_alerts()
     return filter_unsent(intelligent_alerts, state, lambda alert: repr(_dedup_key(alert)))
 
 
 def send_alerts(result, alerts=None):
     alerts = _new_telegram_alerts(result) if alerts is None else alerts
-    if not alerts: return []
-    responses = send_catalyst_alerts(alerts); state = load_sent_alerts(); timestamp = datetime.now(timezone.utc).isoformat()
-    mark_sent(alerts, state, lambda alert: repr(_dedup_key(alert)), timestamp); save_sent_alerts(state)
+    if not alerts:
+        return []
+    responses = send_catalyst_alerts(alerts)
+    state = load_sent_alerts()
+    timestamp = datetime.now(timezone.utc).isoformat()
+    mark_sent(alerts, state, lambda alert: repr(_dedup_key(alert)), timestamp)
+    save_sent_alerts(state)
     return responses
 
 
@@ -91,15 +122,33 @@ def main():
     result = scan()
     result["alerts"] = enrich_trading_intelligence_scores(result.get("alerts", []))
     result["alerts"] = enrich_trading_intelligence_rules(result["alerts"])
+
     qualified = sum(1 for alert in result["alerts"] if alert.get("trading_intelligence_qualified") is True)
-    print(f"Trading Intelligence Rule V1.0: {qualified}/{len(result['alerts'])} alerts qualified")
+    watched = sum(1 for alert in result["alerts"] if alert.get("trading_intelligence_watch") is True)
+    rule_version = next(
+        (alert.get("trading_intelligence_rule_version") for alert in result["alerts"] if alert.get("trading_intelligence_rule_version")),
+        "1.1",
+    )
+    print(f"Trading Intelligence Rule V{rule_version}: {qualified}/{len(result['alerts'])} alerts qualified")
+    print(f"Trading Intelligence Watch V{rule_version}: {watched}/{len(result['alerts'])} alerts watched")
+
     record_events(result["alerts"])
     new_alerts = _new_telegram_alerts(result)
     if new_alerts:
-        summary = build_summary(result, intelligent_alerts=new_alerts); print(); print(summary); send_telegram(summary)
-    sent = send_alerts(result, alerts=new_alerts); print(f"Telegram catalyst alerts sent: {len(sent)}")
-    sent = send_email_alerts(result); print(f"Pharma Intelligence emails sent: {sent}")
-    if not new_alerts: print(); print(build_summary(result, intelligent_alerts=[]))
+        summary = build_summary(result, intelligent_alerts=new_alerts)
+        print()
+        print(summary)
+        send_telegram(summary)
+
+    sent = send_alerts(result, alerts=new_alerts)
+    print(f"Telegram catalyst alerts sent: {len(sent)}")
+    sent = send_email_alerts(result)
+    print(f"Pharma Intelligence emails sent: {sent}")
+
+    if not new_alerts:
+        print()
+        print(build_summary(result, intelligent_alerts=[]))
 
 
-if __name__ == "__main__": main()
+if __name__ == "__main__":
+    main()
