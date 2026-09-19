@@ -69,6 +69,9 @@
   "events": [
     {
       "event_timestamp": "2015-08-27",
+      "forward_1d_net_pct": 1.5858414589679073,
+      "forward_3d_net_pct": 0.9742910092024777,
+      "forward_5d_net_pct": 1.0088171247392472,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -87,6 +90,9 @@
     },
     {
       "event_timestamp": "2017-07-13",
+      "forward_1d_net_pct": -1.6329442090375677,
+      "forward_3d_net_pct": -2.9063947611915104,
+      "forward_5d_net_pct": -1.5327372870525544,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -105,6 +111,9 @@
     },
     {
       "event_timestamp": "2018-04-20",
+      "forward_1d_net_pct": -1.742397874267809,
+      "forward_3d_net_pct": -3.3376529982857,
+      "forward_5d_net_pct": -1.8835773079553861,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -123,6 +132,9 @@
     },
     {
       "event_timestamp": "2018-05-25",
+      "forward_1d_net_pct": -0.4210564280934134,
+      "forward_3d_net_pct": 0.721465817225442,
+      "forward_5d_net_pct": -0.6405681139959649,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -141,6 +153,9 @@
     },
     {
       "event_timestamp": "2019-08-19",
+      "forward_1d_net_pct": 13.757585440449937,
+      "forward_3d_net_pct": 18.55658322751953,
+      "forward_5d_net_pct": 18.383113610248714,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -159,6 +174,9 @@
     },
     {
       "event_timestamp": "2019-09-30",
+      "forward_1d_net_pct": -0.35662687616238004,
+      "forward_3d_net_pct": 3.3788394840140628,
+      "forward_5d_net_pct": 2.733697138591052,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -177,6 +195,9 @@
     },
     {
       "event_timestamp": "2020-11-12",
+      "forward_1d_net_pct": 0.8175374796155268,
+      "forward_3d_net_pct": 3.6413334524364465,
+      "forward_5d_net_pct": 1.0964796437691662,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -195,6 +216,9 @@
     },
     {
       "event_timestamp": "2020-11-13",
+      "forward_1d_net_pct": -0.04487902885742495,
+      "forward_3d_net_pct": -2.2081486082864306,
+      "forward_5d_net_pct": -1.9721691425956254,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -213,6 +237,9 @@
     },
     {
       "event_timestamp": "2020-12-18",
+      "forward_1d_net_pct": 3.9537736423833403,
+      "forward_3d_net_pct": 4.916050109789706,
+      "forward_5d_net_pct": -1.357719547784075,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -231,6 +258,9 @@
     },
     {
       "event_timestamp": "2021-09-29",
+      "forward_1d_net_pct": 6.331552450308354,
+      "forward_3d_net_pct": -3.898547149682718,
+      "forward_5d_net_pct": -4.283072081242789,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -249,6 +279,9 @@
     },
     {
       "event_timestamp": "2021-12-17",
+      "forward_1d_net_pct": 1.3290347968328067,
+      "forward_3d_net_pct": 0.8311588298117292,
+      "forward_5d_net_pct": -4.790228432219512,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -267,6 +300,9 @@
     },
     {
       "event_timestamp": "2021-12-17",
+      "forward_1d_net_pct": 8.327259816602126,
+      "forward_3d_net_pct": 11.586108217533907,
+      "forward_5d_net_pct": 12.354164309838321,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -285,6 +321,9 @@
     },
     {
       "event_timestamp": "2022-01-21",
+      "forward_1d_net_pct": 4.378215724696056,
+      "forward_3d_net_pct": -1.2054693733560826,
+      "forward_5d_net_pct": -4.827791739138475,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -303,6 +342,9 @@
     },
     {
       "event_timestamp": "2022-02-28",
+      "forward_1d_net_pct": -0.8919909672535085,
+      "forward_3d_net_pct": -6.008890380747133,
+      "forward_5d_net_pct": -6.825414203383905,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -321,6 +363,9 @@
     },
     {
       "event_timestamp": "2022-02-28",
+      "forward_1d_net_pct": -0.8919909672535085,
+      "forward_3d_net_pct": -6.008890380747133,
+      "forward_5d_net_pct": -6.825414203383905,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -339,6 +384,9 @@
     },
     {
       "event_timestamp": "2022-04-01",
+      "forward_1d_net_pct": 0.3261182911105667,
+      "forward_3d_net_pct": 15.258021351712046,
+      "forward_5d_net_pct": 21.091157810408934,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -357,6 +405,9 @@
     },
     {
       "event_timestamp": "2022-06-13",
+      "forward_1d_net_pct": 4.099637042282567,
+      "forward_3d_net_pct": 4.249041679212795,
+      "forward_5d_net_pct": -2.0324342071988175,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -375,6 +426,9 @@
     },
     {
       "event_timestamp": "2023-01-18",
+      "forward_1d_net_pct": -1.073333569490453,
+      "forward_3d_net_pct": 4.092789269731024,
+      "forward_5d_net_pct": 3.9849232320133714,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -393,6 +447,9 @@
     },
     {
       "event_timestamp": "2023-02-16",
+      "forward_1d_net_pct": -1.357453218531923,
+      "forward_3d_net_pct": -7.483727235037507,
+      "forward_5d_net_pct": -10.084628954631837,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -411,6 +468,9 @@
     },
     {
       "event_timestamp": "2023-03-13",
+      "forward_1d_net_pct": 4.552117852705473,
+      "forward_3d_net_pct": 1.96088713192365,
+      "forward_5d_net_pct": 5.235388691542032,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -429,6 +489,9 @@
     },
     {
       "event_timestamp": "2023-03-30",
+      "forward_1d_net_pct": 0.9610910074772441,
+      "forward_3d_net_pct": -3.1834534569190938,
+      "forward_5d_net_pct": -5.4549048657097305,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -447,6 +510,9 @@
     },
     {
       "event_timestamp": "2023-04-24",
+      "forward_1d_net_pct": -0.6752830101793392,
+      "forward_3d_net_pct": -0.6634216757728015,
+      "forward_5d_net_pct": 2.54146893632532,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -465,6 +531,9 @@
     },
     {
       "event_timestamp": "2023-06-20",
+      "forward_1d_net_pct": -0.23077006701870378,
+      "forward_3d_net_pct": 1.354335022846387,
+      "forward_5d_net_pct": -0.2197220584425505,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -483,6 +552,9 @@
     },
     {
       "event_timestamp": "2023-06-27",
+      "forward_1d_net_pct": 3.2210812807904725,
+      "forward_3d_net_pct": -0.30445553086021454,
+      "forward_5d_net_pct": -0.4344417068738668,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -501,6 +573,9 @@
     },
     {
       "event_timestamp": "2023-09-28",
+      "forward_1d_net_pct": 0.027803901127565755,
+      "forward_3d_net_pct": -1.1273928619030535,
+      "forward_5d_net_pct": -1.9504976661623872,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -519,6 +594,9 @@
     },
     {
       "event_timestamp": "2023-12-12",
+      "forward_1d_net_pct": -3.1796318861813218,
+      "forward_3d_net_pct": -5.051902719541556,
+      "forward_5d_net_pct": -8.32803114255104,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -537,6 +615,9 @@
     },
     {
       "event_timestamp": "2023-12-12",
+      "forward_1d_net_pct": -3.1796318861813218,
+      "forward_3d_net_pct": -5.051902719541556,
+      "forward_5d_net_pct": -8.32803114255104,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -555,6 +636,9 @@
     },
     {
       "event_timestamp": "2024-03-13",
+      "forward_1d_net_pct": 3.869548740968976,
+      "forward_3d_net_pct": -2.4718619900756407,
+      "forward_5d_net_pct": -1.1108539302962293,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -573,6 +657,9 @@
     },
     {
       "event_timestamp": "2024-03-13",
+      "forward_1d_net_pct": 3.869548740968976,
+      "forward_3d_net_pct": -2.4718619900756407,
+      "forward_5d_net_pct": -1.1108539302962293,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -591,6 +678,9 @@
     },
     {
       "event_timestamp": "2024-03-22",
+      "forward_1d_net_pct": -0.6154345912131041,
+      "forward_3d_net_pct": 1.2401148806160835,
+      "forward_5d_net_pct": -0.20404925110965005,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -609,6 +699,9 @@
     },
     {
       "event_timestamp": "2024-03-22",
+      "forward_1d_net_pct": -0.6154345912131041,
+      "forward_3d_net_pct": 1.2401148806160835,
+      "forward_5d_net_pct": -0.20404925110965005,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -627,6 +720,9 @@
     },
     {
       "event_timestamp": "2024-06-14",
+      "forward_1d_net_pct": 1.4549032239143058,
+      "forward_3d_net_pct": 2.2930633668432407,
+      "forward_5d_net_pct": -8.19510339827233,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -645,6 +741,9 @@
     },
     {
       "event_timestamp": "2024-06-18",
+      "forward_1d_net_pct": -0.5375289996029429,
+      "forward_3d_net_pct": 3.398578093661831,
+      "forward_5d_net_pct": 2.5984788879733216,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -663,6 +762,9 @@
     },
     {
       "event_timestamp": "2024-06-21",
+      "forward_1d_net_pct": 9.919454775833103,
+      "forward_3d_net_pct": 12.938344257803857,
+      "forward_5d_net_pct": 8.35994192694177,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -681,6 +783,9 @@
     },
     {
       "event_timestamp": "2024-06-21",
+      "forward_1d_net_pct": 9.919454775833103,
+      "forward_3d_net_pct": 12.938344257803857,
+      "forward_5d_net_pct": 8.35994192694177,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -699,6 +804,9 @@
     },
     {
       "event_timestamp": "2024-07-10",
+      "forward_1d_net_pct": 4.364101193409365,
+      "forward_3d_net_pct": 5.275019421032012,
+      "forward_5d_net_pct": 9.352717333629855,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -717,6 +825,9 @@
     },
     {
       "event_timestamp": "2024-07-24",
+      "forward_1d_net_pct": 2.4724364428589833,
+      "forward_3d_net_pct": 5.928579659366052,
+      "forward_5d_net_pct": 10.772498690133691,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -735,6 +846,9 @@
     },
     {
       "event_timestamp": "2024-07-24",
+      "forward_1d_net_pct": 1.0685522495112012,
+      "forward_3d_net_pct": 6.0854163092821105,
+      "forward_5d_net_pct": 3.4678810765750194,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -753,6 +867,9 @@
     },
     {
       "event_timestamp": "2024-07-24",
+      "forward_1d_net_pct": 1.0685522495112012,
+      "forward_3d_net_pct": 6.0854163092821105,
+      "forward_5d_net_pct": 3.4678810765750194,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -771,6 +888,9 @@
     },
     {
       "event_timestamp": "2024-08-08",
+      "forward_1d_net_pct": 0.9840254788957894,
+      "forward_3d_net_pct": -1.2503003270954658,
+      "forward_5d_net_pct": -3.2192609028950154,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -789,6 +909,9 @@
     },
     {
       "event_timestamp": "2024-08-08",
+      "forward_1d_net_pct": 0.9840254788957894,
+      "forward_3d_net_pct": -1.2503003270954658,
+      "forward_5d_net_pct": -3.2192609028950154,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -807,6 +930,9 @@
     },
     {
       "event_timestamp": "2024-08-20",
+      "forward_1d_net_pct": 1.25975836635438,
+      "forward_3d_net_pct": -0.20350711313762399,
+      "forward_5d_net_pct": -0.8613226046431441,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -825,6 +951,9 @@
     },
     {
       "event_timestamp": "2024-10-10",
+      "forward_1d_net_pct": -0.5944634004353075,
+      "forward_3d_net_pct": 1.6442285098660194,
+      "forward_5d_net_pct": -4.490761665094533,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -843,6 +972,9 @@
     },
     {
       "event_timestamp": "2024-11-08",
+      "forward_1d_net_pct": -0.6046483743024964,
+      "forward_3d_net_pct": 8.274110098441934,
+      "forward_5d_net_pct": 17.50686207922304,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -861,6 +993,9 @@
     },
     {
       "event_timestamp": "2024-11-20",
+      "forward_1d_net_pct": -6.587859366740511,
+      "forward_3d_net_pct": -6.556149776334563,
+      "forward_5d_net_pct": -7.565131737157437,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -879,6 +1014,9 @@
     },
     {
       "event_timestamp": "2024-12-20",
+      "forward_1d_net_pct": 1.0454697351914735,
+      "forward_3d_net_pct": 1.5671083769239649,
+      "forward_5d_net_pct": 1.7463640853037312,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -897,6 +1035,9 @@
     },
     {
       "event_timestamp": "2025-01-15",
+      "forward_1d_net_pct": 1.492718952010952,
+      "forward_3d_net_pct": 2.421047333034432,
+      "forward_5d_net_pct": -0.03491289297888861,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -915,6 +1056,9 @@
     },
     {
       "event_timestamp": "2025-01-30",
+      "forward_1d_net_pct": 5.940305087535214,
+      "forward_3d_net_pct": 10.746116158776632,
+      "forward_5d_net_pct": 9.635390471001948,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -933,6 +1077,9 @@
     },
     {
       "event_timestamp": "2025-03-11",
+      "forward_1d_net_pct": 0.10831839306421093,
+      "forward_3d_net_pct": -0.14910596779816848,
+      "forward_5d_net_pct": 2.028892280583017,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -951,6 +1098,9 @@
     },
     {
       "event_timestamp": "2025-03-20",
+      "forward_1d_net_pct": 10.83707176771803,
+      "forward_3d_net_pct": 9.944594749614499,
+      "forward_5d_net_pct": 7.814311178233514,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -969,6 +1119,9 @@
     },
     {
       "event_timestamp": "2025-04-10",
+      "forward_1d_net_pct": 2.2580654605883215,
+      "forward_3d_net_pct": 3.645377634987568,
+      "forward_5d_net_pct": 2.817490842806613,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -987,6 +1140,9 @@
     },
     {
       "event_timestamp": "2025-04-10",
+      "forward_1d_net_pct": -2.922477294003045,
+      "forward_3d_net_pct": -8.437064514317372,
+      "forward_5d_net_pct": -6.383802438761876,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1005,6 +1161,9 @@
     },
     {
       "event_timestamp": "2025-04-25",
+      "forward_1d_net_pct": 7.63819307390089,
+      "forward_3d_net_pct": 10.511288962244414,
+      "forward_5d_net_pct": 4.281751035585757,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1023,6 +1182,9 @@
     },
     {
       "event_timestamp": "2025-05-15",
+      "forward_1d_net_pct": 7.237961328051712,
+      "forward_3d_net_pct": -3.8987770023291795,
+      "forward_5d_net_pct": 2.420795522155728,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1041,6 +1203,9 @@
     },
     {
       "event_timestamp": "2025-07-02",
+      "forward_1d_net_pct": -0.9000962316766279,
+      "forward_3d_net_pct": -0.20381962594706565,
+      "forward_5d_net_pct": -2.339510057929239,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1059,6 +1224,9 @@
     },
     {
       "event_timestamp": "2025-07-07",
+      "forward_1d_net_pct": 1.531677775375684,
+      "forward_3d_net_pct": 27.091570300178404,
+      "forward_5d_net_pct": 31.516889908081534,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1077,6 +1245,9 @@
     },
     {
       "event_timestamp": "2025-07-09",
+      "forward_1d_net_pct": 0.455531954044153,
+      "forward_3d_net_pct": 35.44417930177216,
+      "forward_5d_net_pct": 36.24554855343349,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1095,6 +1266,9 @@
     },
     {
       "event_timestamp": "2025-07-30",
+      "forward_1d_net_pct": 2.772788565622886,
+      "forward_3d_net_pct": -5.619959593322898,
+      "forward_5d_net_pct": 2.9432404041337072,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1113,6 +1287,9 @@
     },
     {
       "event_timestamp": "2025-07-30",
+      "forward_1d_net_pct": 0.6719517521714071,
+      "forward_3d_net_pct": -2.6856191250814394,
+      "forward_5d_net_pct": -0.5267236769239456,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1131,6 +1308,9 @@
     },
     {
       "event_timestamp": "2025-08-12",
+      "forward_1d_net_pct": -2.578137629778154,
+      "forward_3d_net_pct": 0.1282814701976001,
+      "forward_5d_net_pct": 1.8075769681517364,
       "gate_failure_reason": "WARMUP_SAMPLE",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1149,6 +1329,9 @@
     },
     {
       "event_timestamp": "2025-09-22",
+      "forward_1d_net_pct": 0.11505177941714156,
+      "forward_3d_net_pct": 1.7676039559558767,
+      "forward_5d_net_pct": 3.3796703902931218,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1167,6 +1350,9 @@
     },
     {
       "event_timestamp": "2025-09-25",
+      "forward_1d_net_pct": -1.4668264238063442,
+      "forward_3d_net_pct": -2.268964543571183,
+      "forward_5d_net_pct": -0.2554160297230876,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1185,6 +1371,9 @@
     },
     {
       "event_timestamp": "2025-10-10",
+      "forward_1d_net_pct": -0.009652823330263682,
+      "forward_3d_net_pct": 2.5644517405392424,
+      "forward_5d_net_pct": 2.187164124819663,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1203,6 +1392,9 @@
     },
     {
       "event_timestamp": "2025-10-17",
+      "forward_1d_net_pct": -1.8110246299703257,
+      "forward_3d_net_pct": -3.3502107983407132,
+      "forward_5d_net_pct": -3.969413271352406,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1221,6 +1413,9 @@
     },
     {
       "event_timestamp": "2025-10-17",
+      "forward_1d_net_pct": -1.8110246299703257,
+      "forward_3d_net_pct": -3.3502107983407132,
+      "forward_5d_net_pct": -3.969413271352406,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1239,6 +1434,9 @@
     },
     {
       "event_timestamp": "2026-01-23",
+      "forward_1d_net_pct": 1.6402791641312977,
+      "forward_3d_net_pct": 3.368243127251525,
+      "forward_5d_net_pct": 2.5875997254128706,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1257,6 +1455,9 @@
     },
     {
       "event_timestamp": "2026-02-07",
+      "forward_1d_net_pct": 13.25042707133971,
+      "forward_3d_net_pct": 16.38730013084324,
+      "forward_5d_net_pct": 20.543881043705035,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1275,6 +1476,9 @@
     },
     {
       "event_timestamp": "2026-02-13",
+      "forward_1d_net_pct": 2.2770239899197247,
+      "forward_3d_net_pct": 0.017157443258575544,
+      "forward_5d_net_pct": -4.34109188508146,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1293,6 +1497,9 @@
     },
     {
       "event_timestamp": "2026-02-26",
+      "forward_1d_net_pct": -0.6625427924280445,
+      "forward_3d_net_pct": 0.009761256330309831,
+      "forward_5d_net_pct": -2.9748611279685977,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1311,6 +1518,9 @@
     },
     {
       "event_timestamp": "2026-03-17",
+      "forward_1d_net_pct": -0.1767341600081293,
+      "forward_3d_net_pct": 0.9885356845626305,
+      "forward_5d_net_pct": 0.44528120878190053,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1329,6 +1539,9 @@
     },
     {
       "event_timestamp": "2026-03-27",
+      "forward_1d_net_pct": 2.7071886379704373,
+      "forward_3d_net_pct": -4.515664021527021,
+      "forward_5d_net_pct": -7.717304433599492,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1347,6 +1560,9 @@
     },
     {
       "event_timestamp": "2026-04-10",
+      "forward_1d_net_pct": -4.924985760069533,
+      "forward_3d_net_pct": 3.9771134000010537,
+      "forward_5d_net_pct": 4.933182095195499,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1365,6 +1581,9 @@
     },
     {
       "event_timestamp": "2026-04-22",
+      "forward_1d_net_pct": -2.578178634452721,
+      "forward_3d_net_pct": -1.853647533303204,
+      "forward_5d_net_pct": -8.115602572574899,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1383,6 +1602,9 @@
     },
     {
       "event_timestamp": "2026-05-08",
+      "forward_1d_net_pct": 3.6477138055687313,
+      "forward_3d_net_pct": 1.4784910523402697,
+      "forward_5d_net_pct": 4.876812421429189,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1401,6 +1623,9 @@
     },
     {
       "event_timestamp": "2026-05-08",
+      "forward_1d_net_pct": 3.6477138055687313,
+      "forward_3d_net_pct": 1.4784910523402697,
+      "forward_5d_net_pct": 4.876812421429189,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1419,6 +1644,9 @@
     },
     {
       "event_timestamp": "2026-07-31",
+      "forward_1d_net_pct": -0.9485861298125007,
+      "forward_3d_net_pct": -3.6011587146877018,
+      "forward_5d_net_pct": -4.497792633438446,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1437,6 +1665,9 @@
     },
     {
       "event_timestamp": "2026-08-25",
+      "forward_1d_net_pct": 6.799892193542301,
+      "forward_3d_net_pct": 6.58625263947702,
+      "forward_5d_net_pct": 11.079533395341123,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1455,6 +1686,9 @@
     },
     {
       "event_timestamp": "2026-08-25",
+      "forward_1d_net_pct": 6.799892193542301,
+      "forward_3d_net_pct": 6.58625263947702,
+      "forward_5d_net_pct": 11.079533395341123,
       "gate_failure_reason": "MEDIAN",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1473,6 +1707,9 @@
     },
     {
       "event_timestamp": "2026-08-26",
+      "forward_1d_net_pct": 2.445405597418005,
+      "forward_3d_net_pct": -1.3834875643653153,
+      "forward_5d_net_pct": -1.3890179499068231,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1491,6 +1728,9 @@
     },
     {
       "event_timestamp": "2026-09-03",
+      "forward_1d_net_pct": -0.02205090030963336,
+      "forward_3d_net_pct": -0.8880637891883534,
+      "forward_5d_net_pct": -2.067230058391057,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1509,6 +1749,9 @@
     },
     {
       "event_timestamp": "2026-09-11",
+      "forward_1d_net_pct": 3.1438293003687505,
+      "forward_3d_net_pct": 5.776210067042509,
+      "forward_5d_net_pct": 10.881707159753217,
       "gate_failure_reason": "BOTH",
       "gate_result": false,
       "historical_edge_gate": false,
@@ -1534,6 +1777,7 @@
     "WIN_RATE": 0
   },
   "methodology": {
+    "forward_validation": "Each event is selected using only strictly prior history; its own 1D/3D/5D market outcome is evaluated afterward.",
     "friction_bps": 30.0,
     "lookahead_control": "Only strictly earlier timestamps contribute; equal-timestamp events are batched.",
     "sensitivity_median_thresholds_pct": [
@@ -1575,9 +1819,9 @@
         "win_rate": 0.55
       }
     ],
-    "warning": "Research-only; not a live trading backtest."
+    "warning": "Research-only; forward outcome validation is not a live trading backtest."
   },
-  "purpose": "point-in-time historical-edge replay with warm-up diagnostics and median-threshold sensitivity",
+  "purpose": "point-in-time historical-edge replay with warm-up diagnostics, threshold sensitivity, and forward outcome validation",
   "sample": {
     "events": 81,
     "qualified_historical_edge_events": 0
@@ -1589,6 +1833,26 @@
         "LABEL_EXPANSION": 18
       },
       "evaluated_events": 49,
+      "forward_outcomes": {
+        "1D": {
+          "mean_pct": 1.6653,
+          "median_pct": 0.672,
+          "n": 27,
+          "win_rate": 0.6296
+        },
+        "3D": {
+          "mean_pct": 2.6897,
+          "median_pct": 0.9885,
+          "n": 27,
+          "win_rate": 0.5926
+        },
+        "5D": {
+          "mean_pct": 3.4274,
+          "median_pct": 2.1872,
+          "n": 27,
+          "win_rate": 0.5926
+        }
+      },
       "median_threshold_pct": 0.5,
       "qualified_events": 27,
       "win_rate_threshold": 0.55
@@ -1599,6 +1863,26 @@
         "LABEL_EXPANSION": 18
       },
       "evaluated_events": 49,
+      "forward_outcomes": {
+        "1D": {
+          "mean_pct": 1.7573,
+          "median_pct": 0.984,
+          "n": 19,
+          "win_rate": 0.6316
+        },
+        "3D": {
+          "mean_pct": 3.0562,
+          "median_pct": 0.9885,
+          "n": 19,
+          "win_rate": 0.5789
+        },
+        "5D": {
+          "mean_pct": 3.7651,
+          "median_pct": 2.0289,
+          "n": 19,
+          "win_rate": 0.5789
+        }
+      },
       "median_threshold_pct": 0.75,
       "qualified_events": 19,
       "win_rate_threshold": 0.55
@@ -1608,6 +1892,26 @@
         "LABEL_EXPANSION": 13
       },
       "evaluated_events": 49,
+      "forward_outcomes": {
+        "1D": {
+          "mean_pct": 1.6513,
+          "median_pct": 0.1083,
+          "n": 13,
+          "win_rate": 0.5385
+        },
+        "3D": {
+          "mean_pct": 1.5251,
+          "median_pct": -0.1491,
+          "n": 13,
+          "win_rate": 0.4615
+        },
+        "5D": {
+          "mean_pct": 2.3247,
+          "median_pct": -0.2554,
+          "n": 13,
+          "win_rate": 0.4615
+        }
+      },
       "median_threshold_pct": 1.0,
       "qualified_events": 13,
       "win_rate_threshold": 0.55
@@ -1617,6 +1921,26 @@
         "LABEL_EXPANSION": 2
       },
       "evaluated_events": 49,
+      "forward_outcomes": {
+        "1D": {
+          "mean_pct": 0.984,
+          "median_pct": 0.984,
+          "n": 2,
+          "win_rate": 1.0
+        },
+        "3D": {
+          "mean_pct": -1.2503,
+          "median_pct": -1.2503,
+          "n": 2,
+          "win_rate": 0.0
+        },
+        "5D": {
+          "mean_pct": -3.2193,
+          "median_pct": -3.2193,
+          "n": 2,
+          "win_rate": 0.0
+        }
+      },
       "median_threshold_pct": 1.25,
       "qualified_events": 2,
       "win_rate_threshold": 0.55
@@ -1626,6 +1950,26 @@
         "LABEL_EXPANSION": 2
       },
       "evaluated_events": 49,
+      "forward_outcomes": {
+        "1D": {
+          "mean_pct": 0.984,
+          "median_pct": 0.984,
+          "n": 2,
+          "win_rate": 1.0
+        },
+        "3D": {
+          "mean_pct": -1.2503,
+          "median_pct": -1.2503,
+          "n": 2,
+          "win_rate": 0.0
+        },
+        "5D": {
+          "mean_pct": -3.2193,
+          "median_pct": -3.2193,
+          "n": 2,
+          "win_rate": 0.0
+        }
+      },
       "median_threshold_pct": 1.5,
       "qualified_events": 2,
       "win_rate_threshold": 0.55
@@ -1633,10 +1977,30 @@
     "2.00": {
       "by_subtype": {},
       "evaluated_events": 49,
+      "forward_outcomes": {
+        "1D": {
+          "mean_pct": null,
+          "median_pct": null,
+          "n": 0,
+          "win_rate": null
+        },
+        "3D": {
+          "mean_pct": null,
+          "median_pct": null,
+          "n": 0,
+          "win_rate": null
+        },
+        "5D": {
+          "mean_pct": null,
+          "median_pct": null,
+          "n": 0,
+          "win_rate": null
+        }
+      },
       "median_threshold_pct": 2.0,
       "qualified_events": 0,
       "win_rate_threshold": 0.55
     }
   },
-  "version": "1.3"
+  "version": "1.4"
 }
