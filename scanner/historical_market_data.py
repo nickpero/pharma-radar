@@ -33,8 +33,7 @@ class YahooDailyProvider:
         self.timeout = timeout
         self.session = session or requests.Session()
         self._cache: dict[tuple[str, date, date], dict[str, dict[str, Any]]] = {}
-        self._symbol_cache: dict[str, dict[str, dict[str, Any]]] = {}
-
+        self._symbol_cache: dict[str, dict[str, dict[str, Any]]] = {}\n        self._chunk_source: dict[tuple[str, str], str] = {}\n        self._source_counts: dict[str, int] = {"Yahoo": 0, "Stooq": 0, "Failed": 0}\n
     @staticmethod
     def _date(value: Any) -> date | None:
         if value is None:
@@ -57,10 +56,12 @@ class YahooDailyProvider:
 
     @staticmethod
     def _chunks(start: date, end: date):
-        cursor = date(start.year, 1, 1)
+        """Yield fixed 5-year blocks so nearby events share the same cache."""
+        cursor_year = (start.year // CHUNK_YEARS) * CHUNK_YEARS
+        cursor = date(cursor_year, 1, 1)
         while cursor <= end:
             chunk_end = date(cursor.year + CHUNK_YEARS - 1, 12, 31)
-            yield max(cursor, start), min(chunk_end, end)
+            yield cursor, chunk_end
             cursor = date(cursor.year + CHUNK_YEARS, 1, 1)
 
     def _request(self, method: str, url: str, **kwargs):
@@ -132,12 +133,21 @@ class YahooDailyProvider:
         return rows
 
     def _fetch_chunk(self, symbol: str, start: date, end: date) -> dict[str, dict[str, Any]]:
+        chunk_key = f"{start.isoformat()}:{end.isoformat()}"
         try:
-            return self._fetch_yahoo_chunk(symbol, start, end)
+            rows = self._fetch_yahoo_chunk(symbol, start, end)
+            self._chunk_source[(symbol, chunk_key)] = "Yahoo"
+            self._source_counts["Yahoo"] += 1
+            return rows
         except Exception as yahoo_error:
             try:
-                return self._fetch_stooq_chunk(symbol, start, end)
+                rows = self._fetch_stooq_chunk(symbol, start, end)
+                self._chunk_source[(symbol, chunk_key)] = "Stooq"
+                self._source_counts["Stooq"] += 1
+                return rows
             except Exception as stooq_error:
+                self._chunk_source[(symbol, chunk_key)] = "Failed"
+                self._source_counts["Failed"] += 1
                 raise RuntimeError(
                     f"No market data for {symbol} {start}..{end}; "
                     f"Yahoo={yahoo_error}; Stooq={stooq_error}"
@@ -191,6 +201,20 @@ class YahooDailyProvider:
             event_date + timedelta(days=10),
         )
         return self._window_bars(rows, event_date)
+
+    def source_for(self, symbol: str, event_date: date | None) -> str:
+        if event_date is None:
+            return "UNKNOWN"
+        year = (event_date.year // CHUNK_YEARS) * CHUNK_YEARS
+        start = date(year, 1, 1)
+        end = date(year + CHUNK_YEARS - 1, 12, 31)
+        return self._chunk_source.get((str(symbol).upper().strip(), f"{start.isoformat()}:{end.isoformat()}"), "UNKNOWN")
+
+    def stats(self) -> dict[str, Any]:
+        return {
+            "source_chunks": dict(self._source_counts),
+            "cached_chunks": sum(len(chunks) for chunks in self._symbol_cache.values()),
+        }
 
     @staticmethod
     def _window_bars(rows: Mapping[str, Mapping[str, Any]], event_date: date) -> dict[str, dict[str, Any]]:
