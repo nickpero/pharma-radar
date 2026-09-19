@@ -131,6 +131,11 @@ def main():
     )
     print(f"Trading Intelligence Rule V{rule_version}: {qualified}/{len(result['alerts'])} alerts qualified")
     print(f"Trading Intelligence Watch V{rule_version}: {watched}/{len(result['alerts'])} alerts watched")
+    for alert in result["alerts"]:
+        ticker = str(alert.get("ticker", "UNKNOWN")).upper()
+        failed_watch = alert.get("trading_intelligence_watch_failed", [])
+        failed_rule = alert.get("trading_intelligence_rule_failed", [])
+        print(f"TI diagnostics {ticker}: WATCH_FAILED={failed_watch or []} RULE_FAILED={failed_rule or []}")
 
     record_events(result["alerts"])
     new_alerts = _new_telegram_alerts(result)
