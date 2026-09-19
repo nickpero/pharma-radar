@@ -245,9 +245,40 @@ def format_catalyst_alert(alert):
     return "\n".join(str(line) for line in lines)
 
 
+def format_divergence_alert(divergence):
+    """Create a non-operational alert for strong catalyst/market divergence."""
+    ticker = _clean_text(divergence.get("ticker", "UNKNOWN"), 20).upper()
+    program = _clean_text(divergence.get("program", "UNKNOWN"), 80)
+    daily_pct = _num(divergence.get("daily_pct"))
+    catalyst = divergence.get("catalyst_score", "N/A")
+    ti = divergence.get("trading_intelligence_score", "N/A")
+    edge = divergence.get("historical_edge_median_1d_pct", "N/A")
+    win = divergence.get("historical_edge_win_rate_1d")
+    win_text = f"{float(win) * 100:.1f}%" if win is not None else "N/A"
+    return "\n".join([
+        "⚠️ PHARMA RADAR — DIVERGENCE",
+        "━━━━━━━━━━━━━━━━━━",
+        f"🧬 {ticker}",
+        f"💊 {program}",
+        "",
+        "📈 Positive catalyst / 📉 negative market reaction",
+        f"🎯 Catalyst: {catalyst}/100",
+        f"🧠 TI Score: {ti}/100",
+        f"📚 Historical edge: {edge}% · Win rate: {win_text}",
+        f"📉 Daily reaction: {daily_pct}% · DIVERGENT",
+        "",
+        "ℹ️ Informational monitor only — this is not a buy/sell signal.",
+        "━━━━━━━━━━━━━━━━━━",
+    ])
+
+
 def send_catalyst_alert(alert):
     return send_telegram(format_catalyst_alert(alert))
 
 
 def send_catalyst_alerts(alerts):
     return [send_catalyst_alert(alert) for alert in alerts]
+
+
+def send_divergence_alerts(divergences):
+    return [send_telegram(format_divergence_alert(item)) for item in divergences]
