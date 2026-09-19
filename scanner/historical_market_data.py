@@ -33,7 +33,10 @@ class YahooDailyProvider:
         self.timeout = timeout
         self.session = session or requests.Session()
         self._cache: dict[tuple[str, date, date], dict[str, dict[str, Any]]] = {}
-        self._symbol_cache: dict[str, dict[str, dict[str, Any]]] = {}\n        self._chunk_source: dict[tuple[str, str], str] = {}\n        self._source_counts: dict[str, int] = {"Yahoo": 0, "Stooq": 0, "Failed": 0}\n
+        self._symbol_cache: dict[str, dict[str, dict[str, Any]]] = {}
+        self._chunk_source: dict[tuple[str, str], str] = {}
+        self._source_counts: dict[str, int] = {"Yahoo": 0, "Stooq": 0, "Failed": 0}
+
     @staticmethod
     def _date(value: Any) -> date | None:
         if value is None:
