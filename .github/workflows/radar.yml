@@ -38,6 +38,32 @@ jobs:
             echo "No requirements.txt found — no third-party dependencies to install"
           fi
 
+      - name: Validate Trading Intelligence Rule
+        run: |
+          python -m py_compile main.py scanner/trading_intelligence_rule.py scanner/trading_intelligence_score.py
+          python - <<'PY'
+          from scanner.trading_intelligence_rule import qualify_trading_intelligence
+
+          event = {
+              "alert_tier": "HIGH",
+              "alert_priority": 85,
+              "trading_intelligence_score": 75,
+              "source_type": "PRIMARY_REGULATORY",
+              "historical_edge_sample": 10,
+              "historical_edge_median_1d_pct": 0.75,
+              "historical_edge_win_rate_1d": 0.55,
+              "direction": "POSITIVE",
+              "reaction_interpretation": "CONFIRMED",
+              "market_reaction": {"reaction_direction": "POSITIVE"},
+              "volume_ratio": 2.0,
+          }
+          result = qualify_trading_intelligence(event)
+          assert result["trading_intelligence_rule_version"] == "1.1"
+          assert result["trading_intelligence_watch"] is True
+          assert result["trading_intelligence_qualified"] is False
+          print("OK — TI Watch V1.1 validation passed")
+          PY
+
       - name: Run Pharma Radar
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
