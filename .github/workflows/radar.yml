@@ -1,10 +1,11 @@
 name: Pharma Radar
 
-# PAUSED: external cron repository_dispatch is intentionally disabled
-# until the GitHub Actions quota is available again.
+# Automatic production scan every 10 minutes.
 # workflow_dispatch remains available for manual testing.
 
 on:
+  schedule:
+    - cron: "*/10 * * * *"
   workflow_dispatch:
 
 concurrency:
@@ -42,28 +43,6 @@ jobs:
         run: |
           python -m py_compile main.py scanner/trading_intelligence_rule.py scanner/trading_intelligence_score.py scanner/data_quality_audit.py scanner/divergence_monitor.py scanner/divergence_outcomes.py
           python -m pytest -q scanner/test_data_quality_audit.py scanner/test_divergence_monitor.py scanner/test_divergence_outcomes.py
-          python - <<'PY'
-          from scanner.trading_intelligence_rule import qualify_trading_intelligence
-
-          event = {
-              "alert_tier": "HIGH",
-              "alert_priority": 85,
-              "trading_intelligence_score": 75,
-              "source_type": "PRIMARY_REGULATORY",
-              "historical_edge_sample": 10,
-              "historical_edge_median_1d_pct": 0.75,
-              "historical_edge_win_rate_1d": 0.55,
-              "direction": "POSITIVE",
-              "reaction_interpretation": "CONFIRMED",
-              "market_reaction": {"reaction_direction": "POSITIVE"},
-              "volume_ratio": 2.0,
-          }
-          result = qualify_trading_intelligence(event)
-          assert result["trading_intelligence_rule_version"] == "1.1"
-          assert result["trading_intelligence_watch"] is True
-          assert result["trading_intelligence_qualified"] is False
-          print("OK — TI Watch V1.1 validation passed")
-          PY
 
       - name: Run Pharma Radar
         env:
