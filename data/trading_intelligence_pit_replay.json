@@ -2,45 +2,83 @@
   "by_stage": {
     "DEVELOPING": {
       "events": 19,
-      "qualified": 0
+      "median_pass": 0,
+      "qualified": 0,
+      "win_rate_pass": 9
     },
     "FULL": {
       "events": 8,
-      "qualified": 0
+      "median_pass": 0,
+      "qualified": 0,
+      "win_rate_pass": 8
     },
     "PROVISIONAL": {
       "events": 22,
-      "qualified": 0
+      "median_pass": 0,
+      "qualified": 0,
+      "win_rate_pass": 9
     },
     "WARMUP": {
       "events": 32,
-      "qualified": 0
+      "median_pass": 0,
+      "qualified": 0,
+      "win_rate_pass": 0
     }
   },
   "by_subtype": {
     "FDA_APPROVAL": {
       "events": 13,
+      "failure_reasons": {
+        "BOTH": 3,
+        "MEDIAN": 0,
+        "PASS": 0,
+        "WARMUP_SAMPLE": 10,
+        "WIN_RATE": 0
+      },
       "first_qualification_stage": null,
       "first_qualification_timestamp": null,
-      "qualified": 0
+      "median_pass": 0,
+      "qualified": 0,
+      "win_rate_pass": 0
     },
     "FDA_REJECTION": {
       "events": 38,
+      "failure_reasons": {
+        "BOTH": 20,
+        "MEDIAN": 8,
+        "PASS": 0,
+        "WARMUP_SAMPLE": 10,
+        "WIN_RATE": 0
+      },
       "first_qualification_stage": null,
       "first_qualification_timestamp": null,
-      "qualified": 0
+      "median_pass": 0,
+      "qualified": 0,
+      "win_rate_pass": 8
     },
     "LABEL_EXPANSION": {
       "events": 30,
+      "failure_reasons": {
+        "BOTH": 0,
+        "MEDIAN": 18,
+        "PASS": 0,
+        "WARMUP_SAMPLE": 12,
+        "WIN_RATE": 0
+      },
       "first_qualification_stage": null,
       "first_qualification_timestamp": null,
-      "qualified": 0
+      "median_pass": 0,
+      "qualified": 0,
+      "win_rate_pass": 18
     }
   },
   "events": [
     {
       "event_timestamp": "2015-08-27",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": null,
       "prior_subtype_sample": 0,
       "prior_subtype_win_rate_1d": null,
@@ -50,11 +88,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2017-07-13",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 1.5858414589679073,
       "prior_subtype_sample": 1,
       "prior_subtype_win_rate_1d": 1.0,
@@ -64,11 +106,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2018-04-20",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -0.02355137503483018,
       "prior_subtype_sample": 2,
       "prior_subtype_win_rate_1d": 0.5,
@@ -78,11 +124,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2018-05-25",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -1.6329442090375677,
       "prior_subtype_sample": 3,
       "prior_subtype_win_rate_1d": 0.3333333333333333,
@@ -92,11 +142,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2019-08-19",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -1.0270003185654906,
       "prior_subtype_sample": 4,
       "prior_subtype_win_rate_1d": 0.25,
@@ -106,11 +160,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2019-09-30",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -0.4210564280934134,
       "prior_subtype_sample": 5,
       "prior_subtype_win_rate_1d": 0.4,
@@ -120,11 +178,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2020-11-12",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -0.38884165212789673,
       "prior_subtype_sample": 6,
       "prior_subtype_win_rate_1d": 0.3333333333333333,
@@ -134,11 +196,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2020-11-13",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -0.35662687616238004,
       "prior_subtype_sample": 7,
       "prior_subtype_win_rate_1d": 0.42857142857142855,
@@ -148,11 +214,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2020-12-18",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -0.2007529525099025,
       "prior_subtype_sample": 8,
       "prior_subtype_win_rate_1d": 0.375,
@@ -162,11 +232,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2021-09-29",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": null,
       "prior_subtype_sample": 0,
       "prior_subtype_win_rate_1d": null,
@@ -176,11 +250,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2021-12-17",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -0.04487902885742495,
       "prior_subtype_sample": 9,
       "prior_subtype_win_rate_1d": 0.4444444444444444,
@@ -190,11 +268,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2021-12-17",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 6.331552450308354,
       "prior_subtype_sample": 1,
       "prior_subtype_win_rate_1d": 1.0,
@@ -204,11 +286,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2022-01-21",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.3863292253790509,
       "prior_subtype_sample": 10,
       "prior_subtype_win_rate_1d": 0.5,
@@ -218,11 +304,15 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2022-02-28",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.8175374796155268,
       "prior_subtype_sample": 11,
       "prior_subtype_win_rate_1d": 0.5454545454545454,
@@ -232,11 +322,15 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2022-02-28",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.8175374796155268,
       "prior_subtype_sample": 11,
       "prior_subtype_win_rate_1d": 0.5454545454545454,
@@ -246,11 +340,15 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2022-04-01",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": null,
       "prior_subtype_sample": 0,
       "prior_subtype_win_rate_1d": null,
@@ -260,11 +358,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2022-06-13",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 7.32940613345524,
       "prior_subtype_sample": 2,
       "prior_subtype_win_rate_1d": 1.0,
@@ -274,11 +376,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2023-01-18",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -0.04487902885742495,
       "prior_subtype_sample": 13,
       "prior_subtype_win_rate_1d": 0.46153846153846156,
@@ -288,11 +394,15 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2023-02-16",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.3261182911105667,
       "prior_subtype_sample": 1,
       "prior_subtype_win_rate_1d": 1.0,
@@ -302,11 +412,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2023-03-13",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -0.5156674637106782,
       "prior_subtype_sample": 2,
       "prior_subtype_win_rate_1d": 0.5,
@@ -316,11 +430,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2023-03-30",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -0.2007529525099025,
       "prior_subtype_sample": 14,
       "prior_subtype_win_rate_1d": 0.42857142857142855,
@@ -330,11 +448,15 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2023-04-24",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -0.04487902885742495,
       "prior_subtype_sample": 15,
       "prior_subtype_win_rate_1d": 0.4666666666666667,
@@ -344,11 +466,15 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2023-06-20",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 6.331552450308354,
       "prior_subtype_sample": 3,
       "prior_subtype_win_rate_1d": 1.0,
@@ -358,11 +484,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2023-06-27",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -0.2007529525099025,
       "prior_subtype_sample": 16,
       "prior_subtype_win_rate_1d": 0.4375,
@@ -372,11 +502,15 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2023-09-28",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -0.04487902885742495,
       "prior_subtype_sample": 17,
       "prior_subtype_win_rate_1d": 0.47058823529411764,
@@ -386,11 +520,15 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2023-12-12",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.3261182911105667,
       "prior_subtype_sample": 3,
       "prior_subtype_win_rate_1d": 0.6666666666666666,
@@ -400,11 +538,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2023-12-12",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.3261182911105667,
       "prior_subtype_sample": 3,
       "prior_subtype_win_rate_1d": 0.6666666666666666,
@@ -414,11 +556,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2024-03-13",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -1.357453218531923,
       "prior_subtype_sample": 5,
       "prior_subtype_win_rate_1d": 0.4,
@@ -428,11 +574,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2024-03-13",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -1.357453218531923,
       "prior_subtype_sample": 5,
       "prior_subtype_win_rate_1d": 0.4,
@@ -442,11 +592,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2024-03-22",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -0.008537563864929598,
       "prior_subtype_sample": 18,
       "prior_subtype_win_rate_1d": 0.5,
@@ -456,11 +610,15 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2024-03-22",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -0.008537563864929598,
       "prior_subtype_sample": 18,
       "prior_subtype_win_rate_1d": 0.5,
@@ -470,11 +628,15 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2024-06-14",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -0.2007529525099025,
       "prior_subtype_sample": 20,
       "prior_subtype_win_rate_1d": 0.45,
@@ -484,11 +646,15 @@
       "warmup_min_sample": 20,
       "warmup_required_median_net_1d_pct": 1.5,
       "warmup_required_win_rate_1d": 0.6,
-      "warmup_stage": "DEVELOPING"
+      "warmup_stage": "DEVELOPING",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2024-06-18",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -0.04487902885742495,
       "prior_subtype_sample": 21,
       "prior_subtype_win_rate_1d": 0.47619047619047616,
@@ -498,11 +664,15 @@
       "warmup_min_sample": 20,
       "warmup_required_median_net_1d_pct": 1.5,
       "warmup_required_win_rate_1d": 0.6,
-      "warmup_stage": "DEVELOPING"
+      "warmup_stage": "DEVELOPING",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2024-06-21",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.3261182911105667,
       "prior_subtype_sample": 7,
       "prior_subtype_win_rate_1d": 0.5714285714285714,
@@ -512,11 +682,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2024-06-21",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.3261182911105667,
       "prior_subtype_sample": 7,
       "prior_subtype_win_rate_1d": 0.5714285714285714,
@@ -526,11 +700,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2024-07-10",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -0.2007529525099025,
       "prior_subtype_sample": 22,
       "prior_subtype_win_rate_1d": 0.45454545454545453,
@@ -540,11 +718,15 @@
       "warmup_min_sample": 20,
       "warmup_required_median_net_1d_pct": 1.5,
       "warmup_required_win_rate_1d": 0.6,
-      "warmup_stage": "DEVELOPING"
+      "warmup_stage": "DEVELOPING",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2024-07-24",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 3.869548740968976,
       "prior_subtype_sample": 9,
       "prior_subtype_win_rate_1d": 0.6666666666666666,
@@ -554,25 +736,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2024-07-24",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
-      "prior_subtype_median_net_1d_pct": 3.869548740968976,
-      "prior_subtype_sample": 9,
-      "prior_subtype_win_rate_1d": 0.6666666666666666,
-      "subtype": "LABEL_EXPANSION",
-      "ticker": "MIRM",
-      "warmup_max_sample": 9,
-      "warmup_min_sample": 0,
-      "warmup_required_median_net_1d_pct": null,
-      "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
-    },
-    {
-      "event_timestamp": "2024-07-24",
-      "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 3.869548740968976,
       "prior_subtype_sample": 9,
       "prior_subtype_win_rate_1d": 0.6666666666666666,
@@ -582,11 +754,33 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
+    },
+    {
+      "event_timestamp": "2024-07-24",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
+      "historical_edge_gate": false,
+      "median_pass": false,
+      "prior_subtype_median_net_1d_pct": 3.869548740968976,
+      "prior_subtype_sample": 9,
+      "prior_subtype_win_rate_1d": 0.6666666666666666,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "MIRM",
+      "warmup_max_sample": 9,
+      "warmup_min_sample": 0,
+      "warmup_required_median_net_1d_pct": null,
+      "warmup_required_win_rate_1d": null,
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2024-08-08",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 1.7704943461850924,
       "prior_subtype_sample": 12,
       "prior_subtype_win_rate_1d": 0.75,
@@ -596,11 +790,15 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2024-08-08",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 1.7704943461850924,
       "prior_subtype_sample": 12,
       "prior_subtype_win_rate_1d": 0.75,
@@ -610,11 +808,15 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2024-08-20",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -0.04487902885742495,
       "prior_subtype_sample": 23,
       "prior_subtype_win_rate_1d": 0.4782608695652174,
@@ -624,11 +826,15 @@
       "warmup_min_sample": 20,
       "warmup_required_median_net_1d_pct": 1.5,
       "warmup_required_win_rate_1d": 0.6,
-      "warmup_stage": "DEVELOPING"
+      "warmup_stage": "DEVELOPING",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2024-10-10",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -0.008537563864929598,
       "prior_subtype_sample": 24,
       "prior_subtype_win_rate_1d": 0.5,
@@ -638,11 +844,15 @@
       "warmup_min_sample": 20,
       "warmup_required_median_net_1d_pct": 1.5,
       "warmup_required_win_rate_1d": 0.6,
-      "warmup_stage": "DEVELOPING"
+      "warmup_stage": "DEVELOPING",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2024-11-08",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 1.0685522495112012,
       "prior_subtype_sample": 14,
       "prior_subtype_win_rate_1d": 0.7857142857142857,
@@ -652,11 +862,15 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2024-11-20",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 5.21559474629546,
       "prior_subtype_sample": 4,
       "prior_subtype_win_rate_1d": 0.75,
@@ -666,11 +880,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2024-12-20",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 4.099637042282567,
       "prior_subtype_sample": 5,
       "prior_subtype_win_rate_1d": 0.6,
@@ -680,11 +898,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2025-01-15",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -0.04487902885742495,
       "prior_subtype_sample": 25,
       "prior_subtype_win_rate_1d": 0.48,
@@ -694,11 +916,15 @@
       "warmup_min_sample": 20,
       "warmup_required_median_net_1d_pct": 1.5,
       "warmup_required_win_rate_1d": 0.6,
-      "warmup_stage": "DEVELOPING"
+      "warmup_stage": "DEVELOPING",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2025-01-30",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 2.5725533887370204,
       "prior_subtype_sample": 6,
       "prior_subtype_win_rate_1d": 0.6666666666666666,
@@ -708,11 +934,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2025-03-11",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 1.0685522495112012,
       "prior_subtype_sample": 15,
       "prior_subtype_win_rate_1d": 0.7333333333333333,
@@ -722,11 +952,15 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2025-03-20",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 1.0262888642034953,
       "prior_subtype_sample": 16,
       "prior_subtype_win_rate_1d": 0.75,
@@ -736,11 +970,15 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2025-04-10",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 1.0685522495112012,
       "prior_subtype_sample": 17,
       "prior_subtype_win_rate_1d": 0.7647058823529411,
@@ -750,11 +988,15 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2025-04-10",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 4.099637042282567,
       "prior_subtype_sample": 7,
       "prior_subtype_win_rate_1d": 0.7142857142857143,
@@ -764,11 +1006,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2025-04-25",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": -0.008537563864929598,
       "prior_subtype_sample": 26,
       "prior_subtype_win_rate_1d": 0.5,
@@ -778,11 +1024,15 @@
       "warmup_min_sample": 20,
       "warmup_required_median_net_1d_pct": 1.5,
       "warmup_required_win_rate_1d": 0.6,
-      "warmup_stage": "DEVELOPING"
+      "warmup_stage": "DEVELOPING",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2025-05-15",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.027803901127565755,
       "prior_subtype_sample": 27,
       "prior_subtype_win_rate_1d": 0.5185185185185185,
@@ -792,11 +1042,15 @@
       "warmup_min_sample": 20,
       "warmup_required_median_net_1d_pct": 1.5,
       "warmup_required_win_rate_1d": 0.6,
-      "warmup_stage": "DEVELOPING"
+      "warmup_stage": "DEVELOPING",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2025-07-02",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 2.5725533887370204,
       "prior_subtype_sample": 8,
       "prior_subtype_win_rate_1d": 0.625,
@@ -806,11 +1060,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2025-07-07",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.42267069037154625,
       "prior_subtype_sample": 28,
       "prior_subtype_win_rate_1d": 0.5357142857142857,
@@ -820,11 +1078,15 @@
       "warmup_min_sample": 20,
       "warmup_required_median_net_1d_pct": 1.5,
       "warmup_required_win_rate_1d": 0.6,
-      "warmup_stage": "DEVELOPING"
+      "warmup_stage": "DEVELOPING",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2025-07-09",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.8175374796155268,
       "prior_subtype_sample": 29,
       "prior_subtype_win_rate_1d": 0.5517241379310345,
@@ -834,11 +1096,15 @@
       "warmup_min_sample": 20,
       "warmup_required_median_net_1d_pct": 1.5,
       "warmup_required_win_rate_1d": 0.6,
-      "warmup_stage": "DEVELOPING"
+      "warmup_stage": "DEVELOPING",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2025-07-30",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.6365347168298399,
       "prior_subtype_sample": 30,
       "prior_subtype_win_rate_1d": 0.5666666666666667,
@@ -848,11 +1114,15 @@
       "warmup_min_sample": 30,
       "warmup_required_median_net_1d_pct": 1.0,
       "warmup_required_win_rate_1d": 0.55,
-      "warmup_stage": "FULL"
+      "warmup_stage": "FULL",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2025-07-30",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.6365347168298399,
       "prior_subtype_sample": 30,
       "prior_subtype_win_rate_1d": 0.5666666666666667,
@@ -862,11 +1132,15 @@
       "warmup_min_sample": 30,
       "warmup_required_median_net_1d_pct": 1.0,
       "warmup_required_win_rate_1d": 0.55,
-      "warmup_stage": "FULL"
+      "warmup_stage": "FULL",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2025-08-12",
+      "gate_failure_reason": "WARMUP_SAMPLE",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 1.0454697351914735,
       "prior_subtype_sample": 9,
       "prior_subtype_win_rate_1d": 0.5555555555555556,
@@ -876,11 +1150,15 @@
       "warmup_min_sample": 0,
       "warmup_required_median_net_1d_pct": null,
       "warmup_required_win_rate_1d": null,
-      "warmup_stage": "WARMUP"
+      "warmup_stage": "WARMUP",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2025-09-22",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.744744615893467,
       "prior_subtype_sample": 32,
       "prior_subtype_win_rate_1d": 0.59375,
@@ -890,11 +1168,15 @@
       "warmup_min_sample": 30,
       "warmup_required_median_net_1d_pct": 1.0,
       "warmup_required_win_rate_1d": 0.55,
-      "warmup_stage": "FULL"
+      "warmup_stage": "FULL",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2025-09-25",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 1.0685522495112012,
       "prior_subtype_sample": 18,
       "prior_subtype_win_rate_1d": 0.7777777777777778,
@@ -904,11 +1186,15 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2025-10-10",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.6719517521714071,
       "prior_subtype_sample": 33,
       "prior_subtype_win_rate_1d": 0.6060606060606061,
@@ -918,11 +1204,15 @@
       "warmup_min_sample": 30,
       "warmup_required_median_net_1d_pct": 1.0,
       "warmup_required_win_rate_1d": 0.55,
-      "warmup_stage": "FULL"
+      "warmup_stage": "FULL",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2025-10-17",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 1.0685522495112012,
       "prior_subtype_sample": 19,
       "prior_subtype_win_rate_1d": 0.7368421052631579,
@@ -932,11 +1222,15 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2025-10-17",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 1.0685522495112012,
       "prior_subtype_sample": 19,
       "prior_subtype_win_rate_1d": 0.7368421052631579,
@@ -946,11 +1240,15 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2026-01-23",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.9840254788957894,
       "prior_subtype_sample": 21,
       "prior_subtype_win_rate_1d": 0.6666666666666666,
@@ -960,11 +1258,15 @@
       "warmup_min_sample": 20,
       "warmup_required_median_net_1d_pct": 1.5,
       "warmup_required_win_rate_1d": 0.6,
-      "warmup_stage": "DEVELOPING"
+      "warmup_stage": "DEVELOPING",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2026-02-07",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.56374185310778,
       "prior_subtype_sample": 34,
       "prior_subtype_win_rate_1d": 0.5882352941176471,
@@ -974,11 +1276,15 @@
       "warmup_min_sample": 30,
       "warmup_required_median_net_1d_pct": 1.0,
       "warmup_required_win_rate_1d": 0.55,
-      "warmup_stage": "FULL"
+      "warmup_stage": "FULL",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2026-02-13",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.6719517521714071,
       "prior_subtype_sample": 35,
       "prior_subtype_win_rate_1d": 0.6,
@@ -988,11 +1294,15 @@
       "warmup_min_sample": 30,
       "warmup_required_median_net_1d_pct": 1.0,
       "warmup_required_win_rate_1d": 0.55,
-      "warmup_stage": "FULL"
+      "warmup_stage": "FULL",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2026-02-26",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 1.0262888642034953,
       "prior_subtype_sample": 22,
       "prior_subtype_win_rate_1d": 0.6818181818181818,
@@ -1002,11 +1312,15 @@
       "warmup_min_sample": 20,
       "warmup_required_median_net_1d_pct": 1.5,
       "warmup_required_win_rate_1d": 0.6,
-      "warmup_stage": "DEVELOPING"
+      "warmup_stage": "DEVELOPING",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2026-03-17",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.9840254788957894,
       "prior_subtype_sample": 23,
       "prior_subtype_win_rate_1d": 0.6521739130434783,
@@ -1016,11 +1330,15 @@
       "warmup_min_sample": 20,
       "warmup_required_median_net_1d_pct": 1.5,
       "warmup_required_win_rate_1d": 0.6,
-      "warmup_stage": "DEVELOPING"
+      "warmup_stage": "DEVELOPING",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2026-03-27",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.9840254788957894,
       "prior_subtype_sample": 24,
       "prior_subtype_win_rate_1d": 0.625,
@@ -1030,11 +1348,15 @@
       "warmup_min_sample": 20,
       "warmup_required_median_net_1d_pct": 1.5,
       "warmup_required_win_rate_1d": 0.6,
-      "warmup_stage": "DEVELOPING"
+      "warmup_stage": "DEVELOPING",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2026-04-10",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.744744615893467,
       "prior_subtype_sample": 36,
       "prior_subtype_win_rate_1d": 0.6111111111111112,
@@ -1044,11 +1366,15 @@
       "warmup_min_sample": 30,
       "warmup_required_median_net_1d_pct": 1.0,
       "warmup_required_win_rate_1d": 0.55,
-      "warmup_stage": "FULL"
+      "warmup_stage": "FULL",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2026-04-22",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.6719517521714071,
       "prior_subtype_sample": 37,
       "prior_subtype_win_rate_1d": 0.5945945945945946,
@@ -1058,11 +1384,15 @@
       "warmup_min_sample": 30,
       "warmup_required_median_net_1d_pct": 1.0,
       "warmup_required_win_rate_1d": 0.55,
-      "warmup_stage": "FULL"
+      "warmup_stage": "FULL",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2026-05-08",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.9840254788957894,
       "prior_subtype_sample": 25,
       "prior_subtype_win_rate_1d": 0.64,
@@ -1072,11 +1402,15 @@
       "warmup_min_sample": 20,
       "warmup_required_median_net_1d_pct": 1.5,
       "warmup_required_win_rate_1d": 0.6,
-      "warmup_stage": "DEVELOPING"
+      "warmup_stage": "DEVELOPING",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2026-05-08",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.9840254788957894,
       "prior_subtype_sample": 25,
       "prior_subtype_win_rate_1d": 0.64,
@@ -1086,11 +1420,15 @@
       "warmup_min_sample": 20,
       "warmup_required_median_net_1d_pct": 1.5,
       "warmup_required_win_rate_1d": 0.6,
-      "warmup_stage": "DEVELOPING"
+      "warmup_stage": "DEVELOPING",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2026-07-31",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 1.0685522495112012,
       "prior_subtype_sample": 27,
       "prior_subtype_win_rate_1d": 0.6666666666666666,
@@ -1100,11 +1438,15 @@
       "warmup_min_sample": 20,
       "warmup_required_median_net_1d_pct": 1.5,
       "warmup_required_win_rate_1d": 0.6,
-      "warmup_stage": "DEVELOPING"
+      "warmup_stage": "DEVELOPING",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2026-08-25",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 1.0262888642034953,
       "prior_subtype_sample": 28,
       "prior_subtype_win_rate_1d": 0.6428571428571429,
@@ -1114,11 +1456,15 @@
       "warmup_min_sample": 20,
       "warmup_required_median_net_1d_pct": 1.5,
       "warmup_required_win_rate_1d": 0.6,
-      "warmup_stage": "DEVELOPING"
+      "warmup_stage": "DEVELOPING",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2026-08-25",
+      "gate_failure_reason": "MEDIAN",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 1.0262888642034953,
       "prior_subtype_sample": 28,
       "prior_subtype_win_rate_1d": 0.6428571428571429,
@@ -1128,11 +1474,15 @@
       "warmup_min_sample": 20,
       "warmup_required_median_net_1d_pct": 1.5,
       "warmup_required_win_rate_1d": 0.6,
-      "warmup_stage": "DEVELOPING"
+      "warmup_stage": "DEVELOPING",
+      "win_rate_pass": true
     },
     {
       "event_timestamp": "2026-08-26",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.4073498340863848,
       "prior_subtype_sample": 10,
       "prior_subtype_win_rate_1d": 0.5,
@@ -1142,11 +1492,15 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2026-09-03",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 1.0454697351914735,
       "prior_subtype_sample": 11,
       "prior_subtype_win_rate_1d": 0.5454545454545454,
@@ -1156,11 +1510,15 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": false
     },
     {
       "event_timestamp": "2026-09-11",
+      "gate_failure_reason": "BOTH",
+      "gate_result": false,
       "historical_edge_gate": false,
+      "median_pass": false,
       "prior_subtype_median_net_1d_pct": 0.51170941744092,
       "prior_subtype_sample": 12,
       "prior_subtype_win_rate_1d": 0.5,
@@ -1170,9 +1528,17 @@
       "warmup_min_sample": 10,
       "warmup_required_median_net_1d_pct": 2.0,
       "warmup_required_win_rate_1d": 0.65,
-      "warmup_stage": "PROVISIONAL"
+      "warmup_stage": "PROVISIONAL",
+      "win_rate_pass": false
     }
   ],
+  "failure_reasons": {
+    "BOTH": 23,
+    "MEDIAN": 26,
+    "PASS": 0,
+    "WARMUP_SAMPLE": 32,
+    "WIN_RATE": 0
+  },
   "methodology": {
     "friction_bps": 30.0,
     "lookahead_control": "Only strictly earlier timestamps contribute to each event's subtype statistics; equal-timestamp events are batched.",
@@ -1206,12 +1572,12 @@
         "win_rate": 0.55
       }
     ],
-    "warning": "This replays only the historical-edge gate; it is not a live trading backtest."
+    "warning": "Research-only. This replays the historical-edge gate; it is not a live trading backtest."
   },
-  "purpose": "point-in-time replay of the historical-edge prerequisite for Trading Intelligence Rule V1.0 with explicit progressive warm-up",
+  "purpose": "point-in-time replay of the historical-edge prerequisite with progressive warm-up and gate diagnostics",
   "sample": {
     "events": 81,
     "qualified_historical_edge_events": 0
   },
-  "version": "1.1"
+  "version": "1.2"
 }
