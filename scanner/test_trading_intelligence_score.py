@@ -21,14 +21,27 @@ def test_weak_event_stays_low():
     assert result["trading_intelligence_label"] == "LOW"
 
 
+def test_daily_snapshot_is_conservative_reaction_fallback():
+    result = calculate_trading_intelligence_score({
+        "score": 70,
+        "historical_edge_score": 70,
+        "direction": "POSITIVE",
+        "market_data": {"price_change_pct": 4.0},
+    })
+    assert result["ti_market_reaction_score"] == 62.0
+    assert result["ti_market_reaction_source"] == "DAILY_SNAPSHOT"
+
+
 def test_missing_market_data_is_neutral_not_fatal():
     result = calculate_trading_intelligence_score({"score": 70, "historical_edge_score": 70})
     assert result["ti_market_reaction_score"] == 50.0
+    assert result["ti_market_reaction_source"] == "NONE"
     assert 0 <= result["trading_intelligence_score"] <= 100
 
 
 if __name__ == "__main__":
     test_strong_confirmed_event()
     test_weak_event_stays_low()
+    test_daily_snapshot_is_conservative_reaction_fallback()
     test_missing_market_data_is_neutral_not_fatal()
     print("OK — Trading Intelligence Score tests passed")
