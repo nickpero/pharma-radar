@@ -1,4 +1,4 @@
-"""Pharma Radar — Divergence Monitor V1.0.
+"""Pharma Radar — Divergence Monitor V1.1.
 
 Identifies strong positive-catalyst / negative-market-reaction divergences.
 This is an informational research alert, not a trading signal.
@@ -36,6 +36,8 @@ def classify_divergence(alert, threshold_pct=2.0):
         "direction": direction,
         "event_timestamp": alert.get("event_timestamp") or alert.get("published_at") or alert.get("timestamp"),
         "event_date": alert.get("event_timestamp") or alert.get("published_at") or alert.get("timestamp"),
+        "event_price": _num((alert.get("market_reaction") or {}).get("event_price")),
+        "event_price_timestamp": (alert.get("market_reaction") or {}).get("event_timestamp"),
         "daily_pct": daily_pct,
         "threshold_pct": abs(threshold_pct),
         "status": "DIVERGENT",
