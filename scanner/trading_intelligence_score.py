@@ -1,4 +1,4 @@
-"""Pharma Radar — Trading Intelligence Score V1.
+"""Pharma Radar — Trading Intelligence Score V1.1.
 
 Combines catalyst relevance, historical edge, market reaction, surprise,
 volume and data quality into one 0-100 decision-support score.
@@ -21,7 +21,16 @@ def _clamp(value, low=0.0, high=100.0):
 def _reaction_score(event):
     reaction = event.get("market_reaction") or {}
     if reaction.get("reaction_status") != "AVAILABLE":
-        return 50.0
+        daily = _num(event.get("price_change_pct"))
+        if daily is None:
+            daily = _num((event.get("market_data") or {}).get("price_change_pct"))
+        direction = str(event.get("direction") or "UNKNOWN").upper()
+        if daily is None or direction not in {"POSITIVE", "NEGATIVE"}:
+            return 50.0
+        magnitude = min(abs(daily), 10.0) / 10.0 * 100.0
+        aligned = (direction == "POSITIVE" and daily > 0) or (direction == "NEGATIVE" and daily < 0)
+        return 50.0 + min(magnitude / 2.0, 12.0) if aligned else 50.0 - min(magnitude / 2.0, 12.0)
+
     direction = str(event.get("direction") or "UNKNOWN").upper()
     observed = _num(reaction.get("reaction_15m_pct"))
     if observed is None:
@@ -34,6 +43,18 @@ def _reaction_score(event):
     if direction == "NEGATIVE":
         return 50.0 + magnitude / 2 if observed < 0 else 50.0 - magnitude / 2
     return 50.0
+
+
+def _reaction_source(event):
+    reaction = event.get("market_reaction") or {}
+    if reaction.get("reaction_status") == "AVAILABLE":
+        return "INTRADAY"
+    if (
+        _num(event.get("price_change_pct")) is not None
+        or _num((event.get("market_data") or {}).get("price_change_pct")) is not None
+    ):
+        return "DAILY_SNAPSHOT"
+    return "NONE"
 
 
 def _volume_score(event):
@@ -69,12 +90,13 @@ def calculate_trading_intelligence_score(event):
     score = round(_clamp(score), 1)
     label = "CRITICAL" if score >= 85 else "HIGH" if score >= 75 else "MEDIUM" if score >= 60 else "LOW"
     return {
-        "trading_intelligence_version": "1.0",
+        "trading_intelligence_version": "1.1",
         "trading_intelligence_score": score,
         "trading_intelligence_label": label,
         "ti_catalyst_score": round(catalyst, 1),
         "ti_historical_edge_score": round(edge, 1),
         "ti_market_reaction_score": round(reaction, 1),
+        "ti_market_reaction_source": _reaction_source(event),
         "ti_surprise_score": round(surprise, 1),
         "ti_volume_score": round(volume, 1),
         "ti_data_quality_score": round(quality, 1),
