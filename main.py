@@ -205,8 +205,8 @@ def main():
 
     divergences = detect_divergences(result.get("alerts", []))
     outcome = track_divergence_outcomes(divergences)
-    print(f"Divergence Monitor V1.0: {len(divergences)} detected")
-    print(f"Divergence Outcomes V1.0: added={outcome['added']} updated={outcome['updated']} summary={outcome['summary']}")
+    print(f"Divergence Monitor V1.1: {len(divergences)} detected")
+    print(f"Divergence Outcomes V1.1: added={outcome['added']} updated={outcome['updated']} summary={outcome['summary']}")
     for item in divergences:
         print(
             f"DIVERGENCE {item['ticker']}: daily={item['daily_pct']:+.2f}% "
