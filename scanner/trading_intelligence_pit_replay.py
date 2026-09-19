@@ -309,7 +309,7 @@ def build() -> dict[str, Any]:
         failure_reasons[row["gate_failure_reason"]] += 1
 
     report = {
-        "version": "1.6",
+        "version": "1.7",
         "purpose": "point-in-time historical-edge replay with warm-up diagnostics, threshold sensitivity, and forward outcome validation",
         "methodology": {
             "friction_bps": FRICTION_BPS,
