@@ -72,6 +72,9 @@ jobs:
               )
           h = p.get("temporal_holdout", {})
           print("Temporal holdout:", h)
+          print("Rolling OOS 0.75%:", p.get("rolling_oos", {}))
+          if "rolling_oos" not in p:
+              raise SystemExit("Missing rolling_oos report")
           print("======================================")
           if sample["events"] == 0:
               raise SystemExit("PIT replay returned zero events")
