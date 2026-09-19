@@ -1,0 +1,764 @@
+{
+  "by_subtype": {
+    "FDA_APPROVAL": {
+      "events": 13,
+      "first_qualification_timestamp": null,
+      "qualified": 0
+    },
+    "FDA_REJECTION": {
+      "events": 38,
+      "first_qualification_timestamp": null,
+      "qualified": 0
+    },
+    "LABEL_EXPANSION": {
+      "events": 30,
+      "first_qualification_timestamp": null,
+      "qualified": 0
+    }
+  },
+  "events": [
+    {
+      "event_timestamp": "2015-08-27",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": null,
+      "prior_subtype_sample": 0,
+      "prior_subtype_win_rate_1d": null,
+      "subtype": "FDA_REJECTION",
+      "ticker": "AMGN"
+    },
+    {
+      "event_timestamp": "2017-07-13",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 1.5858414589679073,
+      "prior_subtype_sample": 1,
+      "prior_subtype_win_rate_1d": 1.0,
+      "subtype": "FDA_REJECTION",
+      "ticker": "AMGN"
+    },
+    {
+      "event_timestamp": "2018-04-20",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -0.02355137503483018,
+      "prior_subtype_sample": 2,
+      "prior_subtype_win_rate_1d": 0.5,
+      "subtype": "FDA_REJECTION",
+      "ticker": "PFE"
+    },
+    {
+      "event_timestamp": "2018-05-25",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -1.6329442090375677,
+      "prior_subtype_sample": 3,
+      "prior_subtype_win_rate_1d": 0.3333333333333333,
+      "subtype": "FDA_REJECTION",
+      "ticker": "AMGN"
+    },
+    {
+      "event_timestamp": "2019-08-19",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -1.0270003185654906,
+      "prior_subtype_sample": 4,
+      "prior_subtype_win_rate_1d": 0.25,
+      "subtype": "FDA_REJECTION",
+      "ticker": "SRPT"
+    },
+    {
+      "event_timestamp": "2019-09-30",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -0.4210564280934134,
+      "prior_subtype_sample": 5,
+      "prior_subtype_win_rate_1d": 0.4,
+      "subtype": "FDA_REJECTION",
+      "ticker": "AZN"
+    },
+    {
+      "event_timestamp": "2020-11-12",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -0.38884165212789673,
+      "prior_subtype_sample": 6,
+      "prior_subtype_win_rate_1d": 0.3333333333333333,
+      "subtype": "FDA_REJECTION",
+      "ticker": "SNY"
+    },
+    {
+      "event_timestamp": "2020-11-13",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -0.35662687616238004,
+      "prior_subtype_sample": 7,
+      "prior_subtype_win_rate_1d": 0.42857142857142855,
+      "subtype": "FDA_REJECTION",
+      "ticker": "ALKS"
+    },
+    {
+      "event_timestamp": "2020-12-18",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -0.2007529525099025,
+      "prior_subtype_sample": 8,
+      "prior_subtype_win_rate_1d": 0.375,
+      "subtype": "FDA_REJECTION",
+      "ticker": "NVS"
+    },
+    {
+      "event_timestamp": "2021-09-29",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": null,
+      "prior_subtype_sample": 0,
+      "prior_subtype_win_rate_1d": null,
+      "subtype": "FDA_APPROVAL",
+      "ticker": "MIRM"
+    },
+    {
+      "event_timestamp": "2021-12-17",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -0.04487902885742495,
+      "prior_subtype_sample": 9,
+      "prior_subtype_win_rate_1d": 0.4444444444444444,
+      "subtype": "FDA_REJECTION",
+      "ticker": "LLY"
+    },
+    {
+      "event_timestamp": "2021-12-17",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 6.331552450308354,
+      "prior_subtype_sample": 1,
+      "prior_subtype_win_rate_1d": 1.0,
+      "subtype": "FDA_APPROVAL",
+      "ticker": "ARGX"
+    },
+    {
+      "event_timestamp": "2022-01-21",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.3863292253790509,
+      "prior_subtype_sample": 10,
+      "prior_subtype_win_rate_1d": 0.5,
+      "subtype": "FDA_REJECTION",
+      "ticker": "PFE"
+    },
+    {
+      "event_timestamp": "2022-02-28",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.8175374796155268,
+      "prior_subtype_sample": 11,
+      "prior_subtype_win_rate_1d": 0.5454545454545454,
+      "subtype": "FDA_REJECTION",
+      "ticker": "GILD"
+    },
+    {
+      "event_timestamp": "2022-02-28",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.8175374796155268,
+      "prior_subtype_sample": 11,
+      "prior_subtype_win_rate_1d": 0.5454545454545454,
+      "subtype": "FDA_REJECTION",
+      "ticker": "GILD"
+    },
+    {
+      "event_timestamp": "2022-04-01",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": null,
+      "prior_subtype_sample": 0,
+      "prior_subtype_win_rate_1d": null,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "MIRM"
+    },
+    {
+      "event_timestamp": "2022-06-13",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 7.32940613345524,
+      "prior_subtype_sample": 2,
+      "prior_subtype_win_rate_1d": 1.0,
+      "subtype": "FDA_APPROVAL",
+      "ticker": "ALNY"
+    },
+    {
+      "event_timestamp": "2023-01-18",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -0.04487902885742495,
+      "prior_subtype_sample": 13,
+      "prior_subtype_win_rate_1d": 0.46153846153846156,
+      "subtype": "FDA_REJECTION",
+      "ticker": "LLY"
+    },
+    {
+      "event_timestamp": "2023-02-16",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.3261182911105667,
+      "prior_subtype_sample": 1,
+      "prior_subtype_win_rate_1d": 1.0,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "ALNY"
+    },
+    {
+      "event_timestamp": "2023-03-13",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -0.5156674637106782,
+      "prior_subtype_sample": 2,
+      "prior_subtype_win_rate_1d": 0.5,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "MIRM"
+    },
+    {
+      "event_timestamp": "2023-03-30",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -0.2007529525099025,
+      "prior_subtype_sample": 14,
+      "prior_subtype_win_rate_1d": 0.42857142857142855,
+      "subtype": "FDA_REJECTION",
+      "ticker": "LLY"
+    },
+    {
+      "event_timestamp": "2023-04-24",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -0.04487902885742495,
+      "prior_subtype_sample": 15,
+      "prior_subtype_win_rate_1d": 0.4666666666666667,
+      "subtype": "FDA_REJECTION",
+      "ticker": "NVO"
+    },
+    {
+      "event_timestamp": "2023-06-20",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 6.331552450308354,
+      "prior_subtype_sample": 3,
+      "prior_subtype_win_rate_1d": 1.0,
+      "subtype": "FDA_APPROVAL",
+      "ticker": "ARGX"
+    },
+    {
+      "event_timestamp": "2023-06-27",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -0.2007529525099025,
+      "prior_subtype_sample": 16,
+      "prior_subtype_win_rate_1d": 0.4375,
+      "subtype": "FDA_REJECTION",
+      "ticker": "REGN"
+    },
+    {
+      "event_timestamp": "2023-09-28",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -0.04487902885742495,
+      "prior_subtype_sample": 17,
+      "prior_subtype_win_rate_1d": 0.47058823529411764,
+      "subtype": "FDA_REJECTION",
+      "ticker": "LLY"
+    },
+    {
+      "event_timestamp": "2023-12-12",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.3261182911105667,
+      "prior_subtype_sample": 3,
+      "prior_subtype_win_rate_1d": 0.6666666666666666,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "ARGX"
+    },
+    {
+      "event_timestamp": "2023-12-12",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.3261182911105667,
+      "prior_subtype_sample": 3,
+      "prior_subtype_win_rate_1d": 0.6666666666666666,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "ARGX"
+    },
+    {
+      "event_timestamp": "2024-03-13",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -1.357453218531923,
+      "prior_subtype_sample": 5,
+      "prior_subtype_win_rate_1d": 0.4,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "MIRM"
+    },
+    {
+      "event_timestamp": "2024-03-13",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -1.357453218531923,
+      "prior_subtype_sample": 5,
+      "prior_subtype_win_rate_1d": 0.4,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "MIRM"
+    },
+    {
+      "event_timestamp": "2024-03-22",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -0.008537563864929598,
+      "prior_subtype_sample": 18,
+      "prior_subtype_win_rate_1d": 0.5,
+      "subtype": "FDA_REJECTION",
+      "ticker": "REGN"
+    },
+    {
+      "event_timestamp": "2024-03-22",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -0.008537563864929598,
+      "prior_subtype_sample": 18,
+      "prior_subtype_win_rate_1d": 0.5,
+      "subtype": "FDA_REJECTION",
+      "ticker": "REGN"
+    },
+    {
+      "event_timestamp": "2024-06-14",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -0.2007529525099025,
+      "prior_subtype_sample": 20,
+      "prior_subtype_win_rate_1d": 0.45,
+      "subtype": "FDA_REJECTION",
+      "ticker": "RCKT"
+    },
+    {
+      "event_timestamp": "2024-06-18",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -0.04487902885742495,
+      "prior_subtype_sample": 21,
+      "prior_subtype_win_rate_1d": 0.47619047619047616,
+      "subtype": "FDA_REJECTION",
+      "ticker": "ABBV"
+    },
+    {
+      "event_timestamp": "2024-06-21",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.3261182911105667,
+      "prior_subtype_sample": 7,
+      "prior_subtype_win_rate_1d": 0.5714285714285714,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "ARGX"
+    },
+    {
+      "event_timestamp": "2024-06-21",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.3261182911105667,
+      "prior_subtype_sample": 7,
+      "prior_subtype_win_rate_1d": 0.5714285714285714,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "ARGX"
+    },
+    {
+      "event_timestamp": "2024-07-10",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -0.2007529525099025,
+      "prior_subtype_sample": 22,
+      "prior_subtype_win_rate_1d": 0.45454545454545453,
+      "subtype": "FDA_REJECTION",
+      "ticker": "NVO"
+    },
+    {
+      "event_timestamp": "2024-07-24",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 3.869548740968976,
+      "prior_subtype_sample": 9,
+      "prior_subtype_win_rate_1d": 0.6666666666666666,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "ARGX"
+    },
+    {
+      "event_timestamp": "2024-07-24",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 3.869548740968976,
+      "prior_subtype_sample": 9,
+      "prior_subtype_win_rate_1d": 0.6666666666666666,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "MIRM"
+    },
+    {
+      "event_timestamp": "2024-07-24",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 3.869548740968976,
+      "prior_subtype_sample": 9,
+      "prior_subtype_win_rate_1d": 0.6666666666666666,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "MIRM"
+    },
+    {
+      "event_timestamp": "2024-08-08",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 1.7704943461850924,
+      "prior_subtype_sample": 12,
+      "prior_subtype_win_rate_1d": 0.75,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "ARGX"
+    },
+    {
+      "event_timestamp": "2024-08-08",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 1.7704943461850924,
+      "prior_subtype_sample": 12,
+      "prior_subtype_win_rate_1d": 0.75,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "ARGX"
+    },
+    {
+      "event_timestamp": "2024-08-20",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -0.04487902885742495,
+      "prior_subtype_sample": 23,
+      "prior_subtype_win_rate_1d": 0.4782608695652174,
+      "subtype": "FDA_REJECTION",
+      "ticker": "REGN"
+    },
+    {
+      "event_timestamp": "2024-10-10",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -0.008537563864929598,
+      "prior_subtype_sample": 24,
+      "prior_subtype_win_rate_1d": 0.5,
+      "subtype": "FDA_REJECTION",
+      "ticker": "IOVA"
+    },
+    {
+      "event_timestamp": "2024-11-08",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 1.0685522495112012,
+      "prior_subtype_sample": 14,
+      "prior_subtype_win_rate_1d": 0.7857142857142857,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "MIRM"
+    },
+    {
+      "event_timestamp": "2024-11-20",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 5.21559474629546,
+      "prior_subtype_sample": 4,
+      "prior_subtype_win_rate_1d": 0.75,
+      "subtype": "FDA_APPROVAL",
+      "ticker": "ZYME"
+    },
+    {
+      "event_timestamp": "2024-12-20",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 4.099637042282567,
+      "prior_subtype_sample": 5,
+      "prior_subtype_win_rate_1d": 0.6,
+      "subtype": "FDA_APPROVAL",
+      "ticker": "VRTX"
+    },
+    {
+      "event_timestamp": "2025-01-15",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -0.04487902885742495,
+      "prior_subtype_sample": 25,
+      "prior_subtype_win_rate_1d": 0.48,
+      "subtype": "FDA_REJECTION",
+      "ticker": "IOVA"
+    },
+    {
+      "event_timestamp": "2025-01-30",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 2.5725533887370204,
+      "prior_subtype_sample": 6,
+      "prior_subtype_win_rate_1d": 0.6666666666666666,
+      "subtype": "FDA_APPROVAL",
+      "ticker": "VRTX"
+    },
+    {
+      "event_timestamp": "2025-03-11",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 1.0685522495112012,
+      "prior_subtype_sample": 15,
+      "prior_subtype_win_rate_1d": 0.7333333333333333,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "ALNY"
+    },
+    {
+      "event_timestamp": "2025-03-20",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 1.0262888642034953,
+      "prior_subtype_sample": 16,
+      "prior_subtype_win_rate_1d": 0.75,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "ALNY"
+    },
+    {
+      "event_timestamp": "2025-04-10",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 1.0685522495112012,
+      "prior_subtype_sample": 17,
+      "prior_subtype_win_rate_1d": 0.7647058823529411,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "ARGX"
+    },
+    {
+      "event_timestamp": "2025-04-10",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 4.099637042282567,
+      "prior_subtype_sample": 7,
+      "prior_subtype_win_rate_1d": 0.7142857142857143,
+      "subtype": "FDA_APPROVAL",
+      "ticker": "MIRM"
+    },
+    {
+      "event_timestamp": "2025-04-25",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": -0.008537563864929598,
+      "prior_subtype_sample": 26,
+      "prior_subtype_win_rate_1d": 0.5,
+      "subtype": "FDA_REJECTION",
+      "ticker": "TLX"
+    },
+    {
+      "event_timestamp": "2025-05-15",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.027803901127565755,
+      "prior_subtype_sample": 27,
+      "prior_subtype_win_rate_1d": 0.5185185185185185,
+      "subtype": "FDA_REJECTION",
+      "ticker": "IOVA"
+    },
+    {
+      "event_timestamp": "2025-07-02",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 2.5725533887370204,
+      "prior_subtype_sample": 8,
+      "prior_subtype_win_rate_1d": 0.625,
+      "subtype": "FDA_APPROVAL",
+      "ticker": "REGN"
+    },
+    {
+      "event_timestamp": "2025-07-07",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.42267069037154625,
+      "prior_subtype_sample": 28,
+      "prior_subtype_win_rate_1d": 0.5357142857142857,
+      "subtype": "FDA_REJECTION",
+      "ticker": "RARE"
+    },
+    {
+      "event_timestamp": "2025-07-09",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.8175374796155268,
+      "prior_subtype_sample": 29,
+      "prior_subtype_win_rate_1d": 0.5517241379310345,
+      "subtype": "FDA_REJECTION",
+      "ticker": "CAPR"
+    },
+    {
+      "event_timestamp": "2025-07-30",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.6365347168298399,
+      "prior_subtype_sample": 30,
+      "prior_subtype_win_rate_1d": 0.5666666666666667,
+      "subtype": "FDA_REJECTION",
+      "ticker": "IOVA"
+    },
+    {
+      "event_timestamp": "2025-07-30",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.6365347168298399,
+      "prior_subtype_sample": 30,
+      "prior_subtype_win_rate_1d": 0.5666666666666667,
+      "subtype": "FDA_REJECTION",
+      "ticker": "REGN"
+    },
+    {
+      "event_timestamp": "2025-08-12",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 1.0454697351914735,
+      "prior_subtype_sample": 9,
+      "prior_subtype_win_rate_1d": 0.5555555555555556,
+      "subtype": "FDA_APPROVAL",
+      "ticker": "INSM"
+    },
+    {
+      "event_timestamp": "2025-09-22",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.744744615893467,
+      "prior_subtype_sample": 32,
+      "prior_subtype_win_rate_1d": 0.59375,
+      "subtype": "FDA_REJECTION",
+      "ticker": "BIIB"
+    },
+    {
+      "event_timestamp": "2025-09-25",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 1.0685522495112012,
+      "prior_subtype_sample": 18,
+      "prior_subtype_win_rate_1d": 0.7777777777777778,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "VRTX"
+    },
+    {
+      "event_timestamp": "2025-10-10",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.6719517521714071,
+      "prior_subtype_sample": 33,
+      "prior_subtype_win_rate_1d": 0.6060606060606061,
+      "subtype": "FDA_REJECTION",
+      "ticker": "AZN"
+    },
+    {
+      "event_timestamp": "2025-10-17",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 1.0685522495112012,
+      "prior_subtype_sample": 19,
+      "prior_subtype_win_rate_1d": 0.7368421052631579,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "ARGX"
+    },
+    {
+      "event_timestamp": "2025-10-17",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 1.0685522495112012,
+      "prior_subtype_sample": 19,
+      "prior_subtype_win_rate_1d": 0.7368421052631579,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "ARGX"
+    },
+    {
+      "event_timestamp": "2026-01-23",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.9840254788957894,
+      "prior_subtype_sample": 21,
+      "prior_subtype_win_rate_1d": 0.6666666666666666,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "VRTX"
+    },
+    {
+      "event_timestamp": "2026-02-07",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.56374185310778,
+      "prior_subtype_sample": 34,
+      "prior_subtype_win_rate_1d": 0.5882352941176471,
+      "subtype": "FDA_REJECTION",
+      "ticker": "RGNX"
+    },
+    {
+      "event_timestamp": "2026-02-13",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.6719517521714071,
+      "prior_subtype_sample": 35,
+      "prior_subtype_win_rate_1d": 0.6,
+      "subtype": "FDA_REJECTION",
+      "ticker": "EDIT"
+    },
+    {
+      "event_timestamp": "2026-02-26",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 1.0262888642034953,
+      "prior_subtype_sample": 22,
+      "prior_subtype_win_rate_1d": 0.6818181818181818,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "ARGX"
+    },
+    {
+      "event_timestamp": "2026-03-17",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.9840254788957894,
+      "prior_subtype_sample": 23,
+      "prior_subtype_win_rate_1d": 0.6521739130434783,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "VRTX"
+    },
+    {
+      "event_timestamp": "2026-03-27",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.9840254788957894,
+      "prior_subtype_sample": 24,
+      "prior_subtype_win_rate_1d": 0.625,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "VRTX"
+    },
+    {
+      "event_timestamp": "2026-04-10",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.744744615893467,
+      "prior_subtype_sample": 36,
+      "prior_subtype_win_rate_1d": 0.6111111111111112,
+      "subtype": "FDA_REJECTION",
+      "ticker": "TLX"
+    },
+    {
+      "event_timestamp": "2026-04-22",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.6719517521714071,
+      "prior_subtype_sample": 37,
+      "prior_subtype_win_rate_1d": 0.5945945945945946,
+      "subtype": "FDA_REJECTION",
+      "ticker": "ABBV"
+    },
+    {
+      "event_timestamp": "2026-05-08",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.9840254788957894,
+      "prior_subtype_sample": 25,
+      "prior_subtype_win_rate_1d": 0.64,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "ARGX"
+    },
+    {
+      "event_timestamp": "2026-05-08",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.9840254788957894,
+      "prior_subtype_sample": 25,
+      "prior_subtype_win_rate_1d": 0.64,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "ARGX"
+    },
+    {
+      "event_timestamp": "2026-07-31",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 1.0685522495112012,
+      "prior_subtype_sample": 27,
+      "prior_subtype_win_rate_1d": 0.6666666666666666,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "REGN"
+    },
+    {
+      "event_timestamp": "2026-08-25",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 1.0262888642034953,
+      "prior_subtype_sample": 28,
+      "prior_subtype_win_rate_1d": 0.6428571428571429,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "ZYME"
+    },
+    {
+      "event_timestamp": "2026-08-25",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 1.0262888642034953,
+      "prior_subtype_sample": 28,
+      "prior_subtype_win_rate_1d": 0.6428571428571429,
+      "subtype": "LABEL_EXPANSION",
+      "ticker": "ZYME"
+    },
+    {
+      "event_timestamp": "2026-08-26",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.4073498340863848,
+      "prior_subtype_sample": 10,
+      "prior_subtype_win_rate_1d": 0.5,
+      "subtype": "FDA_APPROVAL",
+      "ticker": "RVMD"
+    },
+    {
+      "event_timestamp": "2026-09-03",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 1.0454697351914735,
+      "prior_subtype_sample": 11,
+      "prior_subtype_win_rate_1d": 0.5454545454545454,
+      "subtype": "FDA_APPROVAL",
+      "ticker": "IONS"
+    },
+    {
+      "event_timestamp": "2026-09-11",
+      "historical_edge_gate": false,
+      "prior_subtype_median_net_1d_pct": 0.51170941744092,
+      "prior_subtype_sample": 12,
+      "prior_subtype_win_rate_1d": 0.5,
+      "subtype": "FDA_APPROVAL",
+      "ticker": "TLX"
+    }
+  ],
+  "methodology": {
+    "friction_bps": 30.0,
+    "lookahead_control": "Only strictly earlier timestamps contribute to each event's subtype statistics; equal-timestamp events are batched.",
+    "minimum_median_net_1d_pct": 1.0,
+    "minimum_sample": 30,
+    "minimum_win_rate_1d": 0.55,
+    "warning": "This replays only the historical-edge gate; it is not a live trading backtest."
+  },
+  "purpose": "point-in-time replay of the historical-edge prerequisite for Trading Intelligence Rule V1.0",
+  "sample": {
+    "events": 81,
+    "qualified_historical_edge_events": 0
+  },
+  "version": "1.0"
+}
