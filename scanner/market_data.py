@@ -92,6 +92,17 @@ def get_market_snapshot(ticker, session=None):
         change_pct = None
         if current is not None and previous:
             change_pct = (current - previous) / previous * 100.0
+        # Some Yahoo responses omit/lag meta.previousClose around non-trading days.
+        # Fall back to the latest two completed daily candles.
+        if change_pct is None and len(closes) >= 2:
+            latest_close = _safe_float(closes[-1])
+            prior_close = _safe_float(closes[-2])
+            if latest_close is not None and prior_close:
+                change_pct = (latest_close - prior_close) / prior_close * 100.0
+                if current is None:
+                    current = latest_close
+                if previous is None:
+                    previous = prior_close
 
         volume_ratio = None
         if volume is not None and avg_volume:
