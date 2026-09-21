@@ -121,7 +121,7 @@
     },
     "reaction_interpretation": "UNKNOWN",
     "reaction_strength": "UNKNOWN",
-    "recorded_at": "2026-09-21T16:36:34.978257+00:00",
+    "recorded_at": "2026-09-21T20:37:31.277480+00:00",
     "score": 100,
     "severity": "HIGH",
     "short_interest_pct": null,
@@ -136,16 +136,17 @@
     "trading_intelligence_rule_checks": {
       "historical_edge": true,
       "historical_sample": false,
-      "market_confirmation": true,
+      "market_confirmation": false,
       "priority": true,
       "source": true,
       "ti_score": false
     },
     "trading_intelligence_rule_failed": [
       "ti_score",
-      "historical_sample"
+      "historical_sample",
+      "market_confirmation"
     ],
-    "trading_intelligence_score": 72.0,
+    "trading_intelligence_score": 71.8,
     "trading_intelligence_version": "1.1",
     "trading_setup_score": 52,
     "trading_setup_version": "5.3",
@@ -276,7 +277,7 @@
     },
     "reaction_interpretation": "UNKNOWN",
     "reaction_strength": "UNKNOWN",
-    "recorded_at": "2026-09-21T16:36:34.978235+00:00",
+    "recorded_at": "2026-09-21T20:37:31.277456+00:00",
     "score": 100,
     "severity": "HIGH",
     "short_interest_pct": null,
@@ -291,17 +292,16 @@
     "trading_intelligence_rule_checks": {
       "historical_edge": true,
       "historical_sample": false,
-      "market_confirmation": false,
+      "market_confirmation": true,
       "priority": true,
       "source": true,
       "ti_score": false
     },
     "trading_intelligence_rule_failed": [
       "ti_score",
-      "historical_sample",
-      "market_confirmation"
+      "historical_sample"
     ],
-    "trading_intelligence_score": 71.9,
+    "trading_intelligence_score": 72.2,
     "trading_intelligence_version": "1.1",
     "trading_setup_score": 52,
     "trading_setup_version": "5.3",
