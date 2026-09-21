@@ -121,7 +121,7 @@
     },
     "reaction_interpretation": "UNKNOWN",
     "reaction_strength": "UNKNOWN",
-    "recorded_at": "2026-09-21T10:38:00.490856+00:00",
+    "recorded_at": "2026-09-21T16:36:34.978257+00:00",
     "score": 100,
     "severity": "HIGH",
     "short_interest_pct": null,
@@ -136,19 +136,18 @@
     "trading_intelligence_rule_checks": {
       "historical_edge": true,
       "historical_sample": false,
-      "market_confirmation": false,
+      "market_confirmation": true,
       "priority": true,
       "source": true,
       "ti_score": false
     },
     "trading_intelligence_rule_failed": [
       "ti_score",
-      "historical_sample",
-      "market_confirmation"
+      "historical_sample"
     ],
-    "trading_intelligence_score": 72.2,
+    "trading_intelligence_score": 72.0,
     "trading_intelligence_version": "1.1",
-    "trading_setup_score": 54,
+    "trading_setup_score": 52,
     "trading_setup_version": "5.3",
     "urgency": "IMMEDIATE",
     "url": "https://www.fda.gov/news-events/press-announcements/fda-approves-first-class-targeted-therapy-metastatic-pancreatic-cancer",
@@ -277,7 +276,7 @@
     },
     "reaction_interpretation": "UNKNOWN",
     "reaction_strength": "UNKNOWN",
-    "recorded_at": "2026-09-21T10:38:00.490835+00:00",
+    "recorded_at": "2026-09-21T16:36:34.978235+00:00",
     "score": 100,
     "severity": "HIGH",
     "short_interest_pct": null,
@@ -302,9 +301,9 @@
       "historical_sample",
       "market_confirmation"
     ],
-    "trading_intelligence_score": 70.3,
+    "trading_intelligence_score": 71.9,
     "trading_intelligence_version": "1.1",
-    "trading_setup_score": 53,
+    "trading_setup_score": 52,
     "trading_setup_version": "5.3",
     "urgency": "IMMEDIATE",
     "url": "https://www.fda.gov/news-events/press-announcements/fda-approves-first-drug-treat-alexander-disease",
