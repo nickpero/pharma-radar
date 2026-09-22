@@ -8,6 +8,7 @@ from scanner.trading_intelligence import enrich_trading_event
 from scanner.priority import enrich_alert_priority, sort_by_alert_priority
 from scanner.ema_feed import get_ema_news
 from scanner.sec_feed import get_sec_news
+from scanner.clinical_impact import enrich_clinical_impact
 
 
 def _process_item(item, watchlist):
@@ -32,6 +33,7 @@ def _process_item(item, watchlist):
         "summary": item.get("summary", ""),
         "published_at": item.get("published_at"),
     })
+    event = enrich_clinical_impact(event)
     scored = score_fda_event(event)
     trading = enrich_trading_event(scored)
     trading = enrich_alert_priority(trading)
