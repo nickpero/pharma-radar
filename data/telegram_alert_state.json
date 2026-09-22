@@ -9,5 +9,6 @@
   "('DIVERGENCE_V1', '2026-09-21', 'RVMD', 'daraxonrasib')": "2026-09-21T00:08:01.606770+00:00",
   "('IONS', 'zilganersen', 'clinical_results', ('ID', '457a6b6645be77efdbc017bbd4114dae1070bc0affd68013084438a476eea220'))": "2026-09-10T01:08:06.399882+00:00",
   "('IONS', 'zilganersen', 'fda_approval', ('URL', 'https://www.fda.gov/news-events/press-announcements/fda-approves-first-drug-treat-alexander-disease'))": "2026-09-09T19:17:03.469476+00:00",
+  "('RVMD', 'rmc-6236', 'date_delayed', ('TIME', ''))": "2026-09-22T12:50:57.430905+00:00",
   "('VRTX', 'suzetrigine', 'date_accelerated', ('TIME', ''))": "2026-09-16T12:16:05.669270+00:00"
 }
