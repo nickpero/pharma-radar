@@ -105,7 +105,13 @@ def build_alert(ticker, company, program, nct_id, event, changes, trial):
         "historical_edge_label": event.get("historical_edge_label"), "historical_edge_confidence": event.get("historical_edge_confidence"),
         "historical_edge_sample": event.get("historical_edge_sample"), "historical_edge_median_1d_pct": event.get("historical_edge_median_1d_pct"),
         "historical_edge_win_rate_1d": event.get("historical_edge_win_rate_1d"), "historical_edge_direction_adjustment": event.get("historical_edge_direction_adjustment"),
-        "historical_edge_ticker_sample": event.get("historical_edge_ticker_sample"), "historical_edge_ticker_adjustment": event.get("historical_edge_ticker_adjustment"),
+        "historical_edge_ticker_sample": event.get("historical_edge_ticker_sample"),
+        "catalyst_category": event.get("catalyst_category"),
+        "clinical_data_release": event.get("clinical_data_release", False),
+        "novelty_score": event.get("novelty_score", 0),
+        "novelty_matches": event.get("novelty_matches", []),
+        "market_impact_score": event.get("market_impact_score", 0),
+        "market_impact_label": event.get("market_impact_label", "N/A"), "historical_edge_ticker_adjustment": event.get("historical_edge_ticker_adjustment"),
     }
     alert.update(_reaction_fields(event))
     return alert
