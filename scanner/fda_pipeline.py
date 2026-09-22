@@ -23,6 +23,7 @@ Il modulo NON invia Telegram.
 """
 
 from scanner.fda_news import filter_fda_catalysts
+from scanner.clinical_impact import enrich_clinical_impact
 from scanner.fda_enrichment import enrich_fda_news_item
 from scanner.fda_entity_resolution import resolve_fda_entities
 from scanner.fda_matcher import identify_fda_target
@@ -66,6 +67,7 @@ def process_fda_news_item(news_item, watchlist=None):
     if resolved_item.get("fda_entity_resolution"):
         catalyst["fda_entity_resolution"] = resolved_item["fda_entity_resolution"]
 
+    catalyst = enrich_clinical_impact(catalyst)
     scored = score_fda_event(catalyst)
     trading = enrich_trading_event(scored)
     trading = enrich_alert_priority(trading)
