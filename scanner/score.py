@@ -74,6 +74,15 @@ SUBTYPE_BONUS = {
     "PRIMARY_ENDPOINT_MET": 20,
     "TOPLINE_RESULTS": 25,
     "FDA_APPROVAL": 30,
+    "PRIMARY_ENDPOINT_MET": 25,
+    "PRIMARY_ENDPOINT_FAILED": 25,
+    "TOPLINE_RESULTS": 25,
+    "MAINTENANCE_DATA": 20,
+    "DOSE_RESPONSE": 15,
+    "SECONDARY_ENDPOINT_MET": 10,
+    "SECONDARY_ENDPOINT_FAILED": 15,
+    "EFFICACY_SIGNAL": 15,
+    "SAFETY_SIGNAL": 25,
 
     # Major negative catalysts
     "PRIMARY_ENDPOINT_FAILED": 25,
@@ -360,6 +369,12 @@ def enrich_event(event):
     result["label"] = score_label(
         score
     )
+
+    try:
+        from scanner.clinical_impact import enrich_clinical_impact
+        result = enrich_clinical_impact(result)
+    except Exception:
+        pass
 
     return result
 
