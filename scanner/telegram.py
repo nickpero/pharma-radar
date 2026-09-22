@@ -229,7 +229,7 @@ def format_catalyst_alert(alert):
     lines.extend([
         "",
         f"🎯 Catalyst: {score}/100 · {label}",
-        *( [f"🧠 Clinical data: {alert.get('catalyst_category')} · Novelty {alert.get('novelty_score', 0)}/100 · Market impact {alert.get('market_impact_score', 0)}/100"] if alert.get("clinical_data_release") else [] ),
+        *( [f"🧠 Clinical data: {alert.get('catalyst_category', event.get('catalyst_category'))} · Novelty {alert.get('novelty_score', event.get('novelty_score', 0))}/100 · Market impact {alert.get('market_impact_score', event.get('market_impact_score', 0))}/100"] if alert.get("clinical_data_release") else [] ),
         f"🚨 Priority: {alert_priority}/100 · {alert_tier}",
         f"📊 Setup: {setup_score}/100 · Window: {window}",
         "",
