@@ -31,6 +31,7 @@ def _process_item(item, watchlist):
         "url": item.get("url"),
         "title": item.get("title", ""),
         "summary": item.get("summary", ""),
+        "content": item.get("content", ""),
         "published_at": item.get("published_at"),
     })
     event = enrich_clinical_impact(event)
