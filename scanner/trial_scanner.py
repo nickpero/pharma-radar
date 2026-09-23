@@ -22,6 +22,7 @@ from scanner.market_data import enrich_market_data, enrich_market_reactions
 from scanner.catalyst_memory import record_events, memory_summary
 from scanner.catalyst_explainer import enrich_catalyst_explainers
 from scanner.catalyst_confirmation import enrich_catalyst_confirmation
+from scanner.catalyst_dedup import filter_known_catalysts
 
 WATCHLIST_FILE = Path("data/watchlist.json")
 
@@ -210,6 +211,7 @@ def scan(baseline=False):
     alerts = [enrich_trading_setup_2(alert, market_data=alert.get("market_data")) for alert in alerts]
     alerts = [enrich_catalyst_confirmation(alert) for alert in alerts]
     alerts = deduplicate_alerts(alerts)
+    alerts, suppressed_duplicates = filter_known_catalysts(alerts)
     alerts = enrich_catalyst_explainers(alerts)
     memory_added = record_events(alerts); memory_info = memory_summary()
     print(f"Catalyst memory: +{memory_added} records, total={memory_info['records']}")
@@ -220,7 +222,7 @@ def scan(baseline=False):
     print(f"EMA news: {len(regulatory_result['ema_news'])}"); print(f"SEC filings: {len(regulatory_result['sec_news'])}"); print(f"EMA/SEC events: {len(regulatory_result['events'])}")
     print(f"Alerts: {len(alerts)}"); print(f"Errors: {len(errors)}"); print("===================================")
     return {"companies": len(watchlist), "total_trials": total_trials, "relevant_trials": relevant_trials, "filtered_trials": filtered_trials,
-            "detected_changes": detected_changes, "changes": alerts, "alerts": alerts, "errors": errors, "relevant_details": relevant_details,
+            "detected_changes": detected_changes, "changes": alerts, "alerts": alerts, "suppressed_duplicates": suppressed_duplicates, "errors": errors, "relevant_details": relevant_details,
             "fda_news": fda_result["news"], "fda_events": fda_result["events"], "fda_alerts": fda_result["alerts"],
             "ema_news": regulatory_result["ema_news"], "sec_news": regulatory_result["sec_news"], "regulatory_events": regulatory_result["events"],
             "regulatory_alerts": regulatory_result["alerts"], "memory_added": memory_added, "memory": memory_info, "baseline": baseline}
