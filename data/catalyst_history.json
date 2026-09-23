@@ -121,7 +121,7 @@
     },
     "reaction_interpretation": "UNKNOWN",
     "reaction_strength": "UNKNOWN",
-    "recorded_at": "2026-09-23T12:16:35.482407+00:00",
+    "recorded_at": "2026-09-23T17:16:31.585533+00:00",
     "score": 100,
     "severity": "HIGH",
     "short_interest_pct": null,
@@ -146,7 +146,7 @@
       "historical_sample",
       "market_confirmation"
     ],
-    "trading_intelligence_score": 71.0,
+    "trading_intelligence_score": 70.9,
     "trading_intelligence_version": "1.1",
     "trading_setup_score": 52,
     "trading_setup_version": "5.3",
@@ -275,7 +275,7 @@
     },
     "reaction_interpretation": "UNKNOWN",
     "reaction_strength": "UNKNOWN",
-    "recorded_at": "2026-09-23T12:16:35.482386+00:00",
+    "recorded_at": "2026-09-23T17:16:31.585512+00:00",
     "score": 100,
     "severity": "HIGH",
     "short_interest_pct": null,
@@ -290,16 +290,17 @@
     "trading_intelligence_rule_checks": {
       "historical_edge": true,
       "historical_sample": false,
-      "market_confirmation": true,
+      "market_confirmation": false,
       "priority": true,
       "source": true,
       "ti_score": false
     },
     "trading_intelligence_rule_failed": [
       "ti_score",
-      "historical_sample"
+      "historical_sample",
+      "market_confirmation"
     ],
-    "trading_intelligence_score": 72.9,
+    "trading_intelligence_score": 70.9,
     "trading_intelligence_version": "1.1",
     "trading_setup_score": 52,
     "trading_setup_version": "5.3",
