@@ -214,6 +214,7 @@ def scan(baseline=False):
     alerts = deduplicate_alerts(alerts)
     alerts, suppressed_duplicates = filter_known_catalysts(alerts)
     alerts = enrich_catalyst_explainers(alerts)
+    monitoring_alerts = alerts + suppressed_duplicates
     memory_added = record_events(alerts); memory_info = memory_summary()
     print(f"Catalyst memory: +{memory_added} records, total={memory_info['records']}")
     save_state(new_state)
@@ -223,7 +224,7 @@ def scan(baseline=False):
     print(f"EMA news: {len(regulatory_result['ema_news'])}"); print(f"SEC filings: {len(regulatory_result['sec_news'])}"); print(f"EMA/SEC events: {len(regulatory_result['events'])}")
     print(f"Alerts: {len(alerts)}"); print(f"Errors: {len(errors)}"); print("===================================")
     return {"companies": len(watchlist), "total_trials": total_trials, "relevant_trials": relevant_trials, "filtered_trials": filtered_trials,
-            "detected_changes": detected_changes, "changes": alerts, "alerts": alerts, "suppressed_duplicates": suppressed_duplicates, "errors": errors, "relevant_details": relevant_details,
+            "detected_changes": detected_changes, "changes": alerts, "alerts": alerts, "monitoring_alerts": monitoring_alerts, "suppressed_duplicates": suppressed_duplicates, "errors": errors, "relevant_details": relevant_details,
             "fda_news": fda_result["news"], "fda_events": fda_result["events"], "fda_alerts": fda_result["alerts"],
             "ema_news": regulatory_result["ema_news"], "sec_news": regulatory_result["sec_news"], "regulatory_events": regulatory_result["events"],
             "regulatory_alerts": regulatory_result["alerts"], "memory_added": memory_added, "memory": memory_info, "baseline": baseline}
