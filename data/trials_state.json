@@ -7200,5 +7200,75 @@
       "Moxifloxacin",
       "Moxifloxacin Placebo"
     ]
+  },
+  "VTGN:fasedienol:NCT06809179": {
+    "nct_id": "NCT06809179",
+    "title": "A Clinical Trial to Assess the Efficacy, Safety, and Tolerability of a Repeat Dose of Fasedienol Nasal Spray for the Acute Treatment of Anxiety in Adults With Social Anxiety Disorder",
+    "official_title": "A Phase 2, Three-arm, Multicenter, Randomized, Double-blind, Placebo-controlled Clinical Trial to Assess the Efficacy, Safety, and Tolerability of a Repeat Dose of Fasedienol (PH94B) Nasal Spray for the Acute Treatment of Anxiety Induced by a Public Speaking Challenge in Adult Subjects With Social Anxiety Disorder, With an Open-Label Extension",
+    "status": "RECRUITING",
+    "last_update": "2026-02-05",
+    "start_date": "2025-01-09",
+    "completion_date": "2026-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 60,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "VistaGen Therapeutics, Inc.",
+    "conditions": [
+      "Social Anxiety Disorder"
+    ],
+    "interventions": [
+      "Fasedienol Nasal Spray - Placebo Nasal Spray",
+      "Fasedienol Nasal Spray - Fasedienol Nasal Spray",
+      "Placebo Nasal Spray - Placebo Nasal Spray"
+    ]
+  },
+  "VTGN:fasedienol:NCT06615557": {
+    "nct_id": "NCT06615557",
+    "title": "Fasedienol Nasal Spray for the Acute Treatment of Anxiety in Adults With Social Anxiety Disorder (PALISADE-4)",
+    "official_title": "US, Phase 3, Multicenter, Randomized, Double-blind, Placebo-controlled Clinical Trial of Fasedienol Nasal Spray for the Acute Treatment of Anxiety Induced by a Public Speaking Challenge in Adult Subjects With Social Anxiety Disorder, With an Open-Label Extension (PALISADE-4)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-05-22",
+    "start_date": "2024-09-16",
+    "completion_date": "2027-04",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 238,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "VistaGen Therapeutics, Inc.",
+    "conditions": [
+      "Social Anxiety Disorder (SAD)"
+    ],
+    "interventions": [
+      "Fasedienol Nasal Spray",
+      "Placebo Nasal Spray"
+    ]
+  },
+  "VTGN:fasedienol:NCT06358651": {
+    "nct_id": "NCT06358651",
+    "title": "Fasedienol Nasal Spray for the Acute Treatment of Anxiety in Adults With Social Anxiety Disorder (PALISADE-3)",
+    "official_title": "US, Phase 3, Multicenter, Randomized, Double-blind, Placebo-controlled Clinical Trial of Fasedienol Nasal Spray for the Acute Treatment of Anxiety Induced by a Public Speaking Challenge in Adult Subjects With Social Anxiety Disorder, With an Open-Label Extension (PALISADE-3)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2025-11-26",
+    "start_date": "2024-03-28",
+    "completion_date": "2026-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 238,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "VistaGen Therapeutics, Inc.",
+    "conditions": [
+      "Social Anxiety Disorder"
+    ],
+    "interventions": [
+      "Fasedienol Nasal Spray",
+      "Placebo Nasal Spray"
+    ]
   }
 }
