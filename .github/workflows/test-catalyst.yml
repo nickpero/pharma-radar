@@ -21,7 +21,7 @@ jobs:
           pip install --disable-pip-version-check -r requirements.txt
       - name: Check Python syntax
         run: |
-          python -m py_compile scanner/historical_edge_score.py scanner/trading_intelligence_score.py scanner/trading_intelligence_rule.py scanner/robust_historical_backtest.py scanner/trading_intelligence_history.py scanner/trading_intelligence_pit_replay.py scanner/trial_scanner.py main.py scanner/telegram.py scanner/telegram_intelligence.py
+          python -m py_compile scanner/historical_edge_score.py scanner/trading_intelligence_score.py scanner/trading_intelligence_rule.py scanner/robust_historical_backtest.py scanner/trading_intelligence_history.py scanner/trading_intelligence_pit_replay.py scanner/catalyst_dedup.py scanner/trial_scanner.py main.py scanner/telegram.py scanner/telegram_intelligence.py
       - name: Run core tests
         run: |
           python -m scanner.test_historical_edge_score
@@ -32,5 +32,6 @@ jobs:
           python -m scanner.test_trading_intelligence_pit_replay
           python -m scanner.test_telegram_intelligence
           python -m scanner.test_alert_dedup
+          python -m scanner.test_catalyst_dedup
           python -m scanner.test_catalyst_explainer
           python -m scanner.test_catalyst_confirmation
