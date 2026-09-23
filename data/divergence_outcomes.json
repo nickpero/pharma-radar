@@ -75,6 +75,47 @@
       "threshold_pct": 2.0,
       "ticker": "ZYME",
       "trading_intelligence_score": 69.7
+    },
+    {
+      "catalyst_score": 100,
+      "created_at": "2026-09-23T20:33:38.888133+00:00",
+      "daily_pct": -4.707011091204974,
+      "direction": "POSITIVE",
+      "event_date": "2026-09-17",
+      "event_price": null,
+      "event_price_timestamp": null,
+      "event_timestamp": "2026-09-17",
+      "historical_edge_median_1d_pct": 1.3082,
+      "historical_edge_win_rate_1d": 0.6768,
+      "outcomes_snapshot": {
+        "entry_close": 14.5,
+        "entry_date": "2026-09-17",
+        "event_price": 14.5,
+        "event_price_source": "DAILY_CLOSE_FALLBACK",
+        "event_price_timestamp": "2026-09-17",
+        "event_to_close_pct": 0.0,
+        "max_adverse_pct": 0.06896709573679957,
+        "max_favorable_pct": 7.689653593918373,
+        "max_recovery": true,
+        "outcomes": {
+          "t1": {
+            "close": 14.510000228881836,
+            "date": "2026-09-18",
+            "return_pct": 0.06896709573679957
+          },
+          "t3": {
+            "close": 15.614999771118164,
+            "date": "2026-09-22",
+            "return_pct": 7.689653593918373
+          }
+        },
+        "recovered_by_t5": false
+      },
+      "program": "UX111",
+      "status": "PENDING",
+      "threshold_pct": 2.0,
+      "ticker": "RARE",
+      "trading_intelligence_score": 69.1
     }
   ],
   "version": "1.0"
