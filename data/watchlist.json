@@ -1,147 +1,237 @@
 {
   "CAPR": {
     "company": "Capricor Therapeutics",
-    "programs": ["deramiocel"],
+    "programs": [
+      "deramiocel"
+    ],
     "priority": "RED"
   },
   "SVRA": {
     "company": "Savara",
-    "programs": ["molgramostim", "MOLBREEVI"],
+    "programs": [
+      "molgramostim",
+      "MOLBREEVI"
+    ],
     "priority": "RED"
   },
   "ZYME": {
     "company": "Zymeworks",
-    "programs": ["zanidatamab"],
+    "programs": [
+      "zanidatamab"
+    ],
     "priority": "RED"
   },
   "MIRM": {
     "company": "Mirum Pharmaceuticals",
-    "programs": ["maralixibat", "zilurgisertib", "brelovitug"],
+    "programs": [
+      "maralixibat",
+      "zilurgisertib",
+      "brelovitug"
+    ],
     "priority": "RED"
   },
   "PHVS": {
     "company": "Pharvaris",
-    "programs": ["deucrictibant"],
+    "programs": [
+      "deucrictibant"
+    ],
     "priority": "RED"
   },
   "TENX": {
     "company": "Tenax Therapeutics",
-    "programs": ["TNX-103"],
+    "programs": [
+      "TNX-103"
+    ],
     "priority": "RED"
   },
   "NUVL": {
     "company": "Nuvalent",
-    "programs": ["zidesamtinib"],
+    "programs": [
+      "zidesamtinib"
+    ],
     "priority": "RED"
   },
   "RARE": {
     "company": "Ultragenyx",
-    "programs": ["UX111"],
+    "programs": [
+      "UX111"
+    ],
     "priority": "ORANGE"
   },
   "TLX": {
     "company": "Telix Pharmaceuticals",
-    "programs": ["TLX101", "Pixclara"],
+    "programs": [
+      "TLX101",
+      "Pixclara"
+    ],
     "priority": "ORANGE"
   },
   "IONS": {
     "company": "Ionis Pharmaceuticals",
-    "programs": ["zilganersen"],
+    "programs": [
+      "zilganersen"
+    ],
     "priority": "ORANGE"
   },
   "ARGX": {
     "company": "argenx",
-    "programs": ["VYVGART"],
+    "programs": [
+      "VYVGART"
+    ],
     "priority": "RED"
   },
   "QURE": {
     "company": "uniQure",
-    "programs": ["AMT-130"],
+    "programs": [
+      "AMT-130"
+    ],
     "priority": "RED"
   },
   "STOK": {
     "company": "Stoke Therapeutics",
-    "programs": ["zorevunersen"],
+    "programs": [
+      "zorevunersen"
+    ],
     "priority": "RED"
   },
   "ANNX": {
     "company": "Annexon",
-    "programs": ["ANX007"],
+    "programs": [
+      "ANX007"
+    ],
     "priority": "ORANGE"
   },
   "IMMX": {
     "company": "Immix Biopharma",
-    "programs": ["NXC-201"],
+    "programs": [
+      "NXC-201"
+    ],
     "priority": "ORANGE"
   },
   "ALMS": {
     "company": "Alumis",
-    "programs": ["ESK-001"],
+    "programs": [
+      "ESK-001"
+    ],
     "priority": "ORANGE"
   },
   "RNA": {
     "company": "Avidity Biosciences",
-    "programs": ["delpacibart"],
+    "programs": [
+      "delpacibart"
+    ],
     "priority": "ORANGE"
   },
   "RGNX": {
     "company": "REGENXBIO",
-    "programs": ["surabgene"],
+    "programs": [
+      "surabgene"
+    ],
     "priority": "ORANGE"
   },
   "EYPT": {
     "company": "EyePoint Pharmaceuticals",
-    "programs": ["vorolanib"],
+    "programs": [
+      "vorolanib"
+    ],
     "priority": "ORANGE"
   },
   "SMMT": {
     "company": "Summit Therapeutics",
-    "programs": ["ivonescimab"],
+    "programs": [
+      "ivonescimab"
+    ],
     "priority": "RED"
   },
   "MRNA": {
     "company": "Moderna",
-    "programs": ["intismeran autogene", "mRNA-1010"],
+    "programs": [
+      "intismeran autogene",
+      "mRNA-1010"
+    ],
     "priority": "RED"
   },
   "BNTX": {
     "company": "BioNTech",
-    "programs": ["BNT122", "BNT113"],
+    "programs": [
+      "BNT122",
+      "BNT113"
+    ],
     "priority": "ORANGE"
   },
   "RVMD": {
     "company": "Revolution Medicines",
-    "programs": ["daraxonrasib", "RMC-6236"],
+    "programs": [
+      "daraxonrasib",
+      "RMC-6236"
+    ],
     "priority": "RED"
   },
   "ROIV": {
     "company": "Roivant Sciences",
-    "programs": ["mosliciguat"],
+    "programs": [
+      "mosliciguat"
+    ],
     "priority": "ORANGE"
   },
   "REGN": {
     "company": "Regeneron Pharmaceuticals",
-    "programs": ["linvoseltamab", "odronextamab"],
+    "programs": [
+      "linvoseltamab",
+      "odronextamab"
+    ],
     "priority": "ORANGE"
   },
   "ALNY": {
     "company": "Alnylam Pharmaceuticals",
-    "programs": ["vutrisiran"],
+    "programs": [
+      "vutrisiran"
+    ],
     "priority": "ORANGE"
   },
   "INSM": {
     "company": "Insmed",
-    "programs": ["brensocatib"],
+    "programs": [
+      "brensocatib"
+    ],
     "priority": "RED"
   },
   "CRSP": {
     "company": "CRISPR Therapeutics",
-    "programs": ["exa-cel", "Casgevy"],
+    "programs": [
+      "exa-cel",
+      "Casgevy"
+    ],
     "priority": "ORANGE"
   },
   "VRTX": {
     "company": "Vertex Pharmaceuticals",
-    "programs": ["suzetrigine", "vanzacaftor"],
+    "programs": [
+      "suzetrigine",
+      "vanzacaftor"
+    ],
+    "priority": "ORANGE"
+  },
+  "VTGN": {
+    "company": "Vistagen Therapeutics",
+    "programs": [
+      "fasedienol"
+    ],
+    "priority": "RED"
+  },
+  "ARTL": {
+    "company": "Artelo Biosciences",
+    "programs": [
+      "ART27.13"
+    ],
+    "priority": "ORANGE"
+  },
+  "DCOY": {
+    "company": "Decoy Therapeutics",
+    "programs": [
+      "D-MAVs",
+      "pan-filovirus"
+    ],
     "priority": "ORANGE"
   }
 }
