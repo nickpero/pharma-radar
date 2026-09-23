@@ -126,7 +126,9 @@ def send_email_alerts(result):
 
 
 def _new_divergence_alerts(result):
-    divergences = detect_divergences(result.get("alerts", []))
+    # Divergence monitoring also sees catalyst restatements that were suppressed
+    # from NEW ACTIONABLE alerts; the market reaction remains useful context.
+    divergences = detect_divergences(result.get("monitoring_alerts", result.get("alerts", [])))
     state = load_sent_alerts()
     today = datetime.now(timezone.utc).date().isoformat()
     fresh = []
@@ -199,11 +201,6 @@ def main():
         if row["issues"]:
             print(f"DATA QUALITY {row['ticker']}: {row['issues']}")
 
-    quality = audit_alerts(result["alerts"])
-    print(f"Data Quality Audit V1.0: {quality['status']} — alerts={quality['alerts']} warnings={quality['warnings']}")
-    for row in quality['rows']:
-        if row['issues']:
-            print(f"DATA QUALITY {row['ticker']}: {row['issues']}")
     record_events(result["alerts"])
     new_alerts = _new_telegram_alerts(result)
     if new_alerts:
