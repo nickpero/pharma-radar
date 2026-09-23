@@ -23,6 +23,7 @@ from scanner.catalyst_memory import record_events, memory_summary
 from scanner.catalyst_explainer import enrich_catalyst_explainers
 from scanner.catalyst_confirmation import enrich_catalyst_confirmation
 from scanner.catalyst_dedup import filter_known_catalysts
+from scanner.catalyst_dedup import filter_known_catalysts
 
 WATCHLIST_FILE = Path("data/watchlist.json")
 
