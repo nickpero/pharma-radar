@@ -233,5 +233,29 @@
       "pan-filovirus"
     ],
     "priority": "ORANGE"
+  },
+  "SRZN": {
+    "company": "Surrozen",
+    "programs": [
+      "SZN-8141"
+    ],
+    "priority": "RED"
+  },
+  "GCTK": {
+    "company": "Glucotrack",
+    "programs": [
+      "LT-100",
+      "ai PIPELINE"
+    ],
+    "priority": "ORANGE"
+  },
+  "HCWB": {
+    "company": "HCW Biologics",
+    "programs": [
+      "HCW9302",
+      "HCW11-018b",
+      "HCW11-040"
+    ],
+    "priority": "ORANGE"
   }
 }
