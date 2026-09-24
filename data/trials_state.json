@@ -7454,5 +7454,49 @@
       "Fasedienol Nasal Spray",
       "Placebo Nasal Spray"
     ]
+  },
+  "SRZN:SZN-8141:NCT07817121": {
+    "nct_id": "NCT07817121",
+    "title": "A First-in-human Trial of SZN-8141 in Diabetic Macular Edema",
+    "official_title": "A First-in-human, Prospective Trial to Evaluate Safety, Tolerability, Pharmacokinetics, Pharmacodynamics, and Clinical Outcomes of SZN-8141 in Diabetic Macular Edema",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-09-14",
+    "start_date": "2026-10-30",
+    "completion_date": "2027-08-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 9,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Surrozen Operating, Inc.",
+    "conditions": [
+      "Diabetic Macular Edema (DME)"
+    ],
+    "interventions": [
+      "SZN-8141 for Injection"
+    ]
+  },
+  "HCWB:HCW9302:NCT07049328": {
+    "nct_id": "NCT07049328",
+    "title": "HCW9302 (Interleukin-2 Fusion Protein) for Alopecia Areata",
+    "official_title": "A Phase 1 Study of HCW9302, an IL-2 Fusion Protein, for Alopecia Areata",
+    "status": "RECRUITING",
+    "last_update": "2026-09-15",
+    "start_date": "2025-08-16",
+    "completion_date": "2027-12-15",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 30,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "HCW Biologics",
+    "conditions": [
+      "Alopecia Areata(AA)"
+    ],
+    "interventions": [
+      "HCW9302, an IL-2 fusion protein"
+    ]
   }
 }
