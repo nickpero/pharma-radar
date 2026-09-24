@@ -13,5 +13,7 @@
   "('RARE', 'ux111', 'fda_approval', ('ID', 'bfde3975dd32b75131a4bc054c09fd9f3d41c22b0ba243775e12e2e31ac9d498'))": "2026-09-23T20:33:36.512879+00:00",
   "('RVMD', 'rmc-6236', 'date_delayed', ('TIME', ''))": "2026-09-22T12:50:57.430905+00:00",
   "('VRTX', 'suzetrigine', 'date_accelerated', ('TIME', ''))": "2026-09-16T12:16:05.669270+00:00",
+  "('VTGN', 'fasedienol', 'fda_approval', ('ID', '0c8ed8c3e770782b9d1b1152635cb7051ff5d9605bbc937df0f46d96332d44ea'))": "2026-09-24T23:36:20.156426+00:00",
+  "('VTGN', 'fasedienol', 'fda_approval', ('ID', 'c831cacec8f507157e5f56eb02d6de95e8130ae94dfba29b5b6cef84fec1de56'))": "2026-09-24T23:36:20.156426+00:00",
   "('ZYME', 'zanidatamab', 'fda_approval', ('ID', '03a621739f32e547781ef75cc2dae6c70aa8655ba75bd6c3237d38ed5a1cc59a'))": "2026-09-23T20:33:36.512879+00:00"
 }
