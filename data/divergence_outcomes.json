@@ -107,12 +107,17 @@
             "close": 15.614999771118164,
             "date": "2026-09-22",
             "return_pct": 7.689653593918373
+          },
+          "t5": {
+            "close": 14.670000076293945,
+            "date": "2026-09-24",
+            "return_pct": 1.1724143192685883
           }
         },
-        "recovered_by_t5": false
+        "recovered_by_t5": true
       },
       "program": "UX111",
-      "status": "PENDING",
+      "status": "COMPLETE",
       "threshold_pct": 2.0,
       "ticker": "RARE",
       "trading_intelligence_score": 69.1
