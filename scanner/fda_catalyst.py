@@ -164,7 +164,7 @@ def build_fda_catalyst(news_item):
         "REJECTION": "FDA_REJECTION", "SAFETY": "FDA_SAFETY_WARNING", "APPROVAL": "FDA_APPROVAL",
         "TRIAL_HOLD": "TRIAL_HOLD", "TRIAL_HOLD_LIFTED": "TRIAL_HOLD_LIFTED",
         "PHASE_ADVANCEMENT": "PHASE_ADVANCED", "DATE_ACCELERATED": "DATE_ACCELERATED",
-        "DATE_DELAYED": "DATE_DELAYED", "FILING": "REGULATORY_FILING",
+        "DATE_DELAYED": "DATE_DELAYED", "FILING": "REGULATORY_FILING", "FDA_MEETING": "FDA_MEETING", "FDA_PATHWAY": "FDA_PATHWAY",
     }
     if advanced["catalyst_type"] in subtype_map:
         event["subtype"] = subtype_map[advanced["catalyst_type"]]
