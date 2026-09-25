@@ -31,23 +31,23 @@ ADVANCED_RULES = [
 CLINICAL_RULES = [rule for rule in ADVANCED_RULES if rule[0] == "CLINICAL_RESULT"]
 
 APPROVAL_POSITIVE_PATTERNS = (
-    r"\\bfda\\s+(?:has\\s+)?approved\\b",
-    r"\\bfda\\s+approves\\b",
-    r"\\breceives?\\s+(?:full\\s+|accelerated\\s+)?fda\\s+approval\\b",
-    r"\\bfda\\s+grants?\\s+(?:full\\s+|accelerated\\s+)?approval\\b",
-    r"\\bfda\\s+authorizes\\b",
+    r"\bfda\s+(?:has\s+)?approved\b",
+    r"\bfda\s+approves\b",
+    r"\breceives?\s+(?:full\s+|accelerated\s+)?fda\s+approval\b",
+    r"\bfda\s+grants?\s+(?:full\s+|accelerated\s+)?approval\b",
+    r"\bfda\s+authorizes\b",
 )
 
 APPROVAL_NEGATION_PATTERNS = (
-    r"\\bnot\\s+(?:yet\\s+)?approved\\b",
-    r"\\bnot\\s+approved\\s+in\\s+the\\s+(?:united\\s+states|us)\\b",
-    r"\\bremains?\\s+investigational\\b",
-    r"\\bpotential\\s+(?:regulatory\\s+)?pathway\\b",
-    r"\\bprepar(?:ing|es)\\s+to\\s+meet\\s+(?:with\\s+)?the?\\s*fda\\b",
-    r"\\bplans?\\s+to\\s+meet\\s+(?:with\\s+)?the?\\s*fda\\b",
-    r"\\bseek(?:s|ing)?\\s+(?:fda\\s+)?approval\\b",
-    r"\\bapplication\\s+(?:for|seeking)\\s+approval\\b",
-    r"\\bcould\\s+support\\s+(?:a\\s+)?new\\s+drug\\s+application\\b",
+    r"\bnot\s+(?:yet\s+)?approved\b",
+    r"\bnot\s+approved\s+in\s+the\s+(?:united\s+states|us)\b",
+    r"\bremains?\s+investigational\b",
+    r"\bpotential\s+(?:regulatory\s+)?pathway\b",
+    r"\bprepar(?:ing|es)\s+to\s+meet\s+(?:with\s+)?the?\s*fda\b",
+    r"\bplans?\s+to\s+meet\s+(?:with\s+)?the?\s*fda\b",
+    r"\bseek(?:s|ing)?\s+(?:fda\s+)?approval\b",
+    r"\bapplication\s+(?:for|seeking)\s+approval\b",
+    r"\bcould\s+support\s+(?:a\s+)?new\s+drug\s+application\b",
 )
 
 REGULATORY_RULES = [
@@ -68,6 +68,11 @@ def _text(news_item):
 
 
 def _matches(text, pattern):
+    if pattern == "__EXPLICIT_FDA_APPROVAL__":
+        return bool(
+            any(re.search(rule, text, re.IGNORECASE) for rule in APPROVAL_POSITIVE_PATTERNS)
+            and not any(re.search(rule, text, re.IGNORECASE) for rule in APPROVAL_NEGATION_PATTERNS)
+        )
     return bool(re.search(pattern, text, re.IGNORECASE)) if pattern.startswith(r"\b") else pattern in text
 
 
@@ -81,33 +86,51 @@ def _classify(text, source_name, rules=ADVANCED_RULES):
 def classify_fda_catalyst(news_item):
     if not isinstance(news_item, dict):
         raise TypeError("news_item must be a dictionary")
+
     text = _text(news_item)
     title = str(news_item.get("title") or "").lower()
     source_type = str(news_item.get("source_type") or "").upper()
 
-    # HARD SAFETY GATE: FDA approval is emitted only when the source contains
-    # an explicit FDA approval statement. Generic words such as "approval",
-    # "approval pathway", "seeking approval", or "not approved" can never
-    # create FDA_APPROVAL.
-    if any(re.search(rule, text, re.IGNORECASE) for rule in APPROVAL_NEGATION_PATTERNS):
-        approval_blocked = True
-    else:
-        approval_blocked = False
+    approval_blocked = any(
+        re.search(rule, text, re.IGNORECASE)
+        for rule in APPROVAL_NEGATION_PATTERNS
+    )
 
-    # SEC/corporate releases often contain boilerplate such as "not approved".
-    # Resolve explicit clinical evidence first for primary-corporate sources.
+    # Corporate/SEC documents: clinical evidence wins over regulatory boilerplate.
     if source_type == "PRIMARY_CORPORATE":
         for source_text, source_name in ((title, "title"), (text, "content")):
             result = _classify(source_text, source_name, CLINICAL_RULES)
             if result:
                 return result
 
+    # Explicit regulatory pathway/meeting is not an approval.
     for source_text, source_name in ((title, "title"), (text, "content")):
-        result = _classify(source_text, source_name)
+        result = _classify(source_text, source_name, REGULATORY_RULES)
         if result:
             return result
-    return {"catalyst_type": "NEUTRAL", "direction": "UNKNOWN", "urgency": "LOW", "classification_source": "fallback"}
 
+    # Approval is allowed only through the explicit FDA approval rule.
+    if not approval_blocked:
+        for source_text, source_name in ((title, "title"), (text, "content")):
+            result = _classify(
+                source_text,
+                source_name,
+                [ADVANCED_RULES[4]],
+            )
+            if result:
+                return result
+
+    # Remaining non-approval catalysts.
+    remaining_rules = [
+        rule for rule in ADVANCED_RULES
+        if rule[0] != "APPROVAL"
+    ]
+    for source_text, source_name in ((title, "title"), (text, "content")):
+        result = _classify(source_text, source_name, remaining_rules)
+        if result:
+            return result
+
+    return {"catalyst_type": "NEUTRAL", "direction": "UNKNOWN", "urgency": "LOW", "classification_source": "fallback"}
 
 def build_fda_catalyst(news_item):
     if not isinstance(news_item, dict):
