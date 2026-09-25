@@ -67,12 +67,16 @@ def _event_identity(alert):
     url = alert.get("url") or event.get("url")
     title = alert.get("title") or event.get("title")
     timestamp = alert.get("event_timestamp") or event.get("published_at")
-    if source_id:
+    # Prefer the normalized headline as the primary identity. The same
+    # catalyst is often published through SEC/FDA/company URLs that differ
+    # while the underlying headline is identical. URL/source IDs remain
+    # fallbacks when no usable title exists.
+    if title:
+        identity = ("TITLE", _normalise_text(title))
+    elif source_id:
         identity = ("ID", _normalise_text(source_id))
     elif url:
         identity = ("URL", _normalise_text(url))
-    elif title:
-        identity = ("TITLE", _normalise_text(title))
     else:
         identity = ("TIME", _normalise_text(timestamp))
     return (
