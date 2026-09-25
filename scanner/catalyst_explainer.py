@@ -67,6 +67,8 @@ def _why_it_matters(alert):
     direction = str(alert.get("direction") or "").upper()
     mapping = {
         "FDA_APPROVAL": "L'approvazione FDA porta il programma a un passaggio regolatorio/commerciale decisivo.",
+        "FDA_MEETING": "Interlocuzione con la FDA su sviluppo o percorso regolatorio; non equivale ad approvazione.",
+        "FDA_PATHWAY": "Indicazione di un possibile percorso regolatorio; non equivale ad approvazione.",
         "EMA_APPROVAL": "Il parere/autorizzazione EMA rappresenta un passaggio regolatorio decisivo per il programma.",
         "CLINICAL_RESULTS": "I risultati clinici possono modificare la valutazione del programma e il rischio percepito dal mercato.",
         "CLINICAL_RESULT": "I risultati clinici possono modificare la valutazione del programma e il rischio percepito dal mercato.",
