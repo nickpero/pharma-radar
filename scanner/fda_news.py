@@ -60,15 +60,10 @@ CATEGORY_KEYWORDS = {
     "APPROVAL": [
         "fda approves",
         "fda approved",
-        "approval",
-        "approves",
-        "approved",
-        "accelerated approval",
+        "fda grants approval",
+        "receives fda approval",
+        "fda authorizes",
         "grants accelerated approval",
-        "authorizes",
-        "authorized",
-        "clearance",
-        "clears",
     ],
     "REJECTION": [
         "fda rejects",
