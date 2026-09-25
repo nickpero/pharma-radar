@@ -140,10 +140,16 @@
         "event_price_source": "DAILY_CLOSE_FALLBACK",
         "event_price_timestamp": "2026-09-24",
         "event_to_close_pct": 0.0,
-        "max_adverse_pct": null,
-        "max_favorable_pct": null,
+        "max_adverse_pct": -9.766667693191064,
+        "max_favorable_pct": -9.766667693191064,
         "max_recovery": false,
-        "outcomes": {},
+        "outcomes": {
+          "t1": {
+            "close": 0.27070000767707825,
+            "date": "2026-09-25",
+            "return_pct": -9.766667693191064
+          }
+        },
         "recovered_by_t5": false
       },
       "program": "fasedienol",
@@ -170,7 +176,7 @@
         "event_price_source": "DAILY_CLOSE_FALLBACK",
         "event_price_timestamp": "2026-09-22",
         "event_to_close_pct": 0.0,
-        "max_adverse_pct": 20.000004768371582,
+        "max_adverse_pct": 8.280003070831299,
         "max_favorable_pct": 48.00000190734863,
         "max_recovery": true,
         "outcomes": {
@@ -178,6 +184,11 @@
             "close": 0.3700000047683716,
             "date": "2026-09-23",
             "return_pct": 48.00000190734863
+          },
+          "t3": {
+            "close": 0.27070000767707825,
+            "date": "2026-09-25",
+            "return_pct": 8.280003070831299
           }
         },
         "recovered_by_t5": false
@@ -206,7 +217,7 @@
         "event_price_source": "DAILY_CLOSE_FALLBACK",
         "event_price_timestamp": "2026-09-23",
         "event_to_close_pct": 0.0,
-        "max_adverse_pct": -2.509092851118608,
+        "max_adverse_pct": -4.145452325994318,
         "max_favorable_pct": -2.509092851118608,
         "max_recovery": false,
         "outcomes": {
@@ -222,6 +233,52 @@
       "status": "PENDING",
       "threshold_pct": 2.0,
       "ticker": "ZYME",
+      "trading_intelligence_score": 69.1
+    },
+    {
+      "catalyst_score": 100,
+      "created_at": "2026-09-25T17:57:18.843454+00:00",
+      "daily_pct": -2.9754924609650133,
+      "direction": "POSITIVE",
+      "event_date": "2026-08-24",
+      "event_price": null,
+      "event_price_timestamp": null,
+      "event_timestamp": "2026-08-24",
+      "historical_edge_median_1d_pct": 1.3082,
+      "historical_edge_win_rate_1d": 0.6768,
+      "outcomes_snapshot": {
+        "entry_close": 6.800000190734863,
+        "entry_date": "2026-08-24",
+        "event_price": 6.800000190734863,
+        "event_price_source": "DAILY_CLOSE_FALLBACK",
+        "event_price_timestamp": "2026-08-24",
+        "event_to_close_pct": 0.0,
+        "max_adverse_pct": 21.911760725364665,
+        "max_favorable_pct": 47.941178491783745,
+        "max_recovery": true,
+        "outcomes": {
+          "t1": {
+            "close": 8.289999961853027,
+            "date": "2026-08-25",
+            "return_pct": 21.911760725364665
+          },
+          "t3": {
+            "close": 10.0600004196167,
+            "date": "2026-08-27",
+            "return_pct": 47.941178491783745
+          },
+          "t5": {
+            "close": 9.90999984741211,
+            "date": "2026-08-31",
+            "return_pct": 45.73528778594276
+          }
+        },
+        "recovered_by_t5": true
+      },
+      "program": "deramiocel",
+      "status": "COMPLETE",
+      "threshold_pct": 2.0,
+      "ticker": "CAPR",
       "trading_intelligence_score": 69.1
     }
   ],
