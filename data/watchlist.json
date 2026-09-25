@@ -257,5 +257,44 @@
       "HCW11-040"
     ],
     "priority": "ORANGE"
+  },
+  "NEXA": {
+    "company": "Nanexa",
+    "programs": [
+      "PharmaShell",
+      "long-acting injectables"
+    ],
+    "priority": "RED"
+  },
+  "JAGX": {
+    "company": "Jaguar Health",
+    "programs": [
+      "crofelemer",
+      "Mytesi",
+      "Canalevia"
+    ],
+    "priority": "RED"
+  },
+  "APUS": {
+    "company": "Apimeds Pharmaceuticals US",
+    "programs": [
+      "Apitox",
+      "LT-100"
+    ],
+    "priority": "ORANGE"
+  },
+  "PFSA": {
+    "company": "Profusa",
+    "programs": [
+      "Lumee Oxygen Platform"
+    ],
+    "priority": "ORANGE"
+  },
+  "GRAL": {
+    "company": "GRAIL",
+    "programs": [
+      "Galleri"
+    ],
+    "priority": "RED"
   }
 }
