@@ -134,9 +134,9 @@
       "historical_edge_median_1d_pct": 1.3082,
       "historical_edge_win_rate_1d": 0.6768,
       "outcomes_snapshot": {
-        "entry_close": 0.29499998688697815,
+        "entry_close": 0.30000001192092896,
         "entry_date": "2026-09-24",
-        "event_price": 0.29499998688697815,
+        "event_price": 0.30000001192092896,
         "event_price_source": "DAILY_CLOSE_FALLBACK",
         "event_price_timestamp": "2026-09-24",
         "event_to_close_pct": 0.0,
@@ -170,7 +170,7 @@
         "event_price_source": "DAILY_CLOSE_FALLBACK",
         "event_price_timestamp": "2026-09-22",
         "event_to_close_pct": 0.0,
-        "max_adverse_pct": 17.99999475479126,
+        "max_adverse_pct": 20.000004768371582,
         "max_favorable_pct": 48.00000190734863,
         "max_recovery": true,
         "outcomes": {
