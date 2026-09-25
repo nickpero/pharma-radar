@@ -106,6 +106,33 @@ def test_sec_clinical_result_beats_regulatory_boilerplate():
     assert event["direction"] == "POSITIVE"
 
 
+def test_sec_8k_clinical_data_is_not_fda_approval():
+    event = build_fda_catalyst({
+        "source": "SEC",
+        "source_type": "PRIMARY_CORPORATE",
+        "title": "SEC 8-K — Vistagen Therapeutics (VTGN)",
+        "summary": "Preliminary positive data from the PALISADE-4 open-label extension; the company is preparing to meet with the FDA to discuss a potential registrational pathway.",
+        "content": "Fasedienol remains investigational and is not approved in the United States. The company is preparing to meet with the FDA.",
+        "categories": ["APPROVAL", "CLINICAL"],
+    })
+    assert event["subtype"] != "FDA_APPROVAL"
+    assert event["catalyst_type"] in {"CLINICAL_RESULT", "FDA_MEETING", "FDA_PATHWAY", "NEUTRAL"}
+
+
+def test_generic_approval_word_never_creates_fda_approval():
+    result = classify(
+        "Company discusses approval pathway",
+        "The investigational drug is not yet approved and management plans to meet with FDA.",
+    )
+    assert result["catalyst_type"] != "APPROVAL"
+
+
+def test_explicit_fda_approval_still_classifies_as_approval():
+    result = classify("FDA approves new therapy for adults")
+    assert result["catalyst_type"] == "APPROVAL"
+    assert result["direction"] == "POSITIVE"
+
+
 if __name__ == "__main__":
     test_approval_is_extreme_positive()
     test_rejection_is_extreme_negative()
@@ -119,4 +146,7 @@ if __name__ == "__main__":
     test_neutral_fallback()
     test_build_preserves_legacy_approval_subtype()
     test_sec_clinical_result_beats_regulatory_boilerplate()
+    test_sec_8k_clinical_data_is_not_fda_approval()
+    test_generic_approval_word_never_creates_fda_approval()
+    test_explicit_fda_approval_still_classifies_as_approval()
     print("P1.3 FDA CATALYST TESTS PASSED")
