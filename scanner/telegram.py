@@ -21,6 +21,8 @@ DRUG_DISPLAY_NAMES = {
 
 EVENT_DISPLAY_NAMES = {
     "FDA_APPROVAL": "FDA APPROVAL",
+    "FDA_MEETING": "FDA MEETING",
+    "FDA_PATHWAY": "FDA PATHWAY",
     "FDA_REJECTION": "FDA REJECTION",
     "FDA_SAFETY_WARNING": "FDA SAFETY WARNING",
     "CLINICAL_RESULTS": "CLINICAL RESULTS",
@@ -169,7 +171,9 @@ def _why_it_matters(alert, event, subtype):
         return why
 
     fallback = {
-        "FDA_APPROVAL": "FDA approval converts the program into an approved product and marks a major regulatory and commercial milestone.",
+        "FDA_APPROVAL": "Confirmed FDA approval is a major regulatory and commercial milestone.",
+        "FDA_MEETING": "FDA meeting or discussion; regulatory outcome is not an approval.",
+        "FDA_PATHWAY": "Regulatory pathway discussion; approval has not been confirmed.",
         "FDA_REJECTION": "FDA rejection is a major regulatory setback that can materially change the program's commercial outlook.",
         "FDA_SAFETY_WARNING": "A new FDA safety warning can materially affect the product's risk profile, label and commercial outlook.",
         "CLINICAL_RESULTS": "Clinical results can materially change the probability of success and valuation of the program.",
