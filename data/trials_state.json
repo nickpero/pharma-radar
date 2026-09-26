@@ -7448,5 +7448,766 @@
     "interventions": [
       "HCW9302, an IL-2 fusion protein"
     ]
+  },
+  "NEXA:PharmaShell:NCT05048498": {
+    "nct_id": "NCT05048498",
+    "title": "Pharmacokinetics, Tolerability and Safety of NEX-18a",
+    "official_title": "An Open Pilot Study to Assess the Pharmacokinetics, Tolerability, and Safety of NEX-18a Given as a Subcutaneous Injection for the Treatment of Intermediate 2 or Higher-risk MDS, CMML or AML",
+    "status": "COMPLETED",
+    "last_update": "2023-10-17",
+    "start_date": "2021-04-27",
+    "completion_date": "2022-02-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 2,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Nanexa AB",
+    "conditions": [
+      "Myelodysplastic Syndromes (MDS)",
+      "Chronic Myelomonocytic Leukemia (CMML)",
+      "Acute Myeloid Leukemia (AML)"
+    ],
+    "interventions": [
+      "NEX-18a injection",
+      "Azacitidine Injection"
+    ]
+  },
+  "JAGX:crofelemer:NCT02910219": {
+    "nct_id": "NCT02910219",
+    "title": "Diarrhea Prevention and Prophylaxis With Crofelemer in HER2 Positive Breast Cancer Patients",
+    "official_title": "Diarrhea Prevention and Prophylaxis With Crofelemer in HER2 Positive Breast Cancer Patients Receiving Trastuzumab, Pertuzumab, and Docetaxel or Paclitaxel With or Without Carboplatin: HALT-D",
+    "status": "COMPLETED",
+    "last_update": "2022-10-24",
+    "start_date": "2017-01-31",
+    "completion_date": "2020-11-23",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 53,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Sandra Swain",
+    "conditions": [
+      "Breast Cancer"
+    ],
+    "interventions": [
+      "Crofelemer"
+    ]
+  },
+  "JAGX:crofelemer:NCT00002408": {
+    "nct_id": "NCT00002408",
+    "title": "A Double-Blind, Randomized, Placebo-Controlled, Multicenter Study to Assess the Efficacy and Safety of Orally Administered SP-303 for the Treatment of Diarrhea in Acquired Immunodeficiency Syndrome (AIDS) Patients",
+    "official_title": "A Double-Blind, Randomized, Placebo-Controlled, Multicenter Study to Assess the Efficacy and Safety of Orally Administered SP-303 for the Treatment of Diarrhea in Acquired Immunodeficiency Syndrome (AIDS) Patients",
+    "status": "COMPLETED",
+    "last_update": "2005-06-24",
+    "start_date": null,
+    "completion_date": null,
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 300,
+    "enrollment_type": null,
+    "sponsor": "Shaman Pharmaceuticals",
+    "conditions": [
+      "Diarrhea",
+      "HIV Infections"
+    ],
+    "interventions": [
+      "Crofelemer"
+    ]
+  },
+  "JAGX:crofelemer:NCT00461526": {
+    "nct_id": "NCT00461526",
+    "title": "Diarrhea Predominant Irritable Bowel Syndrome in Females",
+    "official_title": "A Randomized, Double-Blind, Placebo-Controlled Study to Assess the Safety and Efficacy of TRN-002 (Crofelemer) for the Symptomatic Treatment of Diarrhea-Predominant Irritable Bowel Syndrome (d-IBS) in Females",
+    "status": "COMPLETED",
+    "last_update": "2019-11-25",
+    "start_date": "2006-10",
+    "completion_date": "2007-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 240,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Bausch Health Americas, Inc.",
+    "conditions": [
+      "Irritable Bowel Syndrome"
+    ],
+    "interventions": [
+      "crofelemer"
+    ]
+  },
+  "JAGX:crofelemer:NCT01374490": {
+    "nct_id": "NCT01374490",
+    "title": "Safety and Tolerability of Crofelemer for HIV-Associated Diarrhea",
+    "official_title": "A Phase 3, Multicenter, Open-Label Evaluation of the Safety and Tolerability of Crofelemer in HIV-Positive Subjects With Diarrhea",
+    "status": "COMPLETED",
+    "last_update": "2020-08-31",
+    "start_date": "2011-06-07",
+    "completion_date": "2012-10-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 250,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Bausch Health Americas, Inc.",
+    "conditions": [
+      "HIV Enteropathy",
+      "Diarrhea With HIV"
+    ],
+    "interventions": [
+      "Crofelemer"
+    ]
+  },
+  "JAGX:crofelemer:NCT00002186": {
+    "nct_id": "NCT00002186",
+    "title": "Double-Blind Placebo-Controlled Study Comparing the Combination of 15% SP-303 Gel With Acyclovir Versus Acyclovir Alone for the Treatment of Recurrent Herpes Simplex Virus (HSV) Infections in Subjects With Acquired Immunodeficiency Syndrome (AIDS)",
+    "official_title": "Double-Blind Placebo-Controlled Study Comparing the Combination of 15% SP-303 Gel With Acyclovir Versus Acyclovir Alone for the Treatment of Recurrent Herpes Simplex Virus (HSV) Infections in Subjects With Acquired Immunodeficiency Syndrome (AIDS)",
+    "status": "COMPLETED",
+    "last_update": "2005-06-24",
+    "start_date": null,
+    "completion_date": null,
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "NA"
+    ],
+    "enrollment": 400,
+    "enrollment_type": null,
+    "sponsor": "Shaman Pharmaceuticals",
+    "conditions": [
+      "Herpes Simplex",
+      "HIV Infections"
+    ],
+    "interventions": [
+      "Crofelemer",
+      "Acyclovir"
+    ]
+  },
+  "JAGX:crofelemer:NCT04538625": {
+    "nct_id": "NCT04538625",
+    "title": "Prophylaxis of Diarrhea in Adult Cancer Patients Receiving Targeted Cancer Therapy",
+    "official_title": "A Phase 3 Multicenter, Randomized, Double-blind Placebo-controlled Trial Evaluating Crofelemer for the Prophylaxis of Diarrhea in Adult Patients With Solid Tumors Receiving Targeted-cancer Therapies With or Without Standard Chemotherapy",
+    "status": "COMPLETED",
+    "last_update": "2024-07-26",
+    "start_date": "2020-10-07",
+    "completion_date": "2023-10-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 287,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Napo Pharmaceuticals, Inc.",
+    "conditions": [
+      "Cancer Therapy-Related Diarrhea",
+      "Chemotherapy-related Diarrhea",
+      "Adult Solid Tumor",
+      "Prophylaxis of Diarrhea",
+      "Symptomatic Relief of Diarrhea",
+      "Targeted Therapy-related Diarrhea"
+    ],
+    "interventions": [
+      "Crofelemer 125 MG [Mytesi]",
+      "Placebo"
+    ]
+  },
+  "JAGX:crofelemer:NCT00002310": {
+    "nct_id": "NCT00002310",
+    "title": "SP-303T Applied to the Skin of Patients With Herpes Simplex Virus (HSV) Infection and AIDS Who Have Not Had Success With Acyclovir",
+    "official_title": "A Pilot Study to Determine the Safety and Efficacy of Topically Applied SP-303T in Patients With Acquired Immunodeficiency Syndrome and Concomitant Herpes Simplex Virus (HSV) Infection Unresponsive to Acyclovir",
+    "status": "COMPLETED",
+    "last_update": "2005-06-24",
+    "start_date": null,
+    "completion_date": null,
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "NA"
+    ],
+    "enrollment": null,
+    "enrollment_type": null,
+    "sponsor": "Shaman Pharmaceuticals",
+    "conditions": [
+      "Herpes Simplex",
+      "HIV Infections"
+    ],
+    "interventions": [
+      "Crofelemer"
+    ]
+  },
+  "JAGX:crofelemer:NCT06326645": {
+    "nct_id": "NCT06326645",
+    "title": "Open-Label Pilot Study With Crofelemer in Patients With Short Bowel Syndrome",
+    "official_title": "Open-Label Pilot Study With Crofelemer in Patients With Short Bowel Syndrome",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-08-19",
+    "start_date": "2025-03-03",
+    "completion_date": "2026-10-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "EARLY_PHASE1"
+    ],
+    "enrollment": 6,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Jessica Sosio",
+    "conditions": [
+      "Short Bowel Syndrome"
+    ],
+    "interventions": [
+      "Crofelemer Oral Product"
+    ]
+  },
+  "JAGX:crofelemer:NCT00101725": {
+    "nct_id": "NCT00101725",
+    "title": "A Study of Crofelemer to Treat Diarrhea Irritable Bowel Syndrome",
+    "official_title": "A Randomized, Double-Blind, Placebo-Controlled Study to Assess the Safety and Efficacy of TRN 002 (Crofelemer) for the Symptomatic Treatment of Diarrhea-Predominant Irritable Bowel Syndrome (d-IBS)",
+    "status": "COMPLETED",
+    "last_update": "2019-11-25",
+    "start_date": "2004-12",
+    "completion_date": "2005-11",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 245,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Bausch Health Americas, Inc.",
+    "conditions": [
+      "Irritable Bowel Syndrome",
+      "Colonic Diseases",
+      "Diarrhea",
+      "Gastrointestinal Disease"
+    ],
+    "interventions": [
+      "crofelemer"
+    ]
+  },
+  "JAGX:crofelemer:NCT04486326": {
+    "nct_id": "NCT04486326",
+    "title": "Crofelemer for Functional Diarrhea",
+    "official_title": "Crofelemer for Functional Diarrhea",
+    "status": "TERMINATED",
+    "last_update": "2026-03-10",
+    "start_date": "2020-08-20",
+    "completion_date": "2022-09-23",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE4"
+    ],
+    "enrollment": 17,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Beth Israel Deaconess Medical Center",
+    "conditions": [
+      "Diarrhea"
+    ],
+    "interventions": [
+      "Crofelemer",
+      "Placebo"
+    ]
+  },
+  "JAGX:crofelemer:NCT04192487": {
+    "nct_id": "NCT04192487",
+    "title": "Effects of Crofelemer on the Gut Microbiome in Healthy Volunteers and in HIV+ Patients With Non-Infectious Diarrhea",
+    "official_title": "A Phase 4 Open Label Study to Assess the Safety and Effects of Crofelemer on the Gut Microbiome in Healthy Volunteers and in People Living With HIV/AIDS (PLWHA) With Non-Infectious Diarrhea",
+    "status": "COMPLETED",
+    "last_update": "2021-10-22",
+    "start_date": "2019-10-22",
+    "completion_date": "2021-08-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE4"
+    ],
+    "enrollment": 17,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Napo Pharmaceuticals, Inc.",
+    "conditions": [
+      "Acquired Immunodeficiency Syndrome",
+      "Healthy Volunteers",
+      "HIV/AIDS",
+      "HIV Diarrhea",
+      "Human Immunodeficiency Virus"
+    ],
+    "interventions": [
+      "Crofelemer delayed-release tablets 125mg"
+    ]
+  },
+  "JAGX:crofelemer:NCT06904872": {
+    "nct_id": "NCT06904872",
+    "title": "Safety and Efficacy of Crofelemer in Adult Patients With Short Bowel Syndrome and Intestinal Failure (SBS-IF) Without Colon-in-continuity (CIC)",
+    "official_title": "A Phase 2, Placebo-Controlled, Randomized, Double-Blind Study of 2 Doses of Crofelemer for the Treatment of Adult Patients With Short Bowel Syndrome and Intestinal Failure (SBS-IF) Without Colon-in-continuity (CIC)",
+    "status": "RECRUITING",
+    "last_update": "2026-06-09",
+    "start_date": "2025-05-29",
+    "completion_date": "2027-03",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 18,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Napo Therapeutics, S.p.A.",
+    "conditions": [
+      "Short Bowel Syndrome",
+      "Malabsorption Syndromes",
+      "Short Gut Syndrome",
+      "Post-Op Complication",
+      "Functional Gastrointestinal Disorders"
+    ],
+    "interventions": [
+      "Crofelemer Powder for Oral Solution",
+      "Matched Placebo Powder for Oral Solution"
+    ]
+  },
+  "JAGX:crofelemer:NCT06721871": {
+    "nct_id": "NCT06721871",
+    "title": "Ascending Doses of Crofelemer Powder for Oral Solution in Pediatric Microvillus Inclusion Disease (MVID)",
+    "official_title": "Evaluation of Safety, Tolerability and Efficacy of Crofelemer Following Multiple Ascending Doses of Crofelemer Powder for Oral Solution in Pediatric Participants With Microvillus Inclusion Disease (MVID)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-06-09",
+    "start_date": "2025-05-01",
+    "completion_date": "2026-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2",
+      "PHASE3"
+    ],
+    "enrollment": 6,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Napo Pharmaceuticals, Inc.",
+    "conditions": [
+      "Microvillus Inclusion Disease",
+      "Congenital Disorders",
+      "Rare Diseases"
+    ],
+    "interventions": [
+      "Crofelemer Powder for Oral Solution",
+      "Placebo Powder for Oral Solution"
+    ]
+  },
+  "JAGX:crofelemer:NCT03094052": {
+    "nct_id": "NCT03094052",
+    "title": "Incidence and Severity of Diarrhea in Patients With HER2 Positive Breast Cancer Treated With Trastuzumab and Neratinib",
+    "official_title": "An Open Label Study to Characterize the Incidence and Severity of Diarrhea in Patients With HER2+ Breast Cancer Treated With Neratinib With or Without Trastuzumab",
+    "status": "COMPLETED",
+    "last_update": "2025-06-26",
+    "start_date": "2018-10-09",
+    "completion_date": "2022-10-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 11,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "University of California, San Francisco",
+    "conditions": [
+      "HER2-positive Breast Cancer",
+      "Breast Adenocarcinoma",
+      "Stage II Breast Cancer AJCC v6 and v7",
+      "Stage IIA Breast Cancer AJCC v6 and v7",
+      "Stage IIB Breast Cancer AJCC v6 and v7",
+      "Stage III Breast Cancer AJCC v7",
+      "Stage IIIA Breast Cancer AJCC v7",
+      "Stage IIIB Breast Cancer AJCC v7",
+      "Stage IIIC Breast Cancer AJCC v7"
+    ],
+    "interventions": [
+      "Neratinib",
+      "Trastuzumab",
+      "Loperamide",
+      "Crofelemer",
+      "Diphenoxylate/Atropine"
+    ]
+  },
+  "JAGX:crofelemer:NCT00547898": {
+    "nct_id": "NCT00547898",
+    "title": "Safety and Effectiveness of 3 Doses of Crofelemer Compared to Placebo in the Treatment of HIV Associated Diarrhea",
+    "official_title": "Randomized, Double-Blind, Parallel-Group, Placebo-Controlled, Two-Stage Study to Assess the Efficacy and Safety of 3 Doses of Crofelemer Orally Twice Daily for the Treatment of HIV-Associated Diarrhea",
+    "status": "COMPLETED",
+    "last_update": "2020-09-03",
+    "start_date": "2007-10",
+    "completion_date": "2011-07-11",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 374,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Bausch Health Americas, Inc.",
+    "conditions": [
+      "HIV Associated Diarrhea"
+    ],
+    "interventions": [
+      "Crofelemer 125 mg",
+      "Crofelemer 250 mg",
+      "Crofelemer 500 mg",
+      "Placebo"
+    ]
+  },
+  "JAGX:crofelemer:NCT03898856": {
+    "nct_id": "NCT03898856",
+    "title": "Yield of Diagnostic Tests and Effects of Crofelemer for Chronic Idiopathic Diarrhea In Non-HIV Patients",
+    "official_title": "Yield of Diagnostic Tests and Management of Crofelemer for Chronic Idiopathic Diarrhea In Non-HIV Patients: A Pilot Study",
+    "status": "COMPLETED",
+    "last_update": "2026-02-12",
+    "start_date": "2019-04-01",
+    "completion_date": "2025-01-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE4"
+    ],
+    "enrollment": 93,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "The University of Texas Health Science Center, Houston",
+    "conditions": [
+      "Chronic Diarrhea of Unknown Origin"
+    ],
+    "interventions": [
+      "Crofelemer",
+      "Diagnostic tests for cause of chronic diarrhea"
+    ]
+  },
+  "JAGX:Mytesi:NCT04538625": {
+    "nct_id": "NCT04538625",
+    "title": "Prophylaxis of Diarrhea in Adult Cancer Patients Receiving Targeted Cancer Therapy",
+    "official_title": "A Phase 3 Multicenter, Randomized, Double-blind Placebo-controlled Trial Evaluating Crofelemer for the Prophylaxis of Diarrhea in Adult Patients With Solid Tumors Receiving Targeted-cancer Therapies With or Without Standard Chemotherapy",
+    "status": "COMPLETED",
+    "last_update": "2024-07-26",
+    "start_date": "2020-10-07",
+    "completion_date": "2023-10-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 287,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Napo Pharmaceuticals, Inc.",
+    "conditions": [
+      "Cancer Therapy-Related Diarrhea",
+      "Chemotherapy-related Diarrhea",
+      "Adult Solid Tumor",
+      "Prophylaxis of Diarrhea",
+      "Symptomatic Relief of Diarrhea",
+      "Targeted Therapy-related Diarrhea"
+    ],
+    "interventions": [
+      "Crofelemer 125 MG [Mytesi]",
+      "Placebo"
+    ]
+  },
+  "APUS:Apitox:NCT00949754": {
+    "nct_id": "NCT00949754",
+    "title": "Apitox, Honeybee Venom Treatment for Osteoarthritis Pain and Inflammation",
+    "official_title": "A Multi-Center, Randomized, Double Blind, Active-Controlled, Parallel Group Clinical Study to Evaluate the Dose Effect of Intradermal Injections of Apitox vs. Histamine in Subjects With Osteoarthritis Symptoms of the Knee",
+    "status": "COMPLETED",
+    "last_update": "2010-05-05",
+    "start_date": "2009-10",
+    "completion_date": "2010-04",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 40,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Apimeds, Inc.",
+    "conditions": [
+      "Osteoarthritis of the Knee"
+    ],
+    "interventions": [
+      "honeybee venom (Apitoxin (Korea) Apitox (USA))"
+    ]
+  },
+  "APUS:Apitox:NCT01112722": {
+    "nct_id": "NCT01112722",
+    "title": "Apitox, Honeybee Toxin for Pain and Inflammation of Osteoarthritis",
+    "official_title": "A Multicenter, Randomized, Double Blind, Active Controlled, Parallel Group, Clinical Study, to Evaluate the Safety and Efficacy of Apitox vs Histamine in Subjects With Refractory Osteoarthritis Pain and Inflammation of the Knee",
+    "status": "COMPLETED",
+    "last_update": "2016-12-13",
+    "start_date": "2013-12",
+    "completion_date": "2016-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 363,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Apimeds, Inc.",
+    "conditions": [
+      "Osteoarthritis of the Knee"
+    ],
+    "interventions": [
+      "Apitox, purified honeybee toxin, lyophilized in saline",
+      "histamine"
+    ]
+  },
+  "APUS:Apitox:NCT03710655": {
+    "nct_id": "NCT03710655",
+    "title": "Evaluate Safety and Efficacy of Apitox Add-on Therapy for Improving Disability and Quality of Life in MS Patients",
+    "official_title": "Multi-Center, Randomized, Double-Blind, Placebo-Controlled, Parallel Group Study to Evaluate the Safety and Efficacy of Apitox Add-on Therapy for Improving Disability and QOL in MS Patients",
+    "status": "UNKNOWN",
+    "last_update": "2018-10-18",
+    "start_date": "2019-04",
+    "completion_date": "2019-11",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 468,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Apimeds, Inc.",
+    "conditions": [
+      "Multiple Sclerosis"
+    ],
+    "interventions": [
+      "Apitox - pure honeybee toxin",
+      "Placebo"
+    ]
+  },
+  "PFSA:Lumee Oxygen Platform:NCT04204993": {
+    "nct_id": "NCT04204993",
+    "title": "Assessment of Wearable Sensors During Experimental Human Influenza Infection (Sigma Plus)",
+    "official_title": "Assessment of Wearable Sensors During Experimental Human Influenza Infection (Sigma Plus)",
+    "status": "COMPLETED",
+    "last_update": "2023-08-21",
+    "start_date": "2020-02-11",
+    "completion_date": "2021-05-17",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "NA"
+    ],
+    "enrollment": 20,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Imperial College London",
+    "conditions": [
+      "Influenza A H3N2"
+    ],
+    "interventions": [
+      "Lumee Oxygen Platform"
+    ]
+  },
+  "PFSA:Lumee Oxygen Platform:NCT04514861": {
+    "nct_id": "NCT04514861",
+    "title": "Monitoring Local Tissue Oxygen Changes Using the Wireless Lumee Oxygen Platform in Correlation to TcPO2",
+    "official_title": "Effectiveness of Measuring Local Tissue Oxygen in Response to Induced Hemodynamic Changes With the Profusa's Wireless Lumee Oxygen Platform in Patients With Peripheral Artery Disease (PAD)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2025-11-12",
+    "start_date": "2020-12-18",
+    "completion_date": "2028-03-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "NA"
+    ],
+    "enrollment": 53,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Profusa, Inc.",
+    "conditions": [
+      "Peripheral Artery Disease"
+    ],
+    "interventions": [
+      "Wireless Lumee Oxygen Platform"
+    ]
+  },
+  "GRAL:Galleri:NCT06523868": {
+    "nct_id": "NCT06523868",
+    "title": "Evaluation of Multi-Cancer Early Detection Testing in a High-Risk Military Population: The Sentinel Study",
+    "official_title": "Evaluation of Multi-Cancer Early Detection Testing in a High-Risk Military Population: The Sentinel Study",
+    "status": "RECRUITING",
+    "last_update": "2026-02-27",
+    "start_date": "2025-03-31",
+    "completion_date": "2028-09-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "NA"
+    ],
+    "enrollment": 1500,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Dana-Farber Cancer Institute",
+    "conditions": [
+      "Cancer Diagnosis"
+    ],
+    "interventions": [
+      "GRAIL Galleri"
+    ]
+  },
+  "GRAL:Galleri:NCT06450171": {
+    "nct_id": "NCT06450171",
+    "title": "Evaluation of Multi-Cancer Early Detection Testing in a High-Risk Population: The INFORM Study",
+    "official_title": "Evaluation of Multi-Cancer Early Detection Testing in a High-Risk Population: The INFORM Study",
+    "status": "RECRUITING",
+    "last_update": "2026-01-20",
+    "start_date": "2024-09-27",
+    "completion_date": "2028-01-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "NA"
+    ],
+    "enrollment": 1000,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Dana-Farber Cancer Institute",
+    "conditions": [
+      "Cancer Predisposition Syndrome",
+      "Predisposition, Genetic"
+    ],
+    "interventions": [
+      "GRAIL Galleri Test"
+    ]
+  },
+  "GRAL:Galleri:NCT07764744": {
+    "nct_id": "NCT07764744",
+    "title": "Ovarian Cancer Liquid Biopsy for Early Assessment & Detection in Individuals With BRCA1/2 Pathogenic Variants",
+    "official_title": "Ovarian Cancer Liquid Biopsy for Early Assessment & Detection (OC-LEAD)",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-09-11",
+    "start_date": "2026-09",
+    "completion_date": "2039-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "NA"
+    ],
+    "enrollment": 70,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Weill Medical College of Cornell University",
+    "conditions": [
+      "Ovarian Neoplasms",
+      "BRCA 1 Gene Mutation",
+      "BRCA 2 Gene Mutation",
+      "Serous Tubal Intraepithelial Carcinoma",
+      "Early Detection of Ovarian Cancer"
+    ],
+    "interventions": [
+      "Galleri Multi-Cancer Early Detection (MCED) Blood Test"
+    ]
+  },
+  "GRAL:Galleri:NCT05481697": {
+    "nct_id": "NCT05481697",
+    "title": "Unintentional Weight Loss and Cancer: A Prospective Trial of Patient-centered Weight Tracking Combined With GRAIL Galleri Testing to Improve Early Detection",
+    "official_title": "Unintentional Weight Loss and Cancer: A Prospective Trial of Patient-centered Weight Tracking Combined With GRAIL Galleri Testing to Improve Early Detection",
+    "status": "RECRUITING",
+    "last_update": "2026-09-15",
+    "start_date": "2023-05-05",
+    "completion_date": "2027-01-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "NA"
+    ],
+    "enrollment": 1000,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Case Comprehensive Cancer Center",
+    "conditions": [
+      "Unintended Weight Loss"
+    ],
+    "interventions": [
+      "GRAIL Galleri"
+    ]
+  },
+  "GRAL:Galleri:NCT07390643": {
+    "nct_id": "NCT07390643",
+    "title": "The DISCOVER Study",
+    "official_title": "Determining ImpactS of Multi-Cancer Early detectiOn Tests oVER Time in Symptomatic Patients: The DISCOVER Study",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-02-05",
+    "start_date": "2026-07",
+    "completion_date": "2028-01-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "NA"
+    ],
+    "enrollment": 100,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Dana-Farber Cancer Institute",
+    "conditions": [
+      "Cancer",
+      "Cancer Diagnosis"
+    ],
+    "interventions": [
+      "GRAIL Galleri MCED test"
+    ]
+  },
+  "GRAL:Galleri:NCT05673018": {
+    "nct_id": "NCT05673018",
+    "title": "Galleri® in the Medicare Population.",
+    "official_title": "REACH Study: Galleri® in the Medicare Population.",
+    "status": "RECRUITING",
+    "last_update": "2026-05-22",
+    "start_date": "2024-07-12",
+    "completion_date": "2030-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "NA"
+    ],
+    "enrollment": 50000,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "GRAIL, Inc.",
+    "conditions": [
+      "Cancer"
+    ],
+    "interventions": [
+      "Multi-Cancer Early Detection Test (Galleri®)"
+    ]
+  },
+  "GRAL:Galleri:NCT06603259": {
+    "nct_id": "NCT06603259",
+    "title": "The Galleri® Community Research Program",
+    "official_title": "The Galleri® Community Research Program",
+    "status": "ENROLLING_BY_INVITATION",
+    "last_update": "2024-09-19",
+    "start_date": "2024-08-19",
+    "completion_date": "2025-12",
+    "study_type": "OBSERVATIONAL",
+    "phases": [],
+    "enrollment": 250,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "GRAIL, Inc.",
+    "conditions": [
+      "Data Collection"
+    ],
+    "interventions": []
+  },
+  "GRAL:Galleri:NCT05205967": {
+    "nct_id": "NCT05205967",
+    "title": "REFLECTION: A Clinical Practice Learning Program for Galleri®",
+    "official_title": "REFLECTION: Real World Evidence for Learnings in Early Cancer Detection, a Clinical Practice Learning Program for Galleri®",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2025-11-26",
+    "start_date": "2021-08-23",
+    "completion_date": "2026-10-30",
+    "study_type": "OBSERVATIONAL",
+    "phases": [],
+    "enrollment": 14633,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "GRAIL, Inc.",
+    "conditions": [
+      "Early Detection of Cancer",
+      "Cancer"
+    ],
+    "interventions": [
+      "MCED",
+      "SOC"
+    ]
+  },
+  "GRAL:Galleri:NCT05611632": {
+    "nct_id": "NCT05611632",
+    "title": "Does Screening With the Galleri Test in the NHS Reduce the Likelihood of a Late-stage Cancer Diagnosis in an Asymptomatic Population? A Randomised Clinical Trial",
+    "official_title": "A Randomized, Controlled Trial to Assess the Clinical Utility of a Multi-cancer Early Detection (MCED) Test for Population Screening in the United Kingdom (UK) When Added to Standard of Care",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-07-10",
+    "start_date": "2021-08-31",
+    "completion_date": "2031-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "NA"
+    ],
+    "enrollment": 142318,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "GRAIL, Inc.",
+    "conditions": [
+      "Cancer"
+    ],
+    "interventions": [
+      "Multi-cancer early detection test (Galleri test)"
+    ]
   }
 }

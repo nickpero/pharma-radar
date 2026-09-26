@@ -140,16 +140,10 @@
         "event_price_source": "DAILY_CLOSE_FALLBACK",
         "event_price_timestamp": "2026-09-24",
         "event_to_close_pct": 0.0,
-        "max_adverse_pct": -9.00000298023212,
-        "max_favorable_pct": -9.00000298023212,
+        "max_adverse_pct": null,
+        "max_favorable_pct": null,
         "max_recovery": false,
-        "outcomes": {
-          "t1": {
-            "close": 0.27300000190734863,
-            "date": "2026-09-25",
-            "return_pct": -9.00000298023212
-          }
-        },
+        "outcomes": {},
         "recovered_by_t5": false
       },
       "program": "fasedienol",
@@ -176,7 +170,7 @@
         "event_price_source": "DAILY_CLOSE_FALLBACK",
         "event_price_timestamp": "2026-09-22",
         "event_to_close_pct": 0.0,
-        "max_adverse_pct": 9.200000762939453,
+        "max_adverse_pct": 20.000004768371582,
         "max_favorable_pct": 48.00000190734863,
         "max_recovery": true,
         "outcomes": {
@@ -184,11 +178,6 @@
             "close": 0.3700000047683716,
             "date": "2026-09-23",
             "return_pct": 48.00000190734863
-          },
-          "t3": {
-            "close": 0.27300000190734863,
-            "date": "2026-09-25",
-            "return_pct": 9.200000762939453
           }
         },
         "recovered_by_t5": false
@@ -217,7 +206,7 @@
         "event_price_source": "DAILY_CLOSE_FALLBACK",
         "event_price_timestamp": "2026-09-23",
         "event_to_close_pct": 0.0,
-        "max_adverse_pct": -3.5636346990411933,
+        "max_adverse_pct": -2.509092851118608,
         "max_favorable_pct": -2.509092851118608,
         "max_recovery": false,
         "outcomes": {
