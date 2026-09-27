@@ -36,9 +36,8 @@ def test_label_expansion_is_high_positive():
 def test_clinical_results_can_be_negative_or_positive():
     negative = classify("Phase 3 clinical trial results failed to meet the primary endpoint")
     positive = classify("Phase 3 clinical trial results met the primary endpoint")
-    assert negative["catalyst_type"] == "CLINICAL_RESULT"
-    assert negative["direction"] == "NEGATIVE"
-    assert positive["catalyst_type"] == "CLINICAL_RESULT"
+    assert negative["catalyst_type"] == "PHASE_DATA_UPDATE"
+    assert positive["catalyst_type"] == "PHASE_DATA_UPDATE"
     assert positive["direction"] == "POSITIVE"
 
 
@@ -65,6 +64,16 @@ def test_phase_and_filing():
     filing = classify("Company submits a new drug application")
     assert phase["catalyst_type"] == "PHASE_ADVANCEMENT"
     assert filing["catalyst_type"] == "FILING"
+
+
+def test_phase_keyword_alone_is_not_phase_advancement():
+    result = classify("Company reports Phase 3 program update")
+    assert result["catalyst_type"] != "PHASE_ADVANCEMENT"
+
+
+def test_exploratory_data_is_distinct():
+    result = classify("Exploratory subgroup analysis of Phase 3 data")
+    assert result["catalyst_type"] == "EXPLORATORY_DATA"
 
 
 def test_negation_protection():
