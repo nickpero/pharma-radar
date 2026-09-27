@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 from scanner.market_data import enrich_post_spike_watch
 from scanner.telegram_intelligence import _dedup_key, _is_stale_news, alert_action
@@ -8,7 +8,7 @@ def _points():
     points = []
     for i in range(20):
         points.append({
-            "date": datetime(2026, 8, 25 + i, tzinfo=timezone.utc).date(),
+            "date": (datetime(2026, 8, 25, tzinfo=timezone.utc) + timedelta(days=i)).date(),
             "close": 90.0,
             "high": 92.0,
             "volume": 10.0,
