@@ -232,6 +232,22 @@ def format_catalyst_alert(alert):
     if timeline_details:
         lines.extend(["", *timeline_details])
 
+    if alert.get("post_spike_watch") is True:
+        retracement = _num(alert.get("post_spike_retracement_pct"))
+        spike_pct = _num(alert.get("post_spike_pct"))
+        volume_ratio = alert.get("post_spike_volume_ratio")
+        spike_price = alert.get("post_spike_price")
+        current_price = alert.get("post_spike_current_price")
+        lines.extend([
+            "",
+            "🔄 POST-SPIKE WATCH",
+            f"📅 Spike date: {alert.get('post_spike_date', 'N/A')}",
+            f"🚀 Spike: {spike_pct}% · Volume {volume_ratio:.1f}x" if isinstance(volume_ratio, (int, float)) and spike_pct is not None else "🚀 Spike: data available",
+            f"💵 Spike close: {spike_price} → Current: {current_price}",
+            f"📉 Retracement: {retracement}%" if retracement is not None else "📉 Retracement: N/A",
+            "ℹ️ Catalyst already produced a major move; monitoring post-spike behavior.",
+        ])
+
     lines.extend([
         "",
         f"🎯 Catalyst: {score}/100 · {label}",
