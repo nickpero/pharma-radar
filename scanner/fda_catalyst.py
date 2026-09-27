@@ -12,6 +12,10 @@ FDA_CATALYST_MAP = {
 DEFAULT_EVENT = {"type": "FDA_EVENT", "subtype": "FDA_UPDATE", "severity": "LOW", "direction": "UNKNOWN"}
 CATEGORY_PRIORITY = ["APPROVAL", "REJECTION", "SAFETY", "CLINICAL", "LABEL"]
 
+PHASE_ADVANCEMENT_PATTERNS = ("phase advancement","advanced to phase","advances to phase","progressed to phase","progresses to phase","moved to phase","moves to phase","moved into phase","moves into phase","transitioned to phase","initiated phase 1","initiated phase 2","initiated phase 3","started phase 1","started phase 2","started phase 3","began phase 1","began phase 2","began phase 3","begins phase 1","begins phase 2","begins phase 3","entered phase 1","entered phase 2","entered phase 3")
+EXPLORATORY_PATTERNS = ("exploratory analysis","exploratory analyses","exploratory data","exploratory endpoint","exploratory endpoints","post-hoc analysis","post hoc analysis","post-hoc analyses","post hoc analyses","subgroup analysis","subgroup analyses","subgroup data")
+PHASE_DATA_UPDATE_PATTERNS = ("phase 1 results","phase 2 results","phase 3 results","phase 1 data","phase 2 data","phase 3 data","phase i results","phase ii results","phase iii results","phase i data","phase ii data","phase iii data","phase 1 clinical trial","phase 2 clinical trial","phase 3 clinical trial","phase 1 study","phase 2 study","phase 3 study","phase i study","phase ii study","phase iii study","open-label extension","open label extension")
+
 ADVANCED_RULES = [
     ("TRIAL_HOLD_LIFTED", "POSITIVE", "HIGH", ("clinical hold lifted", "hold lifted", "lifted the clinical hold", "hold is lifted")),
     ("TRIAL_HOLD", "NEGATIVE", "EXTREME", ("clinical hold", "placed on clinical hold", "trial hold", "study hold")),
@@ -22,12 +26,16 @@ ADVANCED_RULES = [
     ("FILING", "POSITIVE", "HIGH", ("new drug application", "biologics license application", "nda submission", "bla submission", "regulatory submission", "submitted the application", "filing accepted")),
     ("CLINICAL_RESULT", "NEGATIVE", "HIGH", ("failed to meet", "did not meet", "missed the primary endpoint", "failed the primary endpoint", "futility", "negative topline", "not statistically significant", "no significant benefit")),
     ("CLINICAL_RESULT", "POSITIVE", "HIGH", ("met the primary endpoint", "met its primary endpoint", "positive topline", "positive results", "statistically significant", "clinical benefit")),
-    ("CLINICAL_RESULT", "POSITIVE", "HIGH", ("clinical trial results", "clinical study results", "clinical results", "topline results", "trial results", "phase 2 results", "phase 3 results")),
-    ("PHASE_ADVANCEMENT", "POSITIVE", "HIGH", ("phase advancement", "advanced to phase", "advances to phase", "phase 2", "phase 3")),
+    ("EXPLORATORY_DATA", "POSITIVE", "MEDIUM", EXPLORATORY_PATTERNS),
+    ("PHASE_DATA_UPDATE", "POSITIVE", "HIGH", PHASE_DATA_UPDATE_PATTERNS),
+    ("CLINICAL_RESULT", "POSITIVE", "HIGH", ("clinical trial results", "clinical study results", "clinical results", "topline results", "trial results")),
+    ("PHASE_ADVANCEMENT", "POSITIVE", "HIGH", PHASE_ADVANCEMENT_PATTERNS),
     ("DATE_ACCELERATED", "POSITIVE", "HIGH", ("accelerated timeline", "date accelerated", "accelerated the timeline", "earlier than expected")),
     ("DATE_DELAYED", "NEGATIVE", "HIGH", ("delayed timeline", "date delayed", "delay in the timeline", "later than expected", "delayed submission")),
 ]
 
+EXPLORATORY_RULES = [rule for rule in ADVANCED_RULES if rule[0] == "EXPLORATORY_DATA"]
+PHASE_DATA_RULES = [rule for rule in ADVANCED_RULES if rule[0] == "PHASE_DATA_UPDATE"]
 CLINICAL_RULES = [rule for rule in ADVANCED_RULES if rule[0] == "CLINICAL_RESULT"]
 
 APPROVAL_POSITIVE_PATTERNS = (
@@ -96,7 +104,16 @@ def classify_fda_catalyst(news_item):
         for rule in APPROVAL_NEGATION_PATTERNS
     )
 
-    # Corporate/SEC documents: clinical evidence wins over regulatory boilerplate.
+    # Classify the most specific clinical event first. Phase numbers alone
+    # never imply a phase advancement.
+    for source_text, source_name in ((title, "title"), (text, "content")):
+        result = _classify(source_text, source_name, EXPLORATORY_RULES)
+        if result:
+            return result
+    for source_text, source_name in ((title, "title"), (text, "content")):
+        result = _classify(source_text, source_name, PHASE_DATA_RULES)
+        if result:
+            return result
     if source_type == "PRIMARY_CORPORATE":
         for source_text, source_name in ((title, "title"), (text, "content")):
             result = _classify(source_text, source_name, CLINICAL_RULES)
@@ -160,7 +177,7 @@ def build_fda_catalyst(news_item):
         event["direction"] = FDA_CATALYST_MAP["LABEL"]["direction"]
 
     subtype_map = {
-        "CLINICAL_RESULT": "CLINICAL_RESULTS", "LABEL_EXPANSION": "LABEL_EXPANSION",
+        "CLINICAL_RESULT": "CLINICAL_RESULTS", "PHASE_DATA_UPDATE": "PHASE_DATA_UPDATE", "EXPLORATORY_DATA": "EXPLORATORY_DATA", "LABEL_EXPANSION": "LABEL_EXPANSION",
         "REJECTION": "FDA_REJECTION", "SAFETY": "FDA_SAFETY_WARNING", "APPROVAL": "FDA_APPROVAL",
         "TRIAL_HOLD": "TRIAL_HOLD", "TRIAL_HOLD_LIFTED": "TRIAL_HOLD_LIFTED",
         "PHASE_ADVANCEMENT": "PHASE_ADVANCED", "DATE_ACCELERATED": "DATE_ACCELERATED",
