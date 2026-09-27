@@ -34,7 +34,7 @@ PATTERNS = [
     ("CLINICAL_RESULTS", "POSITIVE", ("met the primary endpoint", "met its primary endpoint", "positive topline", "positive results", "statistically significant", "clinical benefit", "topline results", "clinical trial results")),
     ("FDA_APPROVAL", "POSITIVE", ("fda approves", "fda approved", "receives fda approval", "received fda approval", "full approval", "granted approval")),
     ("LABEL_EXPANSION", "POSITIVE", ("label expansion", "expanded indication", "new indication", "expanded use")),
-    ("PHASE_ADVANCED", "POSITIVE", ("advanced to phase", "advances to phase", "progressed to phase")),
+    ("PHASE_ADVANCED", "POSITIVE", ("advanced to phase", "advances to phase", "progressed to phase", "progresses to phase", "moved to phase", "moves to phase", "moved into phase", "moves into phase", "transitioned to phase", "initiated phase 1", "initiated phase 2", "initiated phase 3", "started phase 1", "started phase 2", "started phase 3", "began phase 1", "began phase 2", "began phase 3")),
     ("DATE_ACCELERATED", "POSITIVE", ("accelerated timeline", "earlier than expected", "accelerated the timeline")),
     ("DATE_DELAYED", "NEGATIVE", ("delayed timeline", "delay in the timeline", "later than expected", "delayed submission")),
     ("REGULATORY_FILING", "POSITIVE", ("nda submission", "bla submission", "regulatory submission", "submitted the application", "filing accepted")),
@@ -205,8 +205,12 @@ def _efts_classification(category: str, title: str) -> tuple[str, str]:
             return "FDA_APPROVAL", "POSITIVE"
         if "label" in lower or "indication" in lower:
             return "LABEL_EXPANSION", "POSITIVE"
-        if "phase" in lower:
+        if any(phrase in lower for phrase in ("advanced to phase", "advances to phase", "progressed to phase", "progresses to phase", "moved to phase", "moves to phase", "moved into phase", "moves into phase", "transitioned to phase", "initiated phase 1", "initiated phase 2", "initiated phase 3", "started phase 1", "started phase 2", "started phase 3", "began phase 1", "began phase 2", "began phase 3")):
             return "PHASE_ADVANCED", "POSITIVE"
+        if "exploratory" in lower or "post-hoc" in lower or "post hoc" in lower or "subgroup analysis" in lower:
+            return "EXPLORATORY_DATA", "POSITIVE"
+        if re.search(r"phase\s*(?:1|2|3|i|ii|iii)\b", lower) and any(token in lower for token in ("data", "results", "study", "trial", "extension")):
+            return "PHASE_DATA_UPDATE", "POSITIVE"
         return "REGULATORY_FILING", "POSITIVE"
     if "delay" in title.lower() or "delayed" in title.lower():
         return "DATE_DELAYED", "NEGATIVE"
