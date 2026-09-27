@@ -18,7 +18,7 @@ from scanner.alert_filter import filter_alerts
 from scanner.fda_enrichment import get_enriched_fda_news
 from scanner.fda_pipeline import process_fda_news, filter_fda_trading_alerts
 from scanner.regulatory_pipeline import scan_regulatory_sources
-from scanner.market_data import enrich_market_data, enrich_market_reactions
+from scanner.market_data import enrich_market_data, enrich_market_reactions, enrich_post_spike_watch
 from scanner.catalyst_memory import record_events, memory_summary
 from scanner.catalyst_explainer import enrich_catalyst_explainers
 from scanner.catalyst_confirmation import enrich_catalyst_confirmation
@@ -206,6 +206,7 @@ def scan(baseline=False):
 
     alerts = enrich_market_data(alerts)
     alerts = enrich_market_reactions(alerts)
+    alerts = enrich_post_spike_watch(alerts)
     alerts = [enrich_reaction_classification(alert) for alert in alerts]
     alerts = enrich_historical_stats_batch(alerts)
     alerts = enrich_historical_edges(alerts)
