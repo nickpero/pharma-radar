@@ -64,7 +64,6 @@ def _dedup_key(alert):
     return (
         _normalise_text(alert.get("ticker", "UNKNOWN")).upper(),
         _normalise_text(alert.get("program", "UNKNOWN")),
-        _normalise_text(alert.get("subtype") or event.get("subtype")),
         identity,
     )
 
