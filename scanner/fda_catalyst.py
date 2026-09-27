@@ -113,6 +113,12 @@ def classify_fda_catalyst(news_item):
     for source_text, source_name in ((title, "title"), (text, "content")):
         result = _classify(source_text, source_name, PHASE_DATA_RULES)
         if result:
+            if any(phrase in source_text for phrase in (
+                "failed to meet", "did not meet", "missed the primary endpoint",
+                "failed the primary endpoint", "negative topline", "futility",
+                "not statistically significant", "no significant benefit",
+            )):
+                result["direction"] = "NEGATIVE"
             return result
     if source_type == "PRIMARY_CORPORATE":
         for source_text, source_name in ((title, "title"), (text, "content")):
