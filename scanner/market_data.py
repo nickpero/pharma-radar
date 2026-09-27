@@ -163,6 +163,103 @@ def get_daily_series(ticker, session=None, range_="3mo"):
     except (requests.RequestException, ValueError, TypeError, KeyError, IndexError, OverflowError):
         return []
 
+def _post_spike_age_days(value, now=None):
+    if not value:
+        return None
+    text = str(value).strip()
+    try:
+        event_date = datetime.fromisoformat(text.replace("Z", "+00:00")).date()
+    except ValueError:
+        try:
+            event_date = datetime.strptime(text[:10], "%Y-%m-%d").date()
+        except ValueError:
+            return None
+    reference = (now or datetime.now(timezone.utc)).date()
+    return max(0, (reference - event_date).days)
+
+
+def enrich_post_spike_watch(events, now=None, session=None):
+    """Detect a catalyst-linked upward spike followed by a material retracement."""
+    if not events:
+        return []
+    cache = {}
+    enriched = []
+    for event in events:
+        result = dict(event)
+        result.setdefault("post_spike_watch", False)
+        ticker = str(result.get("ticker") or "").strip().upper()
+        direction = str(result.get("direction") or "").upper()
+        if not ticker or direction not in {"POSITIVE", "CATALYST"}:
+            enriched.append(result)
+            continue
+        age_days = _post_spike_age_days(
+            result.get("published_at") or result.get("event_timestamp"), now=now
+        )
+        if age_days is None or age_days > 7:
+            enriched.append(result)
+            continue
+        if ticker not in cache:
+            cache[ticker] = get_daily_series(ticker, session=session, range_="2mo")
+        points = sorted(cache.get(ticker, []), key=lambda p: p["date"])
+        event_text = str(result.get("published_at") or result.get("event_timestamp") or "")
+        try:
+            event_date = datetime.fromisoformat(event_text.replace("Z", "+00:00")).date()
+        except ValueError:
+            try:
+                event_date = datetime.strptime(event_text[:10], "%Y-%m-%d").date()
+            except ValueError:
+                enriched.append(result)
+                continue
+        spike = None
+        for i, point in enumerate(points):
+            if point.get("date") is None or point["date"] < event_date or i == 0:
+                continue
+            close = point.get("close")
+            previous_close = points[i - 1].get("close")
+            if close is None or previous_close in (None, 0):
+                continue
+            daily_pct = (close - previous_close) / previous_close * 100.0
+            if daily_pct < 40.0:
+                continue
+            prior = [
+                p.get("volume") for p in points[max(0, i - 20):i]
+                if p.get("volume") not in (None, 0)
+            ]
+            avg_volume = sum(prior) / len(prior) if prior else None
+            volume_ratio = point.get("volume") / avg_volume if avg_volume else None
+            if volume_ratio is None or volume_ratio < 5.0:
+                continue
+            candidate = {
+                "date": point["date"],
+                "close": close,
+                "high": point.get("high"),
+                "spike_pct": daily_pct,
+                "volume": point.get("volume"),
+                "volume_ratio": volume_ratio,
+            }
+            if spike is None or candidate["spike_pct"] > spike["spike_pct"]:
+                spike = candidate
+        if spike is not None and points:
+            current = points[-1].get("close")
+            if current not in (None, 0):
+                retracement = (current - spike["close"]) / spike["close"] * 100.0
+                if retracement <= -15.0:
+                    result.update({
+                        "post_spike_watch": True,
+                        "market_reaction_state": "POST_SPIKE",
+                        "post_spike_age_days": age_days,
+                        "post_spike_date": spike["date"].isoformat(),
+                        "post_spike_pct": spike["spike_pct"],
+                        "post_spike_volume_ratio": spike["volume_ratio"],
+                        "post_spike_price": spike["close"],
+                        "post_spike_high": spike["high"],
+                        "post_spike_current_price": current,
+                        "post_spike_retracement_pct": retracement,
+                    })
+        enriched.append(result)
+    return enriched
+
+
 def get_intraday_series(ticker, session=None, range_=INTRADAY_RANGE, interval=INTRADAY_INTERVAL):
     """Return timestamped intraday OHLCV points, best effort."""
     ticker = str(ticker or "").strip().upper()
