@@ -1,6 +1,9 @@
 """Pharma Radar — Phase 5.6 intelligent Telegram alert policy."""
 
 import re
+from datetime import datetime, timezone
+
+MAX_NEW_NEWS_AGE_HOURS = 48
 
 
 def _num(value):
@@ -12,6 +15,36 @@ def _num(value):
 
 def _reaction(event):
     return event.get("market_reaction") or event.get("reaction") or {}
+
+
+def _parse_timestamp(value):
+    if not value:
+        return None
+    text = str(value).strip()
+    try:
+        dt = datetime.fromisoformat(text.replace("Z", "+00:00"))
+    except ValueError:
+        try:
+            dt = datetime.strptime(text[:10], "%Y-%m-%d")
+        except ValueError:
+            return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(timezone.utc)
+
+
+def _is_stale_news(alert, now=None):
+    if alert.get("post_spike_watch") is True:
+        return False
+    source = str(alert.get("source") or "").upper()
+    source_type = str(alert.get("source_type") or "").upper()
+    if source not in {"SEC", "FDA", "FDA RSS", "EMA"} and not source_type.startswith(("PRIMARY_REGULATORY", "PRIMARY_CORPORATE")):
+        return False
+    dt = _parse_timestamp(alert.get("published_at") or alert.get("event_timestamp"))
+    if dt is None:
+        return False
+    reference = now or datetime.now(timezone.utc)
+    return (reference - dt).total_seconds() > MAX_NEW_NEWS_AGE_HOURS * 3600
 
 
 def _is_expired(alert):
@@ -31,6 +64,12 @@ def alert_action(alert):
     operational Telegram alerts.
     """
     if _is_expired(alert):
+        return "SILENT"
+
+    if alert.get("post_spike_watch") is True:
+        return "WATCH"
+
+    if _is_stale_news(alert):
         return "SILENT"
 
     event = alert.get("event") if isinstance(alert.get("event"), dict) else {}
@@ -82,8 +121,8 @@ def _event_identity(alert):
     return (
         _normalise_text(alert.get("ticker") or event.get("ticker") or "UNKNOWN").upper(),
         _normalise_text(alert.get("program") or event.get("program") or "UNKNOWN"),
-        _normalise_text(alert.get("subtype") or event.get("subtype") or ""),
         identity,
+        "POST_SPIKE_WATCH" if alert.get("post_spike_watch") is True else "CATALYST",
     )
 
 
