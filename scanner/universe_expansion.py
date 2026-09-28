@@ -43,6 +43,7 @@ def reconcile_watchlist():
             "company": company,
             "programs": programs,
             "priority": candidate.get("priority", "ORANGE"),
+            **({"monitoring_mode": candidate["monitoring_mode"]} if candidate.get("monitoring_mode") else {}),
         }
         added.append(ticker)
 
