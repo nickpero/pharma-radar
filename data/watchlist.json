@@ -309,10 +309,10 @@
   "LFCR": {
     "company": "Lifecore Biomedical",
     "programs": [
-      "Lifecore Biomedical",
-      "CDMO"
+      "Commercial Manufacturing Programs"
     ],
-    "priority": "ORANGE"
+    "priority": "ORANGE",
+    "monitoring_mode": "CORPORATE_REGULATORY"
   },
   "ONCO": {
     "company": "Onconetix",
@@ -335,7 +335,8 @@
     "programs": [
       "sotagliflozin",
       "ZYNQUISTA",
-      "LX9851"
+      "LX9851",
+      "pilavapadin"
     ],
     "priority": "ORANGE"
   }
