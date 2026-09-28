@@ -31,12 +31,15 @@ def reconcile_watchlist():
         company = str(candidate.get("company", "")).strip()
         programs = [str(p).strip() for p in candidate.get("programs", []) if str(p).strip()]
         cik = str(candidate.get("cik") or cik_map.get(ticker) or "").strip().zfill(10)
-        if not ticker or not company or not programs or not cik or cik == "0000000000":
+        if not ticker or not company or not programs:
             rejected.append({"ticker": ticker, "reason": "INCOMPLETE_MAPPING"})
             continue
         if ticker in watchlist:
             continue
         if ticker not in cik_map:
+            rejected.append({"ticker": ticker, "reason": "MISSING_SEC_CIK"})
+            continue
+        if not cik or cik == "0000000000":
             rejected.append({"ticker": ticker, "reason": "MISSING_SEC_CIK"})
             continue
         watchlist[ticker] = {
