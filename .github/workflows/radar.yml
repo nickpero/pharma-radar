@@ -7,6 +7,7 @@ on:
   schedule:
     - cron: "*/10 * * * *"
   workflow_dispatch:
+  pull_request:
 
 concurrency:
   group: pharma-radar-production
@@ -42,7 +43,7 @@ jobs:
       - name: Validate Trading Intelligence Rule
         run: |
           python -m py_compile main.py scanner/trading_intelligence_rule.py scanner/trading_intelligence_score.py scanner/data_quality_audit.py scanner/divergence_monitor.py scanner/divergence_outcomes.py
-          python -m pytest -q scanner/test_data_quality_audit.py scanner/test_divergence_monitor.py scanner/test_divergence_outcomes.py
+          python -m pytest -q scanner/test_data_quality_audit.py scanner/test_divergence_monitor.py scanner/test_divergence_outcomes.py scanner/test_catalyst_quality.py scanner/test_universe_expansion.py
 
       - name: Run Pharma Radar
         env:
@@ -63,6 +64,7 @@ jobs:
           python main.py
 
       - name: Commit updated state
+        if: github.event_name != 'pull_request'
         run: |
           echo "Checking repository changes..."
           if git diff --quiet && [ -z "$(git status --porcelain)" ]; then

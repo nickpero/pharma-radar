@@ -69,6 +69,14 @@ def alert_action(alert):
     if alert.get("post_spike_watch") is True:
         return "WATCH"
 
+    # Operational catalyst gate: non-genuine events can never become
+    # IMMEDIATE/FAST catalyst alerts merely because price or volume exploded.
+    radar_inclusion = str(alert.get("radar_inclusion") or "").upper()
+    catalyst_class = str(alert.get("catalyst_class") or "").upper()
+    market_strength = str(alert.get("catalyst_market_strength") or "").upper()
+    if radar_inclusion in {"WATCH", "UNCONFIRMED"} and catalyst_class in {"SPECULATIVE", "TECHNICAL", "UNCLEAR"}:
+        return "WATCH" if market_strength == "EXTREME" else "SILENT"
+
     if _is_stale_news(alert):
         return "SILENT"
 

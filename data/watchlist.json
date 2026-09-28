@@ -296,5 +296,48 @@
       "Galleri"
     ],
     "priority": "RED"
+  },
+  "KOD": {
+    "company": "Kodiak Sciences",
+    "programs": [
+      "Zenkuda",
+      "KSI-501",
+      "KSI-101"
+    ],
+    "priority": "RED"
+  },
+  "LFCR": {
+    "company": "Lifecore Biomedical",
+    "programs": [
+      "Commercial Manufacturing Programs"
+    ],
+    "priority": "ORANGE",
+    "monitoring_mode": "CORPORATE_REGULATORY"
+  },
+  "ONCO": {
+    "company": "Onconetix",
+    "programs": [
+      "Proclarix",
+      "Entadfi"
+    ],
+    "priority": "ORANGE"
+  },
+  "SCYX": {
+    "company": "SCYNEXIS",
+    "programs": [
+      "SCY-247",
+      "SCY-770"
+    ],
+    "priority": "RED"
+  },
+  "LXRX": {
+    "company": "Lexicon Pharmaceuticals",
+    "programs": [
+      "sotagliflozin",
+      "ZYNQUISTA",
+      "LX9851",
+      "pilavapadin"
+    ],
+    "priority": "ORANGE"
   }
 }
