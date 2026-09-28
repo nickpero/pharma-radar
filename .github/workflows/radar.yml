@@ -64,6 +64,7 @@ jobs:
           python main.py
 
       - name: Commit updated state
+        if: github.event_name != 'pull_request'
         run: |
           echo "Checking repository changes..."
           if git diff --quiet && [ -z "$(git status --porcelain)" ]; then
