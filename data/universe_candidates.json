@@ -1,0 +1,57 @@
+{
+  "last_reviewed": "2026-09-28",
+  "candidates": {
+    "KOD": {
+      "company": "Kodiak Sciences",
+      "programs": [
+        "Zenkuda",
+        "KSI-501",
+        "KSI-101"
+      ],
+      "priority": "RED",
+      "cik": "0001468748",
+      "source": "DAILY_TOP5_2026-09-28"
+    },
+    "LFCR": {
+      "company": "Lifecore Biomedical",
+      "programs": [
+        "Lifecore Biomedical",
+        "CDMO"
+      ],
+      "priority": "ORANGE",
+      "cik": "0001005286",
+      "source": "DAILY_TOP5_2026-09-28"
+    },
+    "ONCO": {
+      "company": "Onconetix",
+      "programs": [
+        "Proclarix",
+        "Entadfi"
+      ],
+      "priority": "ORANGE",
+      "cik": "0001782107",
+      "source": "DAILY_TOP5_2026-09-28"
+    },
+    "SCYX": {
+      "company": "SCYNEXIS",
+      "programs": [
+        "SCY-247",
+        "SCY-770"
+      ],
+      "priority": "RED",
+      "cik": "0001178253",
+      "source": "DAILY_TOP5_2026-09-28"
+    },
+    "LXRX": {
+      "company": "Lexicon Pharmaceuticals",
+      "programs": [
+        "sotagliflozin",
+        "ZYNQUISTA",
+        "LX9851"
+      ],
+      "priority": "ORANGE",
+      "cik": "0001062822",
+      "source": "DAILY_TOP5_2026-09-28"
+    }
+  }
+}
