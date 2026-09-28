@@ -22,6 +22,7 @@ from scanner.market_data import enrich_market_data, enrich_market_reactions, enr
 from scanner.catalyst_memory import record_events, memory_summary
 from scanner.catalyst_explainer import enrich_catalyst_explainers
 from scanner.catalyst_confirmation import enrich_catalyst_confirmation
+from scanner.catalyst_quality import enrich_catalyst_quality
 from scanner.catalyst_dedup import filter_known_catalysts
 from scanner.catalyst_dedup import filter_known_catalysts
 
@@ -207,6 +208,7 @@ def scan(baseline=False):
     alerts = enrich_market_reactions(alerts)
     alerts = enrich_post_spike_watch(alerts)
     alerts = [enrich_reaction_classification(alert) for alert in alerts]
+    alerts = enrich_catalyst_quality(alerts)
     alerts = enrich_historical_stats_batch(alerts)
     alerts = enrich_historical_edges(alerts)
     alerts = [enrich_trading_setup_2(alert, market_data=alert.get("market_data")) for alert in alerts]
