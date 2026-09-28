@@ -65,6 +65,8 @@ def build_summary(result, intelligent_alerts=None):
         "🧬 PHARMA RADAR — SCAN",
         "━━━━━━━━━━━━━━━━━━",
         f"🏢 Companies: {result.get('companies', 0)}",
+        f"➕ Universe added: {len(result.get('universe_added', []))}",
+        f"⚠️ Universe rejected: {len(result.get('universe_rejected', []))}",
         f"🔬 Trials: {result.get('total_trials', 0)}",
         f"🎯 Relevant: {result.get('relevant_trials', 0)}",
         f"📰 FDA news: {len(result.get('fda_news', []))}",
