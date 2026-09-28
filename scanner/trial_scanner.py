@@ -24,14 +24,13 @@ from scanner.catalyst_explainer import enrich_catalyst_explainers
 from scanner.catalyst_confirmation import enrich_catalyst_confirmation
 from scanner.catalyst_quality import enrich_catalyst_quality
 from scanner.catalyst_dedup import filter_known_catalysts
-from scanner.catalyst_dedup import filter_known_catalysts
+from scanner.universe_expansion import reconcile_watchlist
 
 WATCHLIST_FILE = Path("data/watchlist.json")
 
 
 def load_watchlist():
-    with open(WATCHLIST_FILE, "r", encoding="utf-8") as file:
-        return json.load(file)
+    return reconcile_watchlist()["watchlist"]
 
 
 def make_trial_key(ticker, program, trial):
@@ -156,7 +155,8 @@ def scan_fda(watchlist, max_items=50):
 
 
 def scan(baseline=False):
-    watchlist = load_watchlist()
+    universe = reconcile_watchlist()
+    watchlist = universe["watchlist"]
     old_state = load_state()
     new_state, detected_changes, alerts, errors, relevant_details = {}, [], [], [], []
     total_trials = relevant_trials = filtered_trials = 0
@@ -221,11 +221,11 @@ def scan(baseline=False):
     print(f"Catalyst memory: +{memory_added} records, total={memory_info['records']}")
     save_state(new_state)
     print("\n========== SCAN SUMMARY ==========")
-    print(f"Companies: {len(watchlist)}"); print(f"Trials found: {total_trials}"); print(f"Relevant trials: {relevant_trials}"); print(f"Filtered trials: {filtered_trials}")
+    print(f"Companies: {len(watchlist)}"); print(f"Universe additions: {len(universe['added'])}"); print(f"Universe rejected: {len(universe['rejected'])}"); print(f"Trials found: {total_trials}"); print(f"Relevant trials: {relevant_trials}"); print(f"Filtered trials: {filtered_trials}")
     print(f"Changes detected: {len(detected_changes)}"); print(f"FDA news: {len(fda_result['news'])}"); print(f"FDA events: {len(fda_result['events'])}")
     print(f"EMA news: {len(regulatory_result['ema_news'])}"); print(f"SEC filings: {len(regulatory_result['sec_news'])}"); print(f"EMA/SEC events: {len(regulatory_result['events'])}")
     print(f"Alerts: {len(alerts)}"); print(f"Errors: {len(errors)}"); print("===================================")
-    return {"companies": len(watchlist), "total_trials": total_trials, "relevant_trials": relevant_trials, "filtered_trials": filtered_trials,
+    return {"companies": len(watchlist), "universe_added": universe["added"], "universe_rejected": universe["rejected"], "total_trials": total_trials, "relevant_trials": relevant_trials, "filtered_trials": filtered_trials,
             "detected_changes": detected_changes, "changes": alerts, "alerts": alerts, "monitoring_alerts": monitoring_alerts, "suppressed_duplicates": suppressed_duplicates, "errors": errors, "relevant_details": relevant_details,
             "fda_news": fda_result["news"], "fda_events": fda_result["events"], "fda_alerts": fda_result["alerts"],
             "ema_news": regulatory_result["ema_news"], "sec_news": regulatory_result["sec_news"], "regulatory_events": regulatory_result["events"],
