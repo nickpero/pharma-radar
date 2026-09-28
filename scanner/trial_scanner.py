@@ -161,6 +161,10 @@ def scan(baseline=False):
     new_state, detected_changes, alerts, errors, relevant_details = {}, [], [], [], []
     total_trials = relevant_trials = filtered_trials = 0
     for ticker, company in watchlist.items():
+        monitoring_mode = company.get("monitoring_mode", "CLINICAL_REGULATORY")
+        if monitoring_mode == "CORPORATE_REGULATORY":
+            print(f"Skipping clinical pipeline search for {ticker} ({monitoring_mode})")
+            continue
         for program in company.get("programs", []):
             print(f"Searching {ticker} - {program}")
             try:
