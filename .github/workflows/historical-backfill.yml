@@ -46,7 +46,7 @@ jobs:
           from pathlib import Path
           watchlist = json.loads(Path("data/watchlist.json").read_text())
           cik_map = json.loads(Path("data/sec_cik_map.json").read_text())
-          missing = sorted(set(watchlist) - set(cik_map))
+          missing = sorted(ticker for ticker, config in watchlist.items() if config.get("sec_monitoring", True) and ticker not in cik_map)
           invalid = sorted(k for k, v in cik_map.items() if not str(v).isdigit())
           print(f"Watchlist tickers: {len(watchlist)}")
           print(f"Local SEC CIK entries: {len(cik_map)}")
