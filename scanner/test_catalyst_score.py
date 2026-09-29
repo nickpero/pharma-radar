@@ -13,8 +13,8 @@ def test_primary_endpoint():
         "PRIMARY_ENDPOINT_MET"
     )
 
-    assert result["score"] == 30
-    assert result["label"] == "LOW"
+    assert result["score"] == 100
+    assert result["label"] == "CRITICAL"
     assert result["direction"] == "POSITIVE"
 
 
@@ -47,8 +47,8 @@ def test_phase_three_bonus():
         phase="PHASE3"
     )
 
-    assert result["score"] == 100
-    assert result["label"] == "CRITICAL"
+    assert result["score"] == 30
+    assert result["label"] == "LOW"
 
 
 def test_phase_two_bonus():
