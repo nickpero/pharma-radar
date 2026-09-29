@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from unittest.mock import Mock
 
-from scanner.premarket import get_premarket_snapshot, score_opportunity
+from scanner.premarket import get_premarket_snapshot, score_opportunity, format_report
 
 
 def test_no_catalyst_is_not_able_to_fake_a_high_opportunity_score():
@@ -61,3 +61,28 @@ def test_yahoo_premarket_metadata_is_parsed():
     assert result["premarket_price"] == 12
     assert result["premarket_change_pct"] == 20
     assert result["premarket_volume"] == 123456
+
+
+def test_format_report_includes_next_catalysts():
+    report = format_report(
+        [{
+            "ticker": "ABC",
+            "company": "ABC Pharma",
+            "program": "Drug A",
+            "catalyst": {"title": "FDA event", "source": "FDA"},
+            "snapshot": {"premarket_change_pct": 12},
+            "opportunity_score": 70,
+            "confidence": "CONFIRMED",
+        }],
+        now=datetime(2026, 9, 29, 12, tzinfo=timezone.utc),
+        calendar_rows=[{
+            "date": "2026-10-02",
+            "date_precision": "DAY",
+            "ticker": "ABC",
+            "programs": ["Drug A"],
+            "milestone": "PRIMARY_COMPLETION",
+        }],
+    )
+    assert "NEXT CATALYSTS" in report
+    assert "2026-10-02" in report
+    assert "PRIMARY_COMPLETION" in report
