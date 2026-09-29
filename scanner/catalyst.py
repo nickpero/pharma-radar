@@ -39,11 +39,13 @@ def status_direction(old_status, new_status):
     old_status = normalize(old_status)
     new_status = normalize(new_status)
 
+    # Completion means the study ended; it does not by itself
+    # establish a favorable efficacy or safety outcome.
     if (
         new_status == "COMPLETED"
         and old_status != "COMPLETED"
     ):
-        return "POSITIVE"
+        return "UNKNOWN"
 
     if new_status in {
         "TERMINATED",
@@ -95,8 +97,9 @@ def classify_status_change(
     else:
         subtype = "STATUS_CHANGE"
 
-    if subtype in {
-        "TRIAL_COMPLETED",
+    if subtype == "TRIAL_COMPLETED":
+        severity = "LOW"
+    elif subtype in {
         "TRIAL_TERMINATED",
         "TRIAL_SUSPENDED",
         "TRIAL_WITHDRAWN",
@@ -183,6 +186,44 @@ def classify_enrollment_change(
         "new_value": new_value,
         "direction": "UNKNOWN",
         "severity": "MEDIUM",
+    }
+
+
+# ============================================================
+# PHASE CHANGES
+# ============================================================
+
+def phase_rank(phase):
+    value = normalize(phase)
+    ranks = {
+        "EARLY PHASE 1": 0, "PHASE1": 1, "PHASE 1": 1,
+        "PHASE1/PHASE2": 2, "PHASE 1/PHASE 2": 2,
+        "PHASE1/2": 2, "PHASE 1/2": 2,
+        "PHASE2": 3, "PHASE 2": 3,
+        "PHASE2/PHASE3": 4, "PHASE 2/PHASE 3": 4,
+        "PHASE2/3": 4, "PHASE 2/3": 4,
+        "PHASE3": 5, "PHASE 3": 5,
+        "PHASE4": 6, "PHASE 4": 6,
+    }
+    return ranks.get(value)
+
+
+def classify_phase_change(old_phase, new_phase):
+    old_rank = phase_rank(old_phase)
+    new_rank = phase_rank(new_phase)
+    if old_rank is None or new_rank is None or old_rank == new_rank:
+        return None
+    if new_rank > old_rank:
+        subtype, direction = "PHASE_ADVANCED", "POSITIVE"
+    else:
+        subtype, direction = "PHASE_REGRESSED", "NEGATIVE"
+    return {
+        "type": "PHASE_CHANGE",
+        "subtype": subtype,
+        "old_value": old_phase,
+        "new_value": new_phase,
+        "direction": direction,
+        "severity": "HIGH",
     }
 
 
@@ -332,6 +373,15 @@ def classify_trial_changes(changes):
         events.append(enrollment_event)
 
     # --------------------------------------------------------
+    # PHASE
+    # --------------------------------------------------------
+
+    phase = changes.get("phase", {})
+    phase_event = classify_phase_change(phase.get("old"), phase.get("new"))
+    if phase_event:
+        events.append(phase_event)
+
+    # --------------------------------------------------------
     # OTHER FIELDS
     # --------------------------------------------------------
 
@@ -341,6 +391,7 @@ def classify_trial_changes(changes):
         "study_completion_date",
         "completion_date",
         "enrollment",
+        "phase",
     }
 
     for field, change in changes.items():
