@@ -36,5 +36,9 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           SEND_TELEGRAM: "1"
         run: |
+          if [ "$(TZ=Europe/Rome date '+%H:%M')" != "22:15" ]; then
+            echo "DST guard: not 22:15 Europe/Rome; skipping."
+            exit 0
+          fi
           python -m pytest -q scanner/test_daily_top5.py
           python -m scanner.daily_top5
