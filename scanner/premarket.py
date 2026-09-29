@@ -10,6 +10,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from scanner.telegram import send_telegram
+from scanner.catalyst_calendar import build_upcoming_calendar
 
 YAHOO_CHART_URL = "https://query1.finance.yahoo.com/v8/finance/chart/{ticker}"
 WATCHLIST_FILE = Path("data/watchlist.json")
@@ -18,6 +19,8 @@ STATE_FILE = Path("data/premarket_state.json")
 ROME = ZoneInfo("Europe/Rome")
 REQUEST_TIMEOUT = 10
 MAX_CANDIDATES = 5
+CALENDAR_DAYS = 7
+MAX_CALENDAR_ROWS = 5
 
 
 def _float(value):
@@ -175,7 +178,7 @@ def build_candidates(now=None, session=None):
     return candidates[:MAX_CANDIDATES]
 
 
-def format_report(candidates, phase="FINAL", now=None):
+def format_report(candidates, phase="FINAL", now=None, calendar_rows=None):
     now = now or datetime.now(timezone.utc)
     local = now.astimezone(ROME)
     lines = [
@@ -199,7 +202,17 @@ def format_report(candidates, phase="FINAL", now=None):
             f"🔎 Source: {catalyst.get('source') or 'MARKET DATA'}",
             "",
         ]
+    calendar_rows = calendar_rows if calendar_rows is not None else build_upcoming_calendar(days=CALENDAR_DAYS)
+    lines += ["━━━━━━━━━━━━━━━━━━", "📅 NEXT CATALYSTS · 7 DAYS"]
+    if calendar_rows:
+        for row in calendar_rows[:MAX_CALENDAR_ROWS]:
+            date_text = row["date"] if row["date_precision"] == "DAY" else row["date"][:7] + " (month)"
+            program = (row.get("programs") or [row.get("title") or "UNKNOWN"])[0]
+            lines.append(f"• {date_text} · {row['ticker']} · {program} · {row['milestone']}")
+    else:
+        lines.append("• No upcoming monitored clinical milestones.")
     lines += [
+        "",
         "━━━━━━━━━━━━━━━━━━",
         "ℹ️ Opportunity Score = monitoring priority, not a buy/sell signal.",
         "⚠️ Pre-market can be less liquid and more volatile than regular trading.",
