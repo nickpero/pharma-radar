@@ -44,7 +44,15 @@ def _is_stale_news(alert, now=None):
     if dt is None:
         return False
     reference = now or datetime.now(timezone.utc)
-    return (reference - dt).total_seconds() > MAX_NEW_NEWS_AGE_HOURS * 3600
+    age_exceeded = (reference - dt).total_seconds() > MAX_NEW_NEWS_AGE_HOURS * 3600
+    if not age_exceeded:
+        return False
+    event = alert.get("event") if isinstance(alert.get("event"), dict) else {}
+    try:
+        priority = float(alert.get("alert_priority", event.get("alert_priority")) or 0)
+    except (TypeError, ValueError):
+        priority = 0
+    return priority < 80
 
 
 def _is_expired(alert):
