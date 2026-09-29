@@ -13,9 +13,6 @@ from scanner.pharma_email import send_pharma_intelligence_emails
 from scanner.divergence_monitor import detect_divergences
 from scanner.divergence_outcomes import track_divergence_outcomes
 from scanner.data_quality_audit import audit_alerts
-from scanner.data_quality_audit import audit_alerts
-from scanner.data_quality_audit import audit_alerts
-from scanner.data_quality_audit import audit_alerts
 
 
 def _reaction(alert):
