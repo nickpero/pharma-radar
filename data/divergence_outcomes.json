@@ -150,9 +150,9 @@
             "return_pct": -10.0
           },
           "t3": {
-            "close": 0.2879999876022339,
+            "close": 0.2980000078678131,
             "date": "2026-09-29",
-            "return_pct": -4.000007947285654
+            "return_pct": -0.6666679912142757
           }
         },
         "recovered_by_t5": false
@@ -228,7 +228,7 @@
         "event_price_timestamp": "2026-09-23",
         "event_to_close_pct": 0.0,
         "max_adverse_pct": -3.5636346990411933,
-        "max_favorable_pct": -1.0181843150745737,
+        "max_favorable_pct": -1.0909063165838067,
         "max_recovery": false,
         "outcomes": {
           "t1": {
