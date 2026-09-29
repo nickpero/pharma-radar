@@ -74,6 +74,21 @@ def test_different_headlines_remain_separate_events():
     assert len(selected) == 2
 
 
+
+
+def test_stale_high_priority_catalyst_is_not_silenced():
+    alert = _alert("IONS", 100, 40, "CRITICAL")
+    alert["source"] = "SEC"
+    alert["published_at"] = "2026-09-20T00:00:00Z"
+    assert alert_action(alert) == "IMMEDIATE"
+
+
+def test_stale_low_priority_catalyst_remains_silent():
+    alert = _alert("IONS", 70, 40, "HIGH")
+    alert["source"] = "SEC"
+    alert["published_at"] = "2026-09-20T00:00:00Z"
+    assert alert_action(alert) == "SILENT"
+
 def test_silent_alerts_are_filtered():
     selected = select_intelligent_alerts([_alert("SVRA", 20, 30, "LOW")])
     assert selected == []
