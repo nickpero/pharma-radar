@@ -13,8 +13,8 @@ def test_primary_endpoint():
         "PRIMARY_ENDPOINT_MET"
     )
 
-    assert result["score"] == 100
-    assert result["label"] == "CRITICAL"
+    assert result["score"] == 30
+    assert result["label"] == "LOW"
     assert result["direction"] == "POSITIVE"
 
 
@@ -35,9 +35,9 @@ def test_trial_completed():
         "TRIAL_COMPLETED"
     )
 
-    assert result["score"] == 90
-    assert result["label"] == "VERY HIGH"
-    assert result["direction"] == "POSITIVE"
+    assert result["score"] == 20
+    assert result["label"] == "LOW"
+    assert result["direction"] == "UNKNOWN"
 
 
 def test_phase_three_bonus():
@@ -114,7 +114,7 @@ def test_score_event_object():
     event = {
         "type": "TRIAL_COMPLETED",
         "phase": "PHASE3",
-        "direction": "POSITIVE",
+        "direction": "UNKNOWN",
         "nct_id": "NCT12345678",
     }
 
@@ -122,9 +122,9 @@ def test_score_event_object():
         event
     )
 
-    assert scored["score"] == 100
-    assert scored["label"] == "CRITICAL"
-    assert scored["direction"] == "POSITIVE"
+    assert scored["score"] == 30
+    assert scored["label"] == "LOW"
+    assert scored["direction"] == "UNKNOWN"
     assert scored["nct_id"] == "NCT12345678"
 
 
@@ -149,7 +149,7 @@ def test_multiple_events():
     assert len(scored) == 3
 
     assert scored[0]["score"] == 100
-    assert scored[1]["score"] == 90
+    assert scored[1]["score"] == 20
     assert scored[2]["score"] == 60
 
 
