@@ -296,5 +296,74 @@
       "Galleri"
     ],
     "priority": "RED"
+  },
+  "KOD": {
+    "company": "Kodiak Sciences",
+    "programs": [
+      "Zenkuda (tarcocimab tedromer)",
+      "KSI-501",
+      "KSI-101"
+    ],
+    "priority": "RED"
+  },
+  "LFCR": {
+    "company": "Lifecore Biomedical",
+    "programs": [
+      "Commercial Manufacturing Programs",
+      "Late-Stage Development Programs",
+      "CDMO Technology Transfer Programs"
+    ],
+    "priority": "ORANGE",
+    "program_category": "Commercial Manufacturing Programs"
+  },
+  "ONCO": {
+    "company": "Onconetix",
+    "programs": [
+      "Proclarix",
+      "ENTADFI"
+    ],
+    "priority": "ORANGE"
+  },
+  "SCYX": {
+    "company": "SCYNEXIS",
+    "programs": [
+      "SCY-770",
+      "SCY-247",
+      "ibrexafungerp (BREXAFEMME)"
+    ],
+    "priority": "RED"
+  },
+  "LXRX": {
+    "company": "Lexicon Pharmaceuticals",
+    "programs": [
+      "sotagliflozin",
+      "pilavapadin",
+      "LX9851"
+    ],
+    "priority": "RED"
+  },
+  "IOVA": {
+    "company": "Iovance Biotherapeutics",
+    "programs": [
+      "lifileucel (AMTAGVI)",
+      "IOV-4001",
+      "IOV-3001",
+      "IOV-5001"
+    ],
+    "priority": "RED"
+  },
+  "EGTX": {
+    "company": "Egetis Therapeutics",
+    "programs": [
+      "Emcitate (tiratricol)",
+      "Aladote (calmangafodipir)"
+    ],
+    "priority": "RED",
+    "sec_monitoring": false,
+    "primary_sources": [
+      "FDA",
+      "EMA",
+      "Egetis"
+    ]
   }
 }
