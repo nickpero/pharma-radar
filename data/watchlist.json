@@ -264,7 +264,13 @@
       "PharmaShell",
       "long-acting injectables"
     ],
-    "priority": "RED"
+    "priority": "RED",
+    "sec_monitoring": false,
+    "primary_sources": [
+      "Nanexa",
+      "EMA",
+      "FDA"
+    ]
   },
   "JAGX": {
     "company": "Jaguar Health",
