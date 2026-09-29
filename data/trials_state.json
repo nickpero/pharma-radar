@@ -8084,5 +8084,812 @@
       "MCED",
       "SOC"
     ]
+  },
+  "KOD:KSI-501:NCT06556368": {
+    "nct_id": "NCT06556368",
+    "title": "A Study to Evaluate the Efficacy and Safety of Tarcocimab Tedromer and Tabirafusp Tedromer Compared to Aflibercept in Participants With Neovascular (Wet) Age-related Macular Degeneration (wAMD) - DAYBREAK",
+    "official_title": "A Prospective, Randomized, Double-masked, Active Comparator-controlled, Multi-center, Three-arm Phase 3 Study to Evaluate the Efficacy and Safety of Intravitreal Tarcocimab Tedromer and Tabirafusp Tedromer Compared With Intravitreal Aflibercept in Participants With Neovascular (Wet) Age-related Macular Degeneration (wAMD)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-04-29",
+    "start_date": "2024-08-23",
+    "completion_date": "2027-08",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 675,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Kodiak Sciences Inc",
+    "conditions": [
+      "Wet Age-related Macular Degeneration"
+    ],
+    "interventions": [
+      "Tarcocimab tedromer",
+      "Tabirafusp tedromer",
+      "Aflibercept"
+    ]
+  },
+  "KOD:KSI-501:NCT07734844": {
+    "nct_id": "NCT07734844",
+    "title": "A Study to Evaluate the Efficacy and Safety of Tabirafusp Tedromer Compared to Aflibercept in Participants With DME - ALTO",
+    "official_title": "A Randomized, Double-masked, Active-controlled, Multi-center, Phase 3 Study to Evaluate the Efficacy and Safety of Intravitreal Tabirafusp Tedromer 5 mg Compared With Intravitreal Aflibercept 2 mg in Participants With Visual Impairment Secondary to Diabetic Macular Edema (DME) - ALTO",
+    "status": "RECRUITING",
+    "last_update": "2026-08-21",
+    "start_date": "2026-08-03",
+    "completion_date": "2029-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 910,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Kodiak Sciences Inc",
+    "conditions": [
+      "Diabetic Macular Edema (DME)"
+    ],
+    "interventions": [
+      "Tabirafusp tedromer",
+      "Aflibercept (2.0 mg)"
+    ]
+  },
+  "KOD:KSI-101:NCT06996080": {
+    "nct_id": "NCT06996080",
+    "title": "A Phase 3 Study to Evaluate the Efficacy and Safety of Intravitreal KSI-101 in Participants With Macular Edema Secondary to Inflammation (MESI) - PINNACLE",
+    "official_title": "A Randomized, Double-masked, Sham-controlled, Multicenter, Phase 3 Study to Evaluate the Efficacy and Safety of Intravitreal Tabirafusp Alfa (KSI-101) in Participants With Macular Edema Secondary to Inflammation (MESI) - PINNACLE",
+    "status": "RECRUITING",
+    "last_update": "2026-05-18",
+    "start_date": "2025-07-16",
+    "completion_date": "2027-08",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 300,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Kodiak Sciences Inc",
+    "conditions": [
+      "Macular Edema Secondary to Inflammation"
+    ],
+    "interventions": [
+      "KSI-101",
+      "Sham Comparator"
+    ]
+  },
+  "KOD:KSI-101:NCT06990399": {
+    "nct_id": "NCT06990399",
+    "title": "A Phase 3 Study to Evaluate the Efficacy and Safety of Intravitreal KSI-101 in Participants With Macular Edema Secondary to Inflammation (MESI) - PEAK",
+    "official_title": "A Randomized, Double-masked, Sham-controlled, Multicenter, Phase 3 Study to Evaluate the Efficacy and Safety of Intravitreal Tabirafusp Alfa (KSI-101) in Participants With Macular Edema Secondary to Inflammation (MESI) - PEAK",
+    "status": "RECRUITING",
+    "last_update": "2026-05-18",
+    "start_date": "2025-07-30",
+    "completion_date": "2027-11",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 600,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Kodiak Sciences Inc",
+    "conditions": [
+      "Macular Edema Secondary to Inflammation"
+    ],
+    "interventions": [
+      "KSI-101",
+      "Sham Comparator"
+    ]
+  },
+  "ONCO:Proclarix:NCT06637267": {
+    "nct_id": "NCT06637267",
+    "title": "Prospective Evaluation of Proclarix® Test to Improve Risk Stratification in Men Scheduled for MpMRI and Prostate Biopsy in Cantonal Hospital Aarau",
+    "official_title": "Prospective Evaluation of Proclarix® Test to Improve Risk Stratification in Men Scheduled for MpMRI and Prostate Biopsy in Cantonal Hospital Aarau",
+    "status": "RECRUITING",
+    "last_update": "2024-10-15",
+    "start_date": "2022-08-24",
+    "completion_date": "2026-12-30",
+    "study_type": "OBSERVATIONAL",
+    "phases": [],
+    "enrollment": 480,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Kantonsspital Aarau",
+    "conditions": [
+      "Prostate Cancer"
+    ],
+    "interventions": [
+      "Proclarix®"
+    ]
+  },
+  "ONCO:Proclarix:NCT07543757": {
+    "nct_id": "NCT07543757",
+    "title": "Prostate Cancer Risk Identification in a Multi-Ethnic Cohort: a Prospective US-based Multi-center Validation Study of Proclarix",
+    "official_title": "Prostate Cancer Risk Identification in a Multi-Ethnic Cohort: a Prospective US-based Multi-center Validation Study of Proclarix",
+    "status": "RECRUITING",
+    "last_update": "2026-09-28",
+    "start_date": "2026-04-03",
+    "completion_date": "2027-03-31",
+    "study_type": "OBSERVATIONAL",
+    "phases": [],
+    "enrollment": 500,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Sequenom, Inc.",
+    "conditions": [
+      "Prostate Cancer Detection"
+    ],
+    "interventions": [
+      "Proclarix"
+    ]
+  },
+  "SCYX:ibrexafungerp (BREXAFEMME):NCT05908682": {
+    "nct_id": "NCT05908682",
+    "title": "Safety of Pregnant Subjects Exposed to Ibrexafungerp Including Infant Outcomes",
+    "official_title": "A Single-arm Safety Study of Subjects Exposed to Ibrexafungerp Whilst Pregnant, Including Infant Outcomes Up to One Year",
+    "status": "RECRUITING",
+    "last_update": "2026-09-23",
+    "start_date": "2025-11-12",
+    "completion_date": "2029-07-31",
+    "study_type": "OBSERVATIONAL",
+    "phases": [],
+    "enrollment": 100,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "GlaxoSmithKline",
+    "conditions": [
+      "Vulvovaginitis, Candidal",
+      "Vulvovaginal Candidiasis",
+      "Candida Infection",
+      "Vaginal Candidiasis"
+    ],
+    "interventions": [
+      "Non-interventional study"
+    ]
+  },
+  "SCYX:ibrexafungerp (BREXAFEMME):NCT06954493": {
+    "nct_id": "NCT06954493",
+    "title": "Pharmacokinetic Study in Healthy Lactating Women Exposed to Ibrexafungerp",
+    "official_title": "Phase 1, Open-Label Pharmacokinetic Study in Healthy Lactating Women After Two Oral Doses of Ibrexafungerp Administered on a Single Day",
+    "status": "COMPLETED",
+    "last_update": "2025-08-08",
+    "start_date": "2023-07-12",
+    "completion_date": "2023-11-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 5,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Scynexis, Inc.",
+    "conditions": [
+      "Vulvovaginal Candidiasis",
+      "Candida Infection",
+      "Vaginal Candidiasis"
+    ],
+    "interventions": [
+      "Ibrexafungerp"
+    ]
+  },
+  "LXRX:sotagliflozin:NCT02383940": {
+    "nct_id": "NCT02383940",
+    "title": "Efficacy and Safety of Sotagliflozin in Young Adult Patients With Type 1 Diabetes Mellitus and Elevated Hemoglobin A1C",
+    "official_title": "A Phase 2, Multicenter, Randomized, Double-blind, Placebo-controlled, Parallel-group Study to Evaluate the Efficacy and Safety of LX4211 in Young Adult Patients With Type 1 Diabetes Mellitus and Elevated Hemoglobin A1C",
+    "status": "COMPLETED",
+    "last_update": "2020-02-12",
+    "start_date": "2015-04",
+    "completion_date": "2016-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 87,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Lexicon Pharmaceuticals",
+    "conditions": [
+      "Type 1 Diabetes Mellitus"
+    ],
+    "interventions": [
+      "Sotagliflozin",
+      "Placebo"
+    ]
+  },
+  "LXRX:sotagliflozin:NCT06082063": {
+    "nct_id": "NCT06082063",
+    "title": "Multifactorial Intervention to Reduce Cardiovascular Disease in Type 1 Diabetes",
+    "official_title": "Multifactorial Intervention to Reduce Cardiovascular Disease in Type 1 Diabetes",
+    "status": "RECRUITING",
+    "last_update": "2025-01-10",
+    "start_date": "2024-07-01",
+    "completion_date": "2029-07-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 2000,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Steno Diabetes Center Copenhagen",
+    "conditions": [
+      "Cardiovascular Diseases",
+      "Heart Failure",
+      "Type 1 Diabetes",
+      "Kidney Failure"
+    ],
+    "interventions": [
+      "Aspirin tablet",
+      "Semaglutide",
+      "Sotagliflozin",
+      "Finerenone"
+    ]
+  },
+  "LXRX:sotagliflozin:NCT06618976": {
+    "nct_id": "NCT06618976",
+    "title": "Antithrombotic Activities of Sotagliflozin vs. Empagliflozin",
+    "official_title": "SOTA-THROMBOSIS: Antithrombotic Activities of Sotagliflozin vs. Empagliflozin",
+    "status": "COMPLETED",
+    "last_update": "2026-04-30",
+    "start_date": "2025-02-25",
+    "completion_date": "2026-02-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE4"
+    ],
+    "enrollment": 17,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Icahn School of Medicine at Mount Sinai",
+    "conditions": [
+      "Thrombosis"
+    ],
+    "interventions": [
+      "Sotagliflozin",
+      "Empagliflozin"
+    ]
+  },
+  "LXRX:sotagliflozin:NCT07325201": {
+    "nct_id": "NCT07325201",
+    "title": "Mitigating DKA in Type 1 Diabetes for Safe Use of SGLT Inhibitors Using Dual Continuous Ketone and Glucose Monitoring.",
+    "official_title": "Mitigating Diabetic Ketoacidosis in People With T1D and Chronic Kidney Disease on an SGLT1&2 Inhibitor: Ketosis Risk Factor Determination and Incorporation Into an Enhanced Glucose Ketone Report",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-08-27",
+    "start_date": "2026-09",
+    "completion_date": "2030-02",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 80,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "HealthPartners Institute",
+    "conditions": [
+      "Type 1 Diabetes Mellitus",
+      "Chronic Kidney Disease (CKD) With Diabetes Mellitus (DM)",
+      "Chronic Kidney Disease",
+      "Diabetic Ketoacidosis",
+      "Ketones"
+    ],
+    "interventions": [
+      "Sotagliflozin initiation"
+    ]
+  },
+  "LXRX:sotagliflozin:NCT03332771": {
+    "nct_id": "NCT03332771",
+    "title": "Efficacy and Safety of Sotagliflozin Versus Glimepiride and Placebo in Participants With Type 2 Diabetes Mellitus That Are Taking Metformin Monotherapy",
+    "official_title": "A 52-week Randomized, Double-blind, Double-dummy, Active and Placebo-controlled, Parallel-group, Multicenter Study to Evaluate the Efficacy and Safety of Sotagliflozin Compared to Glimepiride or Placebo Added to Metformin in Patients With Type 2 Diabetes Who Have Inadequate Glycemic Control With Metformin Monotherapy",
+    "status": "COMPLETED",
+    "last_update": "2021-05-11",
+    "start_date": "2017-12-01",
+    "completion_date": "2019-09-06",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 954,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Lexicon Pharmaceuticals",
+    "conditions": [
+      "Type 2 Diabetes Mellitus"
+    ],
+    "interventions": [
+      "Sotagliflozin (SAR439954)",
+      "Glimepiride",
+      "Metformin",
+      "Placebo",
+      "Placebo"
+    ]
+  },
+  "LXRX:sotagliflozin:NCT06435156": {
+    "nct_id": "NCT06435156",
+    "title": "Sotagliflozin in Patients With Heart Failure Symptoms and Type 1 Diabetes",
+    "official_title": "A Phase 2 Double-blind Randomised Controlled Trial Studying the Effect of Sotagliflozin Versus Placebo in Individuals With Heart Failure and Type 1 Diabetes.",
+    "status": "RECRUITING",
+    "last_update": "2026-04-06",
+    "start_date": "2025-01-28",
+    "completion_date": "2027-10-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 320,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "University of Dundee",
+    "conditions": [
+      "Type 1 Diabetes",
+      "Heart Failure"
+    ],
+    "interventions": [
+      "Sotagliflozin",
+      "Placebo"
+    ]
+  },
+  "LXRX:sotagliflozin:NCT06933056": {
+    "nct_id": "NCT06933056",
+    "title": "Comparison of Antiplatelet Effects of Sotagliflozin to FDA-approved Antiplatelet Drugs",
+    "official_title": "Comparison of Antiplatelet Effects of Sotagliflozin to FDA-approved Antiplatelet Drugs: an Interventional Study",
+    "status": "RECRUITING",
+    "last_update": "2025-09-15",
+    "start_date": "2025-09-02",
+    "completion_date": "2026-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "EARLY_PHASE1"
+    ],
+    "enrollment": 20,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "University of Michigan",
+    "conditions": [
+      "Platelet Function and Reactivity Tests"
+    ],
+    "interventions": [
+      "Sotagliflozin (SOTA) followed by 3 drugs in a random order",
+      "Aspirin followed by 3 drugs in a random order",
+      "Clopidogrel followed by 3 drugs in a random order",
+      "Eliquis followed by 3 drugs in a random order"
+    ]
+  },
+  "LXRX:sotagliflozin:NCT03521934": {
+    "nct_id": "NCT03521934",
+    "title": "Effect of Sotagliflozin on Cardiovascular Events in Participants With Type 2 Diabetes Post Worsening Heart Failure (SOLOIST-WHF Trial)",
+    "official_title": "A Randomized, Double-blind, Placebo-controlled, Parallel-group, Multicenter Study to Evaluate the Effects of Sotagliflozin on Clinical Outcomes in Hemodynamically Stable Patients With Type 2 Diabetes POST Worsening Heart Failure",
+    "status": "TERMINATED",
+    "last_update": "2022-10-28",
+    "start_date": "2018-06-15",
+    "completion_date": "2020-06-05",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 1222,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Lexicon Pharmaceuticals",
+    "conditions": [
+      "Heart Failure",
+      "Type 2 Diabetes Mellitus"
+    ],
+    "interventions": [
+      "Sotagliflozin",
+      "Placebo"
+    ]
+  },
+  "LXRX:sotagliflozin:NCT03414723": {
+    "nct_id": "NCT03414723",
+    "title": "A Drug-Drug Interaction Study Between Sotagliflozin and Ramipril",
+    "official_title": "An Open Label, 2-treatment, 2-period, Single Sequence Study to Evaluate Pharmacokinetic Drug-drug Interaction Between Ramipril and Sotagliflozin at Steady State in Healthy Subjects",
+    "status": "COMPLETED",
+    "last_update": "2022-04-25",
+    "start_date": "2018-01-15",
+    "completion_date": "2018-03-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 16,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Sanofi",
+    "conditions": [
+      "Diabetes Mellitus",
+      "Healthy Subjects"
+    ],
+    "interventions": [
+      "Sotagliflozin (SAR439954)",
+      "Ramipril"
+    ]
+  },
+  "LXRX:sotagliflozin:NCT05696366": {
+    "nct_id": "NCT05696366",
+    "title": "Combination Adjunctive Therapy to Address Multiple Metabolic Imbalances in Type 1 Diabetes",
+    "official_title": "Combination Adjunctive Therapy to Address Multiple Metabolic Imbalances in Type 1 Diabetes",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-06-15",
+    "start_date": "2024-09-09",
+    "completion_date": "2028-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 24,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "University of California, San Diego",
+    "conditions": [
+      "Type 1 Diabetes"
+    ],
+    "interventions": [
+      "Sotagliflozin",
+      "Volagidemab"
+    ]
+  },
+  "LXRX:sotagliflozin:NCT03760965": {
+    "nct_id": "NCT03760965",
+    "title": "Efficacy and Safety of Sotagliflozin Versus Placebo in Chinese Patients With Type 2 Diabetes Mellitus Not Adequately Controlled by Diet and Exercise",
+    "official_title": "A Randomized, Double-blind, Placebo-controlled, Parallel-group, Multicenter Study to Evaluate the Efficacy and Safety of Sotagliflozin as Monotherapy in Chinese Patients With Type 2 Diabetes Who Have Inadequate Glycemic Control on Diet and Exercise",
+    "status": "TERMINATED",
+    "last_update": "2022-04-25",
+    "start_date": "2018-11-27",
+    "completion_date": "2020-04-24",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 276,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Sanofi",
+    "conditions": [
+      "Type 2 Diabetes Mellitus"
+    ],
+    "interventions": [
+      "sotagliflozin (SAR439954)",
+      "placebo"
+    ]
+  },
+  "LXRX:sotagliflozin:NCT06217302": {
+    "nct_id": "NCT06217302",
+    "title": "Sotagliflozin to Slow Kidney Function Decline in Persons With Type 1 Diabetes and Diabetic Kidney Disease",
+    "official_title": "Effectiveness and Safety of Sotagliflozin in Slowing Kidney Function Decline in Persons With Type 1 Diabetes and Moderate to Severe Diabetic Kidney Disease",
+    "status": "RECRUITING",
+    "last_update": "2026-03-24",
+    "start_date": "2024-10-31",
+    "completion_date": "2029-05",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 150,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Alessandro Doria",
+    "conditions": [
+      "Diabetic Nephropathies",
+      "Kidney Failure, Chronic",
+      "Diabetes Mellitus Type 1",
+      "Heart Failure"
+    ],
+    "interventions": [
+      "Sotagliflozin",
+      "Placebo"
+    ]
+  },
+  "LXRX:sotagliflozin:NCT07421518": {
+    "nct_id": "NCT07421518",
+    "title": "Ketone Monitoring Approaches for Diabetic Ketoacidosis Risk Mitigation in People With T1D on Adjunctive SGLT-2 Inhibitors",
+    "official_title": "Ketone Monitoring Approaches for Diabetic Ketoacidosis Risk Mitigation in People With T1D on Adjunctive SGLT2 Inhibitors",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-02-19",
+    "start_date": "2026-06",
+    "completion_date": "2030-04",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 75,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "AdventHealth Translational Research Institute",
+    "conditions": [
+      "Type 1 Diabetes",
+      "Type 2 Diabetes"
+    ],
+    "interventions": [
+      "SGLT-2 inhibitor (Sotagliflozin)",
+      "Insulin withdrawal test (IWT)"
+    ]
+  },
+  "LXRX:sotagliflozin:NCT03761134": {
+    "nct_id": "NCT03761134",
+    "title": "Efficacy and Safety of Sotagliflozin Versus Placebo in Chinese Patients With Type 2 Diabetes Mellitus Not Adequately Controlled by Metformin With or Without Sulfonylurea",
+    "official_title": "A Randomized, Double-blind, Placebo-controlled, Parallel-group, Multicenter Study to Evaluate the Efficacy and Safety of Sotagliflozin in Chinese Patients With Type 2 Diabetes Who Have Inadequate Glycemic Control on Metformin Alone or Metformin in Combination With Sulfonylurea",
+    "status": "TERMINATED",
+    "last_update": "2022-04-25",
+    "start_date": "2018-11-30",
+    "completion_date": "2020-04-29",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 377,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Sanofi",
+    "conditions": [
+      "Type 2 Diabetes Mellitus"
+    ],
+    "interventions": [
+      "sotagliflozin (SAR439954)",
+      "placebo",
+      "metformin",
+      "sulfonylurea"
+    ]
+  },
+  "LXRX:sotagliflozin:NCT03315143": {
+    "nct_id": "NCT03315143",
+    "title": "Effect of Sotagliflozin on Cardiovascular and Renal Events in Participants With Type 2 Diabetes and Moderate Renal Impairment Who Are at Cardiovascular Risk",
+    "official_title": "A Randomized, Double-blind, Placebo-controlled, Parallel-group, Multicenter Study to Demonstrate the Effects of Sotagliflozin on Cardiovascular and Renal Events in Patients With Type 2 Diabetes, Cardiovascular Risk Factors and Moderately Impaired Renal Function",
+    "status": "TERMINATED",
+    "last_update": "2022-10-28",
+    "start_date": "2017-12-19",
+    "completion_date": "2020-07-08",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 10584,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Lexicon Pharmaceuticals",
+    "conditions": [
+      "Heart Failure",
+      "Type 2 Diabetes Mellitus",
+      "Chronic Kidney Diseases"
+    ],
+    "interventions": [
+      "Sotagliflozin",
+      "Placebo"
+    ]
+  },
+  "LXRX:sotagliflozin:NCT03802487": {
+    "nct_id": "NCT03802487",
+    "title": "Study To Determine Bioavailability of Sotagliflozin in Healthy Male and Female Subjects",
+    "official_title": "A Phase 1, Single-Center, Open-Label, Two-Period, One-Sequence, Single Dose Study to Determine the Absolute Bioavailability of Sotagliflozin in Healthy Male and Female Subjects",
+    "status": "COMPLETED",
+    "last_update": "2022-04-25",
+    "start_date": "2019-01-14",
+    "completion_date": "2019-03-28",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 6,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Sanofi",
+    "conditions": [
+      "Type 2 Diabetes Mellitus",
+      "Healthy Subjects"
+    ],
+    "interventions": [
+      "Sotagliflozin (SAR439954)",
+      "14C-microtracer",
+      "Charcoal"
+    ]
+  },
+  "LXRX:sotagliflozin:NCT03285594": {
+    "nct_id": "NCT03285594",
+    "title": "Efficacy and Safety of Sotagliflozin Versus Placebo in Participants With Type 2 Diabetes Mellitus Who Have Inadequate Glycemic Control While Taking Insulin Alone or With Other Oral Antidiabetic Agents",
+    "official_title": "A Randomized, Double-blind, Placebo-controlled, Parallel-group, 52-week Multicenter Study to Evaluate the Efficacy and Safety of Sotagliflozin in Patients With Type 2 Diabetes Who Have Inadequate Glycemic Control on Basal Insulin Alone or in Addition to Oral Antidiabetes Drugs (OADs)",
+    "status": "COMPLETED",
+    "last_update": "2021-05-11",
+    "start_date": "2017-09-15",
+    "completion_date": "2019-09-27",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 571,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Lexicon Pharmaceuticals",
+    "conditions": [
+      "Type 2 Diabetes Mellitus"
+    ],
+    "interventions": [
+      "Sotagliflozin",
+      "Insulin glargine (HOE901)",
+      "Placebo",
+      "Oral Antidiabetes Drugs (OADs)"
+    ]
+  },
+  "LXRX:sotagliflozin:NCT02384941": {
+    "nct_id": "NCT02384941",
+    "title": "Efficacy, Safety, and Tolerability Study of Sotagliflozin as Adjunct Therapy in Adult Patients With Type 1 Diabetes Mellitus Who Have Inadequate Glycemic Control With Insulin Therapy",
+    "official_title": "A Phase 3, Randomized, Double-blind, Placebo-controlled, Parallel-group, Multicenter Study to Evaluate the Efficacy, Safety, and Tolerability of LX4211 as Adjunct Therapy in Adult Patients With Type 1 Diabetes Mellitus Who Have Inadequate Glycemic Control With Insulin Therapy",
+    "status": "COMPLETED",
+    "last_update": "2020-02-12",
+    "start_date": "2015-03",
+    "completion_date": "2017-02",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 793,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Lexicon Pharmaceuticals",
+    "conditions": [
+      "Type 1 Diabetes Mellitus"
+    ],
+    "interventions": [
+      "Placebo",
+      "Sotagliflozin"
+    ]
+  },
+  "LXRX:sotagliflozin:NCT02531035": {
+    "nct_id": "NCT02531035",
+    "title": "A Phase 3 Study to Evaluate the Safety of Sotagliflozin in Patients With Type 1 Diabetes Who Have Inadequate Glycemic Control With Insulin Therapy Alone",
+    "official_title": "A Phase 3, Randomized, Double-blind, Placebo-controlled, Parallel-group, Multicenter Study to Evaluate the Net Clinical Benefit of Sotagliflozin as Adjunct to Insulin Therapy in Type 1 Diabetes",
+    "status": "COMPLETED",
+    "last_update": "2020-02-12",
+    "start_date": "2015-09",
+    "completion_date": "2017-04",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 1405,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Lexicon Pharmaceuticals",
+    "conditions": [
+      "Type 1 Diabetes Mellitus (T1DM)",
+      "High Level of Sugar (Glucose) in the Blood"
+    ],
+    "interventions": [
+      "Sotagliflozin",
+      "Placebo"
+    ]
+  },
+  "IOVA:lifileucel (AMTAGVI):NCT05398640": {
+    "nct_id": "NCT05398640",
+    "title": "Expanded Access Program of AMTAGVI That is Out of Specification for Commercial Release",
+    "official_title": "Expanded Access Program of AMTAGVI That is Out of Specification for Commercial Release",
+    "status": "AVAILABLE",
+    "last_update": "2026-04-20",
+    "start_date": null,
+    "completion_date": null,
+    "study_type": "EXPANDED_ACCESS",
+    "phases": [],
+    "enrollment": null,
+    "enrollment_type": null,
+    "sponsor": "Iovance Biotherapeutics, Inc.",
+    "conditions": [
+      "Unresectable Melanoma",
+      "Metastatic Melanoma"
+    ],
+    "interventions": [
+      "OOS AMTAGVI"
+    ]
+  },
+  "IOVA:lifileucel (AMTAGVI):NCT07700121": {
+    "nct_id": "NCT07700121",
+    "title": "PICSTAT Pilot Study for CD8 PET/CT-Guided Lifileucel Treatment in Advanced Melanoma",
+    "official_title": "PICSTAT (PET Imaging of CD8 for Selection of Tumors for Autologous TIL): A Pilot Study Assessing the Use of CD8 PET/CT (Zr-89 Crefmirlimab Berdoxam) to Enhance Lifileucel (AMTAGVI) Efficacy in Patients With Treatment Refractory Stage IV Melanoma",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-07-13",
+    "start_date": "2026-10-01",
+    "completion_date": "2029-10-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "EARLY_PHASE1"
+    ],
+    "enrollment": 10,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Abramson Cancer Center at Penn Medicine",
+    "conditions": [
+      "Unresectable or Metastatic Melanoma"
+    ],
+    "interventions": [
+      "Resection of PET (high) and PET (low) Tumors",
+      "Lifileucel Manufacturing Clinical v Research",
+      "Chemotherapy Regimen",
+      "Lifileucel Infusion",
+      "IL-2",
+      "CD8 PET"
+    ]
+  },
+  "IOVA:lifileucel (AMTAGVI):NCT06743126": {
+    "nct_id": "NCT06743126",
+    "title": "SUPRAME-ACTengine® IMA203 vs. Investigator's Choice of Treatment in Previously Treated, Unresectable or Metastatic Cutaneous Melanoma",
+    "official_title": "A Prospective, Multicenter, Open-label, Randomized, Actively Controlled, Parallel-group Phase 3 Clinical Trial to Evaluate Efficacy, Safety, and Tolerability of IMA203 Versus Investigator's Choice of Treatment in Patients With Previously Treated, Unresectable or Metastatic Cutaneous Melanoma (ACTengine® IMA203-301)",
+    "status": "RECRUITING",
+    "last_update": "2026-08-18",
+    "start_date": "2025-01-14",
+    "completion_date": "2031-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 360,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Immatics US, Inc.",
+    "conditions": [
+      "Melanoma, Cutaneous Malignant"
+    ],
+    "interventions": [
+      "IMA203",
+      "nivolumab plus relatlimab",
+      "lifileucel",
+      "nivolumab",
+      "pembrolizumab",
+      "ipilimumab",
+      "Dacarbazine",
+      "temozolomide",
+      "paclitaxel",
+      "paclitaxel plus carboplatin",
+      "Albumin-Bound Paclitaxel"
+    ]
+  },
+  "IOVA:IOV-4001:NCT05361174": {
+    "nct_id": "NCT05361174",
+    "title": "A Study to Investigate the Efficacy and Safety of an Infusion of IOV-4001 in Adult Participants With Unresectable or Metastatic Melanoma or Stage III or IV Non-small-cell Lung Cancer",
+    "official_title": "A Phase 1/2, Open-label Study of PD-1 Knockout Tumor-infiltrating Lymphocytes (IOV-4001) in Participants With Unresectable or Metastatic Melanoma or Stage III or IV Non-small-cell Lung Cancer",
+    "status": "RECRUITING",
+    "last_update": "2026-06-11",
+    "start_date": "2022-07-20",
+    "completion_date": "2029-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 53,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Iovance Biotherapeutics, Inc.",
+    "conditions": [
+      "Unresectable Melanoma",
+      "Metastatic Melanoma",
+      "Stage III Non-small Cell Lung Cancer",
+      "Stage IV Non-small Cell Lung Cancer"
+    ],
+    "interventions": [
+      "IOV-4001"
+    ]
+  },
+  "IOVA:IOV-3001:NCT06940739": {
+    "nct_id": "NCT06940739",
+    "title": "A Study to Investigate the Safety and Efficacy of IOV-3001 in Adults With Advanced Melanoma Who Will Receive Lifileucel",
+    "official_title": "A Phase 1/2, Open-label Study of a Modified Interleukin-2 Fusion Protein (IOV-3001) in Participants With Previously Treated, Unresectable or Metastatic Melanoma Who Will Receive Lifileucel",
+    "status": "RECRUITING",
+    "last_update": "2026-06-15",
+    "start_date": "2025-03-11",
+    "completion_date": "2032-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 42,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Iovance Biotherapeutics, Inc.",
+    "conditions": [
+      "Unresectable Melanoma",
+      "Metastatic Melanoma",
+      "Ocular Melanoma"
+    ],
+    "interventions": [
+      "IOV-3001"
+    ]
+  },
+  "IOVA:IOV-5001:NCT07743723": {
+    "nct_id": "NCT07743723",
+    "title": "A Study of IOV-5001 in Adults With Advanced Solid Tumors",
+    "official_title": "A Phase 1/2, Multicenter, Multi-cohort, Open-label Study of an Autologous Tumor-infiltrating Lymphocytes (TIL) Regimen With IOV-5001 in Participants With Previously Treated Advanced Solid Tumors",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-09-15",
+    "start_date": "2026-09",
+    "completion_date": "2044-03",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 106,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Iovance Biotherapeutics, Inc.",
+    "conditions": [
+      "Advanced Solid Tumors",
+      "Non-Small Cell Lung Cancer",
+      "Triple Negative Breast Cancer (TNBC)",
+      "Colorectal Cancer",
+      "Head and Neck Squamous Cell Carcinoma",
+      "Metastatic Solid Tumors",
+      "Unresectable Solid Tumor"
+    ],
+    "interventions": [
+      "IOV-5001"
+    ]
   }
 }
