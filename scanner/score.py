@@ -69,7 +69,7 @@ EVENT_TYPE_BONUS = {
 SUBTYPE_BONUS = {
 
     # Major positive catalysts
-    "TRIAL_COMPLETED": 5,
+    # Trial completion alone is informational; results are separate.
     "ENROLLMENT_COMPLETED": 10,
     "PRIMARY_ENDPOINT_MET": 25,
     "TOPLINE_RESULTS": 25,
