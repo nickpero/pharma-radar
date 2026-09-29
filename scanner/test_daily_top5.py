@@ -1,0 +1,85 @@
+from scanner.daily_top5 import build_daily_top5, format_daily_top5
+
+
+def snapshot(pct, volume_ratio=1.0):
+    return {
+        "price": 10.0,
+        "price_change_pct": pct,
+        "volume": 1000,
+        "volume_ratio": volume_ratio,
+        "market_data_source": "TEST",
+    }
+
+
+def test_top5_ranks_gainers_and_limits_to_five():
+    watchlist = {
+        f"T{i}": {"company": f"Company {i}", "programs": []}
+        for i in range(7)
+    }
+    values = {f"T{i}": snapshot(i) for i in range(7)}
+    rows = build_daily_top5(
+        watchlist=watchlist,
+        history={},
+        snapshot_fn=lambda ticker: values[ticker],
+        date_value="2026-09-29",
+    )
+    assert [row["ticker"] for row in rows] == ["T6", "T5", "T4", "T3", "T2"]
+
+
+def test_same_day_catalyst_is_linked():
+    watchlist = {"SMMT": {"company": "Summit Therapeutics", "programs": ["ivonescimab"]}}
+    history = {
+        "x": {
+            "ticker": "SMMT",
+            "event_timestamp": "2026-09-29",
+            "subtype": "COMMERCIAL_PARTNERSHIP",
+            "program": "ivonescimab",
+            "source": "SEC",
+            "alert_priority": 100,
+        }
+    }
+    rows = build_daily_top5(
+        watchlist=watchlist,
+        history=history,
+        snapshot_fn=lambda ticker: snapshot(22.0, 4.5),
+        date_value="2026-09-29",
+    )
+    assert rows[0]["catalyst_found"] is True
+    assert rows[0]["catalyst_subtype"] == "COMMERCIAL_PARTNERSHIP"
+    assert rows[0]["classification"] == "CATALYST_LINKED"
+
+
+def test_unexplained_move_is_not_called_a_catalyst():
+    rows = build_daily_top5(
+        watchlist={"ABC": {"company": "ABC Pharma", "programs": []}},
+        history={},
+        snapshot_fn=lambda ticker: snapshot(35.0, 6.0),
+        date_value="2026-09-29",
+    )
+    assert rows[0]["classification"] == "MARKET_MOVE_UNEXPLAINED"
+
+
+def test_format():
+    message = format_daily_top5([
+        {
+            "ticker": "SMMT",
+            "company": "Summit Therapeutics",
+            "price_change_pct": 22.0,
+            "volume_ratio": 4.5,
+            "catalyst_found": True,
+            "catalyst_subtype": "COMMERCIAL_PARTNERSHIP",
+            "catalyst_source": "SEC",
+        }
+    ], "2026-09-29")
+    assert "DAILY TOP 5" in message
+    assert "SMMT" in message
+    assert "+22.00%" in message
+    assert "CATALYST LINKED" in message
+
+
+if __name__ == "__main__":
+    test_top5_ranks_gainers_and_limits_to_five()
+    test_same_day_catalyst_is_linked()
+    test_unexplained_move_is_not_called_a_catalyst()
+    test_format()
+    print("Daily Top 5 tests passed")
