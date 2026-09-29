@@ -148,6 +148,11 @@
             "close": 0.27000001072883606,
             "date": "2026-09-25",
             "return_pct": -10.0
+          },
+          "t3": {
+            "close": 0.2879999876022339,
+            "date": "2026-09-29",
+            "return_pct": -4.000007947285654
           }
         },
         "recovered_by_t5": false
@@ -189,12 +194,17 @@
             "close": 0.27000001072883606,
             "date": "2026-09-25",
             "return_pct": 8.000004291534424
+          },
+          "t5": {
+            "close": 0.2879999876022339,
+            "date": "2026-09-29",
+            "return_pct": 15.199995040893555
           }
         },
-        "recovered_by_t5": false
+        "recovered_by_t5": true
       },
       "program": "fasedienol",
-      "status": "PENDING",
+      "status": "COMPLETE",
       "threshold_pct": 2.0,
       "ticker": "VTGN",
       "trading_intelligence_score": 69.1
@@ -218,7 +228,7 @@
         "event_price_timestamp": "2026-09-23",
         "event_to_close_pct": 0.0,
         "max_adverse_pct": -3.5636346990411933,
-        "max_favorable_pct": -1.3818151300603694,
+        "max_favorable_pct": -1.0181843150745737,
         "max_recovery": false,
         "outcomes": {
           "t1": {
