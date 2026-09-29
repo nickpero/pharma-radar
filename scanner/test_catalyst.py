@@ -3,6 +3,7 @@ from scanner.catalyst import (
     classify_date_change,
     classify_enrollment_change,
     classify_trial_changes,
+    classify_phase_change,
     enrich_events,
 )
 
@@ -16,7 +17,33 @@ def test_completed_status():
 
     assert event["type"] == "STATUS_CHANGE"
     assert event["subtype"] == "TRIAL_COMPLETED"
+    assert event["direction"] == "UNKNOWN"
+    assert event["severity"] == "LOW"
+
+
+def test_phase_advanced():
+    event = classify_phase_change("PHASE2", "PHASE3")
+    assert event["type"] == "PHASE_CHANGE"
+    assert event["subtype"] == "PHASE_ADVANCED"
     assert event["direction"] == "POSITIVE"
+
+
+def test_phase_regressed():
+    event = classify_phase_change("PHASE3", "PHASE2")
+    assert event["subtype"] == "PHASE_REGRESSED"
+    assert event["direction"] == "NEGATIVE"
+
+
+def test_same_phase():
+    assert classify_phase_change("PHASE2", "PHASE2") is None
+
+
+def test_phase_is_not_generic_field_change():
+    events = classify_trial_changes({
+        "phase": {"old": "PHASE2", "new": "PHASE3"},
+    })
+    assert len(events) == 1
+    assert events[0]["type"] == "PHASE_CHANGE"
 
 
 def test_terminated_status():
@@ -133,6 +160,7 @@ def test_classify_trial_changes():
     assert events[0]["subtype"] == (
         "TRIAL_COMPLETED"
     )
+    assert events[0]["direction"] == "UNKNOWN"
 
     assert events[1]["subtype"] == (
         "DATE_ACCELERATED"
