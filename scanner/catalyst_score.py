@@ -15,9 +15,12 @@ EVENT_SCORES = {
     "TRIAL_STOPPED_EFFICACY": 100,
     "TRIAL_STOPPED_SAFETY": 100,
 
-    "TRIAL_COMPLETED": 90,
+    # Completion alone is informational; actual results/topline
+    # events carry the clinical outcome.
+    "TRIAL_COMPLETED": 20,
     "ENROLLMENT_COMPLETED": 85,
     "PHASE_3_STARTED": 85,
+    "PHASE_ADVANCED": 85,
 
     "DATE_ACCELERATED": 80,
     "DATE_DELAYED": 80,
@@ -76,7 +79,6 @@ POSITIVE_EVENTS = {
     "PRIMARY_ENDPOINT_MET",
     "TOPLINE_RESULTS",
     "FDA_APPROVAL",
-    "TRIAL_COMPLETED",
     "ENROLLMENT_COMPLETED",
     "PHASE_3_STARTED",
     "PHASE_2_STARTED",
