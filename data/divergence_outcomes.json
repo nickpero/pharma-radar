@@ -141,8 +141,8 @@
         "event_price_timestamp": "2026-09-24",
         "event_to_close_pct": 0.0,
         "max_adverse_pct": -10.0,
-        "max_favorable_pct": 0.0,
-        "max_recovery": false,
+        "max_favorable_pct": 1.2999971191089503,
+        "max_recovery": true,
         "outcomes": {
           "t1": {
             "close": 0.27000001072883606,
@@ -228,7 +228,7 @@
         "event_price_timestamp": "2026-09-23",
         "event_to_close_pct": 0.0,
         "max_adverse_pct": -3.5636346990411933,
-        "max_favorable_pct": -1.0909063165838067,
+        "max_favorable_pct": -0.07272893732244318,
         "max_recovery": false,
         "outcomes": {
           "t1": {
@@ -240,12 +240,17 @@
             "close": 27.1200008392334,
             "date": "2026-09-28",
             "return_pct": -1.3818151300603694
+          },
+          "t5": {
+            "close": 27.479999542236328,
+            "date": "2026-09-30",
+            "return_pct": -0.07272893732244318
           }
         },
         "recovered_by_t5": false
       },
       "program": "zanidatamab",
-      "status": "PENDING",
+      "status": "COMPLETE",
       "threshold_pct": 2.0,
       "ticker": "ZYME",
       "trading_intelligence_score": 69.1
