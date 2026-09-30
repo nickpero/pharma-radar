@@ -57,6 +57,7 @@ def test_unexplained_move_is_not_called_a_catalyst():
         date_value="2026-09-29",
     )
     assert rows[0]["classification"] == "MARKET_MOVE_UNEXPLAINED"
+    assert rows[0]["catalyst_evidence"] == "NO_VERIFIED_SAME_DAY_CATALYST"
 
 
 def test_format():
@@ -83,3 +84,17 @@ if __name__ == "__main__":
     test_unexplained_move_is_not_called_a_catalyst()
     test_format()
     print("Daily Top 5 tests passed")
+
+
+def test_fundamental_catalyst_is_classified_separately():
+    watchlist = {"CNTB": {"company": "Connect Biopharma", "programs": ["rademikibart"]}}
+    history = {"x": {"ticker": "CNTB", "event_timestamp": "2026-09-30T14:00:00+00:00",
+                      "subtype": "TOPLINE_RESULTS", "program": "rademikibart",
+                      "source": "SEC", "alert_priority": 100}}
+    rows = build_daily_top5(
+        watchlist=watchlist, history=history,
+        snapshot_fn=lambda ticker: snapshot(86.0, 8.0),
+        date_value="2026-09-30",
+    )
+    assert rows[0]["classification"] == "FUNDAMENTAL_OR_CLINICAL_CATALYST"
+    assert rows[0]["catalyst_evidence"] == "RADAR_RECORDED_EVENT"
