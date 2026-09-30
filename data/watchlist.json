@@ -371,5 +371,50 @@
       "EMA",
       "Egetis"
     ]
+  },
+  "CNTB": {
+    "company": "Connect Biopharma Holdings",
+    "programs": [
+      "rademikibart",
+      "CBP-201",
+      "Seabreeze STAT COPD",
+      "Seabreeze STAT Asthma"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "VBIO": {
+    "company": "Valion Bio",
+    "programs": [
+      "Entolimod",
+      "oral mucosal Entolimod",
+      "BioViscid"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "Valion Bio",
+      "FDA"
+    ],
+    "radar_role": "DEVELOPMENT_MILESTONE_WATCH"
+  },
+  "NAUT": {
+    "company": "Nautilus Biotechnology",
+    "programs": [
+      "Voyager",
+      "Iterative Mapping Early Access Program",
+      "broadscale proteomics"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "Nautilus Biotechnology"
+    ],
+    "radar_role": "MARKET_MOVE_WATCH_UNEXPLAINED"
   }
 }
