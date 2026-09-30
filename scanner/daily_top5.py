@@ -72,10 +72,52 @@ def build_daily_top5(watchlist=None, history=None, snapshot_fn=get_market_snapsh
             "catalyst_source": catalyst.get("source") if catalyst else None,
             "catalyst_priority": catalyst.get("alert_priority") if catalyst else None,
             "catalyst_url": catalyst.get("url") if catalyst else None,
-            "classification": "CATALYST_LINKED" if catalyst else "MARKET_MOVE_UNEXPLAINED",
+            "classification": _classify_row(catalyst),
+            "catalyst_evidence": _catalyst_evidence(catalyst),
+            "radar_inclusion": _radar_inclusion(catalyst, meta),
+            "radar_reason": _radar_reason(catalyst, meta),
         })
     rows.sort(key=lambda item: item["price_change_pct"], reverse=True)
     return rows[:5]
+
+
+def _classify_row(catalyst):
+    if not catalyst:
+        return "MARKET_MOVE_UNEXPLAINED"
+    subtype = str(catalyst.get("subtype") or catalyst.get("type") or "").upper()
+    fundamental = {
+        "TOPLINE_RESULTS", "PRIMARY_ENDPOINT_MET", "PRIMARY_ENDPOINT_FAILED",
+        "FDA_APPROVAL", "FDA_REJECTION", "FDA_SAFETY_WARNING",
+        "PHASE_ADVANCED", "PHASE_DATA_UPDATE", "CLINICAL_RESULTS",
+        "COMMERCIAL_CATALYST", "COMMERCIAL_PARTNERSHIP", "GUIDANCE_RAISED",
+    }
+    if subtype in fundamental:
+        return "FUNDAMENTAL_OR_CLINICAL_CATALYST"
+    if subtype in {"EXPLORATORY_DATA", "DEVELOPMENT_MILESTONE", "FORMULATION_MILESTONE",
+                    "PHASE_1_STARTED", "PHASE_2_STARTED"}:
+        return "DEVELOPMENT_MILESTONE_WATCH"
+    return "CATALYST_LINKED"
+
+def _catalyst_evidence(catalyst):
+    if not catalyst:
+        return "NO_VERIFIED_SAME_DAY_CATALYST"
+    return str(catalyst.get("catalyst_evidence") or catalyst.get("evidence_class")
+               or "RADAR_RECORDED_EVENT").upper()
+
+def _radar_inclusion(catalyst, meta):
+    if catalyst:
+        return str(catalyst.get("radar_inclusion") or "YES_IF_MATERIAL").upper()
+    return str((meta or {}).get("radar_role") or "WATCH_UNEXPLAINED_MOVE").upper()
+
+def _radar_reason(catalyst, meta):
+    if catalyst:
+        return catalyst.get("radar_reason") or (
+            "Same-day catalyst recorded by Pharma Radar; retain for monitoring based on event materiality."
+        )
+    return (meta or {}).get("radar_reason") or (
+        "Price/volume move without a verified same-day fundamental catalyst; "
+        "monitor separately and do not label as a catalyst."
+    )
 
 
 def format_daily_top5(rows, date_value=None):
@@ -95,15 +137,17 @@ def format_daily_top5(rows, date_value=None):
         volume_text = f"{float(volume_ratio):.1f}x avg" if volume_ratio else "N/A"
         if row["catalyst_found"]:
             reason = f'{row["catalyst_subtype"]} · {row["catalyst_source"] or "PRIMARY"}'
-            classification = "CATALYST LINKED"
+            classification = row.get("classification", "CATALYST_LINKED")
         else:
             reason = "No same-day Radar catalyst recorded"
-            classification = "MARKET MOVE / UNEXPLAINED"
+            classification = row.get("classification", "MARKET_MOVE_UNEXPLAINED")
         lines.extend([
             f"{index}. 🧬 {row['ticker']} · {row['company']}",
             f"   📈 {pct:+.2f}% · Volume {volume_text}",
             f"   📰 {reason}",
             f"   🔎 {classification}",
+            f"   🧠 Evidence: {row.get('catalyst_evidence', 'N/A')}",
+            f"   📡 Radar: {row.get('radar_inclusion', 'N/A')}",
             "",
         ])
     return "\n".join(lines).rstrip()
