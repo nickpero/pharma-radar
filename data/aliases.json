@@ -440,5 +440,57 @@
         "paracetamol poisoning"
       ]
     }
+  },
+  "CNTB": {
+    "company_aliases": [
+      "Connect Biopharma Holdings",
+      "Connect Biopharma",
+      "Connect Biopharma Holdings Limited"
+    ],
+    "program_aliases": {
+      "rademikibart": [
+        "rademikibart",
+        "CBP-201"
+      ],
+      "Seabreeze STAT COPD": [
+        "Seabreeze STAT COPD",
+        "CBP-201-207"
+      ],
+      "Seabreeze STAT Asthma": [
+        "Seabreeze STAT Asthma",
+        "CBP-201-206"
+      ]
+    }
+  },
+  "VBIO": {
+    "company_aliases": [
+      "Valion Bio",
+      "Valion Bio Inc"
+    ],
+    "program_aliases": {
+      "Entolimod": [
+        "Entolimod"
+      ],
+      "oral mucosal Entolimod": [
+        "oral mucosal Entolimod",
+        "BioViscid"
+      ]
+    }
+  },
+  "NAUT": {
+    "company_aliases": [
+      "Nautilus Biotechnology",
+      "Nautilus Biotechnology Inc"
+    ],
+    "program_aliases": {
+      "Voyager": [
+        "Voyager",
+        "Nautilus Voyager"
+      ],
+      "Iterative Mapping Early Access Program": [
+        "Iterative Mapping Early Access Program",
+        "Early Access Program"
+      ]
+    }
   }
 }
