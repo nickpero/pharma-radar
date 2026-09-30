@@ -9037,5 +9037,712 @@
     "interventions": [
       "IOV-5001"
     ]
+  },
+  "CNTB:rademikibart:NCT06940154": {
+    "nct_id": "NCT06940154",
+    "title": "Rademikibart Add-on Treatment of an Acute COPD Exacerbation (Seabreeze STAT COPD)",
+    "official_title": "A Phase 2, Multicenter, Randomized, Double-blind, Parallel-group, Placebo-controlled Trial to Evaluate the Efficacy and Safety of Rademikibart as an Add-on Treatment for Acute Exacerbation in Participants With Chronic Obstructive Pulmonary Disease and Type 2 Inflammation",
+    "status": "COMPLETED",
+    "last_update": "2026-09-16",
+    "start_date": "2025-08-12",
+    "completion_date": "2026-08-26",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 159,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Connect Biopharm LLC",
+    "conditions": [
+      "COPD Acute Exacerbation"
+    ],
+    "interventions": [
+      "Rademikibart in prefilled syringe",
+      "Matching placebo in prefilled syringe"
+    ]
+  },
+  "CNTB:rademikibart:NCT04773678": {
+    "nct_id": "NCT04773678",
+    "title": "Efficacy and Safety of CBP-201 in Patients With Moderate to Severe Persistent Asthma With Type 2 Inflammation",
+    "official_title": "A Multicenter, Randomized, Double-blind, Parallel Group, Placebo-controlled, Efficacy and Safety Study of CBP-201 in Patients With Moderate to Severe Persistent Asthma With Type 2 Inflammation",
+    "status": "COMPLETED",
+    "last_update": "2024-03-29",
+    "start_date": "2021-05-11",
+    "completion_date": "2023-09-28",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 322,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Connect Biopharm LLC",
+    "conditions": [
+      "Moderate to Severe Persistent Asthma"
+    ],
+    "interventions": [
+      "CBP-201",
+      "Placebo"
+    ]
+  },
+  "CNTB:rademikibart:NCT06701149": {
+    "nct_id": "NCT06701149",
+    "title": "A Comparative Study of the Pharmacokinetics of SIM0718 Injection in Healthy Adult Subjects in China",
+    "official_title": "A Randomized, Open-label, Single-dose, Parallel Group Study to Compare the Pharmacokinetics of SIM0718 Injection in Healthy Adult Subjects in China",
+    "status": "COMPLETED",
+    "last_update": "2026-04-03",
+    "start_date": "2024-11-28",
+    "completion_date": "2025-05-22",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 178,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Simcere Pharmaceutical Co., Ltd",
+    "conditions": [
+      "Healthy Adult Subjects"
+    ],
+    "interventions": [
+      "Rademikibart injection",
+      "CBP-201 injection"
+    ]
+  },
+  "CNTB:rademikibart:NCT04783389": {
+    "nct_id": "NCT04783389",
+    "title": "A Study to Evaluate CBP-201, Rademikibart, in Adult Patients With Chronic Rhinosinusitis With Nasal Polyps",
+    "official_title": "A Multicenter, Randomized, Double-blind, Placebo-controlled Study to Evaluate CBP-201 in Adult Patients With Chronic Rhinosinusitis With Nasal Polyps",
+    "status": "TERMINATED",
+    "last_update": "2023-10-17",
+    "start_date": "2021-06-16",
+    "completion_date": "2022-06-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 40,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Connect Biopharm LLC",
+    "conditions": [
+      "Chronic Rhinosinusitis With Nasal Polyps"
+    ],
+    "interventions": [
+      "CBP-201",
+      "Placebo"
+    ]
+  },
+  "CNTB:rademikibart:NCT06940141": {
+    "nct_id": "NCT06940141",
+    "title": "Rademikibart Add-on Treatment of an Acute Asthma Exacerbation (Seabreeze STAT Asthma)",
+    "official_title": "A Phase 2, Multicenter, Randomized, Double-blind, Parallel-group, Placebo-controlled Trial to Evaluate the Efficacy and Safety of Rademikibart as an Add-on Treatment for Acute Exacerbation in Adult and Adolescent Participants With Asthma and Type 2 Inflammation",
+    "status": "COMPLETED",
+    "last_update": "2026-09-16",
+    "start_date": "2025-08-08",
+    "completion_date": "2026-08-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 160,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Connect Biopharm LLC",
+    "conditions": [
+      "Asthma Acute"
+    ],
+    "interventions": [
+      "Rademikibart in prefilled syringe",
+      "Matching placebo in prefilled syringe"
+    ]
+  },
+  "CNTB:rademikibart:NCT07705737": {
+    "nct_id": "NCT07705737",
+    "title": "Rademikibart IV for Acute Asthma and COPD Exacerbation",
+    "official_title": "A Phase 2, Open-Label, Single-Arm Trial to Evaluate IV Rademikibart as an Add-on Treatment for Acute Exacerbation in Participants With Asthma and or COPD With Type 2 Inflammation",
+    "status": "RECRUITING",
+    "last_update": "2026-08-27",
+    "start_date": "2026-08-21",
+    "completion_date": "2027-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 40,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Connect Biopharm LLC",
+    "conditions": [
+      "Asthma Acute",
+      "COPD Exacerbation Acute"
+    ],
+    "interventions": [
+      "Rademikibart"
+    ]
+  },
+  "CNTB:CBP-201:NCT05017480": {
+    "nct_id": "NCT05017480",
+    "title": "A Study to Evaluate the Efficacy and Safety of CBP-201 in Moderate to Severe Atopic Dermatitis in China",
+    "official_title": "A Double-blind, Multi-center, Randomized Controlled Clinical Study to Evaluate the Efficacy and Safety of CBP-201 in Chinese Subjects With Moderate to Severe Atopic Dermatitis",
+    "status": "COMPLETED",
+    "last_update": "2024-05-01",
+    "start_date": "2021-08-31",
+    "completion_date": "2023-09-28",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 330,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Connect Biopharm LLC",
+    "conditions": [
+      "Moderate-to-severe Atopic Dermatitis"
+    ],
+    "interventions": [
+      "CBP-201",
+      "Placebo"
+    ]
+  },
+  "CNTB:CBP-201:NCT04444752": {
+    "nct_id": "NCT04444752",
+    "title": "A Study to Assess the Efficacy and Safety of CBP-201 in Adult Subjects With Moderate to Severe Atopic Dermatitis",
+    "official_title": "A Randomized, Double-Blind, Placebo-Controlled Multi-Centered Study of the Efficacy, Safety, Pharmacokinetics and Pharmacodynamics of CBP-201 in Adult Subjects With Moderate to Severe Atopic Dermatitis",
+    "status": "COMPLETED",
+    "last_update": "2023-08-01",
+    "start_date": "2020-07-17",
+    "completion_date": "2021-09-22",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 226,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Connect Biopharm LLC",
+    "conditions": [
+      "Moderate-to-severe Atopic Dermatitis"
+    ],
+    "interventions": [
+      "CBP-201",
+      "placebo"
+    ]
+  },
+  "CNTB:CBP-201:NCT04773678": {
+    "nct_id": "NCT04773678",
+    "title": "Efficacy and Safety of CBP-201 in Patients With Moderate to Severe Persistent Asthma With Type 2 Inflammation",
+    "official_title": "A Multicenter, Randomized, Double-blind, Parallel Group, Placebo-controlled, Efficacy and Safety Study of CBP-201 in Patients With Moderate to Severe Persistent Asthma With Type 2 Inflammation",
+    "status": "COMPLETED",
+    "last_update": "2024-03-29",
+    "start_date": "2021-05-11",
+    "completion_date": "2023-09-28",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 322,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Connect Biopharm LLC",
+    "conditions": [
+      "Moderate to Severe Persistent Asthma"
+    ],
+    "interventions": [
+      "CBP-201",
+      "Placebo"
+    ]
+  },
+  "CNTB:CBP-201:NCT06701149": {
+    "nct_id": "NCT06701149",
+    "title": "A Comparative Study of the Pharmacokinetics of SIM0718 Injection in Healthy Adult Subjects in China",
+    "official_title": "A Randomized, Open-label, Single-dose, Parallel Group Study to Compare the Pharmacokinetics of SIM0718 Injection in Healthy Adult Subjects in China",
+    "status": "COMPLETED",
+    "last_update": "2026-04-03",
+    "start_date": "2024-11-28",
+    "completion_date": "2025-05-22",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 178,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Simcere Pharmaceutical Co., Ltd",
+    "conditions": [
+      "Healthy Adult Subjects"
+    ],
+    "interventions": [
+      "Rademikibart injection",
+      "CBP-201 injection"
+    ]
+  },
+  "CNTB:CBP-201:NCT05905133": {
+    "nct_id": "NCT05905133",
+    "title": "A Study to Evaluate the Safety and Efficacy of CBP-201 in Chinese Adult Subjects With Moderate to Severe AD",
+    "official_title": "A Multi-Center, Single-Arm, Open-Label Clinical Study to Evaluate the Safety and Efficacy of CBP-201 in Chinese Adult Subjects With Moderate to Severe Atopic Dermatitis",
+    "status": "UNKNOWN",
+    "last_update": "2023-12-11",
+    "start_date": "2023-07-15",
+    "completion_date": "2024-06-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 360,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Connect Biopharm LLC",
+    "conditions": [
+      "Atopic Dermatitis"
+    ],
+    "interventions": [
+      "CBP-201"
+    ]
+  },
+  "CNTB:CBP-201:NCT05917782": {
+    "nct_id": "NCT05917782",
+    "title": "A Study to Evaluate the Pharmacokinetics Similarity of CBP-201 in Healthy Adult Chinese Subjects",
+    "official_title": "A Randomized, Open-Label, Parallel-Designed, Phase I Clinical Study to Evaluate the Pharmacokinetics Similarity of Single-Dose CBP-201 Injection With Different Dosage Forms and Strengths in Healthy Adult Chinese Subjects",
+    "status": "COMPLETED",
+    "last_update": "2023-10-31",
+    "start_date": "2023-07-18",
+    "completion_date": "2023-10-06",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 324,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Connect Biopharm LLC",
+    "conditions": [
+      "Healthy Adult Subjects"
+    ],
+    "interventions": [
+      "Test drug (T1): CBP-201 injection (pre-filled syringe, 150 mg/1 mL)",
+      "Test drug (T2): CBP-201 injection (pre-filled syringe, 300 mg/2 mL)",
+      "Reference drug (R): CBP-201 injection (vial, 150 mg/1 mL)"
+    ]
+  },
+  "CNTB:CBP-201:NCT04783389": {
+    "nct_id": "NCT04783389",
+    "title": "A Study to Evaluate CBP-201, Rademikibart, in Adult Patients With Chronic Rhinosinusitis With Nasal Polyps",
+    "official_title": "A Multicenter, Randomized, Double-blind, Placebo-controlled Study to Evaluate CBP-201 in Adult Patients With Chronic Rhinosinusitis With Nasal Polyps",
+    "status": "TERMINATED",
+    "last_update": "2023-10-17",
+    "start_date": "2021-06-16",
+    "completion_date": "2022-06-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 40,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Connect Biopharm LLC",
+    "conditions": [
+      "Chronic Rhinosinusitis With Nasal Polyps"
+    ],
+    "interventions": [
+      "CBP-201",
+      "Placebo"
+    ]
+  },
+  "CNTB:CBP-201:NCT05614817": {
+    "nct_id": "NCT05614817",
+    "title": "CBP-201 in Adolescent and Adult Patients With Moderate-to-severe Atopic Dermatitis",
+    "official_title": "A Randomized, Double-blind, Placebo-controlled Phase 3 Trial to Evaluate the Efficacy and Safety of CBP-201 Monotherapy in Patients With Moderate-To-Severe Atopic Dermatitis Who Are Candidates for Systemic Therapy",
+    "status": "WITHDRAWN",
+    "last_update": "2023-03-21",
+    "start_date": "2022-12",
+    "completion_date": "2025-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Connect Biopharm LLC",
+    "conditions": [
+      "Atopic Dermatitis"
+    ],
+    "interventions": [
+      "CBP-201",
+      "Placebo"
+    ]
+  },
+  "CNTB:Seabreeze STAT COPD:NCT06940154": {
+    "nct_id": "NCT06940154",
+    "title": "Rademikibart Add-on Treatment of an Acute COPD Exacerbation (Seabreeze STAT COPD)",
+    "official_title": "A Phase 2, Multicenter, Randomized, Double-blind, Parallel-group, Placebo-controlled Trial to Evaluate the Efficacy and Safety of Rademikibart as an Add-on Treatment for Acute Exacerbation in Participants With Chronic Obstructive Pulmonary Disease and Type 2 Inflammation",
+    "status": "COMPLETED",
+    "last_update": "2026-09-16",
+    "start_date": "2025-08-12",
+    "completion_date": "2026-08-26",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 159,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Connect Biopharm LLC",
+    "conditions": [
+      "COPD Acute Exacerbation"
+    ],
+    "interventions": [
+      "Rademikibart in prefilled syringe",
+      "Matching placebo in prefilled syringe"
+    ]
+  },
+  "CNTB:Seabreeze STAT Asthma:NCT06940141": {
+    "nct_id": "NCT06940141",
+    "title": "Rademikibart Add-on Treatment of an Acute Asthma Exacerbation (Seabreeze STAT Asthma)",
+    "official_title": "A Phase 2, Multicenter, Randomized, Double-blind, Parallel-group, Placebo-controlled Trial to Evaluate the Efficacy and Safety of Rademikibart as an Add-on Treatment for Acute Exacerbation in Adult and Adolescent Participants With Asthma and Type 2 Inflammation",
+    "status": "COMPLETED",
+    "last_update": "2026-09-16",
+    "start_date": "2025-08-08",
+    "completion_date": "2026-08-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 160,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Connect Biopharm LLC",
+    "conditions": [
+      "Asthma Acute"
+    ],
+    "interventions": [
+      "Rademikibart in prefilled syringe",
+      "Matching placebo in prefilled syringe"
+    ]
+  },
+  "VBIO:Entolimod:NCT01728480": {
+    "nct_id": "NCT01728480",
+    "title": "Entolimod in Treating Patients With Stage III-IV Squamous Cell Head and Neck Cancer Receiving Cisplatin and Radiation Therapy",
+    "official_title": "A Phase I Study of CBLB502 in the Treatment of Patients With Poor Prognosis Advanced Squamous Cell Carcinomas of the Head and Neck Receiving Chemoradiotherapy",
+    "status": "WITHDRAWN",
+    "last_update": "2013-12-11",
+    "start_date": "2014-01",
+    "completion_date": null,
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Roswell Park Cancer Institute",
+    "conditions": [
+      "Mucositis",
+      "Recurrent Squamous Cell Carcinoma of the Hypopharynx",
+      "Recurrent Squamous Cell Carcinoma of the Larynx",
+      "Recurrent Squamous Cell Carcinoma of the Lip and Oral Cavity",
+      "Recurrent Squamous Cell Carcinoma of the Nasopharynx",
+      "Recurrent Squamous Cell Carcinoma of the Oropharynx",
+      "Recurrent Squamous Cell Carcinoma of the Paranasal Sinus and Nasal Cavity",
+      "Recurrent Verrucous Carcinoma of the Larynx",
+      "Recurrent Verrucous Carcinoma of the Oral Cavity",
+      "Stage III Squamous Cell Carcinoma of the Hypopharynx",
+      "Stage III Squamous Cell Carcinoma of the Larynx",
+      "Stage III Squamous Cell Carcinoma of the Lip and Oral Cavity",
+      "Stage III Squamous Cell Carcinoma of the Nasopharynx",
+      "Stage III Squamous Cell Carcinoma of the Oropharynx",
+      "Stage III Squamous Cell Carcinoma of the Paranasal Sinus and Nasal Cavity",
+      "Stage III Verrucous Carcinoma of the Larynx",
+      "Stage III Verrucous Carcinoma of the Oral Cavity",
+      "Stage IV Squamous Cell Carcinoma of the Hypopharynx",
+      "Stage IV Squamous Cell Carcinoma of the Nasopharynx",
+      "Stage IVA Squamous Cell Carcinoma of the Larynx",
+      "Stage IVA Squamous Cell Carcinoma of the Lip and Oral Cavity",
+      "Stage IVA Squamous Cell Carcinoma of the Oropharynx",
+      "Stage IVA Squamous Cell Carcinoma of the Paranasal Sinus and Nasal Cavity",
+      "Stage IVA Verrucous Carcinoma of the Larynx",
+      "Stage IVA Verrucous Carcinoma of the Oral Cavity",
+      "Stage IVB Squamous Cell Carcinoma of the Larynx",
+      "Stage IVB Squamous Cell Carcinoma of the Lip and Oral Cavity",
+      "Stage IVB Squamous Cell Carcinoma of the Oropharynx",
+      "Stage IVB Squamous Cell Carcinoma of the Paranasal Sinus and Nasal Cavity",
+      "Stage IVB Verrucous Carcinoma of the Larynx",
+      "Stage IVB Verrucous Carcinoma of the Oral Cavity",
+      "Stage IVC Squamous Cell Carcinoma of the Larynx",
+      "Stage IVC Squamous Cell Carcinoma of the Lip and Oral Cavity",
+      "Stage IVC Squamous Cell Carcinoma of the Oropharynx",
+      "Stage IVC Squamous Cell Carcinoma of the Paranasal Sinus and Nasal Cavity",
+      "Stage IVC Verrucous Carcinoma of the Larynx",
+      "Stage IVC Verrucous Carcinoma of the Oral Cavity",
+      "Tongue Cancer"
+    ],
+    "interventions": [
+      "entolimod",
+      "intensity-modulated radiation therapy",
+      "cisplatin",
+      "pharmacological study",
+      "laboratory biomarker analysis"
+    ]
+  },
+  "VBIO:Entolimod:NCT03063736": {
+    "nct_id": "NCT03063736",
+    "title": "Entolimod, an Adjuvant for Vaccine Augmentation",
+    "official_title": "Entolimod, an Adjuvant for Vaccine Augmentation",
+    "status": "COMPLETED",
+    "last_update": "2020-09-01",
+    "start_date": "2017-12-08",
+    "completion_date": "2019-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "EARLY_PHASE1"
+    ],
+    "enrollment": 40,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Baylor College of Medicine",
+    "conditions": [
+      "Substance Use Disorders"
+    ],
+    "interventions": [
+      "Entolimod",
+      "Td Vaccine"
+    ]
+  },
+  "VBIO:Entolimod:NCT04176133": {
+    "nct_id": "NCT04176133",
+    "title": "Entolimod on Immunosenescence in Healthy Geriatric Subjects Receiving Influenza Vaccination",
+    "official_title": "A Randomized, Double-Blind, Placebo-Controlled, Single-Administration, Dose-Escalation Study of Entolimod on Immunosenescence in Healthy Geriatric Subjects Receiving Influenza Vaccination",
+    "status": "COMPLETED",
+    "last_update": "2023-06-22",
+    "start_date": "2019-10-30",
+    "completion_date": "2022-03-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 61,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Robert J. Pignolo",
+    "conditions": [
+      "Healthy"
+    ],
+    "interventions": [
+      "Entolimod",
+      "Placebo",
+      "Influenza vaccine"
+    ]
+  },
+  "VBIO:Entolimod:NCT01527136": {
+    "nct_id": "NCT01527136",
+    "title": "Entolimod in Treating Patients With Locally Advanced or Metastatic Solid Tumors That Cannot Be Removed By Surgery",
+    "official_title": "A Phase 1 Study to Evaluate the Safety and Pharmacokinetic Profile of CBLB502 in Patients With Advanced Cancers",
+    "status": "COMPLETED",
+    "last_update": "2022-07-22",
+    "start_date": "2012-01",
+    "completion_date": "2014-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 25,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Roswell Park Cancer Institute",
+    "conditions": [
+      "Unspecified Adult Solid Tumor, Protocol Specific"
+    ],
+    "interventions": [
+      "entolimod",
+      "pharmacological study",
+      "laboratory biomarker analysis"
+    ]
+  },
+  "NAUT:Voyager:NCT05476926": {
+    "nct_id": "NCT05476926",
+    "title": "A Real-World Study to Gain Clinical Insights Into Roche Ophthalmology Products",
+    "official_title": "Real-World, Long-Term Data Collection to Gain Clinical Insights Into Roche Ophthalmology Products (VOYAGER STUDY)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-09-02",
+    "start_date": "2022-11-21",
+    "completion_date": "2027-11-30",
+    "study_type": "OBSERVATIONAL",
+    "phases": [],
+    "enrollment": 6000,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Hoffmann-La Roche",
+    "conditions": [
+      "Neovascular Age-related Macular Degeneration",
+      "Diabetic Macular Edema",
+      "Retinal Vein Occlusion",
+      "Branch Retinal Vein Occlusion",
+      "Central Retinal Vein Occlusion",
+      "Hemi-retinal Vein Occlusion"
+    ],
+    "interventions": [
+      "Faricimab",
+      "Port Delivery System with Ranibizumab"
+    ]
+  },
+  "NAUT:Voyager:NCT02463981": {
+    "nct_id": "NCT02463981",
+    "title": "Anterior Insula Regulation and Pain Empathy",
+    "official_title": "Voluntary Anterior Insula Regulation Impacts Pain Empathy and Functional Connectivity: a Real-time fMRI Study",
+    "status": "COMPLETED",
+    "last_update": "2022-02-09",
+    "start_date": "2015-06",
+    "completion_date": "2015-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "NA"
+    ],
+    "enrollment": 37,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "University of Electronic Science and Technology of China",
+    "conditions": [
+      "Anterior Insula Activity During Regulation",
+      "Empathic Responses After Anterior Insula Regulation"
+    ],
+    "interventions": [
+      "real-time fMRI neurofeedback training running on Turbo Brain voyager (TBV) 3.2 (Brain Innovation, Maastricht, The Netherlands)"
+    ]
+  },
+  "NAUT:Voyager:NCT07428668": {
+    "nct_id": "NCT07428668",
+    "title": "Change in IOP Fluctuation After DSLT",
+    "official_title": "Change in Diurnal Intraocular Pressure Fluctuation Following Direct Selective Laser Trabeculoplasty",
+    "status": "RECRUITING",
+    "last_update": "2026-04-20",
+    "start_date": "2026-04-02",
+    "completion_date": "2027-04-03",
+    "study_type": "OBSERVATIONAL",
+    "phases": [],
+    "enrollment": 40,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Ophthalmology Associates, Fort Worth",
+    "conditions": [
+      "Glaucoma"
+    ],
+    "interventions": [
+      "Voyager DSLT"
+    ]
+  },
+  "NAUT:Voyager:NCT02507102": {
+    "nct_id": "NCT02507102",
+    "title": "A Feasibility Study of the Nativis Voyager® System in Patients With Recurrent Glioblastoma Multiforme (GBM) in Australia",
+    "official_title": "A Feasibility Study of the Nativis Voyager® System in Patients With Recurrent Glioblastoma Multiforme (GBM) in Australia",
+    "status": "COMPLETED",
+    "last_update": "2018-03-30",
+    "start_date": "2015-08",
+    "completion_date": "2018-03-26",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "NA"
+    ],
+    "enrollment": 11,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Nativis, Inc.",
+    "conditions": [
+      "Glioblastoma Multiforme"
+    ],
+    "interventions": [
+      "Voyager"
+    ]
+  },
+  "NAUT:Voyager:NCT07696182": {
+    "nct_id": "NCT07696182",
+    "title": "Validation Of anatomY-specific Aortic Valve Implantation Guided by Software Using EncantoR",
+    "official_title": "VOYAGER CE Clinical Trial : Validation Of anatomY-specific Aortic Valve Implantation Guided by Software Using EncantoR",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-07-10",
+    "start_date": "2026-11-30",
+    "completion_date": "2038-12-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "NA"
+    ],
+    "enrollment": 150,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Abbott Medical Devices",
+    "conditions": [
+      "Severe Native Calcific Aortic Stenosis",
+      "Symptomatic Heart Disease Due to Severe Native Calcific Aortic Stenosis"
+    ],
+    "interventions": [
+      "Prospective, single-arm, multi-center study."
+    ]
+  },
+  "NAUT:Voyager:NCT06033053": {
+    "nct_id": "NCT06033053",
+    "title": "Real-time Neurofeedback Training of Fronto-limbic Regions Functional Connectivity",
+    "official_title": "Real-time Neurofeedback Training of Fronto-limbic Areas Functional Connectivity to Reduce Arousal",
+    "status": "UNKNOWN",
+    "last_update": "2024-04-11",
+    "start_date": "2023-09-01",
+    "completion_date": "2025-03-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "NA"
+    ],
+    "enrollment": 45,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "University of Electronic Science and Technology of China",
+    "conditions": [
+      "Emotion Regulation",
+      "Healthy"
+    ],
+    "interventions": [
+      "Real-time fMRI neurofeedback from Turbo Brain voyager (TBV) 3.2"
+    ]
+  },
+  "NAUT:Voyager:NCT03465722": {
+    "nct_id": "NCT03465722",
+    "title": "(VOYAGER) Study of Avapritinib vs Regorafenib in Patients With Locally Advanced Unresectable or Metastatic GIST",
+    "official_title": "An International, Multicenter, Open-label, Randomized, Phase 3 Study of BLU-285 vs Regorafenib in Patients With Locally Advanced Unresectable or Metastatic Gastrointestinal Stromal Tumor (GIST)",
+    "status": "COMPLETED",
+    "last_update": "2022-10-06",
+    "start_date": "2018-03-26",
+    "completion_date": "2021-09-15",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 476,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Blueprint Medicines Corporation",
+    "conditions": [
+      "GIST"
+    ],
+    "interventions": [
+      "avapritinib",
+      "regorafenib"
+    ]
+  },
+  "NAUT:Voyager:NCT00460213": {
+    "nct_id": "NCT00460213",
+    "title": "Valsartan Optimal Therapy Against Elevated Home Blood Pressure Research（VOYAGER）Study",
+    "official_title": "Study on Optimal Anti-hypertensive Therapy With Valsartan by Using Home Blood Pressure Measurement",
+    "status": "COMPLETED",
+    "last_update": "2013-12-09",
+    "start_date": "2006-07",
+    "completion_date": "2013-11",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE4"
+    ],
+    "enrollment": 103,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Kitakyushu-Tsuyazaki Hospital",
+    "conditions": [
+      "Hypertension"
+    ],
+    "interventions": [
+      "Valsartan 80mg daily",
+      "Valsartan 160mg daily"
+    ]
+  },
+  "NAUT:Voyager:NCT02692196": {
+    "nct_id": "NCT02692196",
+    "title": "Fronto-limbic Functional Connectivity Via Real-time fMRI Neurofeedback",
+    "official_title": "Voluntary Regulation of Fronto-limbic Functional Connectivity: A Proof-of-concept Real-time fMRI Study",
+    "status": "COMPLETED",
+    "last_update": "2017-11-08",
+    "start_date": "2015-06",
+    "completion_date": "2016-11",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "NA"
+    ],
+    "enrollment": 24,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "University of Electronic Science and Technology of China",
+    "conditions": [
+      "Healthy"
+    ],
+    "interventions": [
+      "Real-time fMRI neurofeedback from Turbo Brain voyager (TBV) 3.2"
+    ]
   }
 }
