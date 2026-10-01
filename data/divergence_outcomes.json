@@ -153,12 +153,17 @@
             "close": 0.30000001192092896,
             "date": "2026-09-29",
             "return_pct": 0.0
+          },
+          "t5": {
+            "close": 0.29179999232292175,
+            "date": "2026-10-01",
+            "return_pct": -2.7333397573892375
           }
         },
         "recovered_by_t5": false
       },
       "program": "fasedienol",
-      "status": "PENDING",
+      "status": "COMPLETE",
       "threshold_pct": 2.0,
       "ticker": "VTGN",
       "trading_intelligence_score": 69.1
