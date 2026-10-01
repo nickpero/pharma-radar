@@ -141,8 +141,8 @@
         "event_price_timestamp": "2026-09-24",
         "event_to_close_pct": 0.0,
         "max_adverse_pct": -10.0,
-        "max_favorable_pct": 2.5999942382179007,
-        "max_recovery": true,
+        "max_favorable_pct": 0.0,
+        "max_recovery": false,
         "outcomes": {
           "t1": {
             "close": 0.27000001072883606,
