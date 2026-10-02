@@ -80,8 +80,24 @@ def test_different_headlines_remain_separate_events():
 def test_stale_high_priority_catalyst_is_silenced_by_quality_gate():
     alert = _alert("IONS", 100, 40, "CRITICAL")
     alert["source"] = "SEC"
+    alert["source_type"] = "PRIMARY_REGULATORY"
     alert["published_at"] = "2026-09-20T00:00:00Z"
+    assert alert_action(alert) == "SILENT"
+
+
+def test_recent_primary_catalyst_passes_quality_gate():
+    alert = _alert("IONS", 100, 40, "CRITICAL")
+    alert["source"] = "SEC"
+    alert["source_type"] = "PRIMARY_CORPORATE"
+    alert["published_at"] = datetime.now(timezone.utc).isoformat()
     assert alert_action(alert) == "IMMEDIATE"
+
+
+def test_secondary_source_is_silenced_by_quality_gate():
+    alert = _alert("IONS", 100, 40, "CRITICAL")
+    alert["source"] = "REUTERS"
+    alert["published_at"] = datetime.now(timezone.utc).isoformat()
+    assert alert_action(alert) == "SILENT"
 
 
 def test_stale_low_priority_catalyst_remains_silent():
