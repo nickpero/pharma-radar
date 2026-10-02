@@ -9589,6 +9589,352 @@
       "Nativis Voyager RFE Therapy"
     ]
   },
+  "IBRX:ANKTIVA (nogapendekin alfa inbakicept):NCT06061809": {
+    "nct_id": "NCT06061809",
+    "title": "N-803 and PD-L1 t-haNK Combined With Bevacizumab for Recurrent or Progressive Glioblastoma",
+    "official_title": "Open-Label, Single-Arm Phase 2 Study of Nogapendekin Alfa Inbakicept, PD-L1 t-haNK, Bevacizumab and Randomized Phase 2B Study of Nogapendekin Alfa Inbakicept, Bevacizumab, and Tumor Treatment Fields With or Without PD-L1 t-haNK in Participants With Recurrent or Progressive Glioblastoma",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-07-01",
+    "start_date": "2024-08-07",
+    "completion_date": "2030-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 34,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "ImmunityBio, Inc.",
+    "conditions": [
+      "Glioblastoma"
+    ],
+    "interventions": [
+      "Bevacizumab",
+      "PD-L1 t-haNK",
+      "N-803",
+      "Tumor Treating Fields (TTFields, 200 kHz)"
+    ]
+  },
+  "IBRX:ANKTIVA (nogapendekin alfa inbakicept):NCT07492875": {
+    "nct_id": "NCT07492875",
+    "title": "Study of Nogapendekin Alfa Inbakicept and iNKT Cells in Critically Ill Adults With Severe Community-Acquired Pneumonia",
+    "official_title": "Phase 3 Randomized, Blinded, Placebo-Controlled Study Evaluating Nogapendekin Alfa Inbakicept and iNKT Cells In Critically Ill Adults With Severe Community-Acquired Pneumonia With or Without Sepsis/Acute Respiratory Distress Syndrome",
+    "status": "WITHDRAWN",
+    "last_update": "2026-05-08",
+    "start_date": "2026-04-15",
+    "completion_date": "2029-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ImmunityBio, Inc.",
+    "conditions": [
+      "Community-Acquired Pneumonia (CAP)",
+      "Acute Respiratory Distress Syndrome (ARDS)",
+      "Sepsis",
+      "Lymphopenia",
+      "Immunoparalysis"
+    ],
+    "interventions": [
+      "Nogapendekin alfa inbakicept (NAI)",
+      "agenT-797"
+    ]
+  },
+  "IBRX:ANKTIVA (nogapendekin alfa inbakicept):NCT07783789": {
+    "nct_id": "NCT07783789",
+    "title": "NAI Plus Standard of Care Compared With Placebo Plus Standard of Care in Critically Ill Adults With Sepsis",
+    "official_title": "Phase 2a, Randomized, Double-Blind, Placebo-Controlled Clinical Trial Evaluating the Safety and Efficacy of Nogapendekin Alfa Inbakicept (NAI) Plus Standard of Care (SOC) Compared to SOC Alone in Critically Ill Adults With Sepsis",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-09-25",
+    "start_date": "2026-10-15",
+    "completion_date": "2028-08-13",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 50,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "ImmunityBio, Inc.",
+    "conditions": [
+      "Sepsis"
+    ],
+    "interventions": [
+      "Nogapendekin alfa inbakicept (NAI)",
+      "Placebo"
+    ]
+  },
+  "IBRX:ANKTIVA (nogapendekin alfa inbakicept):NCT07217496": {
+    "nct_id": "NCT07217496",
+    "title": "N-803 in Combination With Pembrolizumab and Enfortumab Vedotin for Treatment of Urothelial Cancer",
+    "official_title": "Open-Label, Single-Arm, Phase 1b Clinical Trial of NAI Plus Pembrolizumab With Short Course of Enfortumab Vedotin in Treatment-Naïve Participants With Metastatic Urothelial Carcinoma",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-09-24",
+    "start_date": "2026-12",
+    "completion_date": "2032-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 18,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "ImmunityBio, Inc.",
+    "conditions": [
+      "Metastatic Urothelial Carcinoma",
+      "Urothelial Carcinoma",
+      "Locally Advanced Urothelial Carcinoma",
+      "Urothelial Cancer",
+      "Bladder Cancer"
+    ],
+    "interventions": [
+      "Nogapendekin Alfa Inbakicept (NAI)",
+      "enfortumab vedotin (EV)",
+      "Pembrolizumab"
+    ]
+  },
+  "IBRX:ANKTIVA (nogapendekin alfa inbakicept):NCT07524257": {
+    "nct_id": "NCT07524257",
+    "title": "Phase 3 Study of Nogapendekin Alfa Inbakicept Plus Standard of Care vs Standard of Care in First-Line Advanced or Metastatic NSCLC",
+    "official_title": "Phase 3, Randomized, Open-Label Study of Nogapendekin Alfa Inbakicept in Combination With Standard of Care Versus Standard of Care as First-Line Treatment for Patients With Advanced or Metastatic Non-Small Cell Lung Cancer",
+    "status": "WITHDRAWN",
+    "last_update": "2026-06-22",
+    "start_date": "2026-05-29",
+    "completion_date": "2029-12-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ImmunityBio, Inc.",
+    "conditions": [
+      "NSCLC (Advanced Non-small Cell Lung Cancer)",
+      "Metastatic NSCLC"
+    ],
+    "interventions": [
+      "Drug: Nogapendekin alfa inbakicept (NAI)",
+      "Pembrolizumab",
+      "Cisplatin or Carboplatin",
+      "Nab-paclitaxel (squamous) OR Pemetrexed (nonsquamous)",
+      "Nab-paclitaxel OR Paclitaxel OR Docetaxel (squamous)",
+      "Pemetrexed (nonsquamous)"
+    ]
+  },
+  "IBRX:ANKTIVA (nogapendekin alfa inbakicept):NCT07488884": {
+    "nct_id": "NCT07488884",
+    "title": "Open-Label, Phase 1 Clinical Trial of Neoadjuvant Nogapendekin Alfa Inbakicept, Sotevtamab, and Zabadinostat in Combination With Gemcitabine and Nab-Paclitaxel for Participants With Borderline Resectable or Locally Advanced Pancreatic Cancer",
+    "official_title": "Open-Label, Phase 1 Clinical Trial of Neoadjuvant Nogapendekin Alfa Inbakicept, Sotevtamab, and Zabadinostat in Combination With Gemcitabine and Nab-Paclitaxel for Participants With Borderline Resectable or Locally Advanced Pancreatic Cancer",
+    "status": "WITHDRAWN",
+    "last_update": "2026-08-28",
+    "start_date": "2026-09-01",
+    "completion_date": "2029-06-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ImmunityBio, Inc.",
+    "conditions": [
+      "Pancreatic Cancer Resectable",
+      "Pancreatic Cancer"
+    ],
+    "interventions": [
+      "Nogapendekin Alfa Inbakicept (N803)",
+      "Sotevtamab",
+      "Zabadinostat (CXD101)",
+      "Nab paclitaxel / gemcitabine"
+    ]
+  },
+  "IBRX:ANKTIVA (nogapendekin alfa inbakicept):NCT05618925": {
+    "nct_id": "NCT05618925",
+    "title": "Study for Subjects With Relapsed/Refractory Non- Hodgkin Lymphoma",
+    "official_title": "Open-label, Phase 1 Study of CD19 t-haNK as a Single Agent and in Combination With an IL-15 Superagonist (N-803) and Rituximab in Subjects With Relapsed/Refractory Non-Hodgkin Lymphoma.",
+    "status": "RECRUITING",
+    "last_update": "2026-04-01",
+    "start_date": "2025-08-22",
+    "completion_date": "2027-03-15",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 20,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "ImmunityBio, Inc.",
+    "conditions": [
+      "Non Hodgkin's Lymphoma Refractory/Relapsed"
+    ],
+    "interventions": [
+      "N803",
+      "CD19t-haNK suspension",
+      "Cyclophosphamide",
+      "Fludarabine",
+      "Rituximab"
+    ]
+  },
+  "IBRX:ANKTIVA (nogapendekin alfa inbakicept):NCT07492888": {
+    "nct_id": "NCT07492888",
+    "title": "Nogapendekin Alfa-Inbakicept and iNKT Cells for Critically Ill Adults With Severe Community-Acquired Pneumonia (With or Without Sepsis/ARDS)",
+    "official_title": "Phase 2 Study Evaluating Nogapendekin Alfa Inbakicept and iNKT Cells in Critically Ill Adults With Severe Community-Acquired Pneumonia With or Without Sepsis/Acute Respiratory Distress Syndrome.",
+    "status": "WITHDRAWN",
+    "last_update": "2026-05-08",
+    "start_date": "2026-04-15",
+    "completion_date": "2027-01-15",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ImmunityBio, Inc.",
+    "conditions": [
+      "Acute Respiratory Distress Syndrome",
+      "Severe Community-Acquired Pneum",
+      "Sepsis",
+      "Lymphopenia / Immunoparalysis in Critically Ill Adults"
+    ],
+    "interventions": [
+      "Nogapendekin Alfa-Inbakicept (NAI)",
+      "Allogeneic invariant Natural Killer T (iNKT) Cells (AgenT-797)"
+    ]
+  },
+  "IBRX:ANKTIVA (nogapendekin alfa inbakicept):NCT07123727": {
+    "nct_id": "NCT07123727",
+    "title": "A Study to Examine Anktiva for the Treatment of COVID-19.",
+    "official_title": "Single Arm Study to Evaluate the Safety of Nogapendekin Alfa Inbakicept (NAI) in Participants With Long COVID",
+    "status": "RECRUITING",
+    "last_update": "2026-09-24",
+    "start_date": "2025-09-04",
+    "completion_date": "2027-03",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 40,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "ImmunityBio, Inc.",
+    "conditions": [
+      "Long COVID",
+      "Long COVID Syndrome",
+      "Long Covid 19"
+    ],
+    "interventions": [
+      "Anktiva"
+    ]
+  },
+  "IBRX:ANKTIVA (nogapendekin alfa inbakicept):NCT07108036": {
+    "nct_id": "NCT07108036",
+    "title": "A Study to Assess Anktiva in Patients With Long Covid-19.",
+    "official_title": "Interleukin-15 Superagonist Nogapendekin Alfa Inbakicept in Participants With Long Covid.",
+    "status": "RECRUITING",
+    "last_update": "2026-05-11",
+    "start_date": "2025-11-14",
+    "completion_date": "2026-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 20,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "ImmunityBio, Inc.",
+    "conditions": [
+      "Long COVID"
+    ],
+    "interventions": [
+      "N-803 (IL-15 Superagonist)"
+    ]
+  },
+  "IBRX:ANKTIVA (nogapendekin alfa inbakicept):NCT03520686": {
+    "nct_id": "NCT03520686",
+    "title": "Nogapendekin Alfa Inbakicept for Advanced Non-Small Cell Lung Cancer",
+    "official_title": "Phase 3, Open-Label, 4-Cohort Study of Nogapendekin Alfa Inbakicept in Combination With Current Standard of Care as First-Line Treatment for Patients With Advanced or Metastatic Non-Small Cell Lung Cancer",
+    "status": "TERMINATED",
+    "last_update": "2026-05-26",
+    "start_date": "2018-05-18",
+    "completion_date": "2025-10-13",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 102,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ImmunityBio, Inc.",
+    "conditions": [
+      "Non Small Cell Lung Cancer"
+    ],
+    "interventions": [
+      "NAI + Pembrolizumab",
+      "NAI + Nivolumab + Ipilimumab",
+      "NAI + Pembrolizumab + Carboplatin + Nab-paclitaxel or Paclitaxel",
+      "Cisplatin/Carboplatin + Pemetrexed + Pembrolizumab + NAI",
+      "Cisplatin/Carboplatin + Pemetrexed + Atezolizumab + NAI",
+      "Carboplatin + Paclitaxel + Atezolizumab + Bevacizumab + NAI",
+      "Carboplatin + Nab-paclitaxel + Atezolizumab + NAI",
+      "Pembrolizumab",
+      "Pembrolizumab + Carboplatin + Nab-paclitaxel or Paclitaxel",
+      "Drug: Cisplatin/Carboplatin and Pemetrexed plus Pembrolizumab",
+      "Cisplatin/Carboplatin and Pemetrexed plus Atezolizumab",
+      "Carboplatin and Paclitaxel plus Atezolizumab and Bevacizumab",
+      "Carboplatin and Nab-paclitaxel plus Atezolizumab",
+      "Nogapendekin alfa inbakicept (NAI) + Nivolumab + Ipilimumab + Carboplatin + Nab-paclitaxel"
+    ]
+  },
+  "IBRX:ANKTIVA (nogapendekin alfa inbakicept):NCT07628062": {
+    "nct_id": "NCT07628062",
+    "title": "Phase 2 Study of NAI, HPV Vaccine, and Nab-Paclitaxel in HPV-Positive Oropharyngeal Cancer Followed by De-Intensified Radiation Compared With Standard Chemoradiation",
+    "official_title": "Open-Label, Single-Arm Phase 2 Study Of Nogapendekin Alfa Inbakicept, PD-L1 T-HaNK, And Bevacizumab And Randomized Phase 2B Study Of Nogapendekin Alfa Inbakicept, Bevacizumab, And Tumor Treatment Fields With Or Without PD-L1 T-HaNK In Participants With Recurrent Or Progressive Glioblastoma",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-06-04",
+    "start_date": "2026-07-22",
+    "completion_date": "2031-06-27",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 70,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "ImmunityBio, Inc.",
+    "conditions": [
+      "HPV-Positive Oropharyngeal Squamous Cell Carcinoma",
+      "Oropharyngeal Squamous Cell Carcinoma",
+      "Head and Neck Cancer"
+    ],
+    "interventions": [
+      "Nogapendekin Alfa Inbakicept (NAI)",
+      "hAd5-HPV Vaccine (IBRX-042)",
+      "Nab-Paclitaxel",
+      "Cisplatin",
+      "De-Intensified IMRT",
+      "Standard of Care IMRT"
+    ]
+  },
+  "IBRX:ANKTIVA (nogapendekin alfa inbakicept):NCT07578558": {
+    "nct_id": "NCT07578558",
+    "title": "NAI for Sepsis With Persistent Lymphopenia",
+    "official_title": "Phase 2, Randomized, Open-Label Clinical Trial Evaluating Nogapendekin Alfa Inbakicept in Combination With Standard of Care Versus Standard of Care Alone in Critically Ill Adults With Sepsis and Persistent Lymphopenia",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-05-11",
+    "start_date": "2026-07-06",
+    "completion_date": "2027-10-04",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 50,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "ImmunityBio, Inc.",
+    "conditions": [
+      "Sepsis",
+      "Septic Shock",
+      "Lymphopenia",
+      "Immunosuppression",
+      "Critical Illness"
+    ],
+    "interventions": [
+      "Nogapendekin alfa inbakicept (NAI)",
+      "Standard of Care (SOC)"
+    ]
+  },
   "GLUE:MRT-8102:NCT07119125": {
     "nct_id": "NCT07119125",
     "title": "A First-in-human, 3-part Study of MRT-8102 in Healthy Participants and Participants at Cardiovascular Risk With Elevated CRP",
