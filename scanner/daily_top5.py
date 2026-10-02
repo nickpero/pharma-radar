@@ -31,6 +31,58 @@ def _today_utc():
     return datetime.now(timezone.utc).date().isoformat()
 
 
+def _parse_event_timestamp(event):
+    value = event.get("event_timestamp") or event.get("published_at")
+    if not value:
+        return None
+    text = str(value).strip()
+    try:
+        dt = datetime.fromisoformat(text.replace("Z", "+00:00"))
+    except ValueError:
+        try:
+            dt = datetime.strptime(text[:10], "%Y-%m-%d")
+        except ValueError:
+            return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(timezone.utc)
+
+
+def _catalyst_freshness(event, now=None):
+    if not event:
+        return "NONE"
+    dt = _parse_event_timestamp(event)
+    if dt is None:
+        return "UNKNOWN_TIME"
+    reference = now or datetime.now(timezone.utc)
+    age_hours = max(0.0, (reference - dt).total_seconds() / 3600.0)
+    if age_hours <= 24:
+        return "NEW_0_24H"
+    if age_hours <= 72:
+        return "REACTION_24_72H"
+    return "HISTORICAL_GT_72H"
+
+
+def _source_is_primary(event):
+    if not event:
+        return False
+    source = str(event.get("source") or "").upper()
+    source_type = str(event.get("source_type") or "").upper()
+    return source in {"SEC", "FDA", "FDA RSS", "CLINICALTRIALS", "COMPANY", "COMPANY IR", "COURT", "EMA", "EU CTIS"} or source_type.startswith("PRIMARY_")
+
+
+def _alert_quality_gate(event, now=None):
+    if not event:
+        return {"eligible": False, "reason": "NO_EVENT", "freshness": "NONE", "primary_source": False}
+    freshness = _catalyst_freshness(event, now)
+    primary = _source_is_primary(event)
+    if freshness == "HISTORICAL_GT_72H":
+        return {"eligible": False, "reason": "HISTORICAL_GT_72H", "freshness": freshness, "primary_source": primary}
+    if not primary:
+        return {"eligible": False, "reason": "PRIMARY_SOURCE_NOT_VERIFIED", "freshness": freshness, "primary_source": False}
+    return {"eligible": True, "reason": "QUALITY_GATE_PASS", "freshness": freshness, "primary_source": True}
+
+
 def _same_day_catalysts(history, ticker, date_value=None):
     day = date_value or _today_utc()
     matches = []
@@ -67,6 +119,9 @@ def build_daily_top5(watchlist=None, history=None, snapshot_fn=get_market_snapsh
             "price": snapshot.get("price"),
             "market_data_source": snapshot.get("market_data_source"),
             "catalyst_found": catalyst is not None,
+            "catalyst_freshness": _catalyst_freshness(catalyst),
+            "catalyst_primary_source": _source_is_primary(catalyst),
+            "alert_quality_gate": _alert_quality_gate(catalyst),
             "catalyst_subtype": catalyst.get("subtype") if catalyst else None,
             "catalyst_program": catalyst.get("program") if catalyst else None,
             "catalyst_source": catalyst.get("source") if catalyst else None,
@@ -154,8 +209,11 @@ def format_daily_top5(rows, date_value=None):
         volume_ratio = row.get("volume_ratio")
         volume_text = f"{float(volume_ratio):.1f}x avg" if volume_ratio else "N/A"
         if row["catalyst_found"]:
-            reason = f'{row["catalyst_subtype"]} · {row["catalyst_source"] or "PRIMARY"}'
+            gate = row.get("alert_quality_gate") or {}
+            reason = f'{row["catalyst_subtype"]} · {row["catalyst_source"] or "UNKNOWN"} · {row.get("catalyst_freshness", "UNKNOWN_TIME")}'
             classification = row.get("classification", "CATALYST_LINKED")
+            if not gate.get("eligible"):
+                classification = f'{classification}_QUALITY_GATED'
         else:
             reason = "No same-day Radar catalyst recorded"
             classification = row.get("classification", "MARKET_MOVE_UNEXPLAINED")
@@ -166,6 +224,7 @@ def format_daily_top5(rows, date_value=None):
             f"   🔎 {classification}",
             f"   🧠 Evidence: {row.get('catalyst_evidence', 'N/A')}",
             f"   📡 Radar: {row.get('radar_inclusion', 'N/A')}",
+            f"   🛡️ Quality Gate: {(row.get('alert_quality_gate') or {}).get('reason', 'N/A')}",
             "",
         ])
     return "\n".join(lines).rstrip()
