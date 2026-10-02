@@ -72,7 +72,7 @@ def build_daily_top5(watchlist=None, history=None, snapshot_fn=get_market_snapsh
             "catalyst_source": catalyst.get("source") if catalyst else None,
             "catalyst_priority": catalyst.get("alert_priority") if catalyst else None,
             "catalyst_url": catalyst.get("url") if catalyst else None,
-            "classification": _classify_row(catalyst),
+            "classification": _classify_row(catalyst, meta),
             "catalyst_evidence": _catalyst_evidence(catalyst),
             "radar_inclusion": _radar_inclusion(catalyst, meta),
             "radar_reason": _radar_reason(catalyst, meta),
@@ -81,8 +81,13 @@ def build_daily_top5(watchlist=None, history=None, snapshot_fn=get_market_snapsh
     return rows[:5]
 
 
-def _classify_row(catalyst):
+def _classify_row(catalyst, meta=None):
     if not catalyst:
+        role = str((meta or {}).get("radar_role") or "").upper()
+        if role == "MARKET_STRUCTURE_WATCH":
+            return "TECHNICAL_OR_INDEX_FLOW"
+        if role.endswith("_WATCH"):
+            return "WATCHLIST_CONTEXT_NO_NEW_CATALYST"
         return "MARKET_MOVE_UNEXPLAINED"
     subtype = str(catalyst.get("subtype") or catalyst.get("type") or "").upper()
     fundamental = {
@@ -115,6 +120,17 @@ def _radar_reason(catalyst, meta):
     if catalyst:
         return catalyst.get("radar_reason") or (
             "Same-day catalyst recorded by Pharma Radar; retain for monitoring based on event materiality."
+        )
+    role = str((meta or {}).get("radar_role") or "").upper()
+    if role == "MARKET_STRUCTURE_WATCH":
+        return (meta or {}).get("radar_reason") or (
+            "Market-structure/index flow without a new Pharma catalyst; "
+            "track separately and do not classify as clinical or regulatory."
+        )
+    if role.endswith("_WATCH"):
+        return (meta or {}).get("radar_reason") or (
+            "Watchlist context exists, but no verified same-day catalyst was recorded; "
+            "do not label the price move itself as a catalyst."
         )
     return (meta or {}).get("radar_reason") or (
         "Price/volume move without a verified same-day fundamental catalyst; "
