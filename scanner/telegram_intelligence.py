@@ -3,7 +3,10 @@
 import re
 from datetime import datetime, timezone
 
-MAX_NEW_NEWS_AGE_HOURS = 48
+MAX_NEW_NEWS_AGE_HOURS = 24
+MAX_CATALYST_ALERT_AGE_HOURS = 72
+
+_PRIMARY_SOURCES = {"SEC", "FDA", "FDA RSS", "CLINICALTRIALS", "COMPANY", "COMPANY IR", "COURT", "EMA", "EU CTIS"}
 
 
 def _num(value):
@@ -33,26 +36,41 @@ def _parse_timestamp(value):
     return dt.astimezone(timezone.utc)
 
 
-def _is_stale_news(alert, now=None):
-    if alert.get("post_spike_watch") is True:
-        return False
-    source = str(alert.get("source") or "").upper()
-    source_type = str(alert.get("source_type") or "").upper()
-    if source not in {"SEC", "FDA", "FDA RSS", "EMA"} and not source_type.startswith(("PRIMARY_REGULATORY", "PRIMARY_CORPORATE")):
-        return False
+def catalyst_freshness(alert, now=None):
+    """Classify catalyst age: new, recent reaction, or historical."""
     dt = _parse_timestamp(alert.get("published_at") or alert.get("event_timestamp"))
     if dt is None:
-        return False
+        return "UNKNOWN_TIME"
     reference = now or datetime.now(timezone.utc)
-    age_exceeded = (reference - dt).total_seconds() > MAX_NEW_NEWS_AGE_HOURS * 3600
-    if not age_exceeded:
-        return False
-    event = alert.get("event") if isinstance(alert.get("event"), dict) else {}
-    try:
-        priority = float(alert.get("alert_priority", event.get("alert_priority")) or 0)
-    except (TypeError, ValueError):
-        priority = 0
-    return priority < 80
+    age_hours = max(0.0, (reference - dt).total_seconds() / 3600.0)
+    if age_hours <= 24:
+        return "NEW_0_24H"
+    if age_hours <= MAX_CATALYST_ALERT_AGE_HOURS:
+        return "REACTION_24_72H"
+    return "HISTORICAL_GT_72H"
+
+
+def primary_source_verified(alert):
+    source = str(alert.get("source") or "").upper()
+    source_type = str(alert.get("source_type") or "").upper()
+    return source in _PRIMARY_SOURCES or source_type.startswith("PRIMARY_")
+
+
+def alert_quality_gate(alert, now=None):
+    """Final pre-Telegram gate: primary source + <=72h + non-expired."""
+    freshness = catalyst_freshness(alert, now)
+    primary = primary_source_verified(alert)
+    if _is_expired(alert):
+        return {"eligible": False, "reason": "EXPIRED", "freshness": freshness, "primary_source": primary}
+    if freshness == "HISTORICAL_GT_72H":
+        return {"eligible": False, "reason": "HISTORICAL_GT_72H", "freshness": freshness, "primary_source": primary}
+    if not primary:
+        return {"eligible": False, "reason": "PRIMARY_SOURCE_NOT_VERIFIED", "freshness": freshness, "primary_source": False}
+    return {"eligible": True, "reason": "QUALITY_GATE_PASS", "freshness": freshness, "primary_source": True}
+
+
+def _is_stale_news(alert, now=None):
+    return alert_quality_gate(alert, now)["reason"] == "HISTORICAL_GT_72H"
 
 
 def _is_expired(alert):
@@ -72,6 +90,9 @@ def alert_action(alert):
     operational Telegram alerts.
     """
     if _is_expired(alert):
+        return "SILENT"
+
+    if not alert_quality_gate(alert)["eligible"]:
         return "SILENT"
 
     if alert.get("post_spike_watch") is True:
@@ -159,6 +180,10 @@ def select_intelligent_alerts(alerts):
         if action == "SILENT":
             continue
         item = dict(alert)
+        gate = alert_quality_gate(item)
+        item["quality_gate"] = gate["reason"]
+        item["catalyst_freshness"] = gate["freshness"]
+        item["primary_source_verified"] = gate["primary_source"]
         item["telegram_action"] = action
         key = _dedup_key(item)
         current = selected.get(key)
