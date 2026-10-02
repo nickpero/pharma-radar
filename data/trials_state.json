@@ -9554,5 +9554,1175 @@
       "Lower limb revascularization",
       "Lower limb revascularization"
     ]
+  },
+  "GLUE:MRT-8102:NCT07119125": {
+    "nct_id": "NCT07119125",
+    "title": "A First-in-human, 3-part Study of MRT-8102 in Healthy Participants and Participants at Cardiovascular Risk With Elevated CRP",
+    "official_title": "A Phase 1, Randomized, Double-Blind, Placebo-Controlled Single and Multiple Dose Study Evaluating the Safety, Tolerability, Pharmacokinetics, and Pharmacodynamics of MRT-8102 in Healthy Participants and in Participants at Cardiovascular Risk With Elevated CRP",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-06-04",
+    "start_date": "2025-06-27",
+    "completion_date": "2026-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 100,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Monte Rosa Therapeutics, Inc",
+    "conditions": [
+      "Healthy Volunteers",
+      "Elevated CRP"
+    ],
+    "interventions": [
+      "MRT-8102",
+      "Placebo"
+    ]
+  },
+  "GLUE:MRT-6160:NCT06597799": {
+    "nct_id": "NCT06597799",
+    "title": "First-in-human Study of MRT-6160 in Healthy Subjects",
+    "official_title": "Phase 1, First-in-Human, Randomized, Double-Blind, Placebo-Controlled, Single Ascending Dose, Multiple Ascending Dose, and Food-Effect Study to Assess Safety, Tolerability, PK and PD of MRT-6160 in Healthy Subjects",
+    "status": "COMPLETED",
+    "last_update": "2025-07-28",
+    "start_date": "2024-08-07",
+    "completion_date": "2025-04-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 108,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Monte Rosa Therapeutics, Inc",
+    "conditions": [
+      "Healthy Volunteers"
+    ],
+    "interventions": [
+      "MRT-6160",
+      "Placebo"
+    ]
+  },
+  "GLUE:MRT-2359:NCT07745361": {
+    "nct_id": "NCT07745361",
+    "title": "Study of Oral MRT-2359 With Apalutamide in Prostate Cancer",
+    "official_title": "MODeFIRe-1 (Molecular Degrader for Inhibitor Resistance): A Phase 2, Open-Label, Multicenter Study of Oral MRT-2359 in Combination With Apalutamide in Patients With Castration-Resistant Prostate Cancer",
+    "status": "RECRUITING",
+    "last_update": "2026-08-24",
+    "start_date": "2026-08",
+    "completion_date": "2028-04",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 25,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Monte Rosa Therapeutics, Inc",
+    "conditions": [
+      "Castration-Resistant Prostate Cancer (CRPC)",
+      "Castration-Resistant Prostate Cancer",
+      "Prostate Cancer",
+      "Prostate Cancer (Adenocarcinoma)"
+    ],
+    "interventions": [
+      "Oral MRT-2359",
+      "Apalutamide"
+    ]
+  },
+  "GLUE:MRT-2359:NCT05546268": {
+    "nct_id": "NCT05546268",
+    "title": "Study of Oral MRT-2359 in Selected Cancer Patients",
+    "official_title": "A Phase 1/2 Study of Oral MRT-2359 in Patients With MYC-Driven and Other Selected Solid Tumors Including Lung Cancer and Diffuse B-Cell Lymphoma",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-03-03",
+    "start_date": "2022-10-12",
+    "completion_date": "2027-11",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 174,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Monte Rosa Therapeutics, Inc",
+    "conditions": [
+      "NSCLC",
+      "SCLC",
+      "High Grade Neuroendocrine Cancer",
+      "DLBCL",
+      "L-MYC and N-MYC Amplified Solid Tumors",
+      "NSCLC With High or Low L-MYC or N-MYC Expression",
+      "HR-positive, HER2-negative Breast Cancer",
+      "Prostate Cancer"
+    ],
+    "interventions": [
+      "Oral MRT-2359",
+      "Oral MRT-2359",
+      "Oral MRT-2359",
+      "Oral MRT-2359",
+      "Oral MRT-2359",
+      "Oral MRT-2359"
+    ]
+  },
+  "UTHR:Tyvaso:NCT01172496": {
+    "nct_id": "NCT01172496",
+    "title": "A Bioavailability Study Comparing Treprostinil Diethanolamine Oral Tablets and Oral Solution in Healthy Volunteers",
+    "official_title": "A Comparative Bioavailability Study of UT-15C SR (Treprostinil Diethanolamine, Sustained Release) Oral Tablets and UT-15C (Treprostinil Diethanolamine) Administered as an Oral Solution in Healthy Volunteers",
+    "status": "COMPLETED",
+    "last_update": "2010-10-13",
+    "start_date": "2010-08",
+    "completion_date": null,
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 24,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "United Therapeutics",
+    "conditions": [
+      "Pulmonary Arterial Hypertension"
+    ],
+    "interventions": [
+      "treprostinil diethanolamine"
+    ]
+  },
+  "UTHR:Tyvaso:NCT03016468": {
+    "nct_id": "NCT03016468",
+    "title": "Safety of Transition From Selexipag to Remodulin® Then Oral Treprostinil in Symptomatic Adult PAH",
+    "official_title": "A Multicenter, 16-Week, Open-label Study Evaluating the Safety of Transition From Selexipag to Remodulin® Then Oral Treprostinil in Symptomatic Subjects With Pulmonary Arterial Hypertension",
+    "status": "WITHDRAWN",
+    "last_update": "2017-04-11",
+    "start_date": "2017-05",
+    "completion_date": "2018-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "United Therapeutics",
+    "conditions": [
+      "Pulmonary Arterial Hypertension"
+    ],
+    "interventions": [
+      "Parenteral Remodulin (treprostinil) injection",
+      "Oral Treprostinil"
+    ]
+  },
+  "UTHR:Tyvaso:NCT03496623": {
+    "nct_id": "NCT03496623",
+    "title": "A Phase 3 Adaptive Study to Evaluate the Safety and Efficacy of Inhaled Treprostinil in Participants With Pulmonary Hypertension (PH) Due to Chronic Obstructive Pulmonary Disease (COPD)",
+    "official_title": "A Phase 3, Randomized, Placebo-controlled, Double-blind, Adaptive Study to Evaluate the Safety and Efficacy of Inhaled Treprostinil in Patients With Pulmonary Hypertension Due to Chronic Obstructive Pulmonary Disease (PH-COPD)",
+    "status": "TERMINATED",
+    "last_update": "2023-11-24",
+    "start_date": "2018-05-08",
+    "completion_date": "2022-10-13",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 188,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "United Therapeutics",
+    "conditions": [
+      "Pulmonary Hypertension",
+      "Chronic Obstructive Pulmonary Disease"
+    ],
+    "interventions": [
+      "Inhaled treprostinil solution",
+      "Placebo solution"
+    ]
+  },
+  "UTHR:Tyvaso:NCT00147199": {
+    "nct_id": "NCT00147199",
+    "title": "Clinical Investigation Into Inhaled Treprostinil Sodium in Patients With Severe Pulmonary Arterial Hypertension (PAH)",
+    "official_title": "TRIUMPH I: Double Blind Placebo Controlled Clinical Investigation Into the Efficacy and Tolerability of Inhaled Treprostinil Sodium in Patients With Severe Pulmonary Arterial Hypertension",
+    "status": "COMPLETED",
+    "last_update": "2024-01-02",
+    "start_date": "2005-06",
+    "completion_date": "2007-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 235,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "United Therapeutics",
+    "conditions": [
+      "Pulmonary Hypertension"
+    ],
+    "interventions": [
+      "Inhaled treprostinil",
+      "Placebo inhalation solution"
+    ]
+  },
+  "UTHR:Tyvaso:NCT00887978": {
+    "nct_id": "NCT00887978",
+    "title": "Efficacy and Safety of Oral UT-15C Tablets to Treat Pulmonary Arterial Hypertension",
+    "official_title": "A 16-Week, International, Multicenter, Double-Blind, Randomized, Placebo-Controlled Study of the Efficacy and Safety of Oral UT-15C Sustained Release Tablets in Subjects With Pulmonary Arterial Hypertension",
+    "status": "COMPLETED",
+    "last_update": "2013-01-15",
+    "start_date": "2009-06",
+    "completion_date": "2011-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 310,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "United Therapeutics",
+    "conditions": [
+      "Pulmonary Hypertension"
+    ],
+    "interventions": [
+      "UT-15C SR",
+      "Placebo"
+    ]
+  },
+  "UTHR:Tyvaso:NCT07037836": {
+    "nct_id": "NCT07037836",
+    "title": "Inhaled Treprostinil (Tyvaso Nebulizer) For COPD Patients With Hypoxemia",
+    "official_title": "Inhaled Treprostinil (Tyvaso Nebulizer) For COPD Patients With Hypoxemia",
+    "status": "RECRUITING",
+    "last_update": "2026-08-27",
+    "start_date": "2025-09-29",
+    "completion_date": "2027-07-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 10,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Bastiaan Driehuys",
+    "conditions": [
+      "COPD (Chronic Obstructive Pulmonary Disease)",
+      "Hypoxemia"
+    ],
+    "interventions": [
+      "Inhaled Treprostinil (Tyvaso Nebulizer)"
+    ]
+  },
+  "UTHR:Tyvaso:NCT00760916": {
+    "nct_id": "NCT00760916",
+    "title": "FREEDOM DR: Oral Treprostinil in Combination With an Endothelin Receptor Antagonist (ERA) and/or a Phosphodiesterase-5 (PDE-5) Inhibitor or as Monotherapy for the Treatment of Pulmonary Arterial Hypertension (PAH)",
+    "official_title": "FREEDOM DR: An International, Multi-Center, 12-Week, Double Blind, Randomized, Placebo-Controlled, Parallel Group Study Followed by a 12-Week Open-Label Extension Study to Assess the Efficacy, Safety, and Dose Response of UT-15C SR in Subjects With Pulmonary Hypertension",
+    "status": "WITHDRAWN",
+    "last_update": "2013-01-30",
+    "start_date": "2008-12",
+    "completion_date": "2009-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "United Therapeutics",
+    "conditions": [
+      "Pulmonary Hypertension"
+    ],
+    "interventions": [
+      "UT-15C 1 mg",
+      "UT-15C 0.25 mg",
+      "UT-15C 5 mg",
+      "Placebo"
+    ]
+  },
+  "UTHR:Tyvaso:NCT01266265": {
+    "nct_id": "NCT01266265",
+    "title": "Study of Incidence of Respiratory Tract AEs in Patients Treated With Tyvaso® Compared to Other FDA Approved PAH Therapies",
+    "official_title": "A Postmarketing Observational Study to Assess Respiratory Tract Adverse Events in Pulmonary Arterial Hypertension Patients Treated With Tyvaso® (Treprostinil) Inhalation Solution",
+    "status": "COMPLETED",
+    "last_update": "2016-02-17",
+    "start_date": "2010-12",
+    "completion_date": "2014-12",
+    "study_type": "OBSERVATIONAL",
+    "phases": [],
+    "enrollment": 1333,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "United Therapeutics",
+    "conditions": [
+      "Pulmonary Arterial Hypertension"
+    ],
+    "interventions": [
+      "inhaled prostacyclin",
+      "inhaled prostacyclin",
+      "prostacyclin",
+      "subcutaneous and intravenous prostacyclin",
+      "oral ERA",
+      "oral PDE5 inhibitors"
+    ]
+  },
+  "UTHR:Tyvaso:NCT03012646": {
+    "nct_id": "NCT03012646",
+    "title": "Safety and Tolerability of Inhaled Treprostinil in Adult PH Due to COPD",
+    "official_title": "A Prospective, Multicenter, Single-arm Study to Evaluate the Safety and Tolerability of Inhaled Treprostinil in Subjects With Pulmonary Hypertension Due to Chronic Obstructive Pulmonary Disease",
+    "status": "WITHDRAWN",
+    "last_update": "2017-04-11",
+    "start_date": "2017-04",
+    "completion_date": "2019-04",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "United Therapeutics",
+    "conditions": [
+      "Pulmonary Hypertension",
+      "Chronic Obstructive Pulmonary Disease"
+    ],
+    "interventions": [
+      "Inhaled Treprostinil"
+    ]
+  },
+  "UTHR:Tyvaso:NCT00067041": {
+    "nct_id": "NCT00067041",
+    "title": "Effects of Remodulin in Patients With Critical Limb Ischemia Following a Vein Bypass Graft",
+    "official_title": "A Randomized Placebo-Controlled, 12-Week Multicenter Study of the Safety and Efficacy of Remodulin in Patients With Critical Limb Ischemia Following an Autogenous Vein Infrainguinal Bypass Graft",
+    "status": "TERMINATED",
+    "last_update": "2013-03-07",
+    "start_date": "2003-03",
+    "completion_date": "2003-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2",
+      "PHASE3"
+    ],
+    "enrollment": 30,
+    "enrollment_type": null,
+    "sponsor": "United Therapeutics",
+    "conditions": [
+      "Peripheral Vascular Disease"
+    ],
+    "interventions": [
+      "Remodulin (treprostinil sodium) Injection"
+    ]
+  },
+  "UTHR:Tyvaso:NCT00004497": {
+    "nct_id": "NCT00004497",
+    "title": "Phase III Randomized Study of UT-15 in Patients With Primary Pulmonary Hypertension",
+    "official_title": null,
+    "status": "COMPLETED",
+    "last_update": "2015-03-25",
+    "start_date": "1998-10",
+    "completion_date": "2000-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": null,
+    "enrollment_type": null,
+    "sponsor": "United Therapeutics",
+    "conditions": [
+      "Pulmonary Hypertension"
+    ],
+    "interventions": [
+      "UT-15"
+    ]
+  },
+  "UTHR:Tyvaso:NCT01104870": {
+    "nct_id": "NCT01104870",
+    "title": "A Dose Response Study of UT-15C SR in Patients With Exercise-Induced Pulmonary Hypertension",
+    "official_title": "A 12-Week, Randomized, Dose Response Study of UT-15C (Treprostinil Diethanolamine) SR in Patients With Exercise-Induced Pulmonary Hypertension",
+    "status": "COMPLETED",
+    "last_update": "2016-05-27",
+    "start_date": "2010-04",
+    "completion_date": "2013-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 50,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "United Therapeutics",
+    "conditions": [
+      "Pulmonary Hypertension"
+    ],
+    "interventions": [
+      "UT-15C"
+    ]
+  },
+  "UTHR:Tyvaso:NCT05943535": {
+    "nct_id": "NCT05943535",
+    "title": "Study of the Efficacy and Safety of Inhaled Treprostinil in Subjects With Progressive Pulmonary Fibrosis (TETON-PPF)",
+    "official_title": "A Randomized, Double-blind, Placebo-controlled, Multinational, Phase 3 Study of the Efficacy and Safety of Inhaled Treprostinil in Subjects With Progressive Pulmonary Fibrosis (TETON-PPF)",
+    "status": "RECRUITING",
+    "last_update": "2026-07-13",
+    "start_date": "2023-10-30",
+    "completion_date": "2027-11",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 698,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "United Therapeutics",
+    "conditions": [
+      "Progressive Pulmonary Fibrosis",
+      "Interstitial Lung Disease"
+    ],
+    "interventions": [
+      "Placebo",
+      "Inhaled Treprostinil",
+      "Treprostinil Ultrasonic Nebulizer"
+    ]
+  },
+  "UTHR:Tyvaso:NCT02630316": {
+    "nct_id": "NCT02630316",
+    "title": "Safety and Efficacy of Inhaled Treprostinil in Adult PH With ILD Including CPFE",
+    "official_title": "A Multicenter, Randomized, Double-Blinded, Placebo-Controlled Trial to Evaluate the Safety and Efficacy of Inhaled Treprostinil in Subjects With Pulmonary Hypertension Due to Parenchymal Lung Disease",
+    "status": "COMPLETED",
+    "last_update": "2022-07-27",
+    "start_date": "2017-02-03",
+    "completion_date": "2019-12-26",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2",
+      "PHASE3"
+    ],
+    "enrollment": 326,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "United Therapeutics",
+    "conditions": [
+      "Pulmonary Hypertension",
+      "Interstitial Lung Disease",
+      "Combined Pulmonary Fibrosis and Emphysema"
+    ],
+    "interventions": [
+      "Inhaled Treprostinil",
+      "Placebo"
+    ]
+  },
+  "UTHR:Tyvaso:NCT00494533": {
+    "nct_id": "NCT00494533",
+    "title": "Study of Intravenous Remodulin in Patients in India With Pulmonary Arterial Hypertension",
+    "official_title": "Treprostinil for Untreated Symptomatic PAH Trial: A 12-Week Multicenter Randomized Double-Blind Placebo-Controlled Trial of the Safety and Efficacy of Intravenous Remodulin® in Patients in India With Pulmonary Arterial Hypertension",
+    "status": "TERMINATED",
+    "last_update": "2014-01-29",
+    "start_date": "2005-03",
+    "completion_date": "2005-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE4"
+    ],
+    "enrollment": 45,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "United Therapeutics",
+    "conditions": [
+      "Pulmonary Arterial Hypertension"
+    ],
+    "interventions": [
+      "Remodulin (treprostinil sodium)"
+    ]
+  },
+  "UTHR:Tyvaso DPI:NCT06388421": {
+    "nct_id": "NCT06388421",
+    "title": "DeciPHer-ILD: A Real-world Patient Registry in Group 3 Pulmonary Hypertension Associated With Interstitial Lung Disease (PH-ILD)",
+    "official_title": "DeciPHer-ILD: A Real-world Patient Registry in Group 3 Pulmonary Hypertension Associated With Interstitial Lung Disease (PH-ILD)",
+    "status": "RECRUITING",
+    "last_update": "2026-08-26",
+    "start_date": "2025-01-23",
+    "completion_date": "2030-11-30",
+    "study_type": "OBSERVATIONAL",
+    "phases": [],
+    "enrollment": 900,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "United Therapeutics",
+    "conditions": [
+      "Pulmonary Hypertension Due to Lung Diseases and Hypoxia",
+      "Pulmonary Hypertension",
+      "Interstitial Lung Disease"
+    ],
+    "interventions": [
+      "Prospective study assessments"
+    ]
+  },
+  "UTHR:ralinepag:NCT03626688": {
+    "nct_id": "NCT03626688",
+    "title": "A Study Evaluating the Efficacy and Safety of Ralinepag to Improve Treatment Outcomes in PAH Patients",
+    "official_title": "A Phase 3, Randomized, Double-blind, Placebo-controlled Study to Evaluate the Efficacy and Safety of Ralinepag When Added to PAH Standard of Care or PAH Specific Background Therapy in Subjects With WHO Group 1 PAH",
+    "status": "COMPLETED",
+    "last_update": "2026-06-16",
+    "start_date": "2019-01-24",
+    "completion_date": "2025-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 687,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "United Therapeutics",
+    "conditions": [
+      "PAH",
+      "Pulmonary Hypertension",
+      "Pulmonary Arterial Hypertension",
+      "Hypertension",
+      "Connective Tissue Diseases",
+      "Familial Primary Pulmonary Hypertension",
+      "Vascular Diseases",
+      "Cardiovascular Diseases",
+      "Hypertension, Pulmonary",
+      "Lung Diseases",
+      "Respiratory Tract Disease"
+    ],
+    "interventions": [
+      "Ralinepag",
+      "Placebo"
+    ]
+  },
+  "UTHR:ralinepag:NCT03683186": {
+    "nct_id": "NCT03683186",
+    "title": "A Study Evaluating the Long-Term Efficacy and Safety of Ralinepag in Subjects With PAH Via an Open-Label Extension",
+    "official_title": "A Phase 3 Open-label Extension (OLE) Study to Evaluate the Long-term Safety and Efficacy of Ralinepag in Subjects With World Health Organization (WHO) Group 1 Pulmonary Arterial Hypertension (PAH)",
+    "status": "ENROLLING_BY_INVITATION",
+    "last_update": "2026-02-20",
+    "start_date": "2019-09-23",
+    "completion_date": "2026-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 1000,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "United Therapeutics",
+    "conditions": [
+      "PAH",
+      "Pulmonary Hypertension",
+      "Pulmonary Arterial Hypertension",
+      "Hypertension",
+      "Connective Tissue Diseases",
+      "Familial Primary Pulmonary Hypertension",
+      "Vascular Diseases",
+      "Cardiovascular Diseases",
+      "Hypertension, Pulmonary",
+      "Lung Diseases",
+      "Respiratory Tract Disease"
+    ],
+    "interventions": [
+      "Ralinepag"
+    ]
+  },
+  "UTHR:ralinepag:NCT02279745": {
+    "nct_id": "NCT02279745",
+    "title": "Long-term Safety and Efficacy of Ralinepag in Pulmonary Arterial Hypertension",
+    "official_title": "An Open-label Extension Study of Ralinepag in Patients With Pulmonary Arterial Hypertension",
+    "status": "COMPLETED",
+    "last_update": "2021-12-22",
+    "start_date": "2015-07-08",
+    "completion_date": "2021-03-29",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 45,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "United Therapeutics",
+    "conditions": [
+      "Pulmonary Arterial Hypertension"
+    ],
+    "interventions": [
+      "Ralinepag"
+    ]
+  },
+  "UTHR:ralinepag:NCT04613999": {
+    "nct_id": "NCT04613999",
+    "title": "A Study of Ralinepag in Healthy Chinese Adult Subjects",
+    "official_title": "A Phase 1 Open-label, Non-randomized, Single Ascending Dose Escalation Study To Evaluate The Pharmacokinetics, Safety, And Tolerability Of A Ralinepag Extended Release (XR) Tablet Formulation In Healthy Chinese Subjects",
+    "status": "COMPLETED",
+    "last_update": "2024-02-01",
+    "start_date": "2020-10-09",
+    "completion_date": "2020-11-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 15,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Everstar Medicines (Shanghai) Limited",
+    "conditions": [
+      "Healthy Volunteer",
+      "Pharmacokinetic Study"
+    ],
+    "interventions": [
+      "Ralinepag"
+    ]
+  },
+  "UTHR:ralinepag:NCT04084678": {
+    "nct_id": "NCT04084678",
+    "title": "Study of Ralinepag on Exercise Capacity by Cardiopulmonary Exercise Testing (CPET) in WHO Group 1 PH Subjects",
+    "official_title": "A Phase 3, Randomized, Double-blind, Placebo-controlled Study of Ralinepag to Evaluate Safety and Effects on Exercise Capacity Assessed by CPET in Subjects With WHO Group 1 Pulmonary Hypertension Who Recently Initiated Therapy",
+    "status": "TERMINATED",
+    "last_update": "2026-07-06",
+    "start_date": "2021-01-20",
+    "completion_date": "2023-04-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 10,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "United Therapeutics",
+    "conditions": [
+      "Pulmonary Hypertension",
+      "Pulmonary Arterial Hypertension"
+    ],
+    "interventions": [
+      "Ralinepag",
+      "Placebo"
+    ]
+  },
+  "UTHR:ralinepag:NCT02279160": {
+    "nct_id": "NCT02279160",
+    "title": "Safety and Efficacy of APD811 in Pulmonary Arterial Hypertension",
+    "official_title": "A Randomized, Double-blind, Parallel-group, Placebo-controlled Phase 2 Trial of Ralinepag, an Oral IP Receptor Agonist, in Patients With Pulmonary Arterial Hypertension",
+    "status": "COMPLETED",
+    "last_update": "2020-07-14",
+    "start_date": "2014-12",
+    "completion_date": "2017-06",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 61,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "United Therapeutics",
+    "conditions": [
+      "Pulmonary Arterial Hypertension"
+    ],
+    "interventions": [
+      "APD811",
+      "Placebo"
+    ]
+  },
+  "LONA:lasofoxifene:NCT05696626": {
+    "nct_id": "NCT05696626",
+    "title": "Evaluation of Lasofoxifene Combined With Abemaciclib Compared With Fulvestrant Combined With Abemaciclib in Locally Advanced or Metastatic ER+/HER2- Breast Cancer With an ESR1 Mutation",
+    "official_title": "An Open Label, Randomized, Multicenter Study Comparing the Efficacy and Safety of the Combination of Lasofoxifene and Abemaciclib to the Combination of Fulvestrant and Abemaciclib for the Treatment of Pre- and Postmenopausal Women and Men With Locally Advanced or Metastatic ER+/HER2- Breast Cancer With an ESR1 Mutation",
+    "status": "RECRUITING",
+    "last_update": "2026-06-22",
+    "start_date": "2023-10-31",
+    "completion_date": "2028-04",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 600,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "LeonaBio",
+    "conditions": [
+      "Metastatic Breast Cancer"
+    ],
+    "interventions": [
+      "Lasofoxifene in combination with abemaciclib",
+      "Fulvestrant in combination with abemaciclib"
+    ]
+  },
+  "LONA:lasofoxifene:NCT00143273": {
+    "nct_id": "NCT00143273",
+    "title": "Dose Response Study of Lasofoxifene in Postmenopausal Women With Osteoporosis - Japanese Asian Dose Evaluation",
+    "official_title": "Dose Response Study Of Lasofoxifene In Postmenopausal Women With Osteoporosis (Placebo-Controlled, Multicenter, Double-Blind, Comparative Study) - Japanese Asian Dose Evaluation: JADE",
+    "status": "COMPLETED",
+    "last_update": "2011-08-10",
+    "start_date": "2004-06",
+    "completion_date": "2006-03",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 497,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Ligand Pharmaceuticals",
+    "conditions": [
+      "Osteoporosis"
+    ],
+    "interventions": [
+      "lasofoxifene",
+      "Placebo",
+      "Lasofoxifene",
+      "Lasofoxifene"
+    ]
+  },
+  "LONA:lasofoxifene:NCT01042379": {
+    "nct_id": "NCT01042379",
+    "title": "I-SPY TRIAL: Neoadjuvant and Personalized Adaptive Novel Agents to Treat Breast Cancer",
+    "official_title": "I-SPY Trial (Investigation of Serial Studies to Predict Your Therapeutic Response With Imaging And moLecular Analysis 2)",
+    "status": "RECRUITING",
+    "last_update": "2026-05-06",
+    "start_date": "2010-03-01",
+    "completion_date": "2031-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 5000,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "QuantumLeap Healthcare Collaborative",
+    "conditions": [
+      "Breast Neoplasms",
+      "Breast Cancer",
+      "Breast Tumors",
+      "Angiosarcoma",
+      "TNBC - Triple-Negative Breast Cancer",
+      "HER2-positive Breast Cancer",
+      "HER2-negative Breast Cancer",
+      "Hormone Receptor Positive Tumor",
+      "Hormone Receptor Negative Tumor",
+      "Early-stage Breast Cancer",
+      "Locally Advanced Breast Cancer"
+    ],
+    "interventions": [
+      "Standard Therapy",
+      "AMG 386 with or without Trastuzumab",
+      "AMG 479 (Ganitumab) plus Metformin",
+      "MK-2206 with or without Trastuzumab",
+      "AMG 386 and Trastuzumab",
+      "T-DM1 and Pertuzumab",
+      "Pertuzumab and Trastuzumab",
+      "Ganetespib",
+      "ABT-888",
+      "Neratinib",
+      "PLX3397",
+      "Pembrolizumab - 4 cycle",
+      "Talazoparib plus Irinotecan",
+      "Patritumab and Trastuzumab",
+      "Pembrolizumab - 8 cycle",
+      "SGN-LIV1A",
+      "Durvalumab plus Olaparib",
+      "SD-101 + Pembrolizumab",
+      "Tucatinib plus trastuzumab and pertuzumab",
+      "Cemiplimab",
+      "Cemiplimab plus REGN3767",
+      "Trilaciclib with or without trastuzumab + pertuzumab",
+      "SYD985 ([vic-]trastuzumab duocarmazine)",
+      "Oral Paclitaxel + Encequidar + Dostarlimab (TSR-042) + Carboplatin with or without trastuzumab",
+      "Oral Paclitaxel + Encequidar + Dostarlimab (TSR-042) with or without trastuzumab",
+      "Amcenestrant",
+      "Amcenestrant + Abemaciclib",
+      "Amcenestrant + Letrozole",
+      "ARX788",
+      "ARX788 + Cemiplimab",
+      "VV1 + Cemiplimab",
+      "Datopotamab deruxtecan",
+      "Datopotamab deruxtecan + Durvalumab",
+      "Zanidatamab",
+      "Lasofoxifene",
+      "Z-endoxifen",
+      "ARV-471",
+      "ARV-471 + Letrozole",
+      "ARV-471 + Abemaciclib",
+      "Endoxifen + Abemaciclib",
+      "Rilvegostomig + TDXd",
+      "Dan222 + Niraparib",
+      "Sarilumab + Cemiplimab + Paclitaxel",
+      "GSK 5733584",
+      "GSK 5733584 + Dostarlimab",
+      "Ivonescimab (20mg/kg Q3W)"
+    ]
+  },
+  "LONA:lasofoxifene:NCT00141323": {
+    "nct_id": "NCT00141323",
+    "title": "Postmenopausal Evaluation and Risk-reduction With Lasofoxifene (PEARL)",
+    "official_title": "PEARL: Postmenopausal Evaluation And Risk-Reduction With Lasofoxifene",
+    "status": "COMPLETED",
+    "last_update": "2011-08-15",
+    "start_date": "2001-11",
+    "completion_date": "2007-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 8556,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Ligand Pharmaceuticals",
+    "conditions": [
+      "Osteoporosis"
+    ],
+    "interventions": [
+      "lasofoxifene",
+      "placebo",
+      "lasofoxifene"
+    ]
+  },
+  "LONA:lasofoxifene:NCT00163137": {
+    "nct_id": "NCT00163137",
+    "title": "Comparison of Raloxifene and Lasofoxifene - A Randomized, Blinded Study of These Drugs and Placebo on Bone Loss",
+    "official_title": "Double-Blind Placebo-Controlled Trial Of The Safety, Toleration and Efficacy Of Lasofoxifene 0.25 Mg/D and Raloxifene 60Mg/D For The Prevention Of Bone Loss In Postmenopausal Women",
+    "status": "COMPLETED",
+    "last_update": "2011-08-12",
+    "start_date": "2003-05",
+    "completion_date": "2005-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 540,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Ligand Pharmaceuticals",
+    "conditions": [
+      "Osteoporosis"
+    ],
+    "interventions": [
+      "lasofoxifene",
+      "raloxifene",
+      "Placebo"
+    ]
+  },
+  "LONA:lasofoxifene:NCT03781063": {
+    "nct_id": "NCT03781063",
+    "title": "Evaluation of Lasofoxifene Versus Fulvestrant in Advanced or Metastatic ER+/HER2- Breast Cancer With an ESR1 Mutation",
+    "official_title": "An Open-Label, Randomized, Multicenter Study Evaluating the Activity of Lasofoxifene Relative to Fulvestrant for the Treatment of Pre- and Postmenopausal Women With Locally Advanced or Metastatic ER+/HER2- Breast Cancer With an ESR1 Mutation",
+    "status": "COMPLETED",
+    "last_update": "2026-01-28",
+    "start_date": "2019-09-20",
+    "completion_date": "2025-05-08",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 100,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Sermonix Pharmaceuticals Inc.",
+    "conditions": [
+      "Locally Advanced or Metastatic Breast Cancer"
+    ],
+    "interventions": [
+      "Lasofoxifene",
+      "Fulvestrant"
+    ]
+  },
+  "LONA:lasofoxifene:NCT06197568": {
+    "nct_id": "NCT06197568",
+    "title": "Proof of Concept Study of Vaginal AZU-101 in Vulvovaginal Atrophy in Postmenopausal Women",
+    "official_title": "A Double-blind, Randomized, Placebo-controlled Proof oF Concept Clinical Study to Evaluate the Safety, Pharmacokinetics, AND Pharmacodynamics of Vaginal AZU-101 (Lasofoxifene Tartrate) in Postmenopausal Women",
+    "status": "RECRUITING",
+    "last_update": "2026-05-22",
+    "start_date": "2026-06-01",
+    "completion_date": "2027-06-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 90,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Azure Biotech Inc.",
+    "conditions": [
+      "Vulvo Vaginal Atrophy (VVA)"
+    ],
+    "interventions": [
+      "Lasofoxifene Tartrate"
+    ]
+  },
+  "LONA:lasofoxifene:NCT04432454": {
+    "nct_id": "NCT04432454",
+    "title": "Evaluation of Lasofoxifene Combined With Abemaciclib in Advanced or Metastatic ER+/HER2- Breast Cancer With an ESR1 Mutation",
+    "official_title": "An Open-label, Multicenter Study Evaluating the Safety of Lasofoxifene in Combination With Abemaciclib for the Treatment of Pre- and Postmenopausal Women With Locally Advanced or Metastatic ER+/HER2- Breast Cancer and Have an ESR1 Mutation ( ELAINEII )",
+    "status": "COMPLETED",
+    "last_update": "2025-02-13",
+    "start_date": "2020-09-29",
+    "completion_date": "2025-01-28",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 29,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Sermonix Pharmaceuticals Inc.",
+    "conditions": [
+      "Metastatic Breast Cancer"
+    ],
+    "interventions": [
+      "Lasofoxifene and abemaciclib (VERZENIO (R))."
+    ]
+  },
+  "LONA:lasofoxifene:NCT00674453": {
+    "nct_id": "NCT00674453",
+    "title": "The Prevention Of Postmenopausal Osteoporosis With Lasofoxifene And Cytokine Evaluation",
+    "official_title": "The Effect Of Lasofoxifene On Local Mediators Of Bone Resorption In The Prevention Of Postmenopausal Osteoporosis",
+    "status": "COMPLETED",
+    "last_update": "2011-08-10",
+    "start_date": "2004-09",
+    "completion_date": "2007-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 51,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Ligand Pharmaceuticals",
+    "conditions": [
+      "Bone Loss"
+    ],
+    "interventions": [
+      "Lasofoxifene",
+      "Placebo"
+    ]
+  },
+  "MNKD:Furoscix:NCT05528588": {
+    "nct_id": "NCT05528588",
+    "title": "Furoscix in Heart Failure Patients With Diuretic Resistance",
+    "official_title": "Efficacy of Furoscix in Heart Failure Patients With Diuretic Resistance",
+    "status": "COMPLETED",
+    "last_update": "2025-07-16",
+    "start_date": "2023-06-02",
+    "completion_date": "2024-07-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 70,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "University of Texas Southwestern Medical Center",
+    "conditions": [
+      "Heart Failure"
+    ],
+    "interventions": [
+      "Furoscix",
+      "Diuretic Therapy"
+    ]
+  },
+  "MNKD:Furoscix:NCT04593823": {
+    "nct_id": "NCT04593823",
+    "title": "Avoiding Treatment in the Hospital With Furoscix for the Management of Congestion in Heart Failure - A Pilot Study",
+    "official_title": "A Multicenter, Randomized, Open Label, Controlled Study Evaluating the Effectiveness and Safety of Furoscix On-Body Infusor vs Continued Medical Therapy for Worsening Heart Failure",
+    "status": "COMPLETED",
+    "last_update": "2023-08-01",
+    "start_date": "2021-05-03",
+    "completion_date": "2022-04-18",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 63,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "scPharmaceuticals, Inc.",
+    "conditions": [
+      "Heart Failure"
+    ],
+    "interventions": [
+      "Furoscix Infusor"
+    ]
+  },
+  "MNKD:Furoscix:NCT04161482": {
+    "nct_id": "NCT04161482",
+    "title": "An Open Label Study to Evaluate the Impact of Duration of Subcutaneous Infusion of a Novel, pH Neutral Formulation of Furosemide (Furoscix®) on Safety and Local Skin Tolerability",
+    "official_title": "An Open Label Study to Evaluate the Impact of Duration of Subcutaneous Infusion of a Novel, pH Neutral Formulation of Furosemide (Furoscix®) on Safety and Local Skin Tolerability",
+    "status": "COMPLETED",
+    "last_update": "2020-07-10",
+    "start_date": "2019-12-02",
+    "completion_date": "2020-06-26",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 39,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "scPharmaceuticals, Inc.",
+    "conditions": [
+      "Healthy"
+    ],
+    "interventions": [
+      "Furosemide 80 mg (8 mg/mL)"
+    ]
+  },
+  "MNKD:Furoscix:NCT03458325": {
+    "nct_id": "NCT03458325",
+    "title": "Furoscix Real-World Evaluation for Decreasing Hospital Admissions in Heart Failure",
+    "official_title": "Economic Impact of Reducing Hospital Admissions for Patients Presenting to the Emergency Department With Worsening Heart Failure: An Adaptive Clinical Trial of Furoscix Infusor",
+    "status": "COMPLETED",
+    "last_update": "2023-02-24",
+    "start_date": "2020-11-12",
+    "completion_date": "2021-06-24",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 27,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "scPharmaceuticals, Inc.",
+    "conditions": [
+      "Heart Failure"
+    ],
+    "interventions": [
+      "Furoscix Infusor"
+    ]
+  },
+  "PMVP:rezatapopt:NCT06362642": {
+    "nct_id": "NCT06362642",
+    "title": "A Study to Investigate the Effects of Itraconazole on the Pharmacokinetics of PC14586 in Healthy Participants",
+    "official_title": "A Phase 1, Open-label, Fixed-sequence Study to Investigate the Effect of Coadministration of Itraconazole on the Pharmacokinetics of PC14586 in Healthy Participants",
+    "status": "COMPLETED",
+    "last_update": "2024-11-13",
+    "start_date": "2024-03-28",
+    "completion_date": "2024-10-22",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 12,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "PMV Pharmaceuticals, Inc",
+    "conditions": [
+      "Healthy Volunteers"
+    ],
+    "interventions": [
+      "PC14586",
+      "Itraconazole"
+    ]
+  },
+  "PMVP:rezatapopt:NCT04585750": {
+    "nct_id": "NCT04585750",
+    "title": "The Evaluation of PC14586 in Patients With Advanced Solid Tumors Harboring a TP53 Y220C Mutation (PYNNACLE)",
+    "official_title": "A Phase 1/2 Open-label, Multicenter Study to Assess the Safety, Tolerability, Pharmacokinetics, Pharmacodynamics, and Efficacy of PC14586 in Patients With Locally Advanced or Metastatic Solid Tumors Harboring a TP53 Y220C Mutation (PYNNACLE)",
+    "status": "RECRUITING",
+    "last_update": "2026-09-15",
+    "start_date": "2020-10-29",
+    "completion_date": "2027-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 300,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "PMV Pharmaceuticals, Inc",
+    "conditions": [
+      "Advanced Solid Tumor",
+      "Advanced Malignant Neoplasm",
+      "Metastatic Cancer",
+      "Metastatic Solid Tumor",
+      "Lung Cancer",
+      "Ovarian Cancer",
+      "Endometrial Cancer",
+      "Prostate Cancer",
+      "Colorectal Cancer",
+      "Breast Cancer",
+      "Other Cancer",
+      "Locally Advanced",
+      "Head and Neck Cancer",
+      "Gall Bladder Cancer",
+      "Small Cell Lung Cancer",
+      "Small Cell Lung Cancer ( SCLC )",
+      "Small Cell Lung Carcinoma",
+      "NSCLC",
+      "NSCLC (Non-small Cell Lung Cancer)",
+      "SCLC",
+      "Non-Small Cell Lung Carcinoma",
+      "Triple Negative Breast Cancer",
+      "TNBC",
+      "HER2+ Breast Cancer",
+      "Non-Small Cell Lung Cancer",
+      "ER/PR Positive Breast Cancer",
+      "HER2- Breast Cancer",
+      "HER2-positive Breast Cancer",
+      "HER2-negative Breast Cancer",
+      "ER/PR(+), Her2(-) Breast Cancer"
+    ],
+    "interventions": [
+      "rezatapopt",
+      "pembrolizumab"
+    ]
+  },
+  "PMVP:rezatapopt:NCT06616636": {
+    "nct_id": "NCT06616636",
+    "title": "A Phase Ib Study of Rezatapopt in Combination With Azacitidine in Patients With TP53Y220C Mutant Myeloid Malignancies (Acute Myeloid Leukemia or Myelodysplastic Syndrome)",
+    "official_title": "A Phase Ib Study of Rezatapopt in Combination With Azacitidine in Patients With TP53Y220C Mutant Myeloid Malignancies (Acute Myeloid Leukemia or Myelodysplastic Syndrome)",
+    "status": "RECRUITING",
+    "last_update": "2026-09-11",
+    "start_date": "2025-01-30",
+    "completion_date": "2029-08-27",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 24,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "M.D. Anderson Cancer Center",
+    "conditions": [
+      "Myelodysplastic Syndrome",
+      "Acute Myeloid Leukemia"
+    ],
+    "interventions": [
+      "Azacitidine",
+      "Rezatapopt"
+    ]
+  },
+  "PMVP:rezatapopt:NCT07372625": {
+    "nct_id": "NCT07372625",
+    "title": "A Study to Investigate the Effects of Multiple Doses of Rezatapopt on the Pharmacokinetics of Metformin, Rosuvastatin, Repaglinide, and Midazolam in Patients With Advanced Solid Tumors Harboring a TP53 Y220C Mutation.",
+    "official_title": "A Phase 1, Open-label, 2-part, Drug-Drug Interaction Study to Evaluate the Effects of Multiple Oral Doses of Rezatapopt on the Pharmacokinetics of Metformin, Rosuvastatin, Repaglinide, and Midazolam in Patients With Advanced Solid Tumors Harboring a TP53 Y220C Mutation.",
+    "status": "RECRUITING",
+    "last_update": "2026-08-12",
+    "start_date": "2026-02-04",
+    "completion_date": "2028-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 14,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "PMV Pharmaceuticals, Inc",
+    "conditions": [
+      "TP53 Y220C Mutation",
+      "Advanced Solid Tumors"
+    ],
+    "interventions": [
+      "metformin hydrochloride 500 mg tablet",
+      "rosuvastatin 10 mg tablet",
+      "repaglinide 0.5 mg tablet",
+      "midazolam hydrochloride syrup",
+      "rezatapopt"
+    ]
+  },
+  "PMVP:PYNNACLE:NCT04585750": {
+    "nct_id": "NCT04585750",
+    "title": "The Evaluation of PC14586 in Patients With Advanced Solid Tumors Harboring a TP53 Y220C Mutation (PYNNACLE)",
+    "official_title": "A Phase 1/2 Open-label, Multicenter Study to Assess the Safety, Tolerability, Pharmacokinetics, Pharmacodynamics, and Efficacy of PC14586 in Patients With Locally Advanced or Metastatic Solid Tumors Harboring a TP53 Y220C Mutation (PYNNACLE)",
+    "status": "RECRUITING",
+    "last_update": "2026-09-15",
+    "start_date": "2020-10-29",
+    "completion_date": "2027-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 300,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "PMV Pharmaceuticals, Inc",
+    "conditions": [
+      "Advanced Solid Tumor",
+      "Advanced Malignant Neoplasm",
+      "Metastatic Cancer",
+      "Metastatic Solid Tumor",
+      "Lung Cancer",
+      "Ovarian Cancer",
+      "Endometrial Cancer",
+      "Prostate Cancer",
+      "Colorectal Cancer",
+      "Breast Cancer",
+      "Other Cancer",
+      "Locally Advanced",
+      "Head and Neck Cancer",
+      "Gall Bladder Cancer",
+      "Small Cell Lung Cancer",
+      "Small Cell Lung Cancer ( SCLC )",
+      "Small Cell Lung Carcinoma",
+      "NSCLC",
+      "NSCLC (Non-small Cell Lung Cancer)",
+      "SCLC",
+      "Non-Small Cell Lung Carcinoma",
+      "Triple Negative Breast Cancer",
+      "TNBC",
+      "HER2+ Breast Cancer",
+      "Non-Small Cell Lung Cancer",
+      "ER/PR Positive Breast Cancer",
+      "HER2- Breast Cancer",
+      "HER2-positive Breast Cancer",
+      "HER2-negative Breast Cancer",
+      "ER/PR(+), Her2(-) Breast Cancer"
+    ],
+    "interventions": [
+      "rezatapopt",
+      "pembrolizumab"
+    ]
   }
 }
