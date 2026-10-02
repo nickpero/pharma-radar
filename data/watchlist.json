@@ -416,5 +416,88 @@
       "Nautilus Biotechnology"
     ],
     "radar_role": "MARKET_MOVE_WATCH_UNEXPLAINED"
+  },
+  "GLUE": {
+    "company": "Monte Rosa Therapeutics",
+    "programs": [
+      "MRT-8102",
+      "GFORCE-1",
+      "GFORCE-2",
+      "MRT-6160",
+      "MRT-2359"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Monte Rosa Therapeutics",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "UTHR": {
+    "company": "United Therapeutics",
+    "programs": [
+      "Tyvaso",
+      "Tyvaso DPI",
+      "Yutrepia litigation",
+      "ralinepag"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "United Therapeutics",
+      "Court"
+    ],
+    "radar_role": "STRATEGIC_REGULATORY_COMMERCIAL_CATALYST"
+  },
+  "LONA": {
+    "company": "LeonaBio",
+    "programs": [
+      "lasofoxifene",
+      "ELAINE-3"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "LeonaBio",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_MILESTONE_WATCH"
+  },
+  "MNKD": {
+    "company": "MannKind",
+    "programs": [
+      "Afrezza",
+      "Furoscix",
+      "Furoscix ReadyFlow",
+      "V-Go",
+      "Tyvaso partnership"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "MannKind",
+      "United Therapeutics"
+    ],
+    "radar_role": "COMMERCIAL_CATALYST_WATCH"
+  },
+  "PMVP": {
+    "company": "PMV Pharmaceuticals",
+    "programs": [
+      "rezatapopt",
+      "PYNNACLE"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "PMV Pharmaceuticals",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_CATALYST_WATCH"
   }
 }
