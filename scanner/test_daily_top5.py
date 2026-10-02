@@ -117,3 +117,41 @@ def test_market_structure_move_is_separate_from_pharma_catalyst():
 def test_regulatory_watch_without_same_day_catalyst_is_not_falsely_alerted():
     meta = {"company": "GRAIL", "radar_role": "REGULATORY_CATALYST_WATCH"}
     assert _classify_row(None, meta) == "WATCHLIST_CONTEXT_NO_NEW_CATALYST"
+
+
+def test_same_day_secondary_catalyst_is_quality_gated():
+    watchlist = {"ABC": {"company": "ABC Pharma", "programs": []}}
+    history = {"x": {
+        "ticker": "ABC",
+        "event_timestamp": "2026-09-29T12:00:00+00:00",
+        "subtype": "FDA_APPROVAL",
+        "program": "drug",
+        "source": "REUTERS",
+        "alert_priority": 100,
+    }}
+    rows = build_daily_top5(
+        watchlist=watchlist, history=history,
+        snapshot_fn=lambda ticker: snapshot(20.0, 3.0),
+        date_value="2026-09-29",
+    )
+    assert rows[0]["alert_quality_gate"]["eligible"] is False
+    assert rows[0]["alert_quality_gate"]["reason"] == "PRIMARY_SOURCE_NOT_VERIFIED"
+
+
+def test_same_day_primary_catalyst_passes_quality_gate():
+    watchlist = {"ABC": {"company": "ABC Pharma", "programs": []}}
+    history = {"x": {
+        "ticker": "ABC",
+        "event_timestamp": "2026-09-29T12:00:00+00:00",
+        "subtype": "FDA_APPROVAL",
+        "program": "drug",
+        "source": "FDA",
+        "source_type": "PRIMARY_REGULATORY",
+        "alert_priority": 100,
+    }}
+    rows = build_daily_top5(
+        watchlist=watchlist, history=history,
+        snapshot_fn=lambda ticker: snapshot(20.0, 3.0),
+        date_value="2026-09-29",
+    )
+    assert rows[0]["alert_quality_gate"]["eligible"] is True
