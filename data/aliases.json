@@ -492,5 +492,94 @@
         "Early Access Program"
       ]
     }
+  },
+  "GLUE": {
+    "company_aliases": [
+      "Monte Rosa Therapeutics",
+      "Monte Rosa Therapeutics, Inc."
+    ],
+    "program_aliases": {
+      "MRT-8102": [
+        "MRT-8102",
+        "GFORCE-1"
+      ],
+      "MRT-6160": [
+        "MRT-6160",
+        "DDY391"
+      ],
+      "MRT-2359": [
+        "MRT-2359",
+        "MODeFIRe-1"
+      ]
+    }
+  },
+  "UTHR": {
+    "company_aliases": [
+      "United Therapeutics",
+      "United Therapeutics Corporation"
+    ],
+    "program_aliases": {
+      "Tyvaso": [
+        "Tyvaso",
+        "TYVASO"
+      ],
+      "Tyvaso DPI": [
+        "Tyvaso DPI",
+        "TYVASO DPI"
+      ],
+      "ralinepag": [
+        "ralinepag"
+      ],
+      "Yutrepia": [
+        "Yutrepia",
+        "Liquidia"
+      ]
+    }
+  },
+  "LONA": {
+    "company_aliases": [
+      "LeonaBio",
+      "LeonaBio, Inc."
+    ],
+    "program_aliases": {
+      "lasofoxifene": [
+        "lasofoxifene"
+      ],
+      "ELAINE-3": [
+        "ELAINE-3"
+      ]
+    }
+  },
+  "MNKD": {
+    "company_aliases": [
+      "MannKind",
+      "MannKind Corporation"
+    ],
+    "program_aliases": {
+      "Afrezza": [
+        "Afrezza"
+      ],
+      "Furoscix": [
+        "Furoscix",
+        "Furoscix ReadyFlow"
+      ],
+      "V-Go": [
+        "V-Go"
+      ]
+    }
+  },
+  "PMVP": {
+    "company_aliases": [
+      "PMV Pharmaceuticals",
+      "PMV Pharmaceuticals, Inc."
+    ],
+    "program_aliases": {
+      "rezatapopt": [
+        "rezatapopt"
+      ],
+      "PYNNACLE": [
+        "PYNNACLE"
+      ]
+    }
   }
 }
