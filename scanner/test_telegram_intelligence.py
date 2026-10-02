@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from scanner.telegram_intelligence import alert_action, select_intelligent_alerts
 from scanner.telegram import format_catalyst_alert
 
@@ -76,7 +77,7 @@ def test_different_headlines_remain_separate_events():
 
 
 
-def test_stale_high_priority_catalyst_is_not_silenced():
+def test_stale_high_priority_catalyst_is_silenced_by_quality_gate():
     alert = _alert("IONS", 100, 40, "CRITICAL")
     alert["source"] = "SEC"
     alert["published_at"] = "2026-09-20T00:00:00Z"
