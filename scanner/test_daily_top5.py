@@ -107,3 +107,13 @@ def test_regulatory_patent_catalyst_is_fundamental():
 def test_clinical_milestone_is_watch():
     c = {"subtype": "CLINICAL_MILESTONE", "source": "COMPANY", "ticker": "LONA"}
     assert _classify_row(c) == "DEVELOPMENT_MILESTONE_WATCH"
+
+
+def test_market_structure_move_is_separate_from_pharma_catalyst():
+    meta = {"company": "Moderna", "radar_role": "MARKET_STRUCTURE_WATCH"}
+    assert _classify_row(None, meta) == "TECHNICAL_OR_INDEX_FLOW"
+
+
+def test_regulatory_watch_without_same_day_catalyst_is_not_falsely_alerted():
+    meta = {"company": "GRAIL", "radar_role": "REGULATORY_CATALYST_WATCH"}
+    assert _classify_row(None, meta) == "WATCHLIST_CONTEXT_NO_NEW_CATALYST"
