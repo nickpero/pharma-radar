@@ -1,4 +1,4 @@
-"""Pharma Radar — unified EMA + SEC catalyst pipeline."""
+"""Pharma Radar — unified early discovery + EMA + SEC catalyst pipeline."""
 from __future__ import annotations
 
 from scanner.fda_matcher import identify_fda_target
@@ -6,7 +6,8 @@ from scanner.fda_catalyst import build_fda_catalyst
 from scanner.fda_score import score_fda_event
 from scanner.trading_intelligence import enrich_trading_event
 from scanner.priority import enrich_alert_priority, sort_by_alert_priority
-from scanner.ema_feed import get_ema_news\nfrom scanner.early_discovery_feed import get_early_news
+from scanner.ema_feed import get_ema_news
+from scanner.early_discovery_feed import get_early_news
 from scanner.sec_feed import get_sec_news
 from scanner.clinical_impact import enrich_clinical_impact
 
@@ -32,14 +33,24 @@ def _process_item(item, watchlist):
         "title": item.get("title", ""),
         "summary": item.get("summary", ""),
         "content": item.get("content", ""),
-        "published_at": item.get("published_at"),\n        "first_published_at": item.get("first_published_at") or item.get("published_at"),\n        "event_date": item.get("event_date") or item.get("published_at"),\n        "early_discovery": bool(item.get("early_discovery")),\n        "provider": item.get("provider"),
+        "published_at": item.get("published_at"),
+        "first_published_at": item.get("first_published_at") or item.get("published_at"),
+        "event_date": item.get("event_date") or item.get("published_at"),
+        "early_discovery": bool(item.get("early_discovery")),
+        "provider": item.get("provider"),
     })
     event = enrich_clinical_impact(event)
     scored = score_fda_event(event)
     trading = enrich_trading_event(scored)
     trading = enrich_alert_priority(trading)
     trading["pipeline"] = item.get("source", "REGULATORY")
-    trading["pipeline_stage"] = "TRADING_INTELLIGENCE"\n    event_date = trading.get("event_date") or trading.get("published_at")\n    trading["event_key"] = "|".join(str(value or "UNKNOWN").strip().lower() for value in (\n        trading.get("ticker"), trading.get("program"), trading.get("subtype"), str(event_date)[:10]\n    ))
+    trading["pipeline_stage"] = "TRADING_INTELLIGENCE"
+
+    event_date = trading.get("event_date") or trading.get("published_at")
+    subtype = str(trading.get("subtype") or "UNKNOWN").strip().lower()
+    trading["event_key"] = "|".join(str(value or "UNKNOWN").strip().lower() for value in (
+        trading.get("ticker"), trading.get("program"), subtype, str(event_date)[:10]
+    ))
     return trading
 
 
@@ -50,7 +61,7 @@ def process_regulatory_news(items, watchlist):
         event = _process_item(item, watchlist)
         if event is None:
             continue
-        fingerprint = (
+        fingerprint = event.get("event_key") or (
             event.get("ticker"),
             event.get("program"),
             event.get("subtype"),
@@ -65,12 +76,14 @@ def process_regulatory_news(items, watchlist):
 
 
 def scan_regulatory_sources(watchlist, ema_max=50, sec_per_company=3):
+    early_news = get_early_news(watchlist)
     ema_news = get_ema_news(max_items=ema_max)
     sec_news = get_sec_news(watchlist, max_filings_per_company=sec_per_company)
-    all_news = ema_news + sec_news
+    all_news = early_news + ema_news + sec_news
     events = process_regulatory_news(all_news, watchlist)
     return {
-        "early_news": early_news,\n        "ema_news": ema_news,
+        "early_news": early_news,
+        "ema_news": ema_news,
         "sec_news": sec_news,
         "news": all_news,
         "events": events,
