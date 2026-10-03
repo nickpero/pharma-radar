@@ -33,7 +33,7 @@ CATALYST_HINTS = (
 
 def _clean(value):
     value = html.unescape(str(value or ""))
-    return re.sub(r"\\s+", " ", value).strip()
+    return re.sub(r"\s+", " ", value).strip()
 
 
 def _published_at(value):
