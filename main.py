@@ -6,7 +6,7 @@ from scanner.trial_scanner import scan
 from scanner.trading_intelligence_score import enrich_trading_intelligence_scores
 from scanner.trading_intelligence_rule import enrich_trading_intelligence_rules
 from scanner.catalyst_memory import record_events
-from scanner.telegram import send_telegram, send_catalyst_alerts, send_divergence_alerts
+from scanner.telegram import send_telegram, send_catalyst_alerts, format_catalyst_alert, send_divergence_alerts
 from scanner.telegram_intelligence import select_intelligent_alerts, _dedup_key
 from scanner.alert_state import load_sent_alerts, save_sent_alerts, filter_unsent, mark_sent
 from scanner.pharma_email import send_pharma_intelligence_emails
@@ -107,7 +107,14 @@ def send_alerts(result, alerts=None):
     alerts = _new_telegram_alerts(result) if alerts is None else alerts
     if not alerts:
         return []
-    responses = send_catalyst_alerts(alerts)
+    # One Telegram delivery per scan, containing all new catalyst alerts.
+    # The scan summary is kept for Actions/logs and is not sent separately.
+    message = "
+
+──────────────
+
+".join(format_catalyst_alert(alert) for alert in alerts)
+    responses = [send_telegram(message)]
     state = load_sent_alerts()
     timestamp = datetime.now(timezone.utc).isoformat()
     mark_sent(alerts, state, lambda alert: repr(_dedup_key(alert)), timestamp)
@@ -201,10 +208,8 @@ def main():
     record_events(result["alerts"])
     new_alerts = _new_telegram_alerts(result)
     if new_alerts:
-        summary = build_summary(result, intelligent_alerts=new_alerts)
         print()
-        print(summary)
-        send_telegram(summary)
+        print(build_summary(result, intelligent_alerts=new_alerts))
 
     divergence_sent = send_divergence_alerts_once(result)
     print(f"Telegram divergence alerts sent: {len(divergence_sent)}")
