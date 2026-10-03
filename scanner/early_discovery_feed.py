@@ -21,6 +21,21 @@ REQUEST_TIMEOUT = 15
 BATCH_SIZE = 10
 MAX_ITEMS_PER_FEED = 30
 MAX_AGE_HOURS = 24
+# Fast discovery is deliberately broader than Google News alone. The query
+# asks Google News to surface company releases carried by major distributors
+# and specialist biotech publications, while primary sources remain the
+# confirmation layer.
+DISCOVERY_DOMAINS = (
+    "globenewswire.com", "businesswire.com", "prnewswire.com",
+    "biospace.com", "fiercebiotech.com",
+)
+DOMAIN_LABELS = {
+    "globenewswire.com": ("GlobeNewswire", "TRUSTED_DISTRIBUTION"),
+    "businesswire.com": ("Business Wire", "TRUSTED_DISTRIBUTION"),
+    "prnewswire.com": ("PR Newswire", "TRUSTED_DISTRIBUTION"),
+    "biospace.com": ("BioSpace", "SPECIALIST"),
+    "fiercebiotech.com": ("Fierce Biotech", "SPECIALIST"),
+}
 USER_AGENT = "PharmaRadar/1.0 (GitHub Actions; early discovery)"
 CATALYST_HINTS = (
     "approval", "approved", "fda", "phase", "trial", "data", "results",
@@ -62,9 +77,11 @@ def _query(batch):
             clauses.append(f'"{company}"')
         if ticker:
             clauses.append(ticker)
-    # Google News supports a custom-search RSS endpoint; OR keeps the request
-    # bounded while covering a batch of watchlist companies.
-    return " OR ".join(clauses)
+    # Keep one bounded request per company batch. Domain restrictions increase
+    # source diversity without multiplying HTTP requests for every provider.
+    company_clause = " OR ".join(clauses)
+    domain_clause = " OR ".join(f"site:{domain}" for domain in DISCOVERY_DOMAINS)
+    return f"({company_clause}) ({domain_clause})"
 
 
 def _feed_url(query):
@@ -74,6 +91,17 @@ def _feed_url(query):
 def _entry_value(entry, tag):
     node = entry.find(tag)
     return node.text if node is not None else ""
+
+
+def _source_info(entry, url):
+    node = entry.find("source")
+    source_name = _clean(node.text) if node is not None else ""
+    source_url = _clean(node.get("url")) if node is not None else ""
+    haystack = f"{source_url} {url}".lower()
+    for domain, metadata in DOMAIN_LABELS.items():
+        if domain in haystack:
+            return metadata
+    return (source_name or "Google News", "DISCOVERY")
 
 
 def _matches_watchlist(text, ticker, company):
@@ -96,6 +124,7 @@ def _parse_feed(xml_text, batch):
         summary = _clean(_entry_value(item, "description"))
         url = _clean(_entry_value(item, "link"))
         published = _published_at(_entry_value(item, "pubDate"))
+        provider, source_type = _source_info(item, url)
         if not title or not published or not url:
             continue
         for ticker, company in batch:
@@ -110,8 +139,9 @@ def _parse_feed(xml_text, batch):
             raw_id = f"{ticker}|{company}|{url}|{published}"
             rows.append({
                 "source": "EARLY_DISCOVERY",
-                "source_type": "SECONDARY_DISCOVERY",
-                "provider": "Google News RSS",
+                "source_type": source_type,
+                "provider": provider,
+                "source_reliability": "TRUSTED_DISTRIBUTION" if source_type == "TRUSTED_DISTRIBUTION" else ("SPECIALIST" if source_type == "SPECIALIST" else "DISCOVERY"),
                 "ticker": ticker,
                 "company": company,
                 "title": title,
