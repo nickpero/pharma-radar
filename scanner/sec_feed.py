@@ -234,7 +234,7 @@ def _item_context(items):
 
 
 def build_sec_item(ticker, company, cik, accession, form, filing_date, primary_doc="", items=None,
-                   text="", title=None, url=None, detected_items=None, suspected_buried_events=None):
+                   text="", title=None, url=None, detected_items=None, suspected_buried_events=None, event_date=None):
     items = list(items or [])
     detected_items = list(detected_items or [])
     suspected_buried_events = suspected_buried_events or {}
@@ -250,6 +250,7 @@ def build_sec_item(ticker, company, cik, accession, form, filing_date, primary_d
             "title": title or f"SEC {form} — {company} ({ticker})",
             "summary": f"SEC filing {form}; items: {', '.join(items or detected_items)}",
             "content": content, "url": url, "published_at": filing_date,
+            "event_date": event_date or filing_date, "first_published_at": event_date or filing_date,
             "item_id": hashlib.sha256(raw.encode("utf-8")).hexdigest()}
 
 
@@ -298,6 +299,14 @@ def _extract_filing_date(text):
     return match.group(1) if match else ""
 
 
+def _extract_event_date(text, fallback=""):
+    match = re.search(r"Date of Report \(Date of earliest event reported\):\s*(\d{4}-\d{2}-\d{2})", text or "", flags=re.I)
+    if match:
+        return match.group(1)
+    match = re.search(r"Period of Report\s+(\d{4}-\d{2}-\d{2})", text or "", flags=re.I)
+    return match.group(1) if match else fallback
+
+
 def _discover_company_filings(ticker, company, cik, max_filings=DISCOVERY_MAX_FILINGS):
     try:
         browse_text = _get_jina_text(_browse_company_url(cik, count=max(10, max_filings * 4)))
@@ -317,7 +326,8 @@ def _discover_company_filings(ticker, company, cik, max_filings=DISCOVERY_MAX_FI
             results.append(build_sec_item(ticker, company, cik, accession, "8-K", filing_date,
                                           primary_doc, items, text,
                                           title=f"SEC 8-K — {company} ({ticker})",
-                                          url=content_url or _filing_url(cik, accession, primary_doc)))
+                                          url=content_url or _filing_url(cik, accession, primary_doc),
+                                          event_date=_extract_event_date(text, filing_date)))
         print(f"SEC DISCOVERY FOUND: ticker={ticker} filings={len(results)}", flush=True)
         return results
     except (requests.RequestException, ValueError, TypeError) as exc:
