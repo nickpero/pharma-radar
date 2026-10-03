@@ -136,6 +136,24 @@ def test_generic_approval_word_never_creates_fda_approval():
     assert result["catalyst_type"] != "APPROVAL"
 
 
+def test_sec_vbio_entolimod_formulation_is_not_fda_approval():
+    event = build_fda_catalyst({
+        "source": "SEC",
+        "source_type": "PRIMARY_CORPORATE",
+        "form": "8-K",
+        "title": "SEC 8-K — Valion Bio (VBIO)",
+        "summary": "Completion of formulation work to develop a novel oral mucosal formulation of Entolimod.",
+        "content": (
+            "On September 30, 2026, Valion Bio announced completion of formulation work. "
+            "If further studies demonstrate effective delivery and the product receives appropriate "
+            "authorization or approval, a needle-free formulation could expand deployment. "
+            "Entolimod is investigational and has received Fast Track and Orphan Drug designations."
+        ),
+        "categories": [],
+    })
+    assert event["subtype"] != "FDA_APPROVAL"
+
+
 def test_explicit_fda_approval_still_classifies_as_approval():
     result = classify("FDA approves new therapy for adults")
     assert result["catalyst_type"] == "APPROVAL"
