@@ -4,7 +4,10 @@ import re
 from datetime import datetime, timezone
 
 MAX_NEW_NEWS_AGE_HOURS = 24
+# Telegram actionable alerts are intentionally limited to the last 24h.
+# 24-72h events remain useful internally but must not fire a new actionable alert.
 MAX_CATALYST_ALERT_AGE_HOURS = 72
+MAX_TELEGRAM_ACTIONABLE_AGE_HOURS = 24
 
 _PRIMARY_SOURCES = {"SEC", "FDA", "FDA RSS", "CLINICALTRIALS", "COMPANY", "COMPANY IR", "COURT", "EMA", "EU CTIS"}
 
@@ -62,6 +65,8 @@ def alert_quality_gate(alert, now=None):
     primary = primary_source_verified(alert)
     if _is_expired(alert):
         return {"eligible": False, "reason": "EXPIRED", "freshness": freshness, "primary_source": primary}
+    if freshness == "REACTION_24_72H":
+        return {"eligible": False, "reason": "NOT_NEW_24H", "freshness": freshness, "primary_source": primary}
     if freshness == "HISTORICAL_GT_72H":
         return {"eligible": False, "reason": "HISTORICAL_GT_72H", "freshness": freshness, "primary_source": primary}
     if not primary:
@@ -150,6 +155,7 @@ def _event_identity(alert):
     return (
         _normalise_text(alert.get("ticker") or event.get("ticker") or "UNKNOWN").upper(),
         _normalise_text(alert.get("program") or event.get("program") or "UNKNOWN"),
+        _normalise_text(alert.get("subtype") or event.get("subtype") or "UNKNOWN").upper(),
         identity,
         "POST_SPIKE_WATCH" if alert.get("post_spike_watch") is True else "CATALYST",
     )
