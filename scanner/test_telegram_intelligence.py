@@ -185,3 +185,39 @@ if __name__ == "__main__":
     test_telegram_shows_confirmation_only_as_one_line()
     test_telegram_shows_confirmed_confirmation_compactly()
     print("✅ Telegram intelligence tests passed")
+
+
+def test_early_discovery_is_deliverable_with_freshness():
+    alert = _alert("VBIO", 90, 60, "HIGH")
+    alert.update({
+        "source": "EARLY_DISCOVERY",
+        "source_type": "SECONDARY_DISCOVERY",
+        "early_discovery": True,
+        "published_at": datetime.now(timezone.utc).isoformat(),
+    })
+    assert alert_action(alert) == "FAST"
+
+
+def test_early_and_sec_confirmation_share_event_key():
+    early = _alert("VBIO", 100, 54, "CRITICAL")
+    sec = _alert("VBIO", 100, 54, "CRITICAL")
+    early.update({
+        "program": "Entolimod",
+        "subtype": "DEVELOPMENT_MILESTONE",
+        "event_key": "vbio|entolimod|development_milestone|2026-09-30",
+        "early_discovery": True,
+        "source": "EARLY_DISCOVERY",
+        "published_at": "2026-09-30T14:00:00Z",
+    })
+    sec.update({
+        "program": "SEC",
+        "subtype": "DEVELOPMENT_MILESTONE",
+        "event_key": "vbio|entolimod|development_milestone|2026-09-30",
+        "source": "SEC",
+        "source_type": "PRIMARY_CORPORATE",
+        "event_date": "2026-09-30",
+        "published_at": "2026-10-01T00:00:00Z",
+    })
+    selected = select_intelligent_alerts([early, sec])
+    assert len(selected) == 1
+    assert selected[0]["event_key"] == early["event_key"]
