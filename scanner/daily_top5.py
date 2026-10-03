@@ -76,6 +76,8 @@ def _alert_quality_gate(event, now=None):
         return {"eligible": False, "reason": "NO_EVENT", "freshness": "NONE", "primary_source": False}
     freshness = _catalyst_freshness(event, now)
     primary = _source_is_primary(event)
+    if freshness == "UNKNOWN_TIME":
+        return {"eligible": False, "reason": "EVENT_TIMESTAMP_MISSING", "freshness": freshness, "primary_source": primary}
     if freshness == "HISTORICAL_GT_72H":
         return {"eligible": False, "reason": "HISTORICAL_GT_72H", "freshness": freshness, "primary_source": primary}
     if not primary:
@@ -210,8 +212,13 @@ def format_daily_top5(rows, date_value=None):
         volume_text = f"{float(volume_ratio):.1f}x avg" if volume_ratio else "N/A"
         if row["catalyst_found"]:
             gate = row.get("alert_quality_gate") or {}
-            reason = f'{row["catalyst_subtype"]} · {row["catalyst_source"] or "UNKNOWN"} · {row.get("catalyst_freshness", "UNKNOWN_TIME")}'
+            freshness = row.get("catalyst_freshness", "UNKNOWN_TIME")
+            reason = f'{row["catalyst_subtype"]} · {row["catalyst_source"] or "UNKNOWN"} · {freshness}'
             classification = row.get("classification", "CATALYST_LINKED")
+            if freshness == "REACTION_24_72H":
+                classification = "REACTION_CONTINUATION"
+            elif freshness == "HISTORICAL_GT_72H":
+                classification = "HISTORICAL_WATCH"
             if not gate.get("eligible"):
                 classification = f'{classification}_QUALITY_GATED'
         else:
