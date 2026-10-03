@@ -65,6 +65,8 @@ def alert_quality_gate(alert, now=None):
     primary = primary_source_verified(alert)
     if _is_expired(alert):
         return {"eligible": False, "reason": "EXPIRED", "freshness": freshness, "primary_source": primary}
+    if freshness == "UNKNOWN_TIME":
+        return {"eligible": False, "reason": "EVENT_TIMESTAMP_MISSING", "freshness": freshness, "primary_source": primary}
     if freshness == "REACTION_24_72H":
         return {"eligible": False, "reason": "NOT_NEW_24H", "freshness": freshness, "primary_source": primary}
     if freshness == "HISTORICAL_GT_72H":
