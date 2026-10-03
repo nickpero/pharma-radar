@@ -35,9 +35,11 @@ def _process_item(item, watchlist):
         "content": item.get("content", ""),
         "published_at": item.get("published_at"),
         "first_published_at": item.get("first_published_at") or item.get("published_at"),
+        "first_seen_at": item.get("first_seen_at"),
         "event_date": item.get("event_date") or item.get("published_at"),
         "early_discovery": bool(item.get("early_discovery")),
         "provider": item.get("provider"),
+        "source_reliability": item.get("source_reliability"),
     })
     event = enrich_clinical_impact(event)
     scored = score_fda_event(event)
