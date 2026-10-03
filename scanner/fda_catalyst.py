@@ -195,6 +195,25 @@ def build_fda_catalyst(news_item):
         event["severity"] = "HIGH"
     elif advanced["urgency"] == "HIGH" and event.get("severity") == "LOW":
         event["severity"] = "MEDIUM"
+    # Defense-in-depth: an SEC 8-K must contain explicit FDA approval evidence.
+    # Generic references to approved products, future authorization, or pathways
+    # must never produce FDA_APPROVAL.
+    source = str(news_item.get("source") or "").upper()
+    form = str(news_item.get("form") or "").upper()
+    if source == "SEC" and form in {"8-K", "8-K/A"} and event.get("subtype") == "FDA_APPROVAL":
+        text = _text(news_item)
+        explicit = bool(
+            any(re.search(rule, text, re.IGNORECASE) for rule in APPROVAL_POSITIVE_PATTERNS)
+            and not any(re.search(rule, text, re.IGNORECASE) for rule in APPROVAL_NEGATION_PATTERNS)
+        )
+        if not explicit:
+            event["subtype"] = "FDA_UPDATE"
+            event["catalyst_type"] = "NEUTRAL"
+            event["severity"] = "LOW"
+            event["direction"] = "UNKNOWN"
+            event["urgency"] = "LOW"
+            event["classification_source"] = "sec_8k_approval_guard"
+
     event.update({
         "source": news_item.get("source", "FDA"), "title": news_item.get("title", ""),
         "summary": news_item.get("summary", ""), "url": news_item.get("url"),
