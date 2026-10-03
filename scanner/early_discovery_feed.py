@@ -79,7 +79,7 @@ def _entry_value(entry, tag):
 def _matches_watchlist(text, ticker, company):
     lowered = _clean(text).lower()
     company_match = company and company.lower() in lowered
-    ticker_match = re.search(rf"\\b{re.escape(ticker.lower())}\\b", lowered)
+    ticker_match = re.search(rf"\b{re.escape(ticker.lower())}\b", lowered)
     return bool(company_match or ticker_match)
 
 
