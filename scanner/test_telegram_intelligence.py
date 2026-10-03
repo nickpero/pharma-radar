@@ -195,7 +195,7 @@ def test_early_discovery_is_deliverable_with_freshness():
         "early_discovery": True,
         "published_at": datetime.now(timezone.utc).isoformat(),
     })
-    assert alert_action(alert) == "FAST"
+    assert alert_action(alert) == "SILENT"
 
 
 def test_early_and_sec_confirmation_share_event_key():
@@ -221,3 +221,10 @@ def test_early_and_sec_confirmation_share_event_key():
     selected = select_intelligent_alerts([early, sec])
     assert len(selected) == 1
     assert selected[0]["event_key"] == early["event_key"]
+
+
+def test_missing_timestamp_is_silenced_by_quality_gate():
+    alert = _alert("IONS", 100, 40, "CRITICAL")
+    alert["source"] = "SEC"
+    alert["source_type"] = "PRIMARY_CORPORATE"
+    assert alert_action(alert) == "SILENT"
