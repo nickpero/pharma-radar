@@ -208,6 +208,7 @@ def format_catalyst_alert(alert):
     title = _clean_text(alert.get("title") or event.get("title"), 260)
     why = _why_it_matters(alert, event, subtype)
     event_display = _event_display_name(subtype, event_type)
+    early = alert.get("early_discovery") is True
 
     if alert_priority is None:
         priority_event = dict(event)
@@ -217,7 +218,7 @@ def format_catalyst_alert(alert):
     tier_icon = get_severity_icon(alert_tier)
 
     lines = [
-        "🚨 PHARMA RADAR",
+        "🟡 PHARMA RADAR — EARLY CATALYST" if early else "🚨 PHARMA RADAR",
         "━━━━━━━━━━━━━━━━━━",
         f"{tier_icon} {alert_tier}",
         "",
@@ -265,6 +266,10 @@ def format_catalyst_alert(alert):
             ) or "N/A"
         ),
     ])
+
+    if early:
+        published = _clean_text(alert.get("first_published_at") or alert.get("published_at") or alert.get("event_date"), 40)
+        lines.extend(["", f"⏱ Published: {published}", "⚠️ Early discovery — primary confirmation may still be pending."])
 
     if why:
         lines.extend(["", "💡 WHY IT MATTERS", why])
