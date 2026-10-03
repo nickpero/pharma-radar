@@ -264,7 +264,7 @@ def _fetch_sec_direct(ticker, company, cik, max_filings=3):
         if not items:
             continue
         results.append(build_sec_item(ticker, company, cik, recent["accessionNumber"][idx], form,
-                                      recent["filingDate"][idx], recent["primaryDocument"][idx], items))
+                                      recent["filingDate"][idx], recent["primaryDocument"][idx], items, event_date=(recent.get("reportDate", [""])[idx] or recent["filingDate"][idx])))
         if len(results) >= max_filings:
             break
     return results
