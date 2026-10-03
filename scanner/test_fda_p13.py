@@ -177,3 +177,16 @@ if __name__ == "__main__":
     test_generic_approval_word_never_creates_fda_approval()
     test_explicit_fda_approval_still_classifies_as_approval()
     print("P1.3 FDA CATALYST TESTS PASSED")
+
+
+def test_vbio_oral_mucosal_formulation_is_development_milestone():
+    event = build_fda_catalyst({
+        "source": "EARLY_DISCOVERY",
+        "source_type": "SECONDARY_DISCOVERY",
+        "title": "Valion Bio Successfully Formulates Oral Mucosal Entolimod",
+        "summary": "Successful completion of formulation work advances a potential second development pathway.",
+        "content": "Successful completion of formulation work advances a potential second development pathway.",
+        "categories": [],
+    })
+    assert event["subtype"] == "DEVELOPMENT_MILESTONE"
+    assert event["direction"] == "POSITIVE"
