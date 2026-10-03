@@ -155,3 +155,44 @@ def test_same_day_primary_catalyst_passes_quality_gate():
         date_value="2026-09-29",
     )
     assert rows[0]["alert_quality_gate"]["eligible"] is True
+
+
+def test_24_72h_catalyst_is_reaction_continuation():
+    watchlist = {"ABC": {"company": "ABC Pharma", "programs": []}}
+    history = {"x": {
+        "ticker": "ABC",
+        "event_timestamp": "2026-09-28T12:00:00+00:00",
+        "subtype": "FDA_APPROVAL",
+        "program": "drug",
+        "source": "FDA",
+        "source_type": "PRIMARY_REGULATORY",
+        "alert_priority": 100,
+    }}
+    rows = build_daily_top5(
+        watchlist=watchlist, history=history,
+        snapshot_fn=lambda ticker: snapshot(20.0, 3.0),
+        date_value="2026-09-29",
+    )
+    assert rows[0]["catalyst_freshness"] == "REACTION_24_72H"
+    assert rows[0]["classification"] == "FUNDAMENTAL_OR_CLINICAL_CATALYST"
+    assert rows[0]["alert_quality_gate"]["eligible"] is True
+
+
+def test_missing_timestamp_is_quality_gated():
+    watchlist = {"ABC": {"company": "ABC Pharma", "programs": []}}
+    history = {"x": {
+        "ticker": "ABC",
+        "event_timestamp": None,
+        "subtype": "FDA_APPROVAL",
+        "program": "drug",
+        "source": "FDA",
+        "source_type": "PRIMARY_REGULATORY",
+        "alert_priority": 100,
+    }}
+    rows = build_daily_top5(
+        watchlist=watchlist, history=history,
+        snapshot_fn=lambda ticker: snapshot(20.0, 3.0),
+        date_value="2026-09-29",
+    )
+    assert rows[0]["alert_quality_gate"]["eligible"] is False
+    assert rows[0]["alert_quality_gate"]["reason"] == "EVENT_TIMESTAMP_MISSING"
