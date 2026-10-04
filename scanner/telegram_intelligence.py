@@ -135,7 +135,10 @@ def _normalise_text(value):
 def _event_identity(alert):
     """Build a stable identity for one underlying catalyst/news item."""
     event = alert.get("event") if isinstance(alert.get("event"), dict) else {}
-    explicit_event_key = alert.get("event_key") or event.get("event_key")\n    if explicit_event_key:\n        return ("EVENT_KEY", _normalise_text(explicit_event_key))\n    source_id = (
+    explicit_event_key = alert.get("event_key") or event.get("event_key")
+    if explicit_event_key:
+        return ("EVENT_KEY", _normalise_text(explicit_event_key))
+    source_id = (
         alert.get("source_item_id") or alert.get("item_id") or
         event.get("source_item_id") or event.get("item_id")
     )
