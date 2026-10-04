@@ -74,8 +74,7 @@ REGULATORY_RULES = [
 
 
 def _text(news_item):
-    return "
-".join(str(news_item.get(k) or "") for k in ("title", "summary", "article_text", "content", "body", "text")).lower()
+    return "\n".join(str(news_item.get(k) or "") for k in ("title", "summary", "article_text", "content", "body", "text")).lower()
 
 
 def _matches(text, pattern):
