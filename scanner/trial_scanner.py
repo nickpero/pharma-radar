@@ -1,5 +1,6 @@
 import json
 import re
+from datetime import datetime, timezone
 from pathlib import Path
 
 from scanner.clinical_trials import search_program
@@ -145,16 +146,43 @@ def build_fda_alert(event):
     return alert
 
 
+def _is_recent_fda_event(event, max_age_hours=24):
+    """Keep operational FDA alerts fresh while retaining the full news feed."""
+    value = event.get("published_at") or event.get("first_published_at") or event.get("event_date")
+    if not value:
+        return False
+    text = str(value).strip()
+    try:
+        dt = datetime.fromisoformat(text.replace("Z", "+00:00"))
+    except ValueError:
+        dt = None
+        for fmt in ("%a, %d %b %Y %H:%M:%S %z", "%B %d, %Y", "%b %d, %Y", "%Y-%m-%d"):
+            try:
+                dt = datetime.strptime(text[:40], fmt)
+                break
+            except ValueError:
+                continue
+    if dt is None:
+        return False
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    age_hours = (datetime.now(timezone.utc) - dt.astimezone(timezone.utc)).total_seconds() / 3600.0
+    return 0 <= age_hours <= max_age_hours
+
+
 def scan_fda(watchlist, max_items=50):
     try:
         news = get_enriched_fda_news(max_news=max_items, max_pages=5)
         events = process_fda_news(news, watchlist)
-        trading_events = sort_by_alert_priority(filter_fda_trading_alerts(events))
+        trading_events = [
+            event for event in filter_fda_trading_alerts(events)
+            if _is_recent_fda_event(event)
+        ]
+        trading_events = sort_by_alert_priority(trading_events)
         alerts = [build_fda_alert(event) for event in trading_events]
         return {"news": news, "events": events, "alerts": alerts, "error": None}
     except Exception as error:
         return {"news": [], "events": [], "alerts": [], "error": str(error)}
-
 
 def scan(baseline=False):
     watchlist = load_watchlist()
