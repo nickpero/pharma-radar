@@ -107,11 +107,17 @@ def classify_fda_catalyst(news_item):
     )
 
     # Classify the most specific clinical event first. Phase numbers alone
-    # never imply a phase advancement.
+    # never imply a phase advancement. For primary corporate/SEC material,
+    # explicit clinical results outrank generic phase-data wording.
     for source_text, source_name in ((title, "title"), (text, "content")):
         result = _classify(source_text, source_name, EXPLORATORY_RULES)
         if result:
             return result
+    if source_type == "PRIMARY_CORPORATE":
+        for source_text, source_name in ((title, "title"), (text, "content")):
+            result = _classify(source_text, source_name, CLINICAL_RULES)
+            if result:
+                return result
     for source_text, source_name in ((title, "title"), (text, "content")):
         result = _classify(source_text, source_name, PHASE_DATA_RULES)
         if result:
@@ -122,11 +128,6 @@ def classify_fda_catalyst(news_item):
             )):
                 result["direction"] = "NEGATIVE"
             return result
-    if source_type == "PRIMARY_CORPORATE":
-        for source_text, source_name in ((title, "title"), (text, "content")):
-            result = _classify(source_text, source_name, CLINICAL_RULES)
-            if result:
-                return result
 
     # Explicit regulatory pathway/meeting is not an approval.
     for source_text, source_name in ((title, "title"), (text, "content")):
@@ -140,7 +141,7 @@ def classify_fda_catalyst(news_item):
             result = _classify(
                 source_text,
                 source_name,
-                [ADVANCED_RULES[4]],
+                [ADVANCED_RULES[5]],
             )
             if result:
                 return result
