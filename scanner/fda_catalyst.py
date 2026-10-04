@@ -118,6 +118,13 @@ def classify_fda_catalyst(news_item):
             result = _classify(source_text, source_name, CLINICAL_RULES)
             if result:
                 return result
+    # Explicit regulatory pathway/meeting is not an approval and, when
+    # present, outranks generic phase-data wording.
+    for source_text, source_name in ((title, "title"), (text, "content")):
+        result = _classify(source_text, source_name, REGULATORY_RULES)
+        if result:
+            return result
+
     for source_text, source_name in ((title, "title"), (text, "content")):
         result = _classify(source_text, source_name, PHASE_DATA_RULES)
         if result:
