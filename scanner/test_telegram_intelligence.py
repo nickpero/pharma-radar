@@ -207,7 +207,7 @@ def test_early_and_sec_confirmation_share_event_key():
         "event_key": "vbio|entolimod|development_milestone|2026-09-30",
         "early_discovery": True,
         "source": "EARLY_DISCOVERY",
-        "published_at": "2026-09-30T14:00:00Z",
+        "published_at": datetime.now(timezone.utc).isoformat(),
     })
     sec.update({
         "program": "SEC",
@@ -215,8 +215,8 @@ def test_early_and_sec_confirmation_share_event_key():
         "event_key": "vbio|entolimod|development_milestone|2026-09-30",
         "source": "SEC",
         "source_type": "PRIMARY_CORPORATE",
-        "event_date": "2026-09-30",
-        "published_at": "2026-10-01T00:00:00Z",
+        "event_date": datetime.now(timezone.utc).date().isoformat(),
+        "published_at": datetime.now(timezone.utc).isoformat(),
     })
     selected = select_intelligent_alerts([early, sec])
     assert len(selected) == 1
