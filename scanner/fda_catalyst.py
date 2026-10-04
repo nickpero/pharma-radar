@@ -180,7 +180,7 @@ def build_fda_catalyst(news_item):
 
     # Never trust a broad category keyword for FDA approval. The advanced
     # classifier is the source of truth for this subtype.
-    if selected_category == "APPROVAL" and advanced["catalyst_type"] != "APPROVAL":
+    if selected_category == "APPROVAL" and advanced["catalyst_type"] == "NEUTRAL":
         event["subtype"] = "FDA_UPDATE"
         event["severity"] = "LOW"
         event["direction"] = "UNKNOWN"
