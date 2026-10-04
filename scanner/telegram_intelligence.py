@@ -56,7 +56,10 @@ def catalyst_freshness(alert, now=None):
 def primary_source_verified(alert):
     source = str(alert.get("source") or "").upper()
     source_type = str(alert.get("source_type") or "").upper()
-    return source in _PRIMARY_SOURCES or source_type.startswith("PRIMARY_")
+    # A source_type label alone is not sufficient: a secondary publisher
+    # such as Reuters must never become primary merely because an upstream
+    # fixture tagged the event as PRIMARY_CORPORATE.
+    return source in _PRIMARY_SOURCES
 
 
 def alert_quality_gate(alert, now=None):
