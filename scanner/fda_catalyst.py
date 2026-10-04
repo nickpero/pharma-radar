@@ -107,13 +107,17 @@ def classify_fda_catalyst(news_item):
     )
 
     # Explicit FDA approval is the highest-specificity positive regulatory
-    # signal. Resolve it before generic phase/clinical rules so a headline such
-    # as "FDA approves new therapy" can never fall through to NEUTRAL.
+    # signal. Resolve it before generic phase/clinical rules. Keep this check
+    # deliberately direct so the core approval contract cannot regress when
+    # ADVANCED_RULES is reordered.
     if not approval_blocked:
-        for source_text, source_name in ((title, "title"), (text, "content")):
-            result = _classify(source_text, source_name, [ADVANCED_RULES[5]])
-            if result:
-                return result
+        if any(re.search(pattern, text, re.IGNORECASE) for pattern in APPROVAL_POSITIVE_PATTERNS):
+            return {
+                "catalyst_type": "APPROVAL",
+                "direction": "POSITIVE",
+                "urgency": "EXTREME",
+                "classification_source": "explicit_fda_approval",
+            }
 
     # Classify the most specific clinical event first. Phase numbers alone
     # never imply a phase advancement. For primary corporate/SEC material,
@@ -181,9 +185,22 @@ def build_fda_catalyst(news_item):
     # Never trust a broad category keyword for FDA approval. The advanced
     # classifier is the source of truth for this subtype.
     if selected_category == "APPROVAL" and advanced["catalyst_type"] == "NEUTRAL":
-        event["subtype"] = "FDA_UPDATE"
-        event["severity"] = "LOW"
-        event["direction"] = "UNKNOWN"
+        # Preserve the legacy APPROVAL category only when the source contains
+        # explicit FDA approval evidence.
+        explicit_approval = bool(
+            any(re.search(rule, text, re.IGNORECASE) for rule in APPROVAL_POSITIVE_PATTERNS)
+            and not any(re.search(rule, text, re.IGNORECASE) for rule in APPROVAL_NEGATION_PATTERNS)
+        )
+        if explicit_approval:
+            event["catalyst_type"] = "APPROVAL"
+            event["subtype"] = "FDA_APPROVAL"
+            event["severity"] = "HIGH"
+            event["direction"] = "CATALYST"
+            event["urgency"] = "EXTREME"
+        else:
+            event["subtype"] = "FDA_UPDATE"
+            event["severity"] = "LOW"
+            event["direction"] = "UNKNOWN"
 
     if selected_category == "APPROVAL" and advanced["catalyst_type"] == "APPROVAL":
         event["direction"] = FDA_CATALYST_MAP["APPROVAL"]["direction"]
