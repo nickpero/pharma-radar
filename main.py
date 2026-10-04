@@ -67,6 +67,7 @@ def build_summary(result, intelligent_alerts=None):
         f"🧹 Filtered: {result.get('filtered_trials', 0)}",
         f"📦 Raw alerts: {len(alerts)}",
         f"📨 Telegram alerts: {len(intelligent_alerts)}",
+        f"🧹 Duplicate/low-priority alerts suppressed: {max(0, len(alerts) - len(intelligent_alerts))}",
         f"📰 FDA news: {len(result.get('fda_news', []))}",
         f"🔄 Changes: {len(detected_changes)}",
         f"🧠 TI Qualified: {qualified}",
@@ -86,6 +87,33 @@ def build_summary(result, intelligent_alerts=None):
         ])
         for index, alert in enumerate(intelligent_alerts):
             lines.extend(_alert_summary_line(alert))
+            ticker = str(alert.get("ticker", "UNKNOWN")).upper()
+            program = alert.get("program", "UNKNOWN")
+            event = alert.get("event", {}) if isinstance(alert.get("event", {}), dict) else {}
+            score = event.get("score", alert.get("score", 0))
+            label = event.get("label", alert.get("label", "LOW"))
+            priority = alert.get("alert_priority", event.get("alert_priority", 0))
+            tier = alert.get("alert_tier", event.get("alert_tier", "LOW"))
+            setup = alert.get("trading_setup_score", event.get("trading_setup_score", 0))
+            window = alert.get("trading_window", event.get("trading_window", "UNKNOWN"))
+            reaction_strength = alert.get("reaction_strength", "UNKNOWN")
+            reaction_interpretation = alert.get("reaction_interpretation", "UNKNOWN")
+            reaction = _reaction(alert)
+            reaction_parts = []
+            for label_name, key in (("1m", "reaction_1m_pct"), ("5m", "reaction_5m_pct"), ("15m", "reaction_15m_pct")):
+                if reaction.get(key) is not None:
+                    reaction_parts.append(f"{label_name} {float(reaction[key]):+.2f}%")
+            lines.append(
+                f"{ticker} — {program} | Catalyst {score}/100 {label} | "
+                f"Priority {priority}/100 {tier} | Setup {setup}/100 | Window {window} | "
+                f"Reaction {reaction_strength} | {reaction_interpretation}"
+            )
+            if reaction_parts:
+                lines.append(" | ".join(reaction_parts))
+            if alert.get("price_change_pct") is not None:
+                lines.append(f"💹 Price {float(alert['price_change_pct']):+.2f}%")
+            if alert.get("volume_ratio") is not None:
+                lines.append(f"📊 Volume {float(alert['volume_ratio']):.1f}x")
             if index < len(intelligent_alerts) - 1:
                 lines.extend(["", "──────────────", ""])
     else:
@@ -97,6 +125,9 @@ def build_summary(result, intelligent_alerts=None):
             lines.append(f"• {error.get('ticker', 'UNKNOWN')} — {error.get('program', 'UNKNOWN')}: {error.get('error', '')}")
         lines.append("Status: WARNING")
 
+    if not errors:
+        lines.append("🟢 No catalyst alerts" if not intelligent_alerts else "Status: REVIEW")
+        lines.append("Status: CLEAN" if not intelligent_alerts else "Status: REVIEW")
     lines.extend(["", "━━━━━━━━━━━━━━━━━━"])
     return "\n".join(lines)
 
