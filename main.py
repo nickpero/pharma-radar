@@ -67,7 +67,7 @@ def build_summary(result, intelligent_alerts=None):
         f"🧹 Filtered: {result.get('filtered_trials', 0)}",
         f"📦 Raw alerts: {len(alerts)}",
         f"📨 Telegram alerts: {len(intelligent_alerts)}",
-        f"🧹 Duplicate/low-priority alerts suppressed: {max(0, len(alerts) - len(intelligent_alerts))}",
+        f"🧹 duplicate/low-priority alerts suppressed: {max(0, len(alerts) - len(intelligent_alerts))}",
         f"📰 FDA news: {len(result.get('fda_news', []))}",
         f"🔄 Changes: {len(detected_changes)}",
         f"🧠 TI Qualified: {qualified}",
@@ -126,8 +126,11 @@ def build_summary(result, intelligent_alerts=None):
         lines.append("Status: WARNING")
 
     if not errors:
-        lines.append("🟢 No catalyst alerts" if not intelligent_alerts else "Status: REVIEW")
-        lines.append("Status: CLEAN" if not intelligent_alerts else "Status: REVIEW")
+        if not intelligent_alerts:
+            lines.append("🟢 No catalyst alerts")
+            lines.append("Status: CLEAN")
+        else:
+            lines.append("Status: REVIEW")
     lines.extend(["", "━━━━━━━━━━━━━━━━━━"])
     return "\n".join(lines)
 
