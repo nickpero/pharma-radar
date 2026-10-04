@@ -14,9 +14,11 @@ CATEGORY_PRIORITY = ["APPROVAL", "REJECTION", "SAFETY", "CLINICAL", "LABEL"]
 
 PHASE_ADVANCEMENT_PATTERNS = ("phase advancement","advanced to phase","advances to phase","progressed to phase","progresses to phase","moved to phase","moves to phase","moved into phase","moves into phase","transitioned to phase","initiated phase 1","initiated phase 2","initiated phase 3","started phase 1","started phase 2","started phase 3","began phase 1","began phase 2","began phase 3","begins phase 1","begins phase 2","begins phase 3","entered phase 1","entered phase 2","entered phase 3")
 EXPLORATORY_PATTERNS = ("exploratory analysis","exploratory analyses","exploratory data","exploratory endpoint","exploratory endpoints","post-hoc analysis","post hoc analysis","post-hoc analyses","post hoc analyses","subgroup analysis","subgroup analyses","subgroup data")
-DEVELOPMENT_MILESTONE_PATTERNS = ("successfully formulate", "successful completion of formulation", "completed formulation work", "formulation milestone", "development milestone", "program milestone", "advances the program", "advances development", "program advances", "initiates study", "initiates a study", "begins study", "starts study", "study initiation", "enrollment begins", "begins enrollment", "first patient dosed", "first patient enrolled", "dosing begins", "dosing initiated")\nPHASE_DATA_UPDATE_PATTERNS = ("phase 1 results","phase 2 results","phase 3 results","phase 1 data","phase 2 data","phase 3 data","phase i results","phase ii results","phase iii results","phase i data","phase ii data","phase iii data","phase 1 clinical trial","phase 2 clinical trial","phase 3 clinical trial","phase 1 study","phase 2 study","phase 3 study","phase i study","phase ii study","phase iii study","open-label extension","open label extension")
+DEVELOPMENT_MILESTONE_PATTERNS = ("successfully formulate", "successful completion of formulation", "completed formulation work", "formulation milestone", "development milestone", "program milestone", "advances the program", "advances development", "program advances", "initiates study", "initiates a study", "begins study", "starts study", "study initiation", "enrollment begins", "begins enrollment", "first patient dosed", "first patient enrolled", "dosing begins", "dosing initiated")
+PHASE_DATA_UPDATE_PATTERNS = ("phase 1 results","phase 2 results","phase 3 results","phase 1 data","phase 2 data","phase 3 data","phase i results","phase ii results","phase iii results","phase i data","phase ii data","phase iii data","phase 1 clinical trial","phase 2 clinical trial","phase 3 clinical trial","phase 1 study","phase 2 study","phase 3 study","phase i study","phase ii study","phase iii study","open-label extension","open label extension")
 
-ADVANCED_RULES = [\n    ("DEVELOPMENT_MILESTONE", "POSITIVE", "HIGH", DEVELOPMENT_MILESTONE_PATTERNS),
+ADVANCED_RULES = [
+    ("DEVELOPMENT_MILESTONE", "POSITIVE", "HIGH", DEVELOPMENT_MILESTONE_PATTERNS),
     ("TRIAL_HOLD_LIFTED", "POSITIVE", "HIGH", ("clinical hold lifted", "hold lifted", "lifted the clinical hold", "hold is lifted")),
     ("TRIAL_HOLD", "NEGATIVE", "EXTREME", ("clinical hold", "placed on clinical hold", "trial hold", "study hold")),
     ("REJECTION", "NEGATIVE", "EXTREME", ("complete response letter", r"\bcrl\b", "not approved", "does not approve", "did not approve", "will not approve", "won't approve", "rejected", "rejection", "refused", "refusal", "denied", "denial")),
@@ -72,7 +74,8 @@ REGULATORY_RULES = [
 
 
 def _text(news_item):
-    return "\n".join(str(news_item.get(k) or "") for k in ("title", "summary", "article_text", "content", "body", "text")).lower()
+    return "
+".join(str(news_item.get(k) or "") for k in ("title", "summary", "article_text", "content", "body", "text")).lower()
 
 
 def _matches(text, pattern):
