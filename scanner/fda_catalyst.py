@@ -192,15 +192,6 @@ def build_fda_catalyst(news_item):
     if selected_category == "LABEL" and advanced["catalyst_type"] == "LABEL_EXPANSION":
         event["direction"] = FDA_CATALYST_MAP["LABEL"]["direction"]
 
-    # Preserve the legacy FDA category contract for generic clinical-news
-    # records. The classifier may call a Phase 3 result PHASE_DATA_UPDATE,
-    # but an explicitly categorized FDA CLINICAL item remains CLINICAL_RESULTS
-    # unless a more specific clinical/result class was detected.
-    if selected_category == "CLINICAL" and advanced["catalyst_type"] == "PHASE_DATA_UPDATE":
-        event["catalyst_type"] = "CLINICAL_RESULT"
-        event["subtype"] = "CLINICAL_RESULTS"
-        event["direction"] = FDA_CATALYST_MAP["CLINICAL"]["direction"]
-
     subtype_map = {
         "CLINICAL_RESULT": "CLINICAL_RESULTS", "PHASE_DATA_UPDATE": "PHASE_DATA_UPDATE", "EXPLORATORY_DATA": "EXPLORATORY_DATA", "LABEL_EXPANSION": "LABEL_EXPANSION",
         "REJECTION": "FDA_REJECTION", "SAFETY": "FDA_SAFETY_WARNING", "APPROVAL": "FDA_APPROVAL",
@@ -210,6 +201,10 @@ def build_fda_catalyst(news_item):
     }
     if advanced["catalyst_type"] in subtype_map:
         event["subtype"] = subtype_map[advanced["catalyst_type"]]
+    if selected_category == "CLINICAL" and advanced["catalyst_type"] == "PHASE_DATA_UPDATE":
+        event["catalyst_type"] = "CLINICAL_RESULT"
+        event["subtype"] = "CLINICAL_RESULTS"
+        event["direction"] = FDA_CATALYST_MAP["CLINICAL"]["direction"]
     if advanced["urgency"] == "EXTREME":
         event["severity"] = "HIGH"
     elif advanced["urgency"] == "HIGH" and event.get("severity") == "LOW":
