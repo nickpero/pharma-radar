@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from main import build_summary
 
 
@@ -62,6 +63,8 @@ def test_duplicate_alerts_are_suppressed_in_summary():
         "ticker": "SMMT", "program": "ivonescimab", "subtype": "FDA_APPROVAL",
         "alert_priority": 100, "alert_tier": "CRITICAL", "trading_setup_score": 52,
         "title": "SEC 8-K — Summit Therapeutics (SMMT)",
+        "source": "SEC", "source_type": "PRIMARY_CORPORATE",
+        "published_at": datetime.now(timezone.utc).isoformat(),
     }
     duplicate = dict(base)
     duplicate["trading_setup_score"] = 54
