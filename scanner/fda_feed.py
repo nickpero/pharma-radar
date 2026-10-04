@@ -330,14 +330,11 @@ def _fetch_press_announcements(max_news=DEFAULT_MAX_NEWS, max_pages=DEFAULT_MAX_
     if max_news <= 0:
         return []
 
-    # FDA's current press-announcement listing returns 404 for the legacy
-    # ?page=N endpoint. The official RSS feed is the primary live source.
+    # RSS is fast but can lag or expose an old rolling window. Fetch the
+    # current FDA HTML listing as a complementary source and merge both.
     rss_results = _fetch_press_rss(max_news)
-    if rss_results:
-        return rss_results
+    results = list(rss_results)
 
-    # Keep the HTML listing only as a fallback for temporary RSS outages.
-    results = []
     for page in range(max_pages):
         if len(results) >= max_news:
             break
@@ -345,14 +342,20 @@ def _fetch_press_announcements(max_news=DEFAULT_MAX_NEWS, max_pages=DEFAULT_MAX_
             html = _fetch_html(FDA_PRESS_ANNOUNCEMENTS_URL, {"page": page})
         except requests.RequestException:
             continue
-        parsed = _filter_press_announcement_items(parse_fda_page(html, FDA_PRESS_ANNOUNCEMENTS_URL, max_news))
+        parsed = _filter_press_announcement_items(
+            parse_fda_page(html, FDA_PRESS_ANNOUNCEMENTS_URL, max_news)
+        )
         results.extend(parsed)
-        print(f"FDA PRESS PAGE page={page} parsed={len(parsed)} cumulative={len(results)}", flush=True)
+        print(
+            f"FDA PRESS PAGE page={page} parsed={len(parsed)} cumulative={len(results)}",
+            flush=True,
+        )
         if not parsed:
             break
-    results = deduplicate_fda_news(results)[:max_news]
-    if results:
-        return results
+
+    merged = deduplicate_fda_news(results)
+    if merged:
+        return sort_fda_news(merged)[:max_news]
 
     try:
         html = _fetch_html(FDA_NEWSROOM_URL)
@@ -360,9 +363,11 @@ def _fetch_press_announcements(max_news=DEFAULT_MAX_NEWS, max_pages=DEFAULT_MAX_
         return []
     parsed = parse_fda_page(html, FDA_NEWSROOM_URL, max_news * 2)
     filtered = _filter_press_announcement_items(parsed)
-    print(f"FDA NEWSROOM FALLBACK parsed={len(parsed)} press={len(filtered)}", flush=True)
-    return deduplicate_fda_news(filtered)[:max_news]
-
+    print(
+        f"FDA NEWSROOM FALLBACK parsed={len(parsed)} press={len(filtered)}",
+        flush=True,
+    )
+    return sort_fda_news(deduplicate_fda_news(filtered))[:max_news]
 
 def deduplicate_fda_news(news_items):
     unique, seen_ids, seen_urls, seen_titles = [], set(), set(), set()
