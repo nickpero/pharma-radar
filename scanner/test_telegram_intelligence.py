@@ -14,6 +14,9 @@ def _alert(ticker, priority, setup, tier, strength="UNKNOWN", interpretation="UN
         "trading_setup_score": setup,
         "reaction_strength": strength,
         "reaction_interpretation": interpretation,
+        "source": "SEC",
+        "source_type": "PRIMARY_CORPORATE",
+        "published_at": datetime.now(timezone.utc).isoformat(),
     }
 
 
@@ -227,4 +230,5 @@ def test_missing_timestamp_is_silenced_by_quality_gate():
     alert = _alert("IONS", 100, 40, "CRITICAL")
     alert["source"] = "SEC"
     alert["source_type"] = "PRIMARY_CORPORATE"
+    alert.pop("published_at", None)
     assert alert_action(alert) == "SILENT"
