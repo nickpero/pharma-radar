@@ -109,11 +109,7 @@ def send_alerts(result, alerts=None):
         return []
     # One Telegram delivery per scan, containing all new catalyst alerts.
     # The scan summary is kept for Actions/logs and is not sent separately.
-    message = "
-
-──────────────
-
-".join(format_catalyst_alert(alert) for alert in alerts)
+    message = "\n\n──────────────\n\n".join(format_catalyst_alert(alert) for alert in alerts)
     responses = [send_telegram(message)]
     state = load_sent_alerts()
     timestamp = datetime.now(timezone.utc).isoformat()
