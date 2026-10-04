@@ -106,6 +106,15 @@ def classify_fda_catalyst(news_item):
         for rule in APPROVAL_NEGATION_PATTERNS
     )
 
+    # Explicit FDA approval is the highest-specificity positive regulatory
+    # signal. Resolve it before generic phase/clinical rules so a headline such
+    # as "FDA approves new therapy" can never fall through to NEUTRAL.
+    if not approval_blocked:
+        for source_text, source_name in ((title, "title"), (text, "content")):
+            result = _classify(source_text, source_name, [ADVANCED_RULES[5]])
+            if result:
+                return result
+
     # Classify the most specific clinical event first. Phase numbers alone
     # never imply a phase advancement. For primary corporate/SEC material,
     # explicit clinical results outrank generic phase-data wording.
@@ -141,17 +150,6 @@ def classify_fda_catalyst(news_item):
         result = _classify(source_text, source_name, REGULATORY_RULES)
         if result:
             return result
-
-    # Approval is allowed only through the explicit FDA approval rule.
-    if not approval_blocked:
-        for source_text, source_name in ((title, "title"), (text, "content")):
-            result = _classify(
-                source_text,
-                source_name,
-                [ADVANCED_RULES[5]],
-            )
-            if result:
-                return result
 
     # Remaining non-approval catalysts.
     remaining_rules = [
@@ -209,6 +207,23 @@ def build_fda_catalyst(news_item):
         event["severity"] = "HIGH"
     elif advanced["urgency"] == "HIGH" and event.get("severity") == "LOW":
         event["severity"] = "MEDIUM"
+    # Normalize positive clinical-result direction defensively. This protects
+    # the legacy FDA CLINICAL category from unrelated category boilerplate.
+    if advanced["catalyst_type"] == "CLINICAL_RESULT":
+        clinical_text = _text(news_item)
+        if any(p in clinical_text for p in (
+            "met the primary endpoint", "met its primary endpoint",
+            "positive topline", "positive results", "statistically significant",
+            "clinical benefit",
+        )):
+            advanced["direction"] = "POSITIVE"
+        elif any(p in clinical_text for p in (
+            "failed to meet", "did not meet", "missed the primary endpoint",
+            "failed the primary endpoint", "futility", "negative topline",
+            "not statistically significant", "no significant benefit",
+        )):
+            advanced["direction"] = "NEGATIVE"
+
     # Defense-in-depth: an SEC 8-K must contain explicit FDA approval evidence.
     # Generic references to approved products, future authorization, or pathways
     # must never produce FDA_APPROVAL.
