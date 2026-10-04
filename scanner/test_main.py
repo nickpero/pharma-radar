@@ -37,6 +37,8 @@ def test_alert_summary_is_concise():
             "event_surprise": "UNEXPECTED", "price_change_pct": 5.5, "volume_ratio": 3.2,
             "reaction_strength": "POSITIVE", "reaction_interpretation": "CONFIRMED",
             "market_reaction": {"reaction_1m_pct": 1.2, "reaction_5m_pct": 3.4, "reaction_15m_pct": 4.1},
+            "source": "SEC", "source_type": "PRIMARY_CORPORATE",
+            "published_at": datetime.now(timezone.utc).isoformat(),
             "event": {"type": "STATUS_CHANGE", "subtype": "TRIAL_COMPLETED", "score": 95, "label": "CRITICAL"},
         }],
         "errors": [],
