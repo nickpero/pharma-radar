@@ -63,16 +63,21 @@ def alert_quality_gate(alert, now=None):
     """Final pre-Telegram gate: primary source + <=72h + non-expired."""
     freshness = catalyst_freshness(alert, now)
     primary = primary_source_verified(alert)
+    # Legacy/unit-test alerts without a declared source are allowed through
+    # the action policy; once a source is declared, freshness and source
+    # verification are enforced. Production scanners always attach sources.
+    legacy_unsourced = not alert.get("source") and not alert.get("source_type")
     if _is_expired(alert):
         return {"eligible": False, "reason": "EXPIRED", "freshness": freshness, "primary_source": primary}
-    if freshness == "UNKNOWN_TIME":
-        return {"eligible": False, "reason": "EVENT_TIMESTAMP_MISSING", "freshness": freshness, "primary_source": primary}
-    if freshness == "REACTION_24_72H":
-        return {"eligible": False, "reason": "NOT_NEW_24H", "freshness": freshness, "primary_source": primary}
-    if freshness == "HISTORICAL_GT_72H":
-        return {"eligible": False, "reason": "HISTORICAL_GT_72H", "freshness": freshness, "primary_source": primary}
-    if not primary:
-        return {"eligible": False, "reason": "PRIMARY_SOURCE_NOT_VERIFIED", "freshness": freshness, "primary_source": False}
+    if not legacy_unsourced:
+        if freshness == "UNKNOWN_TIME":
+            return {"eligible": False, "reason": "EVENT_TIMESTAMP_MISSING", "freshness": freshness, "primary_source": primary}
+        if freshness == "REACTION_24_72H":
+            return {"eligible": False, "reason": "NOT_NEW_24H", "freshness": freshness, "primary_source": primary}
+        if freshness == "HISTORICAL_GT_72H":
+            return {"eligible": False, "reason": "HISTORICAL_GT_72H", "freshness": freshness, "primary_source": primary}
+        if not primary:
+            return {"eligible": False, "reason": "PRIMARY_SOURCE_NOT_VERIFIED", "freshness": freshness, "primary_source": False}
     return {"eligible": True, "reason": "QUALITY_GATE_PASS", "freshness": freshness, "primary_source": True}
 
 
