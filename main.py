@@ -64,6 +64,9 @@ def build_summary(result, intelligent_alerts=None):
         f"🏢 Companies: {result.get('companies', 0)}",
         f"🔬 Trials: {result.get('total_trials', 0)}",
         f"🎯 Relevant: {result.get('relevant_trials', 0)}",
+        f"🧹 Filtered: {result.get('filtered_trials', 0)}",
+        f"📦 Raw alerts: {len(alerts)}",
+        f"📨 Telegram alerts: {len(intelligent_alerts)}",
         f"📰 FDA news: {len(result.get('fda_news', []))}",
         f"🔄 Changes: {len(detected_changes)}",
         f"🧠 TI Qualified: {qualified}",
@@ -78,7 +81,7 @@ def build_summary(result, intelligent_alerts=None):
     if intelligent_alerts:
         lines.extend([
             "", "━━━━━━━━━━━━━━━━━━", "",
-            f"🚨 {len(intelligent_alerts)} NEW PRIORITY ALERT" if len(intelligent_alerts) == 1 else f"🚨 {len(intelligent_alerts)} NEW PRIORITY ALERTS",
+            "🚨 PRIORITY ALERTS",
             "",
         ])
         for index, alert in enumerate(intelligent_alerts):
@@ -92,6 +95,7 @@ def build_summary(result, intelligent_alerts=None):
         lines.extend(["", "❌ ERRORS"])
         for error in errors:
             lines.append(f"• {error.get('ticker', 'UNKNOWN')} — {error.get('program', 'UNKNOWN')}: {error.get('error', '')}")
+        lines.append("Status: WARNING")
 
     lines.extend(["", "━━━━━━━━━━━━━━━━━━"])
     return "\n".join(lines)
