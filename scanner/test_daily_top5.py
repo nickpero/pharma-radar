@@ -237,3 +237,35 @@ def test_catalyst_program_must_be_verified_for_quality_gate():
     )
     assert rows[0]["alert_quality_gate"]["eligible"] is False
     assert rows[0]["alert_quality_gate"]["reason"] == "PROGRAM_NOT_VERIFIED"
+
+
+def test_verified_program_catalyst_wins_over_later_unscoped_event():
+    watchlist = {"PCVX": {"company": "Vaxcyte", "programs": ["VAX-31"]}}
+    history = {
+        "clinical": {
+            "ticker": "PCVX",
+            "event_timestamp": "2026-10-05T12:00:00+00:00",
+            "subtype": "TOPLINE_RESULTS",
+            "program": "VAX-31",
+            "source": "COMPANY IR",
+            "source_type": "PRIMARY_CORPORATE",
+            "alert_priority": 100,
+        },
+        "financing": {
+            "ticker": "PCVX",
+            "event_timestamp": "2026-10-05T16:00:00+00:00",
+            "subtype": "FINANCING",
+            "program": None,
+            "source": "SEC",
+            "source_type": "PRIMARY_CORPORATE",
+            "alert_priority": 100,
+        },
+    }
+    rows = build_daily_top5(
+        watchlist=watchlist, history=history,
+        snapshot_fn=lambda ticker: snapshot(30.0, 10.0),
+        date_value="2026-10-05",
+    )
+    assert rows[0]["catalyst_program"] == "VAX-31"
+    assert rows[0]["classification"] == "FUNDAMENTAL_OR_CLINICAL_CATALYST"
+    assert rows[0]["alert_quality_gate"]["eligible"] is True
