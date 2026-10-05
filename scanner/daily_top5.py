@@ -113,7 +113,7 @@ def _reference_time(date_value=None, now=None):
     return datetime.now(timezone.utc)
 
 
-def _recent_catalysts(history, ticker, date_value=None, now=None):
+def _recent_catalysts(history, ticker, date_value=None, now=None, meta=None):
     """Return catalysts from the target day or the preceding 72h window."""
     reference = _reference_time(date_value, now).astimezone(timezone.utc)
     matches = []
@@ -126,14 +126,17 @@ def _recent_catalysts(history, ticker, date_value=None, now=None):
         age_hours = (reference - dt).total_seconds() / 3600.0
         if 0 <= age_hours <= 72:
             matches.append(event)
-    return sorted(
-        matches,
-        key=lambda item: (
+    def sort_key(item):
+        primary = 1 if _source_is_primary(item) else 0
+        program = 1 if _program_is_verified(item, meta) else 0
+        return (
+            program,
+            primary,
             _parse_event_timestamp(item) or datetime.min.replace(tzinfo=timezone.utc),
             int(item.get("alert_priority") or 0),
-        ),
-        reverse=True,
-    )
+        )
+
+    return sorted(matches, key=sort_key, reverse=True)
 
 
 def build_daily_top5(watchlist=None, history=None, snapshot_fn=get_market_snapshot, date_value=None):
@@ -145,7 +148,7 @@ def build_daily_top5(watchlist=None, history=None, snapshot_fn=get_market_snapsh
         snapshot = snapshot_fn(ticker)
         if not snapshot or snapshot.get("price_change_pct") is None:
             continue
-        recent = _recent_catalysts(history, ticker.upper(), date_value)
+        recent = _recent_catalysts(history, ticker.upper(), date_value, meta=meta)
         catalyst = recent[0] if recent else None
         rows.append({
             "ticker": ticker.upper(),
