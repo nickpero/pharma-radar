@@ -10841,6 +10841,549 @@
       "Furoscix Infusor"
     ]
   },
+  "PCVX:VAX-31:NCT07425392": {
+    "nct_id": "NCT07425392",
+    "title": "Safety, Tolerability, and Immunogenicity of VAX-31 in Adults ≥50 Years With Prior Pneumococcal Vaccination",
+    "official_title": "A Phase 3, Randomized, Double-Blind, Active-Controlled Clinical Study to Evaluate the Safety, Tolerability, and Immunogenicity of VAX-31 in Healthy Subjects 50 Years of Age and Older With Prior Pneumococcal Vaccination",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-06-30",
+    "start_date": "2026-02-09",
+    "completion_date": "2027-03",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 752,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Vaxcyte, Inc.",
+    "conditions": [
+      "Pneumococcal Vaccines"
+    ],
+    "interventions": [
+      "31-valent pneumococcal conjugate vaccine",
+      "PCV20"
+    ]
+  },
+  "PCVX:VAX-31:NCT07284654": {
+    "nct_id": "NCT07284654",
+    "title": "Safety, Tolerability, and Immunogenicity of VAX-31 in Adults ≥50 Years With Immunobridging to Adults 18-49",
+    "official_title": "A Phase 3, Randomized, Double-Blind, Active-Controlled Clinical Study to Evaluate the Safety, Tolerability, and Immunogenicity of VAX-31 in Healthy Subjects 50 Years of Age and Older With Immunobridging to Subjects 18-49 Years of Age",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-05-15",
+    "start_date": "2025-12-01",
+    "completion_date": "2027-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 4049,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Vaxcyte, Inc.",
+    "conditions": [
+      "Pneumococcal Vaccines"
+    ],
+    "interventions": [
+      "31 valent pneumococcal conjugate vaccine",
+      "PCV20",
+      "PCV21"
+    ]
+  },
+  "PCVX:VAX-31:NCT06151288": {
+    "nct_id": "NCT06151288",
+    "title": "Safety, Tolerability, and Immunogenicity Study of a 31-Valent Pneumococcal Conjugate Vaccine (VAX-31) in Adults",
+    "official_title": "A Phase 1/2, Randomized, Observer-Blind, Dose-Finding, Active-Controlled, Parallel-Group, Clinical Study to Evaluate the Safety, Tolerability, and Immunogenicity of a 31-Valent Pneumococcal Conjugate Vaccine (VAX-31) in Healthy Adults Aged 50 Years and Older",
+    "status": "COMPLETED",
+    "last_update": "2025-07-28",
+    "start_date": "2023-11-08",
+    "completion_date": "2024-07-17",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 1015,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Vaxcyte, Inc.",
+    "conditions": [
+      "Pneumococcal Vaccines"
+    ],
+    "interventions": [
+      "31 valent pneumococcal conjugate vaccine",
+      "20 valent pneumococcal conjugate vaccine"
+    ]
+  },
+  "PCVX:VAX-31:NCT06720038": {
+    "nct_id": "NCT06720038",
+    "title": "A Clinical Study to Evaluate the Safety, Tolerability, and Immunogenicity of VAX-31 in Healthy Infants",
+    "official_title": "A Phase 2, Randomized, Double-Blind, Active-Controlled, Dose-Finding Clinical Study to Evaluate the Safety, Tolerability, and Immunogenicity of VAX-31 in Healthy Infants Given 4 Doses at 2, 4, 6, and 12-15 Months of Age Concomitantly With Routine Pediatric Vaccines",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-05-15",
+    "start_date": "2024-11-25",
+    "completion_date": "2027-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 900,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Vaxcyte, Inc.",
+    "conditions": [
+      "Pneumococcal Vaccines"
+    ],
+    "interventions": [
+      "0.5 mL of the low dose VAX-31",
+      "0.5 mL of the mid dose VAX-31",
+      "0.5 mL of the high dose VAX-31",
+      "0.5 mL dose of PCV20",
+      "0.5 mL of the High-PFS dose VAX-31"
+    ]
+  },
+  "PCVX:VAX-31:NCT07365826": {
+    "nct_id": "NCT07365826",
+    "title": "A Clinical Study to Evaluate the Safety, Tolerability, and Immunogenicity of VAX-31 With Influenza Vaccine in Adults ≥ 50 Years of Age",
+    "official_title": "A Phase 3, Randomized, Double-Blind, Placebo-Controlled Clinical Study to Evaluate the Safety, Tolerability, and Immunogenicity of VAX-31 Concomitantly Administered With Seasonal Influenza Vaccine in Healthy Subjects 50 Years of Age and Older",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-06-30",
+    "start_date": "2026-01-12",
+    "completion_date": "2027-03",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 1390,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Vaxcyte, Inc.",
+    "conditions": [
+      "Pneumococcal Vaccines"
+    ],
+    "interventions": [
+      "31-valent pneumococcal conjugate vaccine",
+      "Seasonal Influenza Vaccine (SIV) (Flublok)",
+      "Placebo"
+    ]
+  },
+  "PDSB:PDS0101:NCT07090174": {
+    "nct_id": "NCT07090174",
+    "title": "CASCADE: Testing for Safety and Immune Effects of PDS0101, an Anti-HPV Therapy, Among People Living With HIV",
+    "official_title": "CASCADE: A Single-Arm, Open-Label Clinical Phase II Trial of the Safety and Immunogenicity of PDS0101 in People Living With HIV",
+    "status": "WITHDRAWN",
+    "last_update": "2026-08-19",
+    "start_date": "2026-04-30",
+    "completion_date": "2026-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "University of California, San Diego",
+    "conditions": [
+      "HPV Associated Cancers",
+      "HIV (Human Immunodeficiency Virus)",
+      "Anal Cancer",
+      "Cervical Cancer",
+      "HPV 16 Infection"
+    ],
+    "interventions": [
+      "PDS0101"
+    ]
+  },
+  "PDSB:PDS0101:NCT05232851": {
+    "nct_id": "NCT05232851",
+    "title": "A Vaccine (PDS0101) Alone or in Combination With Pembrolizumab for the Treatment of Locally Advanced Human Papillomavirus-Associated Oropharynx Cancer",
+    "official_title": "Stimulating Immune Response With Neoadjuvant Human Papilloma Virus (HPV)-16 Specific Vaccination in HPV-Oropharyngeal Squamous Cell Carcinoma (HPV-OPSCC)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-04-14",
+    "start_date": "2022-06-16",
+    "completion_date": "2026-09-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 20,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Mayo Clinic",
+    "conditions": [
+      "Clinical Stage III HPV-Mediated (p16-Positive) Oropharyngeal Carcinoma AJCC v8",
+      "Human Papillomavirus-Related Carcinoma",
+      "Locally Advanced Oropharyngeal Carcinoma",
+      "Stage IVA Oropharyngeal (p16-Negative) Carcinoma AJCC v8",
+      "Stage IVB Oropharyngeal (p16-Negative) Carcinoma AJCC v8"
+    ],
+    "interventions": [
+      "Liposomal HPV-16 E6/E7 Multipeptide Vaccine PDS0101",
+      "Pembrolizumab",
+      "Computed Tomography",
+      "FDG-Positron Emission Tomography",
+      "Biospecimen Collection",
+      "Biopsy"
+    ]
+  },
+  "PDSB:PDS0101:NCT04580771": {
+    "nct_id": "NCT04580771",
+    "title": "A Vaccine (PDS0101) and Chemoradiation for the Treatment of Stage IB3-IVA Cervical Cancer, the IMMUNOCERV Trial",
+    "official_title": "IMMUNOCERV: Evaluating the Safety of Chemoradiation Combined With PDS0101 Immunotherapy in Treating Locally Advanced Cervical Cancer",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-04-15",
+    "start_date": "2020-10-14",
+    "completion_date": "2027-03-08",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 22,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "M.D. Anderson Cancer Center",
+    "conditions": [
+      "Locally Advanced Cervical Squamous Cell Carcinoma, Not Otherwise Specified",
+      "Stage IB3 Cervical Cancer FIGO 2018",
+      "Stage II Cervical Cancer FIGO 2018",
+      "Stage IIA Cervical Cancer FIGO 2018",
+      "Stage IIA1 Cervical Cancer FIGO 2018",
+      "Stage IIA2 Cervical Cancer FIGO 2018",
+      "Stage IIB Cervical Cancer FIGO 2018",
+      "Stage III Cervical Cancer FIGO 2018",
+      "Stage IIIA Cervical Cancer FIGO 2018",
+      "Stage IIIB Cervical Cancer FIGO 2018",
+      "Stage IIIC Cervical Cancer FIGO 2018",
+      "Stage IIIC1 Cervical Cancer FIGO 2018",
+      "Stage IIIC2 Cervical Cancer FIGO 2018",
+      "Stage IVA Cervical Cancer FIGO 2018"
+    ],
+    "interventions": [
+      "Cisplatin",
+      "Liposomal HPV-16 E6/E7 Multipeptide Vaccine PDS0101",
+      "Radiation Therapy"
+    ]
+  },
+  "PDSB:PDS0101:NCT04287868": {
+    "nct_id": "NCT04287868",
+    "title": "Combination Immunotherapy in Subjects With Advanced HPV Associated Malignancies",
+    "official_title": "Phase I/II Trial of Combination Immunotherapy in Subjects With Advanced HPV Associated Malignancies",
+    "status": "COMPLETED",
+    "last_update": "2026-06-30",
+    "start_date": "2020-06-09",
+    "completion_date": "2026-05-14",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 51,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "National Cancer Institute (NCI)",
+    "conditions": [
+      "Cervical Cancer",
+      "HPV Cancers",
+      "Anal Cancer",
+      "Oropharyngeal Cancer",
+      "Vulvar, Vaginal, Penile, Rectal Cancer"
+    ],
+    "interventions": [
+      "PDS0101",
+      "M7824",
+      "NHS-IL12"
+    ]
+  },
+  "PDSB:PDS0101:NCT02065973": {
+    "nct_id": "NCT02065973",
+    "title": "An Open-Label, Phase I, Escalating Dose Study to Evaluate the Safety, Tolerability, and Pharmacodynamics of PDS0101",
+    "official_title": "An Open-Label, Phase I, Escalating Dose Study to Evaluate the Safety, Tolerability, and Pharmacodynamics of PDS0101 in Subjects With Cervical Intraepithelial Neoplasia (CIN) and High-risk Human Papillomavirus (HPV) Infection",
+    "status": "COMPLETED",
+    "last_update": "2018-12-13",
+    "start_date": "2014-02",
+    "completion_date": "2015-12-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 12,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "PDS Biotechnology Corp.",
+    "conditions": [
+      "High-risk HPV Infection and Biopsy-proven CIN1"
+    ],
+    "interventions": [
+      "R-enantiomer of 1,2-dioleoyl-3-trimethylammonium-propane chloride + Peptides from HPV-16 E6 and E7"
+    ]
+  },
+  "PDSB:PDS0101:NCT06790966": {
+    "nct_id": "NCT06790966",
+    "title": "Phase 3 Study of PDS0101 and Pembrolizumab in HPV16+ Recurrent/Metastatic Head and Neck Squamous Cell Carcinoma",
+    "official_title": "A Phase 3 Open-Label, Randomized Study of PDS0101 and Pembrolizumab vs Pembrolizumab Alone in First-Line Treatment of Unresectable Recurrent and/or Metastatic HPV16+ Head and Neck Squamous Cell Carcinoma",
+    "status": "TERMINATED",
+    "last_update": "2026-09-02",
+    "start_date": "2025-05-30",
+    "completion_date": "2026-08-25",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 12,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "PDS Biotechnology Corp.",
+    "conditions": [
+      "Recurrent Head and Neck Cancer",
+      "Metastatic Head and Neck Cancer",
+      "HPV Positive Oropharyngeal Squamous Cell Carcinoma",
+      "Neoplasms, Head and Neck",
+      "Unresectable Head and Neck Squamous Cell Carcinoma"
+    ],
+    "interventions": [
+      "Combination Treatment of PDS0101 and Pembrolizumab",
+      "Pembrolizumab Monotherapy"
+    ]
+  },
+  "PDSB:PDS0101:NCT04260126": {
+    "nct_id": "NCT04260126",
+    "title": "Study of PDS0101 and Pembrolizumab Combination I/O in Subjects With HPV16 + Recurrent and/or Metastatic HNSCC",
+    "official_title": "A Phase II, Open-Label, Multi-Center Study of PDS0101 and Pembrolizumab (KEYTRUDA®) Combination Immunotherapy in Subjects With Recurrent and/or Metastatic HNSCC and High-Risk HPV16 Infection",
+    "status": "COMPLETED",
+    "last_update": "2025-10-01",
+    "start_date": "2021-03-29",
+    "completion_date": "2025-05-14",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 95,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "PDS Biotechnology Corp.",
+    "conditions": [
+      "Metastatic Head and Neck Cancer",
+      "Recurrent Head and Neck Cancer",
+      "HPV Positive Oropharyngeal Squamous Cell Carcinoma",
+      "Neoplasms, Head and Neck"
+    ],
+    "interventions": [
+      "Pembrolizumab (KEYTRUDA®) and PDS0101"
+    ]
+  },
+  "PDSB:VERSATILE-002:NCT04260126": {
+    "nct_id": "NCT04260126",
+    "title": "Study of PDS0101 and Pembrolizumab Combination I/O in Subjects With HPV16 + Recurrent and/or Metastatic HNSCC",
+    "official_title": "A Phase II, Open-Label, Multi-Center Study of PDS0101 and Pembrolizumab (KEYTRUDA®) Combination Immunotherapy in Subjects With Recurrent and/or Metastatic HNSCC and High-Risk HPV16 Infection",
+    "status": "COMPLETED",
+    "last_update": "2025-10-01",
+    "start_date": "2021-03-29",
+    "completion_date": "2025-05-14",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 95,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "PDS Biotechnology Corp.",
+    "conditions": [
+      "Metastatic Head and Neck Cancer",
+      "Recurrent Head and Neck Cancer",
+      "HPV Positive Oropharyngeal Squamous Cell Carcinoma",
+      "Neoplasms, Head and Neck"
+    ],
+    "interventions": [
+      "Pembrolizumab (KEYTRUDA®) and PDS0101"
+    ]
+  },
+  "PDSB:PDS01ADC:NCT04708470": {
+    "nct_id": "NCT04708470",
+    "title": "A Phase I/II Study of Combination Immunotherapy for Advanced Cancers Including HPV-Associated Malignancies, Small Bowel, and Colon Cancers",
+    "official_title": "A Phase I/II Study of Combination Immunotherapy for Advanced Cancers Including HPV-Associated Malignancies, Small Bowel, and Colon Cancers",
+    "status": "COMPLETED",
+    "last_update": "2026-09-22",
+    "start_date": "2021-10-05",
+    "completion_date": "2026-08-21",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 55,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "National Cancer Institute (NCI)",
+    "conditions": [
+      "Oropharyngeal Cancer",
+      "Neck Cancer",
+      "Human Papillomavirus",
+      "HPV",
+      "Anal Cancer",
+      "Cervical Cancer",
+      "Penile Cancer",
+      "Vulvar Cancer",
+      "Vaginal Cancer",
+      "Colon Cancer"
+    ],
+    "interventions": [
+      "Bintrafusp Alfa",
+      "PDS01ADC",
+      "Entinostat"
+    ]
+  },
+  "PDSB:PDS01ADC:NCT06096870": {
+    "nct_id": "NCT06096870",
+    "title": "Enzalutamide and PDS01ADC in PET Positive Recurrent Prostate Cancer (pprPC) Without Testosterone Lowering Therapy",
+    "official_title": "Phase II Trial of Enzalutamide and PDS01ADC in PET Positive Recurrent Prostate Cancer (pprPC) Without Testosterone Lowering Therapy",
+    "status": "RECRUITING",
+    "last_update": "2026-09-03",
+    "start_date": "2024-04-22",
+    "completion_date": "2029-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 65,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "National Cancer Institute (NCI)",
+    "conditions": [
+      "Prostate Cancer",
+      "Recurrent Prostate Cancer",
+      "PET Positive"
+    ],
+    "interventions": [
+      "Enzalutamide",
+      "PDS01ADC"
+    ]
+  },
+  "PDSB:PDS01ADC:NCT04303117": {
+    "nct_id": "NCT04303117",
+    "title": "PDS01ADC Monotherapy and in Combination With M7824 in Advanced Kaposi Sarcoma",
+    "official_title": "Phase I/II Study of PDS01ADC Monotherapy and in Combination With M7824 in Advanced Kaposi Sarcoma",
+    "status": "RECRUITING",
+    "last_update": "2026-08-24",
+    "start_date": "2020-07-13",
+    "completion_date": "2028-12-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 80,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "National Cancer Institute (NCI)",
+    "conditions": [
+      "Kaposi Sarcoma"
+    ],
+    "interventions": [
+      "PDS01ADC",
+      "M7824"
+    ]
+  },
+  "PDSB:PDS01ADC:NCT04235777": {
+    "nct_id": "NCT04235777",
+    "title": "Bintrafusp Alfa (M7824) and PDS01ADC Alone and in Combination With Stereotactic Body Radiation Therapy (SBRT) in Adults With Metastatic Non-Prostate Genitourinary Malignancies",
+    "official_title": "A Phase I Study of Bintrafusp Alfa (M7824) and PDS01ADC Alone and in Combination With Stereotactic Body Radiation Therapy (SBRT) in Adults With Metastatic Non-Prostate Genitourinary Malignancies",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-09-28",
+    "start_date": "2020-07-13",
+    "completion_date": "2028-12-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 22,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "National Cancer Institute (NCI)",
+    "conditions": [
+      "Urothelial Cancer",
+      "Bladder Cancer",
+      "Genitourinary Cancer",
+      "Urogenital Neoplasms",
+      "Urogenital Cancer"
+    ],
+    "interventions": [
+      "Stereotactic body radiation therapy (SBRT)",
+      "PDS01ADC",
+      "M7824"
+    ]
+  },
+  "PDSB:PDS01ADC:NCT05361798": {
+    "nct_id": "NCT05361798",
+    "title": "A Phase II Study Evaluating T-Cell Clonality After Stereotactic Body Radiation Therapy Alone and in Combination With the Immunocytokine PDS01ADC in Localized High and Intermediate Risk Prostate Cancer Treated With Androgen Deprivation Therapy",
+    "official_title": "A Phase II Study Evaluating T-Cell Clonality After Stereotactic Body Radiation Therapy Alone and in Combination With the Immunocytokine PDS01ADC in Localized High and Intermediate Risk Prostate Cancer Treated With Androgen Deprivation Therapy",
+    "status": "RECRUITING",
+    "last_update": "2026-09-18",
+    "start_date": "2023-06-12",
+    "completion_date": "2027-12-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 65,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "National Cancer Institute (NCI)",
+    "conditions": [
+      "Cancer Of Prostate"
+    ],
+    "interventions": [
+      "PDS01ADC",
+      "Stereotactic Body Radiation Therapy (SBRT)"
+    ]
+  },
+  "PDSB:PDS01ADC:NCT04633252": {
+    "nct_id": "NCT04633252",
+    "title": "A Phase I/II Study of PDS01ADC With Docetaxel and Abiraterone in Adults With Metastatic Castration Sensitive and PDS01ADC With Docetaxel in Castration Resistant Prostate Cancer",
+    "official_title": "A Phase I/II Study of PDS01ADC With Docetaxel and Abiraterone in Adults With Metastatic Castration Sensitive and PDS01ADC With Docetaxel in Castration Resistant Prostate Cancer",
+    "status": "RECRUITING",
+    "last_update": "2026-09-03",
+    "start_date": "2021-02-23",
+    "completion_date": "2026-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 86,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "National Cancer Institute (NCI)",
+    "conditions": [
+      "Cancer Of Prostate",
+      "Prostate Neoplasms"
+    ],
+    "interventions": [
+      "PDS01ADC",
+      "Docetaxel",
+      "M7824",
+      "Prednisone",
+      "ADT"
+    ]
+  },
+  "PDSB:PDS01ADC:NCT05286814": {
+    "nct_id": "NCT05286814",
+    "title": "PDS01ADC in Combination With Hepatic Artery Infusion Pump (HAIP) and Systemic Therapy for Subjects With Metastatic Colorectal Cancer, Intrahepatic Cholangiocarcinoma, or Metastatic Adrenocortical Carcinoma",
+    "official_title": "Phase II Study Evaluating the Efficacy of PDS01ADC in Combination With Hepatic Artery Infusion Pump (HAIP) and Systemic Therapy for Subjects With Metastatic Colorectal Cancer, Intrahepatic Cholangiocarcinoma, or Metastatic Adrenocortical Carcinoma",
+    "status": "RECRUITING",
+    "last_update": "2026-10-01",
+    "start_date": "2022-10-24",
+    "completion_date": "2028-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 70,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "National Cancer Institute (NCI)",
+    "conditions": [
+      "Metastatic Colorectal Cancer (Mcrc)",
+      "Intrahepatic Cholangiocarcinoma (Icc)",
+      "Intrahepatic Bile Duct Cancer",
+      "Colorectal Neoplasms",
+      "Colorectal Cancer",
+      "Cholangiocarcinoma",
+      "Bile Duct Neoplasms",
+      "Bile Duct Cancer",
+      "Adrenocortical Carcinoma (ACC)",
+      "Adrenal Cortical Carcinoma",
+      "Adrenal Gland Cancer",
+      "Adrenal Gland Neoplasms",
+      "Adrenal Cortex Neoplasms"
+    ],
+    "interventions": [
+      "Dexamethasone",
+      "PDS01ADC",
+      "Intera 3000 Hepatic Artery Infusion Pump (HAIP)",
+      "Floxuridine"
+    ]
+  },
   "PMVP:rezatapopt:NCT07372625": {
     "nct_id": "NCT07372625",
     "title": "A Study to Investigate the Effects of Multiple Doses of Rezatapopt on the Pharmacokinetics of Metformin, Rosuvastatin, Repaglinide, and Midazolam in Patients With Advanced Solid Tumors Harboring a TP53 Y220C Mutation.",
