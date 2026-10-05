@@ -140,6 +140,7 @@ def build_daily_top5(watchlist=None, history=None, snapshot_fn=get_market_snapsh
     watchlist = watchlist if watchlist is not None else load_watchlist()
     history = history if history is not None else load_catalyst_history()
     rows = []
+    reference_now = _reference_time(date_value)
     for ticker, meta in watchlist.items():
         snapshot = snapshot_fn(ticker)
         if not snapshot or snapshot.get("price_change_pct") is None:
@@ -156,9 +157,9 @@ def build_daily_top5(watchlist=None, history=None, snapshot_fn=get_market_snapsh
             "price": snapshot.get("price"),
             "market_data_source": snapshot.get("market_data_source"),
             "catalyst_found": catalyst is not None,
-            "catalyst_freshness": _catalyst_freshness(catalyst),
+            "catalyst_freshness": _catalyst_freshness(catalyst, reference_now),
             "catalyst_primary_source": _source_is_primary(catalyst),
-            "alert_quality_gate": _alert_quality_gate(catalyst, meta=meta),
+            "alert_quality_gate": _alert_quality_gate(catalyst, now=reference_now, meta=meta),
             "catalyst_subtype": catalyst.get("subtype") if catalyst else None,
             "catalyst_program": catalyst.get("program") if catalyst else None,
             "catalyst_source": catalyst.get("source") if catalyst else None,
