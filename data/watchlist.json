@@ -295,7 +295,8 @@
       "Apitox",
       "LT-100"
     ],
-    "priority": "ORANGE"
+    "priority": "ORANGE",
+    "radar_role": "MARKET_MOVE_WATCH_UNEXPLAINED"
   },
   "PFSA": {
     "company": "Profusa",
@@ -514,6 +515,56 @@
       "United Therapeutics"
     ],
     "radar_role": "COMMERCIAL_CATALYST_WATCH"
+  },
+  "PCVX": {
+    "company": "Vaxcyte",
+    "programs": [
+      "VAX-31",
+      "VAX-31 OPUS-1",
+      "VAX-31 OPUS-2",
+      "VAX-31 OPUS-3"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Vaxcyte",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "ALEC": {
+    "company": "Alector",
+    "programs": [
+      "AL050",
+      "Alector Brain Carrier (ABC)",
+      "AL137",
+      "AL164"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Alector",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "STRATEGIC_REGULATORY_COMMERCIAL_CATALYST"
+  },
+  "PDSB": {
+    "company": "PDS Biotechnology",
+    "programs": [
+      "PDS0101",
+      "VERSATILE-002",
+      "PDS01ADC"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "PDS Biotech",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_CATALYST_WATCH"
   },
   "PMVP": {
     "company": "PMV Pharmaceuticals",
