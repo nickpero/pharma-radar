@@ -196,3 +196,44 @@ def test_missing_timestamp_is_quality_gated():
     )
     assert rows[0]["alert_quality_gate"]["eligible"] is False
     assert rows[0]["alert_quality_gate"]["reason"] == "EVENT_TIMESTAMP_MISSING"
+
+
+def test_72h_window_links_prior_day_catalyst():
+    watchlist = {"PCVX": {"company": "Vaxcyte", "programs": ["VAX-31"]}}
+    history = {"x": {
+        "ticker": "PCVX",
+        "event_timestamp": "2026-10-04T14:00:00+00:00",
+        "subtype": "TOPLINE_RESULTS",
+        "program": "VAX-31",
+        "source": "COMPANY IR",
+        "source_type": "PRIMARY_CORPORATE",
+        "alert_priority": 100,
+    }}
+    rows = build_daily_top5(
+        watchlist=watchlist, history=history,
+        snapshot_fn=lambda ticker: snapshot(30.0, 10.0),
+        date_value="2026-10-05",
+    )
+    assert rows[0]["catalyst_found"] is True
+    assert rows[0]["catalyst_freshness"] == "REACTION_24_72H"
+    assert rows[0]["catalyst_program"] == "VAX-31"
+
+
+def test_catalyst_program_must_be_verified_for_quality_gate():
+    watchlist = {"APUS": {"company": "Apimeds Pharmaceuticals US", "programs": ["Apitox", "LT-100"]}}
+    history = {"x": {
+        "ticker": "APUS",
+        "event_timestamp": "2026-10-05T14:00:00+00:00",
+        "subtype": "COMMERCIAL_PARTNERSHIP",
+        "program": None,
+        "source": "COMPANY IR",
+        "source_type": "PRIMARY_CORPORATE",
+        "alert_priority": 100,
+    }}
+    rows = build_daily_top5(
+        watchlist=watchlist, history=history,
+        snapshot_fn=lambda ticker: snapshot(40.0, 20.0),
+        date_value="2026-10-05",
+    )
+    assert rows[0]["alert_quality_gate"]["eligible"] is False
+    assert rows[0]["alert_quality_gate"]["reason"] == "PROGRAM_NOT_VERIFIED"
