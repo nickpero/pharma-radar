@@ -58,6 +58,21 @@ def enrich_clinical_impact(event):
     result = dict(event or {})
     text = _text(result)
     subtype = str(result.get("subtype") or "").upper()
+    review_only = subtype == "CLINICAL_REVIEW_UPDATE" and not any(
+        p in text for p in (
+            "interim efficacy results", "interim efficacy data",
+            "interim clinical results", "interim topline", "interim top-line",
+            "unblinded results", "unblinded data", "primary endpoint",
+            "met the primary endpoint", "failed to meet the primary endpoint",
+        )
+    )
+    if review_only:
+        result["catalyst_category"] = "CLINICAL_REVIEW"
+        result["clinical_data_release"] = False
+        result["novelty_score"] = 0
+        result["market_impact_score"] = 0
+        result["market_impact_label"] = "LOW"
+        return result
     clinical = (
         result.get("catalyst_category") == "CLINICAL_DATA_RELEASE"
         or subtype in {"CLINICAL_RESULTS", "TOPLINE_RESULTS", "PRIMARY_ENDPOINT_MET", "PRIMARY_ENDPOINT_FAILED",
