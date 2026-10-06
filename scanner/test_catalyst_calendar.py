@@ -63,3 +63,20 @@ if __name__ == "__main__":
     test_completed_trials_are_excluded()
     test_format()
     print("Catalyst calendar tests passed")
+
+
+def test_completion_is_not_a_clinical_readout():
+    rows = build_upcoming_calendar(
+        days=30,
+        watchlist={"ABC": {"company": "ABC", "programs": ["Drug A"]}},
+        trials={"ABC:Drug A:NCT1": {
+            "nct_id": "NCT1",
+            "status": "RECRUITING",
+            "primary_completion_date": "2026-10-10",
+            "phases": ["PHASE3"],
+        }},
+        today=date(2026, 10, 6),
+    )
+    assert rows[0]["milestone"] == "PRIMARY_COMPLETION"
+    assert rows[0]["milestone_type"] == "EXPECTED_TRIAL_COMPLETION"
+    assert rows[0]["clinical_outcome_available"] is False
