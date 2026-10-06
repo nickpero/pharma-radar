@@ -59,6 +59,9 @@ def build_upcoming_calendar(days=90, watchlist=None, trials=None, today=None):
                 "phase": (trial.get("phases") or [None])[0],
                 "status": status,
                 "milestone": label,
+                "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+                "actionability": "WATCH",
+                "clinical_outcome_available": False,
                 "date": parsed.isoformat(),
                 "date_precision": precision,
                 "source": "ClinicalTrials.gov/Radar state",
@@ -82,6 +85,7 @@ def format_calendar(rows, days=90):
         lines.extend([
             f"📅 {date_text} · {row['ticker']} · {row['milestone']}",
             f"💊 {row['programs'][0] if row['programs'] else row['title'] or 'UNKNOWN'} · {row['phase'] or 'PHASE UNKNOWN'}",
+            "ℹ️ Expected trial milestone — not itself a clinical readout.",
             f"🔬 {row['nct_id'] or 'N/A'} · {row['status']}",
             "",
         ])
