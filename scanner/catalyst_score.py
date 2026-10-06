@@ -18,6 +18,7 @@ EVENT_SCORES = {
     # Completion alone is informational; actual results/topline
     # events carry the clinical outcome.
     "TRIAL_COMPLETED": 20,
+    "CLINICAL_REVIEW_UPDATE": 25,
     "ENROLLMENT_COMPLETED": 85,
     "PHASE_3_STARTED": 85,
     "PHASE_ADVANCED": 85,
