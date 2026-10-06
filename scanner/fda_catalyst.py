@@ -16,6 +16,13 @@ PHASE_ADVANCEMENT_PATTERNS = ("phase advancement","advanced to phase","advances 
 EXPLORATORY_PATTERNS = ("exploratory analysis","exploratory analyses","exploratory data","exploratory endpoint","exploratory endpoints","post-hoc analysis","post hoc analysis","post-hoc analyses","post hoc analyses","subgroup analysis","subgroup analyses","subgroup data")
 DEVELOPMENT_MILESTONE_PATTERNS = ("successfully formulate", "successful completion of formulation", "completed formulation work", "formulation milestone", "development milestone", "program milestone", "advances the program", "advances development", "program advances", "initiates study", "initiates a study", "begins study", "starts study", "study initiation", "enrollment begins", "begins enrollment", "first patient dosed", "first patient enrolled", "dosing begins", "dosing initiated")
 PHASE_DATA_UPDATE_PATTERNS = ("phase 1 results","phase 2 results","phase 3 results","phase 1 data","phase 2 data","phase 3 data","phase i results","phase ii results","phase iii results","phase i data","phase ii data","phase iii data","phase 1 clinical trial","phase 2 clinical trial","phase 3 clinical trial","phase 1 study","phase 2 study","phase 3 study","phase i study","phase ii study","phase iii study","open-label extension","open label extension")
+CLINICAL_REVIEW_PATTERNS = (
+    "dsmb review", "dsmb safety review", "data safety monitoring board",
+    "safety review completed", "safety review found no concerns",
+    "remains blinded", "study remains blinded", "trial remains blinded",
+    "blinded interim review", "blinded review", "without unblinding",
+    "enrollment completed", "closed enrollment",
+)
 
 ADVANCED_RULES = [
     ("DEVELOPMENT_MILESTONE", "POSITIVE", "HIGH", DEVELOPMENT_MILESTONE_PATTERNS),
@@ -31,6 +38,7 @@ ADVANCED_RULES = [
     ("EXPLORATORY_DATA", "POSITIVE", "MEDIUM", EXPLORATORY_PATTERNS),
     ("PHASE_DATA_UPDATE", "POSITIVE", "HIGH", PHASE_DATA_UPDATE_PATTERNS),
     ("CLINICAL_RESULT", "POSITIVE", "HIGH", ("clinical trial results", "clinical study results", "clinical results", "topline results", "trial results")),
+    ("CLINICAL_REVIEW_UPDATE", "UNKNOWN", "MEDIUM", CLINICAL_REVIEW_PATTERNS),
     ("PHASE_ADVANCEMENT", "POSITIVE", "HIGH", PHASE_ADVANCEMENT_PATTERNS),
     ("DATE_ACCELERATED", "POSITIVE", "HIGH", ("accelerated timeline", "date accelerated", "accelerated the timeline", "earlier than expected")),
     ("DATE_DELAYED", "NEGATIVE", "HIGH", ("delayed timeline", "date delayed", "delay in the timeline", "later than expected", "delayed submission")),
@@ -118,6 +126,26 @@ def classify_fda_catalyst(news_item):
                 "urgency": "EXTREME",
                 "classification_source": "explicit_fda_approval",
             }
+
+    # Separate a blinded/DSMB/interim safety review from an actual clinical
+    # readout. A review can be market-relevant, but it does not disclose
+    # efficacy/top-line outcomes and must not be scored as clinical results.
+    review_hit = any(_matches(text, p) for p in CLINICAL_REVIEW_PATTERNS)
+    efficacy_disclosure = any(
+        _matches(text, p) for p in (
+            "interim efficacy results", "interim efficacy data",
+            "interim clinical results", "interim topline", "interim top-line",
+            "unblinded results", "unblinded data", "primary endpoint",
+            "met the primary endpoint", "failed to meet the primary endpoint",
+        )
+    )
+    if review_hit and not efficacy_disclosure:
+        return {
+            "catalyst_type": "CLINICAL_REVIEW_UPDATE",
+            "direction": "UNKNOWN",
+            "urgency": "MEDIUM",
+            "classification_source": "clinical_review",
+        }
 
     # Classify the most specific clinical event first. Phase numbers alone
     # never imply a phase advancement. For primary corporate/SEC material,
