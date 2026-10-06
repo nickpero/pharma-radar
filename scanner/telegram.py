@@ -44,6 +44,7 @@ EVENT_DISPLAY_NAMES = {
     "EXPLORATORY_DATA": "EXPLORATORY DATA",
     "DATE_ACCELERATED": "DATE ACCELERATED",
     "DATE_DELAYED": "DATE DELAYED",
+    "CLINICAL_REVIEW_UPDATE": "CLINICAL REVIEW UPDATE",
 }
 
 
@@ -179,6 +180,7 @@ def _why_it_matters(alert, event, subtype):
         "FDA_REJECTION": "FDA rejection is a major regulatory setback that can materially change the program's commercial outlook.",
         "FDA_SAFETY_WARNING": "A new FDA safety warning can materially affect the product's risk profile, label and commercial outlook.",
         "CLINICAL_RESULTS": "Clinical results can materially change the probability of success and valuation of the program.",
+        "CLINICAL_REVIEW_UPDATE": "A DSMB/blinded/interim review may update development expectations, but it is not a disclosed efficacy or top-line readout.",
         "LABEL_EXPANSION": "A label expansion increases the addressable patient population and can materially change the product's commercial opportunity.",
     }
     return fallback.get(str(subtype).upper())
