@@ -269,3 +269,75 @@ def test_verified_program_catalyst_wins_over_later_unscoped_event():
     assert rows[0]["catalyst_program"] == "VAX-31"
     assert rows[0]["classification"] == "FUNDAMENTAL_OR_CLINICAL_CATALYST"
     assert rows[0]["alert_quality_gate"]["eligible"] is True
+
+
+def test_quality_gate_blocks_radar_inclusion_for_secondary_source():
+    watchlist = {"ABC": {"company": "ABC Pharma", "programs": ["Drug A"]}}
+    history = {"x": {
+        "ticker": "ABC",
+        "event_timestamp": "2026-09-29T12:00:00+00:00",
+        "subtype": "FDA_APPROVAL",
+        "program": "Drug A",
+        "source": "REUTERS",
+        "alert_priority": 100,
+    }}
+    rows = build_daily_top5(
+        watchlist=watchlist, history=history,
+        snapshot_fn=lambda ticker: snapshot(20.0, 8.0),
+        date_value="2026-09-29",
+    )
+    assert rows[0]["radar_inclusion"] == "NO_NEW_ALERT"
+    assert "Quality Gate" in rows[0]["radar_reason"]
+
+
+def test_primary_fundamental_catalyst_is_radar_candidate():
+    watchlist = {"LPCN": {"company": "Lipocine", "programs": ["TLANDO", "LPCN 1154"]}}
+    history = {"x": {
+        "ticker": "LPCN",
+        "event_timestamp": "2026-10-07T12:00:00+00:00",
+        "subtype": "FDA_APPROVAL",
+        "program": "TLANDO",
+        "source": "COMPANY IR",
+        "source_type": "PRIMARY_CORPORATE",
+        "alert_priority": 100,
+    }}
+    rows = build_daily_top5(
+        watchlist=watchlist, history=history,
+        snapshot_fn=lambda ticker: snapshot(5.95, 80.0),
+        date_value="2026-10-07",
+    )
+    assert rows[0]["classification"] == "FUNDAMENTAL_OR_CLINICAL_CATALYST"
+    assert rows[0]["radar_inclusion"] == "INCLUDE_IF_MATERIAL"
+    assert rows[0]["catalyst_program"] == "TLANDO"
+
+
+def test_timeline_change_is_watch_only_not_fundamental():
+    watchlist = {"ABC": {"company": "ABC Pharma", "programs": ["Drug A"]}}
+    history = {"x": {
+        "ticker": "ABC",
+        "event_timestamp": "2026-09-29T12:00:00+00:00",
+        "subtype": "DATE_DELAYED",
+        "program": "Drug A",
+        "source": "CLINICALTRIALS",
+        "source_type": "PRIMARY_TRIAL",
+        "alert_priority": 75,
+    }}
+    rows = build_daily_top5(
+        watchlist=watchlist, history=history,
+        snapshot_fn=lambda ticker: snapshot(12.0, 3.0),
+        date_value="2026-09-29",
+    )
+    assert rows[0]["classification"] == "DEVELOPMENT_MILESTONE_WATCH"
+    assert rows[0]["radar_inclusion"] == "WATCH_ONLY"
+
+
+def test_unexplained_microcap_move_stays_out_of_radar():
+    watchlist = {"SXTC": {"company": "China SXT Pharmaceuticals", "programs": []}}
+    rows = build_daily_top5(
+        watchlist=watchlist,
+        history={},
+        snapshot_fn=lambda ticker: snapshot(376.8, 50.0),
+        date_value="2026-10-07",
+    )
+    assert rows[0]["classification"] == "MARKET_MOVE_UNEXPLAINED"
+    assert rows[0]["radar_inclusion"] == "WATCH_UNEXPLAINED_MOVE"
