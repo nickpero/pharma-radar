@@ -11654,5 +11654,61 @@
       "rezatapopt",
       "pembrolizumab"
     ]
+  },
+  "LPCN:LPCN 1154:NCT06979544": {
+    "nct_id": "NCT06979544",
+    "title": "A Study to Assess the Safety and Efficacy of Oral LPCN 1154A in Women With Severe PPD",
+    "official_title": "A Randomized, Blinded, Placebo-Controlled Study to Evaluate the Saftey and Efficacy of Oral LPCN 1154A in Women With Postpartum Depression",
+    "status": "COMPLETED",
+    "last_update": "2026-02-24",
+    "start_date": "2025-06-16",
+    "completion_date": "2026-02-17",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 90,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Lipocine Inc.",
+    "conditions": [
+      "Depression, Postpartum",
+      "Depression, Post-Partum",
+      "Postpartum Depression (PPD)",
+      "Post-Natal Depression",
+      "Peripartum Depression",
+      "Postnatal Depression"
+    ],
+    "interventions": [
+      "LPCN 1154A",
+      "Placebo"
+    ]
+  },
+  "LPCN:LPCN 1154:NCT07822321": {
+    "nct_id": "NCT07822321",
+    "title": "Brexanolone Lifting Outcomes Of Moms",
+    "official_title": "A Randomized, Blinded, Placebo-Controlled Study to Evaluate the Safety and Efficacy of Oral LPCN 1154A in Women With Postpartum Depression",
+    "status": "RECRUITING",
+    "last_update": "2026-09-16",
+    "start_date": "2026-09",
+    "completion_date": "2027-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 120,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Lipocine Inc.",
+    "conditions": [
+      "Depression, Postpartum",
+      "Postpartum Depression (PPD)",
+      "Post-partum Depression",
+      "Postnatal Depression",
+      "Post-Natal Depression",
+      "Peripartum Depression"
+    ],
+    "interventions": [
+      "LPCN 1154A",
+      "Placebo"
+    ]
   }
 }
