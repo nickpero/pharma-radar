@@ -190,3 +190,21 @@ def test_vbio_oral_mucosal_formulation_is_development_milestone():
     })
     assert event["subtype"] == "DEVELOPMENT_MILESTONE"
     assert event["direction"] == "POSITIVE"
+
+
+def test_health_canada_approval_is_regulatory_approval():
+    event = classify_fda_catalyst({
+        "title": "Lipocine Announces Health Canada Approval of TLANDO",
+        "summary": "Health Canada has approved TLANDO for testosterone replacement therapy.",
+        "source": "SEC",
+        "source_type": "PRIMARY_CORPORATE",
+    })
+    assert event["catalyst_type"] == "REGULATORY_APPROVAL"
+    built = build_fda_catalyst({
+        "title": "Lipocine Announces Health Canada Approval of TLANDO",
+        "summary": "Health Canada has approved TLANDO for testosterone replacement therapy.",
+        "source": "SEC",
+        "source_type": "PRIMARY_CORPORATE",
+        "published_at": "2026-10-07T12:00:00+00:00",
+    })
+    assert built["subtype"] == "REGULATORY_APPROVAL"
