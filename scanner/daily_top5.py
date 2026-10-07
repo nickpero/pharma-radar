@@ -174,11 +174,13 @@ def build_daily_top5(watchlist=None, history=None, snapshot_fn=get_market_snapsh
                 catalyst,
                 meta,
                 _alert_quality_gate(catalyst, now=reference_now, meta=meta),
+                _catalyst_freshness(catalyst, reference_now),
             ),
             "radar_reason": _radar_reason(
                 catalyst,
                 meta,
                 _alert_quality_gate(catalyst, now=reference_now, meta=meta),
+                _catalyst_freshness(catalyst, reference_now),
             ),
         })
     rows.sort(key=lambda item: item["price_change_pct"], reverse=True)
@@ -223,12 +225,14 @@ def _catalyst_evidence(catalyst):
     return str(catalyst.get("catalyst_evidence") or catalyst.get("evidence_class")
                or "RADAR_RECORDED_EVENT").upper()
 
-def _radar_inclusion(catalyst, meta, quality_gate=None):
+def _radar_inclusion(catalyst, meta, quality_gate=None, freshness=None):
     if not catalyst:
         return str((meta or {}).get("radar_role") or "WATCH_UNEXPLAINED_MOVE").upper()
     gate = quality_gate or {}
     if not gate.get("eligible", False):
         return "NO_NEW_ALERT"
+    if freshness in {"REACTION_24_72H", "HISTORICAL_GT_72H"}:
+        return "REACTION_ONLY_NO_NEW_ALERT"
     subtype = str(catalyst.get("subtype") or catalyst.get("type") or "").upper()
     if subtype in FUNDAMENTAL_SUBTYPES:
         return "INCLUDE_IF_MATERIAL"
@@ -237,13 +241,18 @@ def _radar_inclusion(catalyst, meta, quality_gate=None):
     return "WATCH_ONLY"
 
 
-def _radar_reason(catalyst, meta, quality_gate=None):
+def _radar_reason(catalyst, meta, quality_gate=None, freshness=None):
     if catalyst:
         gate = quality_gate or {}
         if not gate.get("eligible", False):
             return (
                 "Catalyst linked to the move but blocked by the Quality Gate: "
                 f"{gate.get('reason', 'UNVERIFIED')}."
+            )
+        if freshness in {"REACTION_24_72H", "HISTORICAL_GT_72H"}:
+            return (
+                "Existing catalyst is outside the new-event window; "
+                "track the market reaction but do not emit a new catalyst alert."
             )
         subtype = str(catalyst.get("subtype") or catalyst.get("type") or "").upper()
         if subtype in FUNDAMENTAL_SUBTYPES:
