@@ -207,6 +207,7 @@ def format_report(candidates, phase="FINAL", now=None, calendar_rows=None):
             f"📈 Pre-market: {change_text}",
             f"🔎 Source: {catalyst.get('source') or 'MARKET DATA'}",
             f"🧭 Origin: {catalyst.get('catalyst_origin') or 'SCHEDULED/RECORDED'}",
+            f"🧭 Origin: {catalyst.get('catalyst_origin') or 'SCHEDULED/RECORDED'}",
             "",
         ]
     calendar_rows = calendar_rows if calendar_rows is not None else build_upcoming_calendar(days=CALENDAR_DAYS)
