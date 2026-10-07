@@ -86,11 +86,12 @@ def get_premarket_snapshot(ticker, session=None):
         return None
 
 
-def recent_catalysts(max_age_hours=24):
+def recent_catalysts(max_age_hours=24, now=None):
+    """Read recent catalyst memory in either dict- or list-backed format."""
     data = _load(HISTORY_FILE, [])
     if isinstance(data, dict):
-        data = data.get("events") or data.get("history") or data.get("records") or []
-    now = datetime.now(timezone.utc)
+        data = data.get("events") or data.get("history") or data.get("records") or list(data.values())
+    now = now or datetime.now(timezone.utc)
     rows = []
     for row in data if isinstance(data, list) else []:
         if not isinstance(row, dict):
@@ -100,6 +101,11 @@ def recent_catalysts(max_age_hours=24):
             continue
         item = dict(row)
         item["_ts"] = dt
+        recorded = _timestamp(item.get("recorded_at"))
+        event_day = dt.astimezone(ROME).date()
+        today = now.astimezone(ROME).date()
+        item["catalyst_origin"] = item.get("catalyst_origin") or ("EMERGED_TODAY" if event_day == today else "RECENT_CONFIRMED")
+        item["detected_at"] = recorded.isoformat() if recorded else item.get("recorded_at")
         rows.append(item)
     rows.sort(key=lambda x: x["_ts"], reverse=True)
     return rows
@@ -153,7 +159,7 @@ def build_candidates(now=None, session=None):
     now = now or datetime.now(timezone.utc)
     watchlist = _load(WATCHLIST_FILE, {})
     best = {}
-    for row in recent_catalysts():
+    for row in recent_catalysts(now=now):
         ticker = str(row.get("ticker") or "").upper()
         if ticker and ticker not in best:
             best[ticker] = row
@@ -200,6 +206,7 @@ def format_report(candidates, phase="FINAL", now=None, calendar_rows=None):
             f"🧠 Confidence: {item['confidence']}",
             f"📈 Pre-market: {change_text}",
             f"🔎 Source: {catalyst.get('source') or 'MARKET DATA'}",
+            f"🧭 Origin: {catalyst.get('catalyst_origin') or 'SCHEDULED/RECORDED'}",
             "",
         ]
     calendar_rows = calendar_rows if calendar_rows is not None else build_upcoming_calendar(days=CALENDAR_DAYS)
