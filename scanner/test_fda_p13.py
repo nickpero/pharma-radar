@@ -200,6 +200,8 @@ def test_health_canada_approval_is_regulatory_approval():
         "source_type": "PRIMARY_CORPORATE",
     })
     assert event["catalyst_type"] == "REGULATORY_APPROVAL"
+    assert classify_fda_catalyst({"title": "Health Canada has approved TLANDO"})["catalyst_type"] == "REGULATORY_APPROVAL"
+    assert classify_fda_catalyst({"title": "Health Canada Approval of TLANDO"})["catalyst_type"] == "REGULATORY_APPROVAL"
     built = build_fda_catalyst({
         "title": "Lipocine Announces Health Canada Approval of TLANDO",
         "summary": "Health Canada has approved TLANDO for testosterone replacement therapy.",
