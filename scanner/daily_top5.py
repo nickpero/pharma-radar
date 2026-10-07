@@ -168,6 +168,8 @@ def build_daily_top5(watchlist=None, history=None, snapshot_fn=get_market_snapsh
             "catalyst_source": catalyst.get("source") if catalyst else None,
             "catalyst_priority": catalyst.get("alert_priority") if catalyst else None,
             "catalyst_url": catalyst.get("url") if catalyst else None,
+            "catalyst_origin": catalyst.get("catalyst_origin") if catalyst else None,
+            "catalyst_detected_at": catalyst.get("detected_at") if catalyst else None,
             "classification": _classify_row(catalyst, meta),
             "catalyst_evidence": _catalyst_evidence(catalyst),
             "radar_inclusion": _radar_inclusion(
@@ -323,6 +325,7 @@ def format_daily_top5(rows, date_value=None):
             f"   🔎 {classification}",
             f"   🧠 Evidence: {row.get('catalyst_evidence', 'N/A')}",
             f"   📚 Source: {row.get('catalyst_source') or 'N/A'}",
+            f"   🧭 Origin: {row.get('catalyst_origin') or 'SCHEDULED/RECORDED'}",
             f"   📡 Radar: {row.get('radar_inclusion', 'N/A')}",
             f"   🛡️ Quality Gate: {(row.get('alert_quality_gate') or {}).get('reason', 'N/A')}",
             f"   ℹ️ Why: {row.get('radar_reason', 'N/A')}",
