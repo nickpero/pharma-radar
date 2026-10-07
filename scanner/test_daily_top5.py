@@ -341,3 +341,23 @@ def test_unexplained_microcap_move_stays_out_of_radar():
     )
     assert rows[0]["classification"] == "MARKET_MOVE_UNEXPLAINED"
     assert rows[0]["radar_inclusion"] == "WATCH_UNEXPLAINED_MOVE"
+
+
+def test_prior_day_fundamental_reaction_does_not_create_new_alert():
+    watchlist = {"PCVX": {"company": "Vaxcyte", "programs": ["VAX-31"]}}
+    history = {"x": {
+        "ticker": "PCVX",
+        "event_timestamp": "2026-10-05T14:00:00+00:00",
+        "subtype": "TOPLINE_RESULTS",
+        "program": "VAX-31",
+        "source": "COMPANY IR",
+        "source_type": "PRIMARY_CORPORATE",
+        "alert_priority": 100,
+    }}
+    rows = build_daily_top5(
+        watchlist=watchlist, history=history,
+        snapshot_fn=lambda ticker: snapshot(-11.6, 4.5),
+        date_value="2026-10-06",
+    )
+    assert rows[0]["catalyst_freshness"] == "REACTION_24_72H"
+    assert rows[0]["radar_inclusion"] == "REACTION_ONLY_NO_NEW_ALERT"
