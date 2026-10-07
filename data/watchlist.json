@@ -580,5 +580,22 @@
       "ClinicalTrials.gov"
     ],
     "radar_role": "CLINICAL_CATALYST_WATCH"
+  },
+  "LPCN": {
+    "company": "Lipocine",
+    "programs": [
+      "TLANDO",
+      "LPCN 1154",
+      "BLOOM Phase 3"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Lipocine",
+      "Health Canada",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_REGULATORY_CATALYST"
   }
 }
