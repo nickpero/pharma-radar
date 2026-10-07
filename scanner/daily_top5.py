@@ -170,11 +170,35 @@ def build_daily_top5(watchlist=None, history=None, snapshot_fn=get_market_snapsh
             "catalyst_url": catalyst.get("url") if catalyst else None,
             "classification": _classify_row(catalyst, meta),
             "catalyst_evidence": _catalyst_evidence(catalyst),
-            "radar_inclusion": _radar_inclusion(catalyst, meta),
-            "radar_reason": _radar_reason(catalyst, meta),
+            "radar_inclusion": _radar_inclusion(
+                catalyst,
+                meta,
+                _alert_quality_gate(catalyst, now=reference_now, meta=meta),
+            ),
+            "radar_reason": _radar_reason(
+                catalyst,
+                meta,
+                _alert_quality_gate(catalyst, now=reference_now, meta=meta),
+            ),
         })
     rows.sort(key=lambda item: item["price_change_pct"], reverse=True)
     return rows[:5]
+
+
+FUNDAMENTAL_SUBTYPES = {
+    "TOPLINE_RESULTS", "PRIMARY_ENDPOINT_MET", "PRIMARY_ENDPOINT_FAILED",
+    "FDA_APPROVAL", "FDA_REJECTION", "FDA_SAFETY_WARNING",
+    "PHASE_ADVANCED", "PHASE_DATA_UPDATE", "CLINICAL_RESULTS",
+    "CLINICAL_DATA_RELEASE", "COMMERCIAL_CATALYST", "COMMERCIAL_PARTNERSHIP",
+    "GUIDANCE_RAISED", "PATENT_RULING", "REGULATORY_RULING",
+    "FDA_FILING_ACCEPTED",
+}
+
+DEVELOPMENT_WATCH_SUBTYPES = {
+    "EXPLORATORY_DATA", "DEVELOPMENT_MILESTONE", "FORMULATION_MILESTONE",
+    "CLINICAL_MILESTONE", "CATALYST_WATCH", "PHASE_1_STARTED", "PHASE_2_STARTED",
+    "ENROLLMENT_INCREASED", "DATE_ACCELERATED", "DATE_DELAYED",
+}
 
 
 def _classify_row(catalyst, meta=None):
@@ -186,20 +210,12 @@ def _classify_row(catalyst, meta=None):
             return "WATCHLIST_CONTEXT_NO_NEW_CATALYST"
         return "MARKET_MOVE_UNEXPLAINED"
     subtype = str(catalyst.get("subtype") or catalyst.get("type") or "").upper()
-    fundamental = {
-        "TOPLINE_RESULTS", "PRIMARY_ENDPOINT_MET", "PRIMARY_ENDPOINT_FAILED",
-        "FDA_APPROVAL", "FDA_REJECTION", "FDA_SAFETY_WARNING",
-        "PHASE_ADVANCED", "PHASE_DATA_UPDATE", "CLINICAL_RESULTS",
-        "COMMERCIAL_CATALYST", "COMMERCIAL_PARTNERSHIP", "GUIDANCE_RAISED",
-        "PATENT_RULING", "REGULATORY_RULING", "FDA_FILING_ACCEPTED",
-    }
-    if subtype in fundamental:
+    if subtype in FUNDAMENTAL_SUBTYPES:
         return "FUNDAMENTAL_OR_CLINICAL_CATALYST"
-    if subtype in {"EXPLORATORY_DATA", "DEVELOPMENT_MILESTONE", "FORMULATION_MILESTONE",
-                    "CLINICAL_MILESTONE", "CATALYST_WATCH",
-                    "PHASE_1_STARTED", "PHASE_2_STARTED"}:
+    if subtype in DEVELOPMENT_WATCH_SUBTYPES:
         return "DEVELOPMENT_MILESTONE_WATCH"
     return "CATALYST_LINKED"
+
 
 def _catalyst_evidence(catalyst):
     if not catalyst:
@@ -207,15 +223,42 @@ def _catalyst_evidence(catalyst):
     return str(catalyst.get("catalyst_evidence") or catalyst.get("evidence_class")
                or "RADAR_RECORDED_EVENT").upper()
 
-def _radar_inclusion(catalyst, meta):
-    if catalyst:
-        return str(catalyst.get("radar_inclusion") or "YES_IF_MATERIAL").upper()
-    return str((meta or {}).get("radar_role") or "WATCH_UNEXPLAINED_MOVE").upper()
+def _radar_inclusion(catalyst, meta, quality_gate=None):
+    if not catalyst:
+        return str((meta or {}).get("radar_role") or "WATCH_UNEXPLAINED_MOVE").upper()
+    gate = quality_gate or {}
+    if not gate.get("eligible", False):
+        return "NO_NEW_ALERT"
+    subtype = str(catalyst.get("subtype") or catalyst.get("type") or "").upper()
+    if subtype in FUNDAMENTAL_SUBTYPES:
+        return "INCLUDE_IF_MATERIAL"
+    if subtype in DEVELOPMENT_WATCH_SUBTYPES:
+        return "WATCH_ONLY"
+    return "WATCH_ONLY"
 
-def _radar_reason(catalyst, meta):
+
+def _radar_reason(catalyst, meta, quality_gate=None):
     if catalyst:
-        return catalyst.get("radar_reason") or (
-            "Same-day catalyst recorded by Pharma Radar; retain for monitoring based on event materiality."
+        gate = quality_gate or {}
+        if not gate.get("eligible", False):
+            return (
+                "Catalyst linked to the move but blocked by the Quality Gate: "
+                f"{gate.get('reason', 'UNVERIFIED')}."
+            )
+        subtype = str(catalyst.get("subtype") or catalyst.get("type") or "").upper()
+        if subtype in FUNDAMENTAL_SUBTYPES:
+            return (
+                "Verified fundamental/clinical/regulatory catalyst; "
+                "consider Radar inclusion if material and not already alerted."
+            )
+        if subtype in DEVELOPMENT_WATCH_SUBTYPES:
+            return (
+                "Development/timeline milestone without a new clinical outcome; "
+                "retain as monitoring context, not as a new high-priority alert."
+            )
+        return (
+            "Catalyst-linked move, but event type is not independently classified "
+            "as a fundamental/clinical catalyst; retain as watch context."
         )
     role = str((meta or {}).get("radar_role") or "").upper()
     if role == "MARKET_STRUCTURE_WATCH":
@@ -267,10 +310,13 @@ def format_daily_top5(rows, date_value=None):
             f"{index}. 🧬 {row['ticker']} · {row['company']}",
             f"   📈 {pct:+.2f}% · Volume {volume_text}",
             f"   📰 {reason}",
+            f"   💊 Program: {row.get('catalyst_program') or ', '.join(row.get('programs') or []) or 'N/A'}",
             f"   🔎 {classification}",
             f"   🧠 Evidence: {row.get('catalyst_evidence', 'N/A')}",
+            f"   📚 Source: {row.get('catalyst_source') or 'N/A'}",
             f"   📡 Radar: {row.get('radar_inclusion', 'N/A')}",
             f"   🛡️ Quality Gate: {(row.get('alert_quality_gate') or {}).get('reason', 'N/A')}",
+            f"   ℹ️ Why: {row.get('radar_reason', 'N/A')}",
             "",
         ])
     return "\n".join(lines).rstrip()
