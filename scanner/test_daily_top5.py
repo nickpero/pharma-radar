@@ -361,3 +361,17 @@ def test_prior_day_fundamental_reaction_does_not_create_new_alert():
     )
     assert rows[0]["catalyst_freshness"] == "REACTION_24_72H"
     assert rows[0]["radar_inclusion"] == "REACTION_ONLY_NO_NEW_ALERT"
+
+
+def test_premarket_history_dict_is_read_and_marks_new_today():
+    from datetime import datetime, timezone
+    from scanner import premarket
+    original = premarket._load
+    try:
+        premarket._load = lambda path, fallback: {"event1": {"ticker": "LPCN", "event_timestamp": "2026-10-07T12:00:00+00:00", "recorded_at": "2026-10-07T12:01:00+00:00", "subtype": "FDA_APPROVAL", "program": "TLANDO", "source": "COMPANY IR"}}
+        rows = premarket.recent_catalysts(now=datetime(2026, 10, 7, 13, 0, tzinfo=timezone.utc))
+        assert rows
+        assert rows[0]["ticker"] == "LPCN"
+        assert rows[0]["catalyst_origin"] == "EMERGED_TODAY"
+    finally:
+        premarket._load = original
