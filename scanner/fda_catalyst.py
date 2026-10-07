@@ -30,6 +30,7 @@ ADVANCED_RULES = [
     ("TRIAL_HOLD", "NEGATIVE", "EXTREME", ("clinical hold", "placed on clinical hold", "trial hold", "study hold")),
     ("REJECTION", "NEGATIVE", "EXTREME", ("complete response letter", r"\bcrl\b", "not approved", "does not approve", "did not approve", "will not approve", "won't approve", "rejected", "rejection", "refused", "refusal", "denied", "denial")),
     ("SAFETY", "NEGATIVE", "EXTREME", ("boxed warning", "safety warning", "drug safety communication", "recall", "serious safety", "safety concern", "contamination")),
+    ("REGULATORY_APPROVAL", "POSITIVE", "EXTREME", ("health canada approved", "approved by health canada", "ema approved", "approved by ema", "european commission approved", "approved by the european commission", "mhra approved", "approved by the mhra", "tga approved", "approved by the tga")),
     ("APPROVAL", "POSITIVE", "EXTREME", ("__EXPLICIT_FDA_APPROVAL__")),
     ("LABEL_EXPANSION", "POSITIVE", "HIGH", ("label expansion", "expanded indication", "expands indication", "expanded use", "expands use", "expanded the indication", "expands the indication", "new indication")),
     ("FILING", "POSITIVE", "HIGH", ("new drug application", "biologics license application", "nda submission", "bla submission", "regulatory submission", "submitted the application", "filing accepted")),
@@ -238,6 +239,7 @@ def build_fda_catalyst(news_item):
     subtype_map = {
         "CLINICAL_RESULT": "CLINICAL_RESULTS", "PHASE_DATA_UPDATE": "PHASE_DATA_UPDATE", "EXPLORATORY_DATA": "EXPLORATORY_DATA", "LABEL_EXPANSION": "LABEL_EXPANSION",
         "REJECTION": "FDA_REJECTION", "SAFETY": "FDA_SAFETY_WARNING", "APPROVAL": "FDA_APPROVAL",
+        "REGULATORY_APPROVAL": "REGULATORY_APPROVAL",
         "TRIAL_HOLD": "TRIAL_HOLD", "TRIAL_HOLD_LIFTED": "TRIAL_HOLD_LIFTED",
         "PHASE_ADVANCEMENT": "PHASE_ADVANCED", "DEVELOPMENT_MILESTONE": "DEVELOPMENT_MILESTONE", "DATE_ACCELERATED": "DATE_ACCELERATED",
         "DATE_DELAYED": "DATE_DELAYED", "FILING": "REGULATORY_FILING", "FDA_MEETING": "FDA_MEETING", "FDA_PATHWAY": "FDA_PATHWAY",
