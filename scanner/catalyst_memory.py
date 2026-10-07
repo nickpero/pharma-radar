@@ -83,6 +83,8 @@ def _snapshot(event):
         "historical_edge_median_1d_pct": event.get("historical_edge_median_1d_pct"),
         "historical_edge_win_rate_1d": event.get("historical_edge_win_rate_1d"),
         "url": event.get("url"),
+        "catalyst_origin": event.get("catalyst_origin"),
+        "detected_at": event.get("detected_at") or event.get("recorded_at"),
     }
 
 
