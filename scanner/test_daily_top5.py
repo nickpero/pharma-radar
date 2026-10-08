@@ -100,6 +100,14 @@ def test_fundamental_catalyst_is_classified_separately():
     assert rows[0]["catalyst_evidence"] == "RADAR_RECORDED_EVENT"
 
 
+def test_corporate_transaction_is_fundamental():
+    assert _classify_row({"subtype": "CORPORATE_TRANSACTION"}) == "FUNDAMENTAL_OR_CLINICAL_CATALYST"
+
+
+def test_ip_catalyst_is_fundamental():
+    assert _classify_row({"subtype": "IP_CATALYST"}) == "FUNDAMENTAL_OR_CLINICAL_CATALYST"
+
+
 def test_regulatory_patent_catalyst_is_fundamental():
     c = {"subtype": "PATENT_RULING", "source": "COURT", "ticker": "UTHR"}
     assert _classify_row(c) == "FUNDAMENTAL_OR_CLINICAL_CATALYST"
