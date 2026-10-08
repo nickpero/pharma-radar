@@ -207,11 +207,10 @@ def format_report(candidates, phase="FINAL", now=None, calendar_rows=None):
             f"📈 Pre-market: {change_text}",
             f"🔎 Source: {catalyst.get('source') or 'MARKET DATA'}",
             f"🧭 Origin: {catalyst.get('catalyst_origin') or 'SCHEDULED/RECORDED'}",
-            f"🧭 Origin: {catalyst.get('catalyst_origin') or 'SCHEDULED/RECORDED'}",
             "",
         ]
     calendar_rows = calendar_rows if calendar_rows is not None else build_upcoming_calendar(days=CALENDAR_DAYS)
-    lines += ["━━━━━━━━━━━━━━━━━━", "📅 NEXT CATALYSTS · 7 DAYS"]
+    lines += ["━━━━━━━━━━━━━━━━━━", "🗓️ SCHEDULED / UPCOMING CATALYSTS · 7 DAYS"]
     if calendar_rows:
         for row in calendar_rows[:MAX_CALENDAR_ROWS]:
             date_text = row["date"] if row["date_precision"] == "DAY" else row["date"][:7] + " (month)"
