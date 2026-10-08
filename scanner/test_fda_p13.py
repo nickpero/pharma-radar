@@ -192,6 +192,40 @@ def test_vbio_oral_mucosal_formulation_is_development_milestone():
     assert event["direction"] == "POSITIVE"
 
 
+def test_pacira_acquisition_is_corporate_transaction():
+    event = classify_fda_catalyst({
+        "title": "Viatris Agrees to Acquire Pacira BioSciences",
+        "summary": "Viatris entered into a definitive agreement to acquire all outstanding shares of Pacira for $36.50 per share.",
+        "source": "SEC",
+        "source_type": "PRIMARY_CORPORATE",
+    })
+    assert event["catalyst_type"] == "CORPORATE_TRANSACTION"
+    built = build_fda_catalyst({
+        "title": "Viatris Agrees to Acquire Pacira BioSciences",
+        "summary": "Viatris entered into a definitive agreement to acquire all outstanding shares of Pacira.",
+        "source": "SEC",
+        "source_type": "PRIMARY_CORPORATE",
+    })
+    assert built["subtype"] == "CORPORATE_TRANSACTION"
+
+
+def test_biaf_patent_allowance_is_ip_catalyst():
+    event = classify_fda_catalyst({
+        "title": "bioAffinity Technologies Announces Notification of Japanese Patent Allowance",
+        "summary": "The Japan Patent Office issued a Notice of Allowance covering CyPath Lung and its AI-built algorithm.",
+        "source": "SEC",
+        "source_type": "PRIMARY_CORPORATE",
+    })
+    assert event["catalyst_type"] == "IP_CATALYST"
+    built = build_fda_catalyst({
+        "title": "bioAffinity Technologies Announces Notification of Japanese Patent Allowance",
+        "summary": "The Japan Patent Office issued a Notice of Allowance covering CyPath Lung.",
+        "source": "SEC",
+        "source_type": "PRIMARY_CORPORATE",
+    })
+    assert built["subtype"] == "IP_CATALYST"
+
+
 def test_health_canada_approval_is_regulatory_approval():
     event = classify_fda_catalyst({
         "title": "Lipocine Announces Health Canada Approval of TLANDO",
