@@ -100,6 +100,26 @@ def test_fundamental_catalyst_is_classified_separately():
     assert rows[0]["catalyst_evidence"] == "RADAR_RECORDED_EVENT"
 
 
+def test_company_level_corporate_transaction_can_pass_without_program():
+    watchlist = {"PCRX": {"company": "Pacira BioSciences", "programs": ["EXPAREL", "ZILRETTA"]}}
+    history = {"x": {
+        "ticker": "PCRX",
+        "event_timestamp": "2026-10-08T15:00:00+00:00",
+        "subtype": "CORPORATE_TRANSACTION",
+        "program": None,
+        "source": "SEC",
+        "source_type": "PRIMARY_CORPORATE",
+        "alert_priority": 100,
+    }}
+    rows = build_daily_top5(
+        watchlist=watchlist, history=history,
+        snapshot_fn=lambda ticker: snapshot(44.0, 50.0),
+        date_value="2026-10-08",
+    )
+    assert rows[0]["alert_quality_gate"]["eligible"] is True
+    assert rows[0]["radar_inclusion"] == "INCLUDE_IF_MATERIAL"
+
+
 def test_corporate_transaction_is_fundamental():
     assert _classify_row({"subtype": "CORPORATE_TRANSACTION"}) == "FUNDAMENTAL_OR_CLINICAL_CATALYST"
 
