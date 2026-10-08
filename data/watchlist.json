@@ -581,6 +581,20 @@
     ],
     "radar_role": "CLINICAL_CATALYST_WATCH"
   },
+  "PCRX": {
+    "company": "Pacira BioSciences",
+    "programs": ["EXPAREL", "ZILRETTA", "PCRX-201"],
+    "priority": "RED",
+    "primary_sources": ["SEC", "Pacira BioSciences", "Viatris", "FDA"],
+    "radar_role": "FUNDAMENTAL_CLINICAL_REGULATORY_CATALYST"
+  },
+  "BIAF": {
+    "company": "bioAffinity Technologies",
+    "programs": ["CyPath Lung"],
+    "priority": "ORANGE",
+    "primary_sources": ["SEC", "bioAffinity Technologies", "FDA"],
+    "radar_role": "FUNDAMENTAL_CLINICAL_REGULATORY_CATALYST"
+  },
   "LPCN": {
     "company": "Lipocine",
     "programs": [
