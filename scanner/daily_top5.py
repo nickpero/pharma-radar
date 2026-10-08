@@ -98,11 +98,13 @@ def _alert_quality_gate(event, now=None, meta=None):
     if not primary:
         return {"eligible": False, "reason": "PRIMARY_SOURCE_NOT_VERIFIED", "freshness": freshness,
                 "primary_source": False, "program_verified": program_verified}
-    if not program_verified:
+    subtype = str(event.get("subtype") or event.get("type") or "").upper()
+    if not program_verified and subtype not in COMPANY_LEVEL_FUNDAMENTAL_SUBTYPES:
         return {"eligible": False, "reason": "PROGRAM_NOT_VERIFIED", "freshness": freshness,
                 "primary_source": primary, "program_verified": False}
     return {"eligible": True, "reason": "QUALITY_GATE_PASS", "freshness": freshness,
-            "primary_source": True, "program_verified": True}
+            "primary_source": True,
+            "program_verified": program_verified or subtype in COMPANY_LEVEL_FUNDAMENTAL_SUBTYPES}
 
 
 def _reference_time(date_value=None, now=None):
@@ -197,6 +199,8 @@ FUNDAMENTAL_SUBTYPES = {
     "GUIDANCE_RAISED", "PATENT_RULING", "REGULATORY_RULING",
     "FDA_FILING_ACCEPTED", "REGULATORY_APPROVAL", "CORPORATE_TRANSACTION", "IP_CATALYST",
 }
+
+COMPANY_LEVEL_FUNDAMENTAL_SUBTYPES = {"CORPORATE_TRANSACTION"}
 
 DEVELOPMENT_WATCH_SUBTYPES = {
     "EXPLORATORY_DATA", "DEVELOPMENT_MILESTONE", "FORMULATION_MILESTONE",
