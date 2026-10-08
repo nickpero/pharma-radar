@@ -11683,6 +11683,414 @@
       "pembrolizumab"
     ]
   },
+  "PCRX:EXPAREL:NCT02011464": {
+    "nct_id": "NCT02011464",
+    "title": "Evaluation Exparel Delivered in Knee Replacement",
+    "official_title": "Evaluation of the Efficacy of Exparel Delivered Into the Posterior Capsule During Knee Replacement",
+    "status": "COMPLETED",
+    "last_update": "2017-08-08",
+    "start_date": "2013-12",
+    "completion_date": "2015-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE4"
+    ],
+    "enrollment": 20,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Maimonides Medical Center",
+    "conditions": [
+      "Arthritis"
+    ],
+    "interventions": [
+      "Exparel",
+      "Saline"
+    ]
+  },
+  "PCRX:EXPAREL:NCT04826484": {
+    "nct_id": "NCT04826484",
+    "title": "Opioid Reduction Initiative During Outpatient Pediatric Urologic Procedures Using Exparel",
+    "official_title": "A Randomized Trial Evaluating Use of Long-Acting Liposomal Bupivacaine (Exparel®) in Reducing Narcotic Pain Requirements in Pediatric Patients Undergoing Minor Urologic Procedures",
+    "status": "TERMINATED",
+    "last_update": "2023-12-26",
+    "start_date": "2021-10-01",
+    "completion_date": "2023-04-26",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 104,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Johns Hopkins University",
+    "conditions": [
+      "Urologic Diseases",
+      "Hypospadias",
+      "Undescended Testes",
+      "Chordee",
+      "Hydrocele",
+      "Orchiectomy"
+    ],
+    "interventions": [
+      "Exparel 133 miligrams per 10 milliliter injection",
+      "Bupivacaine Hydrochloride"
+    ]
+  },
+  "PCRX:EXPAREL:NCT02571283": {
+    "nct_id": "NCT02571283",
+    "title": "Peri-articular Injection Utilizing a Pain Cocktail With and Without Exparel",
+    "official_title": "A Randomized, Prospective Trial Comparing Peri-articular Injection Utilizing a Pain Cocktail With and Without Exparel",
+    "status": "WITHDRAWN",
+    "last_update": "2017-04-06",
+    "start_date": "2015-10",
+    "completion_date": "2016-05",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE4"
+    ],
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "University of Louisville",
+    "conditions": [
+      "Total Knee Arthroplasty",
+      "Pain Management"
+    ],
+    "interventions": [
+      "Cocktail",
+      "Exparel",
+      "Marcaine"
+    ]
+  },
+  "PCRX:EXPAREL:NCT04005859": {
+    "nct_id": "NCT04005859",
+    "title": "Pain Control in Colorectal Surgery: Liposomal Bupivacaine Block Versus Intravenous Lidociane",
+    "official_title": "Pain Control in Colorectal Surgery: Liposomal Bupivacaine Block Versus Intravenous Lidociane",
+    "status": "COMPLETED",
+    "last_update": "2022-08-09",
+    "start_date": "2018-02-22",
+    "completion_date": "2021-07-20",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE4"
+    ],
+    "enrollment": 61,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Wake Forest University Health Sciences",
+    "conditions": [
+      "Colorectal Disorders"
+    ],
+    "interventions": [
+      "Exparel",
+      "IV Lidocaine"
+    ]
+  },
+  "PCRX:EXPAREL:NCT02008370": {
+    "nct_id": "NCT02008370",
+    "title": "Exparel in Minimally Invasive Cardiac Surgery",
+    "official_title": "The Use of Exparel for Extended Pain Control in Minimally Invasive Cardiac Surgery",
+    "status": "TERMINATED",
+    "last_update": "2019-10-04",
+    "start_date": "2013-11",
+    "completion_date": "2016-06",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE4"
+    ],
+    "enrollment": 9,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Maimonides Medical Center",
+    "conditions": [
+      "Cardiac Disease"
+    ],
+    "interventions": [
+      "Exparel infiltration"
+    ]
+  },
+  "PCRX:EXPAREL:NCT03878888": {
+    "nct_id": "NCT03878888",
+    "title": "Exparel Use in Bilateral TAP Blocks for Postoperative Pain Control",
+    "official_title": "The Use of Exparel (Liposomal Bupivacaine) for Bilateral TAP (Transversus Abdominis Plane) Blocks in Open Abdomen Surgery for Postoperative Pain Control",
+    "status": "COMPLETED",
+    "last_update": "2020-12-17",
+    "start_date": "2019-01-15",
+    "completion_date": "2019-07-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE4"
+    ],
+    "enrollment": 52,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "St. Luke's Hospital, Pennsylvania",
+    "conditions": [
+      "Postoperative Pain",
+      "Surgery",
+      "Anesthesia, Local"
+    ],
+    "interventions": [
+      "Exparel 266 MG Per 20 ML Injection"
+    ]
+  },
+  "PCRX:EXPAREL:NCT05494645": {
+    "nct_id": "NCT05494645",
+    "title": "Exparel Use in Peripheral Nerve Blocks and Local Infiltration for Foot and Ankle Surgery",
+    "official_title": "Exparel Use in Peripheral Nerve Blocks and Local Infiltration for Foot and Ankle Surgery: A Randomized Controlled Trial",
+    "status": "COMPLETED",
+    "last_update": "2026-04-28",
+    "start_date": "2022-03-01",
+    "completion_date": "2023-01-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE4"
+    ],
+    "enrollment": 248,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "St. Luke's Hospital, Pennsylvania",
+    "conditions": [
+      "Pain, Postoperative",
+      "Pain, Acute Postoperative",
+      "Ankle Fractures",
+      "Ankle Injuries and Disorders"
+    ],
+    "interventions": [
+      "Exparel",
+      "Peripheral Nerve Block"
+    ]
+  },
+  "PCRX:EXPAREL:NCT05730920": {
+    "nct_id": "NCT05730920",
+    "title": "IV Methadone Vs EXPAREL Erector Spinae Plane Blockade in Pediatric Subjects Undergoing Idiopathic Scoliosis Correction",
+    "official_title": "A Single-center, Randomized, Single-blind Pilot Study to Evaluate Intravenous Methadone Versus EXPAREL Erector Spinae Plane Blockade in Pediatric Subjects Undergoing Adolescent and Juvenile Idiopathic Scoliosis Correction",
+    "status": "COMPLETED",
+    "last_update": "2024-10-04",
+    "start_date": "2022-10-19",
+    "completion_date": "2024-09-21",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE4"
+    ],
+    "enrollment": 30,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Dr. Casey Stondell, MD",
+    "conditions": [
+      "Adolescent Idiopathic Scoliosis",
+      "Juvenile Idiopathic Scoliosis"
+    ],
+    "interventions": [
+      "Methadone",
+      "Liposomal bupivacaine (LB, Exparel)"
+    ]
+  },
+  "PCRX:EXPAREL:NCT03705637": {
+    "nct_id": "NCT03705637",
+    "title": "Liposomal Bupivicaine for Skin Graft Donor Sites in Burn Patients",
+    "official_title": "Evaluation of Liposomal Bipivicaine in Split Thickness Skin Graft Donor Sites in Burn Patients",
+    "status": "TERMINATED",
+    "last_update": "2023-03-02",
+    "start_date": "2019-06-01",
+    "completion_date": "2020-03-24",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "EARLY_PHASE1"
+    ],
+    "enrollment": 6,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Massachusetts General Hospital",
+    "conditions": [
+      "Burns",
+      "Postoperative Pain"
+    ],
+    "interventions": [
+      "Exparel"
+    ]
+  },
+  "PCRX:EXPAREL:NCT01977352": {
+    "nct_id": "NCT01977352",
+    "title": "Efficacy of Interscalene Brachial Plexus Block With Liposomal Bupivacaine for Arthroscopic Shoulder Surgery",
+    "official_title": "Comparison of Cumulative Opioid Consumption After Interscalene Brachial Plexus Block With Liposomal Bupivacaine (Exparel; 88 mg in 20 cc) Versus Bupivacaine 0.25% for Arthroscopic Shoulder Surgery",
+    "status": "COMPLETED",
+    "last_update": "2018-04-02",
+    "start_date": "2014-01",
+    "completion_date": "2015-02",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE4"
+    ],
+    "enrollment": 42,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "St. Luke's-Roosevelt Hospital Center",
+    "conditions": [
+      "Shoulder Pain",
+      "Rotator Cuff Tear"
+    ],
+    "interventions": [
+      "Liposomal bupivacaine",
+      "Bupivacaine 0.25%"
+    ]
+  },
+  "PCRX:EXPAREL:NCT03428984": {
+    "nct_id": "NCT03428984",
+    "title": "Study in Adult Subjects Undergoing Posterolateral Thoracotomy",
+    "official_title": "A Phase 1, Open-Label Study to Evaluate the Safety and Pharmacokinetics of EXPAREL When Administered for Postsurgical Analgesia in Subjects Undergoing Posterolateral Thoracotomy",
+    "status": "TERMINATED",
+    "last_update": "2019-02-06",
+    "start_date": "2018-05-03",
+    "completion_date": "2018-09-28",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 5,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Pacira Pharmaceuticals, Inc",
+    "conditions": [
+      "Postoperative Pain Management"
+    ],
+    "interventions": [
+      "EXPAREL"
+    ]
+  },
+  "PCRX:EXPAREL:NCT01801124": {
+    "nct_id": "NCT01801124",
+    "title": "EXPAREL Infiltrated Into the TAP for Postoperative Analgesia in Unilateral Abdominal Hernia Repair",
+    "official_title": "Evaluation of the Safety and Efficacy of EXPAREL® When Infiltrated Into the Transversus Abdominis Plane (TAP) for Prolonged Postoperative Analgesia in Subjects Undergoing Unilateral Abdominal Hernia Repair",
+    "status": "COMPLETED",
+    "last_update": "2021-03-08",
+    "start_date": "2012-04",
+    "completion_date": "2012-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE4"
+    ],
+    "enrollment": 13,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Pacira Pharmaceuticals, Inc",
+    "conditions": [
+      "Hernia"
+    ],
+    "interventions": [
+      "EXPAREL"
+    ]
+  },
+  "PCRX:EXPAREL:NCT03743194": {
+    "nct_id": "NCT03743194",
+    "title": "Pectoralis and Serratus Muscle Blocks",
+    "official_title": "Pectoralis and Serratus Muscle Blocks for Analgesia After Minimally Invasive Cardiac Procedures",
+    "status": "COMPLETED",
+    "last_update": "2025-10-23",
+    "start_date": "2021-12-14",
+    "completion_date": "2022-03-14",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE4"
+    ],
+    "enrollment": 210,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "The Cleveland Clinic",
+    "conditions": [
+      "Post Operative Pain Control"
+    ],
+    "interventions": [
+      "Exparel 266 MG Per 20 ML Injection",
+      "Placebo"
+    ]
+  },
+  "PCRX:PCRX-201:NCT06884865": {
+    "nct_id": "NCT06884865",
+    "title": "A Study to Assess Safety and Tolerability of PCRX-201 in Subjects With Painful Osteoarthritis of the Knee",
+    "official_title": "A Phase 2, Two-Part, Randomized, Double-Blind, Active-Controlled Study to Assess the Safety and Tolerability of Enekinragene Inzadenovec (PCRX-201) in Subjects With Painful Osteoarthritis of the Knee",
+    "status": "RECRUITING",
+    "last_update": "2026-08-25",
+    "start_date": "2025-02-26",
+    "completion_date": "2032-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 135,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Pacira Pharmaceuticals, Inc",
+    "conditions": [
+      "Osteoarthritis (OA) of the Knee"
+    ],
+    "interventions": [
+      "Enekinragene Inzadenovec (PCRX-201)",
+      "Placebo"
+    ]
+  },
+  "BIAF:CyPath Lung:NCT02388074": {
+    "nct_id": "NCT02388074",
+    "title": "Sputum Labeling Utilizing Synthetic Meso-Tetra (4-Carboxyphenyl) Porphine (TCPP) for Detection of Lung Cancer",
+    "official_title": "Sputum Labeling Utilizing Synthetic Meso Tetra (4-Carboxyphenyl) Porphine (TCPP) for Detection of Lung Cancer",
+    "status": "COMPLETED",
+    "last_update": "2015-07-14",
+    "start_date": "2015-03",
+    "completion_date": "2015-04",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "NA"
+    ],
+    "enrollment": 25,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "bioAffinity Technologies Inc.",
+    "conditions": [
+      "Lung Cancer"
+    ],
+    "interventions": [
+      "CyPath®"
+    ]
+  },
+  "BIAF:CyPath Lung:NCT05870592": {
+    "nct_id": "NCT05870592",
+    "title": "Detection of Abnormal Respiratory Cell Populations in Lung Cancer Screening Patients Using the CyPath Lung Assay",
+    "official_title": "Detection of Abnormal Respiratory Cell Populations in Lung Cancer Screening Patients",
+    "status": "UNKNOWN",
+    "last_update": "2023-07-11",
+    "start_date": "2023-08",
+    "completion_date": "2024-06",
+    "study_type": "OBSERVATIONAL",
+    "phases": [],
+    "enrollment": 40,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "bioAffinity Technologies Inc.",
+    "conditions": [
+      "Lung Cancer"
+    ],
+    "interventions": []
+  },
+  "BIAF:CyPath Lung:NCT03457415": {
+    "nct_id": "NCT03457415",
+    "title": "Collection of Sputum and Labeling for Lung Cancer",
+    "official_title": "Collection of Sputum and Sputum Labeling Utilizing Synthetic Meso-Tetra (4-Carboxyphenyl) Porphyrin (TCPP) for Detection of Lung Cancer",
+    "status": "RECRUITING",
+    "last_update": "2025-04-01",
+    "start_date": "2018-03-01",
+    "completion_date": "2025-12",
+    "study_type": "OBSERVATIONAL",
+    "phases": [],
+    "enrollment": 500,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "bioAffinity Technologies Inc.",
+    "conditions": [
+      "Lung Cancer"
+    ],
+    "interventions": []
+  },
+  "BIAF:CyPath Lung:NCT03837600": {
+    "nct_id": "NCT03837600",
+    "title": "Sputum Labeling Utilizing Synthetic Meso-Tetra (4-Carboxyphenyl) Porphyrin (TCPP) for Detection of Lung Cancer",
+    "official_title": "Sputum Labeling Utilizing Synthetic Meso-Tetra (4-Carboxyphenyl) Porphyrin (TCPP) for Detection of Lung Cancer",
+    "status": "COMPLETED",
+    "last_update": "2023-07-27",
+    "start_date": "2016-09-22",
+    "completion_date": "2018-08-15",
+    "study_type": "OBSERVATIONAL",
+    "phases": [],
+    "enrollment": 197,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "bioAffinity Technologies Inc.",
+    "conditions": [
+      "Lung Cancer"
+    ],
+    "interventions": []
+  },
   "LPCN:LPCN 1154:NCT07822321": {
     "nct_id": "NCT07822321",
     "title": "Brexanolone Lifting Outcomes Of Moms",
