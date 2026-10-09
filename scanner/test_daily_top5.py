@@ -72,10 +72,12 @@ def test_format():
             "catalyst_source": "SEC",
         }
     ], "2026-09-29")
-    assert "DAILY TOP 5" in message
+    assert "TOP 5 GIORNALIERO" in message
     assert "SMMT" in message
     assert "+22.00%" in message
-    assert "CATALYST LINKED" in message
+    assert "non rappresenta l’intero mercato" in message
+    assert "Nessuna raccomandazione di acquisto o vendita" in message
+    assert "CATALYST_LINKED" in message
 
 
 if __name__ == "__main__":
