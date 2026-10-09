@@ -7,6 +7,7 @@ same-day catalyst context when the Radar has recorded one.
 import json
 import os
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 from scanner.market_data import get_market_snapshot
@@ -28,7 +29,8 @@ def load_catalyst_history(path=CATALYST_HISTORY_PATH):
 
 
 def _today_utc():
-    return datetime.now(timezone.utc).date().isoformat()
+    # Report date follows the Italy timezone rather than UTC.
+    return datetime.now(ZoneInfo("Europe/Rome")).date().isoformat()
 
 
 def _parse_event_timestamp(event):
@@ -295,22 +297,23 @@ def _radar_reason(catalyst, meta, quality_gate=None, freshness=None):
 def format_daily_top5(rows, date_value=None):
     day = date_value or _today_utc()
     lines = [
-        "🧬 PHARMA RADAR — DAILY TOP 5",
+        "🧬 PHARMA RADAR — TOP 5 GIORNALIERO",
         "━━━━━━━━━━━━━━━━━━",
-        f"📅 {day}",
+        f"📅 {day} · Universo Pharma/biotech monitorato",
+        "ℹ️ Classifica dei titoli della watchlist con dati validi; non rappresenta l’intero mercato.",
         "",
     ]
     if not rows:
-        lines.append("⚠️ No market data available.")
+        lines.append("⚠️ Nessun dato di mercato disponibile per i titoli monitorati.")
         return "\n".join(lines)
     for index, row in enumerate(rows, 1):
         pct = float(row["price_change_pct"])
         volume_ratio = row.get("volume_ratio")
-        volume_text = f"{float(volume_ratio):.1f}x avg" if volume_ratio else "N/A"
+        volume_text = f"{float(volume_ratio):.1f}× media" if volume_ratio else "non disponibile"
         if row["catalyst_found"]:
             gate = row.get("alert_quality_gate") or {}
             freshness = row.get("catalyst_freshness", "UNKNOWN_TIME")
-            reason = f'{row["catalyst_subtype"]} · {row["catalyst_source"] or "UNKNOWN"} · {freshness}'
+            reason = f'{row["catalyst_subtype"]} · {row["catalyst_source"] or "fonte non verificata"} · {freshness}'
             classification = row.get("classification", "CATALYST_LINKED")
             if freshness == "REACTION_24_72H":
                 classification = "REACTION_CONTINUATION"
@@ -319,22 +322,24 @@ def format_daily_top5(rows, date_value=None):
             if not gate.get("eligible"):
                 classification = f'{classification}_QUALITY_GATED'
         else:
-            reason = "No same-day Radar catalyst recorded"
+            reason = "Nessun catalyst verificato registrato per la giornata"
             classification = row.get("classification", "MARKET_MOVE_UNEXPLAINED")
         lines.extend([
             f"{index}. 🧬 {row['ticker']} · {row['company']}",
-            f"   📈 {pct:+.2f}% · Volume {volume_text}",
-            f"   📰 {reason}",
-            f"   💊 Program: {row.get('catalyst_program') or ', '.join(row.get('programs') or []) or 'N/A'}",
-            f"   🔎 {classification}",
-            f"   🧠 Evidence: {row.get('catalyst_evidence', 'N/A')}",
-            f"   📚 Source: {row.get('catalyst_source') or 'N/A'}",
-            f"   🧭 Origin: {row.get('catalyst_origin') or 'SCHEDULED/RECORDED'}",
-            f"   📡 Radar: {row.get('radar_inclusion', 'N/A')}",
-            f"   🛡️ Quality Gate: {(row.get('alert_quality_gate') or {}).get('reason', 'N/A')}",
-            f"   ℹ️ Why: {row.get('radar_reason', 'N/A')}",
+            f"   📈 Variazione: {pct:+.2f}% · Volume: {volume_text}",
+            f"   📰 Catalyst: {reason}",
+            f"   💊 Programma/farmaco: {row.get('catalyst_program') or ', '.join(row.get('programs') or []) or 'non specificato'}",
+            f"   🔎 Classificazione: {classification}",
+            f"   🧠 Evidenza: {row.get('catalyst_evidence', 'non disponibile')}",
+            f"   📚 Fonte: {row.get('catalyst_source') or 'non disponibile'}",
+            f"   🔗 Fonte primaria: {row.get('catalyst_url') or 'link non disponibile'}",
+            f"   🧭 Origine: {row.get('catalyst_origin') or 'evento registrato'}",
+            f"   📡 Rilevanza Radar: {row.get('radar_inclusion', 'non classificata')}",
+            f"   🛡️ Controllo qualità: {(row.get('alert_quality_gate') or {}).get('reason', 'non disponibile')}",
+            f"   ℹ️ Motivazione: {row.get('radar_reason', 'non disponibile')}",
             "",
         ])
+    lines.extend(["", "Legenda: catalyst fondamentale/clinico/regolatorio = possibile inclusione; milestone di sviluppo = solo monitoraggio; movimento tecnico o non spiegato = nessun nuovo alert fondamentale.", "Nessuna raccomandazione di acquisto o vendita."])
     return "\n".join(lines).rstrip()
 
 
