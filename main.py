@@ -1,13 +1,14 @@
 """Pharma Radar — Main entry point."""
 
 from datetime import datetime, timezone
+from collections import Counter
 
 from scanner.trial_scanner import scan
 from scanner.trading_intelligence_score import enrich_trading_intelligence_scores
 from scanner.trading_intelligence_rule import enrich_trading_intelligence_rules
 from scanner.catalyst_memory import record_events
 from scanner.telegram import send_telegram, send_catalyst_alerts, format_catalyst_alert, send_divergence_alerts
-from scanner.telegram_intelligence import select_intelligent_alerts, _dedup_key
+from scanner.telegram_intelligence import select_intelligent_alerts, _dedup_key, alert_quality_gate, alert_action
 from scanner.alert_state import load_sent_alerts, save_sent_alerts, filter_unsent, mark_sent
 from scanner.pharma_email import send_pharma_intelligence_emails
 from scanner.divergence_monitor import detect_divergences
@@ -240,6 +241,26 @@ def main():
             print(f"DATA QUALITY {row['ticker']}: {row['issues']}")
 
     record_events(result["alerts"])
+    all_alerts = result.get("alerts", [])
+    quality_reasons = Counter(
+        alert_quality_gate(alert).get("reason", "UNKNOWN")
+        for alert in all_alerts
+    )
+    action_counts = Counter(alert_action(alert) for alert in all_alerts)
+    source_counts = Counter(str(alert.get("source") or "UNKNOWN") for alert in all_alerts)
+    intelligent_count = len(select_intelligent_alerts(all_alerts))
+    sent_state = load_sent_alerts()
+    selected_for_diag = select_intelligent_alerts(all_alerts)
+    unsent_count = len(filter_unsent(selected_for_diag, sent_state, lambda alert: repr(_dedup_key(alert))))
+    print(
+        "TELEGRAM PIPELINE DIAGNOSTICS: "
+        f"scanner_alerts={len(all_alerts)} | "
+        f"eligible_after_quality_and_action={intelligent_count} | "
+        f"not_previously_sent={unsent_count} | "
+        f"quality_gate_reasons={dict(quality_reasons)} | "
+        f"actions={dict(action_counts)} | "
+        f"sources={dict(source_counts)}"
+    )
     new_alerts = _new_telegram_alerts(result)
     if new_alerts:
         print()

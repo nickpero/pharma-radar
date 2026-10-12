@@ -174,15 +174,47 @@ def scan_fda(watchlist, max_items=50):
     try:
         news = get_enriched_fda_news(max_news=max_items, max_pages=5)
         events = process_fda_news(news, watchlist)
-        trading_events = [
-            event for event in filter_fda_trading_alerts(events)
-            if _is_recent_fda_event(event)
-        ]
-        trading_events = sort_by_alert_priority(trading_events)
+        impact_events = filter_fda_trading_alerts(events)
+        recent_events = [event for event in impact_events if _is_recent_fda_event(event)]
+        trading_events = sort_by_alert_priority(recent_events)
         alerts = [build_fda_alert(event) for event in trading_events]
-        return {"news": news, "events": events, "alerts": alerts, "error": None}
+        diagnostics = {
+            "news": len(news),
+            "matched_events": len(events),
+            "high_impact_events": len(impact_events),
+            "fresh_high_impact_events": len(recent_events),
+            "missing_or_invalid_timestamp": sum(
+                1 for event in impact_events
+                if not _has_parseable_fda_timestamp(event)
+            ),
+            "stale_or_future_timestamp": sum(
+                1 for event in impact_events
+                if _has_parseable_fda_timestamp(event) and not _is_recent_fda_event(event)
+            ),
+        }
+        print("FDA pipeline diagnostics: " + " | ".join(f"{key}={value}" for key, value in diagnostics.items()))
+        return {"news": news, "events": events, "alerts": alerts, "diagnostics": diagnostics, "error": None}
     except Exception as error:
-        return {"news": [], "events": [], "alerts": [], "error": str(error)}
+        print(f"FDA pipeline diagnostics: ERROR={error}")
+        return {"news": [], "events": [], "alerts": [], "diagnostics": {}, "error": str(error)}
+
+
+def _has_parseable_fda_timestamp(event):
+    value = event.get("published_at") or event.get("first_published_at") or event.get("event_date")
+    if not value:
+        return False
+    text = str(value).strip()
+    try:
+        dt = datetime.fromisoformat(text.replace("Z", "+00:00"))
+    except ValueError:
+        dt = None
+        for fmt in ("%a, %d %b %Y %H:%M:%S %z", "%B %d, %Y", "%b %d, %Y", "%Y-%m-%d"):
+            try:
+                dt = datetime.strptime(text[:40], fmt)
+                break
+            except ValueError:
+                continue
+    return dt is not None
 
 def scan(baseline=False):
     watchlist = load_watchlist()
@@ -252,7 +284,17 @@ def scan(baseline=False):
     print(f"Companies: {len(watchlist)}"); print(f"Trials found: {total_trials}"); print(f"Relevant trials: {relevant_trials}"); print(f"Filtered trials: {filtered_trials}")
     print(f"Changes detected: {len(detected_changes)}"); print(f"FDA news: {len(fda_result['news'])}"); print(f"FDA events: {len(fda_result['events'])}")
     print(f"EMA news: {len(regulatory_result['ema_news'])}"); print(f"SEC filings: {len(regulatory_result['sec_news'])}"); print(f"EMA/SEC events: {len(regulatory_result['events'])}")
-    print(f"Alerts: {len(alerts)}"); print(f"Errors: {len(errors)}"); print("===================================")
+    print(f"Alerts: {len(alerts)}"); print(f"Errors: {len(errors)}")
+    print(
+        "ALERT SOURCE DIAGNOSTICS: "
+        f"trial_changes={len(detected_changes)} | "
+        f"fda_matched={len(fda_result['events'])} | "
+        f"fda_alerts={len(fda_result['alerts'])} | "
+        f"regulatory_events={len(regulatory_result['events'])} | "
+        f"regulatory_alerts={len(regulatory_result['alerts'])} | "
+        f"final_alerts_after_catalyst_dedup={len(alerts)}"
+    )
+    print("===================================")
     return {"companies": len(watchlist), "total_trials": total_trials, "relevant_trials": relevant_trials, "filtered_trials": filtered_trials,
             "detected_changes": detected_changes, "changes": alerts, "alerts": alerts, "monitoring_alerts": monitoring_alerts, "suppressed_duplicates": suppressed_duplicates, "errors": errors, "relevant_details": relevant_details,
             "fda_news": fda_result["news"], "fda_events": fda_result["events"], "fda_alerts": fda_result["alerts"],
