@@ -83,6 +83,6 @@ def test_format_report_includes_next_catalysts():
             "milestone": "PRIMARY_COMPLETION",
         }],
     )
-    assert "NEXT CATALYSTS" in report
+    assert "SCHEDULED / UPCOMING CATALYSTS" in report
     assert "2026-10-02" in report
     assert "PRIMARY_COMPLETION" in report
