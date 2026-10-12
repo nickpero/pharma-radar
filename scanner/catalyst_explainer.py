@@ -112,9 +112,13 @@ def _market_reaction(alert):
 
 
 def enrich_catalyst_explainer(alert):
-    """Add a concise Italian, source-grounded explainer to Pharma alerts."""
+    """Add a concise Italian, source-grounded explainer to important Pharma alerts."""
     if not isinstance(alert, dict):
         return alert
+    event = alert.get("event") if isinstance(alert.get("event"), dict) else {}
+    label = str(alert.get("label") or event.get("label") or "").upper()
+    if label not in IMPORTANT_LABELS:
+        return dict(alert)
     explainer = {
         "what_is": _what_it_is(alert),
         "indication": _indication(alert) or "Non disponibile nella fonte analizzata",
