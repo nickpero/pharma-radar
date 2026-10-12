@@ -1,4 +1,5 @@
 from scanner.fda_feed import (
+    FDA_NEWS_URL,
     normalize_text,
     get_item_id,
     normalize_date,
@@ -14,6 +15,9 @@ from scanner.fda_feed import (
 # ============================================
 # TEST NORMALIZE
 # ============================================
+
+def test_fda_news_url_uses_current_press_announcements_path():
+    assert FDA_NEWS_URL == "https://www.fda.gov/news-events/fda-newsroom/press-announcements"
 
 def test_normalize_text():
 

@@ -13,7 +13,7 @@ from urllib.parse import urljoin, urlparse
 import requests
 from bs4 import BeautifulSoup
 
-FDA_NEWS_URL = "https://www.fda.gov/news-events/press-announcements"
+FDA_NEWS_URL = "https://www.fda.gov/news-events/fda-newsroom/press-announcements"
 FDA_PRESS_ANNOUNCEMENTS_URL = FDA_NEWS_URL
 FDA_NEWSROOM_URL = "https://www.fda.gov/news-events/fda-newsroom"
 FDA_PRESS_RELEASES_RSS_URL = "https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/press-releases/rss.xml"
