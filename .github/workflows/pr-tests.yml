@@ -28,6 +28,9 @@ jobs:
       - name: Install dependencies
         run: python -m pip install --disable-pip-version-check -r requirements.txt
 
+      - name: Report tested merge commit
+        run: git log -1 --oneline
+
       - name: Compile Python sources
         run: python -m compileall -q main.py scanner
 
