@@ -1,4 +1,4 @@
-from scanner.daily_top5 import build_daily_top5, format_daily_top5
+from scanner.daily_top5 import _classify_row, build_daily_top5, format_daily_top5
 
 
 def snapshot(pct, volume_ratio=1.0):
