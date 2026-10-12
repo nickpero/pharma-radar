@@ -250,7 +250,8 @@ def main():
     source_counts = Counter(str(alert.get("source") or "UNKNOWN") for alert in all_alerts)
     intelligent_count = len(select_intelligent_alerts(all_alerts))
     sent_state = load_sent_alerts()
-    unsent_count = len(filter_unsent(intelligent_alerts_for_diag := select_intelligent_alerts(all_alerts), sent_state, lambda alert: repr(_dedup_key(alert))))
+    selected_for_diag = select_intelligent_alerts(all_alerts)
+    unsent_count = len(filter_unsent(selected_for_diag, sent_state, lambda alert: repr(_dedup_key(alert))))
     print(
         "TELEGRAM PIPELINE DIAGNOSTICS: "
         f"scanner_alerts={len(all_alerts)} | "
