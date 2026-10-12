@@ -292,7 +292,7 @@ def scan(baseline=False):
         f"fda_alerts={len(fda_result['alerts'])} | "
         f"regulatory_events={len(regulatory_result['events'])} | "
         f"regulatory_alerts={len(regulatory_result['alerts'])} | "
-        f"combined_alerts_before_enrichment={len(alerts)}"
+        f"final_alerts_after_catalyst_dedup={len(alerts)}"
     )
     print("===================================")
     return {"companies": len(watchlist), "total_trials": total_trials, "relevant_trials": relevant_trials, "filtered_trials": filtered_trials,
