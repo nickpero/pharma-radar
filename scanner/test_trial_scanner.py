@@ -50,14 +50,7 @@ def test_build_alert_carries_catalyst_confirmation():
     assert alert["catalyst_confirmation"] == "CONFIRMED"
 
 
-if __name__ == "__main__":
-    test_make_trial_key()
-    test_make_trial_key_unique()
-    test_make_trial_key_program_difference()
-    test_build_alert_carries_catalyst_confirmation()
-    test_fda_timestamp_skips_invalid_primary_and_uses_valid_fallback()
-    test_fda_timestamp_does_not_invent_date_when_all_candidates_invalid()
-    print("✅ Trial Scanner tests passed")
+
 
 
 
@@ -85,3 +78,13 @@ def test_fda_timestamp_does_not_invent_date_when_all_candidates_invalid():
     assert _parse_fda_event_timestamp(event) == (None, None, None)
     assert not _has_parseable_fda_timestamp(event)
     assert not _is_recent_fda_event(event)
+
+
+if __name__ == "__main__":
+    test_make_trial_key()
+    test_make_trial_key_unique()
+    test_make_trial_key_program_difference()
+    test_build_alert_carries_catalyst_confirmation()
+    test_fda_timestamp_skips_invalid_primary_and_uses_valid_fallback()
+    test_fda_timestamp_does_not_invent_date_when_all_candidates_invalid()
+    print("✅ Trial Scanner tests passed")
