@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime
 from urllib.parse import urlparse, urlunparse
 import re
 
@@ -71,6 +72,31 @@ def _extract_article_text(html: str, title: str = "") -> str:
     return text[:12000]
 
 
+def _is_parseable_date(value) -> bool:
+    """Return True only when a date can be parsed; normalize_date preserves unknown text."""
+    if not value:
+        return False
+    text = normalize_text(value)
+    try:
+        datetime.fromisoformat(text.replace("Z", "+00:00"))
+        return True
+    except ValueError:
+        pass
+    for fmt in (
+        "%a, %d %b %Y %H:%M:%S %z",
+        "%B %d, %Y",
+        "%b %d, %Y",
+        "%m/%d/%Y",
+        "%Y-%m-%d",
+    ):
+        try:
+            datetime.strptime(text[:40], fmt)
+            return True
+        except ValueError:
+            continue
+    return False
+
+
 def _extract_article_published_at(html: str):
     """Extract the article's own publication timestamp when the RSS item lacks one."""
     if not html:
@@ -89,14 +115,14 @@ def _extract_article_published_at(html: str):
         tag = soup.find(tag_name, attrs=attrs)
         if tag and tag.get("content"):
             value = normalize_date(tag.get("content"))
-            if value:
+            if _is_parseable_date(value):
                 return value
 
     for tag in soup.find_all("time"):
         value = tag.get("datetime") or tag.get_text(" ", strip=True)
         if value:
             normalized = normalize_date(value)
-            if normalized:
+            if _is_parseable_date(normalized):
                 return normalized
 
     article_text = normalize_text(soup.get_text(" ", strip=True))
@@ -108,7 +134,7 @@ def _extract_article_published_at(html: str):
         match = re.search(pattern, article_text, re.IGNORECASE)
         if match:
             normalized = normalize_date(match.group(1))
-            if normalized:
+            if _is_parseable_date(normalized):
                 return normalized
     return None
 
@@ -127,11 +153,19 @@ def enrich_fda_news_item(news_item: dict) -> dict:
         response.raise_for_status()
         html = response.text
         content = _extract_article_text(html, enriched.get("title", ""))
-        if not enriched.get("published_at"):
+        # A non-empty RSS value is not necessarily a usable timestamp. If it
+        # cannot be parsed, recover the date from the official article instead.
+        if not _is_parseable_date(enriched.get("published_at")):
             published_at = _extract_article_published_at(html)
             if published_at:
                 enriched["published_at"] = published_at
                 enriched["event_timestamp"] = published_at
+            else:
+                print(
+                    "FDA ENRICH DATE UNRESOLVED "
+                    f"url={canonical_url} rss_published_at={enriched.get('published_at')!r}",
+                    flush=True,
+                )
     except requests.RequestException as exc:
         print(f"FDA ENRICH ERROR url={canonical_url} error={type(exc).__name__}: {exc}", flush=True)
         return enriched

@@ -146,27 +146,36 @@ def build_fda_alert(event):
     return alert
 
 
+def _parse_fda_event_timestamp(event):
+    """Return the first parseable official timestamp, skipping malformed fields."""
+    for field in ("published_at", "first_published_at", "event_date"):
+        value = event.get(field)
+        if not value:
+            continue
+        text = str(value).strip()
+        try:
+            dt = datetime.fromisoformat(text.replace("Z", "+00:00"))
+        except ValueError:
+            dt = None
+            for fmt in ("%a, %d %b %Y %H:%M:%S %z", "%B %d, %Y", "%b %d, %Y", "%m/%d/%Y", "%Y-%m-%d"):
+                try:
+                    dt = datetime.strptime(text[:40], fmt)
+                    break
+                except ValueError:
+                    continue
+        if dt is not None:
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            return dt.astimezone(timezone.utc), field, text
+    return None, None, None
+
+
 def _is_recent_fda_event(event, max_age_hours=24):
     """Keep operational FDA alerts fresh while retaining the full news feed."""
-    value = event.get("published_at") or event.get("first_published_at") or event.get("event_date")
-    if not value:
-        return False
-    text = str(value).strip()
-    try:
-        dt = datetime.fromisoformat(text.replace("Z", "+00:00"))
-    except ValueError:
-        dt = None
-        for fmt in ("%a, %d %b %Y %H:%M:%S %z", "%B %d, %Y", "%b %d, %Y", "%Y-%m-%d"):
-            try:
-                dt = datetime.strptime(text[:40], fmt)
-                break
-            except ValueError:
-                continue
+    dt, _, _ = _parse_fda_event_timestamp(event)
     if dt is None:
         return False
-    if dt.tzinfo is None:
-        dt = dt.replace(tzinfo=timezone.utc)
-    age_hours = (datetime.now(timezone.utc) - dt.astimezone(timezone.utc)).total_seconds() / 3600.0
+    age_hours = (datetime.now(timezone.utc) - dt).total_seconds() / 3600.0
     return 0 <= age_hours <= max_age_hours
 
 
@@ -178,20 +187,54 @@ def scan_fda(watchlist, max_items=50):
         recent_events = [event for event in impact_events if _is_recent_fda_event(event)]
         trading_events = sort_by_alert_priority(recent_events)
         alerts = [build_fda_alert(event) for event in trading_events]
+        invalid_timestamp_events = [
+            {
+                "ticker": event.get("ticker", "UNKNOWN"),
+                "title": event.get("title", ""),
+                "url": event.get("url", ""),
+                "published_at": event.get("published_at"),
+                "first_published_at": event.get("first_published_at"),
+                "event_date": event.get("event_date"),
+            }
+            for event in impact_events
+            if not _has_parseable_fda_timestamp(event)
+        ]
+        excluded_impact_events = [
+            {
+                "ticker": event.get("ticker", "UNKNOWN"),
+                "title": event.get("title", ""),
+                "url": event.get("url", ""),
+                "reason": "STALE_OR_FUTURE_TIMESTAMP",
+                "timestamp": _parse_fda_event_timestamp(event)[2],
+            }
+            for event in impact_events
+            if _has_parseable_fda_timestamp(event) and not _is_recent_fda_event(event)
+        ]
         diagnostics = {
             "news": len(news),
             "matched_events": len(events),
             "high_impact_events": len(impact_events),
             "fresh_high_impact_events": len(recent_events),
-            "missing_or_invalid_timestamp": sum(
-                1 for event in impact_events
-                if not _has_parseable_fda_timestamp(event)
-            ),
-            "stale_or_future_timestamp": sum(
-                1 for event in impact_events
-                if _has_parseable_fda_timestamp(event) and not _is_recent_fda_event(event)
-            ),
+            "missing_or_invalid_timestamp": len(invalid_timestamp_events),
+            "stale_or_future_timestamp": len(excluded_impact_events),
         }
+        for event in invalid_timestamp_events:
+            print(
+                "FDA EVENT EXCLUDED reason=MISSING_OR_INVALID_TIMESTAMP "
+                f"ticker={event['ticker']} title={event['title']!r} "
+                f"published_at={event['published_at']!r} "
+                f"first_published_at={event['first_published_at']!r} "
+                f"event_date={event['event_date']!r} url={event['url']}",
+                flush=True,
+            )
+        for event in excluded_impact_events:
+            print(
+                "FDA EVENT EXCLUDED "
+                f"reason={event['reason']} ticker={event['ticker']} "
+                f"title={event['title']!r} timestamp={event['timestamp']!r} "
+                f"url={event['url']}",
+                flush=True,
+            )
         print("FDA pipeline diagnostics: " + " | ".join(f"{key}={value}" for key, value in diagnostics.items()))
         return {"news": news, "events": events, "alerts": alerts, "diagnostics": diagnostics, "error": None}
     except Exception as error:
@@ -200,20 +243,7 @@ def scan_fda(watchlist, max_items=50):
 
 
 def _has_parseable_fda_timestamp(event):
-    value = event.get("published_at") or event.get("first_published_at") or event.get("event_date")
-    if not value:
-        return False
-    text = str(value).strip()
-    try:
-        dt = datetime.fromisoformat(text.replace("Z", "+00:00"))
-    except ValueError:
-        dt = None
-        for fmt in ("%a, %d %b %Y %H:%M:%S %z", "%B %d, %Y", "%b %d, %Y", "%Y-%m-%d"):
-            try:
-                dt = datetime.strptime(text[:40], fmt)
-                break
-            except ValueError:
-                continue
+    dt, _, _ = _parse_fda_event_timestamp(event)
     return dt is not None
 
 def scan(baseline=False):
@@ -261,6 +291,23 @@ def scan(baseline=False):
     try:
         regulatory_result = scan_regulatory_sources(watchlist)
         alerts.extend([build_fda_alert(event) for event in regulatory_result["alerts"]])
+        regulatory_excluded = [
+            event for event in regulatory_result["events"]
+            if event.get("trading_impact") not in {"EXTREME", "HIGH"}
+        ]
+        for event in regulatory_excluded:
+            print(
+                "REGULATORY EVENT EXCLUDED reason=TRADING_IMPACT_BELOW_ALERT_THRESHOLD "
+                f"ticker={event.get('ticker', 'UNKNOWN')} "
+                f"source={event.get('source', 'UNKNOWN')} "
+                f"impact={event.get('trading_impact', 'UNKNOWN')} "
+                f"subtype={event.get('subtype', 'UNKNOWN')} "
+                f"title={event.get('title', '')!r} "
+                f"published_at={event.get('published_at')!r} "
+                f"event_date={event.get('event_date')!r} "
+                f"url={event.get('url', '')}",
+                flush=True,
+            )
     except Exception as error:
         regulatory_result = {"ema_news": [], "sec_news": [], "news": [], "events": [], "alerts": []}
         errors.append({"ticker": "REGULATORY", "program": "EMA_SEC", "error": str(error)})
@@ -292,6 +339,7 @@ def scan(baseline=False):
         f"fda_alerts={len(fda_result['alerts'])} | "
         f"regulatory_events={len(regulatory_result['events'])} | "
         f"regulatory_alerts={len(regulatory_result['alerts'])} | "
+        f"regulatory_below_threshold={sum(1 for event in regulatory_result['events'] if event.get('trading_impact') not in {'EXTREME', 'HIGH'})} | "
         f"final_alerts_after_catalyst_dedup={len(alerts)}"
     )
     print("===================================")

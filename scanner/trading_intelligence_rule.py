@@ -57,7 +57,8 @@ def _market_confirmation(event):
     volume_confirmation = volume_ratio is not None and volume_ratio >= 1.5
 
     interpretation = str(event.get("reaction_interpretation") or event.get("reaction_classification") or "UNKNOWN").upper()
-    coherent_reaction = interpretation == "CONFIRMED" or price_direction
+    # Do not count the same price-direction signal twice when intraday/daily price confirms direction.
+    coherent_reaction = interpretation == "CONFIRMED"
 
     checks = {
         "price_direction": bool(price_direction),
