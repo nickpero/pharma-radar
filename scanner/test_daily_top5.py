@@ -70,6 +70,7 @@ def test_format():
             "catalyst_found": True,
             "catalyst_subtype": "COMMERCIAL_PARTNERSHIP",
             "catalyst_source": "SEC",
+            "classification": "FUNDAMENTAL_OR_CLINICAL_CATALYST",
         }
     ], "2026-09-29")
     assert "TOP 5 GIORNALIERO" in message
