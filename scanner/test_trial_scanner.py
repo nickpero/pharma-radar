@@ -1,4 +1,9 @@
-from scanner.trial_scanner import make_trial_key, build_alert
+from datetime import datetime, timedelta, timezone
+
+from scanner.trial_scanner import (
+    make_trial_key, build_alert, _parse_fda_event_timestamp,
+    _is_recent_fda_event, _has_parseable_fda_timestamp,
+)
 
 
 def test_make_trial_key():
@@ -50,4 +55,33 @@ if __name__ == "__main__":
     test_make_trial_key_unique()
     test_make_trial_key_program_difference()
     test_build_alert_carries_catalyst_confirmation()
+    test_fda_timestamp_skips_invalid_primary_and_uses_valid_fallback()
+    test_fda_timestamp_does_not_invent_date_when_all_candidates_invalid()
     print("✅ Trial Scanner tests passed")
+
+
+
+def test_fda_timestamp_skips_invalid_primary_and_uses_valid_fallback():
+    fallback = (datetime.now(timezone.utc) - timedelta(minutes=30)).isoformat()
+    event = {
+        "published_at": "date unavailable",
+        "first_published_at": fallback,
+        "event_date": "also invalid",
+    }
+    parsed, field, raw = _parse_fda_event_timestamp(event)
+    assert parsed is not None
+    assert field == "first_published_at"
+    assert raw == fallback
+    assert _has_parseable_fda_timestamp(event)
+    assert _is_recent_fda_event(event)
+
+
+def test_fda_timestamp_does_not_invent_date_when_all_candidates_invalid():
+    event = {
+        "published_at": "unknown",
+        "first_published_at": None,
+        "event_date": "not-a-date",
+    }
+    assert _parse_fda_event_timestamp(event) == (None, None, None)
+    assert not _has_parseable_fda_timestamp(event)
+    assert not _is_recent_fda_event(event)
