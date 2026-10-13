@@ -46,7 +46,7 @@ def test_same_day_catalyst_is_linked():
     )
     assert rows[0]["catalyst_found"] is True
     assert rows[0]["catalyst_subtype"] == "COMMERCIAL_PARTNERSHIP"
-    assert rows[0]["classification"] == "CATALYST_LINKED"
+    assert rows[0]["classification"] == "FUNDAMENTAL_OR_CLINICAL_CATALYST"
 
 
 def test_unexplained_move_is_not_called_a_catalyst():
@@ -80,12 +80,6 @@ def test_format():
     assert "CATALYST_LINKED" in message
 
 
-if __name__ == "__main__":
-    test_top5_ranks_gainers_and_limits_to_five()
-    test_same_day_catalyst_is_linked()
-    test_unexplained_move_is_not_called_a_catalyst()
-    test_format()
-    print("Daily Top 5 tests passed")
 
 
 def test_fundamental_catalyst_is_classified_separately():
@@ -405,3 +399,32 @@ def test_premarket_history_dict_is_read_and_marks_new_today():
         assert rows[0]["catalyst_origin"] == "EMERGED_TODAY"
     finally:
         premarket._load = original
+
+
+if __name__ == "__main__":
+    test_top5_ranks_gainers_and_limits_to_five()
+    test_same_day_catalyst_is_linked()
+    test_unexplained_move_is_not_called_a_catalyst()
+    test_format()
+    test_fundamental_catalyst_is_classified_separately()
+    test_company_level_corporate_transaction_can_pass_without_program()
+    test_corporate_transaction_is_fundamental()
+    test_ip_catalyst_is_fundamental()
+    test_regulatory_patent_catalyst_is_fundamental()
+    test_clinical_milestone_is_watch()
+    test_market_structure_move_is_separate_from_pharma_catalyst()
+    test_regulatory_watch_without_same_day_catalyst_is_not_falsely_alerted()
+    test_same_day_secondary_catalyst_is_quality_gated()
+    test_same_day_primary_catalyst_passes_quality_gate()
+    test_24_72h_catalyst_is_reaction_continuation()
+    test_missing_timestamp_is_quality_gated()
+    test_72h_window_links_prior_day_catalyst()
+    test_catalyst_program_must_be_verified_for_quality_gate()
+    test_verified_program_catalyst_wins_over_later_unscoped_event()
+    test_quality_gate_blocks_radar_inclusion_for_secondary_source()
+    test_primary_fundamental_catalyst_is_radar_candidate()
+    test_timeline_change_is_watch_only_not_fundamental()
+    test_unexplained_microcap_move_stays_out_of_radar()
+    test_prior_day_fundamental_reaction_does_not_create_new_alert()
+    test_premarket_history_dict_is_read_and_marks_new_today()
+    print("Daily Top 5 tests passed")
