@@ -291,6 +291,23 @@ def scan(baseline=False):
     try:
         regulatory_result = scan_regulatory_sources(watchlist)
         alerts.extend([build_fda_alert(event) for event in regulatory_result["alerts"]])
+        regulatory_excluded = [
+            event for event in regulatory_result["events"]
+            if event.get("trading_impact") not in {"EXTREME", "HIGH"}
+        ]
+        for event in regulatory_excluded:
+            print(
+                "REGULATORY EVENT EXCLUDED reason=TRADING_IMPACT_BELOW_ALERT_THRESHOLD "
+                f"ticker={event.get('ticker', 'UNKNOWN')} "
+                f"source={event.get('source', 'UNKNOWN')} "
+                f"impact={event.get('trading_impact', 'UNKNOWN')} "
+                f"subtype={event.get('subtype', 'UNKNOWN')} "
+                f"title={event.get('title', '')!r} "
+                f"published_at={event.get('published_at')!r} "
+                f"event_date={event.get('event_date')!r} "
+                f"url={event.get('url', '')}",
+                flush=True,
+            )
     except Exception as error:
         regulatory_result = {"ema_news": [], "sec_news": [], "news": [], "events": [], "alerts": []}
         errors.append({"ticker": "REGULATORY", "program": "EMA_SEC", "error": str(error)})
@@ -322,7 +339,8 @@ def scan(baseline=False):
         f"fda_alerts={len(fda_result['alerts'])} | "
         f"regulatory_events={len(regulatory_result['events'])} | "
         f"regulatory_alerts={len(regulatory_result['alerts'])} | "
-        f"final_alerts_after_catalyst_dedup={len(alerts)}"
+        f"regulatory_below_threshold={sum(1 for event in regulatory_result['events'] if event.get('trading_impact') not in {'EXTREME', 'HIGH'})} | "
+        f"final_alerts_after_catalyst_dedup={len(alerts)}
     )
     print("===================================")
     return {"companies": len(watchlist), "total_trials": total_trials, "relevant_trials": relevant_trials, "filtered_trials": filtered_trials,
