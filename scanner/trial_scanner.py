@@ -340,7 +340,7 @@ def scan(baseline=False):
         f"regulatory_events={len(regulatory_result['events'])} | "
         f"regulatory_alerts={len(regulatory_result['alerts'])} | "
         f"regulatory_below_threshold={sum(1 for event in regulatory_result['events'] if event.get('trading_impact') not in {'EXTREME', 'HIGH'})} | "
-        f"final_alerts_after_catalyst_dedup={len(alerts)}
+        f"final_alerts_after_catalyst_dedup={len(alerts)}"
     )
     print("===================================")
     return {"companies": len(watchlist), "total_trials": total_trials, "relevant_trials": relevant_trials, "filtered_trials": filtered_trials,
