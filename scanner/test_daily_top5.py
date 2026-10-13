@@ -1,4 +1,4 @@
-from scanner.daily_top5 import build_daily_top5, format_daily_top5
+from scanner.daily_top5 import build_daily_top5, format_daily_top5, _classify_row
 
 
 def snapshot(pct, volume_ratio=1.0):
@@ -77,7 +77,7 @@ def test_format():
     assert "+22.00%" in message
     assert "non rappresenta l’intero mercato" in message
     assert "Nessuna raccomandazione di acquisto o vendita" in message
-    assert "CATALYST_LINKED" in message
+    assert "FUNDAMENTAL_OR_CLINICAL_CATALYST" in message
 
 
 
