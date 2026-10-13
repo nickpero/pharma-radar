@@ -12,7 +12,7 @@ def _qualified():
         "historical_edge_win_rate_1d": 0.61,
         "direction": "POSITIVE",
         "reaction_interpretation": "CONFIRMED",
-        "market_reaction": {"reaction_direction": "POSITIVE"},
+        "market_reaction": {"reaction_status": "AVAILABLE", "reaction_direction": "POSITIVE", "reaction_15m_pct": 2.0},
         "volume_ratio": 2.0,
     }
 
