@@ -125,7 +125,13 @@ def _recent_catalysts(history, ticker, date_value=None, now=None, meta=None):
         if str(event.get("ticker", "")).upper() != ticker:
             continue
         dt = _parse_event_timestamp(event)
-        if dt is None or dt > reference:
+        # Keep untimestamped records as low-priority context so the Quality Gate
+        # can explicitly label them EVENT_TIMESTAMP_MISSING. They must never
+        # outrank a timestamped catalyst or become eligible for a new alert.
+        if dt is None:
+            matches.append(event)
+            continue
+        if dt > reference:
             continue
         age_hours = (reference - dt).total_seconds() / 3600.0
         if 0 <= age_hours <= 72:
