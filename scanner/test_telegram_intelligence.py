@@ -80,12 +80,12 @@ def test_different_headlines_remain_separate_events():
 
 
 
-def test_24_72h_high_priority_catalyst_is_silenced_by_quality_gate():
+def test_24_72h_high_priority_catalyst_is_watch_only():
     alert = _alert("VBIO", 100, 54, "CRITICAL")
     alert["source"] = "SEC"
     alert["source_type"] = "PRIMARY_CORPORATE"
     alert["published_at"] = "2026-10-01T07:45:00Z"
-    assert alert_action(alert) == "SILENT"
+    assert alert_action(alert) == "WATCH"
 
 
 def test_stale_high_priority_catalyst_is_silenced_by_quality_gate():
