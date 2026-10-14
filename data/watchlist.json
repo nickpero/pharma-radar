@@ -583,16 +583,31 @@
   },
   "PCRX": {
     "company": "Pacira BioSciences",
-    "programs": ["EXPAREL", "ZILRETTA", "PCRX-201"],
+    "programs": [
+      "EXPAREL",
+      "ZILRETTA",
+      "PCRX-201"
+    ],
     "priority": "RED",
-    "primary_sources": ["SEC", "Pacira BioSciences", "Viatris", "FDA"],
+    "primary_sources": [
+      "SEC",
+      "Pacira BioSciences",
+      "Viatris",
+      "FDA"
+    ],
     "radar_role": "FUNDAMENTAL_CLINICAL_REGULATORY_CATALYST"
   },
   "BIAF": {
     "company": "bioAffinity Technologies",
-    "programs": ["CyPath Lung"],
+    "programs": [
+      "CyPath Lung"
+    ],
     "priority": "ORANGE",
-    "primary_sources": ["SEC", "bioAffinity Technologies", "FDA"],
+    "primary_sources": [
+      "SEC",
+      "bioAffinity Technologies",
+      "FDA"
+    ],
     "radar_role": "FUNDAMENTAL_CLINICAL_REGULATORY_CATALYST"
   },
   "LPCN": {
@@ -611,5 +626,312 @@
       "ClinicalTrials.gov"
     ],
     "radar_role": "FUNDAMENTAL_CLINICAL_REGULATORY_CATALYST"
+  },
+  "ARWR": {
+    "company": "Arrowhead Pharmaceuticals",
+    "programs": [
+      "plozasiran",
+      "ARO-MAPT",
+      "ARO-ANG3"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Arrowhead Pharmaceuticals",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "VSTM": {
+    "company": "Verastem",
+    "programs": [
+      "avutometinib",
+      "defactinib",
+      "VS-7375"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Verastem",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "BHVN": {
+    "company": "Biohaven",
+    "programs": [
+      "BHV-7000",
+      "BHV-1300",
+      " troriluzole"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Biohaven",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "EPRX": {
+    "company": "Eupraxia Pharmaceuticals",
+    "programs": [
+      "EP-104GI"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "Eupraxia Pharmaceuticals",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "ACHV": {
+    "company": "Achieve Life Sciences",
+    "programs": [
+      "cytisinicline"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Achieve Life Sciences",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "CYTK": {
+    "company": "Cytokinetics",
+    "programs": [
+      "aficamten",
+      "omecamtiv mecarbil",
+      "CK-586"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Cytokinetics",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "AMLX": {
+    "company": "Amylyx Pharmaceuticals",
+    "programs": [
+      "avexitide",
+      "AMX0035"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Amylyx Pharmaceuticals",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "BBIO": {
+    "company": "BridgeBio Pharma",
+    "programs": [
+      "acoramidis",
+      "infigratinib",
+      "encaleret"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "BridgeBio Pharma",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "CGEM": {
+    "company": "Cullinan Therapeutics",
+    "programs": [
+      "zipalertinib",
+      "CLN-049",
+      "CLN-978"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Cullinan Therapeutics",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "KYMR": {
+    "company": "Kymera Therapeutics",
+    "programs": [
+      "KT-621",
+      "KT-579"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Kymera Therapeutics",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "KRYS": {
+    "company": "Krystal Biotech",
+    "programs": [
+      "Vyjuvek",
+      "KB407",
+      "KB803",
+      "KB801"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Krystal Biotech",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "JANX": {
+    "company": "Janux Therapeutics",
+    "programs": [
+      "JANX007",
+      "JANX008"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Janux Therapeutics",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "XNCR": {
+    "company": "Xencor",
+    "programs": [
+      "XmAb942",
+      "XmAb541",
+      "XmAb657",
+      "obexelimab"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Xencor",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "ABVX": {
+    "company": "ABIVAX",
+    "programs": [
+      "obefazimod"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ABIVAX",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "ACIU": {
+    "company": "AC Immune",
+    "programs": [
+      "ACI-24",
+      "ACI-7104"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "AC Immune",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "CRVO": {
+    "company": "CervoMed",
+    "programs": [
+      "neflamapimod"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "CervoMed",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "PRAX": {
+    "company": "Praxis Precision Medicines",
+    "programs": [
+      "ulixacaltamide",
+      "relutrigine",
+      "elsunersen"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Praxis Precision Medicines",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "XENE": {
+    "company": "Xenon Pharmaceuticals",
+    "programs": [
+      "azetukalner",
+      "XEN1101"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Xenon Pharmaceuticals",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "RCKT": {
+    "company": "Rocket Pharmaceuticals",
+    "programs": [
+      "RP-A501",
+      "RP-L102",
+      "RP-L201"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Rocket Pharmaceuticals",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "DRUG": {
+    "company": "Bright Minds Biosciences",
+    "programs": [
+      "BMB-101",
+      "BMB-202"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Bright Minds Biosciences",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
   }
 }
