@@ -93,25 +93,17 @@ def _is_expired(alert):
 
 
 def alert_action(alert):
-    """Classify how aggressively an alert should be delivered to Telegram.
+    """Classify alert delivery while separating discovery from confirmed action.
 
-    Conservative policy: regulatory/catalyst priority is necessary, while strong
-    market reaction can upgrade an alert. Missing reaction data never creates a
-    stronger signal by itself.
-
-    EXPIRED events are retained for historical/contextual use but never become
-    operational Telegram alerts.
+    IMMEDIATE/FAST require a fresh, verified primary source. Fresh discovery
+    items and recent primary-source items aged 24-72h may be WATCH only.
+    Historical, expired, and timestamp-less events remain silent.
     """
     if _is_expired(alert):
         return "SILENT"
 
-    if not alert_quality_gate(alert)["eligible"]:
-        return "SILENT"
-
-    if alert.get("post_spike_watch") is True:
-        return "WATCH"
-
-    if _is_stale_news(alert):
+    freshness = catalyst_freshness(alert)
+    if freshness in {"UNKNOWN_TIME", "HISTORICAL_GT_72H"}:
         return "SILENT"
 
     event = alert.get("event") if isinstance(alert.get("event"), dict) else {}
@@ -122,6 +114,27 @@ def alert_action(alert):
     interpretation = str(alert.get("reaction_interpretation", event.get("reaction_interpretation", "UNKNOWN"))).upper()
     reaction = _reaction(alert)
     reaction_pct = _num(reaction.get("reaction_pct"))
+    primary = primary_source_verified(alert)
+
+    # Recent secondary-source discovery is a clearly labelled watch, never a
+    # confirmed actionable signal. Keep thresholds to avoid alerting on noise.
+    if alert.get("early_discovery") is True:
+        if freshness == "NEW_0_24H" and (priority >= 40 or setup >= 50 or tier in {"HIGH", "CRITICAL"}):
+            return "WATCH"
+        return "SILENT"
+
+    # Expand recall for credible primary-source catalysts published 24-72h ago.
+    # They can alert as WATCH, but cannot be upgraded to FAST/IMMEDIATE.
+    if freshness == "REACTION_24_72H":
+        if primary and (priority >= 50 or tier in {"HIGH", "CRITICAL"}):
+            return "WATCH"
+        return "SILENT"
+
+    if not alert_quality_gate(alert)["eligible"]:
+        return "SILENT"
+
+    if alert.get("post_spike_watch") is True:
+        return "WATCH"
 
     if tier == "CRITICAL" or priority >= 80:
         return "IMMEDIATE"
@@ -199,6 +212,10 @@ def select_intelligent_alerts(alerts):
         item = dict(alert)
         gate = alert_quality_gate(item)
         item["quality_gate"] = gate["reason"]
+        if action == "WATCH" and item.get("early_discovery") is True:
+            item["quality_gate"] = "WATCH_ONLY_SECONDARY_DISCOVERY"
+        elif action == "WATCH" and gate["reason"] == "NOT_NEW_24H":
+            item["quality_gate"] = "WATCH_ONLY_RECENT_PRIMARY"
         item["catalyst_freshness"] = gate["freshness"]
         item["primary_source_verified"] = gate["primary_source"]
         item["telegram_action"] = action
