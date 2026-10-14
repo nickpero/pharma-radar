@@ -232,3 +232,24 @@ def test_missing_timestamp_is_silenced_by_quality_gate():
     alert["source_type"] = "PRIMARY_CORPORATE"
     alert.pop("published_at", None)
     assert alert_action(alert) == "SILENT"
+
+def test_telegram_shows_publication_and_detection_timestamps():
+    alert = _alert("IBRX", 100, 57, "CRITICAL")
+    alert.update({
+        "title": "FDA expands ANKTIVA indication",
+        "source": "FDA RSS",
+        "published_at": "2026-10-14T10:30:00Z",
+        "detected_at": "2026-10-14T10:35:00Z",
+    })
+    message = format_catalyst_alert(alert)
+    assert "🗞 Pubblicata: 14/10/2026 12:30 CEST" in message
+    assert "🛰 Rilevata dal Radar: 14/10/2026 12:35 CEST" in message
+
+
+def test_telegram_does_not_invent_missing_publication_time():
+    alert = _alert("IBRX", 100, 57, "CRITICAL")
+    alert.pop("published_at", None)
+    alert.pop("event_date", None)
+    message = format_catalyst_alert(alert)
+    assert "🗞 Pubblicata: NON DISPONIBILE" in message
+
