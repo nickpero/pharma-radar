@@ -191,13 +191,37 @@ if __name__ == "__main__":
 
 
 def test_early_discovery_is_deliverable_with_freshness():
-    alert = _alert("VBIO", 90, 60, "HIGH")
+    alert = _alert("VBIO", 45, 60, "WATCH")
     alert.update({
         "source": "EARLY_DISCOVERY",
         "source_type": "SECONDARY_DISCOVERY",
         "early_discovery": True,
         "published_at": datetime.now(timezone.utc).isoformat(),
     })
+    assert alert_action(alert) == "WATCH"
+
+
+def test_recent_secondary_discovery_cannot_become_fast_or_immediate():
+    alert = _alert("VBIO", 100, 95, "CRITICAL")
+    alert.update({
+        "source": "EARLY_DISCOVERY",
+        "source_type": "SECONDARY_DISCOVERY",
+        "early_discovery": True,
+        "published_at": datetime.now(timezone.utc).isoformat(),
+    })
+    assert alert_action(alert) == "WATCH"
+
+
+def test_primary_catalyst_24_to_72_hours_becomes_watch_only():
+    alert = _alert("VBIO", 100, 90, "CRITICAL")
+    alert["published_at"] = (datetime.now(timezone.utc) - __import__("datetime").timedelta(hours=36)).isoformat()
+    assert alert_action(alert) == "WATCH"
+
+
+def test_secondary_non_discovery_source_remains_silent():
+    alert = _alert("VBIO", 100, 90, "CRITICAL")
+    alert["source"] = "REUTERS"
+    alert["published_at"] = datetime.now(timezone.utc).isoformat()
     assert alert_action(alert) == "SILENT"
 
 
