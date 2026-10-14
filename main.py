@@ -146,6 +146,10 @@ def send_alerts(result, alerts=None):
     alerts = _new_telegram_alerts(result) if alerts is None else alerts
     if not alerts:
         return []
+    # Stamp detection immediately before formatting the Telegram delivery.
+    detected_at = datetime.now(timezone.utc).isoformat()
+    for alert in alerts:
+        alert.setdefault("detected_at", detected_at)
     # One Telegram delivery per scan, containing all new catalyst alerts.
     # The scan summary is kept for Actions/logs and is not sent separately.
     message = "\n\n──────────────\n\n".join(format_catalyst_alert(alert) for alert in alerts)

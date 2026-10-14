@@ -5,7 +5,8 @@ Gestisce l'invio degli alert Pharma Radar tramite Telegram Bot API.
 """
 
 import os
-from datetime import date
+from datetime import date, datetime, timezone
+from zoneinfo import ZoneInfo
 
 import requests
 from scanner.priority import get_alert_tier, enrich_alert_priority
@@ -123,6 +124,23 @@ def _parse_iso_date(value):
         return date.fromisoformat(str(value).strip())
     except (TypeError, ValueError):
         return None
+
+
+
+def _format_timestamp(value):
+    """Format a source timestamp in Italian local time without inventing missing data."""
+    if not value:
+        return "NON DISPONIBILE"
+    text = str(value).strip()
+    try:
+        parsed = datetime.fromisoformat(text.replace("Z", "+00:00"))
+    except ValueError:
+        parsed_date = _parse_iso_date(text)
+        return f"{parsed_date.strftime('%d/%m/%Y')} (ora non disponibile)" if parsed_date else "NON DISPONIBILE"
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    local = parsed.astimezone(ZoneInfo("Europe/Rome"))
+    return local.strftime("%d/%m/%Y %H:%M %Z")
 
 
 def _timeline_details(alert, event, subtype):
@@ -269,9 +287,20 @@ def format_catalyst_alert(alert):
         ),
     ])
 
+    published_value = (
+        alert.get("first_published_at") or alert.get("published_at")
+        or alert.get("publication_date") or event.get("first_published_at")
+        or event.get("published_at") or event.get("publication_date")
+        or alert.get("event_date") or event.get("event_date")
+    )
+    detected_value = alert.get("detected_at") or datetime.now(timezone.utc).isoformat()
+    lines.extend([
+        "",
+        f"🗞 Pubblicata: {_format_timestamp(published_value)}",
+        f"🛰 Rilevata dal Radar: {_format_timestamp(detected_value)}",
+    ])
     if early:
-        published = _clean_text(alert.get("first_published_at") or alert.get("published_at") or alert.get("event_date"), 40)
-        lines.extend(["", f"⏱ Published: {published}", "⚠️ Early discovery — primary confirmation may still be pending."])
+        lines.append("⚠️ Early discovery — conferma da fonte primaria ancora in attesa.")
 
     if why:
         lines.extend(["", "💡 WHY IT MATTERS", why])
