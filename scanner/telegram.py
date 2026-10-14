@@ -291,7 +291,6 @@ def format_catalyst_alert(alert):
         alert.get("first_published_at") or alert.get("published_at")
         or alert.get("publication_date") or event.get("first_published_at")
         or event.get("published_at") or event.get("publication_date")
-        or alert.get("event_date") or event.get("event_date")
     )
     detected_value = alert.get("detected_at") or datetime.now(timezone.utc).isoformat()
     lines.extend([
