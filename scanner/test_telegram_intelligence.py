@@ -277,3 +277,10 @@ def test_telegram_does_not_invent_missing_publication_time():
     message = format_catalyst_alert(alert)
     assert "🗞 Pubblicata: NON DISPONIBILE" in message
 
+
+
+def test_telegram_marks_watch_only_alert_as_non_urgent():
+    alert = _alert("VBIO", 45, 60, "WATCH")
+    alert["telegram_action"] = "WATCH"
+    message = format_catalyst_alert(alert)
+    assert "👀 WATCH — informativo, non urgente" in message

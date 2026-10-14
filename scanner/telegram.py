@@ -241,6 +241,7 @@ def format_catalyst_alert(alert):
         "🟡 PHARMA RADAR — EARLY CATALYST" if early else "🚨 PHARMA RADAR",
         "━━━━━━━━━━━━━━━━━━",
         f"{tier_icon} {alert_tier}",
+        *(["👀 WATCH — informativo, non urgente"] if str(alert.get("telegram_action", "")).upper() == "WATCH" else []),
         "",
         f"🧬 {ticker}",
         f"💊 {drug_name}",
