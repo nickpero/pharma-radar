@@ -212,6 +212,10 @@ def select_intelligent_alerts(alerts):
         item = dict(alert)
         gate = alert_quality_gate(item)
         item["quality_gate"] = gate["reason"]
+        if action == "WATCH" and item.get("early_discovery") is True:
+            item["quality_gate"] = "WATCH_ONLY_SECONDARY_DISCOVERY"
+        elif action == "WATCH" and gate["reason"] == "NOT_NEW_24H":
+            item["quality_gate"] = "WATCH_ONLY_RECENT_PRIMARY"
         item["catalyst_freshness"] = gate["freshness"]
         item["primary_source_verified"] = gate["primary_source"]
         item["telegram_action"] = action
