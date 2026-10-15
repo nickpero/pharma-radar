@@ -62,10 +62,10 @@ def inspect_latest_run():
     status = latest.get("status")
     conclusion = latest.get("conclusion")
     run_url = latest.get("html_url", "")
-    if status == "in_progress":
+    if status in {"queued", "in_progress"}:
         if age <= timedelta(minutes=25):
-            return True, f"Ultima esecuzione ancora in corso ({int(age.total_seconds() // 60)} min): {run_url}"
-        return False, f"Workflow bloccato/in corso da oltre 25 minuti: {run_url}"
+            return True, f"Ultima esecuzione in coda/in corso ({int(age.total_seconds() // 60)} min): {run_url}"
+        return False, f"Workflow bloccato in coda/in corso da oltre 25 minuti: {run_url}"
     updated = utc(latest.get("updated_at") or latest["created_at"])
     if conclusion != "success":
         return False, f"Ultimo run concluso con esito '{conclusion or status}': {run_url}"
