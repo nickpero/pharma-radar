@@ -49,7 +49,9 @@ def build_upcoming_calendar(days=90, watchlist=None, trials=None, today=None, an
     if trials is None:
         trials = json.loads(TRIALS_PATH.read_text(encoding="utf-8"))
     if announced_events is None:
-        announced_events = load_announced_events()
+        # When tests/callers inject a watchlist or trial snapshot, do not mix
+        # in the repository's live announced feed unless explicitly requested.
+        announced_events = load_announced_events() if watchlist is None and trials is None else []
     start = today or date.today()
     end = start + timedelta(days=days)
     rows = []
