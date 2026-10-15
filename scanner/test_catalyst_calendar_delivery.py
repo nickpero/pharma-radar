@@ -81,3 +81,30 @@ def test_failed_delivery_does_not_mark_as_sent(tmp_path):
     else:
         raise AssertionError("expected Telegram failure")
     assert not state_path.exists()
+
+
+
+def test_partial_delivery_persists_first_alert_before_second_fails(tmp_path):
+    state_path = tmp_path / "state.json"
+    first = row(date="2026-10-22", milestone="Readout A")
+    second = row(date="2026-10-22", milestone="Readout B")
+    calls = {"count": 0}
+
+    def fail_second(_):
+        calls["count"] += 1
+        if calls["count"] == 2:
+            raise RuntimeError("telegram unavailable")
+        return {"ok": True}
+
+    try:
+        run_delivery(today=date(2026, 10, 15), rows=[first, second],
+                     state_path=state_path, send_fn=fail_second)
+    except RuntimeError:
+        pass
+    else:
+        raise AssertionError("expected Telegram failure")
+    state = json.loads(state_path.read_text())
+    assert len(state) == 1
+    retry_due = due_calendar_alerts([first, second], today=date(2026, 10, 15), sent_state=state)
+    assert len(retry_due) == 1
+    assert retry_due[0]["milestone"] == "Readout B"
