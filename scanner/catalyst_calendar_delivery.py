@@ -101,12 +101,16 @@ def format_due_alert(row):
     source_url = row.get("source_url") or row.get("source")
     if source_url:
         lines.append(f"🔗 Fonte primaria: {source_url}")
-    if row.get("why_it_matters"):
-        lines.append(f"💡 Rilevanza: {row['why_it_matters']}")
-    elif event_type == "TRIAL_MILESTONE":
+    if event_type == "TRIAL_MILESTONE":
         lines.append("💡 Rilevanza: segnala la tempistica del trial; non dimostra che i risultati siano disponibili.")
+        if row.get("why_it_matters"):
+            lines.append(f"Contesto: {row['why_it_matters']}")
     elif event_type == "CLINICAL_REVIEW":
         lines.append("💡 Rilevanza: aggiornamento di processo/sicurezza; non attribuire esito positivo o negativo senza dati unblinded.")
+        if row.get("why_it_matters"):
+            lines.append(f"Contesto: {row['why_it_matters']}")
+    elif row.get("why_it_matters"):
+        lines.append(f"💡 Rilevanza: {row['why_it_matters']}")
     else:
         lines.append("💡 Rilevanza: i dati possono modificare la valutazione del programma; nessuna direzione è inferita prima di leggerli.")
     lines.extend([
