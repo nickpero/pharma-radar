@@ -25,7 +25,8 @@ def classify_catalyst_reaction(event, positive_low=0.0, negative_large=-10.0,
     move = _number(event.get("price_change_pct"))
     ticker = str(event.get("ticker") or "UNKNOWN").upper()
     timestamp = event.get("price_timestamp") or event.get("event_timestamp")
-    if move is None:
+    if move is None or not timestamp:
+        # Do not compare an untimestamped daily move with an event: temporal alignment matters.
         return None
 
     common = {
