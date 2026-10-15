@@ -27,10 +27,10 @@ def event(**overrides):
     return value
 
 
-def test_readout_keeps_clinical_outcome():
+def test_future_readout_does_not_claim_data_already_available():
     item = classify_announced_event(event())
     assert item["event_type"] == "CLINICAL_READOUT"
-    assert item["clinical_outcome_available"] is True
+    assert item["clinical_outcome_available"] is False
 
 
 def test_trial_milestone_never_implies_outcome():
