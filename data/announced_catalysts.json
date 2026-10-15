@@ -1,0 +1,6 @@
+[
+  {
+    "_schema": "announced_catalysts.v1",
+    "_instructions": "Replace this schema marker with source-verified event records. Each record requires ticker, event_type (CLINICAL_READOUT, TRIAL_MILESTONE, or CLINICAL_REVIEW), event_name/title, and source/source_url. Use date for exact/month-level date or window_start/window_end for a window. Keep source publication date separate from event date. Never enter a DSMB/blinded/safety review as a readout."
+  }
+]
