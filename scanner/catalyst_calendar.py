@@ -129,11 +129,13 @@ def format_calendar(rows, days=90):
             classification = "ℹ️ Expected trial milestone — not itself a clinical readout."
         program = row.get("program") or ((row.get("programs") or [None])[0]) or row.get("title") or "UNKNOWN"
         lines.extend([
-            f"📅 {date_text} · {row['ticker']} · {row.get('milestone', 'CLINICAL_CATALYST')}",
+            f"📅 {date_text} · {row.get('company') or row['ticker']} ({row['ticker']}) · {row.get('milestone', 'CLINICAL_CATALYST')}",
             f"💊 {program} · {row.get('phase') or 'PHASE UNKNOWN'}",
             classification,
             f"🔬 {row.get('nct_id') or 'N/A'} · {row.get('status') or 'STATUS UNKNOWN'}",
-            f"🔗 {row.get('source') or row.get('source_url') or 'Source unavailable'}",
+            f"🔗 {row.get('source_url') or row.get('source') or 'Source unavailable'}",
+            *([f"🗞 Pubblicazione fonte: {row.get('source_published_at') or row.get('published_at')}"] if row.get('source_published_at') or row.get('published_at') else []),
+            *([f"💡 Rilevanza: {row.get('why_it_matters')}"] if row.get('why_it_matters') else []),
             "",
         ])
     return "\n".join(lines).rstrip()
