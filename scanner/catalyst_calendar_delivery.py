@@ -62,10 +62,20 @@ def due_calendar_alerts(rows, today=None, sent_state=None):
             row.get("source_url") or row.get("source")
         ):
             continue
+        fingerprint = _fingerprint(row)
+        material_update_at = str(row.get("material_update_at") or "").strip()
+        if material_update_at:
+            update_key = f"{fingerprint}:UPDATE:{material_update_at}"
+            if update_key not in sent_state:
+                item = dict(row)
+                item["delivery_key"] = update_key
+                item["trigger"] = "MATERIAL_UPDATE"
+                due.append(item)
+                continue
         trigger = _due_trigger(row, today)
         if trigger is None:
             continue
-        key = f"{_fingerprint(row)}:{trigger}"
+        key = f"{fingerprint}:{trigger}"
         if key in sent_state:
             continue
         item = dict(row)
@@ -87,8 +97,9 @@ def format_due_alert(row):
         date_text = date_text[:7] + " (finestra mensile)"
     elif row.get("date_precision") == "WINDOW" and row.get("window_end"):
         date_text += " → " + str(row["window_end"])
+    heading = "🧬 PHARMA RADAR — AGGIORNAMENTO SOSTANZIALE DEL CATALYST" if row.get("trigger") == "MATERIAL_UPDATE" else "🧬 PHARMA RADAR — CATALYST CLINICO IN AVVICINAMENTO"
     lines = [
-        "🧬 PHARMA RADAR — CATALYST CLINICO IN AVVICINAMENTO",
+        heading,
         "━━━━━━━━━━━━━━━━━━",
         f"🏢 {row.get('company') or row.get('ticker') or 'AZIENDA N/D'} · {row.get('ticker') or 'TICKER N/D'}",
         f"💊 {row.get('program') or row.get('title') or 'Programma N/D'} · {row.get('phase') or 'Fase N/D'}",
