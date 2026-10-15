@@ -44,6 +44,7 @@ def _trial_program(key, trial, watch_entry):
 
 
 def build_upcoming_calendar(days=90, watchlist=None, trials=None, today=None, announced_events=None):
+    use_live_defaults = watchlist is None and trials is None
     if watchlist is None:
         watchlist = json.loads(WATCHLIST_PATH.read_text(encoding="utf-8"))
     if trials is None:
@@ -51,7 +52,7 @@ def build_upcoming_calendar(days=90, watchlist=None, trials=None, today=None, an
     if announced_events is None:
         # When tests/callers inject a watchlist or trial snapshot, do not mix
         # in the repository's live announced feed unless explicitly requested.
-        announced_events = load_announced_events() if watchlist is None and trials is None else []
+        announced_events = load_announced_events() if use_live_defaults else []
     start = today or date.today()
     end = start + timedelta(days=days)
     rows = []
