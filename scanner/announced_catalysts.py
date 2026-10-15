@@ -28,7 +28,7 @@ def classify_announced_event(event):
     if not (item.get("event_name") or item.get("title")):
         raise ValueError("event_name or title is required")
     if event_type == READOUT:
-        item["clinical_outcome_available"] = bool(item.get("clinical_outcome_available", True))
+        item["clinical_outcome_available"] = bool(item.get("clinical_outcome_available", False))
         item["actionability"] = item.get("actionability") or "CATALYST"
     else:
         item["clinical_outcome_available"] = False
