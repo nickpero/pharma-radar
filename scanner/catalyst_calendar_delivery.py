@@ -105,6 +105,7 @@ def format_due_alert(row):
         f"💊 {row.get('program') or row.get('title') or 'Programma N/D'} · {row.get('phase') or 'Fase N/D'}",
         f"📌 {row.get('milestone') or row.get('event_name') or 'Evento clinico'}",
         f"📅 Data/finestra: {date_text}",
+        *([f"🕓 Orario evento: {row.get('event_time')}"] if row.get("event_time") else []),
         f"🏷️ Classificazione: {classification}",
     ]
     if row.get("trigger") == "MATERIAL_UPDATE" and row.get("material_update_summary"):
