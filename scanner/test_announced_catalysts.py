@@ -92,3 +92,27 @@ def test_material_date_change_changes_dedup_identity():
     original = deduplicate_events([event(date="2026-10-22")])[0]
     revised = deduplicate_events([event(date="2026-10-29")])[0]
     assert original["event_fingerprint"] != revised["event_fingerprint"]
+
+
+
+def test_month_only_event_remains_upcoming_during_that_month():
+    rows = upcoming_announced_events(
+        [event(date="2026-10")],
+        days=90,
+        today=date(2026, 10, 15),
+        watchlist={},
+    )
+    assert len(rows) == 1
+    assert rows[0]["date_precision"] == "MONTH"
+
+
+def test_source_verified_event_can_be_outside_static_watchlist():
+    rows = upcoming_announced_events(
+        [event(ticker="NEWCO", date="2026-10-22", company="NewCo Therapeutics")],
+        days=30,
+        today=date(2026, 10, 15),
+        watchlist={"ABC": {"company": "ABC Bio"}},
+    )
+    assert len(rows) == 1
+    assert rows[0]["ticker"] == "NEWCO"
+    assert rows[0]["company"] == "NewCo Therapeutics"
