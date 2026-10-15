@@ -86,7 +86,8 @@ def build_upcoming_calendar(days=90, watchlist=None, trials=None, today=None, an
                 "clinical_outcome_available": False,
                 "date": parsed.isoformat(),
                 "date_precision": precision,
-                "source": "ClinicalTrials.gov/Radar state",
+                "source": "ClinicalTrials.gov",
+                "source_url": f"https://clinicaltrials.gov/study/{trial.get('nct_id')}" if trial.get("nct_id") else "https://clinicaltrials.gov/",
             })
     for event in upcoming_announced_events(announced_events, days=days, today=start, watchlist=watchlist):
         rows.append({
