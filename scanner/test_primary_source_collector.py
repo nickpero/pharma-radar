@@ -83,3 +83,14 @@ def test_all_sources_failure_is_reported(tmp_path):
     with pytest.raises(RuntimeError, match="All official"):
         collector.collect_candidates([SOURCE], tmp_path / "state.json",
                                      tmp_path / "candidates.json", FailedSession())
+
+
+def test_configured_primary_sources_cover_priority_watchlist_and_match_hosts():
+    sources = collector.load_json(collector.SOURCES_PATH, [])
+    by_ticker = {row["ticker"]: row for row in sources}
+    assert {"ALNY", "MRK", "REGN", "KOD", "LFCR", "ONCO", "SCYX", "LXRX"} <= set(by_ticker)
+    for row in sources:
+        from urllib.parse import urlparse
+        parsed = urlparse(row["listing_url"])
+        assert parsed.scheme == "https"
+        assert parsed.hostname == row["allowed_host"]
