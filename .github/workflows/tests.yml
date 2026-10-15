@@ -26,7 +26,7 @@ jobs:
           fi
           python -m pip install --disable-pip-version-check pytest
       - name: Compile changed intelligence modules
-        run: python -m py_compile scanner/telegram_intelligence.py scanner/telegram.py
+        run: python -m py_compile scanner/telegram_intelligence.py scanner/telegram.py scanner/announced_catalysts.py scanner/catalyst_calendar.py
       - name: Run alert and core regression tests
         run: |
-          python -m pytest -q scanner/test_telegram_intelligence.py scanner/test_alert_dedup.py scanner/test_catalyst_dedup.py scanner/test_main.py
+          python -m pytest -q scanner/test_telegram_intelligence.py scanner/test_alert_dedup.py scanner/test_catalyst_dedup.py scanner/test_main.py scanner/test_announced_catalysts.py scanner/test_catalyst_calendar.py scanner/test_catalyst_calendar_integration.py
