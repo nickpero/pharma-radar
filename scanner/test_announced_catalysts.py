@@ -77,7 +77,7 @@ def test_due_alert_lead_window_and_dedup_state():
         [event(date="2026-10-22")],
         today=date(2026, 10, 15),
         lead_days=(7,),
-        sent_fingerprints=[rows[0]["event_fingerprint"]],
+        sent_fingerprints=[rows[0]["alert_fingerprint"]],
     )
     assert already_sent == []
 
@@ -85,3 +85,10 @@ def test_due_alert_lead_window_and_dedup_state():
 def test_invalid_event_type_rejected():
     with pytest.raises(ValueError, match="Unsupported event_type"):
         classify_announced_event(event(event_type="GOOD_NEWS"))
+
+
+
+def test_material_date_change_changes_dedup_identity():
+    original = deduplicate_events([event(date="2026-10-22")])[0]
+    revised = deduplicate_events([event(date="2026-10-29")])[0]
+    assert original["event_fingerprint"] != revised["event_fingerprint"]
