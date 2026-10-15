@@ -85,22 +85,26 @@ def main():
     issue = open_health_issue()
     if not healthy and issue is None:
         body = (
-            "Il monitor indipendente ha rilevato un problema nel workflow di produzione.\n\n"
-            f"- Rilevato (UTC): {datetime.now(timezone.utc).isoformat()}\n"
-            f"- Dettaglio: {detail}\n\n"
+            "Il monitor indipendente ha rilevato un problema nel workflow di produzione.\\n\\n"
+            f"- Rilevato (UTC): {datetime.now(timezone.utc).isoformat()}\\n"
+            f"- Dettaglio: {detail}\\n\\n"
             "Verificare GitHub Actions e la consegna Telegram prima di considerare il Radar operativo."
         )
+        # Notify first so a Telegram failure does not leave an open issue that
+        # suppresses all retries on later scheduled checks.
+        telegram(f"🚨 PHARMA RADAR — CONTROLLO OPERATIVO\\n{detail}")
         created = request(f"{API}/repos/{REPO}/issues", method="POST", payload={
             "title": ISSUE_TITLE, "body": body,
         })
-        telegram(f"🚨 PHARMA RADAR — CONTROLLO OPERATIVO\n{detail}\nIssue: {created.get('html_url', '')}")
-        print("UNHEALTHY: issue aperta e alert Telegram inviato.")
+        print(f"UNHEALTHY: issue aperta e alert Telegram inviato ({created.get('html_url', '')}).")
     elif not healthy:
         print(f"UNHEALTHY: issue già aperta; nessun alert duplicato. {detail}")
     elif issue is not None:
+        # Notify recovery before closing the issue, so a transient Telegram
+        # failure can be retried by the next scheduled check.
+        telegram(f"✅ PHARMA RADAR — SERVIZIO RIPRISTINATO\\n{detail}")
         request(f"{API}/repos/{REPO}/issues/{issue['number']}", method="PATCH",
                 payload={"state": "closed", "state_reason": "completed"})
-        telegram(f"✅ PHARMA RADAR — SERVIZIO RIPRISTINATO\n{detail}")
         print("RECOVERED: issue chiusa e ripristino notificato.")
     else:
         print(f"HEALTHY: {detail}")
