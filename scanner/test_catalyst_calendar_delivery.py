@@ -38,7 +38,7 @@ def test_milestone_and_review_never_claim_efficacy():
     review = row(event_type="CLINICAL_REVIEW", milestone="Blinded DSMB review")
     assert "2 — MILESTONE PREVISTA, NON UN RISULTATO" in format_due_alert(milestone)
     assert "3 — REVIEW / SICUREZZA / CIECO" in format_due_alert(review)
-    assert "senza dati unblinded" in format_due_alert(review)
+    assert "non attribuire esito positivo o negativo" in format_due_alert(review)
 
 
 def test_month_only_event_not_given_fake_day_countdown():
