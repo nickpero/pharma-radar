@@ -39,12 +39,10 @@ def classify_announced_event(event):
 
 def event_fingerprint(event):
     explicit_id = str(event.get("event_id") or "").strip()
-    if explicit_id:
-        raw = explicit_id.lower()
-    else:
-        parts = (event.get("ticker"), event.get("program"), event.get("event_name") or event.get("title"),
-                 event.get("event_type"), event.get("date") or event.get("window_start"))
-        raw = "|".join(str(part or "").strip().lower() for part in parts)
+    parts = (explicit_id or event.get("ticker"), event.get("ticker"), event.get("program"),
+             event.get("event_name") or event.get("title"), event.get("event_type"),
+             event.get("date") or event.get("window_start"), event.get("window_end"))
+    raw = "|".join(str(part or "").strip().lower() for part in parts)
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:20]
 
 
