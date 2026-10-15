@@ -107,6 +107,8 @@ def format_due_alert(row):
         f"📅 Data/finestra: {date_text}",
         f"🏷️ Classificazione: {classification}",
     ]
+    if row.get("trigger") == "MATERIAL_UPDATE" and row.get("material_update_summary"):
+        lines.append(f"🆕 Novità: {row['material_update_summary']}")
     if row.get("source_published_at") or row.get("published_at"):
         lines.append(f"🗞 Pubblicazione fonte: {row.get('source_published_at') or row.get('published_at')}")
     source_url = row.get("source_url") or row.get("source")
