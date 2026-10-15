@@ -51,7 +51,7 @@ def utc(value):
 
 
 def inspect_latest_run():
-    url = f"{API}/repos/{REPO}/actions/workflows/radar.yml/runs?per_page=10"
+    url = f"{API}/repos/{REPO}/actions/workflows/radar.yml/runs?branch=main&per_page=10"
     runs = request(url).get("workflow_runs", [])
     if not runs:
         return False, "Nessuna esecuzione del workflow radar.yml trovata."
