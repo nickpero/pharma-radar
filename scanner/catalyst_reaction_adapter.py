@@ -20,7 +20,7 @@ def classify_alert_reaction(alert):
         "event_type": event_type,
         "direction": event.get("direction") or alert.get("direction") or "UNKNOWN",
         "price_change_pct": market.get("price_change_pct", alert.get("price_change_pct")),
-        "price_timestamp": reaction.get("event_timestamp") or alert.get("event_timestamp") or alert.get("published_at"),
+        "price_timestamp": market.get("timestamp") or reaction.get("price_timestamp") or alert.get("price_timestamp"),
         "source": alert.get("source"),
         "source_url": alert.get("source_url") or alert.get("url"),
         "new_catalyst": alert.get("is_new_catalyst"),
