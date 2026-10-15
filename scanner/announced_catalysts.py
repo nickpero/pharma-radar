@@ -86,8 +86,6 @@ def upcoming_announced_events(events, days=90, today=None, watchlist=None):
     rows = []
     for event in deduplicate_events(events):
         ticker = event["ticker"]
-        if watchlist is not None and ticker not in watchlist:
-            continue
         event_date, precision = _date(event.get("date"))
         window_start, start_precision = _date(event.get("window_start"))
         window_end, _ = _date(event.get("window_end"))
@@ -109,7 +107,7 @@ def upcoming_announced_events(events, days=90, today=None, watchlist=None):
         row["date"] = event_date.isoformat()
         row["date_precision"] = precision or start_precision or "UNKNOWN"
         row["window_end"] = effective_end.isoformat() if window_end else None
-        row["company"] = (watchlist or {}).get(ticker, {}).get("company", event.get("company", ticker))
+        row["company"] = ((watchlist or {}).get(ticker) or {}).get("company") or event.get("company") or ticker
         rows.append(row)
     rows.sort(key=lambda item: (item["date"], item["ticker"], item.get("event_id", "")))
     return rows
