@@ -38,3 +38,13 @@ def test_press_release_timestamp_is_not_used_as_market_timestamp():
         "market_data": {"price_change_pct": -22.0},
     })
     assert result is None
+
+
+
+def test_nonclinical_regulatory_event_is_not_sent_to_clinical_classifier():
+    assert classify_alert_reaction({
+        "ticker": "ABC",
+        "subtype": "FDA_APPROVAL",
+        "direction": "POSITIVE",
+        "market_data": {"price_change_pct": -20.0, "timestamp": "2026-10-06T15:00:00-04:00"},
+    }) is None
