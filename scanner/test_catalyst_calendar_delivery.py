@@ -108,3 +108,18 @@ def test_partial_delivery_persists_first_alert_before_second_fails(tmp_path):
     retry_due = due_calendar_alerts([first, second], today=date(2026, 10, 15), sent_state=state)
     assert len(retry_due) == 1
     assert retry_due[0]["milestone"] == "Readout B"
+
+
+
+def test_material_update_triggers_immediately_and_only_once():
+    item = row(date="2026-11-30", material_update_at="2026-10-15T18:00:00Z",
+               material_update_summary="Company moved the expected readout window.")
+    due = due_calendar_alerts([item], today=date(2026, 10, 15))
+    assert len(due) == 1
+    assert due[0]["trigger"] == "MATERIAL_UPDATE"
+    assert "AGGIORNAMENTO SOSTANZIALE" in format_due_alert(due[0])
+    sent = {due[0]["delivery_key"]: "sent"}
+    assert due_calendar_alerts([item], today=date(2026, 10, 15), sent_state=sent) == []
+    revised = row(date="2026-11-30", material_update_at="2026-10-16T09:00:00Z",
+                  material_update_summary="Company changed the endpoint analysis.")
+    assert len(due_calendar_alerts([revised], today=date(2026, 10, 16), sent_state=sent)) == 1
