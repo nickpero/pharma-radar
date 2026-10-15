@@ -136,19 +136,18 @@ def run_delivery(today=None, rows=None, state_path=None, send_fn=None):
     due = due_calendar_alerts(rows, today=today, sent_state=state)
     if not due:
         return {"due": 0, "sent": 0}
-    # Mark only after the delivery succeeds, so transient Telegram errors retry.
-    sent_keys = []
+    # Persist after each successful send: if a later message fails, earlier
+    # Telegram deliveries must not be repeated on the next scheduled scan.
+    sent = 0
+    state_path.parent.mkdir(parents=True, exist_ok=True)
     for row in due:
         send_fn(format_due_alert(row))
-        sent_keys.append(row["delivery_key"])
-    timestamp = datetime.now(timezone.utc).isoformat()
-    for key in sent_keys:
-        state[key] = timestamp
-    state_path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = state_path.with_suffix(".tmp")
-    tmp.write_text(json.dumps(state, ensure_ascii=False, indent=2, sort_keys=True), encoding="utf-8")
-    tmp.replace(state_path)
-    return {"due": len(due), "sent": len(sent_keys)}
+        state[row["delivery_key"]] = datetime.now(timezone.utc).isoformat()
+        tmp = state_path.with_suffix(".tmp")
+        tmp.write_text(json.dumps(state, ensure_ascii=False, indent=2, sort_keys=True), encoding="utf-8")
+        tmp.replace(state_path)
+        sent += 1
+    return {"due": len(due), "sent": sent}
 
 
 if __name__ == "__main__":
