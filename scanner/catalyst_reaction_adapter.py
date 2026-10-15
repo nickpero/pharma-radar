@@ -32,7 +32,7 @@ def classify_alert_reaction(alert):
         "ticker": alert.get("ticker"),
         "program": alert.get("program"),
         "event_type": event_type,
-        "direction": event.get("direction") or alert.get("direction") or "UNKNOWN",
+        "direction": (event.get("direction") or alert.get("direction") or "UNKNOWN") if event_type == "CLINICAL_READOUT" else "UNKNOWN",
         "price_change_pct": market.get("price_change_pct", alert.get("price_change_pct")),
         "price_timestamp": market.get("timestamp") or reaction.get("price_timestamp") or alert.get("price_timestamp"),
         "source": alert.get("source"),
