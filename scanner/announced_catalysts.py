@@ -1,7 +1,7 @@
 """Validation and alert-window helpers for company-announced clinical catalysts.
 
-The JSON feed is intentionally source-backed and curated; no event is inferred
-from a trial completion date. Dates retain their declared precision.
+The JSON feed is source-backed and curated; no event is inferred from trial
+completion dates. Dates retain their declared precision.
 """
 import hashlib
 import json
@@ -10,31 +10,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ANNOUNCED_CATALYSTS_PATH = ROOT / "data" / "announced_catalysts.json"
-
-READOUT = "CLINICAL_READOUT"
-MILESTONE = "TRIAL_MILESTONE"
-REVIEW = "CLINICAL_REVIEW"
+READOUT, MILESTONE, REVIEW = "CLINICAL_READOUT", "TRIAL_MILESTONE", "CLINICAL_REVIEW"
 VALID_TYPES = {READOUT, MILESTONE, REVIEW}
 
 
 def classify_announced_event(event):
-    """Normalize explicit event evidence without inferring clinical outcome."""
     item = dict(event)
     event_type = str(item.get("event_type") or "").upper().strip()
     if event_type not in VALID_TYPES:
         raise ValueError(f"Unsupported event_type: {event_type or 'MISSING'}")
     item["event_type"] = event_type
-    if event_type == READOUT:
-        item["clinical_outcome_available"] = bool(item.get("clinical_outcome_available", True))
-        item["actionability"] = item.get("actionability") or "CATALYST"
-    elif event_type == MILESTONE:
-        item["clinical_outcome_available"] = False
-        item["actionability"] = "WATCH"
-        item["direction"] = "UNKNOWN"
-    else:
-        item["clinical_outcome_available"] = False
-        item["actionability"] = "WATCH"
-        item["direction"] = "UNKNOWN"
     item["ticker"] = str(item.get("ticker") or "").strip().upper()
     if not item["ticker"]:
         raise ValueError("ticker is required")
@@ -42,27 +27,32 @@ def classify_announced_event(event):
         raise ValueError("source or source_url is required")
     if not (item.get("event_name") or item.get("title")):
         raise ValueError("event_name or title is required")
+    if event_type == READOUT:
+        item["clinical_outcome_available"] = bool(item.get("clinical_outcome_available", True))
+        item["actionability"] = item.get("actionability") or "CATALYST"
+    else:
+        item["clinical_outcome_available"] = False
+        item["actionability"] = "WATCH"
+        item["direction"] = "UNKNOWN"
     return item
 
 
 def event_fingerprint(event):
-    """Stable identity for duplicate detection; explicit IDs take precedence."""
     explicit_id = str(event.get("event_id") or "").strip()
     if explicit_id:
         raw = explicit_id.lower()
     else:
-        parts = (
-            event.get("ticker"), event.get("program"), event.get("event_name") or event.get("title"),
-            event.get("event_type"), event.get("date") or event.get("window_start"),
-        )
+        parts = (event.get("ticker"), event.get("program"), event.get("event_name") or event.get("title"),
+                 event.get("event_type"), event.get("date") or event.get("window_start"))
         raw = "|".join(str(part or "").strip().lower() for part in parts)
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:20]
 
 
 def deduplicate_events(events):
-    """Keep first occurrence, but permit a materially changed event under a new ID."""
     unique = {}
     for raw in events:
+        if raw.get("_schema") or raw.get("_instructions"):
+            continue
         event = classify_announced_event(raw)
         event["event_fingerprint"] = event_fingerprint(event)
         unique.setdefault(event["event_fingerprint"], event)
@@ -102,10 +92,9 @@ def upcoming_announced_events(events, days=90, today=None, watchlist=None):
             continue
         event_date, precision = _date(event.get("date"))
         window_start, start_precision = _date(event.get("window_start"))
-        window_end, end_precision = _date(event.get("window_end"))
+        window_end, _ = _date(event.get("window_end"))
         if event_date is None:
-            event_date = window_start
-            precision = "WINDOW" if window_start else None
+            event_date, precision = window_start, "WINDOW" if window_start else None
         if event_date is None:
             continue
         effective_end = window_end or event_date
@@ -122,7 +111,6 @@ def upcoming_announced_events(events, days=90, today=None, watchlist=None):
 
 
 def alerts_due(events, today=None, lead_days=(14, 7, 3, 0), sent_fingerprints=None):
-    """Return due event notices; caller persists sent_fingerprints across runs."""
     today = today or date.today()
     sent = set(sent_fingerprints or [])
     due = []
@@ -132,9 +120,10 @@ def alerts_due(events, today=None, lead_days=(14, 7, 3, 0), sent_fingerprints=No
             continue
         days_left = (parsed - today).days
         fingerprint = event["event_fingerprint"]
-        if days_left in lead_days and fingerprint not in sent:
+        alert_fingerprint = f"{fingerprint}:{days_left}"
+        if days_left in lead_days and alert_fingerprint not in sent:
             item = dict(event)
             item["days_until_event"] = days_left
-            item["alert_fingerprint"] = f"{fingerprint}:{days_left}"
+            item["alert_fingerprint"] = alert_fingerprint
             due.append(item)
     return due
