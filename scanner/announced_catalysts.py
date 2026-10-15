@@ -96,6 +96,13 @@ def upcoming_announced_events(events, days=90, today=None, watchlist=None):
         if event_date is None:
             continue
         effective_end = window_end or event_date
+        if precision == "MONTH" and window_end is None:
+            # Keep month-only dates eligible throughout that month without
+            # implying that the first day is an exact event date.
+            if event_date.month == 12:
+                effective_end = date(event_date.year, 12, 31)
+            else:
+                effective_end = date(event_date.year, event_date.month + 1, 1) - timedelta(days=1)
         if effective_end < start or event_date > end:
             continue
         row = dict(event)
