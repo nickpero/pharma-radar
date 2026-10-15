@@ -11,8 +11,8 @@ import urllib.request
 from datetime import datetime, timezone, timedelta
 
 API = "https://api.github.com"
-REPO = os.environ["GITHUB_REPOSITORY"]
-TOKEN = os.environ["GITHUB_TOKEN"]
+REPO = os.environ.get("GITHUB_REPOSITORY", "")
+TOKEN = os.environ.get("GITHUB_TOKEN", "")
 BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
 ISSUE_TITLE = "[Radar Health] Production workflow unhealthy"
