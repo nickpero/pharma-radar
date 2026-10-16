@@ -305,6 +305,14 @@ def format_catalyst_alert(alert):
     if why:
         lines.extend(["", "💡 WHY IT MATTERS", why])
 
+    anomaly = _clean_text(alert.get("catalyst_reaction_anomaly"), 80)
+    anomaly_explanation = _clean_text(alert.get("catalyst_reaction_explanation"), 280)
+    if anomaly:
+        lines.extend(["", "⚠️ CATALYST / MARKET DIVERGENCE", anomaly])
+        if anomaly_explanation:
+            lines.append(anomaly_explanation)
+        lines.append("ℹ️ Flag investigativo: non attribuisce causalità e non è un segnale buy/sell.")
+
     source = _clean_text(alert.get("source") or event.get("source"))
     if source:
         lines.extend(["", f"🔎 Source: {source}"])

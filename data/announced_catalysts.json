@@ -1,0 +1,73 @@
+[
+  {
+    "event_id": "ALNY-ALN-HTT02-EHDN-2026-10-23",
+    "ticker": "ALNY",
+    "company": "Alnylam Pharmaceuticals",
+    "program": "ALN-HTT02",
+    "phase": "PHASE1",
+    "event_name": "Presentazione dei risultati iniziali di Fase 1 di ALN-HTT02 al congresso EHDN",
+    "event_type": "CLINICAL_READOUT",
+    "date": "2026-10-23",
+    "source": "Alnylam Q2 2026 results and pipeline update",
+    "source_url": "https://investors.alnylam.com/press-release?id=ddc78e15-7847-4066-8fdb-3562023a60f4",
+    "source_published_at": "2026-07-30",
+    "why_it_matters": "Primi dati clinici nell'uomo di una terapia RNAi sperimentale per la malattia di Huntington; distinguere biomarcatori e sicurezza da eventuali benefici clinici."
+  },
+  {
+    "event_id": "MRK-INTerpath-001-ESMO-2026-10-24",
+    "ticker": "MRK",
+    "company": "Merck & Co.",
+    "program": "Intismeran autogene + pembrolizumab",
+    "phase": "PHASE3",
+    "event_name": "Prima presentazione dei dati di Fase 3 INTerpath-001 a ESMO 2026",
+    "event_type": "CLINICAL_READOUT",
+    "date": "2026-10-24",
+    "source": "Merck ESMO 2026 clinical data announcement",
+    "source_url": "https://www.merck.com/news/merck-showcases-first-time-pivotal-phase-3-results-from-oncology-pipeline-and-continued-innovative-potential-of-existing-portfolio-at-esmo-2026/",
+    "source_published_at": "2026-10-13T06:45:00-04:00",
+    "why_it_matters": "Dati di Fase 3 su sopravvivenza libera da recidiva e metastasi a distanza nel melanoma resecato; aggiornamento importante per il programma di immunoterapia personalizzata."
+  },
+  {
+    "event_id": "REGN-CPOST-ESMO-2026-10-25",
+    "ticker": "REGN",
+    "company": "Regeneron Pharmaceuticals",
+    "program": "Cemiplimab (Libtayo)",
+    "phase": "PHASE3",
+    "event_name": "C-POST: aggiornamento OS e analisi ctDNA a ESMO 2026 (10:15–11:45 CET)",
+    "event_type": "CLINICAL_READOUT",
+    "date": "2026-10-25",
+    "source": "Regeneron ESMO 2026 presentations",
+    "source_url": "https://newsroom.regeneron.com/news-releases/news-release-details/regeneron-showcases-advances-care-across-several-cancers-and",
+    "why_it_matters": "Aggiornamento di sopravvivenza a più lungo termine in uno studio adiuvante di Fase 3; l'esito non è anticipato dalla sola presenza in congresso.",
+    "source_published_at": "2026-10-06T07:00:00-04:00",
+    "event_time": "10:15–11:45 CET"
+  },
+  {
+    "event_id": "MRK-TroFuse-005-ESMO-2026-10-26",
+    "ticker": "MRK",
+    "company": "Merck & Co.",
+    "program": "Sacituzumab tirumotecan (sac-TMT)",
+    "phase": "PHASE3",
+    "event_name": "Prima presentazione dei dati di Fase 3 TroFuse-005 a ESMO 2026",
+    "event_type": "CLINICAL_READOUT",
+    "date": "2026-10-26",
+    "source": "Merck ESMO 2026 clinical data announcement",
+    "source_url": "https://www.merck.com/news/merck-showcases-first-time-pivotal-phase-3-results-from-oncology-pipeline-and-continued-innovative-potential-of-existing-portfolio-at-esmo-2026/",
+    "source_published_at": "2026-10-13T06:45:00-04:00",
+    "why_it_matters": "Prima presentazione dei risultati di uno studio di Fase 3 in tumore endometriale avanzato/recidivante; l'azienda aveva già comunicato il raggiungimento degli endpoint principali, quindi il focus è sui dati dettagliati."
+  },
+  {
+    "event_id": "MRK-KEYNOTE-C93-ESMO-2026-10-26",
+    "ticker": "MRK",
+    "company": "Merck & Co.",
+    "program": "Pembrolizumab (Keytruda)",
+    "phase": "PHASE3",
+    "event_name": "Presentazione dei dati di Fase 3 KEYNOTE-C93 a ESMO 2026",
+    "event_type": "CLINICAL_READOUT",
+    "date": "2026-10-26",
+    "source": "Merck ESMO 2026 clinical data announcement",
+    "source_url": "https://www.merck.com/news/merck-showcases-first-time-pivotal-phase-3-results-from-oncology-pipeline-and-continued-innovative-potential-of-existing-portfolio-at-esmo-2026/",
+    "source_published_at": "2026-10-13T06:45:00-04:00",
+    "why_it_matters": "Presentazione dei dati di uno studio di Fase 3 in prima linea nel tumore endometriale dMMR; distinguere i dati dettagliati dall'annuncio preliminare già pubblicato a luglio."
+  }
+]
