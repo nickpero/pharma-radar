@@ -9,6 +9,8 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone, timedelta
+from math import ceil
+from pathlib import Path
 
 API = "https://api.github.com"
 REPO = os.environ.get("GITHUB_REPOSITORY", "")
@@ -74,6 +76,44 @@ def inspect_latest_run():
     return True, f"Ultimo run completato correttamente: {run_url}"
 
 
+def inspect_source_coverage(state_path=None, sources_path=None, now=None):
+    """Detect degraded or stale official-source collection, not just failed workflows."""
+    root = Path(__file__).resolve().parents[1]
+    state_path = Path(state_path) if state_path else root / "data" / "primary_source_discovery_state.json"
+    sources_path = Path(sources_path) if sources_path else root / "data" / "primary_source_pages.json"
+    now = now or datetime.now(timezone.utc)
+
+    # On first deployment, no collector state exists until the first production scan.
+    if not state_path.exists():
+        return True, "Copertura delle fonti ufficiali non ancora inizializzata."
+
+    try:
+        state = json.loads(state_path.read_text(encoding="utf-8"))
+        sources = json.loads(sources_path.read_text(encoding="utf-8"))
+        checked_at = utc(state["last_checked_at"])
+        successful = int(state["successful_sources"])
+        total = len(sources)
+    except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError) as exc:
+        return False, f"Stato della raccolta fonti illeggibile o incompleto: {type(exc).__name__}."
+
+    if total < 1:
+        return False, "Configurazione delle fonti ufficiali vuota."
+    age = now - checked_at
+    if age > timedelta(minutes=35):
+        return False, (
+            f"Raccolta fonti ufficiali non aggiornata da {int(age.total_seconds() // 60)} minuti."
+        )
+    minimum = max(1, ceil(total * 0.75))
+    if successful < minimum:
+        errors = state.get("source_errors") or []
+        sample = "; ".join(str(item) for item in errors[:3])
+        suffix = f" Dettagli: {sample}" if sample else ""
+        return False, (
+            f"Copertura fonti ufficiali degradata: {successful}/{total} riuscite; "
+            f"soglia minima {minimum}/{total}.{suffix}"
+        )
+    return True, f"Fonti ufficiali aggiornate: {successful}/{total} riuscite."
+
 def open_health_issue():
     issues = request(f"{API}/repos/{REPO}/issues?state=open&per_page=100")
     return next((item for item in issues
@@ -82,6 +122,11 @@ def open_health_issue():
 
 def main():
     healthy, detail = inspect_latest_run()
+    sources_healthy, sources_detail = inspect_source_coverage()
+    if healthy and not sources_healthy:
+        healthy, detail = False, f"{sources_detail} Ultimo workflow: {detail}"
+    elif healthy:
+        detail = f"{detail}\n{sources_detail}"
     issue = open_health_issue()
     if not healthy and issue is None:
         body = (
