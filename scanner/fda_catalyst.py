@@ -220,9 +220,10 @@ def build_fda_catalyst(news_item):
     if selected_category == "APPROVAL" and advanced["catalyst_type"] == "NEUTRAL":
         # Preserve the legacy APPROVAL category only when the source contains
         # explicit FDA approval evidence.
+        approval_text = _text(news_item)
         explicit_approval = bool(
-            any(re.search(rule, text, re.IGNORECASE) for rule in APPROVAL_POSITIVE_PATTERNS)
-            and not any(re.search(rule, text, re.IGNORECASE) for rule in APPROVAL_NEGATION_PATTERNS)
+            any(re.search(rule, approval_text, re.IGNORECASE) for rule in APPROVAL_POSITIVE_PATTERNS)
+            and not any(re.search(rule, approval_text, re.IGNORECASE) for rule in APPROVAL_NEGATION_PATTERNS)
         )
         if explicit_approval:
             event["catalyst_type"] = "APPROVAL"
@@ -281,10 +282,10 @@ def build_fda_catalyst(news_item):
     source = str(news_item.get("source") or "").upper()
     form = str(news_item.get("form") or "").upper()
     if source == "SEC" and form in {"8-K", "8-K/A"} and event.get("subtype") == "FDA_APPROVAL":
-        text = _text(news_item)
+        sec_text = _text(news_item)
         explicit = bool(
-            any(re.search(rule, text, re.IGNORECASE) for rule in APPROVAL_POSITIVE_PATTERNS)
-            and not any(re.search(rule, text, re.IGNORECASE) for rule in APPROVAL_NEGATION_PATTERNS)
+            any(re.search(rule, sec_text, re.IGNORECASE) for rule in APPROVAL_POSITIVE_PATTERNS)
+            and not any(re.search(rule, sec_text, re.IGNORECASE) for rule in APPROVAL_NEGATION_PATTERNS)
         )
         if not explicit:
             event["subtype"] = "FDA_UPDATE"
