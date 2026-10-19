@@ -41,9 +41,12 @@ jobs:
 
       - name: Validate Trading Intelligence Rule
         run: |
-          python -m py_compile main.py scanner/trial_scanner.py scanner/fda_enrichment.py scanner/early_discovery_feed.py scanner/regulatory_pipeline.py scanner/trading_intelligence_rule.py scanner/trading_intelligence_score.py scanner/data_quality_audit.py scanner/divergence_monitor.py scanner/divergence_outcomes.py
-          python -m pytest -q scanner/test_data_quality_audit.py scanner/test_divergence_monitor.py scanner/test_divergence_outcomes.py scanner/test_fda_p13.py scanner/test_telegram_intelligence.py scanner/test_early_discovery_feed.py scanner/test_main.py
+          python -m py_compile main.py scanner/trial_scanner.py scanner/fda_enrichment.py scanner/early_discovery_feed.py scanner/regulatory_pipeline.py scanner/trading_intelligence_rule.py scanner/trading_intelligence_score.py scanner/data_quality_audit.py scanner/divergence_monitor.py scanner/divergence_outcomes.py scanner/announced_catalysts.py scanner/catalyst_calendar.py scanner/catalyst_reaction.py scanner/catalyst_reaction_adapter.py scanner/catalyst_calendar_delivery.py scanner/primary_source_collector.py
+          python -m pytest -q scanner/test_data_quality_audit.py scanner/test_divergence_monitor.py scanner/test_divergence_outcomes.py scanner/test_fda_p13.py scanner/test_telegram_intelligence.py scanner/test_early_discovery_feed.py scanner/test_main.py scanner/test_announced_catalysts.py scanner/test_catalyst_calendar.py scanner/test_catalyst_calendar_integration.py scanner/test_catalyst_reaction.py scanner/test_catalyst_reaction_adapter.py scanner/test_catalyst_calendar_delivery.py scanner/test_primary_source_collector.py
           python -m pytest -q scanner/test_fda_enrichment_dates.py scanner/test_trial_scanner.py
+
+      - name: Discover clinical candidates from official company pages
+        run: python -m scanner.primary_source_collector
 
       - name: Run Pharma Radar
         env:
@@ -62,6 +65,7 @@ jobs:
           echo "Event: ${{ github.event_name }}"
           echo "UTC start: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
           python main.py
+          python -m scanner.catalyst_calendar_delivery
 
       - name: Commit updated state
         run: |

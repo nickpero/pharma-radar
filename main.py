@@ -14,6 +14,7 @@ from scanner.pharma_email import send_pharma_intelligence_emails
 from scanner.divergence_monitor import detect_divergences
 from scanner.divergence_outcomes import track_divergence_outcomes
 from scanner.data_quality_audit import audit_alerts
+from scanner.catalyst_reaction_adapter import classify_alert_reaction
 
 
 def _reaction(alert):
@@ -201,6 +202,18 @@ def main():
     result = scan()
     result["alerts"] = enrich_trading_intelligence_scores(result.get("alerts", []))
     result["alerts"] = enrich_trading_intelligence_rules(result["alerts"])
+
+    # Descriptive catalyst/market divergence labels only; never a trade signal.
+    for alert in result["alerts"]:
+        anomaly = classify_alert_reaction(alert)
+        if anomaly:
+            alert["catalyst_reaction_anomaly"] = anomaly["anomaly"]
+            alert["catalyst_reaction_explanation"] = anomaly["explanation"]
+            alert["catalyst_reaction_price_timestamp"] = anomaly.get("price_timestamp")
+            print(
+                f"CATALYST REACTION {alert.get('ticker', 'UNKNOWN')}: "
+                f"{anomaly['anomaly']} | {anomaly['explanation']}"
+            )
 
     qualified = sum(1 for alert in result["alerts"] if alert.get("trading_intelligence_qualified") is True)
     watched = sum(1 for alert in result["alerts"] if alert.get("trading_intelligence_watch") is True)
