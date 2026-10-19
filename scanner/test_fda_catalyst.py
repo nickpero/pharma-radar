@@ -88,8 +88,22 @@ def test_relevant_catalysts():
     assert events[0]["subtype"] == "FDA_APPROVAL"
 
 
+def test_approval_category_without_explicit_approval_does_not_crash():
+    news = {
+        "source": "FDA",
+        "title": "FDA publishes general review information",
+        "summary": "The agency shared a regulatory update.",
+        "categories": ["APPROVAL"],
+    }
+    event = build_fda_catalyst(news)
+    assert event["subtype"] == "FDA_UPDATE"
+    assert event["severity"] == "LOW"
+    assert event["direction"] == "UNKNOWN"
+
+
 if __name__ == "__main__":
     test_fda_approval()
+    test_approval_category_without_explicit_approval_does_not_crash()
     test_fda_rejection()
     test_fda_safety()
     test_fda_clinical()
