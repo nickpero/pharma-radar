@@ -328,7 +328,7 @@ def score_event(event):
     # Trial completion is a registry status, not an efficacy result.
     # Keep it informational even when timing/phase bonuses would inflate it.
     if subtype == "TRIAL_COMPLETED":
-        score = min(score, 35)
+        score = min(score, 34)
 
     return score
 
