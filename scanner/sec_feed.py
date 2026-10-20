@@ -417,10 +417,36 @@ def get_sec_news(watchlist, max_filings_per_company=3):
         print(f"SEC FEED STATUS: {status} filings={len(results)} path=proxy_fallback", flush=True)
         return results
     except (requests.RequestException, ValueError, TypeError, KeyError) as exc:
-        error = f"{type(exc).__name__}: {exc}"
-        print(f"SEC PROXY ERROR: {error}", flush=True)
-        LAST_FETCH_STATUS = {"status": "ERROR", "count": 0, "path": "proxy_fallback", "error": error}
-        return []
+        proxy_error = f"{type(exc).__name__}: {exc}"
+        print(f"SEC PROXY ERROR: {proxy_error}", flush=True)
+        # The proxy has failed as well as the direct EDGAR endpoint. Try a
+        # small rotating batch via SEC company browse pages before declaring
+        # the entire SEC source unavailable.
+        try:
+            discovery_results = _discover_missing_companies(watchlist, set())
+            status = "DEGRADED_FALLBACK" if discovery_results else "ERROR"
+            LAST_FETCH_STATUS = {
+                "status": status,
+                "count": len(discovery_results),
+                "path": "sec_browse_discovery",
+                "error": None if discovery_results else proxy_error,
+            }
+            print(
+                f"SEC DISCOVERY FALLBACK: status={status} filings={len(discovery_results)} "
+                f"after_proxy_error={proxy_error}",
+                flush=True,
+            )
+            return discovery_results
+        except Exception as discovery_exc:
+            discovery_error = f"{type(discovery_exc).__name__}: {discovery_exc}"
+            LAST_FETCH_STATUS = {
+                "status": "ERROR",
+                "count": 0,
+                "path": "sec_browse_discovery",
+                "error": f"proxy={proxy_error}; discovery={discovery_error}",
+            }
+            print(f"SEC DISCOVERY FALLBACK ERROR: {discovery_error}", flush=True)
+            return []
 
 def get_sec_filings_for_ticker(ticker, company, max_filings=3):
     cik = WATCHLIST_CIK.get(str(ticker).upper())
