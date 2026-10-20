@@ -166,6 +166,11 @@ def build_daily_top5(watchlist=None, history=None, snapshot_fn=get_market_snapsh
         except Exception as exc:
             LAST_UNIVERSE_STATUS.update({"status":"ERROR","count":0,"last_error":f"{type(exc).__name__}: {exc}"})
             print(f"BIOTECH UNIVERSE ERROR: {type(exc).__name__}: {exc}", flush=True)
+    else:
+        LAST_UNIVERSE_STATUS.update({
+            "status": "WATCHLIST_ONLY", "count": 0, "pages": 0,
+            "last_error": None, "source": "CONFIGURED_WATCHLIST",
+        })
 
     combined = dict(watchlist)
     for ticker, quote in market_quotes.items():
