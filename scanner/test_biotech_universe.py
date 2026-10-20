@@ -89,3 +89,15 @@ def test_daily_top5_includes_unconfigured_market_candidates():
     assert rows[0]["ticker"] == "NEWBIO"
     assert rows[0]["radar_status"] == "NEW_CANDIDATE"
     assert rows[0]["market_data_source"] == "YAHOO_FINANCE_SCREENER"
+
+def test_market_row_parses_yahoo_formatted_numeric_objects():
+    item = quote("WRAPPED")
+    item["regularMarketChangePercent"] = {"raw": 31.25, "fmt": "31.25%"}
+    item["regularMarketPrice"] = {"raw": 2.5, "fmt": "2.50"}
+    item["regularMarketVolume"] = {"raw": 800000, "fmt": "800,000"}
+    item["averageDailyVolume3Month"] = {"raw": 200000, "fmt": "200,000"}
+    row = _to_market_row(item)
+    assert row["price_change_pct"] == 31.25
+    assert row["price"] == 2.5
+    assert row["volume"] == 800000
+    assert row["volume_ratio"] == 4.0
