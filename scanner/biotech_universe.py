@@ -13,6 +13,8 @@ INDUSTRY_HINTS = ("biotechnology", "drug manufacturers", "diagnostics & research
 LAST_UNIVERSE_STATUS = {"status": "NOT_RUN", "count": 0, "pages": 0, "last_error": None, "source": "YAHOO_FINANCE_SCREENER"}
 
 def _as_float(value):
+    if isinstance(value, dict):
+        value = value.get("raw", value.get("value"))
     try: return float(value)
     except (TypeError, ValueError): return None
 
