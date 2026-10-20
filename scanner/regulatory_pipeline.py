@@ -10,6 +10,7 @@ from scanner.ema_feed import get_ema_news
 from scanner.early_discovery_feed import get_early_news
 from scanner.sec_feed import get_sec_news
 from scanner.clinical_impact import enrich_clinical_impact
+from scanner import ema_feed, early_discovery_feed, sec_feed
 
 
 def _process_item(item, watchlist):
@@ -83,7 +84,18 @@ def scan_regulatory_sources(watchlist, ema_max=50, sec_per_company=3):
     sec_news = get_sec_news(watchlist, max_filings_per_company=sec_per_company)
     all_news = early_news + ema_news + sec_news
     events = process_regulatory_news(all_news, watchlist)
+    source_diagnostics = {
+        "EARLY_DISCOVERY": dict(early_discovery_feed.LAST_FETCH_STATUS),
+        "EMA": dict(ema_feed.LAST_FETCH_STATUS),
+        "SEC": dict(sec_feed.LAST_FETCH_STATUS),
+    }
+    print("REGULATORY SOURCE HEALTH: " + " | ".join(
+        "{}={} items={}".format(name, detail.get("status", "UNKNOWN"), detail.get("count", 0))
+        + (" error={}".format(detail.get("error")) if detail.get("error") else "")
+        for name, detail in source_diagnostics.items()
+    ), flush=True)
     return {
+        "source_diagnostics": source_diagnostics,
         "early_news": early_news,
         "ema_news": ema_news,
         "sec_news": sec_news,
