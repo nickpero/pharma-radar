@@ -63,3 +63,29 @@ def test_universe_reads_screener_and_filters_unrelated_industries():
     assert set(result) == {"BIO", "PHARMA"}
     assert result["BIO"]["price_change_pct"] == 21.0
     assert len(session.calls) == 1
+
+def test_daily_top5_includes_unconfigured_market_candidates():
+    from scanner.daily_top5 import build_daily_top5
+    watchlist = {"KNOWN": {"company": "Known Bio", "programs": []}}
+    broad = {
+        "NEWBIO": {
+            "ticker": "NEWBIO", "company": "NewBio Therapeutics",
+            "short_name": "NewBio", "industry": "Biotechnology",
+            "exchange": "NASDAQ", "price_change_pct": 45.0,
+            "volume": 500000, "volume_ratio": 4.0, "price": 3.2,
+            "market_data_source": "YAHOO_FINANCE_SCREENER",
+        }
+    }
+    rows = build_daily_top5(
+        watchlist=watchlist, history={},
+        snapshot_fn=lambda ticker: {
+            "price_change_pct": 2.0, "volume": 1000,
+            "volume_ratio": 1.0, "price": 10.0,
+        },
+        date_value="2026-10-20",
+        universe_fn=lambda: broad,
+        include_broad_universe=True,
+    )
+    assert rows[0]["ticker"] == "NEWBIO"
+    assert rows[0]["radar_status"] == "NEW_CANDIDATE"
+    assert rows[0]["market_data_source"] == "YAHOO_FINANCE_SCREENER"
