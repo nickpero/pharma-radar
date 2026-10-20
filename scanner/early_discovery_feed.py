@@ -21,6 +21,7 @@ REQUEST_TIMEOUT = 15
 BATCH_SIZE = 10
 MAX_ITEMS_PER_FEED = 30
 MAX_AGE_HOURS = 24
+LAST_FETCH_STATUS = {"status": "NOT_RUN", "count": 0, "error_batches": 0, "last_error": None}
 # Fast discovery is deliberately broader than Google News alone. The query
 # asks Google News to surface company releases carried by major distributors
 # and specialist biotech publications, while primary sources remain the
@@ -160,12 +161,15 @@ def _parse_feed(xml_text, batch):
 
 def get_early_news(watchlist, batch_size=BATCH_SIZE):
     """Return fresh watchlist-matched news for rapid catalyst discovery."""
+    global LAST_FETCH_STATUS
     companies = []
     for ticker, config in (watchlist or {}).items():
         if not isinstance(config, dict):
             continue
         companies.append((str(ticker).upper(), str(config.get("company") or ticker)))
     results = []
+    error_batches = 0
+    last_error = None
     for start in range(0, len(companies), batch_size):
         batch = companies[start:start + batch_size]
         query = _query(batch)
@@ -180,8 +184,14 @@ def get_early_news(watchlist, batch_size=BATCH_SIZE):
             response.raise_for_status()
             results.extend(_parse_feed(response.text, batch))
         except (requests.RequestException, ET.ParseError) as exc:
-            print(f"EARLY DISCOVERY ERROR: batch={start // batch_size + 1} {type(exc).__name__}: {exc}", flush=True)
+            error_batches += 1
+            last_error = f"{type(exc).__name__}: {exc}"
+            print(f"EARLY DISCOVERY ERROR: batch={start // batch_size + 1} {last_error}", flush=True)
     unique = {}
     for row in results:
         unique[(row["ticker"], row["url"])] = row
-    return sorted(unique.values(), key=lambda item: item.get("published_at", ""), reverse=True)
+    ordered = sorted(unique.values(), key=lambda item: item.get("published_at", ""), reverse=True)
+    status = "DEGRADED" if error_batches and ordered else ("ERROR" if error_batches and not ordered else ("OK" if ordered else "EMPTY"))
+    LAST_FETCH_STATUS = {"status": status, "count": len(ordered), "error_batches": error_batches, "last_error": last_error}
+    print(f"EARLY DISCOVERY STATUS: {status} items={len(ordered)} failed_batches={error_batches}", flush=True)
+    return ordered
