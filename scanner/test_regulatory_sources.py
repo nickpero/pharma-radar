@@ -159,6 +159,27 @@ def test_regulatory_pipeline_rejects_generic_company_only_news():
     assert events == []
 
 
+
+def test_sec_uses_browse_fallback_after_proxy_failure(monkeypatch):
+    watchlist = {"CAPR": {"company": "Capricor Therapeutics"}}
+    expected = [{"ticker": "CAPR", "source": "SEC", "title": "Browse fallback"}]
+
+    def fail_direct(*args, **kwargs):
+        raise sec_feed.requests.RequestException("direct unavailable")
+
+    def fail_proxy(*args, **kwargs):
+        raise sec_feed.requests.Timeout("proxy timeout")
+
+    monkeypatch.setattr(sec_feed, "_fetch_sec_direct", fail_direct)
+    monkeypatch.setattr(sec_feed, "_fetch_proxy", fail_proxy)
+    monkeypatch.setattr(sec_feed, "_discover_missing_companies", lambda *_: expected)
+
+    result = sec_feed.get_sec_news(watchlist)
+    assert result == expected
+    assert sec_feed.LAST_FETCH_STATUS["status"] == "DEGRADED_FALLBACK"
+    assert sec_feed.LAST_FETCH_STATUS["path"] == "sec_browse_discovery"
+    assert sec_feed.LAST_FETCH_STATUS["count"] == 1
+
 if __name__ == "__main__":
     test_ema_rss_parser()
     test_ema_content_classification()
