@@ -331,6 +331,13 @@ def scan(baseline=False):
     print(f"Companies: {len(watchlist)}"); print(f"Trials found: {total_trials}"); print(f"Relevant trials: {relevant_trials}"); print(f"Filtered trials: {filtered_trials}")
     print(f"Changes detected: {len(detected_changes)}"); print(f"FDA news: {len(fda_result['news'])}"); print(f"FDA events: {len(fda_result['events'])}")
     print(f"EMA news: {len(regulatory_result['ema_news'])}"); print(f"SEC filings: {len(regulatory_result['sec_news'])}"); print(f"EMA/SEC events: {len(regulatory_result['events'])}")
+    source_diagnostics = regulatory_result.get("source_diagnostics", {})
+    for source_name, details in source_diagnostics.items():
+        print("SOURCE HEALTH {}: status={} items={} path={} failed_batches={} error={}".format(
+            source_name, details.get("status", "UNKNOWN"), details.get("count", 0),
+            details.get("path", "-"), details.get("error_batches", 0),
+            details.get("error") or details.get("last_error") or "-",
+        ), flush=True)
     print(f"Alerts: {len(alerts)}"); print(f"Errors: {len(errors)}")
     print(
         "ALERT SOURCE DIAGNOSTICS: "
@@ -347,4 +354,4 @@ def scan(baseline=False):
             "detected_changes": detected_changes, "changes": alerts, "alerts": alerts, "monitoring_alerts": monitoring_alerts, "suppressed_duplicates": suppressed_duplicates, "errors": errors, "relevant_details": relevant_details,
             "fda_news": fda_result["news"], "fda_events": fda_result["events"], "fda_alerts": fda_result["alerts"],
             "ema_news": regulatory_result["ema_news"], "sec_news": regulatory_result["sec_news"], "regulatory_events": regulatory_result["events"],
-            "regulatory_alerts": regulatory_result["alerts"], "memory_added": memory_added, "memory": memory_info, "baseline": baseline}
+            "regulatory_alerts": regulatory_result["alerts"], "source_diagnostics": regulatory_result.get("source_diagnostics", {}), "memory_added": memory_added, "memory": memory_info, "baseline": baseline}
