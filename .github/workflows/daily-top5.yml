@@ -40,5 +40,5 @@ jobs:
             echo "DST guard: not 22:15 Europe/Rome; skipping."
             exit 0
           fi
-          python -m pytest -q scanner/test_daily_top5.py
+          python -m pytest -q scanner/test_daily_top5.py scanner/test_biotech_universe.py
           python -m scanner.daily_top5
