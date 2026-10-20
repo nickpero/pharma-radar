@@ -31,8 +31,8 @@ def test_trial_completion_is_informational_not_critical():
         "phase": "PHASE3",
     }
     score = score_event(event)
-    assert score <= 35
-    assert score_label(score) == "MEDIUM"
+    assert score <= 34
+    assert score_label(score) == "LOW"
 
 
 def test_positive_date_acceleration():
