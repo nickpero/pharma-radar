@@ -39,14 +39,14 @@ def test_alert_summary_is_concise():
             "market_reaction": {"reaction_1m_pct": 1.2, "reaction_5m_pct": 3.4, "reaction_15m_pct": 4.1},
             "source": "SEC", "source_type": "PRIMARY_CORPORATE",
             "published_at": datetime.now(timezone.utc).isoformat(),
-            "event": {"type": "STATUS_CHANGE", "subtype": "TRIAL_COMPLETED", "score": 95, "label": "CRITICAL"},
+            "event": {"type": "FDA_EVENT", "subtype": "FDA_APPROVAL", "score": 95, "label": "CRITICAL"},
         }],
         "errors": [],
     }
     message = build_summary(result)
     assert "🚨 PRIORITY ALERTS" in message
     assert "CAPR — deramiocel" in message
-    assert "TRIAL_COMPLETED" in message
+    assert "FDA_APPROVAL" in message
     assert "Catalyst 95/100 CRITICAL" in message
     assert "Priority 100/100 CRITICAL" in message
     assert "Setup 88/100" in message

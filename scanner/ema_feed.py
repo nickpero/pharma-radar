@@ -17,6 +17,7 @@ EMA_BASE_URL = "https://www.ema.europa.eu"
 REQUEST_TIMEOUT = 20
 USER_AGENT = "PharmaRadar/1.0"
 MAX_ENRICHED_ITEMS = 20
+LAST_FETCH_STATUS = {"status": "NOT_RUN", "count": 0, "error": None}
 
 CATEGORY_KEYWORDS = {
     "APPROVAL": ("recommends granting", "positive opinion", "marketing authorisation", "marketing authorization", "authorisation recommended", "authorization recommended", "recommended for approval"),
@@ -157,14 +158,18 @@ def _enrich_ema_item(item):
 
 
 def get_ema_news(max_items=50):
+    global LAST_FETCH_STATUS
     try:
         response = requests.get(EMA_NEWS_RSS_URL, timeout=REQUEST_TIMEOUT, headers={"User-Agent": USER_AGENT, "Accept": "application/rss+xml,application/xml,text/xml"})
         response.raise_for_status()
     except requests.RequestException as exc:
+        LAST_FETCH_STATUS = {"status": "ERROR", "count": 0, "error": f"{type(exc).__name__}: {exc}"}
         print(f"EMA FEED ERROR: {type(exc).__name__}: {exc}", flush=True)
         return []
     items = parse_ema_rss(response.text, max_items=max_items)
     if not items:
+        LAST_FETCH_STATUS = {"status": "EMPTY", "count": 0, "error": None}
+        print("EMA FEED EMPTY: HTTP request succeeded but no RSS items were parsed", flush=True)
         return []
     enrich_count = min(len(items), MAX_ENRICHED_ITEMS)
     with ThreadPoolExecutor(max_workers=min(8, enrich_count)) as executor:
@@ -174,6 +179,8 @@ def get_ema_news(max_items=50):
             index = futures[future]
             try:
                 enriched[index] = future.result()
-            except Exception:
+            except Exception as exc:
+                print(f"EMA ARTICLE ENRICHMENT WARNING: {type(exc).__name__}: {exc}", flush=True)
                 enriched[index] = items[index]
+    LAST_FETCH_STATUS = {"status": "OK", "count": len(enriched), "error": None}
     return enriched

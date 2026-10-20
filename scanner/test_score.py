@@ -12,13 +12,27 @@ def test_critical_catalyst():
         "type": "STATUS_CHANGE",
         "severity": "HIGH",
         "direction": "CATALYST",
-        "subtype": "TRIAL_COMPLETED",
+        "subtype": "FDA_APPROVAL",
     }
 
     score = score_event(event)
 
     assert score == 100
     assert score_label(score) == "CRITICAL"
+
+
+
+def test_trial_completion_is_informational_not_critical():
+    event = {
+        "type": "STATUS_CHANGE",
+        "severity": "HIGH",
+        "direction": "CATALYST",
+        "subtype": "TRIAL_COMPLETED",
+        "phase": "PHASE3",
+    }
+    score = score_event(event)
+    assert score <= 34
+    assert score_label(score) == "LOW"
 
 
 def test_positive_date_acceleration():

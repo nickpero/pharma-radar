@@ -173,6 +173,60 @@ def test_telegram_shows_confirmed_confirmation_compactly():
     assert "🧠 Confirmation" not in message
 
 
+def test_trial_completed_is_watch_only_when_primary_registry_was_updated_today():
+    alert = _alert("CAPR", 100, 88, "CRITICAL")
+    alert.update({
+        "source": "CLINICALTRIALS",
+        "subtype": "TRIAL_COMPLETED",
+        "nct_id": "NCT05126758",
+        "published_at": "2024-01-01T00:00:00Z",
+        "trial": {
+            "nct_id": "NCT05126758",
+            "completion_date": "2024-01-01",
+            "last_update": datetime.now(timezone.utc).isoformat(),
+        },
+        "event": {"type": "STATUS_CHANGE", "subtype": "TRIAL_COMPLETED", "score": 35, "label": "MEDIUM"},
+    })
+    assert alert_action(alert) == "WATCH"
+    selected = select_intelligent_alerts([alert])
+    assert len(selected) == 1
+    assert selected[0]["telegram_action"] == "WATCH"
+
+
+def test_trial_completed_with_stale_or_missing_registry_update_is_silent():
+    stale = _alert("CAPR", 100, 88, "CRITICAL")
+    stale.update({
+        "source": "CLINICALTRIALS",
+        "subtype": "TRIAL_COMPLETED",
+        "trial": {"completion_date": datetime.now(timezone.utc).date().isoformat(), "last_update": "2026-09-01T00:00:00Z"},
+        "event": {"type": "STATUS_CHANGE", "subtype": "TRIAL_COMPLETED", "score": 35, "label": "MEDIUM"},
+    })
+    assert alert_action(stale) == "SILENT"
+    missing = dict(stale)
+    missing["trial"] = {"completion_date": datetime.now(timezone.utc).date().isoformat()}
+    assert alert_action(missing) == "SILENT"
+
+
+def test_trial_completed_telegram_explains_status_and_shows_registry_dates():
+    alert = _alert("CAPR", 35, 20, "MEDIUM")
+    alert.update({
+        "source": "CLINICALTRIALS",
+        "subtype": "TRIAL_COMPLETED",
+        "nct_id": "NCT05126758",
+        "trial": {
+            "nct_id": "NCT05126758",
+            "completion_date": "2026-10-01",
+            "last_update": "2026-10-19T12:00:00Z",
+        },
+        "event": {"type": "STATUS_CHANGE", "subtype": "TRIAL_COMPLETED", "score": 35, "label": "MEDIUM"},
+    })
+    message = format_catalyst_alert(alert)
+    assert "non implica risultati positivi" in message
+    assert "NCT05126758" in message
+    assert "2026-10-01" in message
+    assert "Registro aggiornato:" in message
+
+
 if __name__ == "__main__":
     test_critical_is_immediate()
     test_expired_is_silent_even_if_priority_is_critical()

@@ -41,7 +41,16 @@ def _parse_timestamp(value):
 
 def catalyst_freshness(alert, now=None):
     """Classify catalyst age: new, recent reaction, or historical."""
-    dt = _parse_timestamp(alert.get("first_published_at") or alert.get("event_date") or alert.get("published_at") or alert.get("event_timestamp"))
+    event = alert.get("event") if isinstance(alert.get("event"), dict) else {}
+    subtype = str(alert.get("subtype") or event.get("subtype") or "").upper()
+    trial = alert.get("trial") if isinstance(alert.get("trial"), dict) else {}
+    if subtype == "TRIAL_COMPLETED":
+        # For status changes, freshness must follow the registry update, not
+        # the planned/actual completion date, which may be months old.
+        timestamp = trial.get("last_update") or event.get("last_update")
+    else:
+        timestamp = alert.get("first_published_at") or alert.get("event_date") or alert.get("published_at") or alert.get("event_timestamp")
+    dt = _parse_timestamp(timestamp)
     if dt is None:
         return "UNKNOWN_TIME"
     reference = now or datetime.now(timezone.utc)
@@ -115,6 +124,12 @@ def alert_action(alert):
     reaction = _reaction(alert)
     reaction_pct = _num(reaction.get("reaction_pct"))
     primary = primary_source_verified(alert)
+    subtype = str(alert.get("subtype") or event.get("subtype") or "").upper()
+
+    # Trial completion is informational only. It can be sent as WATCH only
+    # when the primary registry itself was updated in the last 24 hours.
+    if subtype == "TRIAL_COMPLETED":
+        return "WATCH" if primary and freshness == "NEW_0_24H" else "SILENT"
 
     # Recent secondary-source discovery is a clearly labelled watch, never a
     # confirmed actionable signal. Keep thresholds to avoid alerting on noise.

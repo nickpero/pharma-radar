@@ -254,6 +254,19 @@ def format_catalyst_alert(alert):
     if timeline_details:
         lines.extend(["", *timeline_details])
 
+    trial = alert.get("trial") if isinstance(alert.get("trial"), dict) else {}
+    if str(subtype or "").upper() == "TRIAL_COMPLETED":
+        nct_id = _clean_text(alert.get("nct_id") or trial.get("nct_id"), 40)
+        completion_date = _clean_text(trial.get("completion_date"), 40)
+        lines.extend([
+            "",
+            "ℹ️ Stato ClinicalTrials.gov: COMPLETED — non implica risultati positivi.",
+        ])
+        if nct_id:
+            lines.append(f"🔗 Registro: {nct_id}")
+        if completion_date:
+            lines.append(f"📅 Completamento studio registrato: {completion_date}")
+
     if alert.get("post_spike_watch") is True:
         retracement = _num(alert.get("post_spike_retracement_pct"))
         spike_pct = _num(alert.get("post_spike_pct"))
@@ -299,6 +312,8 @@ def format_catalyst_alert(alert):
         f"🗞 Pubblicata: {_format_timestamp(published_value)}",
         f"🛰 Rilevata dal Radar: {_format_timestamp(detected_value)}",
     ])
+    if str(subtype or "").upper() == "TRIAL_COMPLETED" and trial.get("last_update"):
+        lines.append(f"🗂 Registro aggiornato: {_format_timestamp(trial.get('last_update'))}")
     if early:
         lines.append("⚠️ Early discovery — conferma da fonte primaria ancora in attesa.")
 
