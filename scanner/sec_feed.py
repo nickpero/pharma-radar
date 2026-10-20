@@ -39,6 +39,7 @@ JINA_MIN_INTERVAL = 1.5
 _JINA_LOCK = threading.Lock()
 _JINA_LAST_REQUEST = 0.0
 _JINA_RATE_LIMITED = False
+LAST_FETCH_STATUS = {"status": "NOT_RUN", "count": 0, "path": None, "error": None}
 
 
 def normalize_text(value) -> str:
@@ -366,6 +367,8 @@ def _discover_missing_companies(watchlist, existing_tickers):
 
 
 def get_sec_news(watchlist, max_filings_per_company=3):
+    global LAST_FETCH_STATUS
+    direct_error = None
     try:
         results = []
         for ticker, config in (watchlist or {}).items():
@@ -374,9 +377,13 @@ def get_sec_news(watchlist, max_filings_per_company=3):
             if not cik:
                 continue
             results.extend(_fetch_sec_direct(ticker, company, cik, max_filings=max_filings_per_company))
+        status = "OK" if results else "EMPTY_OR_DEGRADED"
+        LAST_FETCH_STATUS = {"status": status, "count": len(results), "path": "direct", "error": None}
+        print(f"SEC FEED STATUS: {status} filings={len(results)} path=direct", flush=True)
         return results
     except requests.RequestException as exc:
-        print(f"SEC DIRECT UNAVAILABLE: {type(exc).__name__}: {exc}", flush=True)
+        direct_error = f"{type(exc).__name__}: {exc}"
+        print(f"SEC DIRECT UNAVAILABLE: {direct_error}", flush=True)
     try:
         proxy_rows = _fetch_proxy(max_filings=50)
         by_cik = {str(cik).lstrip("0") or "0": ticker for ticker, cik in WATCHLIST_CIK.items()}
@@ -405,12 +412,15 @@ def get_sec_news(watchlist, max_filings_per_company=3):
         existing_tickers = {str(item.get("ticker", "")).upper() for item in results}
         discovery_results = _discover_missing_companies(watchlist, existing_tickers)
         results.extend(discovery_results)
-        print(f"SEC DISCOVERY SUMMARY: proxy={len(existing_tickers)} discovered={len(discovery_results)}", flush=True)
+        status = "DEGRADED_FALLBACK" if results else "ERROR"
+        LAST_FETCH_STATUS = {"status": status, "count": len(results), "path": "proxy_fallback", "error": direct_error if not results else None}
+        print(f"SEC FEED STATUS: {status} filings={len(results)} path=proxy_fallback", flush=True)
         return results
     except (requests.RequestException, ValueError, TypeError, KeyError) as exc:
-        print(f"SEC PROXY ERROR: {type(exc).__name__}: {exc}", flush=True)
+        error = f"{type(exc).__name__}: {exc}"
+        print(f"SEC PROXY ERROR: {error}", flush=True)
+        LAST_FETCH_STATUS = {"status": "ERROR", "count": 0, "path": "proxy_fallback", "error": error}
         return []
-
 
 def get_sec_filings_for_ticker(ticker, company, max_filings=3):
     cik = WATCHLIST_CIK.get(str(ticker).upper())
