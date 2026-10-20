@@ -88,7 +88,7 @@ def get_biotech_universe(session=None, max_pages=MAX_PAGES, page_size=PAGE_SIZE)
                     if row: found[row["ticker"]] = row
             if not quotes or (page + 1) * page_size >= total: break
         if found:
-            LAST_UNIVERSE_STATUS = {"status":"OK","count":len(found),"pages":pages,"last_error":None,"source":"YAHOO_FINANCE_SCREENER"}
+            LAST_UNIVERSE_STATUS.update({"status":"OK","count":len(found),"pages":pages,"last_error":None,"source":"YAHOO_FINANCE_SCREENER"})
             print(f"BIOTECH UNIVERSE STATUS: OK tickers={len(found)} pages={pages}", flush=True)
             return found
     except (requests.RequestException, ValueError, TypeError, KeyError) as exc:
@@ -99,13 +99,13 @@ def get_biotech_universe(session=None, max_pages=MAX_PAGES, page_size=PAGE_SIZE)
             row = _to_market_row(quote)
             if row: found[row["ticker"]] = row
         status = "DEGRADED" if found else "ERROR"
-        LAST_UNIVERSE_STATUS = {"status":status,"count":len(found),"pages":pages,"last_error":last_error,"source":"YAHOO_DAY_GAINERS_FALLBACK"}
+        LAST_UNIVERSE_STATUS.update({"status":status,"count":len(found),"pages":pages,"last_error":last_error,"source":"YAHOO_DAY_GAINERS_FALLBACK"})
         print(f"BIOTECH UNIVERSE STATUS: {status} tickers={len(found)}", flush=True)
         return found
     except (requests.RequestException, ValueError, TypeError, KeyError) as exc:
         fallback_error = f"{type(exc).__name__}: {exc}"
-        LAST_UNIVERSE_STATUS = {"status":"ERROR","count":0,"pages":pages,
+        LAST_UNIVERSE_STATUS.update({"status":"ERROR","count":0,"pages":pages,
             "last_error":f"{last_error}; fallback: {fallback_error}" if last_error else fallback_error,
-            "source":"YAHOO_FINANCE_SCREENER"}
+            "source":"YAHOO_FINANCE_SCREENER"})
         print(f"BIOTECH UNIVERSE FALLBACK ERROR: {fallback_error}", flush=True)
         return {}
