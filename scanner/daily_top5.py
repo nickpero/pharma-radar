@@ -11,6 +11,7 @@ from zoneinfo import ZoneInfo
 from pathlib import Path
 
 from scanner.market_data import get_market_snapshot
+from scanner.biotech_universe import get_biotech_universe, LAST_UNIVERSE_STATUS
 from scanner.telegram import send_telegram
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -149,53 +150,73 @@ def _recent_catalysts(history, ticker, date_value=None, now=None, meta=None):
     return sorted(matches, key=sort_key, reverse=True)
 
 
-def build_daily_top5(watchlist=None, history=None, snapshot_fn=get_market_snapshot, date_value=None):
+def build_daily_top5(watchlist=None, history=None, snapshot_fn=get_market_snapshot, date_value=None,
+                    universe_fn=None, include_broad_universe=None):
+    """Rank configured companies plus a broad US biotech/pharma market scan."""
+    explicit_watchlist = watchlist is not None
     watchlist = watchlist if watchlist is not None else load_watchlist()
     history = history if history is not None else load_catalyst_history()
+    if include_broad_universe is None:
+        include_broad_universe = (not explicit_watchlist and snapshot_fn is get_market_snapshot)
+
+    market_quotes = {}
+    if include_broad_universe:
+        try:
+            market_quotes = (universe_fn or get_biotech_universe)() or {}
+        except Exception as exc:
+            LAST_UNIVERSE_STATUS.update({"status":"ERROR","count":0,"last_error":f"{type(exc).__name__}: {exc}"})
+            print(f"BIOTECH UNIVERSE ERROR: {type(exc).__name__}: {exc}", flush=True)
+
+    combined = dict(watchlist)
+    for ticker, quote in market_quotes.items():
+        symbol = str(ticker or "").strip().upper()
+        if symbol and symbol not in combined:
+            combined[symbol] = {
+                "company": quote.get("company") or quote.get("short_name") or symbol,
+                "programs": [], "radar_role": "NEW_MARKET_CANDIDATE",
+                "radar_reason": "Scoperta tramite scansione ampia; verificare società e pipeline prima di inserirla nel Radar.",
+            }
+
     rows = []
     reference_now = _reference_time(date_value)
-    for ticker, meta in watchlist.items():
-        snapshot = snapshot_fn(ticker)
+    for ticker, meta in combined.items():
+        symbol = ticker.upper()
+        quote = market_quotes.get(symbol)
+        if quote:
+            snapshot = {"price_change_pct":quote.get("price_change_pct"),"volume":quote.get("volume"),
+                        "volume_ratio":quote.get("volume_ratio"),"price":quote.get("price"),
+                        "market_data_source":quote.get("market_data_source","YAHOO_FINANCE_SCREENER")}
+        else:
+            snapshot = snapshot_fn(symbol)
         if not snapshot or snapshot.get("price_change_pct") is None:
             continue
-        recent = _recent_catalysts(history, ticker.upper(), date_value, meta=meta)
+        recent = _recent_catalysts(history, symbol, date_value, meta=meta)
         catalyst = recent[0] if recent else None
+        quality_gate = _alert_quality_gate(catalyst, now=reference_now, meta=meta)
+        freshness = _catalyst_freshness(catalyst, reference_now)
         rows.append({
-            "ticker": ticker.upper(),
-            "company": meta.get("company", ticker.upper()),
-            "programs": meta.get("programs", []),
-            "price_change_pct": snapshot.get("price_change_pct"),
-            "volume": snapshot.get("volume"),
-            "volume_ratio": snapshot.get("volume_ratio"),
-            "price": snapshot.get("price"),
-            "market_data_source": snapshot.get("market_data_source"),
-            "catalyst_found": catalyst is not None,
-            "catalyst_freshness": _catalyst_freshness(catalyst, reference_now),
-            "catalyst_primary_source": _source_is_primary(catalyst),
-            "alert_quality_gate": _alert_quality_gate(catalyst, now=reference_now, meta=meta),
-            "catalyst_subtype": catalyst.get("subtype") if catalyst else None,
-            "catalyst_program": catalyst.get("program") if catalyst else None,
-            "catalyst_source": catalyst.get("source") if catalyst else None,
-            "catalyst_priority": catalyst.get("alert_priority") if catalyst else None,
-            "catalyst_url": catalyst.get("url") if catalyst else None,
-            "catalyst_origin": catalyst.get("catalyst_origin") if catalyst else None,
-            "catalyst_detected_at": catalyst.get("detected_at") if catalyst else None,
-            "classification": _classify_row(catalyst, meta),
-            "catalyst_evidence": _catalyst_evidence(catalyst),
-            "radar_inclusion": _radar_inclusion(
-                catalyst,
-                meta,
-                _alert_quality_gate(catalyst, now=reference_now, meta=meta),
-                _catalyst_freshness(catalyst, reference_now),
-            ),
-            "radar_reason": _radar_reason(
-                catalyst,
-                meta,
-                _alert_quality_gate(catalyst, now=reference_now, meta=meta),
-                _catalyst_freshness(catalyst, reference_now),
-            ),
+            "ticker":symbol,"company":meta.get("company",symbol),"programs":meta.get("programs",[]),
+            "price_change_pct":snapshot.get("price_change_pct"),"volume":snapshot.get("volume"),
+            "volume_ratio":snapshot.get("volume_ratio"),"price":snapshot.get("price"),
+            "market_data_source":snapshot.get("market_data_source"),"catalyst_found":catalyst is not None,
+            "catalyst_freshness":freshness,"catalyst_primary_source":_source_is_primary(catalyst),
+            "alert_quality_gate":quality_gate,"catalyst_subtype":catalyst.get("subtype") if catalyst else None,
+            "catalyst_program":catalyst.get("program") if catalyst else None,
+            "catalyst_source":catalyst.get("source") if catalyst else None,
+            "catalyst_priority":catalyst.get("alert_priority") if catalyst else None,
+            "catalyst_url":catalyst.get("url") if catalyst else None,
+            "catalyst_origin":catalyst.get("catalyst_origin") if catalyst else None,
+            "catalyst_detected_at":catalyst.get("detected_at") if catalyst else None,
+            "classification":_classify_row(catalyst,meta),"catalyst_evidence":_catalyst_evidence(catalyst),
+            "radar_status":"CONFIGURED" if symbol in watchlist else "NEW_CANDIDATE",
+            "industry":(quote or {}).get("industry"),"exchange":(quote or {}).get("exchange"),
+            "radar_inclusion":_radar_inclusion(catalyst,meta,quality_gate,freshness),
+            "radar_reason":_radar_reason(catalyst,meta,quality_gate,freshness),
         })
-    rows.sort(key=lambda item: item["price_change_pct"], reverse=True)
+    rows.sort(key=lambda item:item["price_change_pct"],reverse=True)
+    LAST_UNIVERSE_STATUS["ranked_count"] = len(rows)
+    LAST_UNIVERSE_STATUS["configured_count"] = len(watchlist)
+    LAST_UNIVERSE_STATUS["new_candidate_count"] = sum(1 for row in rows if row["radar_status"]=="NEW_CANDIDATE")
     return rows[:5]
 
 
@@ -305,8 +326,10 @@ def format_daily_top5(rows, date_value=None):
     lines = [
         "🧬 PHARMA RADAR — TOP 5 GIORNALIERO",
         "━━━━━━━━━━━━━━━━━━",
-        f"📅 {day} · Universo Pharma/biotech monitorato",
-        "ℹ️ Classifica dei titoli della watchlist con dati validi; non rappresenta l’intero mercato.",
+        f"📅 {day} · Universo USA biotech/farmaceutico",
+        ("ℹ️ Scansione ampia di mercato + watchlist; non rappresenta l’intero mercato in modo esaustivo."
+         if LAST_UNIVERSE_STATUS.get("status") == "OK"
+         else "ℹ️ Universo watchlist + titoli scoperti disponibili; copertura ampia non confermata, non rappresenta l’intero mercato."),
         "",
     ]
     if not rows:
@@ -333,6 +356,8 @@ def format_daily_top5(rows, date_value=None):
         lines.extend([
             f"{index}. 🧬 {row['ticker']} · {row['company']}",
             f"   📈 Variazione: {pct:+.2f}% · Volume: {volume_text}",
+            (f"   🆕 Stato: NUOVO CANDIDATO (non ancora configurato nel Radar) · {row.get('industry') or 'settore da verificare'}"
+             if row.get("radar_status") == "NEW_CANDIDATE" else "   🧭 Stato: azienda già configurata nel Radar"),
             f"   📰 Catalyst: {reason}",
             f"   💊 Programma/farmaco: {row.get('catalyst_program') or ', '.join(row.get('programs') or []) or 'non specificato'}",
             f"   🔎 Classificazione: {classification}",
