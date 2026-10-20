@@ -57,9 +57,5 @@ def main():
     print("IMPORTANT: synthetic test only; this is not a real catalyst or investment signal.")
 
 
-if __test__ if False else False:
-    pass
-
-
 if __name__ == "__main__":
     main()
