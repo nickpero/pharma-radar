@@ -68,6 +68,7 @@ def build_summary(result, intelligent_alerts=None):
         f"🧹 Filtered: {result.get('filtered_trials', 0)}",
         f"📦 Raw alerts: {len(alerts)}",
         f"📨 Telegram alerts: {len(intelligent_alerts)}",
+        *(["🛰 Source health: " + " | ".join("{}={}({})".format(name, detail.get("status", "UNKNOWN"), detail.get("count", 0)) for name, detail in result.get("source_diagnostics", {}).items())] if result.get("source_diagnostics") else []),
         f"🧹 duplicate/low-priority alerts suppressed: {max(0, len(alerts) - len(intelligent_alerts))}",
         f"📰 FDA news: {len(result.get('fda_news', []))}",
         f"🔄 Changes: {len(detected_changes)}",
