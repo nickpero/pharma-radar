@@ -25,6 +25,7 @@ Il modulo NON invia Telegram.
 from scanner.fda_news import filter_fda_catalysts
 from scanner.clinical_impact import enrich_clinical_impact
 from scanner.fda_enrichment import enrich_fda_news_item
+from scanner.fda_freshness import is_stale_fda_item
 from scanner.fda_entity_resolution import resolve_fda_entities
 from scanner.fda_matcher import identify_fda_target
 from scanner.fda_catalyst import build_fda_catalyst
@@ -43,6 +44,11 @@ def process_fda_news_item(news_item, watchlist=None):
         for field in ("article_text", "content", "body", "text")
     )
     enriched_item = news_item if has_article_body else enrich_fda_news_item(news_item)
+
+    # Historical/archive material must never be promoted as a fresh catalyst.
+    # Apply this after enrichment so the official article can supply its date.
+    if is_stale_fda_item(enriched_item):
+        return None
 
     if not filter_fda_catalysts([enriched_item]):
         return None
