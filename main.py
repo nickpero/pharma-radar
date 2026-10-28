@@ -209,7 +209,7 @@ def send_source_health_alert_if_needed(result, actionable_alerts=None):
         "Questo è un avviso tecnico, non un catalyst di mercato.",
         "━━━━━━━━━━━━━━━━━━",
     ])
-    response = send_telegram("\\n".join(lines))
+    response = send_telegram("\n".join(lines))
     # Persist only after Telegram confirms success; failed sends remain retryable.
     state[key] = now.isoformat()
     save_sent_alerts(state)
