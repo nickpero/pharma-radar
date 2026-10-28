@@ -30,6 +30,13 @@ def _process_item(item, watchlist):
         if str(target.get("ticker") or "").strip().upper() != source_ticker:
             return None
 
+    # EMA headlines often cover several medicines or generic committee business.
+    # A program-name coincidence alone is insufficient: require the matched
+    # company to be explicitly present in the official article as well.
+    if source == "EMA":
+        if not target.get("program_matches") or not target.get("company_matches"):
+            return None
+
     event = build_fda_catalyst(item)
     event.update({
         "ticker": target.get("ticker"),
