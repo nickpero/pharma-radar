@@ -366,87 +366,121 @@ def _discover_missing_companies(watchlist, existing_tickers):
     return results
 
 
+def _parse_proxy_rows(watchlist, proxy_rows):
+    by_cik = {str(cik).lstrip("0") or "0": ticker for ticker, cik in WATCHLIST_CIK.items()}
+    company_by_ticker = {
+        str(ticker).upper(): (
+            (config or {}).get("company", ticker) if isinstance(config, dict) else ticker
+        )
+        for ticker, config in (watchlist or {}).items()
+    }
+    results = []
+    for row in proxy_rows or []:
+        cik = str(row.get("cik", "")).lstrip("0") or "0"
+        ticker = by_cik.get(cik)
+        if not ticker:
+            continue
+        reported = _extract_items(row.get("filer_reported_items", []))
+        detected = _extract_items(row.get("detected_items", []))
+        items = reported or detected
+        if not items:
+            continue
+        accession = str(row.get("accession_number", ""))
+        text, content_url = _enrich_proxy_row(row, WATCHLIST_CIK[ticker], accession)
+        company = company_by_ticker.get(ticker, ticker)
+        results.append(build_sec_item(
+            ticker, company, WATCHLIST_CIK[ticker], accession,
+            row.get("form_type", "8-K"), str(row.get("filed_at", ""))[:10],
+            items=items, detected_items=detected,
+            suspected_buried_events=row.get("suspected_buried_events", {}),
+            text=text, title=f"SEC 8-K — {company} ({ticker})",
+            url=content_url or (
+                f"{SEC_ARCHIVES}/{int(WATCHLIST_CIK[ticker])}/{accession.replace('-', '')}/"
+                if accession else ""
+            ),
+        ))
+    return results
+
+
 def get_sec_news(watchlist, max_filings_per_company=3):
+    """Fetch SEC filings per issuer; isolate per-ticker failures and preserve partial data."""
     global LAST_FETCH_STATUS
-    direct_error = None
-    try:
-        results = []
-        for ticker, config in (watchlist or {}).items():
-            company = config.get("company", ticker) if isinstance(config, dict) else ticker
-            cik = WATCHLIST_CIK.get(str(ticker).upper())
-            if not cik:
-                continue
-            results.extend(_fetch_sec_direct(ticker, company, cik, max_filings=max_filings_per_company))
-        status = "OK" if results else "EMPTY_OR_DEGRADED"
-        LAST_FETCH_STATUS = {"status": status, "count": len(results), "path": "direct", "error": None}
-        print(f"SEC FEED STATUS: {status} filings={len(results)} path=direct", flush=True)
-        return results
-    except requests.RequestException as exc:
-        direct_error = f"{type(exc).__name__}: {exc}"
-        print(f"SEC DIRECT UNAVAILABLE: {direct_error}", flush=True)
-    try:
-        proxy_rows = _fetch_proxy(max_filings=50)
-        by_cik = {str(cik).lstrip("0") or "0": ticker for ticker, cik in WATCHLIST_CIK.items()}
-        company_by_ticker = {ticker: ((watchlist.get(ticker, {}) or {}).get("company", ticker)
-                                      if isinstance(watchlist.get(ticker, {}), dict) else ticker)
-                             for ticker in WATCHLIST_CIK}
-        results = []
-        for row in proxy_rows:
-            cik = str(row.get("cik", "")).lstrip("0") or "0"
-            ticker = by_cik.get(cik)
-            if not ticker:
-                continue
-            reported = _extract_items(row.get("filer_reported_items", []))
-            detected = _extract_items(row.get("detected_items", []))
-            items = reported or detected
-            if not items:
-                continue
-            accession = str(row.get("accession_number", ""))
-            text, content_url = _enrich_proxy_row(row, WATCHLIST_CIK[ticker], accession)
-            results.append(build_sec_item(ticker, company_by_ticker[ticker], WATCHLIST_CIK[ticker], accession,
-                                          row.get("form_type", "8-K"), str(row.get("filed_at", ""))[:10],
-                                          items=items, detected_items=detected,
-                                          suspected_buried_events=row.get("suspected_buried_events", {}), text=text,
-                                          title=f"SEC 8-K — {company_by_ticker[ticker]} ({ticker})",
-                                          url=content_url or (f"{SEC_ARCHIVES}/{int(WATCHLIST_CIK[ticker])}/{accession.replace('-', '')}/" if accession else "")))
-        existing_tickers = {str(item.get("ticker", "")).upper() for item in results}
-        discovery_results = _discover_missing_companies(watchlist, existing_tickers)
-        results.extend(discovery_results)
-        status = "DEGRADED_FALLBACK" if results else "ERROR"
-        LAST_FETCH_STATUS = {"status": status, "count": len(results), "path": "proxy_fallback", "error": direct_error if not results else None}
-        print(f"SEC FEED STATUS: {status} filings={len(results)} path=proxy_fallback", flush=True)
-        return results
-    except (requests.RequestException, ValueError, TypeError, KeyError) as exc:
-        proxy_error = f"{type(exc).__name__}: {exc}"
-        print(f"SEC PROXY ERROR: {proxy_error}", flush=True)
-        # The proxy has failed as well as the direct EDGAR endpoint. Try a
-        # small rotating batch via SEC company browse pages before declaring
-        # the entire SEC source unavailable.
+    direct_results = []
+    failed_tickers = []
+    direct_errors = []
+    for ticker, config in (watchlist or {}).items():
+        ticker = str(ticker).upper()
+        company = config.get("company", ticker) if isinstance(config, dict) else ticker
+        cik = WATCHLIST_CIK.get(ticker)
+        if not cik:
+            continue
         try:
-            discovery_results = _discover_missing_companies(watchlist, set())
-            status = "DEGRADED_FALLBACK" if discovery_results else "ERROR"
-            LAST_FETCH_STATUS = {
-                "status": status,
-                "count": len(discovery_results),
-                "path": "sec_browse_discovery",
-                "error": None if discovery_results else proxy_error,
-            }
-            print(
-                f"SEC DISCOVERY FALLBACK: status={status} filings={len(discovery_results)} "
-                f"after_proxy_error={proxy_error}",
-                flush=True,
+            direct_results.extend(
+                _fetch_sec_direct(ticker, company, cik, max_filings=max_filings_per_company)
             )
-            return discovery_results
-        except Exception as discovery_exc:
-            discovery_error = f"{type(discovery_exc).__name__}: {discovery_exc}"
-            LAST_FETCH_STATUS = {
-                "status": "ERROR",
-                "count": 0,
-                "path": "sec_browse_discovery",
-                "error": f"proxy={proxy_error}; discovery={discovery_error}",
-            }
-            print(f"SEC DISCOVERY FALLBACK ERROR: {discovery_error}", flush=True)
-            return []
+        except requests.RequestException as exc:
+            failed_tickers.append(ticker)
+            direct_errors.append(f"{ticker}: {type(exc).__name__}: {exc}")
+            print(f"SEC DIRECT TICKER FAILED: ticker={ticker} error={type(exc).__name__}: {exc}", flush=True)
+
+    if not failed_tickers:
+        status = "OK" if direct_results else "EMPTY_OR_DEGRADED"
+        LAST_FETCH_STATUS = {"status": status, "count": len(direct_results), "path": "direct", "error": None}
+        print(f"SEC FEED STATUS: {status} filings={len(direct_results)} path=direct", flush=True)
+        return direct_results
+
+    direct_error = "; ".join(direct_errors[:8])
+    print(
+        f"SEC DIRECT PARTIAL FAILURE: failed_tickers={len(failed_tickers)} "
+        f"successful_filings={len(direct_results)}",
+        flush=True,
+    )
+    combined = list(direct_results)
+    path = "direct_partial"
+    fallback_error = None
+    try:
+        proxy_results = _parse_proxy_rows(watchlist, _fetch_proxy(max_filings=50))
+        known_accessions = {
+            (str(item.get("ticker", "")).upper(), str(item.get("accession", "")))
+            for item in combined
+        }
+        for item in proxy_results:
+            key = (str(item.get("ticker", "")).upper(), str(item.get("accession", "")))
+            if key not in known_accessions:
+                combined.append(item)
+                known_accessions.add(key)
+        path = "direct_plus_proxy"
+    except (requests.RequestException, ValueError, TypeError, KeyError) as exc:
+        fallback_error = f"{type(exc).__name__}: {exc}"
+        print(f"SEC PROXY SUPPLEMENT FAILED: {fallback_error}", flush=True)
+
+    # Discovery is a bounded supplement, not a reason to discard successful direct filings.
+    try:
+        existing_tickers = {str(item.get("ticker", "")).upper() for item in combined}
+        combined.extend(_discover_missing_companies(watchlist, existing_tickers))
+        if path == "direct_partial":
+            path = "direct_plus_discovery"
+    except Exception as exc:
+        fallback_error = f"{fallback_error}; discovery={type(exc).__name__}: {exc}" if fallback_error else f"discovery={type(exc).__name__}: {exc}"
+        print(f"SEC DISCOVERY SUPPLEMENT FAILED: {fallback_error}", flush=True)
+
+    status = "DEGRADED_FALLBACK" if combined else "ERROR"
+    error_summary = direct_error
+    if fallback_error:
+        error_summary = f"{error_summary}; fallback={fallback_error}"
+    LAST_FETCH_STATUS = {
+        "status": status,
+        "count": len(combined),
+        "path": path,
+        "error": error_summary,
+        "failed_tickers": failed_tickers,
+    }
+    print(
+        f"SEC FEED STATUS: {status} filings={len(combined)} path={path} "
+        f"failed_tickers={len(failed_tickers)}",
+        flush=True,
+    )
+    return combined
 
 def get_sec_filings_for_ticker(ticker, company, max_filings=3):
     cik = WATCHLIST_CIK.get(str(ticker).upper())
