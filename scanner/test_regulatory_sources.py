@@ -221,7 +221,7 @@ def test_sec_uses_browse_fallback_after_proxy_failure(monkeypatch):
     result = sec_feed.get_sec_news(watchlist)
     assert result == expected
     assert sec_feed.LAST_FETCH_STATUS["status"] == "DEGRADED_FALLBACK"
-    assert sec_feed.LAST_FETCH_STATUS["path"] == "sec_browse_discovery"
+    assert sec_feed.LAST_FETCH_STATUS["path"] == "direct_plus_discovery"
     assert sec_feed.LAST_FETCH_STATUS["count"] == 1
 
 
