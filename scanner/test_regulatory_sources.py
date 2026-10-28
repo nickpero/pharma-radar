@@ -87,6 +87,7 @@ def test_sec_watchlist_cik_map_avoids_runtime_ticker_lookup():
     assert mapping["NUVL"] == "0001861560"
     assert mapping["IONS"] == "0000874015"
     assert mapping["SMMT"] == "0001599298"
+    assert mapping["MNKD"] == "0000899460"
     assert "ARGX" not in mapping
 
 
