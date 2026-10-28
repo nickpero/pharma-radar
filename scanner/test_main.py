@@ -138,6 +138,22 @@ def test_degraded_source_health_warning_sends_once(monkeypatch):
     assert len(messages) == 1
 
 
+def test_source_health_warning_is_not_suppressed_by_catalyst_alerts(monkeypatch):
+    sent_state = {}
+    messages = []
+    monkeypatch.setattr(main, "load_sent_alerts", lambda: dict(sent_state))
+    monkeypatch.setattr(main, "save_sent_alerts", lambda state: sent_state.update(state))
+    monkeypatch.setattr(main, "send_telegram", lambda message: messages.append(message) or {"ok": True})
+    result = {
+        "companies": 82,
+        "alerts": [{"ticker": "KYMR"}],
+        "source_diagnostics": {"SEC": {"status": "DEGRADED_FALLBACK", "count": 12, "path": "proxy_fallback"}},
+    }
+    assert main.send_source_health_alert_if_needed(result, actionable_alerts=[{"ticker": "KYMR"}]) is True
+    assert "Alert consegnati in questa scansione: 1" in messages[0]
+    assert "Copertura incompleta" in messages[0]
+
+
 def test_source_health_warning_does_not_send_when_sources_are_healthy(monkeypatch):
     monkeypatch.setattr(main, "load_sent_alerts", lambda: {})
     monkeypatch.setattr(main, "send_telegram", lambda message: (_ for _ in ()).throw(AssertionError("unexpected Telegram send")))
