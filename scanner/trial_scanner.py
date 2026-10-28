@@ -293,7 +293,7 @@ def scan(baseline=False):
         alerts.extend([build_fda_alert(event) for event in regulatory_result["alerts"]])
         regulatory_excluded = [
             event for event in regulatory_result["events"]
-            if event.get("trading_impact") not in {"EXTREME", "HIGH"}
+            if event.get("trading_impact") not in {"EXTREME", "HIGH", "MEDIUM"}
         ]
         for event in regulatory_excluded:
             print(
@@ -346,7 +346,7 @@ def scan(baseline=False):
         f"fda_alerts={len(fda_result['alerts'])} | "
         f"regulatory_events={len(regulatory_result['events'])} | "
         f"regulatory_alerts={len(regulatory_result['alerts'])} | "
-        f"regulatory_below_threshold={sum(1 for event in regulatory_result['events'] if event.get('trading_impact') not in {'EXTREME', 'HIGH'})} | "
+        f"regulatory_below_threshold={sum(1 for event in regulatory_result['events'] if event.get('trading_impact') not in {'EXTREME', 'HIGH', 'MEDIUM'})} | "
         f"final_alerts_after_catalyst_dedup={len(alerts)}"
     )
     print("===================================")
