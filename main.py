@@ -127,12 +127,19 @@ def build_summary(result, intelligent_alerts=None):
             lines.append(f"• {error.get('ticker', 'UNKNOWN')} — {error.get('program', 'UNKNOWN')}: {error.get('error', '')}")
         lines.append("Status: WARNING")
 
-    if not errors:
-        if not intelligent_alerts:
-            lines.append("🟢 No catalyst alerts")
-            lines.append("Status: CLEAN")
-        else:
-            lines.append("Status: REVIEW")
+    degraded_sources = {
+        name: detail for name, detail in (result.get("source_diagnostics") or {}).items()
+        if str(detail.get("status") or "UNKNOWN").upper() not in {"OK", "SUCCESS", "HEALTHY"}
+    }
+    if errors or degraded_sources:
+        if degraded_sources:
+            lines.append("⚠️ Source degradation detected; scan completion does not imply full coverage.")
+        lines.append("Status: WARNING")
+    elif not intelligent_alerts:
+        lines.append("🟢 No catalyst alerts")
+        lines.append("Status: CLEAN")
+    else:
+        lines.append("Status: REVIEW")
     lines.extend(["", "━━━━━━━━━━━━━━━━━━"])
     return "\n".join(lines)
 
@@ -160,6 +167,54 @@ def send_alerts(result, alerts=None):
     mark_sent(alerts, state, lambda alert: repr(_dedup_key(alert)), timestamp)
     save_sent_alerts(state)
     return responses
+
+
+def send_source_health_alert_if_needed(result, actionable_alerts=None):
+    """Send at most one daily Telegram warning when sources are degraded and no actionable catalyst was delivered."""
+    diagnostics = result.get("source_diagnostics") or {}
+    degraded = {
+        name: detail for name, detail in diagnostics.items()
+        if str(detail.get("status") or "UNKNOWN").upper() not in {"OK", "SUCCESS", "HEALTHY"}
+    }
+    if not degraded or actionable_alerts:
+        return False
+
+    now = datetime.now(timezone.utc)
+    state = load_sent_alerts()
+    key = f"RADAR_SOURCE_HEALTH:{now.date().isoformat()}"
+    if key in state:
+        print("Radar source-health Telegram warning already sent today.")
+        return False
+
+    lines = [
+        "⚠️ PHARMA RADAR — SOURCE HEALTH WARNING",
+        "━━━━━━━━━━━━━━━━━━",
+        f"🕒 Scan UTC: {now.strftime('%Y-%m-%d %H:%M:%S')}",
+        f"🏢 Aziende configurate: {result.get('companies', 0)}",
+        f"📰 FDA news raccolte: {len(result.get('fda_news', []))}",
+        f"🚨 Alert candidati: {len(result.get('alerts', []))}",
+        "📡 Fonti degradate:",
+    ]
+    for name, detail in degraded.items():
+        status = detail.get("status", "UNKNOWN")
+        count = detail.get("count", 0)
+        path = detail.get("path") or "non disponibile"
+        error = detail.get("error")
+        lines.append(f"• {name}: {status} · elementi={count} · percorso={path}")
+        if error:
+            lines.append(f"  Errore: {str(error)[:240]}")
+    lines.extend([
+        "",
+        "Nessun nuovo alert azionabile consegnato in questa scansione.",
+        "Questo è un avviso tecnico, non un catalyst di mercato.",
+        "━━━━━━━━━━━━━━━━━━",
+    ])
+    response = send_telegram("\\n".join(lines))
+    # Persist only after Telegram confirms success; failed sends remain retryable.
+    state[key] = now.isoformat()
+    save_sent_alerts(state)
+    print(f"Radar source-health Telegram warning sent: {response.get('ok', 'response received')}")
+    return True
 
 
 def send_email_alerts(result):
@@ -276,6 +331,11 @@ def main():
 
     sent = send_alerts(result, alerts=new_alerts)
     print(f"Telegram catalyst alerts sent: {len(sent)}")
+    try:
+        send_source_health_alert_if_needed(result, actionable_alerts=new_alerts)
+    except Exception as exc:
+        # Health notifications must never hide the scan result or prevent the Daily from running.
+        print(f"Radar source-health Telegram warning failed: {type(exc).__name__}: {exc}")
     sent = send_email_alerts(result)
     print(f"Pharma Intelligence emails sent: {sent}")
 
