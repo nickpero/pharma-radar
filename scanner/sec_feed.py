@@ -15,7 +15,7 @@ SEC_PROXY = "https://filingfirehose.com/v1/public/8k"
 JINA_READER = "https://r.jina.ai/"
 REQUEST_TIMEOUT = 20
 DEFAULT_USER_AGENT = "PharmaRadar/1.0 (GitHub Actions; 41898282+github-actions[bot]@users.noreply.github.com)"
-USER_AGENT = os.getenv("SEC_USER_AGENT", DEFAULT_USER_AGENT)
+USER_AGENT = os.getenv("SEC_USER_AGENT", "").strip() or DEFAULT_USER_AGENT
 JINA_API_KEY = os.getenv("JINA_API_KEY", "")
 
 WATCHLIST_CIK = {
