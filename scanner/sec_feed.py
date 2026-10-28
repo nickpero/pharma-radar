@@ -34,7 +34,8 @@ WATCHLIST_CIK = {
 CATALYST_ITEMS = {"1.01", "1.02", "2.01", "2.03", "3.01", "5.02", "7.01", "8.01"}
 DISCOVERY_MAX_FILINGS = 2
 DISCOVERY_MAX_TICKERS = 6
-DISCOVERY_ROTATION_SECONDS = 3600
+# Production scans run every 10 minutes; rotate each batch per scan rather than repeating it for an hour.
+DISCOVERY_ROTATION_SECONDS = 600
 JINA_MIN_INTERVAL = 1.5
 _JINA_LOCK = threading.Lock()
 _JINA_LAST_REQUEST = 0.0
