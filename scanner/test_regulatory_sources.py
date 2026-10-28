@@ -76,6 +76,9 @@ def test_sec_primary_document_fallback_ignores_exhibits_and_r_files():
 def test_sec_user_agent_is_declared():
     assert "PharmaRadar" in DEFAULT_USER_AGENT
     assert "@" in DEFAULT_USER_AGENT
+    # An unset/empty GitHub secret must not result in a blank User-Agent header.
+    assert sec_feed.USER_AGENT.strip()
+
 
 
 def test_sec_watchlist_cik_map_avoids_runtime_ticker_lookup():
