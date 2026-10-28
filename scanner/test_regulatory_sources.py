@@ -159,6 +159,22 @@ def test_regulatory_pipeline_rejects_generic_company_only_news():
     assert events == []
 
 
+def test_sec_issuer_ticker_cannot_be_remapped_to_another_watchlist_company():
+    watchlist = {
+        "EYPT": {"company": "EyePoint Pharmaceuticals", "programs": ["DURAVYU"]},
+        "LFCR": {"company": "Lifecore Biomedical", "programs": ["pilavapadin"]},
+    }
+    item = build_sec_item(
+        "EYPT", "EyePoint Pharmaceuticals", "0001314102",
+        "0000000000-26-000001", "8-K", "2026-10-19",
+        items=["8.01"], text="EyePoint Pharmaceuticals filing mentions pilavapadin.",
+    )
+    events = process_regulatory_news([item], watchlist)
+    # A program alias belonging to LFCR must not cause an EYPT SEC filing
+    # to be attributed to LFCR. With no matching EYPT program, suppress it.
+    assert events == []
+
+
 
 def test_sec_uses_browse_fallback_after_proxy_failure(monkeypatch):
     watchlist = {"CAPR": {"company": "Capricor Therapeutics"}}
