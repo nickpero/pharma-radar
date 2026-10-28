@@ -101,5 +101,12 @@ def scan_regulatory_sources(watchlist, ema_max=50, sec_per_company=3):
         "sec_news": sec_news,
         "news": all_news,
         "events": events,
-        "alerts": [event for event in events if event.get("trading_impact") in {"EXTREME", "HIGH"}],
+        # MEDIUM-impact events enter the final freshness/primary-source/priority
+        # gate. This improves recall without making every medium event a Telegram alert.
+        "alerts": [event for event in events if is_regulatory_alert_candidate(event)],
     }
+
+
+def is_regulatory_alert_candidate(event):
+    """Allow medium-impact matched events to reach the strict final delivery gate."""
+    return str((event or {}).get("trading_impact") or "").upper() in {"EXTREME", "HIGH", "MEDIUM"}
