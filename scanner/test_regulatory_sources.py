@@ -11,7 +11,7 @@ from scanner.sec_feed import (
     build_sec_item,
     get_ticker_cik_map,
 )
-from scanner.regulatory_pipeline import process_regulatory_news
+from scanner.regulatory_pipeline import process_regulatory_news, is_regulatory_alert_candidate
 from scanner.fda_score import score_fda_event
 
 
@@ -179,6 +179,14 @@ def test_sec_uses_browse_fallback_after_proxy_failure(monkeypatch):
     assert sec_feed.LAST_FETCH_STATUS["status"] == "DEGRADED_FALLBACK"
     assert sec_feed.LAST_FETCH_STATUS["path"] == "sec_browse_discovery"
     assert sec_feed.LAST_FETCH_STATUS["count"] == 1
+
+
+def test_medium_impact_regulatory_events_reach_final_delivery_gate():
+    assert is_regulatory_alert_candidate({"trading_impact": "MEDIUM"}) is True
+    assert is_regulatory_alert_candidate({"trading_impact": "HIGH"}) is True
+    assert is_regulatory_alert_candidate({"trading_impact": "EXTREME"}) is True
+    assert is_regulatory_alert_candidate({"trading_impact": "LOW"}) is False
+    assert is_regulatory_alert_candidate({}) is False
 
 if __name__ == "__main__":
     test_ema_rss_parser()
