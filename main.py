@@ -170,13 +170,13 @@ def send_alerts(result, alerts=None):
 
 
 def send_source_health_alert_if_needed(result, actionable_alerts=None):
-    """Send at most one daily Telegram warning when sources are degraded and no actionable catalyst was delivered."""
+    """Send at most one daily Telegram warning whenever source coverage is degraded."""
     diagnostics = result.get("source_diagnostics") or {}
     degraded = {
         name: detail for name, detail in diagnostics.items()
         if str(detail.get("status") or "UNKNOWN").upper() not in {"OK", "SUCCESS", "HEALTHY"}
     }
-    if not degraded or actionable_alerts:
+    if not degraded:
         return False
 
     now = datetime.now(timezone.utc)
@@ -205,7 +205,8 @@ def send_source_health_alert_if_needed(result, actionable_alerts=None):
             lines.append(f"  Errore: {str(error)[:240]}")
     lines.extend([
         "",
-        "Nessun nuovo alert azionabile consegnato in questa scansione.",
+        f"Alert consegnati in questa scansione: {len(actionable_alerts or [])}.",
+        "Copertura incompleta: gli alert ricevuti non garantiscono copertura completa del mercato.",
         "Questo è un avviso tecnico, non un catalyst di mercato.",
         "━━━━━━━━━━━━━━━━━━",
     ])
