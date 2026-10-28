@@ -103,6 +103,11 @@ def test_sec_company_discovery_helpers():
     assert _extract_filing_date(browse_text) == "2026-09-04"
 
 
+def test_sec_discovery_rotates_each_production_scan():
+    # Production runs every 10 minutes, so a new batch should be selected each scan.
+    assert sec_feed.DISCOVERY_ROTATION_SECONDS == 600
+
+
 def test_sec_discovery_is_bounded(monkeypatch):
     watchlist = {ticker: {"company": ticker} for ticker in sec_feed.WATCHLIST_CIK}
     calls = []
@@ -155,6 +160,20 @@ def test_regulatory_pipeline_requires_program_match():
 def test_regulatory_pipeline_rejects_generic_company_only_news():
     watchlist = {"ARGX": {"company": "argenx", "programs": ["VYVGART"]}}
     items = [build_ema_news_item("argenx corporate update", "/en/news/corporate", "2026-09-01")]
+    events = process_regulatory_news(items, watchlist)
+    assert events == []
+
+
+def test_ema_program_alias_without_matching_company_is_rejected():
+    watchlist = {
+        "RVMD": {"company": "Revolution Medicines", "programs": ["RMC-6236", "daraxonrasib"]},
+    }
+    items = [
+        build_ema_news_item(
+            "EMA recommends authorisation of Rasonque for metastatic pancreatic cancer",
+            "/en/news/rasonque", "2026-10-15",
+        )
+    ]
     events = process_regulatory_news(items, watchlist)
     assert events == []
 
