@@ -14,9 +14,21 @@ from scanner import ema_feed, early_discovery_feed, sec_feed
 
 
 def _process_item(item, watchlist):
-    target = identify_fda_target(item, watchlist)
+    # SEC and early-discovery records already carry an issuer ticker assigned
+    # by their source adapter. Never let a coincidental drug/program alias
+    # reassign that record to a different watchlist company.
+    source = str(item.get("source") or "").strip().upper()
+    source_ticker = str(item.get("ticker") or "").strip().upper()
+    match_watchlist = watchlist
+    if source in {"SEC", "EARLY_DISCOVERY"} and source_ticker in watchlist:
+        match_watchlist = {source_ticker: watchlist[source_ticker]}
+
+    target = identify_fda_target(item, match_watchlist)
     if target is None:
         return None
+    if source in {"SEC", "EARLY_DISCOVERY"} and source_ticker in watchlist:
+        if str(target.get("ticker") or "").strip().upper() != source_ticker:
+            return None
 
     event = build_fda_catalyst(item)
     event.update({
