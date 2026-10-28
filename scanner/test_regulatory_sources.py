@@ -176,6 +176,34 @@ def test_sec_issuer_ticker_cannot_be_remapped_to_another_watchlist_company():
 
 
 
+def test_sec_direct_failure_isolated_per_ticker_and_preserves_successes(monkeypatch):
+    watchlist = {
+        "CAPR": {"company": "Capricor Therapeutics"},
+        "NUVL": {"company": "Nuvalent"},
+    }
+    good = build_sec_item(
+        "CAPR", "Capricor Therapeutics", "0001133869",
+        "0000000000-26-000001", "8-K", "2026-10-28",
+        items=["8.01"], text="Capricor material event",
+    )
+    calls = []
+    def fake_direct(ticker, company, cik, max_filings=3):
+        calls.append(ticker)
+        if ticker == "CAPR":
+            return [good]
+        raise sec_feed.requests.HTTPError("403 forbidden")
+    monkeypatch.setattr(sec_feed, "_fetch_sec_direct", fake_direct)
+    monkeypatch.setattr(sec_feed, "_fetch_proxy", lambda max_filings=50: [])
+    monkeypatch.setattr(sec_feed, "_discover_missing_companies", lambda *_: [])
+    result = sec_feed.get_sec_news(watchlist)
+    assert calls == ["CAPR", "NUVL"]
+    assert len(result) == 1
+    assert result[0]["ticker"] == "CAPR"
+    assert sec_feed.LAST_FETCH_STATUS["status"] == "DEGRADED_FALLBACK"
+    assert sec_feed.LAST_FETCH_STATUS["path"] == "direct_plus_proxy"
+    assert sec_feed.LAST_FETCH_STATUS["failed_tickers"] == ["NUVL"]
+
+
 def test_sec_uses_browse_fallback_after_proxy_failure(monkeypatch):
     watchlist = {"CAPR": {"company": "Capricor Therapeutics"}}
     expected = [{"ticker": "CAPR", "source": "SEC", "title": "Browse fallback"}]
