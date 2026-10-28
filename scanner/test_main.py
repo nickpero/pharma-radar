@@ -1,4 +1,5 @@
 from datetime import datetime, timezone
+import main
 from main import build_summary
 
 
@@ -109,6 +110,39 @@ def test_degraded_source_summary_is_warning():
     assert "Status: WARNING" in message
     assert "Status: CLEAN" not in message
 
+
+
+def test_degraded_source_health_warning_sends_once(monkeypatch):
+    sent_state = {}
+    messages = []
+
+    monkeypatch.setattr(main, "load_sent_alerts", lambda: dict(sent_state))
+    monkeypatch.setattr(main, "save_sent_alerts", lambda state: sent_state.update(state))
+    monkeypatch.setattr(main, "send_telegram", lambda message: messages.append(message) or {"ok": True})
+
+    result = {
+        "companies": 82,
+        "alerts": [{"ticker": "UTHR"}],
+        "fda_news": [{}] * 30,
+        "source_diagnostics": {
+            "SEC": {"status": "DEGRADED_FALLBACK", "count": 12, "path": "proxy_fallback"}
+        },
+    }
+    assert main.send_source_health_alert_if_needed(result, actionable_alerts=[]) is True
+    assert len(messages) == 1
+    assert "PHARMA RADAR — SOURCE HEALTH WARNING" in messages[0]
+    assert "SEC: DEGRADED_FALLBACK" in messages[0]
+    assert "Questo è un avviso tecnico" in messages[0]
+    assert "\\n" not in messages[0]
+    assert main.send_source_health_alert_if_needed(result, actionable_alerts=[]) is False
+    assert len(messages) == 1
+
+
+def test_source_health_warning_does_not_send_when_sources_are_healthy(monkeypatch):
+    monkeypatch.setattr(main, "load_sent_alerts", lambda: {})
+    monkeypatch.setattr(main, "send_telegram", lambda message: (_ for _ in ()).throw(AssertionError("unexpected Telegram send")))
+    result = {"alerts": [], "source_diagnostics": {"EMA": {"status": "OK", "count": 5}}}
+    assert main.send_source_health_alert_if_needed(result, actionable_alerts=[]) is False
 
 if __name__ == "__main__":
     test_clean_summary()
