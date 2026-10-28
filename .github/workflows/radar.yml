@@ -55,6 +55,9 @@ jobs:
           PHARMA_SMTP_PASSWORD: ${{ secrets.PHARMA_SMTP_PASSWORD }}
           PHARMA_EMAIL_FROM: ${{ secrets.PHARMA_EMAIL_FROM }}
           PHARMA_EMAIL_TO: ${{ secrets.PHARMA_EMAIL_TO }}
+          # Configure this repository secret with a real organization/contact email,
+          # e.g. "Organization Name admin@example.com", per SEC EDGAR fair-access policy.
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
         run: |
           echo "==================================="
           echo "🧬 PHARMA RADAR — PRODUCTION SCAN"
