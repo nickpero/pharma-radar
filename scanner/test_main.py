@@ -88,6 +88,28 @@ def test_error_summary():
     assert "Status: WARNING" in message
 
 
+def test_degraded_source_summary_is_warning():
+    result = {
+        "companies": 82,
+        "total_trials": 1103,
+        "relevant_trials": 745,
+        "filtered_trials": 358,
+        "alerts": [],
+        "errors": [],
+        "source_diagnostics": {
+            "EARLY_DISCOVERY": {"status": "OK", "count": 7},
+            "EMA": {"status": "OK", "count": 11},
+            "SEC": {"status": "DEGRADED_FALLBACK", "count": 12, "path": "proxy_fallback"},
+        },
+        "fda_news": [{}] * 30,
+    }
+    message = build_summary(result)
+    assert "SEC=DEGRADED_FALLBACK(12)" in message
+    assert "Source degradation detected" in message
+    assert "Status: WARNING" in message
+    assert "Status: CLEAN" not in message
+
+
 if __name__ == "__main__":
     test_clean_summary()
     test_alert_summary_is_concise()
