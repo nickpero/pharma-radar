@@ -1402,7 +1402,7 @@
     },
     "reaction_interpretation": "UNKNOWN",
     "reaction_strength": "UNKNOWN",
-    "recorded_at": "2026-10-27T22:16:43.588011+00:00",
+    "recorded_at": "2026-10-28T19:43:14.425643+00:00",
     "score": 100,
     "severity": "HIGH",
     "short_interest_pct": null,
@@ -1426,7 +1426,7 @@
       "ti_score",
       "market_confirmation"
     ],
-    "trading_intelligence_score": 68.9,
+    "trading_intelligence_score": 70.0,
     "trading_intelligence_version": "1.1",
     "trading_setup_score": 52,
     "trading_setup_version": "5.3",
