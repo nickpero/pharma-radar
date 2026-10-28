@@ -235,13 +235,15 @@ def format_catalyst_alert(alert):
         priority_event.update({"score": score, "trading_impact": trading_impact, "urgency": urgency})
         alert_priority = enrich_alert_priority(priority_event).get("alert_priority", 0)
     alert_tier = event.get("alert_tier", alert.get("alert_tier")) or get_alert_tier(alert_priority)
-    tier_icon = get_severity_icon(alert_tier)
+    telegram_action = str(alert.get("telegram_action", "")).upper()
+    display_tier = "WATCH · NON CONFERMATO" if early else ("WATCH · NON URGENTE" if telegram_action == "WATCH" else alert_tier)
+    tier_icon = "👀" if early or telegram_action == "WATCH" else get_severity_icon(alert_tier)
 
     lines = [
         "🟡 PHARMA RADAR — EARLY CATALYST" if early else "🚨 PHARMA RADAR",
         "━━━━━━━━━━━━━━━━━━",
-        f"{tier_icon} {alert_tier}",
-        *(["👀 WATCH — informativo, non urgente"] if str(alert.get("telegram_action", "")).upper() == "WATCH" else []),
+        f"{tier_icon} {display_tier}",
+        *(["👀 WATCH — informativo, non urgente"] if telegram_action == "WATCH" and not early else []),
         "",
         f"🧬 {ticker}",
         f"💊 {drug_name}",
@@ -285,10 +287,10 @@ def format_catalyst_alert(alert):
 
     lines.extend([
         "",
-        f"🎯 Catalyst: {score}/100 · {label}",
-        *( [f"🧠 Clinical data: {alert.get('catalyst_category', event.get('catalyst_category'))} · Novelty {alert.get('novelty_score', event.get('novelty_score', 0))}/100 · Market impact {alert.get('market_impact_score', event.get('market_impact_score', 0))}/100"] if alert.get("clinical_data_release") else [] ),
-        f"🚨 Priority: {alert_priority}/100 · {alert_tier}",
-        f"📊 Setup: {setup_score}/100 · Window: {window}",
+        (f"🎯 Potenziale catalyst (non confermato): punteggio interno {score}/100" if early else f"🎯 Catalyst: {score}/100 · {label}"),
+        *( [f"🧠 Clinical data: {alert.get('catalyst_category', event.get('catalyst_category'))} · Novelty {alert.get('novelty_score', event.get('novelty_score', 0))}/100 · Market impact {alert.get('market_impact_score', event.get('market_impact_score', 0))}/100"] if alert.get("clinical_data_release") and not early else [] ),
+        (f"📌 Punteggio interno: {alert_priority}/100 · non operativo" if early else f"🚨 Priority: {alert_priority}/100 · {alert_tier}"),
+        (f"📊 Setup: NON CONFERMATO · Window: {window}" if early else f"📊 Setup: {setup_score}/100 · Window: {window}"),
         "",
         "📈 Market reaction: " + (
             f"{_num(reaction_pct)}% · {reaction_direction}"
