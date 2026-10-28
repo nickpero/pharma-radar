@@ -338,3 +338,21 @@ def test_telegram_marks_watch_only_alert_as_non_urgent():
     alert["telegram_action"] = "WATCH"
     message = format_catalyst_alert(alert)
     assert "👀 WATCH — informativo, non urgente" in message
+
+
+def test_early_discovery_never_displays_critical_as_operational():
+    alert = _alert("KYMR", 99, 56, "CRITICAL")
+    alert.update({
+        "source": "EARLY_DISCOVERY",
+        "source_type": "SECONDARY_DISCOVERY",
+        "early_discovery": True,
+        "telegram_action": "WATCH",
+        "title": "Kymera Therapeutics to Announce KT-579 Phase 1 Results Tomorrow",
+        "published_at": datetime.now(timezone.utc).isoformat(),
+    })
+    message = format_catalyst_alert(alert)
+    assert "WATCH · NON CONFERMATO" in message
+    assert "Potenziale catalyst (non confermato)" in message
+    assert "Punteggio interno: 99/100 · non operativo" in message
+    assert "🚨 CRITICAL" not in message
+    assert "Priority: 99/100 · CRITICAL" not in message
