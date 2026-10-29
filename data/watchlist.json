@@ -1392,5 +1392,410 @@
       "ClinicalTrials.gov"
     ],
     "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "ABBV": {
+    "company": "AbbVie",
+    "programs": [
+      "upadacitinib",
+      "risankizumab",
+      "epcoritamab",
+      "elafibranor"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "LARGE_CAP_REGULATORY_CLINICAL_CATALYST"
+  },
+  "AMGN": {
+    "company": "Amgen",
+    "programs": [
+      "maridebart cafraglutide",
+      "rocatinlimab",
+      "olpasiran",
+      "MariTide"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "LARGE_CAP_REGULATORY_CLINICAL_CATALYST"
+  },
+  "ABT": {
+    "company": "Abbott Laboratories",
+    "programs": [
+      "Libre",
+      "FreeStyle Libre",
+      "TriClip"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "MEDTECH_REGULATORY_CATALYST"
+  },
+  "BIIB": {
+    "company": "Biogen",
+    "programs": [
+      "lecanemab",
+      "litifilimab",
+      "felzartamab",
+      "Skyclarys"
+    ],
+    "priority": "RED",
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "GILD": {
+    "company": "Gilead Sciences",
+    "programs": [
+      "lenacapavir",
+      "Trodelvy",
+      "zimberelimab",
+      "GS-1423"
+    ],
+    "priority": "RED",
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "PFE": {
+    "company": "Pfizer",
+    "programs": [
+      "vaccine",
+      "sigmoid",
+      "atirmociclib",
+      "PF-07220060"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "LARGE_CAP_REGULATORY_CLINICAL_CATALYST"
+  },
+  "MRK": {
+    "company": "Merck & Co.",
+    "programs": [
+      "KEYTRUDA",
+      "MK-1084",
+      "MK-2870",
+      "sotatercept"
+    ],
+    "priority": "RED",
+    "radar_role": "LARGE_CAP_REGULATORY_CLINICAL_CATALYST"
+  },
+  "LLY": {
+    "company": "Eli Lilly",
+    "programs": [
+      "orforglipron",
+      "retatrutide",
+      "lebrikizumab",
+      "donanemab"
+    ],
+    "priority": "RED",
+    "radar_role": "LARGE_CAP_REGULATORY_CLINICAL_CATALYST"
+  },
+  "NVS": {
+    "company": "Novartis",
+    "programs": [
+      "remibrutinib",
+      "ianalumab",
+      "Pluvicto",
+      "Fabhalta"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "LARGE_CAP_REGULATORY_CLINICAL_CATALYST"
+  },
+  "AZN": {
+    "company": "AstraZeneca",
+    "programs": [
+      "camizestrant",
+      "datopotamab deruxtecan",
+      "tozorakimab",
+      "volrustomig"
+    ],
+    "priority": "RED",
+    "radar_role": "LARGE_CAP_REGULATORY_CLINICAL_CATALYST"
+  },
+  "SNY": {
+    "company": "Sanofi",
+    "programs": [
+      "tolebrutinib",
+      "amlitelimab",
+      "lunsekimig",
+      "frexalimab"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "LARGE_CAP_REGULATORY_CLINICAL_CATALYST"
+  },
+  "TAK": {
+    "company": "Takeda Pharmaceutical",
+    "programs": [
+      "oveporexton",
+      "rusfertide",
+      "zasocitinib",
+      "TAK-861"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "LARGE_CAP_REGULATORY_CLINICAL_CATALYST"
+  },
+  "ALKS": {
+    "company": "Alkermes",
+    "programs": [
+      "ALKS 2680",
+      "ALKS 4510",
+      "olanzapine"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "ACAD": {
+    "company": "ACADIA Pharmaceuticals",
+    "programs": [
+      "pimavanserin",
+      "trofinetide",
+      "ACP-204"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "APLS": {
+    "company": "Apellis Pharmaceuticals",
+    "programs": [
+      "pegcetacoplan",
+      "Empaveli",
+      "Syfovre"
+    ],
+    "priority": "RED",
+    "radar_role": "REGULATORY_COMMERCIAL_CATALYST"
+  },
+  "IMVT": {
+    "company": "Immunovant",
+    "programs": [
+      "batoclimab",
+      "IMVT-1402"
+    ],
+    "priority": "RED",
+    "radar_role": "CLINICAL_CATALYST"
+  },
+  "FATE": {
+    "company": "Fate Therapeutics",
+    "programs": [
+      "FT819",
+      "FT836",
+      "FT522"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "CLINICAL_CATALYST"
+  },
+  "NTLA": {
+    "company": "Intellia Therapeutics",
+    "programs": [
+      "nexiguran ziclumeran",
+      "NTLA-2002",
+      "lonvoguran ziclumeran"
+    ],
+    "priority": "RED",
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "EDIT": {
+    "company": "Editas Medicine",
+    "programs": [
+      "EDIT-301",
+      "renizgamglogene autogedtemcel",
+      "EDIT-401"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "CLINICAL_CATALYST"
+  },
+  "VERV": {
+    "company": "Verve Therapeutics",
+    "programs": [
+      "VERVE-102",
+      "VERVE-201",
+      "VERVE-101"
+    ],
+    "priority": "RED",
+    "radar_role": "CLINICAL_CATALYST"
+  },
+  "SRPT": {
+    "company": "Sarepta Therapeutics",
+    "programs": [
+      "Elevidys",
+      "delandistrogene moxeparvovec",
+      "SRP-9003"
+    ],
+    "priority": "RED",
+    "radar_role": "REGULATORY_SAFETY_CATALYST"
+  },
+  "MGNX": {
+    "company": "MacroGenics",
+    "programs": [
+      "vobramitamab duocarmazine",
+      "lorigerlimab",
+      "MGC-026"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "CLINICAL_CATALYST"
+  },
+  "AXSM": {
+    "company": "Axsome Therapeutics",
+    "programs": [
+      "AXS-05",
+      "AXS-12",
+      "AXS-14",
+      "solriamfetol"
+    ],
+    "priority": "RED",
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "LQDA": {
+    "company": "Liquidia Corporation",
+    "programs": [
+      "Yutrepia",
+      "treprostinil"
+    ],
+    "priority": "RED",
+    "radar_role": "REGULATORY_COMMERCIAL_CATALYST"
+  },
+  "INVA": {
+    "company": "Innoviva",
+    "programs": [
+      "zoliflodacin",
+      "sulbactam-durlobactam",
+      "amifampridine"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "REGULATORY_COMMERCIAL_CATALYST"
+  },
+  "TGTX": {
+    "company": "TG Therapeutics",
+    "programs": [
+      "ublituximab",
+      "Briumvi"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "REGULATORY_COMMERCIAL_CATALYST"
+  },
+  "ACLX": {
+    "company": "Arcellx",
+    "programs": [
+      "anito-cel",
+      "anitocabtagene autoleucel"
+    ],
+    "priority": "RED",
+    "radar_role": "CLINICAL_CATALYST"
+  },
+  "IMCR": {
+    "company": "Immunocore",
+    "programs": [
+      "tebentafusp",
+      "IMC-F106C",
+      "IMC-I109V"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "RLAY": {
+    "company": "Relay Therapeutics",
+    "programs": [
+      "zovegalisib",
+      "RLY-2608",
+      "RLY-4008"
+    ],
+    "priority": "RED",
+    "radar_role": "CLINICAL_CATALYST"
+  },
+  "DNLI": {
+    "company": "Denali Therapeutics",
+    "programs": [
+      "tividenofusp alfa",
+      "DNL343",
+      "DNL126"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "CLINICAL_CATALYST"
+  },
+  "SANA": {
+    "company": "Sana Biotechnology",
+    "programs": [
+      "UP421",
+      "SC291",
+      "SC262"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "CLINICAL_CATALYST"
+  },
+  "CRBU": {
+    "company": "Caribou Biosciences",
+    "programs": [
+      "CB-010",
+      "CB-011",
+      "CB-012"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "CLINICAL_CATALYST"
+  },
+  "RYTM": {
+    "company": "Rhythm Pharmaceuticals",
+    "programs": [
+      "setmelanotide",
+      "RM-718",
+      "IMCIVREE"
+    ],
+    "priority": "RED",
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "ARDX": {
+    "company": "Ardelyx",
+    "programs": [
+      "tenapanor",
+      "Xphozah",
+      "IBAT inhibitor"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "REGULATORY_COMMERCIAL_CATALYST"
+  },
+  "TVTX": {
+    "company": "Travere Therapeutics",
+    "programs": [
+      "sparsentan",
+      "FILSPARI",
+      "pegtibatinase"
+    ],
+    "priority": "RED",
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "KYTX": {
+    "company": "Kyverna Therapeutics",
+    "programs": [
+      "KYV-101",
+      "KYV-201"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "CLINICAL_CATALYST"
+  },
+  "ARQT": {
+    "company": "Arcutis Biotherapeutics",
+    "programs": [
+      "roflumilast cream",
+      "ZORYVE",
+      "roflumilast foam"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "REGULATORY_COMMERCIAL_CATALYST"
+  },
+  "PRTA": {
+    "company": "Prothena Corporation",
+    "programs": [
+      "birtamimab",
+      "prasinezumab",
+      "NNC6019"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "CLINICAL_CATALYST"
+  },
+  "CABA": {
+    "company": "Cabaletta Bio",
+    "programs": [
+      "rese-cel",
+      "CABA-201"
+    ],
+    "priority": "ORANGE",
+    "radar_role": "CLINICAL_CATALYST"
+  },
+  "CGON": {
+    "company": "CG Oncology",
+    "programs": [
+      "cretostimogene grenadenorepvec",
+      "BOND-003"
+    ],
+    "priority": "RED",
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
   }
 }
