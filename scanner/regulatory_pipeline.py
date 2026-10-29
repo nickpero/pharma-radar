@@ -23,7 +23,17 @@ def _process_item(item, watchlist):
     if source in {"SEC", "EARLY_DISCOVERY"} and source_ticker in watchlist:
         match_watchlist = {source_ticker: watchlist[source_ticker]}
 
-    target = identify_fda_target(item, match_watchlist)
+    # EMA article bodies may mention unrelated companies, indications, or
+    # comparator drugs. For issuer/program attribution, use only the headline
+    # and feed summary; keep the full article for event classification below.
+    match_item = item
+    if source == "EMA":
+        match_item = {
+            key: item.get(key)
+            for key in ("source", "title", "summary", "description", "url", "published_at")
+        }
+
+    target = identify_fda_target(match_item, match_watchlist)
     if target is None:
         return None
     # EMA headlines can mention disease areas or broad indications that overlap
@@ -83,10 +93,17 @@ def _process_item(item, watchlist):
 def process_regulatory_news(items, watchlist):
     results = []
     seen = set()
+    ema_seen = 0
+    ema_matched = 0
     for item in items or []:
+        is_ema = str((item or {}).get("source") or "").strip().upper() == "EMA"
+        if is_ema:
+            ema_seen += 1
         event = _process_item(item, watchlist)
         if event is None:
             continue
+        if is_ema:
+            ema_matched += 1
         fingerprint = event.get("event_key") or (
             event.get("ticker"),
             event.get("program"),
@@ -98,6 +115,12 @@ def process_regulatory_news(items, watchlist):
             continue
         seen.add(fingerprint)
         results.append(event)
+    if ema_seen:
+        print(
+            f"EMA MATCH AUDIT: seen={ema_seen} matched={ema_matched} "
+            f"rejected={ema_seen - ema_matched} match_scope=title_summary",
+            flush=True,
+        )
     return sort_by_alert_priority(results)
 
 
