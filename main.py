@@ -183,17 +183,17 @@ def send_source_health_alert_if_needed(result, actionable_alerts=None):
     state = load_sent_alerts()
     key = f"RADAR_SOURCE_HEALTH:{now.date().isoformat()}"
     if key in state:
-        print("Radar source-health Telegram warning already sent today.")
+        print("Avviso Telegram sulla disponibilità delle fonti già inviato oggi.")
         return False
 
     lines = [
-        "⚠️ PHARMA RADAR — SOURCE HEALTH WARNING",
+        "⚠️ PHARMA RADAR — AVVISO SULLA DISPONIBILITÀ DELLE FONTI",
         "━━━━━━━━━━━━━━━━━━",
-        f"🕒 Scan UTC: {now.strftime('%Y-%m-%d %H:%M:%S')}",
+        f"🕒 Scansione UTC: {now.strftime('%Y-%m-%d %H:%M:%S')}",
         f"🏢 Aziende configurate: {result.get('companies', 0)}",
         f"📰 FDA news raccolte: {len(result.get('fda_news', []))}",
-        f"🚨 Alert candidati: {len(result.get('alerts', []))}",
-        "📡 Fonti degradate:",
+        f"🚨 Avvisi candidati: {len(result.get('alerts', []))}",
+        "📡 Fonti con problemi:",
     ]
     for name, detail in degraded.items():
         status = detail.get("status", "UNKNOWN")
@@ -205,16 +205,16 @@ def send_source_health_alert_if_needed(result, actionable_alerts=None):
             lines.append(f"  Errore: {str(error)[:240]}")
     lines.extend([
         "",
-        f"Alert consegnati in questa scansione: {len(actionable_alerts or [])}.",
-        "Copertura incompleta: gli alert ricevuti non garantiscono copertura completa del mercato.",
-        "Questo è un avviso tecnico, non un catalyst di mercato.",
+        f"Avvisi inviati in questa scansione: {len(actionable_alerts or [])}.",
+        "Copertura incompleta: gli avvisi ricevuti non garantiscono una copertura completa del mercato.",
+        "Questo è un avviso tecnico, non un catalizzatore di mercato.",
         "━━━━━━━━━━━━━━━━━━",
     ])
     response = send_telegram("\n".join(lines))
     # Persist only after Telegram confirms success; failed sends remain retryable.
     state[key] = now.isoformat()
     save_sent_alerts(state)
-    print(f"Radar source-health Telegram warning sent: {response.get('ok', 'response received')}")
+    print(f"Avviso Telegram sulla disponibilità delle fonti inviato: {response.get('ok', 'response received')}")
     return True
 
 
@@ -336,7 +336,7 @@ def main():
         send_source_health_alert_if_needed(result, actionable_alerts=new_alerts)
     except Exception as exc:
         # Health notifications must never hide the scan result or prevent the Daily from running.
-        print(f"Radar source-health Telegram warning failed: {type(exc).__name__}: {exc}")
+        print(f"Invio dell’avviso Telegram sulla disponibilità delle fonti non riuscito: {type(exc).__name__}: {exc}")
     sent = send_email_alerts(result)
     print(f"Pharma Intelligence emails sent: {sent}")
 
