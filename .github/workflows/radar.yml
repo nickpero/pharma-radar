@@ -1,6 +1,7 @@
 name: Pharma Radar
 
-# Automatic production scan every 10 minutes.
+# Primary GitHub schedule plus external scheduler fallback.
+# The external scheduler must POST repository_dispatch with event_type=pharma_radar_tick.
 # workflow_dispatch remains available for manual testing.
 
 on:
@@ -8,6 +9,8 @@ on:
     # Offset from the top of the hour to reduce scheduler contention.
     - cron: "7,17,27,37,47,57 * * * *"
   workflow_dispatch:
+  repository_dispatch:
+    types: [pharma_radar_tick]
 
 concurrency:
   group: pharma-radar-production
