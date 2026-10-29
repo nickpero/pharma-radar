@@ -40,7 +40,7 @@ def test_email_contains_intelligence_sections():
     assert "💊 COS'È / COSA FA" in message
     assert "🩺 INDICAZIONE" in message
     assert "🧪 FASE / STATO DI SVILUPPO" in message
-    assert "🎯 PERCHÉ CONTA" in message
+    assert "🎯 PERCHÉ È IMPORTANTE" in message
     assert "🏢 RUOLO NEL PORTAFOGLIO DI SVILUPPO" in message
     assert "📈 REAZIONE DEL MERCATO" in message
     assert "5m +3.05%" in message
