@@ -225,7 +225,7 @@ def send_daily_status_if_needed(result, actionable_alerts=None, now=None):
         "Il Radar continua a monitorare le fonti: un evento reale qualificato genererà un alert separato.",
         "━━━━━━━━━━━━━━━━━━",
     ]
-    response = send_telegram("\\n".join(lines))
+    response = send_telegram("\n".join(lines))
     if not isinstance(response, dict) or response.get("ok") is not True:
         raise RuntimeError(f"Telegram non ha confermato lo stato giornaliero: {response!r}")
     state[key] = current.isoformat()
