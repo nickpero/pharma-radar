@@ -310,10 +310,10 @@ def format_catalyst_alert(alert):
 
     lines.extend([
         "",
-        (f"🎯 Potenziale catalyst (non confermato): punteggio interno {score}/100" if early else f"🎯 Catalizzatore: {score}/100 · {_it_status(label)}"),
-        *( [f"🧠 Clinical data: {alert.get('catalyst_category', event.get('catalyst_category'))} · Novelty {alert.get('novelty_score', event.get('novelty_score', 0))}/100 · Market impact {alert.get('market_impact_score', event.get('market_impact_score', 0))}/100"] if alert.get("clinical_data_release") and not early else [] ),
+        (f"🎯 Potenziale catalizzatore (non confermato): punteggio interno {score}/100" if early else f"🎯 Catalizzatore: {score}/100 · {_it_status(label)}"),
+        *( [f"🧠 Dati clinici: {alert.get('catalyst_category', event.get('catalyst_category'))} · Novità {alert.get('novelty_score', event.get('novelty_score', 0))}/100 · Impatto sul mercato {alert.get('market_impact_score', event.get('market_impact_score', 0))}/100"] if alert.get("clinical_data_release") and not early else [] ),
         (f"📌 Punteggio interno: {alert_priority}/100 · non operativo" if early else f"🚨 Priorità: {alert_priority}/100 · {_it_status(alert_tier)}"),
-        (f"📊 Setup: NON CONFERMATO · Finestra temporale: {window}" if early else f"📊 Setup: {setup_score}/100 · Finestra temporale: {window}"),
+        (f"📊 Configurazione: NON CONFERMATO · Finestra temporale: {window}" if early else f"📊 Configurazione: {setup_score}/100 · Finestra temporale: {window}"),
         "",
         "📈 Reazione del mercato: " + (
             f"{_num(reaction_pct)}% · {_it_status(reaction_direction)}"
