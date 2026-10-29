@@ -3562,5 +3562,499 @@
       "ClinicalTrials.gov"
     ],
     "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "ABUS": {
+    "company": "Arbutus Biopharma",
+    "programs": [
+      "hepatitis B pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "ACXP": {
+    "company": "Acurx Pharmaceuticals",
+    "programs": [
+      "ibezapolstat"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "ADIL": {
+    "company": "Adial Pharmaceuticals",
+    "programs": [
+      "AD04"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "AFMD": {
+    "company": "Affimed",
+    "programs": [
+      "immuno-oncology pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "AGLE": {
+    "company": "Aeglea Biotherapeutics",
+    "programs": [
+      "rare disease pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "AKBA": {
+    "company": "Akebia Therapeutics",
+    "programs": [
+      "vadadustat"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "ALPN": {
+    "company": "Alpine Immune Sciences",
+    "programs": [
+      "immunology pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "AMTX": {
+    "company": "Aemetis",
+    "programs": [
+      "renewable fuels and biotechnology"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "ANIK": {
+    "company": "Anika Therapeutics",
+    "programs": [
+      "orthobiologics portfolio"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "APRE": {
+    "company": "Aprea Therapeutics",
+    "programs": [
+      "eprenetapopt"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "ATOS": {
+    "company": "Atossa Therapeutics",
+    "programs": [
+      "endoxifen"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "AVTX": {
+    "company": "Avalo Therapeutics",
+    "programs": [
+      "immunology pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "BCDA": {
+    "company": "BioCardia",
+    "programs": [
+      "cell therapy pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "BDTX": {
+    "company": "Black Diamond Therapeutics",
+    "programs": [
+      "precision oncology pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "BIVI": {
+    "company": "BioVie",
+    "programs": [
+      "neurodegenerative disease pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "CAMP": {
+    "company": "CAMP4 Therapeutics",
+    "programs": [
+      "RNA medicines"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "CING": {
+    "company": "Cingulate",
+    "programs": [
+      "CING-203"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "CLDI": {
+    "company": "Calidi Biotherapeutics",
+    "programs": [
+      "cell therapy platform"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "CLYM": {
+    "company": "Climb Bio",
+    "programs": [
+      "immunology pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "COCP": {
+    "company": "Cocrystal Pharma",
+    "programs": [
+      "antiviral pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "CNTX": {
+    "company": "Context Therapeutics",
+    "programs": [
+      "CTIM-76"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "DARE": {
+    "company": "Daré Bioscience",
+    "programs": [
+      "women's health pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "DMAC": {
+    "company": "DiaMedica Therapeutics",
+    "programs": [
+      "DM199"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "ELOX": {
+    "company": "Eloxx Pharmaceuticals",
+    "programs": [
+      "rare disease pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "ENSC": {
+    "company": "Ensysce Biosciences",
+    "programs": [
+      "abuse-deterrent therapeutics"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "ENTX": {
+    "company": "Entera Bio",
+    "programs": [
+      "oral peptide pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "GANX": {
+    "company": "Gain Therapeutics",
+    "programs": [
+      "GT-02287"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "GNPX": {
+    "company": "Genprex",
+    "programs": [
+      "oncology gene therapy pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "GTBP": {
+    "company": "GT Biopharma",
+    "programs": [
+      "TriKE immunotherapy"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "HOTH": {
+    "company": "Hoth Therapeutics",
+    "programs": [
+      "inflammatory disease pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "IMUX": {
+    "company": "Immunic",
+    "programs": [
+      "vidofludimus calcium"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "KNSA": {
+    "company": "Kiniksa Pharmaceuticals",
+    "programs": [
+      "rilonacept"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "ONCT": {
+    "company": "Oncternal Therapeutics",
+    "programs": [
+      "oncology pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "YMAB": {
+    "company": "y-mAbs Therapeutics",
+    "programs": [
+      "DANYELZA"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "ZVRA": {
+    "company": "Zevra Therapeutics",
+    "programs": [
+      "arimoclomol; rare disease pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "BYSI": {
+    "company": "BeyondSpring",
+    "programs": [
+      "plinabulin"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "CPIX": {
+    "company": "Cumberland Pharmaceuticals",
+    "programs": [
+      "specialty pharmaceuticals"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "CRIS": {
+    "company": "Curis",
+    "programs": [
+      "emavusertib"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
   }
 }
