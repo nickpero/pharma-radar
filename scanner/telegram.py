@@ -21,31 +21,34 @@ DRUG_DISPLAY_NAMES = {
 }
 
 EVENT_DISPLAY_NAMES = {
-    "FDA_APPROVAL": "FDA APPROVAL",
-    "FDA_MEETING": "FDA MEETING",
-    "FDA_PATHWAY": "FDA PATHWAY",
-    "FDA_REJECTION": "FDA REJECTION",
-    "FDA_SAFETY_WARNING": "FDA SAFETY WARNING",
-    "CLINICAL_RESULTS": "CLINICAL RESULTS",
-    "TOPLINE_RESULTS": "TOPLINE RESULTS",
-    "PRIMARY_ENDPOINT_MET": "PRIMARY ENDPOINT MET",
-    "PRIMARY_ENDPOINT_FAILED": "PRIMARY ENDPOINT FAILED",
-    "MAINTENANCE_DATA": "MAINTENANCE DATA",
-    "DOSE_RESPONSE": "DOSE RESPONSE",
-    "SECONDARY_ENDPOINT_MET": "SECONDARY ENDPOINT MET",
-    "SECONDARY_ENDPOINT_FAILED": "SECONDARY ENDPOINT FAILED",
-    "EFFICACY_SIGNAL": "EFFICACY SIGNAL",
-    "SAFETY_SIGNAL": "SAFETY SIGNAL",
-    "LABEL_EXPANSION": "LABEL EXPANSION",
-    "REGULATORY_FILING": "REGULATORY FILING",
-    "TRIAL_HOLD": "TRIAL HOLD",
-    "TRIAL_HOLD_LIFTED": "TRIAL HOLD LIFTED",
-    "PHASE_ADVANCED": "PHASE ADVANCED",
-    "PHASE_DATA_UPDATE": "PHASE DATA UPDATE",
-    "EXPLORATORY_DATA": "EXPLORATORY DATA",
-    "DATE_ACCELERATED": "DATE ACCELERATED",
-    "DATE_DELAYED": "DATE DELAYED",
-    "CLINICAL_REVIEW_UPDATE": "CLINICAL REVIEW UPDATE",
+    "FDA_APPROVAL": "APPROVAZIONE FDA",
+    "FDA_MEETING": "INCONTRO FDA",
+    "FDA_PATHWAY": "PERCORSO REGOLATORIO FDA",
+    "FDA_REJECTION": "RIFIUTO FDA",
+    "FDA_SAFETY_WARNING": "AVVISO DI SICUREZZA FDA",
+    "CLINICAL_RESULTS": "RISULTATI CLINICI",
+    "TOPLINE_RESULTS": "RISULTATI PRINCIPALI",
+    "PRIMARY_ENDPOINT_MET": "OBIETTIVO PRIMARIO RAGGIUNTO",
+    "PRIMARY_ENDPOINT_FAILED": "OBIETTIVO PRIMARIO NON RAGGIUNTO",
+    "MAINTENANCE_DATA": "DATI DI MANTENIMENTO",
+    "DOSE_RESPONSE": "RISPOSTA ALLA DOSE",
+    "SECONDARY_ENDPOINT_MET": "OBIETTIVO SECONDARIO RAGGIUNTO",
+    "SECONDARY_ENDPOINT_FAILED": "OBIETTIVO SECONDARIO NON RAGGIUNTO",
+    "EFFICACY_SIGNAL": "SEGNALE DI EFFICACIA",
+    "SAFETY_SIGNAL": "SEGNALE DI SICUREZZA",
+    "LABEL_EXPANSION": "ESTENSIONE DELL'INDICAZIONE",
+    "REGULATORY_FILING": "DEPOSITO REGOLATORIO",
+    "TRIAL_HOLD": "SOSPENSIONE DELLO STUDIO",
+    "TRIAL_HOLD_LIFTED": "RIPRESA DELLO STUDIO",
+    "PHASE_ADVANCED": "AVANZAMENTO DI FASE",
+    "PHASE_DATA_UPDATE": "AGGIORNAMENTO DEI DATI DI FASE",
+    "EXPLORATORY_DATA": "DATI ESPLORATIVI",
+    "DATE_ACCELERATED": "DATA ANTICIPATA",
+    "DATE_DELAYED": "DATA POSTICIPATA",
+    "CLINICAL_REVIEW_UPDATE": "AGGIORNAMENTO DELLA REVISIONE CLINICA",
+    "TRIAL_COMPLETED": "STUDIO COMPLETATO",
+    "TRIAL_STOPPED": "STUDIO INTERROTTO",
+    "TRIAL_STATUS_UNKNOWN": "STATO DELLO STUDIO NON NOTO",
 }
 
 
@@ -112,11 +115,31 @@ def _drug_name(alert, program):
     return DRUG_DISPLAY_NAMES.get(str(program).strip().lower(), program)
 
 
+def _it_status(value):
+    """Traduce etichette interne comuni nelle notifiche rivolte all'utente."""
+    raw = _clean_text(value, 100)
+    key = raw.upper()
+    labels = {
+        "CRITICAL": "CRITICO", "HIGH": "ALTO", "MEDIUM": "MEDIO", "LOW": "BASSO",
+        "POSITIVE": "POSITIVA", "NEGATIVE": "NEGATIVA", "UNKNOWN": "NON DISPONIBILE",
+        "UNAVAILABLE": "NON DISPONIBILE", "IMMEDIATE": "IMMEDIATA",
+        "DIVERGENT": "DIVERGENTE", "STRONG POSITIVE": "FORTEMENTE POSITIVA",
+        "STRONG NEGATIVE": "FORTEMENTE NEGATIVA", "CONFIRMED": "CONFERMATA",
+        "UNCONFIRMED": "NON CONFERMATA", "FDA_UPDATE": "AGGIORNAMENTO FDA",
+        "EMA_UPDATE": "AGGIORNAMENTO EMA", "WATCH": "DA MONITORARE",
+    }
+    if key in labels:
+        return labels[key]
+    if key.endswith("D") and key[:-1].isdigit():
+        return f"{key[:-1]} giorni"
+    return raw.replace("_", " ") if raw else "NON DISPONIBILE"
+
+
 def _event_display_name(subtype, event_type):
     raw = _clean_text(subtype or event_type, 100).upper()
     if raw in EVENT_DISPLAY_NAMES:
         return EVENT_DISPLAY_NAMES[raw]
-    return raw.replace("_", " ") if raw else "CATALYST"
+    return _it_status(raw) if raw else "EVENTO"
 
 
 def _parse_iso_date(value):
@@ -236,7 +259,7 @@ def format_catalyst_alert(alert):
         alert_priority = enrich_alert_priority(priority_event).get("alert_priority", 0)
     alert_tier = event.get("alert_tier", alert.get("alert_tier")) or get_alert_tier(alert_priority)
     telegram_action = str(alert.get("telegram_action", "")).upper()
-    display_tier = "DA VERIFICARE · NON CONFERMATO" if early else ("DA MONITORARE · NON URGENTE" if telegram_action == "WATCH" else alert_tier)
+    display_tier = "DA VERIFICARE · NON CONFERMATO" if early else ("DA MONITORARE · NON URGENTE" if telegram_action == "WATCH" else _it_status(alert_tier))
     tier_icon = "👀" if early or telegram_action == "WATCH" else get_severity_icon(alert_tier)
 
     lines = [
@@ -287,13 +310,13 @@ def format_catalyst_alert(alert):
 
     lines.extend([
         "",
-        (f"🎯 Potenziale catalyst (non confermato): punteggio interno {score}/100" if early else f"🎯 Catalizzatore: {score}/100 · {label}"),
+        (f"🎯 Potenziale catalyst (non confermato): punteggio interno {score}/100" if early else f"🎯 Catalizzatore: {score}/100 · {_it_status(label)}"),
         *( [f"🧠 Clinical data: {alert.get('catalyst_category', event.get('catalyst_category'))} · Novelty {alert.get('novelty_score', event.get('novelty_score', 0))}/100 · Market impact {alert.get('market_impact_score', event.get('market_impact_score', 0))}/100"] if alert.get("clinical_data_release") and not early else [] ),
-        (f"📌 Punteggio interno: {alert_priority}/100 · non operativo" if early else f"🚨 Priorità: {alert_priority}/100 · {alert_tier}"),
+        (f"📌 Punteggio interno: {alert_priority}/100 · non operativo" if early else f"🚨 Priorità: {alert_priority}/100 · {_it_status(alert_tier)}"),
         (f"📊 Setup: NON CONFERMATO · Finestra temporale: {window}" if early else f"📊 Setup: {setup_score}/100 · Finestra temporale: {window}"),
         "",
         "📈 Reazione del mercato: " + (
-            f"{_num(reaction_pct)}% · {reaction_direction}"
+            f"{_num(reaction_pct)}% · {_it_status(reaction_direction)}"
             if reaction_pct is not None and _num(reaction_pct) is not None
             else " | ".join(
                 f"{label_window} {_num(reaction.get(f'reaction_{label_window}_pct'))}%"
