@@ -88,7 +88,7 @@ def test_sec_watchlist_cik_map_avoids_runtime_ticker_lookup():
     assert mapping["IONS"] == "0000874015"
     assert mapping["SMMT"] == "0001599298"
     assert mapping["MNKD"] == "0000899460"
-    assert "ARGX" not in mapping
+    assert mapping["ARGX"] == "0001697862"
 
 
 def test_sec_company_discovery_helpers():
@@ -331,3 +331,13 @@ if __name__ == "__main__":
     test_regulatory_pipeline_requires_program_match()
     test_regulatory_pipeline_rejects_generic_company_only_news()
     print("Regulatory source tests passed")
+
+
+
+def test_sec_cik_map_supplements_missing_static_tickers_without_overriding_priority_map():
+    # ARGX is present in data/sec_cik_map.json but absent from the original
+    # hard-coded priority map; it should now be covered by direct SEC polling.
+    assert sec_feed.WATCHLIST_CIK["ARGX"] == "0001697862"
+    # Preserve the pre-existing hand-verified mapping if the supplemental map
+    # disagrees, avoiding silent replacement with a potentially stale CIK.
+    assert sec_feed.WATCHLIST_CIK["GLUE"] == "0001829818"
