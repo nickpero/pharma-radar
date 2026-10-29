@@ -326,6 +326,45 @@ def _radar_reason(catalyst, meta, quality_gate=None, freshness=None):
     )
 
 
+def _display_daily_code(value):
+    """Traduce codici interni in etichette italiane per il rapporto giornaliero."""
+    raw = str(value or "non disponibile")
+    labels = {
+        "FUNDAMENTAL_OR_CLINICAL_CATALYST": "CATALIZZATORE FONDAMENTALE, CLINICO O REGOLATORIO",
+        "DEVELOPMENT_MILESTONE_WATCH": "TAPPA DI SVILUPPO DA MONITORARE",
+        "TECHNICAL_OR_INDEX_FLOW": "MOVIMENTO TECNICO O FLUSSI DI MERCATO",
+        "WATCHLIST_CONTEXT_NO_NEW_CATALYST": "CONTESTO DI MONITORAGGIO, NESSUN NUOVO CATALIZZATORE",
+        "MARKET_MOVE_UNEXPLAINED": "MOVIMENTO DI MERCATO NON SPIEGATO",
+        "CATALYST_LINKED": "COLLEGATO A UN CATALIZZATORE",
+        "REACTION_CONTINUATION": "PROSEGUIMENTO DELLA REAZIONE",
+        "HISTORICAL_WATCH": "EVENTO STORICO DA MONITORARE",
+        "NO_VERIFIED_SAME_DAY_CATALYST": "NESSUN CATALIZZATORE VERIFICATO NELLA GIORNATA",
+        "RADAR_RECORDED_EVENT": "EVENTO REGISTRATO DAL RADAR",
+        "WATCH_ONLY": "SOLO MONITORAGGIO",
+        "INCLUDE_IF_MATERIAL": "INCLUDERE SE RILEVANTE",
+        "NO_NEW_ALERT": "NESSUN NUOVO AVVISO",
+        "WATCH_UNEXPLAINED_MOVE": "MONITORARE MOVIMENTO NON SPIEGATO",
+        "REACTION_ONLY_NO_NEW_ALERT": "SOLO REAZIONE, NESSUN NUOVO AVVISO",
+        "PRIMARY_SOURCE_NOT_VERIFIED": "FONTE PRIMARIA NON VERIFICATA",
+        "EVENT_TIMESTAMP_MISSING": "DATA/ORA DELL'EVENTO ASSENTE",
+        "PROGRAM_NOT_VERIFIED": "PROGRAMMA NON VERIFICATO",
+        "REACTION_24_72H": "REAZIONE NELLE 24–72 ORE",
+        "HISTORICAL_GT_72H": "EVENTO STORICO OLTRE 72 ORE",
+        "UNKNOWN_TIME": "ORA NON DISPONIBILE",
+        "COMMERCIAL_PARTNERSHIP": "ACCORDO COMMERCIALE",
+        "CORPORATE_TRANSACTION": "OPERAZIONE SOCIETARIA",
+        "IP_CATALYST": "EVENTO RELATIVO ALLA PROPRIETÀ INTELLETTUALE",
+        "PATENT_RULING": "DECISIONE SUI BREVETTI",
+        "CLINICAL_MILESTONE": "TAPPA CLINICA",
+        "TOPLINE_RESULTS": "RISULTATI PRINCIPALI",
+        "FDA_APPROVAL": "APPROVAZIONE FDA",
+        "TRIAL_COMPLETED": "STUDIO COMPLETATO",
+        "DATE_DELAYED": "DATA POSTICIPATA",
+        "DATE_ACCELERATED": "DATA ANTICIPATA",
+    }
+    return labels.get(raw.upper(), raw.replace("_", " "))
+
+
 def format_daily_top5(rows, date_value=None):
     day = date_value or _today_utc()
     lines = [
@@ -348,22 +387,22 @@ def format_daily_top5(rows, date_value=None):
             gate = row.get("alert_quality_gate") or {}
             freshness = row.get("catalyst_freshness", "UNKNOWN_TIME")
             reason = f'{row["catalyst_subtype"]} · {row["catalyst_source"] or "fonte non verificata"} · {freshness}'
-            classification = row.get("classification", "CATALYST_LINKED")
+            classification = _display_daily_code(row.get("classification", "CATALYST_LINKED"))
             if freshness == "REACTION_24_72H":
-                classification = "REACTION_CONTINUATION"
+                classification = _display_daily_code("REACTION_CONTINUATION")
             elif freshness == "HISTORICAL_GT_72H":
-                classification = "HISTORICAL_WATCH"
+                classification = _display_daily_code("HISTORICAL_WATCH")
             if not gate.get("eligible"):
                 classification = f'{classification}_QUALITY_GATED'
         else:
             reason = "Nessun catalyst verificato registrato per la giornata"
-            classification = row.get("classification", "MARKET_MOVE_UNEXPLAINED")
+            classification = _display_daily_code(row.get("classification", "MARKET_MOVE_UNEXPLAINED"))
         lines.extend([
             f"{index}. 🧬 {row['ticker']} · {row['company']}",
             f"   📈 Variazione: {pct:+.2f}% · Volume: {volume_text}",
             (f"   🆕 Stato: NUOVO CANDIDATO (non ancora configurato nel Radar) · {row.get('industry') or 'settore da verificare'}"
              if row.get("radar_status") == "NEW_CANDIDATE" else "   🧭 Stato: azienda già configurata nel Radar"),
-            f"   📰 Catalyst: {reason}",
+            f"   📰 Catalizzatore: {reason}",
             f"   💊 Programma/farmaco: {row.get('catalyst_program') or ', '.join(row.get('programs') or []) or 'non specificato'}",
             f"   🔎 Classificazione: {classification}",
             f"   🧠 Evidenza: {row.get('catalyst_evidence', 'non disponibile')}",
@@ -375,7 +414,7 @@ def format_daily_top5(rows, date_value=None):
             f"   ℹ️ Motivazione: {row.get('radar_reason', 'non disponibile')}",
             "",
         ])
-    lines.extend(["", "Legenda: catalyst fondamentale/clinico/regolatorio = possibile inclusione; milestone di sviluppo = solo monitoraggio; movimento tecnico o non spiegato = nessun nuovo alert fondamentale.", "Nessuna raccomandazione di acquisto o vendita."])
+    lines.extend(["", "Legenda: catalizzatore fondamentale, clinico o regolatorio = possibile inclusione; tappa di sviluppo = solo monitoraggio; movimento tecnico o non spiegato = nessun nuovo avviso fondamentale.", "Nessuna raccomandazione di acquisto o vendita."])
     return "\n".join(lines).rstrip()
 
 
