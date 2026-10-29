@@ -1,5 +1,7 @@
 from scanner.fda_feed import (
     FDA_NEWS_URL,
+    _parse_medwatch_rss,
+    FDA_MEDWATCH_RSS_URL,
     normalize_text,
     get_item_id,
     normalize_date,
@@ -381,3 +383,18 @@ if __name__ == "__main__":
     print(
         "✅ FDA Feed tests passed"
     )
+
+
+def test_medwatch_rss_parses_primary_safety_alerts():
+    xml = """<rss><channel><item><title>FDA MedWatch: Example drug safety alert</title><link>https://www.fda.gov/safety/medwatch-fda-safety-information-and-adverse-event-reporting-program/example-alert</link><pubDate>Thu, 29 Oct 2026 12:00:00 GMT</pubDate><description>FDA warns about a serious adverse event risk.</description></item></channel></rss>"""
+    items = _parse_medwatch_rss(xml, max_items=10)
+    assert len(items) == 1
+    assert items[0]["source"] == "FDA MedWatch"
+    assert items[0]["url"].startswith("https://www.fda.gov/")
+    assert "SAFETY" in items[0]["categories"]
+    assert items[0]["published_at"] is not None
+
+
+def test_medwatch_rss_rejects_non_fda_links():
+    xml = """<rss><channel><item><title>FDA safety alert</title><link>https://example.com/fake</link><pubDate>Thu, 29 Oct 2026 12:00:00 GMT</pubDate></item></channel></rss>"""
+    assert _parse_medwatch_rss(xml, max_items=10) == []
