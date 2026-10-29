@@ -135,7 +135,7 @@ def test_telegram_is_compact_and_hierarchical():
     assert "🚨 CRITICO" in message
     assert "🧬 IONS" in message
     assert "💊 Zilganersen (Zanvastro)" in message
-    assert "📰 FDA APPROVAL" in message
+    assert "📰 APPROVAZIONE FDA" in message
     assert "🎯 Catalyst: 100/100" in message
     assert "🚨 Priority: 100/100" in message
     assert "📊 Setup: 56/100 · Window: 1-7D" in message
@@ -352,7 +352,7 @@ def test_early_discovery_never_displays_critical_as_operational():
     })
     message = format_catalyst_alert(alert)
     assert "DA VERIFICARE · NON CONFERMATO" in message
-    assert "Potenziale catalyst (non confermato)" in message
+    assert "Potenziale catalizzatore (non confermato)" in message
     assert "Punteggio interno: 99/100 · non operativo" in message
     assert "🚨 CRITICO" not in message
     assert "Priorità: 99/100 · CRITICO" not in message
