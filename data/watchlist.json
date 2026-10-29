@@ -933,5 +933,238 @@
       "ClinicalTrials.gov"
     ],
     "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "INO": {
+    "company": "INOVIO Pharmaceuticals",
+    "programs": [
+      "INO-3107",
+      "VGX-3100",
+      "INO-3112"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "INOVIO",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "CLDX": {
+    "company": "Celldex Therapeutics",
+    "programs": [
+      "barzolvolimab",
+      "CDX-622"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Celldex Therapeutics",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "BEAM": {
+    "company": "Beam Therapeutics",
+    "programs": [
+      "risto-cel (BEAM-101)",
+      "BEAM-302",
+      "BEAM-301"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Beam Therapeutics",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "ARVN": {
+    "company": "Arvinas",
+    "programs": [
+      "ARV-393",
+      "ARV-102",
+      "ARV-6723"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Arvinas",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "DYN": {
+    "company": "Dyne Therapeutics",
+    "programs": [
+      "DYNE-251",
+      "DYNE-101",
+      "DYNE-302"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Dyne Therapeutics",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "NRIX": {
+    "company": "Nurix Therapeutics",
+    "programs": [
+      "NX-5948",
+      "NX-1607",
+      "NX-0479"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Nurix Therapeutics",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "AQST": {
+    "company": "Aquestive Therapeutics",
+    "programs": [
+      "Anaphylm (dibutepinephrine sublingual film)",
+      "AQST-109"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Aquestive Therapeutics",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "IMNM": {
+    "company": "Immunome",
+    "programs": [
+      "varegacestat (AL102)",
+      "IM-1021"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Immunome",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "COGT": {
+    "company": "Cogent Biosciences",
+    "programs": [
+      "bezuclastinib",
+      "CGT4859",
+      "CGT1815"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Cogent Biosciences",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "ZBIO": {
+    "company": "Zenas BioPharma",
+    "programs": [
+      "obexelimab"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Zenas BioPharma",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "INBX": {
+    "company": "Inhibrx Biosciences",
+    "programs": [
+      "ozekibart (INBRX-109)",
+      "INBRX-106"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Inhibrx Biosciences",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "PHAR": {
+    "company": "Pharming Group N.V.",
+    "programs": [
+      "leniolisib (JOENJA)",
+      "RUCONEST",
+      "leniolisib pediatric program"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Pharming Group",
+      "EMA"
+    ],
+    "radar_role": "REGULATORY_COMMERCIAL_CATALYST_WATCH"
+  },
+  "KALV": {
+    "company": "KalVista Pharmaceuticals",
+    "programs": [
+      "sebetralstat (EKTERLY)",
+      "KVD-824"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "KalVista Pharmaceuticals",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "IDYA": {
+    "company": "IDEAYA Biosciences",
+    "programs": [
+      "darovasertib",
+      "IDE397",
+      "IDE705"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "IDEAYA Biosciences",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "RCUS": {
+    "company": "Arcus Biosciences",
+    "programs": [
+      "domvanalimab",
+      "quemliclustat",
+      "zimberelimab"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Arcus Biosciences",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
   }
 }
