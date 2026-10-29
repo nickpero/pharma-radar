@@ -37,11 +37,11 @@ def test_email_contains_intelligence_sections():
     assert "PHARMA RADAR — PHARMA INTELLIGENCE" in message
     assert "SMMT — ivonescimab" in message
     assert "Azienda: Summit Therapeutics" in message
-    assert "💊 COS'È / COSA FA" in message
+    assert "💊 CHE COS’È / COME AGISCE" in message
     assert "🩺 INDICAZIONE" in message
-    assert "🧪 FASE DI SVILUPPO" in message
-    assert "🎯 PERCHÉ CONTA" in message
-    assert "🏢 IMPATTO POTENZIALE SULL'AZIENDA" in message
+    assert "🧪 FASE / STATO DI SVILUPPO" in message
+    assert "🎯 PERCHÉ È IMPORTANTE" in message
+    assert "🏢 RUOLO NEL PORTAFOGLIO DI SVILUPPO" in message
     assert "📈 REAZIONE DEL MERCATO" in message
     assert "5m +3.05%" in message
     assert "15m +2.29%" in message
@@ -64,10 +64,10 @@ def test_successful_send_is_persisted_and_deduplicated():
     with tempfile.TemporaryDirectory() as tmp:
         path = os.path.join(tmp, "state.json")
         alert = _alert()
-        with patch("scanner.pharma_email.DEFAULT_PATH", path, create=True):
+        with patch("scanner.pharma_email.EMAIL_STATE_PATH", path):
             with patch("scanner.pharma_email.load_email_state", return_value=load_email_state(path)):
                 with patch("scanner.pharma_email_state.load_email_state", return_value=set()):
-                    with patch("scanner.pharma_email_state.save_email_state") as save_state:
+                    with patch("scanner.pharma_email.save_email_state") as save_state:
                         with patch("scanner.pharma_email.smtplib.SMTP_SSL") as smtp_cls:
                             smtp = smtp_cls.return_value.__enter__.return_value
                             with patch.dict(os.environ, {

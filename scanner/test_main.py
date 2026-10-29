@@ -130,7 +130,7 @@ def test_degraded_source_health_warning_sends_once(monkeypatch):
     }
     assert main.send_source_health_alert_if_needed(result, actionable_alerts=[]) is True
     assert len(messages) == 1
-    assert "PHARMA RADAR — SOURCE HEALTH WARNING" in messages[0]
+    assert "PHARMA RADAR — AVVISO SULLA DISPONIBILITÀ DELLE FONTI" in messages[0]
     assert "SEC: DEGRADED_FALLBACK" in messages[0]
     assert "Questo è un avviso tecnico" in messages[0]
     assert "\\n" not in messages[0]
@@ -150,7 +150,7 @@ def test_source_health_warning_is_not_suppressed_by_catalyst_alerts(monkeypatch)
         "source_diagnostics": {"SEC": {"status": "DEGRADED_FALLBACK", "count": 12, "path": "proxy_fallback"}},
     }
     assert main.send_source_health_alert_if_needed(result, actionable_alerts=[{"ticker": "KYMR"}]) is True
-    assert "Alert consegnati in questa scansione: 1" in messages[0]
+    assert "Avvisi inviati in questa scansione: 1" in messages[0]
     assert "Copertura incompleta" in messages[0]
 
 

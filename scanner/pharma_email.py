@@ -81,19 +81,44 @@ def _category(alert):
     subtype = _subtype(alert)
     event_type = _event_type(alert)
     if subtype.startswith(("FDA_", "EMA_")) or event_type in {"FDA_EVENT", "EMA_EVENT"}:
-        return "REGULATORY"
+        return "REGOLATORIO"
     if event_type == "NEW_TRIAL":
-        return "DISCOVERY"
+        return "NUOVO STUDIO"
     if event_type in {
         "PHASE_CHANGE", "STATUS_CHANGE", "DATE_CHANGE",
         "ENROLLMENT_CHANGE", "PROTOCOL_CHANGE",
     } or subtype in {"PHASE_CHANGE", "TRIAL_COMPLETED", "TRIAL_RECRUITING"}:
-        return "DEVELOPMENT"
+        return "SVILUPPO CLINICO"
     if subtype.startswith(("CLINICAL_RESULT", "SAFETY")) or subtype in {
         "FILING", "REJECTION", "LABEL_EXPANSION", "APPROVAL",
     }:
-        return "MILESTONE"
-    return "DEVELOPMENT"
+        return "TAPPA RILEVANTE"
+    return "SVILUPPO CLINICO"
+
+
+def _it_code(value):
+    """Converte codici evento e stati comuni in etichette italiane per l'e-mail."""
+    raw = str(value or "").strip()
+    labels = {
+        "FDA_APPROVAL": "APPROVAZIONE FDA", "FDA_MEETING": "INCONTRO FDA",
+        "FDA_PATHWAY": "PERCORSO REGOLATORIO FDA", "FDA_REJECTION": "RIFIUTO FDA",
+        "FDA_SAFETY_WARNING": "AVVISO DI SICUREZZA FDA", "EMA_APPROVAL": "APPROVAZIONE EMA",
+        "CLINICAL_RESULTS": "RISULTATI CLINICI", "TOPLINE_RESULTS": "RISULTATI PRINCIPALI",
+        "PRIMARY_ENDPOINT_MET": "OBIETTIVO PRIMARIO RAGGIUNTO",
+        "PRIMARY_ENDPOINT_FAILED": "OBIETTIVO PRIMARIO NON RAGGIUNTO",
+        "TRIAL_COMPLETED": "STUDIO COMPLETATO", "TRIAL_RECRUITING": "STUDIO IN ARRUOLAMENTO",
+        "PHASE_CHANGE": "CAMBIO DI FASE", "STATUS_CHANGE": "CAMBIO DI STATO",
+        "DATE_CHANGE": "CAMBIO DI DATA", "NEW_TRIAL": "NUOVO STUDIO",
+        "ENROLLMENT_CHANGE": "CAMBIO NELL'ARRUOLAMENTO", "PROTOCOL_CHANGE": "MODIFICA DEL PROTOCOLLO",
+        "FDA_EVENT": "EVENTO FDA", "EMA_EVENT": "EVENTO EMA", "PHARMA_EVENT": "EVENTO FARMACEUTICO",
+        "CRITICAL": "CRITICO", "HIGH": "ALTO", "MEDIUM": "MEDIO", "LOW": "BASSO",
+        "UNKNOWN": "NON DISPONIBILE", "PHASE 1": "FASE 1", "PHASE 2": "FASE 2",
+        "PHASE 3": "FASE 3", "PHASE 4": "FASE 4", "RECRUITING": "IN ARRUOLAMENTO",
+        "COMPLETED": "COMPLETATO", "ACTIVE, NOT RECRUITING": "ATTIVO, NON IN ARRUOLAMENTO",
+        "TERMINATED": "INTERROTTO", "WITHDRAWN": "RITIRATO",
+    }
+    key = raw.upper()
+    return labels.get(key, raw.replace("_", " "))
 
 
 def _trial(alert):
@@ -115,9 +140,9 @@ def _journey_status(alert):
     phase = _trial_value(alert, "phase", "overall_phase") or event.get("phase")
     parts = []
     if phase:
-        parts.append(f"Fase: {phase}")
+        parts.append(f"Fase: {_it_code(phase)}")
     if status:
-        parts.append(f"Stato: {status}")
+        parts.append(f"Stato: {_it_code(status)}")
     return " | ".join(parts) or "Non disponibile"
 
 
@@ -194,29 +219,29 @@ def format_pharma_intelligence_email(alert):
     if company:
         lines.append(f"🏢 Azienda: {company}")
     if nct_id:
-        lines.append(f"🧪 Trial: {nct_id}")
+        lines.append(f"🧪 Studio clinico: {nct_id}")
     lines += [
-        f"📍 Evento: {event_type} — {subtype}",
+        f"📍 Evento: {_it_code(event_type)} — {_it_code(subtype)}",
         f"🧭 Percorso: {journey}",
         "",
-        f"📰 {title}",
+        f"📰 Titolo originale della fonte: {title}",
     ]
     if summary:
         lines += ["", "SINTESI", " ".join(str(summary).split())[:1600]]
 
     lines += [
         "",
-        "💊 COS'È / COSA FA",
+        "💊 CHE COS’È / COME AGISCE",
         str(explainer["what_is"]),
         "",
         "🩺 INDICAZIONE",
         str(explainer["indication"]),
         "",
-        "🧪 FASE / STATO",
+        "🧪 FASE / STATO DI SVILUPPO",
         str(explainer["stage"]),
     ]
     if explainer.get("mechanism"):
-        lines += ["", "⚙️ MECCANISMO", str(explainer["mechanism"])]
+        lines += ["", "⚙️ MECCANISMO D’AZIONE", str(explainer["mechanism"])]
 
     if changes:
         lines += ["", "🔄 COSA È CAMBIATO"]
@@ -228,29 +253,29 @@ def format_pharma_intelligence_email(alert):
 
     lines += [
         "",
-        "🎯 PERCHÉ È INTERESSANTE",
+        "🎯 PERCHÉ È IMPORTANTE",
         str(explainer["why_it_matters"]),
         "",
-        "➡️ PROSSIMO PASSO / MILESTONE",
+        "➡️ PROSSIMA TAPPA",
         _next_step(alert),
         "",
-        "🏢 RUOLO NELLA PIPELINE",
+        "🏢 RUOLO NEL PORTAFOGLIO DI SVILUPPO",
         str(explainer["company_impact"]),
     ]
 
     reaction = _reaction_line(alert)
     if reaction:
-        lines += ["", "📈 REAZIONE DEL MERCATO (solo contesto)", reaction]
+        lines += ["", "📈 REAZIONE DEL MERCATO (solo come contesto)", reaction]
 
     lines += [
         "",
-        "ℹ️ CRITERIO DEL REPORT",
-        "Questa email ha finalità esclusivamente conoscitiva: segue l'evoluzione di farmaci, trial e percorso regolatorio. I punteggi Trading Intelligence non determinano l'invio.",
+        "ℹ️ CRITERI DEL RAPPORTO",
+        "Questa e-mail ha finalità esclusivamente informative: segue l’evoluzione dei farmaci, degli studi clinici e del percorso regolatorio. I punteggi di analisi del mercato non determinano l’invio.",
         "",
         f"Fonte: {source}",
     ]
     if source_url:
-        lines.append(f"Link fonte ufficiale: {source_url}")
+        lines.append(f"Collegamento alla fonte: {source_url}")
     return "\n".join(lines)
 
 
@@ -288,7 +313,7 @@ def send_pharma_intelligence_email(alert):
     subtype = _subtype(alert) or "PHARMA_EVENT"
 
     message = EmailMessage()
-    message["Subject"] = f"Pharma Radar | {_category(alert)} | {ticker} — {program} | {subtype}"
+    message["Subject"] = f"Pharma Radar | {_category(alert)} | {ticker} — {program} | {_it_code(subtype)}"
     message["From"] = sender
     message["To"] = recipient
     message.set_content(format_pharma_intelligence_email(alert))
@@ -298,7 +323,7 @@ def send_pharma_intelligence_email(alert):
             smtp.login(username, password)
             smtp.send_message(message)
     except (OSError, smtplib.SMTPException, TimeoutError, ValueError) as exc:
-        print(f"Pharma Intelligence email error for {ticker}: {exc}")
+        print(f"Errore nell’invio dell’e-mail di Pharma Radar per {ticker}: {exc}")
         return False
 
     sent_keys.add(key)

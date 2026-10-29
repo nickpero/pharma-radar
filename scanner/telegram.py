@@ -21,31 +21,34 @@ DRUG_DISPLAY_NAMES = {
 }
 
 EVENT_DISPLAY_NAMES = {
-    "FDA_APPROVAL": "FDA APPROVAL",
-    "FDA_MEETING": "FDA MEETING",
-    "FDA_PATHWAY": "FDA PATHWAY",
-    "FDA_REJECTION": "FDA REJECTION",
-    "FDA_SAFETY_WARNING": "FDA SAFETY WARNING",
-    "CLINICAL_RESULTS": "CLINICAL RESULTS",
-    "TOPLINE_RESULTS": "TOPLINE RESULTS",
-    "PRIMARY_ENDPOINT_MET": "PRIMARY ENDPOINT MET",
-    "PRIMARY_ENDPOINT_FAILED": "PRIMARY ENDPOINT FAILED",
-    "MAINTENANCE_DATA": "MAINTENANCE DATA",
-    "DOSE_RESPONSE": "DOSE RESPONSE",
-    "SECONDARY_ENDPOINT_MET": "SECONDARY ENDPOINT MET",
-    "SECONDARY_ENDPOINT_FAILED": "SECONDARY ENDPOINT FAILED",
-    "EFFICACY_SIGNAL": "EFFICACY SIGNAL",
-    "SAFETY_SIGNAL": "SAFETY SIGNAL",
-    "LABEL_EXPANSION": "LABEL EXPANSION",
-    "REGULATORY_FILING": "REGULATORY FILING",
-    "TRIAL_HOLD": "TRIAL HOLD",
-    "TRIAL_HOLD_LIFTED": "TRIAL HOLD LIFTED",
-    "PHASE_ADVANCED": "PHASE ADVANCED",
-    "PHASE_DATA_UPDATE": "PHASE DATA UPDATE",
-    "EXPLORATORY_DATA": "EXPLORATORY DATA",
-    "DATE_ACCELERATED": "DATE ACCELERATED",
-    "DATE_DELAYED": "DATE DELAYED",
-    "CLINICAL_REVIEW_UPDATE": "CLINICAL REVIEW UPDATE",
+    "FDA_APPROVAL": "APPROVAZIONE FDA",
+    "FDA_MEETING": "INCONTRO FDA",
+    "FDA_PATHWAY": "PERCORSO REGOLATORIO FDA",
+    "FDA_REJECTION": "RIFIUTO FDA",
+    "FDA_SAFETY_WARNING": "AVVISO DI SICUREZZA FDA",
+    "CLINICAL_RESULTS": "RISULTATI CLINICI",
+    "TOPLINE_RESULTS": "RISULTATI PRINCIPALI",
+    "PRIMARY_ENDPOINT_MET": "OBIETTIVO PRIMARIO RAGGIUNTO",
+    "PRIMARY_ENDPOINT_FAILED": "OBIETTIVO PRIMARIO NON RAGGIUNTO",
+    "MAINTENANCE_DATA": "DATI DI MANTENIMENTO",
+    "DOSE_RESPONSE": "RISPOSTA ALLA DOSE",
+    "SECONDARY_ENDPOINT_MET": "OBIETTIVO SECONDARIO RAGGIUNTO",
+    "SECONDARY_ENDPOINT_FAILED": "OBIETTIVO SECONDARIO NON RAGGIUNTO",
+    "EFFICACY_SIGNAL": "SEGNALE DI EFFICACIA",
+    "SAFETY_SIGNAL": "SEGNALE DI SICUREZZA",
+    "LABEL_EXPANSION": "ESTENSIONE DELL'INDICAZIONE",
+    "REGULATORY_FILING": "DEPOSITO REGOLATORIO",
+    "TRIAL_HOLD": "SOSPENSIONE DELLO STUDIO",
+    "TRIAL_HOLD_LIFTED": "RIPRESA DELLO STUDIO",
+    "PHASE_ADVANCED": "AVANZAMENTO DI FASE",
+    "PHASE_DATA_UPDATE": "AGGIORNAMENTO DEI DATI DI FASE",
+    "EXPLORATORY_DATA": "DATI ESPLORATIVI",
+    "DATE_ACCELERATED": "DATA ANTICIPATA",
+    "DATE_DELAYED": "DATA POSTICIPATA",
+    "CLINICAL_REVIEW_UPDATE": "AGGIORNAMENTO DELLA REVISIONE CLINICA",
+    "TRIAL_COMPLETED": "STUDIO COMPLETATO",
+    "TRIAL_STOPPED": "STUDIO INTERROTTO",
+    "TRIAL_STATUS_UNKNOWN": "STATO DELLO STUDIO NON NOTO",
 }
 
 
@@ -112,11 +115,32 @@ def _drug_name(alert, program):
     return DRUG_DISPLAY_NAMES.get(str(program).strip().lower(), program)
 
 
+def _it_status(value):
+    """Traduce etichette interne comuni nelle notifiche rivolte all'utente."""
+    raw = _clean_text(value, 100)
+    key = raw.upper()
+    labels = {
+        "CRITICAL": "CRITICO", "HIGH": "ALTO", "MEDIUM": "MEDIO", "LOW": "BASSO",
+        "POSITIVE": "POSITIVA", "NEGATIVE": "NEGATIVA", "UNKNOWN": "NON DISPONIBILE",
+        "UNAVAILABLE": "NON DISPONIBILE", "IMMEDIATE": "IMMEDIATA",
+        "DIVERGENT": "DIVERGENTE", "STRONG POSITIVE": "FORTEMENTE POSITIVA",
+        "STRONG NEGATIVE": "FORTEMENTE NEGATIVA", "CONFIRMED": "CONFERMATA",
+        "UNCONFIRMED": "NON CONFERMATA", "FDA_UPDATE": "AGGIORNAMENTO FDA",
+        "1-7D": "1–7 giorni", "1-3D": "1–3 giorni", "1D": "1 giorno", "2-4W": "2–4 settimane", "1-4W": "1–4 settimane", 
+        "EMA_UPDATE": "AGGIORNAMENTO EMA", "WATCH": "DA MONITORARE",
+    }
+    if key in labels:
+        return labels[key]
+    if key.endswith("D") and key[:-1].isdigit():
+        return f"{key[:-1]} giorni"
+    return raw.replace("_", " ") if raw else "NON DISPONIBILE"
+
+
 def _event_display_name(subtype, event_type):
     raw = _clean_text(subtype or event_type, 100).upper()
     if raw in EVENT_DISPLAY_NAMES:
         return EVENT_DISPLAY_NAMES[raw]
-    return raw.replace("_", " ") if raw else "CATALYST"
+    return _it_status(raw) if raw else "EVENTO"
 
 
 def _parse_iso_date(value):
@@ -155,29 +179,29 @@ def _timeline_details(alert, event, subtype):
     field = _clean_text(event.get("field") or alert.get("changed_field"), 100)
 
     field_labels = {
-        "primary_completion_date": "Primary Completion",
-        "study_completion_date": "Study Completion",
-        "completion_date": "Completion",
+        "primary_completion_date": "Completamento primario",
+        "study_completion_date": "Completamento dello studio",
+        "completion_date": "Completamento",
     }
-    field_display = field_labels.get(field, field.replace("_", " ").title() if field else "Trial Timeline")
+    field_display = field_labels.get(field, field.replace("_", " ").title() if field else "Cronologia dello studio")
 
     details = [
-        "🚨 TRIAL TIMELINE CHANGE",
-        f"📌 Field: {field_display}",
+        "🚨 MODIFICA DELLE DATE DELLO STUDIO",
+        f"📌 Campo: {field_display}",
     ]
     if old_value:
-        details.append(f"📅 Old date: {old_value}")
+        details.append(f"📅 Data precedente: {old_value}")
     if new_value:
-        details.append(f"📅 New date: {new_value}")
+        details.append(f"📅 Nuova data: {new_value}")
     if old_date and new_date:
         delta_days = (new_date - old_date).days
         if delta_days < 0:
-            details.append(f"⏩ Accelerated: {abs(delta_days)} days")
+            details.append(f"⏩ Anticipata di {abs(delta_days)} giorni")
         elif delta_days > 0:
-            details.append(f"⏳ Delayed: {delta_days} days")
+            details.append(f"⏳ Posticipata di {delta_days} giorni")
         else:
-            details.append("↔️ Change: 0 days")
-    details.append("ℹ️ Timeline change only — clinical outcome not yet reported.")
+            details.append("↔️ Nessuna variazione di giorni")
+    details.append("ℹ️ È cambiata solo la tempistica: i risultati clinici non sono ancora stati comunicati.")
     return details
 
 
@@ -192,14 +216,14 @@ def _why_it_matters(alert, event, subtype):
         return why
 
     fallback = {
-        "FDA_APPROVAL": "Confirmed FDA approval is a major regulatory and commercial milestone.",
-        "FDA_MEETING": "FDA meeting or discussion; regulatory outcome is not an approval.",
-        "FDA_PATHWAY": "Regulatory pathway discussion; approval has not been confirmed.",
-        "FDA_REJECTION": "FDA rejection is a major regulatory setback that can materially change the program's commercial outlook.",
-        "FDA_SAFETY_WARNING": "A new FDA safety warning can materially affect the product's risk profile, label and commercial outlook.",
-        "CLINICAL_RESULTS": "Clinical results can materially change the probability of success and valuation of the program.",
-        "CLINICAL_REVIEW_UPDATE": "A DSMB/blinded/interim review may update development expectations, but it is not a disclosed efficacy or top-line readout.",
-        "LABEL_EXPANSION": "A label expansion increases the addressable patient population and can materially change the product's commercial opportunity.",
+        "FDA_APPROVAL": "Un’approvazione FDA confermata è una tappa regolatoria e commerciale importante.",
+        "FDA_MEETING": "Incontro o confronto con la FDA: non equivale a un’approvazione.",
+        "FDA_PATHWAY": "Discussione sul percorso regolatorio: l’approvazione non è confermata.",
+        "FDA_REJECTION": "Un rifiuto della FDA è un ostacolo regolatorio importante e può cambiare le prospettive commerciali del programma.",
+        "FDA_SAFETY_WARNING": "Un nuovo avviso di sicurezza FDA può incidere sul profilo di rischio, sull’indicazione e sulle prospettive commerciali del prodotto.",
+        "CLINICAL_RESULTS": "I risultati clinici possono modificare in modo significativo la probabilità di successo e la valutazione del programma.",
+        "CLINICAL_REVIEW_UPDATE": "Una revisione del comitato indipendente, in cieco o ad interim può aggiornare le aspettative di sviluppo, ma non equivale alla pubblicazione dei risultati di efficacia o dei risultati principali.",
+        "LABEL_EXPANSION": "L’estensione dell’indicazione amplia la popolazione di pazienti potenzialmente trattabili e può modificare le opportunità commerciali del prodotto.",
     }
     return fallback.get(str(subtype).upper())
 
@@ -236,20 +260,20 @@ def format_catalyst_alert(alert):
         alert_priority = enrich_alert_priority(priority_event).get("alert_priority", 0)
     alert_tier = event.get("alert_tier", alert.get("alert_tier")) or get_alert_tier(alert_priority)
     telegram_action = str(alert.get("telegram_action", "")).upper()
-    display_tier = "WATCH · NON CONFERMATO" if early else ("WATCH · NON URGENTE" if telegram_action == "WATCH" else alert_tier)
+    display_tier = "DA VERIFICARE · NON CONFERMATO" if early else ("DA MONITORARE · NON URGENTE" if telegram_action == "WATCH" else _it_status(alert_tier))
     tier_icon = "👀" if early or telegram_action == "WATCH" else get_severity_icon(alert_tier)
 
     lines = [
-        "🟡 PHARMA RADAR — EARLY CATALYST" if early else "🚨 PHARMA RADAR",
+        "🟡 PHARMA RADAR — CATALIZZATORE PRELIMINARE" if early else "🚨 PHARMA RADAR",
         "━━━━━━━━━━━━━━━━━━",
         f"{tier_icon} {display_tier}",
-        *(["👀 WATCH — informativo, non urgente"] if telegram_action == "WATCH" and not early else []),
+        *(["👀 DA MONITORARE — informativo, non urgente"] if telegram_action == "WATCH" and not early else []),
         "",
         f"🧬 {ticker}",
         f"💊 {drug_name}",
         "",
         f"📰 {event_display}",
-        title or "Catalyst detected",
+        title or "Titolo non disponibile nella fonte.",
     ]
 
     timeline_details = _timeline_details(alert, event, subtype)
@@ -262,7 +286,7 @@ def format_catalyst_alert(alert):
         completion_date = _clean_text(trial.get("completion_date"), 40)
         lines.extend([
             "",
-            "ℹ️ Stato ClinicalTrials.gov: COMPLETED — non implica risultati positivi.",
+            "ℹ️ Stato su ClinicalTrials.gov: COMPLETATO — non implica risultati positivi.",
         ])
         if nct_id:
             lines.append(f"🔗 Registro: {nct_id}")
@@ -277,23 +301,23 @@ def format_catalyst_alert(alert):
         current_price = alert.get("post_spike_current_price")
         lines.extend([
             "",
-            "🔄 POST-SPIKE WATCH",
-            f"📅 Spike date: {alert.get('post_spike_date', 'N/A')}",
-            f"🚀 Spike: {spike_pct}% · Volume {volume_ratio:.1f}x" if isinstance(volume_ratio, (int, float)) and spike_pct is not None else "🚀 Spike: data available",
-            f"💵 Spike close: {spike_price} → Current: {current_price}",
-            f"📉 Retracement: {retracement}%" if retracement is not None else "📉 Retracement: N/A",
-            "ℹ️ Catalyst already produced a major move; monitoring post-spike behavior.",
+            "🔄 MONITORAGGIO DOPO IL RIALZO",
+            f"📅 Data del rialzo: {alert.get('post_spike_date', 'non disponibile')}",
+            f"🚀 Rialzo: {spike_pct}% · Volume {volume_ratio:.1f}×" if isinstance(volume_ratio, (int, float)) and spike_pct is not None else "🚀 Rialzo: dato disponibile",
+            f"💵 Chiusura al rialzo: {spike_price} → Prezzo attuale: {current_price}",
+            f"📉 Ritracciamento: {retracement}%" if retracement is not None else "📉 Ritracciamento: non disponibile",
+            "ℹ️ Il catalizzatore ha già prodotto un movimento rilevante; si monitora l’andamento successivo.",
         ])
 
     lines.extend([
         "",
-        (f"🎯 Potenziale catalyst (non confermato): punteggio interno {score}/100" if early else f"🎯 Catalyst: {score}/100 · {label}"),
-        *( [f"🧠 Clinical data: {alert.get('catalyst_category', event.get('catalyst_category'))} · Novelty {alert.get('novelty_score', event.get('novelty_score', 0))}/100 · Market impact {alert.get('market_impact_score', event.get('market_impact_score', 0))}/100"] if alert.get("clinical_data_release") and not early else [] ),
-        (f"📌 Punteggio interno: {alert_priority}/100 · non operativo" if early else f"🚨 Priority: {alert_priority}/100 · {alert_tier}"),
-        (f"📊 Setup: NON CONFERMATO · Window: {window}" if early else f"📊 Setup: {setup_score}/100 · Window: {window}"),
+        (f"🎯 Potenziale catalizzatore (non confermato): punteggio interno {score}/100" if early else f"🎯 Catalizzatore: {score}/100 · {_it_status(label)}"),
+        *( [f"🧠 Dati clinici: {alert.get('catalyst_category', event.get('catalyst_category'))} · Novità {alert.get('novelty_score', event.get('novelty_score', 0))}/100 · Impatto sul mercato {alert.get('market_impact_score', event.get('market_impact_score', 0))}/100"] if alert.get("clinical_data_release") and not early else [] ),
+        (f"📌 Punteggio interno: {alert_priority}/100 · non operativo" if early else f"🚨 Priorità: {alert_priority}/100 · {_it_status(alert_tier)}"),
+        (f"📊 Configurazione: NON CONFERMATA · Finestra temporale: {_it_status(window)}" if early else f"📊 Configurazione: {setup_score}/100 · Finestra temporale: {_it_status(window)}"),
         "",
-        "📈 Market reaction: " + (
-            f"{_num(reaction_pct)}% · {reaction_direction}"
+        "📈 Reazione del mercato: " + (
+            f"{_num(reaction_pct)}% · {_it_status(reaction_direction)}"
             if reaction_pct is not None and _num(reaction_pct) is not None
             else " | ".join(
                 f"{label_window} {_num(reaction.get(f'reaction_{label_window}_pct'))}%"
@@ -317,16 +341,16 @@ def format_catalyst_alert(alert):
     if str(subtype or "").upper() == "TRIAL_COMPLETED" and trial.get("last_update"):
         lines.append(f"🗂 Registro aggiornato: {_format_timestamp(trial.get('last_update'))}")
     if early:
-        lines.append("⚠️ Early discovery — conferma da fonte primaria ancora in attesa.")
+        lines.append("⚠️ Rilevazione preliminare: in attesa di conferma da una fonte primaria.")
 
     if why:
-        lines.extend(["", "💡 WHY IT MATTERS", why])
+        lines.extend(["", "💡 PERCHÉ È IMPORTANTE", why])
 
     source = _clean_text(alert.get("source") or event.get("source"))
     if source:
-        lines.extend(["", f"🔎 Source: {source}"])
+        lines.extend(["", f"🔎 Fonte: {source}"])
 
-    lines.extend(["", "⚠️ Informational only — no automatic buy/sell signal.", "━━━━━━━━━━━━━━━━━━"])
+    lines.extend(["", "⚠️ Solo a scopo informativo: non è un segnale automatico di acquisto o vendita.", "━━━━━━━━━━━━━━━━━━"])
     return "\n".join(str(line) for line in lines)
 
 
@@ -341,18 +365,18 @@ def format_divergence_alert(divergence):
     win = divergence.get("historical_edge_win_rate_1d")
     win_text = f"{float(win) * 100:.1f}%" if win is not None else "N/A"
     return "\n".join([
-        "⚠️ PHARMA RADAR — DIVERGENCE",
+        "⚠️ PHARMA RADAR — DIVERGENZA",
         "━━━━━━━━━━━━━━━━━━",
         f"🧬 {ticker}",
         f"💊 {program}",
         "",
-        "📈 Positive catalyst / 📉 negative market reaction",
-        f"🎯 Catalyst: {catalyst}/100",
-        f"🧠 TI Score: {ti}/100",
-        f"📚 Historical edge: {edge}% · Win rate: {win_text}",
-        f"📉 Daily reaction: {daily_pct}% · DIVERGENT",
+        "📈 Catalizzatore positivo / 📉 reazione negativa del mercato",
+        f"🎯 Catalizzatore: {catalyst}/100",
+        f"🧠 Punteggio di analisi: {ti}/100",
+        f"📚 Vantaggio storico: {edge}% · Frequenza di esito positivo: {win_text}",
+        f"📉 Variazione giornaliera: {daily_pct}% · DIVERGENT",
         "",
-        "ℹ️ Informational monitor only — this is not a buy/sell signal.",
+        "ℹ️ Monitoraggio a scopo informativo: non è un segnale di acquisto o vendita.",
         "━━━━━━━━━━━━━━━━━━",
     ])
 

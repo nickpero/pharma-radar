@@ -132,17 +132,17 @@ def test_telegram_is_compact_and_hierarchical():
     })
     message = format_catalyst_alert(alert)
     assert "🚨 PHARMA RADAR" in message
-    assert "🚨 CRITICAL" in message
+    assert "🚨 CRITICO" in message
     assert "🧬 IONS" in message
     assert "💊 Zilganersen (Zanvastro)" in message
-    assert "📰 FDA APPROVAL" in message
-    assert "🎯 Catalyst: 100/100" in message
-    assert "🚨 Priority: 100/100" in message
-    assert "📊 Setup: 56/100 · Window: 1-7D" in message
-    assert "💡 WHY IT MATTERS" in message
+    assert "📰 APPROVAZIONE FDA" in message
+    assert "🎯 Catalizzatore: 100/100" in message
+    assert "🚨 Priorità: 100/100" in message
+    assert "📊 Configurazione: 56/100 · Finestra temporale: 1–7 giorni" in message
+    assert "💡 PERCHÉ È IMPORTANTE" in message
     assert "Awareness:" not in message
     assert "Surprise:" not in message
-    assert "📈 Market reaction: N/A" in message
+    assert "📈 Reazione del mercato: N/A" in message
 
 
 def test_telegram_shows_market_reaction_compactly():
@@ -151,8 +151,8 @@ def test_telegram_shows_market_reaction_compactly():
     message = format_catalyst_alert(alert)
     assert "5m +3.05%" in message
     assert "15m +2.29%" in message
-    assert "MARKET REACTION: UNAVAILABLE" not in message
-    assert "Reaction: N/A" not in message
+    assert "REAZIONE DEL MERCATO: NON DISPONIBILE" not in message
+    assert "Reazione: N/A" not in message
 
 
 def test_telegram_shows_confirmation_only_as_one_line():
@@ -337,7 +337,7 @@ def test_telegram_marks_watch_only_alert_as_non_urgent():
     alert = _alert("VBIO", 45, 60, "WATCH")
     alert["telegram_action"] = "WATCH"
     message = format_catalyst_alert(alert)
-    assert "👀 WATCH — informativo, non urgente" in message
+    assert "👀 DA MONITORARE — informativo, non urgente" in message
 
 
 def test_early_discovery_never_displays_critical_as_operational():
@@ -351,8 +351,8 @@ def test_early_discovery_never_displays_critical_as_operational():
         "published_at": datetime.now(timezone.utc).isoformat(),
     })
     message = format_catalyst_alert(alert)
-    assert "WATCH · NON CONFERMATO" in message
-    assert "Potenziale catalyst (non confermato)" in message
+    assert "DA VERIFICARE · NON CONFERMATO" in message
+    assert "Potenziale catalizzatore (non confermato)" in message
     assert "Punteggio interno: 99/100 · non operativo" in message
-    assert "🚨 CRITICAL" not in message
-    assert "Priority: 99/100 · CRITICAL" not in message
+    assert "🚨 CRITICO" not in message
+    assert "Priorità: 99/100 · CRITICO" not in message

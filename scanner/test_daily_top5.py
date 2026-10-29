@@ -78,7 +78,7 @@ def test_format():
     assert "+22.00%" in message
     assert "non rappresenta l’intero mercato" in message
     assert "Nessuna raccomandazione di acquisto o vendita" in message
-    assert "FUNDAMENTAL_OR_CLINICAL_CATALYST" in message
+    assert "CATALIZZATORE IN ATTESA DI VERIFICA QUALITÀ" in message
 
 
 
