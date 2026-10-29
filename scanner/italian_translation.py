@@ -6,8 +6,10 @@ sono protetti. In caso di indisponibilità del servizio non viene mostrato testo
 inglese non tradotto: si visualizza un messaggio esplicito e resta disponibile il link
 alla fonte primaria.
 """
+import json
 import re
 from functools import lru_cache
+from pathlib import Path
 
 import requests
 
@@ -93,11 +95,23 @@ def translate_to_italian(value, protected_terms=None):
 def alert_protected_terms(alert):
     """Return known company, ticker and drug/program names to preserve verbatim."""
     event = alert.get("event") if isinstance(alert.get("event"), dict) else {}
+    ticker = str(alert.get("ticker") or "").strip().upper()
     terms = [
         alert.get("company"), event.get("company"),
-        alert.get("ticker"), alert.get("drug_name"), alert.get("drug"),
+        ticker, alert.get("drug_name"), alert.get("drug"),
         alert.get("program"), event.get("program"),
     ]
+    # Use the configured Radar universe to protect full company and pipeline names
+    # even when an individual feed record contains only its ticker.
+    if ticker:
+        try:
+            watchlist_path = Path(__file__).resolve().parents[1] / "data" / "watchlist.json"
+            with watchlist_path.open("r", encoding="utf-8") as handle:
+                metadata = json.load(handle).get(ticker, {})
+            terms.append(metadata.get("company"))
+            terms.extend(metadata.get("programs") or [])
+        except (OSError, ValueError, TypeError):
+            pass
     trial = alert.get("trial") if isinstance(alert.get("trial"), dict) else {}
     for key in ("intervention", "interventions", "drug_name", "drug"):
         value = trial.get(key)
