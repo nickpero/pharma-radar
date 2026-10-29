@@ -45,8 +45,11 @@ def test_new_catalyst_is_sent(tmp_path):
          patch.object(pharma_email, "_smtp_config", return_value=("smtp.example", 465, "user", "pass", "from@example.com", "to@example.com")), \
          patch("scanner.pharma_email.smtplib.SMTP_SSL") as smtp_cls:
         smtp = smtp_cls.return_value.__enter__.return_value
-        assert pharma_email.send_pharma_intelligence_emails([_alert("Catalyst A")]) == 1
-        assert pharma_email.send_pharma_intelligence_emails([_alert("Catalyst B")]) == 1
+        alert_a = _alert("Catalyst A")
+        alert_b = _alert("Catalyst B")
+        alert_b["url"] = "https://www.fda.gov/example-different-event"
+        assert pharma_email.send_pharma_intelligence_emails([alert_a]) == 1
+        assert pharma_email.send_pharma_intelligence_emails([alert_b]) == 1
         assert smtp.send_message.call_count == 2
 
 
@@ -97,7 +100,7 @@ def test_low_priority_development_event_is_sent_for_knowledge():
         },
     }
     assert pharma_email.is_pharma_intelligence_event(alert) is True
-    assert "DEVELOPMENT" in pharma_email.format_pharma_intelligence_email(alert)
+    assert "SVILUPPO CLINICO" in pharma_email.format_pharma_intelligence_email(alert)
 
 
 def test_same_drug_new_trial_event_is_not_suppressed():
