@@ -17,6 +17,7 @@ FDA_NEWS_URL = "https://www.fda.gov/news-events/fda-newsroom/press-announcements
 FDA_PRESS_ANNOUNCEMENTS_URL = FDA_NEWS_URL
 FDA_NEWSROOM_URL = "https://www.fda.gov/news-events/fda-newsroom"
 FDA_PRESS_RELEASES_RSS_URL = "https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/press-releases/rss.xml"
+FDA_MEDWATCH_RSS_URL = "https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/medwatch/rss.xml"
 DEFAULT_MAX_NEWS = 50
 DEFAULT_MAX_PAGES = 5
 REQUEST_TIMEOUT = 20
@@ -307,6 +308,47 @@ def _parse_fda_rss(xml_content, max_items=DEFAULT_MAX_NEWS):
     results = deduplicate_fda_news(results)[:max_items]
     print(f"FDA RSS parsed={len(results)}", flush=True)
     return results
+
+
+def _parse_medwatch_rss(xml_content, max_items=DEFAULT_MAX_NEWS):
+    """Parse the official FDA MedWatch safety-alert RSS feed."""
+    if not xml_content:
+        return []
+    try:
+        root = ET.fromstring(xml_content)
+    except ET.ParseError as exc:
+        print(f"FDA MEDWATCH RSS PARSE ERROR: {type(exc).__name__}: {exc}", flush=True)
+        return []
+    results = []
+    for node in root.iter():
+        if node.tag.rsplit("}", 1)[-1].lower() != "item":
+            continue
+        fields = {}
+        for child in list(node):
+            fields[child.tag.rsplit("}", 1)[-1].lower()] = normalize_text(child.text or "")
+        title = fields.get("title", "")
+        url = normalize_url(fields.get("link", ""), "https://www.fda.gov/")
+        parsed = urlparse(url)
+        if not title or parsed.netloc.lower() not in {"www.fda.gov", "fda.gov"}:
+            continue
+        published = fields.get("pubdate") or fields.get("published") or fields.get("date")
+        summary = fields.get("description", "")
+        results.append(build_fda_news_item(title, url, published, summary, source="FDA MedWatch"))
+        if len(results) >= max_items:
+            break
+    results = deduplicate_fda_news(results)[:max_items]
+    print(f"FDA MEDWATCH RSS parsed={len(results)}", flush=True)
+    return results
+
+
+def get_medwatch_news(max_news=DEFAULT_MAX_NEWS):
+    """Fetch primary-source FDA safety alerts from the dedicated MedWatch feed."""
+    try:
+        xml_content = _fetch_html(FDA_MEDWATCH_RSS_URL)
+    except requests.RequestException as exc:
+        print(f"FDA MEDWATCH FETCH ERROR: {type(exc).__name__}: {exc}", flush=True)
+        return []
+    return _parse_medwatch_rss(xml_content, max_news)
 
 
 def _fetch_press_rss(max_news=DEFAULT_MAX_NEWS):
