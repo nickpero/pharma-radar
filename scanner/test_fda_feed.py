@@ -1,5 +1,7 @@
 from scanner.fda_feed import (
-    FDA_NEWS_URL,\n    _parse_medwatch_rss,\n    FDA_MEDWATCH_RSS_URL,
+    FDA_NEWS_URL,
+    _parse_medwatch_rss,
+    FDA_MEDWATCH_RSS_URL,
     normalize_text,
     get_item_id,
     normalize_date,
