@@ -20,7 +20,7 @@ _ITALIAN_MARKERS = (
     " per ", " con ", " che ", " non ", " nella ", " nelle ", " alla ",
     " agli ", " sono ", " può ", " una ", " un ", " questo ", " questa ",
     " programma", " studio", " fase", " dati", " approvazione", " aggiornamento",
-    " mercato", " farmaco", " clinico", " regolatorio", " società",
+    " mercato", " farmaco", " clinico", " regolatorio", " società", " le ", " sul ",\n    " aspettative", " descrizione", " indicazione", " passaggio", " rilevante",\n    " evoluzione", " contesto", " valutare", " sviluppo", " trattamento", " non disponibile",
 )
 _ENGLISH_MARKERS = (
     " the ", " and ", " for ", " with ", " study ", " trial ", " announced ",
