@@ -39,9 +39,9 @@ def test_email_contains_intelligence_sections():
     assert "Azienda: Summit Therapeutics" in message
     assert "💊 COS'È / COSA FA" in message
     assert "🩺 INDICAZIONE" in message
-    assert "🧪 FASE DI SVILUPPO" in message
+    assert "🧪 FASE / STATO DI SVILUPPO" in message
     assert "🎯 PERCHÉ CONTA" in message
-    assert "🏢 IMPATTO POTENZIALE SULL'AZIENDA" in message
+    assert "🏢 RUOLO NEL PORTAFOGLIO DI SVILUPPO" in message
     assert "📈 REAZIONE DEL MERCATO" in message
     assert "5m +3.05%" in message
     assert "15m +2.29%" in message
