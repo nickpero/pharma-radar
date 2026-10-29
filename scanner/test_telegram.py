@@ -28,11 +28,11 @@ def test_catalyst_message_format():
     assert "🚨 CRITICAL" in message
     assert "🧬 CAPR" in message
     assert "💊 deramiocel" in message
-    assert "📰 TRIAL COMPLETED" in message
-    assert "🎯 Catalyst: 95/100 · CRITICAL" in message
-    assert "🚨 Priority: 100/100 · CRITICAL" in message
-    assert "📊 Setup: 80/100 · Window: IMMEDIATE" in message
-    assert "📈 Market reaction:" in message
+    assert "📰 STUDIO COMPLETATO" in message
+    assert "🎯 Catalizzatore: 95/100 · CRITICO" in message
+    assert "🚨 Priorità: 100/100 · CRITICO" in message
+    assert "📊 Configurazione: 80/100 · Finestra temporale: IMMEDIATA" in message
+    assert "📈 Reazione del mercato:" in message
 
 
 def test_real_newlines():
@@ -75,12 +75,12 @@ def test_timeline_acceleration_details():
         },
     }
     message = format_catalyst_alert(alert)
-    assert "🚨 TRIAL TIMELINE CHANGE" in message
-    assert "📌 Field: Primary Completion" in message
-    assert "📅 Old date: 2027-06-30" in message
-    assert "📅 New date: 2027-04-30" in message
-    assert "⏩ Accelerated: 61 days" in message
-    assert "ℹ️ Timeline change only — clinical outcome not yet reported." in message
+    assert "🚨 MODIFICA DELLE DATE DELLO STUDIO" in message
+    assert "📌 Campo: Completamento primario" in message
+    assert "📅 Data precedente: 2027-06-30" in message
+    assert "📅 Nuova data: 2027-04-30" in message
+    assert "⏩ Anticipata di 61 giorni" in message
+    assert "ℹ️ È cambiata solo la tempistica: i risultati clinici non sono ancora stati comunicati." in message
 
 
 def test_timeline_delay_details():
@@ -101,9 +101,9 @@ def test_timeline_delay_details():
         },
     }
     message = format_catalyst_alert(alert)
-    assert "🚨 TRIAL TIMELINE CHANGE" in message
-    assert "📌 Field: Study Completion" in message
-    assert "⏳ Delayed: 91 days" in message
+    assert "🚨 MODIFICA DELLE DATE DELLO STUDIO" in message
+    assert "📌 Campo: Completamento dello studio" in message
+    assert "⏳ Posticipata di 91 giorni" in message
 
 
 def test_negative_direction():
@@ -124,8 +124,8 @@ def test_negative_direction():
     }
     message = format_catalyst_alert(alert)
     assert "🧬 CAPR" in message
-    assert "📰 TRIAL STOPPED" in message
-    assert "🎯 Catalyst: 95/100 · CRITICAL" in message
+    assert "📰 STUDIO INTERROTTO" in message
+    assert "🎯 Catalizzatore: 95/100 · CRITICO" in message
 
 
 def test_unknown_direction():
@@ -145,8 +145,8 @@ def test_unknown_direction():
     message = format_catalyst_alert(alert)
     assert "ZYME" in message
     assert "zanidatamab" in message
-    assert "TRIAL STATUS UNKNOWN" in message
-    assert "🎯 Catalyst: 15/100 · LOW" in message
+    assert "STATO DELLO STUDIO NON NOTO" in message
+    assert "🎯 Catalizzatore: 15/100 · BASSO" in message
 
 
 if __name__ == "__main__":
