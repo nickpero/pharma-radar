@@ -179,11 +179,11 @@ def _timeline_details(alert, event, subtype):
     field = _clean_text(event.get("field") or alert.get("changed_field"), 100)
 
     field_labels = {
-        "primary_completion_date": "Primary Completion",
-        "study_completion_date": "Study Completion",
-        "completion_date": "Completion",
+        "primary_completion_date": "Completamento primario",
+        "study_completion_date": "Completamento dello studio",
+        "completion_date": "Completamento",
     }
-    field_display = field_labels.get(field, field.replace("_", " ").title() if field else "Trial Timeline")
+    field_display = field_labels.get(field, field.replace("_", " ").title() if field else "Cronologia dello studio")
 
     details = [
         "🚨 MODIFICA DELLE DATE DELLO STUDIO",
@@ -196,11 +196,11 @@ def _timeline_details(alert, event, subtype):
     if old_date and new_date:
         delta_days = (new_date - old_date).days
         if delta_days < 0:
-            details.append(f"⏩ Anticipata di {abs(delta_days)} days")
+            details.append(f"⏩ Anticipata di {abs(delta_days)} giorni")
         elif delta_days > 0:
-            details.append(f"⏳ Posticipata di {delta_days} days")
+            details.append(f"⏳ Posticipata di {delta_days} giorni")
         else:
-            details.append("↔️ Change: 0 days")
+            details.append("↔️ Nessuna variazione di giorni")
     details.append("ℹ️ È cambiata solo la tempistica: i risultati clinici non sono ancora stati comunicati.")
     return details
 
