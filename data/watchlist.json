@@ -3094,5 +3094,473 @@
       "ClinicalTrials.gov"
     ],
     "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "ADVM": {
+    "company": "Adverum Biotechnologies",
+    "programs": [
+      "ixoberogene soroparvovec"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "AEMD": {
+    "company": "Aethlon Medical",
+    "programs": [
+      "Hemopurifier"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "AFIB": {
+    "company": "Acutus Medical",
+    "programs": [
+      "cardiac ablation technology"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "AGTC": {
+    "company": "Applied Genetic Technologies",
+    "programs": [
+      "gene therapy pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "ALRN": {
+    "company": "Aileron Therapeutics",
+    "programs": [
+      "clinical pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "APVO": {
+    "company": "Aptevo Therapeutics",
+    "programs": [
+      "maveropepimut-S"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "ARMP": {
+    "company": "Armata Pharmaceuticals",
+    "programs": [
+      "AP-PA02"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "ASMB": {
+    "company": "Assembly Biosciences",
+    "programs": [
+      "ABI-5366"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "ATHE": {
+    "company": "Alterity Therapeutics",
+    "programs": [
+      "ATH434"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "ATNX": {
+    "company": "Athenex",
+    "programs": [
+      "oncology portfolio"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "BCTX": {
+    "company": "BriaCell Therapeutics",
+    "programs": [
+      "Bria-IMT"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "BDSI": {
+    "company": "BioDelivery Sciences",
+    "programs": [
+      "Belbuca"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "BDSX": {
+    "company": "Biodesix",
+    "programs": [
+      "VeriStrat"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "BMEA": {
+    "company": "Biomea Fusion",
+    "programs": [
+      "icovamenib"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "BNGO": {
+    "company": "Bionano Genomics",
+    "programs": [
+      "genome mapping"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "CALA": {
+    "company": "Calithera Biosciences",
+    "programs": [
+      "clinical pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "CFRX": {
+    "company": "ContraFect",
+    "programs": [
+      "exebacase"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "CNSP": {
+    "company": "CNS Pharmaceuticals",
+    "programs": [
+      "Berubicin"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "CYAD": {
+    "company": "Celyad Oncology",
+    "programs": [
+      "CYAD-211"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "DRIO": {
+    "company": "DarioHealth",
+    "programs": [
+      "digital therapeutics"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "EIGR": {
+    "company": "Eiger BioPharmaceuticals",
+    "programs": [
+      "clinical pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "ELMD": {
+    "company": "Electromed",
+    "programs": [
+      "respiratory devices"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "ENZC": {
+    "company": "Enzolytics",
+    "programs": [
+      "biologics pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "FUSN": {
+    "company": "Fusion Pharmaceuticals",
+    "programs": [
+      "FPI-2265"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "GLTO": {
+    "company": "Galecto",
+    "programs": [
+      "GB2064"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "IPSC": {
+    "company": "Century Therapeutics",
+    "programs": [
+      "iPSC cell therapies"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "KZR": {
+    "company": "Kezar Life Sciences",
+    "programs": [
+      "zetomipzomib"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "MNMD": {
+    "company": "Mind Medicine",
+    "programs": [
+      "lysergide"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "MRUS": {
+    "company": "Merus",
+    "programs": [
+      "petosemtamab"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "OBIO": {
+    "company": "Orchestra BioMed",
+    "programs": [
+      "AVIM therapy"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "RNLX": {
+    "company": "Renalytix",
+    "programs": [
+      "kidneyintelX"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "SAVA": {
+    "company": "Cassava Sciences",
+    "programs": [
+      "simufilam"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "TNYA": {
+    "company": "Tenaya Therapeutics",
+    "programs": [
+      "TN-201"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "TRML": {
+    "company": "Tourmaline Bio",
+    "programs": [
+      "pacibekitug"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "VYGR": {
+    "company": "Voyager Therapeutics",
+    "programs": [
+      "VY-TAU01"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
+  },
+  "ZURA": {
+    "company": "Zura Bio",
+    "programs": [
+      "tibulizumab"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "CLINICAL_REGULATORY_CATALYST"
   }
 }
