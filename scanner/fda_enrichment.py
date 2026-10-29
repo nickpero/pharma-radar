@@ -10,7 +10,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-from scanner.fda_feed import get_fda_news, get_medwatch_news, is_fda_press_announcement_url, normalize_text, normalize_date
+from scanner.fda_feed import get_fda_news, get_medwatch_news, is_fda_press_announcement_url, normalize_text, normalize_date, sort_fda_news
 
 FDA_HOSTS = {"www.fda.gov", "fda.gov"}
 FDA_ALLOWED_PREFIXES = (
@@ -213,5 +213,6 @@ def get_enriched_fda_news(max_news=50, max_pages=5, max_enrich=MAX_ENRICH_ITEMS)
         if key and key not in seen:
             seen.add(key)
             merged.append(item)
+    merged = sort_fda_news(merged)
     print(f"FDA SOURCE COUNTS: press={len(press_news)} medwatch={len(medwatch_news)} merged={len(merged)}", flush=True)
     return enrich_fda_news(merged, max_items=max_enrich)
