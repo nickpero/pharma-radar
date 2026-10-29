@@ -119,4 +119,4 @@ def alert_protected_terms(alert):
             terms.append(value)
         elif isinstance(value, list):
             terms.extend(value)
-    return [str(term).strip() for term in terms if isinstance(term, str) and term.strip()]
+    return list(dict.fromkeys(str(term).strip() for term in terms if isinstance(term, str) and term.strip()))
