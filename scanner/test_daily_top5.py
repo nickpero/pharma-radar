@@ -46,7 +46,7 @@ def test_same_day_catalyst_is_linked():
     )
     assert rows[0]["catalyst_found"] is True
     assert rows[0]["catalyst_subtype"] == "COMMERCIAL_PARTNERSHIP"
-    assert rows[0]["classification"] == "FUNDAMENTAL_OR_CLINICAL_CATALYST"
+    assert rows[0]["classification"] == "CATALIZZATORE FONDAMENTALE, CLINICO O REGOLATORIO"
 
 
 def test_unexplained_move_is_not_called_a_catalyst():
@@ -70,7 +70,7 @@ def test_format():
             "catalyst_found": True,
             "catalyst_subtype": "COMMERCIAL_PARTNERSHIP",
             "catalyst_source": "SEC",
-            "classification": "FUNDAMENTAL_OR_CLINICAL_CATALYST",
+            "classification": "CATALIZZATORE FONDAMENTALE, CLINICO O REGOLATORIO",
         }
     ], "2026-09-29")
     assert "TOP 5 GIORNALIERO" in message
@@ -78,7 +78,7 @@ def test_format():
     assert "+22.00%" in message
     assert "non rappresenta l’intero mercato" in message
     assert "Nessuna raccomandazione di acquisto o vendita" in message
-    assert "FUNDAMENTAL_OR_CLINICAL_CATALYST" in message
+    assert "CATALIZZATORE FONDAMENTALE, CLINICO O REGOLATORIO" in message
 
 
 
@@ -93,7 +93,7 @@ def test_fundamental_catalyst_is_classified_separately():
         snapshot_fn=lambda ticker: snapshot(86.0, 8.0),
         date_value="2026-09-30",
     )
-    assert rows[0]["classification"] == "FUNDAMENTAL_OR_CLINICAL_CATALYST"
+    assert rows[0]["classification"] == "CATALIZZATORE FONDAMENTALE, CLINICO O REGOLATORIO"
     assert rows[0]["catalyst_evidence"] == "RADAR_RECORDED_EVENT"
 
 
@@ -118,16 +118,16 @@ def test_company_level_corporate_transaction_can_pass_without_program():
 
 
 def test_corporate_transaction_is_fundamental():
-    assert _classify_row({"subtype": "CORPORATE_TRANSACTION"}) == "FUNDAMENTAL_OR_CLINICAL_CATALYST"
+    assert _classify_row({"subtype": "CORPORATE_TRANSACTION"}) == "CATALIZZATORE FONDAMENTALE, CLINICO O REGOLATORIO"
 
 
 def test_ip_catalyst_is_fundamental():
-    assert _classify_row({"subtype": "IP_CATALYST"}) == "FUNDAMENTAL_OR_CLINICAL_CATALYST"
+    assert _classify_row({"subtype": "IP_CATALYST"}) == "CATALIZZATORE FONDAMENTALE, CLINICO O REGOLATORIO"
 
 
 def test_regulatory_patent_catalyst_is_fundamental():
     c = {"subtype": "PATENT_RULING", "source": "COURT", "ticker": "UTHR"}
-    assert _classify_row(c) == "FUNDAMENTAL_OR_CLINICAL_CATALYST"
+    assert _classify_row(c) == "CATALIZZATORE FONDAMENTALE, CLINICO O REGOLATORIO"
 
 def test_clinical_milestone_is_watch():
     c = {"subtype": "CLINICAL_MILESTONE", "source": "COMPANY", "ticker": "LONA"}
@@ -199,7 +199,7 @@ def test_24_72h_catalyst_is_reaction_continuation():
         date_value="2026-09-29",
     )
     assert rows[0]["catalyst_freshness"] == "REACTION_24_72H"
-    assert rows[0]["classification"] == "FUNDAMENTAL_OR_CLINICAL_CATALYST"
+    assert rows[0]["classification"] == "CATALIZZATORE FONDAMENTALE, CLINICO O REGOLATORIO"
     assert rows[0]["alert_quality_gate"]["eligible"] is True
 
 
@@ -292,7 +292,7 @@ def test_verified_program_catalyst_wins_over_later_unscoped_event():
         date_value="2026-10-05",
     )
     assert rows[0]["catalyst_program"] == "VAX-31"
-    assert rows[0]["classification"] == "FUNDAMENTAL_OR_CLINICAL_CATALYST"
+    assert rows[0]["classification"] == "CATALIZZATORE FONDAMENTALE, CLINICO O REGOLATORIO"
     assert rows[0]["alert_quality_gate"]["eligible"] is True
 
 
@@ -331,7 +331,7 @@ def test_primary_fundamental_catalyst_is_radar_candidate():
         snapshot_fn=lambda ticker: snapshot(5.95, 80.0),
         date_value="2026-10-07",
     )
-    assert rows[0]["classification"] == "FUNDAMENTAL_OR_CLINICAL_CATALYST"
+    assert rows[0]["classification"] == "CATALIZZATORE FONDAMENTALE, CLINICO O REGOLATORIO"
     assert rows[0]["radar_inclusion"] == "INCLUDE_IF_MATERIAL"
     assert rows[0]["catalyst_program"] == "TLANDO"
 
