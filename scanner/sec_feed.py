@@ -2,10 +2,12 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import os
 import re
 import threading
 import time
+from pathlib import Path
 
 import requests
 
@@ -31,6 +33,22 @@ WATCHLIST_CIK = {
     "GLUE": "0001829818", "UTHR": "0001082554", "LONA": "0001873745", "MNKD": "0000899460", "PMVP": "0001699929",
     "SMMT": "0001599298", "VTGN": "0001411685", "ARTL": "0001621221", "DCOY": "0001615219", "SRZN": "0001824893", "GCTK": "0001506983", "HCWB": "0001828673",
 }
+# Supplement the hand-verified high-priority mapping with the repository's
+# maintained SEC CIK map. Existing WATCHLIST_CIK entries take precedence because
+# this map has historically contained a few stale ticker/CIK associations.
+_SEC_MAP_PATH = Path(__file__).resolve().parent.parent / "data" / "sec_cik_map.json"
+try:
+    with _SEC_MAP_PATH.open("r", encoding="utf-8") as _sec_map_file:
+        _SEC_STATIC_MAP = json.load(_sec_map_file)
+    if isinstance(_SEC_STATIC_MAP, dict):
+        for _ticker, _cik in _SEC_STATIC_MAP.items():
+            _ticker = str(_ticker).upper().strip()
+            _cik = str(_cik).strip()
+            if _ticker and _cik.isdigit() and _ticker not in WATCHLIST_CIK:
+                WATCHLIST_CIK[_ticker] = _cik.zfill(10)
+except (OSError, ValueError, TypeError) as _sec_map_error:
+    print(f"SEC CIK MAP SUPPLEMENT UNAVAILABLE: {type(_sec_map_error).__name__}: {_sec_map_error}", flush=True)
+
 CATALYST_ITEMS = {"1.01", "1.02", "2.01", "2.03", "3.01", "5.02", "7.01", "8.01"}
 DISCOVERY_MAX_FILINGS = 2
 DISCOVERY_MAX_TICKERS = 6
