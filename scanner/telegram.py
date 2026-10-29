@@ -10,6 +10,7 @@ from zoneinfo import ZoneInfo
 
 import requests
 from scanner.priority import get_alert_tier, enrich_alert_priority
+from scanner.italian_translation import translate_to_italian, alert_protected_terms
 
 TELEGRAM_API = "https://api.telegram.org"
 MAX_MESSAGE_LENGTH = 4096
@@ -126,7 +127,8 @@ def _it_status(value):
         "DIVERGENT": "DIVERGENTE", "STRONG POSITIVE": "FORTEMENTE POSITIVA",
         "STRONG NEGATIVE": "FORTEMENTE NEGATIVA", "CONFIRMED": "CONFERMATA",
         "UNCONFIRMED": "NON CONFERMATA", "FDA_UPDATE": "AGGIORNAMENTO FDA",
-        "1-7D": "1–7 giorni", "1-3D": "1–3 giorni", "1D": "1 giorno", "2-4W": "2–4 settimane", "1-4W": "1–4 settimane", 
+        "1-7D": "1–7 giorni", "1-3D": "1–3 giorni", "1D": "1 giorno", "2-4W": "2–4 settimane", "1-4W": "1–4 settimane",
+        "NEXT_24H": "PROSSIME 24 ORE", "NEXT 24H": "PROSSIME 24 ORE", "NEXT_48H": "PROSSIME 48 ORE", "NEXT 7D": "PROSSIMI 7 GIORNI", "UNKNOWN_TIME": "ORA NON DISPONIBILE", "N/A": "NON DISPONIBILE", "NONE": "NON DISPONIBILE", 
         "EMA_UPDATE": "AGGIORNAMENTO EMA", "WATCH": "DA MONITORARE",
     }
     if key in labels:
@@ -359,11 +361,11 @@ def format_divergence_alert(divergence):
     ticker = _clean_text(divergence.get("ticker", "UNKNOWN"), 20).upper()
     program = _clean_text(divergence.get("program", "UNKNOWN"), 80)
     daily_pct = _num(divergence.get("daily_pct"))
-    catalyst = divergence.get("catalyst_score", "N/A")
-    ti = divergence.get("trading_intelligence_score", "N/A")
-    edge = divergence.get("historical_edge_median_1d_pct", "N/A")
+    catalyst = divergence.get("catalyst_score", "NON DISPONIBILE")
+    ti = divergence.get("trading_intelligence_score", "NON DISPONIBILE")
+    edge = divergence.get("historical_edge_median_1d_pct", "NON DISPONIBILE")
     win = divergence.get("historical_edge_win_rate_1d")
-    win_text = f"{float(win) * 100:.1f}%" if win is not None else "N/A"
+    win_text = f"{float(win) * 100:.1f}%" if win is not None else "NON DISPONIBILE"
     return "\n".join([
         "⚠️ PHARMA RADAR — DIVERGENZA",
         "━━━━━━━━━━━━━━━━━━",
@@ -374,7 +376,7 @@ def format_divergence_alert(divergence):
         f"🎯 Catalizzatore: {catalyst}/100",
         f"🧠 Punteggio di analisi: {ti}/100",
         f"📚 Vantaggio storico: {edge}% · Frequenza di esito positivo: {win_text}",
-        f"📉 Variazione giornaliera: {daily_pct}% · DIVERGENT",
+        f"📉 Variazione giornaliera: {daily_pct}% · DIVERGENTE",
         "",
         "ℹ️ Monitoraggio a scopo informativo: non è un segnale di acquisto o vendita.",
         "━━━━━━━━━━━━━━━━━━",

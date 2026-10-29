@@ -10,6 +10,7 @@ import smtplib
 from email.message import EmailMessage
 
 from scanner.pharma_email_state import email_delivery_key, load_email_state, save_email_state
+from scanner.italian_translation import translate_to_italian, alert_protected_terms
 
 
 PHARMA_EVENT_TYPES = {
@@ -115,7 +116,9 @@ def _it_code(value):
         "UNKNOWN": "NON DISPONIBILE", "PHASE 1": "FASE 1", "PHASE 2": "FASE 2",
         "PHASE 3": "FASE 3", "PHASE 4": "FASE 4", "RECRUITING": "IN ARRUOLAMENTO",
         "COMPLETED": "COMPLETATO", "ACTIVE, NOT RECRUITING": "ATTIVO, NON IN ARRUOLAMENTO",
-        "TERMINATED": "INTERROTTO", "WITHDRAWN": "RITIRATO",
+        "TERMINATED": "INTERROTTO", "WITHDRAWN": "RITIRATO", "UNKNOWN": "NON DISPONIBILE",
+        "NOT YET RECRUITING": "NON ANCORA IN ARRUOLAMENTO", "NOT APPLICABLE": "NON APPLICABILE",
+        "SUSPENDED": "SOSPESO", "ENROLLING BY INVITATION": "ARRUOLAMENTO SU INVITO",
     }
     key = raw.upper()
     return labels.get(key, raw.replace("_", " "))
@@ -210,6 +213,12 @@ def format_pharma_intelligence_email(alert):
     changes = alert.get("changes") if isinstance(alert.get("changes"), dict) else {}
     explainer = _knowledge_explainer(alert)
     journey = _journey_status(alert)
+    protected_terms = alert_protected_terms(alert)
+    title = translate_to_italian(title, protected_terms)
+    summary = translate_to_italian(summary, protected_terms) if summary else ""
+    for key in ("what_is", "mechanism", "indication", "stage", "why_it_matters", "company_impact"):
+        if explainer.get(key):
+            explainer[key] = translate_to_italian(explainer[key], protected_terms)
 
     lines = [
         "PHARMA RADAR — PHARMA INTELLIGENCE",
@@ -224,10 +233,10 @@ def format_pharma_intelligence_email(alert):
         f"📍 Evento: {_it_code(event_type)} — {_it_code(subtype)}",
         f"🧭 Percorso: {journey}",
         "",
-        f"📰 Titolo originale della fonte: {title}",
+        f"📰 Titolo della notizia (tradotto): {title}",
     ]
     if summary:
-        lines += ["", "SINTESI", " ".join(str(summary).split())[:1600]]
+        lines += ["", "SINTESI IN ITALIANO", " ".join(str(summary).split())[:1600]]
 
     lines += [
         "",
@@ -246,10 +255,13 @@ def format_pharma_intelligence_email(alert):
     if changes:
         lines += ["", "🔄 COSA È CAMBIATO"]
         for field, change in changes.items():
+            field_it = translate_to_italian(field, protected_terms)
             if isinstance(change, dict):
-                lines.append(f"• {field}: {change.get('old')} → {change.get('new')}")
+                old_value = translate_to_italian(change.get("old"), protected_terms) if change.get("old") else "non disponibile"
+                new_value = translate_to_italian(change.get("new"), protected_terms) if change.get("new") else "non disponibile"
+                lines.append(f"• {field_it}: {old_value} → {new_value}")
             else:
-                lines.append(f"• {field}: {change}")
+                lines.append(f"• {field_it}: {translate_to_italian(change, protected_terms)}")
 
     lines += [
         "",
