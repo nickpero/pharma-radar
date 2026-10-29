@@ -28,6 +28,8 @@ def test_calendar_uses_watchlist_and_precision():
     assert len(rows) == 1
     assert rows[0]["ticker"] == "ABC"
     assert rows[0]["date_precision"] == "MONTH"
+    assert rows[0]["date_is_estimate"] is True
+    assert rows[0]["source_url"] == "https://clinicaltrials.gov/study/NCT1"
 
 
 def test_completed_trials_are_excluded():
@@ -56,6 +58,8 @@ def test_format():
     }], days=90)
     assert "CATALYST CALENDAR" in message
     assert "2026-10 (month)" in message
+    assert "Estimated registry milestone" in message
+    assert "https://clinicaltrials.gov/study/NCT1" in message
 
 
 if __name__ == "__main__":
