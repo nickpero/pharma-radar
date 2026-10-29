@@ -126,6 +126,7 @@ def _it_status(value):
         "DIVERGENT": "DIVERGENTE", "STRONG POSITIVE": "FORTEMENTE POSITIVA",
         "STRONG NEGATIVE": "FORTEMENTE NEGATIVA", "CONFIRMED": "CONFERMATA",
         "UNCONFIRMED": "NON CONFERMATA", "FDA_UPDATE": "AGGIORNAMENTO FDA",
+        "1-7D": "1–7 giorni", "1-3D": "1–3 giorni", "1D": "1 giorno", "2-4W": "2–4 settimane", "1-4W": "1–4 settimane", 
         "EMA_UPDATE": "AGGIORNAMENTO EMA", "WATCH": "DA MONITORARE",
     }
     if key in labels:
@@ -215,14 +216,14 @@ def _why_it_matters(alert, event, subtype):
         return why
 
     fallback = {
-        "FDA_APPROVAL": "Confirmed FDA approval is a major regulatory and commercial milestone.",
-        "FDA_MEETING": "FDA meeting or discussion; regulatory outcome is not an approval.",
-        "FDA_PATHWAY": "Regulatory pathway discussion; approval has not been confirmed.",
-        "FDA_REJECTION": "FDA rejection is a major regulatory setback that can materially change the program's commercial outlook.",
-        "FDA_SAFETY_WARNING": "A new FDA safety warning can materially affect the product's risk profile, label and commercial outlook.",
-        "CLINICAL_RESULTS": "Clinical results can materially change the probability of success and valuation of the program.",
-        "CLINICAL_REVIEW_UPDATE": "A DSMB/blinded/interim review may update development expectations, but it is not a disclosed efficacy or top-line readout.",
-        "LABEL_EXPANSION": "A label expansion increases the addressable patient population and can materially change the product's commercial opportunity.",
+        "FDA_APPROVAL": "Un’approvazione FDA confermata è una tappa regolatoria e commerciale importante.",
+        "FDA_MEETING": "Incontro o confronto con la FDA: non equivale a un’approvazione.",
+        "FDA_PATHWAY": "Discussione sul percorso regolatorio: l’approvazione non è confermata.",
+        "FDA_REJECTION": "Un rifiuto della FDA è un ostacolo regolatorio importante e può cambiare le prospettive commerciali del programma.",
+        "FDA_SAFETY_WARNING": "Un nuovo avviso di sicurezza FDA può incidere sul profilo di rischio, sull’indicazione e sulle prospettive commerciali del prodotto.",
+        "CLINICAL_RESULTS": "I risultati clinici possono modificare in modo significativo la probabilità di successo e la valutazione del programma.",
+        "CLINICAL_REVIEW_UPDATE": "Una revisione del comitato indipendente, in cieco o ad interim può aggiornare le aspettative di sviluppo, ma non equivale alla pubblicazione dei risultati di efficacia o dei risultati principali.",
+        "LABEL_EXPANSION": "L’estensione dell’indicazione amplia la popolazione di pazienti potenzialmente trattabili e può modificare le opportunità commerciali del prodotto.",
     }
     return fallback.get(str(subtype).upper())
 
@@ -285,7 +286,7 @@ def format_catalyst_alert(alert):
         completion_date = _clean_text(trial.get("completion_date"), 40)
         lines.extend([
             "",
-            "ℹ️ Stato ClinicalTrials.gov: COMPLETED — non implica risultati positivi.",
+            "ℹ️ Stato su ClinicalTrials.gov: COMPLETATO — non implica risultati positivi.",
         ])
         if nct_id:
             lines.append(f"🔗 Registro: {nct_id}")
@@ -300,12 +301,12 @@ def format_catalyst_alert(alert):
         current_price = alert.get("post_spike_current_price")
         lines.extend([
             "",
-            "🔄 POST-SPIKE WATCH",
-            f"📅 Spike date: {alert.get('post_spike_date', 'N/A')}",
-            f"🚀 Spike: {spike_pct}% · Volume {volume_ratio:.1f}x" if isinstance(volume_ratio, (int, float)) and spike_pct is not None else "🚀 Spike: data available",
-            f"💵 Spike close: {spike_price} → Current: {current_price}",
-            f"📉 Retracement: {retracement}%" if retracement is not None else "📉 Retracement: N/A",
-            "ℹ️ Catalyst already produced a major move; monitoring post-spike behavior.",
+            "🔄 MONITORAGGIO DOPO IL RIALZO",
+            f"📅 Data del rialzo: {alert.get('post_spike_date', 'non disponibile')}",
+            f"🚀 Rialzo: {spike_pct}% · Volume {volume_ratio:.1f}×" if isinstance(volume_ratio, (int, float)) and spike_pct is not None else "🚀 Rialzo: dato disponibile",
+            f"💵 Chiusura al rialzo: {spike_price} → Prezzo attuale: {current_price}",
+            f"📉 Ritracciamento: {retracement}%" if retracement is not None else "📉 Ritracciamento: non disponibile",
+            "ℹ️ Il catalizzatore ha già prodotto un movimento rilevante; si monitora l’andamento successivo.",
         ])
 
     lines.extend([
