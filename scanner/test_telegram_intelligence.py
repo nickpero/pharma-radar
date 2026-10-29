@@ -132,7 +132,7 @@ def test_telegram_is_compact_and_hierarchical():
     })
     message = format_catalyst_alert(alert)
     assert "🚨 PHARMA RADAR" in message
-    assert "🚨 CRITICAL" in message
+    assert "🚨 CRITICO" in message
     assert "🧬 IONS" in message
     assert "💊 Zilganersen (Zanvastro)" in message
     assert "📰 FDA APPROVAL" in message
@@ -337,7 +337,7 @@ def test_telegram_marks_watch_only_alert_as_non_urgent():
     alert = _alert("VBIO", 45, 60, "WATCH")
     alert["telegram_action"] = "WATCH"
     message = format_catalyst_alert(alert)
-    assert "👀 WATCH — informativo, non urgente" in message
+    assert "👀 DA MONITORARE — informativo, non urgente" in message
 
 
 def test_early_discovery_never_displays_critical_as_operational():
@@ -351,8 +351,8 @@ def test_early_discovery_never_displays_critical_as_operational():
         "published_at": datetime.now(timezone.utc).isoformat(),
     })
     message = format_catalyst_alert(alert)
-    assert "WATCH · NON CONFERMATO" in message
+    assert "DA VERIFICARE · NON CONFERMATO" in message
     assert "Potenziale catalyst (non confermato)" in message
     assert "Punteggio interno: 99/100 · non operativo" in message
-    assert "🚨 CRITICAL" not in message
-    assert "Priority: 99/100 · CRITICAL" not in message
+    assert "🚨 CRITICO" not in message
+    assert "Priorità: 99/100 · CRITICO" not in message
