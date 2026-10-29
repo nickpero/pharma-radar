@@ -22071,5 +22071,5271 @@
       "Zimberelimab",
       "Metformin Hydrochloride"
     ]
+  },
+  "AGIO:mitapivat (PYRUKYND):NCT06648824": {
+    "nct_id": "NCT06648824",
+    "title": "Study of How Mitapivat Affects Midazolam Blood Levels in Healthy Participants",
+    "official_title": "A Phase 1, Open-label, One-Sequence Crossover Study to Assess the Effect of Mitapivat on the Pharmacokinetics of the CYP3A Substrate (Midazolam) in Healthy Participants",
+    "status": "COMPLETED",
+    "last_update": "2025-01-28",
+    "start_date": "2024-10-17",
+    "completion_date": "2024-12-03",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 20,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Agios Pharmaceuticals, Inc.",
+    "conditions": [
+      "Healthy Participants"
+    ],
+    "interventions": [
+      "Mitapivat",
+      "Midazolam"
+    ]
+  },
+  "CNTA:cleminorexton:NCT07598708": {
+    "nct_id": "NCT07598708",
+    "title": "A Study to Investigate the Effects of Cleminorexton Compared With Placebo in the Treatment of Participants With Central Disorders of Hypersomnolence",
+    "official_title": "A Randomized, Double-blind, 3-Arm Parallel Design Study to Investigate the Efficacy, Safety, Tolerability, and Pharmacokinetics of Cleminorexton Compared With Placebo in Participants With Central Disorders of Hypersomnolence",
+    "status": "RECRUITING",
+    "last_update": "2026-10-02",
+    "start_date": "2026-05-29",
+    "completion_date": "2027-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2",
+      "PHASE3"
+    ],
+    "enrollment": 222,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Centessa Pharmaceuticals (UK) Limited",
+    "conditions": [
+      "Narcolepsy Type 1",
+      "Narcolepsy Type 2"
+    ],
+    "interventions": [
+      "cleminorexton",
+      "Placebo"
+    ]
+  },
+  "CNTA:cleminorexton:NCT06752668": {
+    "nct_id": "NCT06752668",
+    "title": "A Study of ORX750 in Participants With Narcolepsy and Idiopathic Hypersomnia",
+    "official_title": "A Phase 2a, Randomized, Double-blind, Placebo-controlled Study of the Safety, Tolerability, Pharmacokinetics, and Pharmacodynamics of ORX750 in Subjects With Narcolepsy and Idiopathic Hypersomnia (CRYSTAL-1)",
+    "status": "RECRUITING",
+    "last_update": "2026-04-27",
+    "start_date": "2024-12-23",
+    "completion_date": "2026-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 248,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Centessa Pharmaceuticals (UK) Limited",
+    "conditions": [
+      "Narcolepsy Type 1",
+      "Narcolepsy Type 2",
+      "Idiopathic Hypersomnia"
+    ],
+    "interventions": [
+      "ORX750",
+      "Placebo"
+    ]
+  },
+  "CNTA:orexin receptor 2 agonist program:NCT07096674": {
+    "nct_id": "NCT07096674",
+    "title": "A Long-term Extension Study of ORX750 in Participants With Narcolepsy and Idiopathic Hypersomnia",
+    "official_title": "A Phase 2, Long-term Extension Study of the Safety and Efficacy of ORX750 in Participants With Narcolepsy and Idiopathic Hypersomnia Who Completed a Sponsored ORX750 Clinical Trial",
+    "status": "RECRUITING",
+    "last_update": "2026-04-16",
+    "start_date": "2025-08-12",
+    "completion_date": "2026-04-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 90,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Centessa Pharmaceuticals (UK) Limited",
+    "conditions": [
+      "Narcolepsy Type 1",
+      "Narcolepsy Type 2",
+      "Idiopathic Hypersomnia"
+    ],
+    "interventions": [
+      "ORX750",
+      "ORX750",
+      "ORX750"
+    ]
+  },
+  "EXEL:zanzalintinib:NCT07773454": {
+    "nct_id": "NCT07773454",
+    "title": "Study of Zanzalintinib in Children and Adolescents With Relapsed or Refractory Solid Tumors",
+    "official_title": "A Phase 1 Dose-Escalation Study of XL092 in Children and Adolescents With Relapsed or Refractory Solid Tumors",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-08-19",
+    "start_date": "2026-09-30",
+    "completion_date": "2028-07-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 18,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Exelixis",
+    "conditions": [
+      "Cancer",
+      "Pediatric Cancer"
+    ],
+    "interventions": [
+      "Zanzalintinib"
+    ]
+  },
+  "EXEL:zanzalintinib:NCT07470489": {
+    "nct_id": "NCT07470489",
+    "title": "Zanzalintinib Plus Cemiplimab for the Treatment of BRAF Wild-Type Anaplastic Thyroid Cancer",
+    "official_title": "A Multi-Center Single-Arm Phase 2 Trial Of Zanzalintinib In Combination With Cemiplimab In BRAF Wild-Type Anaplastic Thyroid Cancer: The ZEPHYR Trial",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-10-14",
+    "start_date": "2027-01-31",
+    "completion_date": "2032-09-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 12,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "M.D. Anderson Cancer Center",
+    "conditions": [
+      "Anaplastic Thyroid Cancer"
+    ],
+    "interventions": [
+      "Cemiplimab",
+      "Zanzalintinib"
+    ]
+  },
+  "EXEL:zanzalintinib:NCT07527169": {
+    "nct_id": "NCT07527169",
+    "title": "A Phase 2 Study Of Zanzalintinib For Patients With Recurrent Or Metastatic Olfactory Neuroblastoma",
+    "official_title": "A Phase 2 Study Of Zanzalintinib For Patients With Recurrent Or Metastatic Olfactory Neuroblastoma",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-10-05",
+    "start_date": "2026-10-01",
+    "completion_date": "2030-07-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 16,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "M.D. Anderson Cancer Center",
+    "conditions": [
+      "Metastatic Olfactory Neuroblastoma"
+    ],
+    "interventions": [
+      "Zanzalintinib"
+    ]
+  },
+  "EXEL:zanzalintinib:NCT07049926": {
+    "nct_id": "NCT07049926",
+    "title": "Substudy 03C: A Study of Combination Therapies in Participants With Renal Cell Carcinoma With Recurrent Disease During or After Anti-PD-(L)1 Therapy (MK-3475-03C/KEYMAKER-U03)",
+    "official_title": "A Phase 1b/2 Study of Immune and Targeted Combination Therapies in Participants With RCC (KEYMAKER-U03): Substudy 03C in Participants With Recurrent Disease During or After Anti-PD-(L)1 Adjuvant Therapy",
+    "status": "RECRUITING",
+    "last_update": "2026-10-27",
+    "start_date": "2025-07-20",
+    "completion_date": "2031-10-26",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 140,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Merck Sharp & Dohme LLC",
+    "conditions": [
+      "Renal Cell Carcinoma"
+    ],
+    "interventions": [
+      "Belzutifan",
+      "Zanzalintinib"
+    ]
+  },
+  "EXEL:zanzalintinib:NCT07878689": {
+    "nct_id": "NCT07878689",
+    "title": "Study of Tegavivint Plus Zanzalintinib in Patients With Advanced Hepatocellular Carcinoma",
+    "official_title": "A Phase 1/2 Study of Tegavivint Plus Zanzalintinib in Patients With Advanced Hepatocellular Carcinoma",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-10-16",
+    "start_date": "2026-12-01",
+    "completion_date": "2029-12-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 36,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "University of Texas Southwestern Medical Center",
+    "conditions": [
+      "Hepatocellular Carcinoma (HCC)"
+    ],
+    "interventions": [
+      "Zanzalintinib",
+      "Zanzalintinib",
+      "Tegavivint",
+      "Tegavivint"
+    ]
+  },
+  "EXEL:zanzalintinib:NCT07691476": {
+    "nct_id": "NCT07691476",
+    "title": "A Phase 2 Multicenter Single-Arm Clinical Trial of Zanzalintinib and Pembrolizumab in Subjects With Resectable Clear Cell Renal Cell Carcinoma",
+    "official_title": "A Phase 2 Multicenter Single-Arm Clinical Trial of Zanzalintinib and Pembrolizumab in Subjects With Resectable Clear Cell Renal Cell Carcinoma",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-07-09",
+    "start_date": "2026-10-01",
+    "completion_date": "2029-02-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 48,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Yonsei University",
+    "conditions": [
+      "Patients With Locally Advanced or Metastatic But Resectable Clear Cell Renal Cell Carcinoma"
+    ],
+    "interventions": [
+      "Zanzalintinib and Pembrolizumab"
+    ]
+  },
+  "EXEL:zanzalintinib:NCT07845786": {
+    "nct_id": "NCT07845786",
+    "title": "Zanzalintinib and Pembrolizumab in First-Line Maintenance for Metastatic Squamous Non-Small Cell Lung Cancer (NSCLC)",
+    "official_title": "A Phase 2, Single-Arm, Multicenter Trial of Zanzalintinib in Combination With Pembrolizumab in First-Line Maintenance for Metastatic Squamous Non-Small Cell Lung Cancer",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-09-29",
+    "start_date": "2026-12-15",
+    "completion_date": "2030-06-15",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 60,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Exelixis",
+    "conditions": [
+      "Squamous Non-Small Cell Lung Cancer (NSCLC)"
+    ],
+    "interventions": [
+      "Carboplatin",
+      "Paclitaxel",
+      "Nab-paclitaxel",
+      "Pembrolizumab",
+      "Zanzalintinib"
+    ]
+  },
+  "EXEL:zanzalintinib:NCT06912087": {
+    "nct_id": "NCT06912087",
+    "title": "Dose Finding Study of Zanzalintinib With Pembrolizumab and Cetuximab in Head and Neck SCC",
+    "official_title": "A Phase I Study of Zanzalintinib With Pembrolizumab and Cetuximab in Patients With Recurrent and/or Metastatic Squamous Cell Carcinoma of the Head and Neck",
+    "status": "RECRUITING",
+    "last_update": "2025-12-02",
+    "start_date": "2025-09-29",
+    "completion_date": "2027-06-05",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 36,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "University of Chicago",
+    "conditions": [
+      "Head and Neck Neoplasms",
+      "Carcinoma, Squamous Cell",
+      "Neoplasm Recurrence, Local",
+      "Neoplasm Metastasis",
+      "Recurrent Squamous Cell Carcinoma",
+      "Metastatic Squamous Cell Carcinoma"
+    ],
+    "interventions": [
+      "Zanzalintinib",
+      "Cetuximab",
+      "Pembrolizumab"
+    ]
+  },
+  "EXEL:zanzalintinib:NCT06191796": {
+    "nct_id": "NCT06191796",
+    "title": "Study of Zanzalintinib (XL092) + AB521 and Zanzalintinib + AB521 + Nivolumab in Participants With Advanced Clear Cell Renal Cell Carcinoma (ccRCC) or Other Advanced Solid Tumors (STELLAR-009)",
+    "official_title": "A Phase 1b/2 Dose-finding and Expansion Study Evaluating the Safety and Efficacy of Zanzalintinib (XL092) Combined With Either AB521 or AB521 Plus Nivolumab in Subjects With Advanced Clear Cell Renal Cell Carcinoma or Other Advanced Solid Tumors.",
+    "status": "TERMINATED",
+    "last_update": "2025-06-12",
+    "start_date": "2024-01-25",
+    "completion_date": "2025-05-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 25,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Exelixis",
+    "conditions": [
+      "Advanced Clear Cell Renal Cell Carcinoma or Other Advanced Solid Tumors"
+    ],
+    "interventions": [
+      "zanzalintinib",
+      "AB521",
+      "Nivolumab"
+    ]
+  },
+  "EXEL:zanzalintinib:NCT07185945": {
+    "nct_id": "NCT07185945",
+    "title": "Zanzalintinib for Advanced Urothelial Carcinoma Progressing After Prior Therapy",
+    "official_title": "Phase II Trial of Zanzalintinib for Advanced Urothelial Carcinoma Progressing After Prior Therapy",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-09-02",
+    "start_date": "2026-10",
+    "completion_date": "2029-06",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 44,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Guru Sonpavde",
+    "conditions": [
+      "Advanced Urothelial Carcinoma"
+    ],
+    "interventions": [
+      "Zanzalintinib"
+    ]
+  },
+  "EXEL:zanzalintinib:NCT07227402": {
+    "nct_id": "NCT07227402",
+    "title": "A Clinical Study of Belzutifan and Zanzalintinib in People With Recurrent Kidney Cancer Following Adjuvant Therapy (MK-6482-033)",
+    "official_title": "A Phase 3, Randomized, Open-label Study of Belzutifan + Zanzalintinib Versus Cabozantinib in Participants With Advanced RCC Who Experienced Disease Recurrence During or After Prior Adjuvant Anti-PD-1/L1 Therapy (LITESPARK-033)",
+    "status": "RECRUITING",
+    "last_update": "2026-08-03",
+    "start_date": "2025-11-26",
+    "completion_date": "2032-02-27",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 904,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Merck Sharp & Dohme LLC",
+    "conditions": [
+      "Renal Cell Carcinoma"
+    ],
+    "interventions": [
+      "Belzutifan",
+      "Zanzalintinib",
+      "Cabozantinib"
+    ]
+  },
+  "EXEL:zanzalintinib:NCT06795009": {
+    "nct_id": "NCT06795009",
+    "title": "Zanzalintinib in Combination With Paclitaxel in Recurrent High Grade Uterine Cancer",
+    "official_title": "Phase I/IB Study of Zanzalintinib in Combination With Paclitaxel in Recurrent High Grade Uterine Cancer",
+    "status": "RECRUITING",
+    "last_update": "2026-10-13",
+    "start_date": "2025-10-17",
+    "completion_date": "2035-04-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 36,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Washington University School of Medicine",
+    "conditions": [
+      "Uterine Cancer",
+      "Endometrial Cancer"
+    ],
+    "interventions": [
+      "Zanzalintinib",
+      "Paclitaxel"
+    ]
+  },
+  "EXEL:zanzalintinib:NCT07623460": {
+    "nct_id": "NCT07623460",
+    "title": "Zanzalintinib Efficacy Post Pluvicto® in Chemotherapy Naïve Metastatic Castration Resistant Prostate Cancer",
+    "official_title": "ZENITH: Zanzalintinib Efficacy Post Pluvicto® in Chemotherapy Naïve Metastatic Castration Resistant Prostate Cancer",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-06-03",
+    "start_date": "2026-09",
+    "completion_date": "2031-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 30,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Stuthi Perimbeti",
+    "conditions": [
+      "mCRPC (Metastatic Castration-resistant Prostate Cancer)"
+    ],
+    "interventions": [
+      "Zanzalintinib"
+    ]
+  },
+  "EXEL:zanzalintinib:NCT06968988": {
+    "nct_id": "NCT06968988",
+    "title": "Zanzalintinib in Combination With Ipilimumab and Nivolumab in Patients With Metastatic Soft Tissue Sarcoma",
+    "official_title": "Phase I Study With Expansion Cohort of Zanzalintinib in Combination With Ipilimumab and Nivolumab in Patients With Metastatic Soft Tissue Sarcoma",
+    "status": "SUSPENDED",
+    "last_update": "2026-09-04",
+    "start_date": "2026-01-05",
+    "completion_date": "2034-01-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 18,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Washington University School of Medicine",
+    "conditions": [
+      "Metastatic Soft-tissue Sarcoma"
+    ],
+    "interventions": [
+      "Zanzalintinib",
+      "Ipilimumab",
+      "Nivolumab"
+    ]
+  },
+  "EXEL:zanzalintinib:NCT07193550": {
+    "nct_id": "NCT07193550",
+    "title": "A Phase 2 Trial of Zanzalintinib in Advanced/Metastatic Bone Sarcomas (ZAMBONE)",
+    "official_title": "A Phase 2 Trial of Zanzalintinib in Advanced/Metastatic Bone Sarcomas (ZAMBONE)",
+    "status": "RECRUITING",
+    "last_update": "2026-09-25",
+    "start_date": "2025-12-05",
+    "completion_date": "2031-10-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 70,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "M.D. Anderson Cancer Center",
+    "conditions": [
+      "Bone Sarcomas"
+    ],
+    "interventions": [
+      "Zanzalintinib"
+    ]
+  },
+  "EXEL:zanzalintinib:NCT07226063": {
+    "nct_id": "NCT07226063",
+    "title": "Maintenance Zanzalintinib and Durvalumab in Participants With Advanced Hepatocellular Cancer",
+    "official_title": "A Phase II Study of Maintenance Zanzalintinib and Durvalumab in Patients With Advanced Hepatocellular Cancer After Induction Tremelimumab Plus Durvalumab",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-05-05",
+    "start_date": "2026-05",
+    "completion_date": "2028-08",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 16,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Amit Mahipal",
+    "conditions": [
+      "Hepatocellular Carcinoma",
+      "Liver Cancer"
+    ],
+    "interventions": [
+      "Durvalumab",
+      "Zanzalintinib"
+    ]
+  },
+  "EXEL:zanzalintinib:NCT06698250": {
+    "nct_id": "NCT06698250",
+    "title": "Zanzalintinib (XL-092) Plus Durvalumab and Tremelimumab in Unresectable Hepatocellular Carcinoma (ZENOBIA)",
+    "official_title": "Phase II Trial of Zanzalintinib (XL-092) in Combination With Durvalumab Plus Tremelimumab in Unresectable Hepatocellular Carcinoma (ZENOBIA)",
+    "status": "RECRUITING",
+    "last_update": "2025-11-06",
+    "start_date": "2024-12-18",
+    "completion_date": "2027-04-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 40,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Anwaar Saeed",
+    "conditions": [
+      "Hepatocellular Carcinoma"
+    ],
+    "interventions": [
+      "Zanzalintinib",
+      "Durvalumab",
+      "Tremelimumab"
+    ]
+  },
+  "EXEL:zanzalintinib:NCT06926634": {
+    "nct_id": "NCT06926634",
+    "title": "Zanzalintinib Maintenance in Patients With High Grade Neuroendocrine Neoplasms (HG-NENs)",
+    "official_title": "Zanzalintinib Maintenance in Patients With High Grade Neuroendocrine Neoplasms (HG-NENs)",
+    "status": "RECRUITING",
+    "last_update": "2026-10-14",
+    "start_date": "2025-12-09",
+    "completion_date": "2034-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 32,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Washington University School of Medicine",
+    "conditions": [
+      "High Grade Neuroendocrine Neoplasms"
+    ],
+    "interventions": [
+      "Zanzalintinib"
+    ]
+  },
+  "EXEL:cabozantinib:NCT01639508": {
+    "nct_id": "NCT01639508",
+    "title": "Cabozantinib in Patients With RET Fusion-Positive Advanced Non-Small Cell Lung Cancer and Those With Other Genotypes: ROS1 or NTRK Fusions or Increased MET or AXL Activity",
+    "official_title": "A Phase II Study of Cabozantinib in Patients With RET Fusion-Positive Advanced Non-Small Cell Lung Cancer and Those With Other Genotypes: ROS1 or NTRK Fusions or Increased MET or AXL Activity",
+    "status": "RECRUITING",
+    "last_update": "2026-10-13",
+    "start_date": "2012-07",
+    "completion_date": "2027-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 86,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Memorial Sloan Kettering Cancer Center",
+    "conditions": [
+      "Non-Small Cell Lung Cancer"
+    ],
+    "interventions": [
+      "Cabozantinib"
+    ]
+  },
+  "EXEL:cabozantinib:NCT01709435": {
+    "nct_id": "NCT01709435",
+    "title": "Cabozantinib S-Malate in Treating Younger Patients With Recurrent or Refractory Solid Tumors",
+    "official_title": "A Phase 1 Study of XL184 (Cabozantinib) in Children and Adolescents With Recurrent or Refractory Solid Tumors, Including CNS Tumors",
+    "status": "COMPLETED",
+    "last_update": "2023-12-22",
+    "start_date": "2012-11-14",
+    "completion_date": "2019-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 41,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "National Cancer Institute (NCI)",
+    "conditions": [
+      "Recurrent Malignant Solid Neoplasm",
+      "Recurrent Melanoma",
+      "Recurrent Primary Central Nervous System Neoplasm",
+      "Recurrent Thyroid Gland Carcinoma",
+      "Refractory Malignant Solid Neoplasm",
+      "Refractory Primary Central Nervous System Neoplasm",
+      "Thyroid Gland Medullary Carcinoma"
+    ],
+    "interventions": [
+      "Cabozantinib S-malate",
+      "Laboratory Biomarker Analysis",
+      "Pharmacological Study"
+    ]
+  },
+  "EXEL:cabozantinib:NCT02496208": {
+    "nct_id": "NCT02496208",
+    "title": "Cabozantinib S-malate and Nivolumab With or Without Ipilimumab in Treating Patients With Metastatic Genitourinary Tumors",
+    "official_title": "A Phase 1 Study of Cabozantinib Plus Nivolumab (CaboNivo) Alone or in Combination With Ipilimumab (CaboNivoIpi) in Patients With Advanced/Metastatic Urothelial Carcinoma and Other Genitourinary Tumors",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-10-15",
+    "start_date": "2015-07-22",
+    "completion_date": "2027-07-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 152,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "National Cancer Institute (NCI)",
+    "conditions": [
+      "Bladder Small Cell Neuroendocrine Carcinoma",
+      "Bladder Squamous Cell Carcinoma",
+      "Bladder Urothelial Carcinoma",
+      "Clear Cell Renal Cell Carcinoma",
+      "Invasive Bladder Plasmacytoid Urothelial Carcinoma",
+      "Invasive Bladder Sarcomatoid Urothelial Carcinoma",
+      "Invasive Sarcomatoid Urothelial Carcinoma",
+      "Kidney Medullary Carcinoma",
+      "Malignant Genitourinary System Neoplasm",
+      "Malignant Solid Neoplasm",
+      "Penile Carcinoma",
+      "Penile Squamous Cell Carcinoma",
+      "Renal Cell Carcinoma",
+      "Renal Pelvis Urothelial Carcinoma",
+      "Sarcomatoid Renal Cell Carcinoma",
+      "Stage III Bladder Cancer AJCC v8",
+      "Stage III Penile Cancer AJCC v8",
+      "Stage III Renal Cell Cancer AJCC v8",
+      "Stage III Renal Pelvis and Ureter Cancer AJCC v8",
+      "Stage III Renal Pelvis Cancer AJCC v8",
+      "Stage III Ureter Cancer AJCC v8",
+      "Stage III Urethral Cancer AJCC v8",
+      "Stage IV Bladder Cancer AJCC v8",
+      "Stage IV Penile Cancer AJCC v8",
+      "Stage IV Renal Cell Cancer AJCC v8",
+      "Stage IV Renal Pelvis and Ureter Cancer AJCC v8",
+      "Stage IV Ureter Cancer AJCC v8",
+      "Stage IV Urethral Cancer AJCC v8",
+      "Ureter Urothelial Carcinoma",
+      "Urethral Urothelial Carcinoma"
+    ],
+    "interventions": [
+      "Biopsy Procedure",
+      "Biospecimen Collection",
+      "Cabozantinib S-malate",
+      "Computed Tomography",
+      "Echocardiography Test",
+      "Ipilimumab",
+      "Magnetic Resonance Imaging",
+      "Nivolumab"
+    ]
+  },
+  "EXEL:cabozantinib:NCT05182164": {
+    "nct_id": "NCT05182164",
+    "title": "Combination of Pembrolizumab and Cabozantinib in Patients With Advanced Sarcomas",
+    "official_title": "Combination of Pembrolizumab and Cabozantinib in Patients With Advanced Sarcomas",
+    "status": "RECRUITING",
+    "last_update": "2025-10-07",
+    "start_date": "2022-04-25",
+    "completion_date": "2027-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 119,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Institut Bergonié",
+    "conditions": [
+      "Soft Tissue Sarcoma Adult",
+      "Advanced Soft-tissue Sarcoma",
+      "Ewing Sarcoma",
+      "Osteosarcoma",
+      "Undifferentiated Pleomorphic Sarcoma"
+    ],
+    "interventions": [
+      "Association of pembrolizumab + cabozantinib"
+    ]
+  },
+  "EXEL:cabozantinib:NCT03729245": {
+    "nct_id": "NCT03729245",
+    "title": "A Study of Bempegaldesleukin (NKTR-214: BEMPEG) in Combination With Nivolumab Compared With the Investigator's Choice of a Tyrosine Kinase Inhibitor (TKI) Therapy (Either Sunitinib or Cabozantinib Monotherapy) for Advanced Metastatic Renal Cell Carcinoma (RCC)",
+    "official_title": "A Phase 3 Randomized Open Label Study to Compare NKTR-214 Combined With Nivolumab to the Investigator's Choice of Sunitinib or Cabozantinib in Patients With Previously Untreated Advanced Renal Cell Carcinoma",
+    "status": "TERMINATED",
+    "last_update": "2023-04-11",
+    "start_date": "2018-12-18",
+    "completion_date": "2022-10-19",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 623,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Nektar Therapeutics",
+    "conditions": [
+      "Renal Cell Carcinoma",
+      "Metastatic Renal Cell Carcinoma"
+    ],
+    "interventions": [
+      "bempegaldesleukin",
+      "sunitinib",
+      "nivolumab",
+      "cabozantinib"
+    ]
+  },
+  "EXEL:cabozantinib:NCT03943602": {
+    "nct_id": "NCT03943602",
+    "title": "Cabozantinib in Patients With Advanced Penile Squamous Cell Carcinoma (PSCC) (CaboPen)",
+    "official_title": "Cabozantinib in Patients With Advanced Penile Squamous Cell Carcinoma (PSCC): an Open-label, Single-center, Phase 2, Single-arm Trial (CaboPen)",
+    "status": "UNKNOWN",
+    "last_update": "2021-02-25",
+    "start_date": "2019-08-01",
+    "completion_date": "2022-09-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 37,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Fondazione IRCCS Istituto Nazionale dei Tumori, Milano",
+    "conditions": [
+      "Penile Squamous Cell Carcinoma"
+    ],
+    "interventions": [
+      "Cabozantinib"
+    ]
+  },
+  "EXEL:cabozantinib:NCT06026410": {
+    "nct_id": "NCT06026410",
+    "title": "KO-2806 Monotherapy and Combination Therapies in Advanced Solid Tumors",
+    "official_title": "Phase 1, First-in-Human, Multicenter, Open-Label Study to Evaluate the Safety, Tolerability, Pharmacokinetics, Pharmacodynamics, and Preliminary Antitumor Activity of KO-2806 When Administered as Monotherapy and in Combination Therapy in Adult Patients With Advanced Solid Tumors",
+    "status": "RECRUITING",
+    "last_update": "2026-10-14",
+    "start_date": "2023-10-18",
+    "completion_date": "2027-04",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 300,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Kura Oncology, Inc.",
+    "conditions": [
+      "Solid Tumors With HRAS Alterations",
+      "Non Small Cell Lung Cancer (NSCLC)",
+      "Colorectal Cancer (CRC)",
+      "Pancreatic Ductal Adenocarcinoma (PDAC)",
+      "Clear Cell Renal Cell Carcinoma (ccRCC)",
+      "Renal Cell Carcinoma (Kidney Cancer)",
+      "Non Clear Cell Renal Cell Carcinoma (nccRCC)"
+    ],
+    "interventions": [
+      "Darlifarnib",
+      "Cabozantinib",
+      "Adagrasib"
+    ]
+  },
+  "EXEL:cabozantinib:NCT07383441": {
+    "nct_id": "NCT07383441",
+    "title": "Adding Biotherapy or Placebo to Standard Treatment for Advanced Kidney Cancer",
+    "official_title": "Phase III Double Blinded Trial of Immune-Based Therapy With a Live Biotherapeutic MO-03 or Placebo for Frontline Therapy of Advanced Clear Cell Renal Cell Carcinoma [BioFront Trial]",
+    "status": "RECRUITING",
+    "last_update": "2026-06-11",
+    "start_date": "2026-06-05",
+    "completion_date": "2034-01-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 718,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "SWOG Cancer Research Network",
+    "conditions": [
+      "Advanced Clear Cell Renal Cell Carcinoma",
+      "Metastatic Clear Cell Renal Cell Carcinoma",
+      "Stage III Renal Cell Cancer AJCC v8",
+      "Stage IV Renal Cell Cancer AJCC v8"
+    ],
+    "interventions": [
+      "Axitinib",
+      "Biospecimen Collection",
+      "Bone Scan",
+      "Cabozantinib",
+      "Clostridium butyricum CBM 588 Probiotic Strain",
+      "Computed Tomography",
+      "Ipilimumab",
+      "Lenvatinib",
+      "Magnetic Resonance Imaging",
+      "Nivolumab",
+      "Nivolumab and Recombinant Human Hyaluronidase",
+      "Pembrolizumab",
+      "Placebo Administration"
+    ]
+  },
+  "EXEL:cabozantinib:NCT05536141": {
+    "nct_id": "NCT05536141",
+    "title": "A Phase 1 Study of AB521 Monotherapy and Combination Therapies in Renal Cell Carcinoma and Other Solid Tumors",
+    "official_title": "A Phase 1, Open-label, Dose Escalation and Dose Expansion Study, to Investigate the Safety, Tolerability, and Pharmacokinetic Profile of AB521 Monotherapy and Combination Therapies in Participants With Clear Cell Renal Cell Carcinoma and Other Solid Tumors",
+    "status": "RECRUITING",
+    "last_update": "2026-10-05",
+    "start_date": "2022-10-26",
+    "completion_date": "2029-03",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 362,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Arcus Biosciences, Inc.",
+    "conditions": [
+      "Clear Cell Renal Cell Carcinoma",
+      "Solid Tumors"
+    ],
+    "interventions": [
+      "casdatifan",
+      "Cabozantinib",
+      "Zimberelimab",
+      "Ipilimumab"
+    ]
+  },
+  "EXEL:cabozantinib:NCT03200587": {
+    "nct_id": "NCT03200587",
+    "title": "Cabometyx and Avelumab in Patients With Metastatic Renal Cell Carcinoma (mRCC)",
+    "official_title": "A Phase 1B, Open Label, Dose-finding Study to Evaluate the Safety and Tolerability of Cabometyx and Avelumab in Patients With Metastatic Renal Cell Carcinoma (mRCC)",
+    "status": "COMPLETED",
+    "last_update": "2024-07-03",
+    "start_date": "2018-06-21",
+    "completion_date": "2021-11-25",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 12,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "University of Utah",
+    "conditions": [
+      "Renal Cell Carcinoma"
+    ],
+    "interventions": [
+      "Avelumab",
+      "Cabozantinib"
+    ]
+  },
+  "EXEL:cabozantinib:NCT01522443": {
+    "nct_id": "NCT01522443",
+    "title": "Study of Cabozantinib (XL184) Versus Mitoxantrone Plus Prednisone in Men With Previously Treated Symptomatic Castration-resistant Prostate Cancer",
+    "official_title": "A Phase 3, Randomized, Double-blind, Controlled Trial of Cabozantinib (XL184) Versus Mitoxantrone Plus Prednisone in Men With Previously Treated Symptomatic Castration-resistant Prostate Cancer",
+    "status": "TERMINATED",
+    "last_update": "2018-05-23",
+    "start_date": "2012-03",
+    "completion_date": "2015-01-13",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 119,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Exelixis",
+    "conditions": [
+      "Prostate Cancer",
+      "Castration Resistant Prostate Cancer",
+      "Pain",
+      "Prostatic Neoplasms"
+    ],
+    "interventions": [
+      "cabozantinib",
+      "mitoxantrone",
+      "prednisone"
+    ]
+  },
+  "EXEL:cabozantinib:NCT00596648": {
+    "nct_id": "NCT00596648",
+    "title": "A Study of XL184 (Cabozantinib) With or Without Erlotinib in Subjects With Non-Small Cell Lung Cancer (NSCLC)",
+    "official_title": "A Phase 1b/2 Study of XL184 With or Without Erlotinib in Subjects With Non-Small Cell Lung Cancer",
+    "status": "COMPLETED",
+    "last_update": "2026-01-13",
+    "start_date": "2008-02-12",
+    "completion_date": "2012-08-02",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 92,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Exelixis",
+    "conditions": [
+      "Carcinoma, Non-Small-Cell Lung"
+    ],
+    "interventions": [
+      "XL184",
+      "erlotinib"
+    ]
+  },
+  "EXEL:cabozantinib:NCT04637204": {
+    "nct_id": "NCT04637204",
+    "title": "Real-world Treatment Patterns and Outcomes Among aRCC Patients on Cabozantinib or Axitinib in England",
+    "official_title": "Treatment Patterns and Outcomes Among Advanced Renal Cell Carcinoma (aRCC) Patients Treated With Cabozantinib or Axitinib Therapy: Non Interventional, Retrospective Study Using Data From Public Health England's Cancer Analysis System",
+    "status": "COMPLETED",
+    "last_update": "2021-02-01",
+    "start_date": "2020-11-24",
+    "completion_date": "2020-12-11",
+    "study_type": "OBSERVATIONAL",
+    "phases": [],
+    "enrollment": 1540,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Ipsen",
+    "conditions": [
+      "Renal Cell Carcinoma"
+    ],
+    "interventions": [
+      "Cabozantinib",
+      "Axitinib"
+    ]
+  },
+  "EXEL:cabozantinib:NCT03755791": {
+    "nct_id": "NCT03755791",
+    "title": "Study of Cabozantinib in Combination With Atezolizumab Versus Sorafenib in Participants With Advanced Hepatocellular Carcinoma (HCC) Who Have Not Received Previous Systemic Anticancer Therapy",
+    "official_title": "A Randomized, Controlled Phase 3 Study of Cabozantinib (XL184) in Combination With Atezolizumab Versus Sorafenib in Subjects With Advanced Hepatocellular Carcinoma Who Have Not Received Previous Systemic Anticancer Therapy",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2025-12-11",
+    "start_date": "2018-06-10",
+    "completion_date": "2026-07-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 837,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Exelixis",
+    "conditions": [
+      "Hepatocellular Carcinoma"
+    ],
+    "interventions": [
+      "Cabozantinib",
+      "Cabozantinib",
+      "Sorafenib",
+      "Atezolizumab"
+    ]
+  },
+  "EXEL:cabozantinib:NCT01441947": {
+    "nct_id": "NCT01441947",
+    "title": "Cabozantinib in Women With Metastatic Hormone-Receptor-Positive Breast Cancer",
+    "official_title": "A Phase II Trial of Cabozantinib in Women With Metastatic Hormone-Receptor-Positive Breast Cancer With Involvement of Bone",
+    "status": "COMPLETED",
+    "last_update": "2025-05-25",
+    "start_date": "2011-10",
+    "completion_date": "2019-08-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 68,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Massachusetts General Hospital",
+    "conditions": [
+      "Breast Cancer"
+    ],
+    "interventions": [
+      "Cabozantinib",
+      "Fulvestrant"
+    ]
+  },
+  "EXEL:cabozantinib:NCT04131543": {
+    "nct_id": "NCT04131543",
+    "title": "Phase II Study With Cabozantinib in Patients With RET Positive NSCLC",
+    "official_title": "\"Phase II Study to Evaluate the Activity and Safety of Cabozantinib in Pretreated, Advanced RET-rearranged Non-small Cell Lung Cancer Patients: CRETA Trial\"",
+    "status": "UNKNOWN",
+    "last_update": "2019-10-18",
+    "start_date": "2019-08-07",
+    "completion_date": "2022-08-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 25,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "University of Bologna",
+    "conditions": [
+      "Non Small Cell Lung Cancer"
+    ],
+    "interventions": [
+      "Cabozantinib 20 MG",
+      "Cabozantinib 40 MG",
+      "Cabozantinib 60 MG"
+    ]
+  },
+  "EXEL:XL092:NCT07773454": {
+    "nct_id": "NCT07773454",
+    "title": "Study of Zanzalintinib in Children and Adolescents With Relapsed or Refractory Solid Tumors",
+    "official_title": "A Phase 1 Dose-Escalation Study of XL092 in Children and Adolescents With Relapsed or Refractory Solid Tumors",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-08-19",
+    "start_date": "2026-09-30",
+    "completion_date": "2028-07-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 18,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Exelixis",
+    "conditions": [
+      "Cancer",
+      "Pediatric Cancer"
+    ],
+    "interventions": [
+      "Zanzalintinib"
+    ]
+  },
+  "EXEL:XL092:NCT03337698": {
+    "nct_id": "NCT03337698",
+    "title": "A Study Of Multiple Immunotherapy-Based Treatment Combinations In Participants With Metastatic Non-Small Cell Lung Cancer (Morpheus- Non-Small Cell Lung Cancer)",
+    "official_title": "A Phase Ib/II, Open-Label, Multicenter, Randomized Umbrella Study Evaluating The Efficacy And Safety Of Multiple Immunotherapy-Based Treatment Combinations In Patients With Metastatic Non-Small Cell Lung Cancer (Morpheus-Lung)",
+    "status": "TERMINATED",
+    "last_update": "2026-05-12",
+    "start_date": "2017-12-27",
+    "completion_date": "2025-11-25",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 314,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Hoffmann-La Roche",
+    "conditions": [
+      "Carcinoma, Non-Small-Cell Lung"
+    ],
+    "interventions": [
+      "Atezolizumab",
+      "Cobimetinib",
+      "RO6958688",
+      "Docetaxel",
+      "CPI-444",
+      "Pemetrexed",
+      "Carboplatin",
+      "Gemcitabine",
+      "Linagliptin",
+      "Tocilizumab",
+      "Ipatasertib",
+      "Bevacizumab",
+      "Sacituzumab Govitecan",
+      "Radiation",
+      "Evolocumab",
+      "Tiragolumab",
+      "XL092",
+      "Camonsertib"
+    ]
+  },
+  "EXEL:XL092:NCT06568562": {
+    "nct_id": "NCT06568562",
+    "title": "XL092 in Patients With Metastatic Castration-Resistant Prostate Cancer",
+    "official_title": "PRO-XL: A Phase II Study of XL092 in Patients With Metastatic Castration-Resistant Prostate Cancer After Progression on Lutetium-177 (177Lu)-PSMA-617",
+    "status": "RECRUITING",
+    "last_update": "2026-06-29",
+    "start_date": "2024-12-09",
+    "completion_date": "2028-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 32,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "University of Utah",
+    "conditions": [
+      "Metastatic Castration-resistant Prostate Cancer"
+    ],
+    "interventions": [
+      "XL092"
+    ]
+  },
+  "EXEL:XL092:NCT06191796": {
+    "nct_id": "NCT06191796",
+    "title": "Study of Zanzalintinib (XL092) + AB521 and Zanzalintinib + AB521 + Nivolumab in Participants With Advanced Clear Cell Renal Cell Carcinoma (ccRCC) or Other Advanced Solid Tumors (STELLAR-009)",
+    "official_title": "A Phase 1b/2 Dose-finding and Expansion Study Evaluating the Safety and Efficacy of Zanzalintinib (XL092) Combined With Either AB521 or AB521 Plus Nivolumab in Subjects With Advanced Clear Cell Renal Cell Carcinoma or Other Advanced Solid Tumors.",
+    "status": "TERMINATED",
+    "last_update": "2025-06-12",
+    "start_date": "2024-01-25",
+    "completion_date": "2025-05-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 25,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Exelixis",
+    "conditions": [
+      "Advanced Clear Cell Renal Cell Carcinoma or Other Advanced Solid Tumors"
+    ],
+    "interventions": [
+      "zanzalintinib",
+      "AB521",
+      "Nivolumab"
+    ]
+  },
+  "EXEL:XL092:NCT03845166": {
+    "nct_id": "NCT03845166",
+    "title": "A Study of XL092 as Single-Agent and Combination Therapy in Subjects With Solid Tumors",
+    "official_title": "A Dose-Escalation and Expansion Study of the Safety and Pharmacokinetics of XL092 as Single-Agent and Combination Therapy in Subjects With Inoperable Locally Advanced or Metastatic Solid Tumors",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2024-11-19",
+    "start_date": "2019-03-20",
+    "completion_date": "2027-05-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 325,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Exelixis",
+    "conditions": [
+      "Neoplasm Malignant",
+      "Renal Cell Carcinoma",
+      "Hormone Receptor Positive Breast Carcinoma",
+      "Metastatic Castration-resistant Prostate Cancer",
+      "Colorectal Cancer"
+    ],
+    "interventions": [
+      "XL092",
+      "Atezolizumab",
+      "Avelumab"
+    ]
+  },
+  "EXEL:XL092:NCT06902376": {
+    "nct_id": "NCT06902376",
+    "title": "XL092 and Cemiplimab in BRAF WT Thyroid Cancer",
+    "official_title": "NEO-COMBAT XL: Neoadjuvant and Maintenance XL092 and Cemiplimab in BRAF V600E-wildtype Anaplastic Thyroid Cancer: a Phase 1B Study",
+    "status": "RECRUITING",
+    "last_update": "2026-10-05",
+    "start_date": "2025-06-03",
+    "completion_date": "2028-08-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 12,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "UNC Lineberger Comprehensive Cancer Center",
+    "conditions": [
+      "Anaplastic Thyroid Cancer",
+      "Thyroid Cancer",
+      "BRAF Mutation-Related Tumors"
+    ],
+    "interventions": [
+      "Cemiplimab",
+      "XL092"
+    ]
+  },
+  "EXEL:XL092:NCT05176483": {
+    "nct_id": "NCT05176483",
+    "title": "Study of Zanzalintinib in Combination With Immuno-Oncology or Other Agents in Participants With Solid Tumors",
+    "official_title": "A Dose-Escalation and Expansion Study of the Safety and Efficacy of XL092 in Combination With Immuno-Oncology or Other Agents in Subjects With Unresectable Advanced or Metastatic Solid Tumors",
+    "status": "RECRUITING",
+    "last_update": "2026-10-01",
+    "start_date": "2021-12-14",
+    "completion_date": "2030-06-28",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 1394,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Exelixis",
+    "conditions": [
+      "Renal Cell Carcinoma (RCC)",
+      "Metastatic Castration-Resistant Prostate Cancer (mCRPC)",
+      "Urothelial Carcinoma (UC)",
+      "Solid Tumor",
+      "Hepatocellular Carcinoma (HCC)",
+      "Non-small Cell Lung Cancer (NSCLC)",
+      "Colorectal Cancer (CRC)",
+      "Head and Neck Squamous Cell Carcinoma (HNSCC)",
+      "Clear Cell Renal Cell Carcinoma (ccRCC)",
+      "Non-Clear Cell Renal Cell Carcinoma (nccRCC)",
+      "Drug-Drug Interaction (DDI)"
+    ],
+    "interventions": [
+      "Zanzalintinib",
+      "Nivolumab",
+      "Ipilimumab",
+      "Nivolumab + Relatlimab",
+      "Prednisone",
+      "Docetaxel",
+      "DDI Probe Cocktail"
+    ]
+  },
+  "EXEL:XL092:NCT07750158": {
+    "nct_id": "NCT07750158",
+    "title": "Zanzalintinib Alone or in Combination With Pembrolizumab and Berahyaluronidase Alfa in Participants With Colorectal Cancer With Molecular Residual Disease",
+    "official_title": "Randomized Phase 3 Study of Zanzalintinib ± Subcutaneous Pembrolizumab and Berahyaluronidase Alfa (MK-3475A) Versus Placebo in Participants With Colorectal Cancer With Stage II/III Molecular Residual Disease Following Definitive Therapy",
+    "status": "RECRUITING",
+    "last_update": "2026-09-21",
+    "start_date": "2026-08-25",
+    "completion_date": "2030-04-05",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 600,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Exelixis",
+    "conditions": [
+      "Colorectal Cancer"
+    ],
+    "interventions": [
+      "Zanzalintinib",
+      "Pembrolizumab (+) Berahyaluronidase alfa",
+      "Placebo"
+    ]
+  },
+  "CMPX:CTX-009:NCT05513742": {
+    "nct_id": "NCT05513742",
+    "title": "A Study of CTX-009 in Adult Patients With Metastatic Colorectal Cancer",
+    "official_title": "A Phase 2 Study of CTX-009 in Adult Patients With Metastatic Colorectal Cancer Who Have Received Two or Three Prior Systemic Chemotherapy Regimens",
+    "status": "COMPLETED",
+    "last_update": "2026-09-25",
+    "start_date": "2022-12-08",
+    "completion_date": "2025-05-15",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 49,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Compass Therapeutics",
+    "conditions": [
+      "Metastatic Colorectal Cancer",
+      "Colon Cancer",
+      "Rectal Cancer"
+    ],
+    "interventions": [
+      "CTX-009"
+    ]
+  },
+  "CMPX:CTX-009:NCT04492033": {
+    "nct_id": "NCT04492033",
+    "title": "A Study of CTX-009 (ABL001) in Combination With Irinotecan or Paclitaxel in Advanced or Metastatic Solid Tumor Patients",
+    "official_title": "A Phase 1b/2a Multi-center Study to Assess the Safety, Tolerability, Pharmacokinetics of CTX-009 (ABL001) in Combination With Irinotecan or Paclitaxel in Patients With Advanced or Metastatic Solid Tumors",
+    "status": "TERMINATED",
+    "last_update": "2025-01-27",
+    "start_date": "2020-06-22",
+    "completion_date": "2025-01-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 41,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Handok Inc.",
+    "conditions": [
+      "P1b: Advanced Solid Tumors",
+      "P2: Biliary Tract Cancer"
+    ],
+    "interventions": [
+      "CTX-009 (ABL001)",
+      "Paclitaxel",
+      "Irinotecan"
+    ]
+  },
+  "CMPX:CTX-009:NCT07392957": {
+    "nct_id": "NCT07392957",
+    "title": "Safety and Efficacy of CTX-009 With or Without CTX-471 for Recurrent Glioblastoma",
+    "official_title": "A Phase IB/II Open-label Study of the Safety and Preliminary Efficacy of CTX-009 Administered Either as a Monotherapy or in Combination With CTX-471 in Patients With Recurrent Glioblastoma",
+    "status": "RECRUITING",
+    "last_update": "2026-06-22",
+    "start_date": "2026-06-16",
+    "completion_date": "2031-06-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 54,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Washington University School of Medicine",
+    "conditions": [
+      "Glioblastoma"
+    ],
+    "interventions": [
+      "CTX-009",
+      "CTX-471"
+    ]
+  },
+  "CMPX:CTX-009:NCT05506943": {
+    "nct_id": "NCT05506943",
+    "title": "A Study of CTX-009 in Combination With Paclitaxel in Adult Patients With Unresectable Advanced, Metastatic or Recurrent Biliary Tract Cancers (COMPANION-002)",
+    "official_title": "A Phase 2/3 Randomized, Controlled Study of CTX-009 in Combination With Paclitaxel Versus Paclitaxel Alone in Adult Patients With Unresectable Advanced, Metastatic or Recurrent Biliary Tract Cancers Who Have Received One Prior Systemic Chemotherapy Regimen",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-09-02",
+    "start_date": "2023-01-09",
+    "completion_date": "2027-08-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2",
+      "PHASE3"
+    ],
+    "enrollment": 168,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Compass Therapeutics",
+    "conditions": [
+      "Biliary Tract Cancer",
+      "Cholangiocarcinoma",
+      "Gall Bladder Cancer",
+      "Ampullary Cancer"
+    ],
+    "interventions": [
+      "CTX-009",
+      "Paclitaxel"
+    ]
+  },
+  "CMPX:CTX-009:NCT06548412": {
+    "nct_id": "NCT06548412",
+    "title": "CTX-009 With Gemcitabine, Cisplatin, and Durvalumab as First-line Therapy in Patients With Unresectable or Metastatic Biliary Tract Cancers",
+    "official_title": "CTX-009 With Gemcitabine, Cisplatin, and Durvalumab as First-line Therapy in Patients With Unresectable or Metastatic Biliary Tract Cancers",
+    "status": "RECRUITING",
+    "last_update": "2026-09-09",
+    "start_date": "2025-01-22",
+    "completion_date": "2029-05-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 50,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "M.D. Anderson Cancer Center",
+    "conditions": [
+      "Metastatic Biliary Tract Cancer"
+    ],
+    "interventions": [
+      "Gemcitabine",
+      "Cisplatin",
+      "Durvalumab",
+      "CTX-009"
+    ]
+  },
+  "CMPX:CTX-471:NCT07392957": {
+    "nct_id": "NCT07392957",
+    "title": "Safety and Efficacy of CTX-009 With or Without CTX-471 for Recurrent Glioblastoma",
+    "official_title": "A Phase IB/II Open-label Study of the Safety and Preliminary Efficacy of CTX-009 Administered Either as a Monotherapy or in Combination With CTX-471 in Patients With Recurrent Glioblastoma",
+    "status": "RECRUITING",
+    "last_update": "2026-06-22",
+    "start_date": "2026-06-16",
+    "completion_date": "2031-06-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 54,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Washington University School of Medicine",
+    "conditions": [
+      "Glioblastoma"
+    ],
+    "interventions": [
+      "CTX-009",
+      "CTX-471"
+    ]
+  },
+  "CMPX:CTX-471:NCT03881488": {
+    "nct_id": "NCT03881488",
+    "title": "Study of CTX-471 as a Monotherapy or in Combination With Pembrolizumab in Patients Post PD-1/PD-L1 Inhibitors in Metastatic or Locally Advanced Malignancies",
+    "official_title": "A Phase 1, Open-Label, Multiple-Ascending Dose Study of the Safety and Tolerability of CTX-471 Administered Either as a Monotherapy or in Combination With Pembrolizumab in Patients With Inadequate Responses to PD-1/PD-L1 Checkpoint Inhibitors in Metastatic or Locally Advanced Malignancies",
+    "status": "TERMINATED",
+    "last_update": "2026-10-09",
+    "start_date": "2019-05-17",
+    "completion_date": "2025-05-21",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 100,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Compass Therapeutics",
+    "conditions": [
+      "Locally Advanced Solid Tumor",
+      "Metastatic Cancer",
+      "Non-small Cell Lung Cancer",
+      "Small Cell Lung Cancer",
+      "Mesothelioma",
+      "Melanoma",
+      "Head and Neck Cancer"
+    ],
+    "interventions": [
+      "CTX-471",
+      "Pembrolizumab (KEYTRUDA®)"
+    ]
+  },
+  "CMPX:CTX-471:NCT07684170": {
+    "nct_id": "NCT07684170",
+    "title": "Study of CTX-471 in Patients With Neural Cell Adhesion Molecule (NCAM) Positive Neuroendocrine Neoplasms",
+    "official_title": "A Phase 2, Open-Label Study of CTX-471 in Patients With NCAM Positive Tumors",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-07-06",
+    "start_date": "2026-09",
+    "completion_date": "2029-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 58,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Compass Therapeutics",
+    "conditions": [
+      "Neuroendocrine Neoplasm",
+      "Neuroendocrine Carcinomas",
+      "Neuroendocrine Tumors"
+    ],
+    "interventions": [
+      "CTX-471"
+    ]
+  },
+  "CORT:relacorilant:NCT04795479": {
+    "nct_id": "NCT04795479",
+    "title": "T/QT Study to Investigate the Effect of Relacorilant on Cardiac Repolarization in Healthy Volunteers",
+    "official_title": "A Randomized, Partial Double-Blind, Placebo- and Positive- Controlled, Multiple-Dose, 4-Way Crossover, Thorough QT/QTc (TQT) Study to Investigate the Effect of Relacorilant on Cardiac Repolarization in Healthy Volunteers",
+    "status": "COMPLETED",
+    "last_update": "2021-09-14",
+    "start_date": "2021-01-22",
+    "completion_date": "2021-07-13",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 36,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Corcept Therapeutics",
+    "conditions": [
+      "Healthy"
+    ],
+    "interventions": [
+      "Relacorilant",
+      "Placebo to relacorilant",
+      "Moxifloxacin"
+    ]
+  },
+  "CORT:relacorilant:NCT06094738": {
+    "nct_id": "NCT06094738",
+    "title": "A Study to Evaluate the Effect of Food on the Oral Bioavailability of Relacorilant in Healthy Subjects",
+    "official_title": "A Phase 1, Randomized, Open-Label, Single-Dose, Three-Way Crossover Study to Evaluate The Effect of Food on the Oral Bioavailability of Relacorilant in Healthy Subjects",
+    "status": "COMPLETED",
+    "last_update": "2023-10-23",
+    "start_date": "2020-09-19",
+    "completion_date": "2020-11-16",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 30,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Corcept Therapeutics",
+    "conditions": [
+      "Healthy"
+    ],
+    "interventions": [
+      "Relacorilant under fasted conditions",
+      "Relacorilant after a high-fat meal",
+      "Relacorilant after a low-fat meal"
+    ]
+  },
+  "CORT:relacorilant:NCT03508635": {
+    "nct_id": "NCT03508635",
+    "title": "CORT125134 Single Ascending Dose (SAD) and Multiple Ascending Dose (MAD)",
+    "official_title": "A Phase I Adaptive Dose, Double-Blind, Placebo-Controlled, SAD and MAD Study to Measure the Safety, Tolerability, Pharmacokinetics and Pharmacological Effects of Orally Administered CORT125134 in Healthy Subjects",
+    "status": "COMPLETED",
+    "last_update": "2019-08-09",
+    "start_date": "2014-09",
+    "completion_date": "2015-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 130,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Corcept Therapeutics",
+    "conditions": [
+      "Healthy"
+    ],
+    "interventions": [
+      "CORT125134",
+      "Matching Placebo of CORT125134",
+      "Mifepristone",
+      "Prednisone",
+      "Glucose"
+    ]
+  },
+  "CORT:relacorilant:NCT06906341": {
+    "nct_id": "NCT06906341",
+    "title": "Relacorilant in Combination With Different Treatment Regimens in Patients With Gynecological Cancers",
+    "official_title": "An Open-label, Global, Multi-Arm Study to Evaluate the Efficacy and Safety of Relacorilant in Combination With Different Treatment Regimens in Patients With Gynecological Cancers (BELLA)",
+    "status": "RECRUITING",
+    "last_update": "2026-07-16",
+    "start_date": "2025-04-11",
+    "completion_date": "2026-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 270,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Corcept Therapeutics",
+    "conditions": [
+      "Ovarian Cancer",
+      "Fallopian Tube Cancer",
+      "Peritoneal Neoplasms",
+      "Endometrial Cancer"
+    ],
+    "interventions": [
+      "Relacorilant 150 mg once daily (QD)",
+      "Nab-paclitaxel 80 mg/m^2",
+      "Bevacizumab 10 mg/kg"
+    ]
+  },
+  "CORT:relacorilant:NCT04308590": {
+    "nct_id": "NCT04308590",
+    "title": "A Study of the Efficacy and Safety of Relacorilant in Patients With Cortisol-Secreting Adrenal Adenomas",
+    "official_title": "Glucocorticoid Receptor Antagonism in the Treatment of Hypercortisolism in Patients With Cortisol-Secreting Adrenal Adenomas or Hyperplasia (GRADIENT): A Phase 3, Randomized, Double-Blind, Placebo-Controlled Study of the Efficacy and Safety of Relacorilant",
+    "status": "COMPLETED",
+    "last_update": "2025-09-04",
+    "start_date": "2020-07-27",
+    "completion_date": "2024-09-19",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 137,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Corcept Therapeutics",
+    "conditions": [
+      "Hypercortisolism"
+    ],
+    "interventions": [
+      "Relacorilant",
+      "Placebo"
+    ]
+  },
+  "CORT:relacorilant:NCT07259317": {
+    "nct_id": "NCT07259317",
+    "title": "Relacorilant With Nab-Paclitaxel and Gemcitabine in Patients With Metastatic Pancreatic Adenocarcinoma",
+    "official_title": "A Phase 2, Single-Arm Trial of Relacorilant in Combination With Nab-Paclitaxel and Gemcitabine in Chemotherapy-Naïve Patients With Metastatic Pancreatic Adenocarcinoma (TRIDENT)",
+    "status": "RECRUITING",
+    "last_update": "2026-09-25",
+    "start_date": "2026-01-27",
+    "completion_date": "2027-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 80,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Corcept Therapeutics",
+    "conditions": [
+      "Adenocarcinoma",
+      "Carcinoma, Pancreatic Ductal"
+    ],
+    "interventions": [
+      "Relacorilant",
+      "Nab-paclitaxel",
+      "Gemcitabine"
+    ]
+  },
+  "CORT:relacorilant:NCT04373265": {
+    "nct_id": "NCT04373265",
+    "title": "Study of Relacorilant in Combination With Pembrolizumab for Patients With Adrenocortical Carcinoma Which Produces Too Much Stress Hormone (Cortisol)",
+    "official_title": "A Phase 1b, Open-Label Study of Relacorilant in Combination With Pembrolizumab for Patients With Adrenocortical Carcinoma With Excess Glucocorticoid Production",
+    "status": "COMPLETED",
+    "last_update": "2024-02-23",
+    "start_date": "2020-09-30",
+    "completion_date": "2024-01-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 15,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Corcept Therapeutics",
+    "conditions": [
+      "Adrenocortical Carcinoma"
+    ],
+    "interventions": [
+      "Relacorilant",
+      "Pembrolizumab"
+    ]
+  },
+  "CORT:relacorilant:NCT03776812": {
+    "nct_id": "NCT03776812",
+    "title": "Study of Relacorilant in Combination With Nab-Paclitaxel for Patients With Recurrent Platinum-Resistant Ovarian, Fallopian Tube, or Primary Peritoneal Cancer",
+    "official_title": "A Phase 2, Randomized, Open-Label, 3-arm Study of Relacorilant in Combination With Nab-Paclitaxel for Patients With Recurrent Platinum-Resistant Ovarian, Fallopian Tube, or Primary Peritoneal Cancer",
+    "status": "COMPLETED",
+    "last_update": "2025-10-07",
+    "start_date": "2019-04-05",
+    "completion_date": "2023-07-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 178,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Corcept Therapeutics",
+    "conditions": [
+      "Recurrent Ovarian Cancer",
+      "Recurrent Fallopian Tube Carcinoma",
+      "Recurrent Primary Peritoneal Carcinoma"
+    ],
+    "interventions": [
+      "Relacorilant",
+      "Nab-paclitaxel"
+    ]
+  },
+  "CORT:relacorilant:NCT03604198": {
+    "nct_id": "NCT03604198",
+    "title": "Extension Study to Evaluate the Safety of Long-Term Use of Relacorilant in Patients With Cushing Syndrome",
+    "official_title": "An Open-Label Extension Study of the Safety of Relacorilant (CORT125134) in the Treatment of the Signs and Symptoms of Endogenous Cushing Syndrome",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-10-09",
+    "start_date": "2018-05-07",
+    "completion_date": "2026-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 125,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Corcept Therapeutics",
+    "conditions": [
+      "Cushing Syndrome"
+    ],
+    "interventions": [
+      "relacorilant"
+    ]
+  },
+  "CORT:relacorilant:NCT06094790": {
+    "nct_id": "NCT06094790",
+    "title": "A Study to Evaluate the Pharmacokinetics of the Current Capsule Formulation of CORT125134 in Healthy Subjects",
+    "official_title": "An Open-Label, Repeat-Dose Study to Evaluate the Pharmacokinetics of Orally Administered CORT125134 Using the Current Capsule Formulation in Healthy Subjects",
+    "status": "COMPLETED",
+    "last_update": "2023-10-23",
+    "start_date": "2017-05-18",
+    "completion_date": "2017-11-15",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 32,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Corcept Therapeutics",
+    "conditions": [
+      "Healthy"
+    ],
+    "interventions": [
+      "CORT125134 150 mg",
+      "CORT125134 250 mg",
+      "CORT125134 dose to be determined"
+    ]
+  },
+  "CORT:relacorilant:NCT06094712": {
+    "nct_id": "NCT06094712",
+    "title": "A Study to Evaluate the Pharmacokinetics of the CORT125134 Phase 2 Formulation in Healthy Male Subjects",
+    "official_title": "An Open-Label, Single Dose Study to Evaluate the Pharmacokinetics of the Phase 2 Formulation of CORT125134 Capsules in Healthy Male Subjects",
+    "status": "COMPLETED",
+    "last_update": "2023-10-23",
+    "start_date": "2016-04-07",
+    "completion_date": "2016-04-27",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 8,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Corcept Therapeutics",
+    "conditions": [
+      "Healthy"
+    ],
+    "interventions": [
+      "CORT125134"
+    ]
+  },
+  "CORT:relacorilant:NCT03457597": {
+    "nct_id": "NCT03457597",
+    "title": "Study in Healthy Subjects to Determine the Effect of Relacorilant on Exposure to Probe Substrates for Cytochrome P450s",
+    "official_title": "A Phase 1, Open-Label, Single-Sequence Crossover Study in Healthy Subjects to Determine the Effect of Relacorilant on Exposure to Probe Substrates for Cytochrome P450s 3A4, 2C8, 2C9, 2C19, and 2D6",
+    "status": "COMPLETED",
+    "last_update": "2018-05-17",
+    "start_date": "2018-03-06",
+    "completion_date": "2018-04-28",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 27,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Corcept Therapeutics",
+    "conditions": [
+      "Healthy"
+    ],
+    "interventions": [
+      "Midazolam hydrochloride",
+      "Metoprolol tartrate",
+      "Pioglitazone hydrochloride",
+      "Tolbutamide",
+      "Omeprazole",
+      "Relacorilant"
+    ]
+  },
+  "CORT:relacorilant:NCT03442621": {
+    "nct_id": "NCT03442621",
+    "title": "Relacorilant Food Effect Study in Healthy Subjects",
+    "official_title": "A Phase 1, Open-label, Single-dose, Randomized, Crossover Study in Healthy Subjects of the Effects of Co-administration With Food on Exposure, and to Determine the Within-subject Variability in Exposure, to Relacorilant and Its Metabolites",
+    "status": "COMPLETED",
+    "last_update": "2018-05-17",
+    "start_date": "2018-01-16",
+    "completion_date": "2018-03-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 30,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Corcept Therapeutics",
+    "conditions": [
+      "Healthy",
+      "Food-drug Interaction"
+    ],
+    "interventions": [
+      "Relacorilant Fasted",
+      "Relacorilant with a high fat breakfast",
+      "Relacorilant with a moderate breakfast"
+    ]
+  },
+  "CORT:relacorilant:NCT03674814": {
+    "nct_id": "NCT03674814",
+    "title": "Study of Drug 1 (Enzalutamide) Plus Drug 2 (Relacorilant) for Patients With Prostate Cancer",
+    "official_title": "A Phase I Trial of Enzalutamide Plus the Glucocorticoid Receptor Antagonist CORT-125134 (Relacorilant) for Patients With Metastatic Castration Resistant Prostate Cancer (CRPC)",
+    "status": "COMPLETED",
+    "last_update": "2026-03-31",
+    "start_date": "2018-10-23",
+    "completion_date": "2024-06-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 42,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "University of Chicago",
+    "conditions": [
+      "Prostate Cancer"
+    ],
+    "interventions": [
+      "Enzalutamide",
+      "Relacorilant"
+    ]
+  },
+  "CORT:relacorilant:NCT03512548": {
+    "nct_id": "NCT03512548",
+    "title": "Study in Healthy Subjects to Determine the Effect of an Inhibitor on Exposure to Relacorilant and Its Metabolites",
+    "official_title": "A Phase 1, Open-Label, Single-Sequence Crossover Study in Healthy Subjects to Determine the Effect of an Inhibitor of Cytochrome P450 3A on Exposure to Relacorilant and Its Main Metabolites",
+    "status": "COMPLETED",
+    "last_update": "2020-03-24",
+    "start_date": "2018-04-10",
+    "completion_date": "2019-08-23",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 52,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Corcept Therapeutics",
+    "conditions": [
+      "Healthy"
+    ],
+    "interventions": [
+      "Relacorilant 350mg",
+      "Itraconazole",
+      "Relacorilant 300mg"
+    ]
+  },
+  "CORT:relacorilant:NCT05347979": {
+    "nct_id": "NCT05347979",
+    "title": "Effect of Relacorilant on the Pharmacokinetics of the Sensitive P-glycoprotein Substrate Dabigatran Etexilate in Healthy Participants",
+    "official_title": "An Open-Label, Drug-Drug Interaction Study Designed to Evaluate the Effect of Relacorilant on the Pharmacokinetics of the Sensitive P-glycoprotein Substrate Dabigatran Etexilate in Healthy Subjects",
+    "status": "COMPLETED",
+    "last_update": "2023-02-09",
+    "start_date": "2022-05-25",
+    "completion_date": "2022-07-19",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 30,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Corcept Therapeutics",
+    "conditions": [
+      "Cushing Syndrome",
+      "Neoplasms"
+    ],
+    "interventions": [
+      "Dabigatran Etexilate",
+      "Relacorilant"
+    ]
+  },
+  "CORT:relacorilant:NCT07763496": {
+    "nct_id": "NCT07763496",
+    "title": "Relacorilant and Nab-Paclitaxel in Recurrent or Metastatic Cervical Cancer",
+    "official_title": "Second Line Therapy and Beyond With Relacorilant and Nab-Paclitaxel for Cervical Cancer With Loss of Benefit From Immune Checkpoint and Platinum Exposure",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-08-13",
+    "start_date": "2026-10",
+    "completion_date": "2030-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 63,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "ARCAGY/ GINECO GROUP",
+    "conditions": [
+      "Recurrent or Metastatic Cervical Cancer"
+    ],
+    "interventions": [
+      "Relacorilant",
+      "Nab-paclitaxel"
+    ]
+  },
+  "CORT:relacorilant:NCT05257408": {
+    "nct_id": "NCT05257408",
+    "title": "Relacorilant in Combination With Nab-Paclitaxel in Advanced, Platinum-Resistant, High-Grade Epithelial Ovarian, Primary Peritoneal, or Fallopian-Tube Cancer",
+    "official_title": "A Phase 3 Study of Relacorilant in Combination With Nab-Paclitaxel Versus Nab-Paclitaxel Monotherapy in Advanced, Platinum-Resistant, High-Grade Epithelial Ovarian, Primary Peritoneal, or Fallopian-Tube Cancer (ROSELLA)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-09-25",
+    "start_date": "2022-06-29",
+    "completion_date": "2026-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 381,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Corcept Therapeutics",
+    "conditions": [
+      "Ovarian Neoplasm",
+      "Fallopian Tube Neoplasms",
+      "Peritoneal Neoplasms"
+    ],
+    "interventions": [
+      "Relacorilant 150 mg",
+      "Nab-paclitaxel 80 mg/m^2",
+      "Nab-paclitaxel 100 mg/m^2"
+    ]
+  },
+  "CORT:relacorilant:NCT06094725": {
+    "nct_id": "NCT06094725",
+    "title": "A Study to Evaluate the Effects of Hepatic Impairment on the Pharmacokinetics of Relacorilant",
+    "official_title": "An Open-label, Multiple-dose, Adaptive Design Study to Evaluate the Effects of Hepatic Impairment on the Pharmacokinetics of Relacorilant",
+    "status": "COMPLETED",
+    "last_update": "2023-10-23",
+    "start_date": "2020-01-06",
+    "completion_date": "2020-12-14",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 30,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Corcept Therapeutics",
+    "conditions": [
+      "Hepatic Impairment"
+    ],
+    "interventions": [
+      "Relacorilant"
+    ]
+  },
+  "CORT:relacorilant:NCT03540836": {
+    "nct_id": "NCT03540836",
+    "title": "A Study to Determine the Relative Bioavailability of Two New Relacorilant Capsule Variants",
+    "official_title": "A Phase 1, Randomized, Open-label, Crossover Study to Determine the Relative Bioavailability of Relacorilant Administered as 3×100-mg Softgel Capsules, 3×100 mg Hard Shell Capsules, and 6×50-mg Hard-shell Capsules in Healthy Adult Subjects",
+    "status": "COMPLETED",
+    "last_update": "2018-09-07",
+    "start_date": "2018-05-24",
+    "completion_date": "2018-07-25",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 30,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Corcept Therapeutics",
+    "conditions": [
+      "Healthy"
+    ],
+    "interventions": [
+      "Relacorilant (3x100 mg softgel capsules)",
+      "Relacorilant (3x100 mg hard-shell capsules)",
+      "Relacorilant (6x50mg hard-shell capsules)"
+    ]
+  },
+  "BMY:nivolumab (Opdivo):NCT03518320": {
+    "nct_id": "NCT03518320",
+    "title": "Safety and Tolerability of TAR-200 and Nivolumab in Subjects With Muscle-Invasive Bladder Cancer",
+    "official_title": "A Multicenter Study of TAR-200 in Combination With Nivolumab (OPDIVO) in Subjects With Muscle-Invasive Urothelial Carcinoma of the Bladder Who Are Scheduled for Radical Cystectomy and Are Ineligible for or Refusing Platinum-Based Neoadjuvant Chemotherapy",
+    "status": "TERMINATED",
+    "last_update": "2024-08-27",
+    "start_date": "2019-01-02",
+    "completion_date": "2019-12-11",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 13,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Taris Biomedical LLC",
+    "conditions": [
+      "Bladder Cancer TNM Staging Primary Tumor (T) T2",
+      "Bladder Cancer TNM Staging Primary Tumor (T) T2A",
+      "Bladder Cancer TNM Staging Primary Tumor (T) T2B",
+      "Bladder Cancer TNM Staging Primary Tumor (T) T3",
+      "Bladder Cancer TNM Staging Primary Tumor (T) T3A",
+      "Bladder Cancer TNM Staging Primary Tumor (T) T3B",
+      "Bladder Cancer TNM Staging Regional Lymph Node (N) N0",
+      "Bladder Cancer TNM Staging Regional Lymph Node (N) N1",
+      "Bladder Cancer TNM Staging Distant Metastasis (M) M0"
+    ],
+    "interventions": [
+      "Gemcitabine-Releasing Intravesical System (GemRIS)/TAR-200",
+      "Nivolumab Injection [Opdivo]"
+    ]
+  },
+  "BMY:nivolumab (Opdivo):NCT05068609": {
+    "nct_id": "NCT05068609",
+    "title": "A Study of Nivolumab in Participants With Squamous Cell Carcinoma of the Head & Neck (SCCHN) - Patient Reported Outcomes (PRO)",
+    "official_title": "Nivolumab in the Real World in Patients With Squamous Cell Carcinoma of the Head & Neck (SCCHN) - Patient Reported Outcomes (PRO)",
+    "status": "COMPLETED",
+    "last_update": "2022-05-05",
+    "start_date": "2020-08-13",
+    "completion_date": "2021-10-18",
+    "study_type": "OBSERVATIONAL",
+    "phases": [],
+    "enrollment": 509,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Bristol-Myers Squibb",
+    "conditions": [
+      "Squamous Cell Carcinoma of the Head and Neck"
+    ],
+    "interventions": [
+      "Nivolumab"
+    ]
+  },
+  "TRAW:rigosertib:NCT04263090": {
+    "nct_id": "NCT04263090",
+    "title": "Rigosertib Plus Nivolumab for KRAS+ NSCLC Patients Who Progressed on First-Line Treatment",
+    "official_title": "A Phase1/2a Study of Rigosertib Plus Nivolumab in Stage IV Lung Adenocarcinoma Patients With KRAS Mutation Who Progressed on First-Line Treatment",
+    "status": "COMPLETED",
+    "last_update": "2024-05-09",
+    "start_date": "2020-06-29",
+    "completion_date": "2023-12-20",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 25,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Icahn School of Medicine at Mount Sinai",
+    "conditions": [
+      "Non-small Cell Lung Cancer",
+      "Adenocarcinoma",
+      "Stage IV"
+    ],
+    "interventions": [
+      "Rigosertib",
+      "Nivolumab"
+    ]
+  },
+  "TRAW:rigosertib:NCT01168011": {
+    "nct_id": "NCT01168011",
+    "title": "Safety, Pharmacokinetics and Clinical Activity of Oral Rigosertib in Solid Tumors",
+    "official_title": "A Phase 1 Study To Assess The Tolerability, Pharmacokinetics and Clinical Activity of Rigosertib Administered Orally as Escalating Multiple Doses Twice or Three Times a Day up to 21 Days of a 21-Day Cycle in Patients With Advanced Cancer",
+    "status": "COMPLETED",
+    "last_update": "2017-06-23",
+    "start_date": "2010-07",
+    "completion_date": "2015-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 68,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Traws Pharma, Inc.",
+    "conditions": [
+      "Solid Tumor"
+    ],
+    "interventions": [
+      "rigosertib"
+    ]
+  },
+  "TRAW:rigosertib:NCT02030639": {
+    "nct_id": "NCT02030639",
+    "title": "Metabolism and Excretion of [14C]-Rigosertib After Infusion to Volunteers",
+    "official_title": "Phase I Study of the Metabolism and Excretion of [14C]-Rigosertib After Single-dose Administration as 24-hour Continuous Intravenous Infusion to Healthy Volunteers",
+    "status": "COMPLETED",
+    "last_update": "2017-06-23",
+    "start_date": "2014-01",
+    "completion_date": "2015-08",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 6,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Traws Pharma, Inc.",
+    "conditions": [
+      "Healthy"
+    ],
+    "interventions": [
+      "rigosertib"
+    ]
+  },
+  "TRAW:rigosertib:NCT04177498": {
+    "nct_id": "NCT04177498",
+    "title": "Rigosertib in Patients With Recessive Dystrophic Epidermolysis Bullosa Associated SCC",
+    "official_title": "A Pilot, Open Study to Assess Efficacy and Safety of Rigosertib in Patients With Recessive Dystrophic Epidermolysis Bullosa Associated Locally Advanced/Metastatic Squamous Cell Carcinoma",
+    "status": "COMPLETED",
+    "last_update": "2025-08-01",
+    "start_date": "2021-08-24",
+    "completion_date": "2025-05-05",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "EARLY_PHASE1"
+    ],
+    "enrollment": 3,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Thomas Jefferson University",
+    "conditions": [
+      "Recessive Dystrophic Epidermolysis Bullosa"
+    ],
+    "interventions": [
+      "Rigosertib Sodium",
+      "Quality-of-Life Assessment"
+    ]
+  },
+  "TRAW:rigosertib:NCT00854945": {
+    "nct_id": "NCT00854945",
+    "title": "Study of 72-Hour Infusion of ON 01910.Na in Patients With MDS or AML",
+    "official_title": "A Phase 1/2, Single-Arm Study To Assess The Efficacy and Safety Of 72-Hour Continuous Intravenous Dosing Of ON 01910.Na Administered Every Other Week in Patients With Myelodysplastic Syndrome (MDS) or Acute Myeloid Leukemia (AML)",
+    "status": "COMPLETED",
+    "last_update": "2017-06-26",
+    "start_date": "2009-01",
+    "completion_date": "2014-02",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 36,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Traws Pharma, Inc.",
+    "conditions": [
+      "Myelodysplastic Syndrome",
+      "Acute Myeloid Leukemia"
+    ],
+    "interventions": [
+      "ON 01910.Na"
+    ]
+  },
+  "TRAW:rigosertib:NCT02107235": {
+    "nct_id": "NCT02107235",
+    "title": "Platinum-based Chemoradiotherapy and Rigosertib in Head and Neck Cancer",
+    "official_title": "Phase I Study of Platinum-based Chemoradiotherapy (CRT) With Oral Rigosertib in Patients With Intermediate or High-risk Head and Neck Squamous Cell Carcinoma",
+    "status": "COMPLETED",
+    "last_update": "2017-06-23",
+    "start_date": "2014-01",
+    "completion_date": "2015-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 2,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Traws Pharma, Inc.",
+    "conditions": [
+      "Head and Neck Neoplasms",
+      "Carcinoma, Squamous Cell"
+    ],
+    "interventions": [
+      "oral rigosertib",
+      "cisplatin",
+      "Radiotherapy"
+    ]
+  },
+  "TRAW:rigosertib:NCT01165905": {
+    "nct_id": "NCT01165905",
+    "title": "Safety of 24-hour Infusion of ON 01910.Na in Combination With Gemcitabine in Advanced Solid Tumors",
+    "official_title": "Phase I Dose Escalation Study of Gemcitabine and 24 Hour Infusion of ON 01910.Na in Patients With Advanced or Metastatic Solid Tumors",
+    "status": "COMPLETED",
+    "last_update": "2017-06-23",
+    "start_date": "2010-01",
+    "completion_date": "2011-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 10,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Traws Pharma, Inc.",
+    "conditions": [
+      "Solid Tumor"
+    ],
+    "interventions": [
+      "ON 01910.Na",
+      "Gemcitabine"
+    ]
+  },
+  "TRAW:rigosertib:NCT03786237": {
+    "nct_id": "NCT03786237",
+    "title": "Rigosertib for RDEB-SCC",
+    "official_title": "A Phase II, Open Study to Assess Efficacy and Safety of Rigosertib in Patients With Recessive Dystrophic Epidermolysis Bullosa Associated Locally Advanced/Metastatic Squamous Cell Carcinoma",
+    "status": "COMPLETED",
+    "last_update": "2026-02-24",
+    "start_date": "2021-04-12",
+    "completion_date": "2025-12-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 2,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Prof. Johann Bauer",
+    "conditions": [
+      "Epidermolysis Bullosa Dystrophica",
+      "Squamous Cell Carcinoma"
+    ],
+    "interventions": [
+      "Rigosertib Oral Capsules / Rigosertib Intravenous"
+    ]
+  },
+  "TRAW:rigosertib:NCT01360853": {
+    "nct_id": "NCT01360853",
+    "title": "Gemcitabine and ON 01910.Na in Previously Untreated Metastatic Pancreatic Cancer",
+    "official_title": "A Phase III, Multi-center, Randomized, Controlled Study to Compare the Efficacy and Safety of Gemcitabine Alone vs. ON 01910.Na Combined With Gemcitabine in Patients With Previously Untreated Metastatic Pancreatic Cancer",
+    "status": "COMPLETED",
+    "last_update": "2016-08-04",
+    "start_date": "2011-05",
+    "completion_date": "2015-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 160,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Traws Pharma, Inc.",
+    "conditions": [
+      "Metastatic Pancreatic Adenocarcinoma"
+    ],
+    "interventions": [
+      "ON 01910.Na",
+      "Gemcitabine",
+      "Gemcitabine"
+    ]
+  },
+  "TRAW:rigosertib:NCT01538563": {
+    "nct_id": "NCT01538563",
+    "title": "Safety of 24-Hour Infusion of ON 01910.Na in Patients With Advanced Cancer",
+    "official_title": "Phase I Dose Escalation Study of ON 01910.Na by 24 Hour Continuous Infusion Per Week in Patients With Advanced Cancer",
+    "status": "COMPLETED",
+    "last_update": "2017-06-23",
+    "start_date": "2006-06",
+    "completion_date": "2011-11",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 42,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Traws Pharma, Inc.",
+    "conditions": [
+      "Solid Tumors",
+      "Advanced Cancer",
+      "Cancer",
+      "Neoplasms"
+    ],
+    "interventions": [
+      "rigosertib sodium"
+    ]
+  },
+  "TRAW:rigosertib:NCT01904682": {
+    "nct_id": "NCT01904682",
+    "title": "Oral Rigosertib in Low Risk MDS Patients Refractory to ESAs",
+    "official_title": "A Single-arm Study to Assess the Efficacy and Safety of Oral Rigosertib in Transfusion-dependent, Low or Intermediate-1, Myelodysplastic Syndrome Patients Based on the International Prognostic Scoring System",
+    "status": "COMPLETED",
+    "last_update": "2021-06-16",
+    "start_date": "2013-07",
+    "completion_date": "2021-05",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 45,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Traws Pharma, Inc.",
+    "conditions": [
+      "Myelodysplastic Syndromes"
+    ],
+    "interventions": [
+      "Oral rigosertib"
+    ]
+  },
+  "TRAW:rigosertib:NCT00854646": {
+    "nct_id": "NCT00854646",
+    "title": "Phase I Study of ON 01910.Na in Refractory Leukemia or Myelodysplastic Syndrome (MDS)",
+    "official_title": "Phase I Dose Escalation Study of ON 01910.Na With Increasing Duration of an Initial 3-Day Continuous Infusion in Patients With Refractory Leukemia or MDS",
+    "status": "COMPLETED",
+    "last_update": "2018-01-10",
+    "start_date": "2008-10",
+    "completion_date": "2015-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 22,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Traws Pharma, Inc.",
+    "conditions": [
+      "Acute Myelocytic Leukemia",
+      "Acute Lymphocytic Leukemia",
+      "Chronic Myelocytic Leukemia",
+      "Chronic Lymphocytic Leukemia",
+      "Myelodysplastic Syndromes"
+    ],
+    "interventions": [
+      "ON 01910.Na"
+    ]
+  },
+  "TRAW:rigosertib:NCT00861328": {
+    "nct_id": "NCT00861328",
+    "title": "Safety Study of ON 01910.Na in Combination With Irinotecan or Oxaliplatin",
+    "official_title": "A Phase 1 Dose-Escalation Study of the Safety and Clinical Effects of ON 01910.Na in Combination With Either Irinotecan or Oxaliplatin in Patients With Advanced Solid Tumors",
+    "status": "COMPLETED",
+    "last_update": "2017-06-23",
+    "start_date": "2008-02",
+    "completion_date": "2011-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 18,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Traws Pharma, Inc.",
+    "conditions": [
+      "Advanced Solid Tumors"
+    ],
+    "interventions": [
+      "ON 01910.Na and irinotecan",
+      "ON 01910.Na and oxaliplatin"
+    ]
+  },
+  "TRAW:rigosertib:NCT01125891": {
+    "nct_id": "NCT01125891",
+    "title": "Dose Escalation Study of Gemcitabine and ON 01910.Na in Solid Tumors",
+    "official_title": "Phase I Dose Escalation Study of Gemcitabine and ON 01910.Na in Patients With Advanced or Metastatic Solid Tumors",
+    "status": "COMPLETED",
+    "last_update": "2017-06-23",
+    "start_date": "2009-01",
+    "completion_date": "2011-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 39,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Traws Pharma, Inc.",
+    "conditions": [
+      "Malignant Neoplasmas",
+      "Solid Tumors"
+    ],
+    "interventions": [
+      "gemcitabine",
+      "ON 01910.Na"
+    ]
+  },
+  "TRAW:rigosertib:NCT02730884": {
+    "nct_id": "NCT02730884",
+    "title": "Single-Arm Study of the Efficacy and Safety of Oral Rigosertib in Patients With Myelofibrosis (MF) and Anemia",
+    "official_title": "A Phase II Single-Arm Study of the Efficacy and Safety of Oral Rigosertib in Patients With Myelofibrosis (MF) and Anemia",
+    "status": "TERMINATED",
+    "last_update": "2020-08-07",
+    "start_date": "2017-08-16",
+    "completion_date": "2019-08-22",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 3,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "M.D. Anderson Cancer Center",
+    "conditions": [
+      "Leukemia",
+      "Myelofibrosis",
+      "Anemia",
+      "Splenomegaly"
+    ],
+    "interventions": [
+      "Rigosertib",
+      "Questionnaire"
+    ]
+  },
+  "SNDX:revumenib:NCT07498465": {
+    "nct_id": "NCT07498465",
+    "title": "A Study to Find the Highest Dose of SNDX-5613 (Revumenib) as a Treatment Option After Hematopoietic Stem Cell Transplant in Children With Acute Lymphoblastic Leukemia, Acute Myeloid Leukemia, and Mixed Phenotype Acute Leukemia",
+    "official_title": "A Phase 1 Trial of the Menin Inhibitor SNDX-5613 (Revumenib) (NSC# 852942) for Maintenance Therapy After Allogeneic Hematopoietic Stem Cell Transplantation in Pediatric Patients With Acute Lymphoblastic Leukemia, Acute Myeloid Leukemia, and Mixed Phenotype Acute Leukemia",
+    "status": "WITHDRAWN",
+    "last_update": "2026-05-05",
+    "start_date": "2026-09-10",
+    "completion_date": "2028-11-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Children's Oncology Group",
+    "conditions": [
+      "Acute Lymphoblastic Leukemia",
+      "Acute Myeloid Leukemia",
+      "Childhood Acute Lymphoblastic Leukemia",
+      "Childhood Acute Myeloid Leukemia",
+      "Childhood Mixed Phenotype Acute Leukemia",
+      "Mixed Phenotype Acute Leukemia"
+    ],
+    "interventions": [
+      "Biospecimen Collection",
+      "Bone Marrow Aspiration",
+      "Bone Marrow Biopsy",
+      "Cytarabine",
+      "Echocardiography Test",
+      "Methotrexate",
+      "Radiologic Examination",
+      "Revumenib",
+      "Therapeutic Hydrocortisone"
+    ]
+  },
+  "SNDX:revumenib:NCT07605949": {
+    "nct_id": "NCT07605949",
+    "title": "Revumenib, Azacitidine, and VENetoclax in Newly Diagnosed KMT2A-Rearranged AML",
+    "official_title": "Revumenib, Azacitidine, and VENetoclax in Newly Diagnosed KMT2A-Rearranged AML",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-09-10",
+    "start_date": "2026-10",
+    "completion_date": "2028-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 88,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "UNC Lineberger Comprehensive Cancer Center",
+    "conditions": [
+      "Leukemia Acute Myeloid"
+    ],
+    "interventions": [
+      "Azacitidine",
+      "Venetoclax",
+      "Revumenib"
+    ]
+  },
+  "SNDX:revumenib:NCT07686107": {
+    "nct_id": "NCT07686107",
+    "title": "Trial of Revumenib Plus FLA Chemotherapy for Children With Relapsed or Refractory NUP98-rearranged AML.\"",
+    "official_title": "T2023-004 Phase 2 Trial of Revumenib (SNDX-5613) in Combination With FLA Chemotherapy for Children With Relapsed or Refractory NUP98-rearranged Acute Myeloid Leukemia",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-07-22",
+    "start_date": "2026-08-31",
+    "completion_date": "2030-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 24,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Therapeutic Advances in Childhood Leukemia Consortium",
+    "conditions": [
+      "Leukemia, Myeloid, Acute"
+    ],
+    "interventions": [
+      "Revumenib",
+      "Fludarabine",
+      "Cytarabine (Ara-C)",
+      "Methotrexate (IT)",
+      "Hydrocortisone (intrathecal)",
+      "Cytarabine (intrathecal)"
+    ]
+  },
+  "SNDX:revumenib:NCT06226571": {
+    "nct_id": "NCT06226571",
+    "title": "A Study of Revumenib in Combination With Intensive Chemotherapy in Participants With Acute Myeloid Leukemias",
+    "official_title": "A Phase 1, Open-label, Dose-escalation, and Dose-expansion Study to Evaluate Safety, Tolerability, and Clinical Activity of Revumenib in Combination With Intensive Chemotherapy in Participants With Newly Diagnosed Acute Myeloid Leukemias Harboring Alterations in Lysine-specific Methyltransferase 2A (KMT2A/MLL), Nucleophosmin 1 (NPM1), and Nucleoporin 98 (NUP98) Genes",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-09-16",
+    "start_date": "2024-05-21",
+    "completion_date": "2027-02",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 96,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Syndax Pharmaceuticals",
+    "conditions": [
+      "Acute Myeloid Leukemias"
+    ],
+    "interventions": [
+      "Revumenib",
+      "Chemotherapy Regimen",
+      "HiDAC"
+    ]
+  },
+  "SNDX:revumenib:NCT05326516": {
+    "nct_id": "NCT05326516",
+    "title": "A Study of Revumenib in Combination With Chemotherapy in Participants With R/R Acute Leukemia",
+    "official_title": "AUGMENT-102: A Phase 1, Open-label, Dose-escalation Study to Evaluate Safety, Tolerability and Preliminary Anti-Leukemic Activity of SNDX-5613 in Combination With Chemotherapy in Patients With Relapsed/Refractory Leukemias Harboring Alterations in KMT2A/MLL, Nucleophosmin 1 (NPM1), and Nucleoporin 98 (NUP98) Genes",
+    "status": "COMPLETED",
+    "last_update": "2024-08-13",
+    "start_date": "2022-03-09",
+    "completion_date": "2024-07-29",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 30,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Syndax Pharmaceuticals",
+    "conditions": [
+      "Relapsed/Refractory Leukemias",
+      "Acute Lymphoblastic Leukemia",
+      "Acute Lymphocytic Leukemia",
+      "Mixed Phenotype Acute Leukemia",
+      "Acute Myeloid Leukemia",
+      "Acute Undifferentiated Leukemia"
+    ],
+    "interventions": [
+      "Revumenib",
+      "Chemotherapy Regimen 1",
+      "Chemotherapy Regimen 2"
+    ]
+  },
+  "SNDX:revumenib:NCT07211958": {
+    "nct_id": "NCT07211958",
+    "title": "Study of Revumenib in Combination With Intensive Chemotherapy in Newly Diagnosed Acute Myeloid Leukemia (AML) With a NPM1 Mutation",
+    "official_title": "A Phase 3, Randomized, Double-Blind, Placebo-Controlled Study of Revumenib in Combination With Intensive Chemotherapy in Participants With Newly Diagnosed AML With an NPM1 Mutation",
+    "status": "RECRUITING",
+    "last_update": "2026-10-21",
+    "start_date": "2025-11-25",
+    "completion_date": "2031-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 468,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Syndax Pharmaceuticals",
+    "conditions": [
+      "Acute Myeloid Leukemias"
+    ],
+    "interventions": [
+      "Revumenib",
+      "Placebo",
+      "Intensive Chemotherapy Regimen"
+    ]
+  },
+  "SNDX:revumenib:NCT05918913": {
+    "nct_id": "NCT05918913",
+    "title": "Expanded Access Program for Revumenib",
+    "official_title": "Expanded Access Program for SNDX-5613 in Patients With Relapsed/Refractory Acute Leukemias With Genetic Alterations Associated With HOXA Overexpression",
+    "status": "NO_LONGER_AVAILABLE",
+    "last_update": "2025-09-05",
+    "start_date": null,
+    "completion_date": null,
+    "study_type": "EXPANDED_ACCESS",
+    "phases": [],
+    "enrollment": null,
+    "enrollment_type": null,
+    "sponsor": "Syndax Pharmaceuticals",
+    "conditions": [
+      "Relapsed/Refractory Acute Leukemia"
+    ],
+    "interventions": [
+      "Revumenib"
+    ]
+  },
+  "SNDX:revumenib:NCT06222580": {
+    "nct_id": "NCT06222580",
+    "title": "SNDX-5613 and Gilteritinib for the Treatment of Relapsed or Refractory FLT3-Mutated Acute Myeloid Leukemia and Concurrent MLL-Rearrangement or NPM1 Mutation",
+    "official_title": "Safety and Efficacy of Dual Menin and FLT3 Inhibition in Patients With Relapsed/Refractory FLT3- Mutated Acute Myeloid Leukemia Containing a Concurrent MLL-Rearrangement or NPM1 Mutation: A Phase I (Ph I) Study of SNDX-5613 + Gilteritinib",
+    "status": "RECRUITING",
+    "last_update": "2026-05-14",
+    "start_date": "2024-02-20",
+    "completion_date": "2027-02-28",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 30,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Uma Borate",
+    "conditions": [
+      "Acute Myeloid Leukemia With FLT3/ITD Mutation",
+      "Acute Myeloid Leukemia With KMT2A Rearrangement",
+      "Acute Myeloid Leukemia With NPM1 Mutation",
+      "Recurrent Acute Myeloid Leukemia",
+      "Refractory Acute Myeloid Leukemia"
+    ],
+    "interventions": [
+      "Biospecimen Collection",
+      "Bone Marrow Aspiration and Biopsy",
+      "Gilteritinib",
+      "Revumenib",
+      "Echocardiography Test",
+      "Multigated Acquisition Scan"
+    ]
+  },
+  "SNDX:revumenib:NCT05761171": {
+    "nct_id": "NCT05761171",
+    "title": "A Study of Revumenib in Combination With Chemotherapy for Patients Diagnosed With Relapsed or Refractory Leukemia",
+    "official_title": "A Phase 2 Study of SNDX-5613 in Combination With Chemotherapy for Patients With Relapsed or Refractory KMT2A-Rearranged Infant Leukemia",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-08-25",
+    "start_date": "2024-01-08",
+    "completion_date": "2027-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 78,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Children's Oncology Group",
+    "conditions": [
+      "Recurrent Acute Leukemia of Ambiguous Lineage",
+      "Recurrent Acute Lymphoblastic Leukemia",
+      "Recurrent Acute Myeloid Leukemia Due to Lineage Switch From Acute Leukemia of Ambiguous Lineage",
+      "Recurrent Acute Myeloid Leukemia Due to Lineage Switch From B Acute Lymphoblastic Leukemia, KMT2A-Rearranged",
+      "Recurrent Acute Myeloid Leukemia Due to Lineage Switch From Mixed Phenotype Acute Leukemia",
+      "Recurrent Mixed Phenotype Acute Leukemia",
+      "Refractory Acute Leukemia of Ambiguous Lineage",
+      "Refractory Acute Lymphoblastic Leukemia",
+      "Refractory Acute Myeloid Leukemia Due to Lineage Switch From Acute Leukemia of Ambiguous Lineage",
+      "Refractory Acute Myeloid Leukemia Due to Lineage Switch From B Acute Lymphoblastic Leukemia, KMT2A-Rearranged",
+      "Refractory Acute Myeloid Leukemia Due to Lineage Switch From Mixed Phenotype Acute Leukemia",
+      "Refractory Mixed Phenotype Acute Leukemia"
+    ],
+    "interventions": [
+      "Biospecimen Collection",
+      "Bone Marrow Aspiration",
+      "Calaspargase Pegol",
+      "Cytarabine",
+      "Echocardiography Test",
+      "Electrocardiogram",
+      "Fludarabine Phosphate",
+      "Hydrocortisone Sodium Succinate",
+      "Lumbar Puncture",
+      "Methotrexate",
+      "Multigated Acquisition Scan",
+      "Prednisolone",
+      "Prednisone",
+      "Revumenib",
+      "Vincristine Sulfate"
+    ]
+  },
+  "SNDX:revumenib:NCT07356154": {
+    "nct_id": "NCT07356154",
+    "title": "A Study of Revumenib and Mezigdomide in People With Leukemia",
+    "official_title": "A Phase 1/2 Study of the Menin Inhibitor Revumenib With the CELMod Mezigdomide in Relapsed/Refractory KMT2A-rearanged, NPM1-mutant, and NUP98-rearranged Acute Leukemias",
+    "status": "RECRUITING",
+    "last_update": "2026-10-20",
+    "start_date": "2026-01-16",
+    "completion_date": "2029-01-16",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 52,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Memorial Sloan Kettering Cancer Center",
+    "conditions": [
+      "Leukemia",
+      "Acute Leukemia",
+      "Relapse Leukemia",
+      "Refractory Leukemia",
+      "Refractory Acute Leukemia",
+      "Acute Myeloid Leukemia",
+      "Acute Lymphoblastic Leukemia",
+      "Mixed Phenotype Acute Leukemia"
+    ],
+    "interventions": [
+      "Revumenib",
+      "Mezigdomide"
+    ]
+  },
+  "SNDX:revumenib:NCT06177067": {
+    "nct_id": "NCT06177067",
+    "title": "Study of Revumenib, Azacitidine, and Venetoclax in Pediatric and Young Adult Patients With Refractory or Relapsed Acute Myeloid Leukemia",
+    "official_title": "A Phase 1 Study of Revumenib, Azacitidine, and Venetoclax in Pediatric and Young Adult Patients With Refractory or Relapsed Acute Myeloid Leukemia",
+    "status": "RECRUITING",
+    "last_update": "2026-10-22",
+    "start_date": "2024-04-19",
+    "completion_date": "2029-02",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 24,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "St. Jude Children's Research Hospital",
+    "conditions": [
+      "Refractory Acute Myeloid Leukemia",
+      "Relapsed Acute Myeloid Leukemia",
+      "Acute Leukemia of Ambiguous Lineage"
+    ],
+    "interventions": [
+      "Revumenib",
+      "Venetoclax",
+      "Azacitidine",
+      "intrathecal (IT) chemotherapy",
+      "Cytarabine",
+      "Methotrexate"
+    ]
+  },
+  "SNDX:revumenib:NCT06313437": {
+    "nct_id": "NCT06313437",
+    "title": "Revumenib in Combination With 7+3 + Midostaurin in AML",
+    "official_title": "A Phase I Trial of Revumenib in Combination With 7+3 (7 Days of Cytarabine and 3 Days of Daunorubicin) + Midostaurin Induction Chemotherapy for the Frontline Treatment of NPM1 and FLT3 Mutated AML",
+    "status": "RECRUITING",
+    "last_update": "2026-03-25",
+    "start_date": "2024-12-06",
+    "completion_date": "2028-03-02",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 22,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Richard Stone, MD",
+    "conditions": [
+      "Acute Myeloid Leukemia",
+      "AML, Adult",
+      "AML With Gene Mutations",
+      "AML",
+      "Leukemia"
+    ],
+    "interventions": [
+      "Revumenib",
+      "Midostaurin",
+      "Cytarabine",
+      "Daunorubicin"
+    ]
+  },
+  "SNDX:revumenib:NCT06575296": {
+    "nct_id": "NCT06575296",
+    "title": "Revumenib for the Treatment of Acute Leukemia in Patients Post-Allogeneic Stem Cell Transplant",
+    "official_title": "A Phase I Study of SNDX 5613 (Revumenib) as Post-Transplant Maintenance After Allogeneic Hematopoietic Cell Transplant in Patients With KMT2A-Rearranged or NPM1-Mutated Acute Leukemia",
+    "status": "RECRUITING",
+    "last_update": "2026-10-19",
+    "start_date": "2024-12-31",
+    "completion_date": "2028-04-29",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 27,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "City of Hope Medical Center",
+    "conditions": [
+      "Acute Leukemia",
+      "Acute Leukemia of Ambiguous Lineage",
+      "Acute Lymphoblastic Leukemia",
+      "Acute Myeloid Leukemia",
+      "Childhood Acute Leukemia",
+      "Childhood Acute Leukemia of Ambiguous Lineage",
+      "Childhood Acute Lymphoblastic Leukemia",
+      "Childhood Acute Myeloid Leukemia"
+    ],
+    "interventions": [
+      "Biospecimen Collection",
+      "Bone Marrow Aspiration",
+      "Bone Marrow Biopsy",
+      "Echocardiography",
+      "Electronic Health Record Review",
+      "Quality-of-Life Assessment",
+      "Questionnaire Administration",
+      "Revumenib"
+    ]
+  },
+  "SNDX:revumenib:NCT07734077": {
+    "nct_id": "NCT07734077",
+    "title": "Revumenib in Patients With Myelofibrosis",
+    "official_title": "Phase Ib/II Study Of Revumenib As Monotherapy Or In Combination With Jak Inhibitors In Patients With Myelofibrosis",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-07-29",
+    "start_date": "2026-12-01",
+    "completion_date": "2028-12-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 32,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "John Mascarenhas",
+    "conditions": [
+      "Myelofibrosis",
+      "Post-polycythemia Vera Myelofibrosis",
+      "Post-essential Thrombocythemia Myelofibrosis"
+    ],
+    "interventions": [
+      "Revumenib",
+      "Ruxolitinib",
+      "FEDRATINIB",
+      "Momelotinib"
+    ]
+  },
+  "SNDX:revumenib:NCT05886049": {
+    "nct_id": "NCT05886049",
+    "title": "A Phase 1b Study of Menin Inhibitor SNDX- 5613 in Combination With Daunorubicin and Cytarabine in Newly Diagnosed Patients With Acute Myeloid Leukemia and NPM1 Mutated/FLT3 Wildtype or MLL/KMT2A Rearranged or NUP98 Alterations Disease",
+    "official_title": "A Phase 1b Study of Menin Inhibitor SNDX-5613 in Combination With Daunorubicin and Cytarabine in Newly Diagnosed Patients With Acute Myeloid Leukemia and NPM1 Mutated/FLT3 Wildtype or MLL/KMT2A Rearranged or NUP98 Alterations Disease",
+    "status": "RECRUITING",
+    "last_update": "2026-08-25",
+    "start_date": "2024-06-20",
+    "completion_date": "2027-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 38,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "National Cancer Institute (NCI)",
+    "conditions": [
+      "Acute Myeloid Leukemia",
+      "Acute Myeloid Leukemia With KMT2A Rearrangement",
+      "Acute Myeloid Leukemia With NPM1 Mutation",
+      "Secondary Acute Myeloid Leukemia"
+    ],
+    "interventions": [
+      "Biospecimen Collection",
+      "Bone Marrow Aspiration",
+      "Bone Marrow Biopsy",
+      "Cytarabine",
+      "Daunorubicin",
+      "Multigated Acquisition Scan",
+      "Revumenib",
+      "Transthoracic Echocardiography Test"
+    ]
+  },
+  "SNDX:revumenib:NCT07052994": {
+    "nct_id": "NCT07052994",
+    "title": "A Phase Ia/Ib Trial of Revumenib Combined With Cytarabine, Daunorubicin, and Gemtuzumab Ozogamicin (GO) in Frontline and Relapsed /Refractory Pediatric Acute Leukemia Patients",
+    "official_title": "A Phase Ia/Ib Trial of Revumenib Combined With Cytarabine, Daunorubicin, and Gemtuzumab Ozogamicin (GO) in Frontline and Relapsed /Refractory Pediatric Acute Leukemia Patients",
+    "status": "WITHDRAWN",
+    "last_update": "2026-09-23",
+    "start_date": "2026-05-21",
+    "completion_date": "2026-05-21",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "M.D. Anderson Cancer Center",
+    "conditions": [
+      "Pediatric Acute Leukemia"
+    ],
+    "interventions": [
+      "Revumenib",
+      "Cytrabine",
+      "Daunorubicin"
+    ]
+  },
+  "SNDX:revumenib:NCT07283640": {
+    "nct_id": "NCT07283640",
+    "title": "A Phase IB Trial of Subcutaneous Blinatumomab in Combination With Revumenib for Patients With KMT2A-rearranged Acute Lymphoblastic Leukemia",
+    "official_title": "A Phase IB Trial of Subcutaneous Blinatumomab in Combination With Revumenib for Patients With KMT2A-rearranged Acute Lymphoblastic Leukemia",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-08-12",
+    "start_date": "2026-11-18",
+    "completion_date": "2031-08-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 20,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "M.D. Anderson Cancer Center",
+    "conditions": [
+      "Blinatumomab",
+      "Revumenib",
+      "Lymphoblastic Leukemia",
+      "KMT2A-rearranged"
+    ],
+    "interventions": [
+      "Revumenib",
+      "Blinatumomab"
+    ]
+  },
+  "SNDX:revumenib:NCT05731947": {
+    "nct_id": "NCT05731947",
+    "title": "Evaluation of Revumenib in Participants With Colorectal Cancer and Other Solid Tumors",
+    "official_title": "A Phase 1/2 Study to Investigate the Safety, Tolerability, Pharmacokinetics, Pharmacodynamics, and Efficacy of SNDX-5613 in Patients With Colorectal Cancer and Other Solid Tumors",
+    "status": "TERMINATED",
+    "last_update": "2026-07-06",
+    "start_date": "2023-04-04",
+    "completion_date": "2025-06-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 41,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Syndax Pharmaceuticals",
+    "conditions": [
+      "Colorectal Cancer",
+      "Solid Tumors"
+    ],
+    "interventions": [
+      "Revumenib",
+      "Chemotherapy"
+    ]
+  },
+  "SNDX:revumenib:NCT07636564": {
+    "nct_id": "NCT07636564",
+    "title": "Testing Blinatumomab With or Without Revumenib in Patients With B-cell Acute Lymphoblastic Leukemia With a Genetic Change Requiring More Treatment",
+    "official_title": "A Phase II Randomized Study of Blinatumomab With or Without Revumenib for Patients With KMT2A-Translocation B-Cell Acute Lymphoblastic Leukemia (ALL)/ Acute Leukemia With Ambiguous Lineage (ALAL) With Persistent Measurable Residual Disease (MRD)",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-10-13",
+    "start_date": "2026-10-14",
+    "completion_date": "2032-04-16",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 90,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "SWOG Cancer Research Network",
+    "conditions": [
+      "Acute Leukemia of Ambiguous Lineage",
+      "B Acute Lymphoblastic Leukemia",
+      "B Acute Lymphoblastic Leukemia, Philadelphia Chromosome Negative",
+      "T Acute Lymphoblastic Leukemia"
+    ],
+    "interventions": [
+      "Biospecimen Collection",
+      "Blinatumomab",
+      "Bone Marrow Aspiration",
+      "Bone Marrow Biopsy",
+      "Calaspargase Pegol",
+      "Chest Radiography",
+      "Computed Tomography",
+      "Cyclophosphamide",
+      "Cytarabine",
+      "Daunorubicin Hydrochloride",
+      "Dexamethasone",
+      "Doxorubicin",
+      "Echocardiography Test",
+      "Leucovorin Calcium",
+      "Mercaptopurine",
+      "Methotrexate",
+      "Multigated Acquisition Scan",
+      "Positron Emission Tomography",
+      "Revumenib",
+      "Thioguanine",
+      "Vincristine"
+    ]
+  },
+  "SNDX:axatilimab:NCT07128381": {
+    "nct_id": "NCT07128381",
+    "title": "Phase I/II Clinical Trial of Axatilimab, a CSF1R Monoclonal Antibody, in Combination With Ruxolitinib as Therapy for Patients With Myelofibrosis (MF) and Chronic Myelomonocytic Leukemia (CMML)",
+    "official_title": "Phase I/II Clinical Trial of Axatilimab, a CSF1R Monoclonal Antibody, in Combination With Ruxolitinib as Therapy for Patients With Myelofibrosis (MF) and Chronic Myelomonocytic Leukemia (CMML)",
+    "status": "RECRUITING",
+    "last_update": "2026-10-09",
+    "start_date": "2026-01-02",
+    "completion_date": "2033-07-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 66,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "M.D. Anderson Cancer Center",
+    "conditions": [
+      "Myelofibrosis (MF)",
+      "Chronic Myelomonocytic Leukemia (CMML)"
+    ],
+    "interventions": [
+      "Axatilimab (SNDX-6352)",
+      "Ruxolitinib"
+    ]
+  },
+  "SNDX:axatilimab:NCT07015853": {
+    "nct_id": "NCT07015853",
+    "title": "ASTRAEA: ReinvigorAting ReSponse To ImmunotheRApy in MEtAstatic TNBC With Combination Myeloid Inhibition and Radiation",
+    "official_title": "IIT2024-02-SHIAO-ASTRAEA: ReinvigorAting ReSponse To ImmunotheRApy in MEtAstatic TNBC With Combination Myeloid Inhibition and Radiation",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-04-20",
+    "start_date": "2026-06",
+    "completion_date": "2033-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 34,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Stephen Shiao",
+    "conditions": [
+      "TNBC - Triple-Negative Breast Cancer",
+      "Breast Cancer"
+    ],
+    "interventions": [
+      "Pembrolizumab",
+      "Radiotherapy",
+      "Axatilimab"
+    ]
+  },
+  "SNDX:axatilimab:NCT06320405": {
+    "nct_id": "NCT06320405",
+    "title": "Axatilimab in Combination With Retifanlimab and Paclitaxel for the Treatment of Patients With Advanced or Metastatic Solid Tumors",
+    "official_title": "A Phase Ib/II Study of Axatilimab in Combination With Retifanlimab and Paclitaxel for the Treatment of Patients With Advanced Solid Tumors",
+    "status": "RECRUITING",
+    "last_update": "2026-07-08",
+    "start_date": "2024-05-21",
+    "completion_date": "2029-04-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 38,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "OHSU Knight Cancer Institute",
+    "conditions": [
+      "Advanced Malignant Solid Neoplasm",
+      "Metastatic Malignant Solid Neoplasm",
+      "Recurrent Malignant Solid Neoplasm",
+      "Refractory Malignant Solid Neoplasm"
+    ],
+    "interventions": [
+      "Axatilimab",
+      "Biopsy",
+      "Biospecimen Collection",
+      "Computed Tomography",
+      "Magnetic Resonance Imaging",
+      "Paclitaxel",
+      "Positron Emission Tomography",
+      "Retifanlimab"
+    ]
+  },
+  "SNDX:axatilimab:NCT07511062": {
+    "nct_id": "NCT07511062",
+    "title": "Axatilimab Combined With Decitabine/Venetoclax for the Treatment of TP53-mutated AML",
+    "official_title": "Axatilimab Combined With Decitabine/Venetoclax for the Treatment of TP53-mutated/Deleted AML Patients",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-10-16",
+    "start_date": "2027-01-31",
+    "completion_date": "2030-08-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 32,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Northside Hospital, Inc.",
+    "conditions": [
+      "Acute Myeloid Leukemia",
+      "TP53 Gene Mutation"
+    ],
+    "interventions": [
+      "Decitabine",
+      "Venetoclax",
+      "Axatilimab"
+    ]
+  },
+  "SNDX:axatilimab:NCT03604692": {
+    "nct_id": "NCT03604692",
+    "title": "A Phase 1/2 Study to Evaluate Axatilimab in Participants With Active cGVHD",
+    "official_title": "A Phase 1/2, Open-Label, Dose Escalation and Dose Expansion Study to Evaluate the Safety, Tolerability, Pharmacokinetics, Pharmacodynamic Activity, and Efficacy of SNDX- 6352 in Subjects With Active Chronic Graft Versus Host Disease Who Have Received at Least 2 Lines of Prior Therapy",
+    "status": "COMPLETED",
+    "last_update": "2025-09-15",
+    "start_date": "2018-11-01",
+    "completion_date": "2024-10-18",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 41,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Syndax Pharmaceuticals",
+    "conditions": [
+      "Chronic Graft-versus-host-disease"
+    ],
+    "interventions": [
+      "axatilimab"
+    ]
+  },
+  "SNDX:axatilimab:NCT07349771": {
+    "nct_id": "NCT07349771",
+    "title": "Axatilimab Plus Standard of Care Therapy for the Prevention of Graft Versus Host Disease Following Allogeneic Hematopoietic Stem Cell Transplantation in Patients With Hematologic Cancer, ABRAXAS Trial",
+    "official_title": "Phase II Double-Blinded Placebo-Controlled Randomized Trial of CSF-1R Inhibitor, Axatilimab for Prevention of Acute and Chronic GVHD After HLA-Matched Related and Unrelated Donor Allogeneic Stem Cell Transplantation (ABRAXAS)",
+    "status": "WITHDRAWN",
+    "last_update": "2026-09-03",
+    "start_date": "2026-06-01",
+    "completion_date": "2033-06-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Mayo Clinic",
+    "conditions": [
+      "Hematopoietic and Lymphatic System Neoplasm"
+    ],
+    "interventions": [
+      "Allogeneic Hematopoietic Stem Cell Transplantation",
+      "Axatilimab",
+      "Biospecimen Collection",
+      "Bone Marrow Aspiration",
+      "Computed Tomography",
+      "Cyclophosphamide",
+      "Magnetic Resonance Imaging",
+      "Mycophenolate Mofetil",
+      "Placebo Administration",
+      "Positron Emission Tomography",
+      "Skin Biopsy",
+      "Tacrolimus",
+      "X-Ray Imaging"
+    ]
+  },
+  "SNDX:axatilimab:NCT04415073": {
+    "nct_id": "NCT04415073",
+    "title": "A Phase 2 Study to Evaluate Axatilimab for Hospitalized Participants With Respiratory Involvement Secondary to COVID-19",
+    "official_title": "A Phase 2, Randomized, Double-blind, Placebo-controlled Study to Evaluate the Efficacy and Safety of Axatilimab for the Treatment of Hospitalized Patients With Respiratory Signs and Symptoms Secondary to Novel Coronavirus Disease (COVID-19)",
+    "status": "TERMINATED",
+    "last_update": "2022-07-22",
+    "start_date": "2020-05-30",
+    "completion_date": "2020-07-13",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 1,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Syndax Pharmaceuticals",
+    "conditions": [
+      "Coronavirus",
+      "COVID",
+      "ARDS",
+      "Cytokine Storm",
+      "Cytokine Release Syndrome"
+    ],
+    "interventions": [
+      "SNDX-6352",
+      "Placebo"
+    ]
+  },
+  "SNDX:axatilimab:NCT06663722": {
+    "nct_id": "NCT06663722",
+    "title": "Axatilimab in Combination With Extracorporeal Photopheresis (ECP) in Chronic Graft-versus-Host Disease",
+    "official_title": "A Phase II b Study of Axatilimab in Combination With Extracorporeal Photopheresis (ECP) in Chronic Graft-versus-Host Disease",
+    "status": "RECRUITING",
+    "last_update": "2026-06-22",
+    "start_date": "2025-05-05",
+    "completion_date": "2030-05-05",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 49,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "University of Miami",
+    "conditions": [
+      "Chronic Graft Versus Host Disease",
+      "cGVHD"
+    ],
+    "interventions": [
+      "Axatilimab",
+      "Extracorporeal Photopheresis"
+    ]
+  },
+  "SNDX:axatilimab:NCT07728708": {
+    "nct_id": "NCT07728708",
+    "title": "Effects of Axatilimab on Skin in Chronic Graft-versus-Host Disease",
+    "official_title": "Mapping On-Target Effects of Axatilimab in Human Chronic Graft-versus-Host Disease Skin: A Prospective Observational Mechanistic Study",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-09-22",
+    "start_date": "2026-11",
+    "completion_date": "2027-12",
+    "study_type": "OBSERVATIONAL",
+    "phases": [],
+    "enrollment": 15,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Northwestern University",
+    "conditions": [
+      "Chronic Graft vs. Host Disease",
+      "GVHD",
+      "cGVHD",
+      "Graft Versus Host Disease in Skin"
+    ],
+    "interventions": [
+      "Axatilimab"
+    ]
+  },
+  "SNDX:axatilimab:NCT06585774": {
+    "nct_id": "NCT06585774",
+    "title": "A Study to Evaluate Axatilimab and Corticosteroids as Initial Treatment for Chronic Graft-Versus-Host Disease",
+    "official_title": "A Phase 3, Randomized, Double-Blind, Placebo-Controlled Study of Axatilimab and Corticosteroids as Initial Treatment for Chronic Graft-Versus-Host Disease (AXemplify-357)",
+    "status": "RECRUITING",
+    "last_update": "2026-10-09",
+    "start_date": "2025-01-21",
+    "completion_date": "2030-03-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 240,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Incyte Corporation",
+    "conditions": [
+      "Chronic Graft-versus-host-disease"
+    ],
+    "interventions": [
+      "INCA034176",
+      "Placebo",
+      "Corticosteroids"
+    ]
+  },
+  "SNDX:axatilimab:NCT06488378": {
+    "nct_id": "NCT06488378",
+    "title": "Phase Ib Study of Axatilimab in Combination With Olaparib in BRCA1/2 and PALB2- Associated Metastatic HER2-negative Breast Cancer",
+    "official_title": "Phase Ib Study of Axatilimab in Combination With Olaparib in BRCA1/2 and PALB2- Associated Metastatic HER2-negative Breast Cancer",
+    "status": "RECRUITING",
+    "last_update": "2026-09-02",
+    "start_date": "2024-08-13",
+    "completion_date": "2029-03-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 20,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Dana-Farber Cancer Institute",
+    "conditions": [
+      "Breast Cancer",
+      "PALB2-Mutated Breast Carcinoma",
+      "HER2-negative Breast Cancer",
+      "BRCA1 Mutation",
+      "BRCA2 Mutation"
+    ],
+    "interventions": [
+      "Axatilimab",
+      "Olaparib"
+    ]
+  },
+  "SNDX:axatilimab:NCT07124078": {
+    "nct_id": "NCT07124078",
+    "title": "A Study to Evaluate Axatilimab Versus Best Available Therapy in Pediatric Participants With Chronic Graft-Versus-Host Disease After at Least 2 Prior Lines of Systemic Therapy (AGAVE-256)",
+    "official_title": "A Phase 2, Randomized, Open-Label Study of Axatilimab Versus Best Available Therapy in Pediatric Participants With Chronic Graft-Versus-Host Disease After at Least 2 Prior Lines of Systemic Therapy (AGAVE-256)",
+    "status": "RECRUITING",
+    "last_update": "2026-10-09",
+    "start_date": "2026-05-20",
+    "completion_date": "2029-07-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 60,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Incyte Corporation",
+    "conditions": [
+      "Chronic Graft-versus-host-disease"
+    ],
+    "interventions": [
+      "INCA034176",
+      "Best available Treatment (BAT)"
+    ]
+  },
+  "SNDX:axatilimab:NCT06263478": {
+    "nct_id": "NCT06263478",
+    "title": "A Study to Evaluate the Efficacy, Safety, and Pharmacokinetics of Axatilimab Monotherapy in Japanese Participants With Recurrent or Refractory Active Chronic Graft-Versus-Host Disease",
+    "official_title": "A Phase 3, Open-Label, Multicenter Study to Evaluate the Efficacy, Safety, and Pharmacokinetics of Axatilimab Monotherapy in Japanese Participants With Recurrent or Refractory Active Chronic Graft-Versus-Host Disease After at Least 2 Lines of Systemic Therapy",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-10-05",
+    "start_date": "2024-07-30",
+    "completion_date": "2027-03-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 21,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Incyte Biosciences Japan GK",
+    "conditions": [
+      "Chronic Graft-versus-host-disease"
+    ],
+    "interventions": [
+      "INCA034176"
+    ]
+  },
+  "SNDX:axatilimab:NCT07808112": {
+    "nct_id": "NCT07808112",
+    "title": "CSF-1R Inhibitor, Axatilimab, for Prevention of Acute and Chronic GVHD After HLA-Matched Related and Unrelated Donor Allogeneic Stem Cell Transplantation",
+    "official_title": "Phase II Open-Label, Randomized-Controlled Trial of CSF-1R Inhibitor, Axatilimab, for Prevention of Acute and Chronic GVHD After HLA-Matched Related and Unrelated Donor Allogeneic Stem Cell Transplantation",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-09-08",
+    "start_date": "2026-11",
+    "completion_date": "2031-11",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 72,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Medical College of Wisconsin",
+    "conditions": [
+      "Graft -Versus-host-disease"
+    ],
+    "interventions": [
+      "Hematopoietic Cell Transplantation",
+      "Cyclophosphamide",
+      "Tacrolimus",
+      "Mycophenolate Mofetil (MMF)",
+      "Axatilimab"
+    ]
+  },
+  "SNDX:axatilimab:NCT05723055": {
+    "nct_id": "NCT05723055",
+    "title": "Evaluating Combination of Nivolumab and Axatilimab in Patients With Relapsed/Refractory Classical Hodgkin Lymphoma",
+    "official_title": "A Proof-of-Concept Multicenter Trial Evaluating Response Adapted Combination of Nivolumab and Axatilimab in Patients With Relapsed/Refractory Classical Hodgkin Lymphoma",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-06-05",
+    "start_date": "2023-05-03",
+    "completion_date": "2028-11",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 9,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "University of Utah",
+    "conditions": [
+      "Hodgkin Lymphoma"
+    ],
+    "interventions": [
+      "Axatilimab",
+      "Nivolumab"
+    ]
+  },
+  "SNDX:axatilimab:NCT06713590": {
+    "nct_id": "NCT06713590",
+    "title": "A Study to Evaluate a Single-Dose Subcutaneous Axatilimab Compared With Intravenous Axatilimab in Healthy Participants",
+    "official_title": "A Phase 1, Open-Label, Randomized Study of Single-Dose Subcutaneous Axatilimab Compared With Intravenous Axatilimab in Healthy Participants",
+    "status": "COMPLETED",
+    "last_update": "2025-06-25",
+    "start_date": "2025-01-14",
+    "completion_date": "2025-06-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 72,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Incyte Corporation",
+    "conditions": [
+      "Healthy Participants"
+    ],
+    "interventions": [
+      "Axatilimab"
+    ]
+  },
+  "SNDX:axatilimab:NCT03238027": {
+    "nct_id": "NCT03238027",
+    "title": "A Phase 1 Study to Investigate Axatilimab Alone or in Combination With Durvalumab in Patients With Solid Tumors",
+    "official_title": "A Phase 1, Open-Label, Dose Escalation Trial to Investigate the Safety, Tolerability, Pharmacokinetics and Pharmacodynamic Activity of SNDX-6352 Monotherapy and SNDX-6352 in Combination With Durvalumab in Patients With Unresectable, Recurrent, Locally-Advanced, or Metastatic Solid Tumors",
+    "status": "COMPLETED",
+    "last_update": "2024-05-17",
+    "start_date": "2017-09-01",
+    "completion_date": "2020-11-20",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 45,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Syndax Pharmaceuticals",
+    "conditions": [
+      "Solid Tumor",
+      "Metastatic Tumor",
+      "Locally Advanced Malignant Neoplasm",
+      "Unresectable Malignant Neoplasm"
+    ],
+    "interventions": [
+      "Axatilimab",
+      "Durvalumab"
+    ]
+  },
+  "SNDX:axatilimab:NCT07011810": {
+    "nct_id": "NCT07011810",
+    "title": "Axatilimab for Sclerotic Chronic Graft-versus-Host Disease",
+    "official_title": "Axatilimab for Sclerotic Chronic Graft-Versus-Host Disease",
+    "status": "RECRUITING",
+    "last_update": "2026-09-24",
+    "start_date": "2025-08-06",
+    "completion_date": "2030-02-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 50,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Fred Hutchinson Cancer Center",
+    "conditions": [
+      "Chronic Graft Versus Host Disease"
+    ],
+    "interventions": [
+      "Axatilimab",
+      "Biospecimen Collection",
+      "Questionnaire Administration",
+      "Skin Biopsy",
+      "Skin Measurement"
+    ]
+  },
+  "SNDX:axatilimab:NCT06523556": {
+    "nct_id": "NCT06523556",
+    "title": "Axatilimab With or Without Azacitidine for the Treatment of Patients With Advanced Phase Myeloproliferative Neoplasms, Myeloproliferative Neoplasm/Myelodysplastic Syndrome Overlap or High Risk Chronic Myelomonocytic Leukemia",
+    "official_title": "Phase 1b/2 Study of Axatilimab (SNDX-6352) + Azacitidine (AZA) in Advanced Phase MPN, MPN/MDS Overlap or High-Risk CMML",
+    "status": "RECRUITING",
+    "last_update": "2026-08-27",
+    "start_date": "2024-08-02",
+    "completion_date": "2028-10-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 49,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Uma Borate",
+    "conditions": [
+      "Atypical Chronic Myeloid Leukemia",
+      "Chronic Myelomonocytic Leukemia",
+      "Myelodysplastic/Myeloproliferative Neoplasm",
+      "Recurrent Myelodysplastic/Myeloproliferative Neoplasm",
+      "Recurrent Myeloproliferative Neoplasm",
+      "Refractory Chronic Myelomonocytic Leukemia",
+      "Refractory Myelodysplastic/Myeloproliferative Neoplasm",
+      "Refractory Myeloproliferative Neoplasm"
+    ],
+    "interventions": [
+      "Axatilimab",
+      "Azacitidine",
+      "Biospecimen Collection",
+      "Bone Marrow Aspiration and Biopsy",
+      "Survey Administration"
+    ]
+  },
+  "VIR:tobevibart:NCT07128550": {
+    "nct_id": "NCT07128550",
+    "title": "A Study to Evaluate Tobevibart+Elebsiran in Participants With Chronic HDV Infection Not Virologically Suppressed With Bulevirtide",
+    "official_title": "A Phase 3 Randomized, Open-Label Study to Evaluate the Efficacy and Safety of Tobevibart+Elebsiran Combination Therapy in Participants With Chronic HDV Infection Not Virologically Suppressed With Bulevirtide (ECLIPSE 2)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-07-13",
+    "start_date": "2025-07-30",
+    "completion_date": "2031-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 150,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Vir Biotechnology, Inc.",
+    "conditions": [
+      "Viral Hepatitis"
+    ],
+    "interventions": [
+      "Tobevibart",
+      "Elebsiran",
+      "Bulevirtide"
+    ]
+  },
+  "VIR:tobevibart:NCT07142811": {
+    "nct_id": "NCT07142811",
+    "title": "A Study to Evaluate Tobevibart+Elebsiran Versus Bulevirtide in Chronic HDV Infection",
+    "official_title": "A Phase 2b Randomized, Open-Label Study to Evaluate the Efficacy and Safety of Tobevibart+Elebsiran Combination Therapy Versus Bulevirtide in Participants With Chronic HDV Infection (ECLIPSE 3)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-01-16",
+    "start_date": "2025-08-05",
+    "completion_date": "2030-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 100,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Vir Biotechnology, Inc.",
+    "conditions": [
+      "Viral Hepatitis"
+    ],
+    "interventions": [
+      "Tobevibart",
+      "Elebsiran",
+      "Bulevirtide"
+    ]
+  },
+  "VIR:tobevibart:NCT06903338": {
+    "nct_id": "NCT06903338",
+    "title": "A Study to Evaluate Tobevibart + Elebsiran in Chronic HDV Infection",
+    "official_title": "A Phase 3 Randomized, Open-Label Study to Evaluate the Efficacy and Safety of Tobevibart + Elebsiran Combination Therapy in Participants With Chronic HDV Infection (ECLIPSE 1)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-04-08",
+    "start_date": "2025-03-12",
+    "completion_date": "2031-05",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 124,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Vir Biotechnology, Inc.",
+    "conditions": [
+      "Viral Hepatitis"
+    ],
+    "interventions": [
+      "Tobevibart",
+      "Elebsiran"
+    ]
+  },
+  "VIR:tobevibart:NCT04856085": {
+    "nct_id": "NCT04856085",
+    "title": "Study of VIR-2218, VIR-3434, and/or PEG-IFNα in Subjects With Chronic Hepatitis B Virus Infection",
+    "official_title": "A Phase 2 Study to Evaluate the Safety, Tolerability, and Efficacy of Regimens Containing VIR-2218, VIR-3434, and/or PEG-IFNα in Subjects With Chronic Hepatitis B Virus Infection",
+    "status": "COMPLETED",
+    "last_update": "2026-04-23",
+    "start_date": "2021-07-11",
+    "completion_date": "2026-03-16",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 244,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Vir Biotechnology, Inc.",
+    "conditions": [
+      "Hepatitis B, Chronic"
+    ],
+    "interventions": [
+      "VIR-2218",
+      "VIR-3434",
+      "PEG-IFNα"
+    ]
+  },
+  "VIR:tobevibart:NCT05612581": {
+    "nct_id": "NCT05612581",
+    "title": "A Platform Study to Evaluate Investigational Therapies in Chronic Hepatitis B Infection",
+    "official_title": "A Platform Study Evaluating the Efficacy and Safety of Investigational Therapies in Participants With Chronic Hepatitis B Infection (PREVAIL)",
+    "status": "COMPLETED",
+    "last_update": "2026-02-09",
+    "start_date": "2023-05-10",
+    "completion_date": "2025-08-19",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 33,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Vir Biotechnology, Inc.",
+    "conditions": [
+      "Hepatitis B, Chronic"
+    ],
+    "interventions": [
+      "VIR-3434",
+      "VIR-2218",
+      "TDF",
+      "PEG-IFNα"
+    ]
+  },
+  "VIR:tobevibart:NCT05461170": {
+    "nct_id": "NCT05461170",
+    "title": "SOLSTICE: Combination Therapy for the Treatment of Chronic Hepatitis D Infection.",
+    "official_title": "A Phase 2 Study to Evaluate Efficacy, Safety and Tolerability of VIR-2218 and VIR-3434 in Participants With Chronic Hepatitis D Virus Infection (SOLSTICE)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-06-26",
+    "start_date": "2022-09-17",
+    "completion_date": "2032-05",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 95,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Vir Biotechnology, Inc.",
+    "conditions": [
+      "Hepatitis D, Chronic"
+    ],
+    "interventions": [
+      "VIR-2218",
+      "VIR-3434",
+      "NRTI"
+    ]
+  },
+  "VIR:elebsiran:NCT07128550": {
+    "nct_id": "NCT07128550",
+    "title": "A Study to Evaluate Tobevibart+Elebsiran in Participants With Chronic HDV Infection Not Virologically Suppressed With Bulevirtide",
+    "official_title": "A Phase 3 Randomized, Open-Label Study to Evaluate the Efficacy and Safety of Tobevibart+Elebsiran Combination Therapy in Participants With Chronic HDV Infection Not Virologically Suppressed With Bulevirtide (ECLIPSE 2)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-07-13",
+    "start_date": "2025-07-30",
+    "completion_date": "2031-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 150,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Vir Biotechnology, Inc.",
+    "conditions": [
+      "Viral Hepatitis"
+    ],
+    "interventions": [
+      "Tobevibart",
+      "Elebsiran",
+      "Bulevirtide"
+    ]
+  },
+  "VIR:elebsiran:NCT07142811": {
+    "nct_id": "NCT07142811",
+    "title": "A Study to Evaluate Tobevibart+Elebsiran Versus Bulevirtide in Chronic HDV Infection",
+    "official_title": "A Phase 2b Randomized, Open-Label Study to Evaluate the Efficacy and Safety of Tobevibart+Elebsiran Combination Therapy Versus Bulevirtide in Participants With Chronic HDV Infection (ECLIPSE 3)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-01-16",
+    "start_date": "2025-08-05",
+    "completion_date": "2030-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 100,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Vir Biotechnology, Inc.",
+    "conditions": [
+      "Viral Hepatitis"
+    ],
+    "interventions": [
+      "Tobevibart",
+      "Elebsiran",
+      "Bulevirtide"
+    ]
+  },
+  "VIR:elebsiran:NCT06903338": {
+    "nct_id": "NCT06903338",
+    "title": "A Study to Evaluate Tobevibart + Elebsiran in Chronic HDV Infection",
+    "official_title": "A Phase 3 Randomized, Open-Label Study to Evaluate the Efficacy and Safety of Tobevibart + Elebsiran Combination Therapy in Participants With Chronic HDV Infection (ECLIPSE 1)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-04-08",
+    "start_date": "2025-03-12",
+    "completion_date": "2031-05",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 124,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Vir Biotechnology, Inc.",
+    "conditions": [
+      "Viral Hepatitis"
+    ],
+    "interventions": [
+      "Tobevibart",
+      "Elebsiran"
+    ]
+  },
+  "VIR:elebsiran:NCT05844228": {
+    "nct_id": "NCT05844228",
+    "title": "A Study to Investigate the Effect of Renal Impairment on the Pharmacokinetics and Safety of VIR-2218",
+    "official_title": "A Phase 1, Open-Label, Single-Dose, Parallel-Group Study of the Pharmacokinetics and Safety of VIR-2218 in Adult Participants With Renal Impairment",
+    "status": "COMPLETED",
+    "last_update": "2026-10-16",
+    "start_date": "2023-06-01",
+    "completion_date": "2025-04-21",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 28,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Vir Biotechnology, Inc.",
+    "conditions": [
+      "Renal Impairment"
+    ],
+    "interventions": [
+      "VIR-2218"
+    ]
+  },
+  "VIR:elebsiran:NCT04412863": {
+    "nct_id": "NCT04412863",
+    "title": "Study of VIR-2218 With or Without Pegylated Interferon Alpha-2a for Treatment of Chronic Hepatitis B Virus Infection",
+    "official_title": "A Phase 1/2 Study to Evaluate the Safety, Tolerability, Pharmacokinetics, and Antiviral Activity of VIR-2218 Alone or in Combination With Pegylated Interferon Alpha-2a",
+    "status": "COMPLETED",
+    "last_update": "2026-04-16",
+    "start_date": "2020-07-03",
+    "completion_date": "2024-03-25",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 84,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Vir Biotechnology, Inc.",
+    "conditions": [
+      "Chronic Hepatitis B"
+    ],
+    "interventions": [
+      "VIR-2218",
+      "pegylated interferon-alfa 2a"
+    ]
+  },
+  "VIR:elebsiran:NCT04856085": {
+    "nct_id": "NCT04856085",
+    "title": "Study of VIR-2218, VIR-3434, and/or PEG-IFNα in Subjects With Chronic Hepatitis B Virus Infection",
+    "official_title": "A Phase 2 Study to Evaluate the Safety, Tolerability, and Efficacy of Regimens Containing VIR-2218, VIR-3434, and/or PEG-IFNα in Subjects With Chronic Hepatitis B Virus Infection",
+    "status": "COMPLETED",
+    "last_update": "2026-04-23",
+    "start_date": "2021-07-11",
+    "completion_date": "2026-03-16",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 244,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Vir Biotechnology, Inc.",
+    "conditions": [
+      "Hepatitis B, Chronic"
+    ],
+    "interventions": [
+      "VIR-2218",
+      "VIR-3434",
+      "PEG-IFNα"
+    ]
+  },
+  "VIR:elebsiran:NCT05612581": {
+    "nct_id": "NCT05612581",
+    "title": "A Platform Study to Evaluate Investigational Therapies in Chronic Hepatitis B Infection",
+    "official_title": "A Platform Study Evaluating the Efficacy and Safety of Investigational Therapies in Participants With Chronic Hepatitis B Infection (PREVAIL)",
+    "status": "COMPLETED",
+    "last_update": "2026-02-09",
+    "start_date": "2023-05-10",
+    "completion_date": "2025-08-19",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 33,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Vir Biotechnology, Inc.",
+    "conditions": [
+      "Hepatitis B, Chronic"
+    ],
+    "interventions": [
+      "VIR-3434",
+      "VIR-2218",
+      "TDF",
+      "PEG-IFNα"
+    ]
+  },
+  "VIR:elebsiran:NCT05461170": {
+    "nct_id": "NCT05461170",
+    "title": "SOLSTICE: Combination Therapy for the Treatment of Chronic Hepatitis D Infection.",
+    "official_title": "A Phase 2 Study to Evaluate Efficacy, Safety and Tolerability of VIR-2218 and VIR-3434 in Participants With Chronic Hepatitis D Virus Infection (SOLSTICE)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-06-26",
+    "start_date": "2022-09-17",
+    "completion_date": "2032-05",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 95,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Vir Biotechnology, Inc.",
+    "conditions": [
+      "Hepatitis D, Chronic"
+    ],
+    "interventions": [
+      "VIR-2218",
+      "VIR-3434",
+      "NRTI"
+    ]
+  },
+  "ADCT:loncastuximab tesirine:NCT03685344": {
+    "nct_id": "NCT03685344",
+    "title": "Safety and Antitumor Activity Study of Loncastuximab Tesirine and Durvalumab in Diffuse Large B-Cell, Mantle Cell, or Follicular Lymphoma",
+    "official_title": "A Phase 1 Open-Label Study to Evaluate the Safety and Antitumor Activity of Loncastuximab Tesirine and Durvalumab in Patients With Advanced Diffuse Large B-Cell Lymphoma, Mantle Cell Lymphoma, or Follicular Lymphoma",
+    "status": "TERMINATED",
+    "last_update": "2021-10-26",
+    "start_date": "2019-02-04",
+    "completion_date": "2020-10-27",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 13,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ADC Therapeutics S.A.",
+    "conditions": [
+      "Diffuse Large B-Cell Lymphoma",
+      "Mantle Cell Lymphoma",
+      "Follicular Lymphoma"
+    ],
+    "interventions": [
+      "Loncastuximab Tesirine and Durvalumab"
+    ]
+  },
+  "ADCT:loncastuximab tesirine:NCT05991388": {
+    "nct_id": "NCT05991388",
+    "title": "A Global Study of Novel Agents in Paediatric and Adolescent Relapsed and Refractory B-cell Non-Hodgkin Lymphoma",
+    "official_title": "A Global Study of Novel Agents in Paediatric and Adolescent Relapsed and Refractory B-cell Non-Hodgkin Lymphoma",
+    "status": "RECRUITING",
+    "last_update": "2026-02-20",
+    "start_date": "2024-05-02",
+    "completion_date": "2033-05-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2",
+      "PHASE3"
+    ],
+    "enrollment": 210,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "University of Birmingham",
+    "conditions": [
+      "B-cell Non Hodgkin Lymphoma"
+    ],
+    "interventions": [
+      "Odronextamab",
+      "Loncastuximab tesirine",
+      "Rituximab",
+      "Ifosfamide",
+      "Carboplatin",
+      "Etoposide",
+      "Etoposide Phosphate",
+      "Dexamethasone",
+      "CAR T-cells (TBC)"
+    ]
+  },
+  "ADCT:loncastuximab tesirine:NCT05270057": {
+    "nct_id": "NCT05270057",
+    "title": "Loncastuximab Tesirine in Combination With DA-EPOCH-R in Patients With Previously Untreated Aggressive B-cell Lymphoid Malignancies",
+    "official_title": "A Multicenter Phase 1, Open-Label Trial of Loncastuximab Tesirine in Combination With DA-EPOCH-R in Patients With Previously Untreated Aggressive B-cell Lymphoid Malignancies",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-10-14",
+    "start_date": "2023-01-26",
+    "completion_date": "2027-10-11",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 11,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Medical College of Wisconsin",
+    "conditions": [
+      "B-cell Lymphoma",
+      "Burkitt Lymphoma"
+    ],
+    "interventions": [
+      "Etoposide",
+      "Doxorubicin",
+      "Cyclophosphamide",
+      "Rituximab",
+      "Vincristine",
+      "Prednisone",
+      "Loncastuximab Tesirine 0.075 mg/kg by IV",
+      "Loncastuximab tesirine 0.12 mg/kg by IV",
+      "Loncastuximab tesirine 0.15 mg/kg by IV"
+    ]
+  },
+  "ADCT:loncastuximab tesirine:NCT05190705": {
+    "nct_id": "NCT05190705",
+    "title": "Loncastuximab Tesirine in WM",
+    "official_title": "A Phase II Study Evaluating Loncastuximab Tesirine in Patients With Previously Treated Waldenström Macroglobulinemia",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-05-20",
+    "start_date": "2022-02-17",
+    "completion_date": "2028-08-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 21,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Shayna Sarosiek, MD",
+    "conditions": [
+      "Waldenstrom Macroglobulinemia"
+    ],
+    "interventions": [
+      "Loncastuximab Tesirine",
+      "Dexamethasone"
+    ]
+  },
+  "ADCT:loncastuximab tesirine:NCT03589469": {
+    "nct_id": "NCT03589469",
+    "title": "Study to Evaluate the Efficacy and Safety of Loncastuximab Tesirine in Patients With Relapsed or Refractory Diffuse Large B-Cell Lymphoma",
+    "official_title": "A Phase 2 Open-Label Single-Arm Study to Evaluate the Efficacy and Safety of Loncastuximab Tesirine in Patients With Relapsed or Refractory Diffuse Large B-Cell Lymphoma (DLBCL) (LOTIS-2)",
+    "status": "COMPLETED",
+    "last_update": "2023-08-29",
+    "start_date": "2018-08-01",
+    "completion_date": "2022-08-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 145,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ADC Therapeutics S.A.",
+    "conditions": [
+      "Diffuse Large B-Cell Lymphoma Refractory",
+      "Diffuse Large B-cell Lymphoma Recurrent"
+    ],
+    "interventions": [
+      "Loncastuximab tesirine"
+    ]
+  },
+  "ADCT:loncastuximab tesirine:NCT07308132": {
+    "nct_id": "NCT07308132",
+    "title": "A Study of JNJ-95566692 in Participants With Non-Hodgkin Lymphoid Malignancies",
+    "official_title": "A Phase 1, First-in-Human Study of a Novel CD79bxCD20xCD3 Trispecific Antibody in B-Cell Non-Hodgkin Lymphoid Malignancies (NHLs)",
+    "status": "RECRUITING",
+    "last_update": "2026-09-10",
+    "start_date": "2026-01-20",
+    "completion_date": "2029-10-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 340,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Janssen Research & Development, LLC",
+    "conditions": [
+      "Lymphoma, Non-Hodgkin"
+    ],
+    "interventions": [
+      "JNJ-95566692",
+      "JNJ-87801493",
+      "loncastuximab tesirine",
+      "Lenalidomide",
+      "Rituximab",
+      "Gemcitabine",
+      "Oxaliplatin",
+      "Cyclophosphamide",
+      "Doxorubicin",
+      "Vincristine",
+      "Prednisone",
+      "Polatuzumab vedotin"
+    ]
+  },
+  "ADCT:loncastuximab tesirine:NCT05296070": {
+    "nct_id": "NCT05296070",
+    "title": "Open-label of Loncastuximab Tesirine (ADCT-402) in Relapsed/Refractory Marginal Zone Lymphoma",
+    "official_title": "A Phase 2, Open-label, Study Evaluating Safety and Efficacy of the Loncastuximab in Relapsed/Refractory Marginal Zone Lymphoma",
+    "status": "RECRUITING",
+    "last_update": "2026-09-21",
+    "start_date": "2022-06-21",
+    "completion_date": "2029-06-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 50,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "University of Miami",
+    "conditions": [
+      "Marginal Zone Lymphoma"
+    ],
+    "interventions": [
+      "Loncastuximab tesirine 150 µg/Kg",
+      "Loncastuximab tesirine 75µg/Kg"
+    ]
+  },
+  "ADCT:loncastuximab tesirine:NCT04699461": {
+    "nct_id": "NCT04699461",
+    "title": "Study to Evaluate the Efficacy and Safety of Loncastuximab Tesirine Versus Idelalisib in Participants With Relapsed or Refractory Follicular Lymphoma",
+    "official_title": "A Phase 2 Randomized Study of Loncastuximab Tesirine Versus Idelalisib in Patients With Relapsed or Refractory Follicular Lymphoma (LOTIS-6)",
+    "status": "TERMINATED",
+    "last_update": "2023-10-23",
+    "start_date": "2021-11-04",
+    "completion_date": "2022-11-25",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 6,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ADC Therapeutics S.A.",
+    "conditions": [
+      "Relapsed Follicular Lymphoma",
+      "Refractory Follicular Lymphoma"
+    ],
+    "interventions": [
+      "Loncastuximab Tesirine",
+      "Idelalisib"
+    ]
+  },
+  "ADCT:loncastuximab tesirine:NCT05453396": {
+    "nct_id": "NCT05453396",
+    "title": "Loncastuximab Tesirine for the Treatment of Relapsed or Refractory B-Cell Malignancies",
+    "official_title": "A Pilot Study of Loncastuximab Tesirine in Specific Populations of Relapsed/Refractory B-Cell Malignancies",
+    "status": "TERMINATED",
+    "last_update": "2026-06-15",
+    "start_date": "2023-08-07",
+    "completion_date": "2026-05-21",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 11,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "University of Washington",
+    "conditions": [
+      "Recurrent B-Cell Non-Hodgkin Lymphoma",
+      "Recurrent Diffuse Large B-Cell Lymphoma",
+      "Recurrent Follicular Lymphoma",
+      "Recurrent Mantle Cell Lymphoma",
+      "Refractory B-Cell Non-Hodgkin Lymphoma",
+      "Refractory Diffuse Large B-Cell Lymphoma",
+      "Refractory Follicular Lymphoma",
+      "Refractory Mantle Cell Lymphoma"
+    ],
+    "interventions": [
+      "Loncastuximab Tesirine",
+      "Bone Marrow Biopsy",
+      "Bone Marrow Aspiration"
+    ]
+  },
+  "ADCT:loncastuximab tesirine:NCT05144009": {
+    "nct_id": "NCT05144009",
+    "title": "A Study of Loncastuximab Tesirine and Rituximab (Lonca-R) in Previously Untreated Unfit/Frail Participants With Diffuse Large B-cell Lymphoma (DLBCL)",
+    "official_title": "A Phase 2 Open-label Study of Loncastuximab Tesirine in Combination With Rituximab (Lonca-R) in Previously Untreated Unfit/Frail Patients With Diffuse Large B-cell Lymphoma (DLBCL) (LOTIS-9)",
+    "status": "TERMINATED",
+    "last_update": "2025-01-30",
+    "start_date": "2022-06-21",
+    "completion_date": "2024-01-22",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 41,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ADC Therapeutics S.A.",
+    "conditions": [
+      "Diffuse Large B-cell Lymphoma"
+    ],
+    "interventions": [
+      "Loncastuximab Tesirine",
+      "Rituximab"
+    ]
+  },
+  "ADCT:loncastuximab tesirine:NCT05053659": {
+    "nct_id": "NCT05053659",
+    "title": "Loncastuximab Tesirine and Venetoclax for Relapsed/ Refractory Non-Hodgkin Lymphoma",
+    "official_title": "Phase I Trial of Loncastuximab Tesirine and Venetoclax for Treatment of Relapsed/ Refractory Non-Hodgkin Lymphoma",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-06-05",
+    "start_date": "2022-06-20",
+    "completion_date": "2026-11",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 23,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Paolo Caimi, MD",
+    "conditions": [
+      "Relapsed Non Hodgkin Lymphoma",
+      "Refractory Non-Hodgkin Lymphoma"
+    ],
+    "interventions": [
+      "Loncastuximab tesirine",
+      "Venetoclax"
+    ]
+  },
+  "ADCT:loncastuximab tesirine:NCT04384484": {
+    "nct_id": "NCT04384484",
+    "title": "Study to Evaluate Loncastuximab Tesirine With Rituximab Versus Immunochemotherapy in Participants With Relapsed or Refractory Diffuse Large B-Cell Lymphoma",
+    "official_title": "A Phase 3 Randomized Study of Loncastuximab Tesirine Combined With Rituximab Versus Immunochemotherapy in Patients With Relapsed or Refractory Diffuse Large B-Cell Lymphoma (DLBCL) (LOTIS-5)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-04-28",
+    "start_date": "2020-09-16",
+    "completion_date": "2028-06-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 440,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ADC Therapeutics S.A.",
+    "conditions": [
+      "Relapsed Diffuse Large B-Cell Lymphoma",
+      "Refractory Diffuse Large B-Cell Lymphoma"
+    ],
+    "interventions": [
+      "Loncastuximab Tesirine",
+      "Rituximab",
+      "Gemcitabine",
+      "Oxaliplatin"
+    ]
+  },
+  "ADCT:loncastuximab tesirine:NCT04974996": {
+    "nct_id": "NCT04974996",
+    "title": "A Study to Evaluate the Tolerability, Safety, Pharmacokinetics, and Antitumor Activity of Loncastuximab Tesirine in Combination With Rituximab, Cyclophosphamide, Doxorubicin, Vincristine, and Prednisone (R-CHOP) in Participants With Previously Untreated Diffuse Large B-cell Lymphoma (LOTIS-8)",
+    "official_title": "A Phase 1b, Open-Label, Study to Evaluate the Tolerability, Safety, Pharmacokinetics, and Antitumor Activity of Loncastuximab Tesirine in Combination With R-CHOP in Patients With Previously Untreated Diffuse Large B-cell Lymphoma (LOTIS-8)",
+    "status": "WITHDRAWN",
+    "last_update": "2022-03-29",
+    "start_date": "2022-02-01",
+    "completion_date": "2027-05-05",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ADC Therapeutics S.A.",
+    "conditions": [
+      "Diffuse Large B-Cell Lymphoma"
+    ],
+    "interventions": [
+      "Loncastuximab tesirine",
+      "Prednisone",
+      "Rituximab",
+      "Cyclophosphamide",
+      "Doxorubicin",
+      "Vincristine"
+    ]
+  },
+  "ADCT:loncastuximab tesirine:NCT06918912": {
+    "nct_id": "NCT06918912",
+    "title": "Study of Loncastuximab Tesirine in Patients With Relapsed/Refractory Diffuse Large B-Cell Lymphoma (DLBCL) or High-Grade B-Cell Lymphoma (HGBCL) Following CAR-T Therapy Failure",
+    "official_title": "Use of LOncastuximab Tesirine in Patients With RElapsed/Refractory Diffuse LargeB-Cell LYmphoma (DLBCL) or High Grade B-Cell Lymphoma (HGBCL) Who Have Progressive Disease After CAR T-cell Treatment",
+    "status": "RECRUITING",
+    "last_update": "2025-04-09",
+    "start_date": "2023-06-16",
+    "completion_date": "2027-06",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 50,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Istituto Clinico Humanitas",
+    "conditions": [
+      "Diffuse Large B-Cell Lymphoma",
+      "High-grade B-cell Lymphoma (HGBCL)",
+      "B-Cell Lymphoma Treatment",
+      "Relapsed or Refractory Lymphoma"
+    ],
+    "interventions": [
+      "Loncastuximab Tesirine (Anti-CD19 Antibody-Drug Conjugate)"
+    ]
+  },
+  "ADCT:loncastuximab tesirine:NCT05600686": {
+    "nct_id": "NCT05600686",
+    "title": "Loncastuximab Tesirine and Rituximab Followed by DA-EPOCH-R for Treating Patients With High-Risk Diffuse Large B-cell Lymphoma",
+    "official_title": "A Phase 2 Study of Loncastuximab Tesirine and Rituximab (Lonca-R) Followed by DA-EPOCH-R in Previously Untreated High-Risk Diffuse Large B-Cell Lymphoma",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-09-28",
+    "start_date": "2023-05-24",
+    "completion_date": "2027-12-15",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 24,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "University of California, Davis",
+    "conditions": [
+      "Double-Expressor Lymphoma",
+      "High Grade B-Cell Lymphoma With MYC and BCL2 and/or BCL6 Rearrangements",
+      "High Grade B-Cell Lymphoma With MYC and BCL2 or BCL6 Rearrangements",
+      "High Grade B-Cell Lymphoma With MYC, BCL2, and BCL6 Rearrangements"
+    ],
+    "interventions": [
+      "Cyclophosphamide",
+      "Doxorubicin",
+      "Etoposide",
+      "Loncastuximab Tesirine",
+      "Prednisone",
+      "Rituximab",
+      "Vincristine"
+    ]
+  },
+  "ADCT:loncastuximab tesirine:NCT05971251": {
+    "nct_id": "NCT05971251",
+    "title": "Addition of Loncastuximab Tesirine to Acalbrutinib , Chronic Lymphocytic Leukemia",
+    "official_title": "Addition of loNcasTuxImab teSirine to AcalabruTinib in Chronic Lymphocytic Leukemia(Anti-Static Study)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-10-20",
+    "start_date": "2023-12-18",
+    "completion_date": "2028-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 24,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "University of Alabama at Birmingham",
+    "conditions": [
+      "Chronic Lymphocytic Leukemia"
+    ],
+    "interventions": [
+      "Loncastuximab Tesirine and Acalabrutinib"
+    ]
+  },
+  "ADCT:loncastuximab tesirine:NCT04970901": {
+    "nct_id": "NCT04970901",
+    "title": "A Study to Evaluate the Safety and Anti-cancer Activity of Loncastuximab Tesirine in Combination With Other Anti-cancer Agents in Participants With Relapsed or Refractory B-cell Non-Hodgkin Lymphoma (LOTIS-7)",
+    "official_title": "A Phase 1b Open-Label Study to Evaluate the Safety and Anti-cancer Activity of Loncastuximab Tesirine in Combination With Other Anti-cancer Agents in Patients With Relapsed or Refractory B-cell Non-Hodgkin Lymphoma (LOTIS-7)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-07-17",
+    "start_date": "2022-06-17",
+    "completion_date": "2028-04-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 154,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ADC Therapeutics S.A.",
+    "conditions": [
+      "B-Cell Non-Hodgkin Lymphoma",
+      "Relapsed B-Cell Non-Hodgkin Lymphoma",
+      "Refractory B-Cell Non-Hodgkin Lymphoma"
+    ],
+    "interventions": [
+      "Loncastuximab Tesirine",
+      "Polatuzumab Vedotin",
+      "Glofitamab",
+      "Mosunetuzumab",
+      "Obinutuzumab"
+    ]
+  },
+  "ADCT:loncastuximab tesirine:NCT05464719": {
+    "nct_id": "NCT05464719",
+    "title": "A Phase II Study of Loncastuximab Tesirine as Consolidation Strategy in Patients With LBCL in PR After CAR T-cell Therapy",
+    "official_title": "A Phase II Study of Loncastuximab Tesirine as Consolidation Strategy in Patients With LBCL in PR After CAR T-cell Therapy",
+    "status": "RECRUITING",
+    "last_update": "2026-07-15",
+    "start_date": "2022-09-23",
+    "completion_date": "2030-01-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 30,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "M.D. Anderson Cancer Center",
+    "conditions": [
+      "Large B-cell Lymphoma",
+      "Lymphoma"
+    ],
+    "interventions": [
+      "Loncastuximab Tesirine"
+    ]
+  },
+  "ADCT:Zynlonta:NCT03685344": {
+    "nct_id": "NCT03685344",
+    "title": "Safety and Antitumor Activity Study of Loncastuximab Tesirine and Durvalumab in Diffuse Large B-Cell, Mantle Cell, or Follicular Lymphoma",
+    "official_title": "A Phase 1 Open-Label Study to Evaluate the Safety and Antitumor Activity of Loncastuximab Tesirine and Durvalumab in Patients With Advanced Diffuse Large B-Cell Lymphoma, Mantle Cell Lymphoma, or Follicular Lymphoma",
+    "status": "TERMINATED",
+    "last_update": "2021-10-26",
+    "start_date": "2019-02-04",
+    "completion_date": "2020-10-27",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 13,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ADC Therapeutics S.A.",
+    "conditions": [
+      "Diffuse Large B-Cell Lymphoma",
+      "Mantle Cell Lymphoma",
+      "Follicular Lymphoma"
+    ],
+    "interventions": [
+      "Loncastuximab Tesirine and Durvalumab"
+    ]
+  },
+  "ADCT:Zynlonta:NCT03589469": {
+    "nct_id": "NCT03589469",
+    "title": "Study to Evaluate the Efficacy and Safety of Loncastuximab Tesirine in Patients With Relapsed or Refractory Diffuse Large B-Cell Lymphoma",
+    "official_title": "A Phase 2 Open-Label Single-Arm Study to Evaluate the Efficacy and Safety of Loncastuximab Tesirine in Patients With Relapsed or Refractory Diffuse Large B-Cell Lymphoma (DLBCL) (LOTIS-2)",
+    "status": "COMPLETED",
+    "last_update": "2023-08-29",
+    "start_date": "2018-08-01",
+    "completion_date": "2022-08-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 145,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ADC Therapeutics S.A.",
+    "conditions": [
+      "Diffuse Large B-Cell Lymphoma Refractory",
+      "Diffuse Large B-cell Lymphoma Recurrent"
+    ],
+    "interventions": [
+      "Loncastuximab tesirine"
+    ]
+  },
+  "ADCT:Zynlonta:NCT04699461": {
+    "nct_id": "NCT04699461",
+    "title": "Study to Evaluate the Efficacy and Safety of Loncastuximab Tesirine Versus Idelalisib in Participants With Relapsed or Refractory Follicular Lymphoma",
+    "official_title": "A Phase 2 Randomized Study of Loncastuximab Tesirine Versus Idelalisib in Patients With Relapsed or Refractory Follicular Lymphoma (LOTIS-6)",
+    "status": "TERMINATED",
+    "last_update": "2023-10-23",
+    "start_date": "2021-11-04",
+    "completion_date": "2022-11-25",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 6,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ADC Therapeutics S.A.",
+    "conditions": [
+      "Relapsed Follicular Lymphoma",
+      "Refractory Follicular Lymphoma"
+    ],
+    "interventions": [
+      "Loncastuximab Tesirine",
+      "Idelalisib"
+    ]
+  },
+  "ADCT:Zynlonta:NCT05144009": {
+    "nct_id": "NCT05144009",
+    "title": "A Study of Loncastuximab Tesirine and Rituximab (Lonca-R) in Previously Untreated Unfit/Frail Participants With Diffuse Large B-cell Lymphoma (DLBCL)",
+    "official_title": "A Phase 2 Open-label Study of Loncastuximab Tesirine in Combination With Rituximab (Lonca-R) in Previously Untreated Unfit/Frail Patients With Diffuse Large B-cell Lymphoma (DLBCL) (LOTIS-9)",
+    "status": "TERMINATED",
+    "last_update": "2025-01-30",
+    "start_date": "2022-06-21",
+    "completion_date": "2024-01-22",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 41,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ADC Therapeutics S.A.",
+    "conditions": [
+      "Diffuse Large B-cell Lymphoma"
+    ],
+    "interventions": [
+      "Loncastuximab Tesirine",
+      "Rituximab"
+    ]
+  },
+  "ADCT:Zynlonta:NCT04384484": {
+    "nct_id": "NCT04384484",
+    "title": "Study to Evaluate Loncastuximab Tesirine With Rituximab Versus Immunochemotherapy in Participants With Relapsed or Refractory Diffuse Large B-Cell Lymphoma",
+    "official_title": "A Phase 3 Randomized Study of Loncastuximab Tesirine Combined With Rituximab Versus Immunochemotherapy in Patients With Relapsed or Refractory Diffuse Large B-Cell Lymphoma (DLBCL) (LOTIS-5)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-04-28",
+    "start_date": "2020-09-16",
+    "completion_date": "2028-06-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 440,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ADC Therapeutics S.A.",
+    "conditions": [
+      "Relapsed Diffuse Large B-Cell Lymphoma",
+      "Refractory Diffuse Large B-Cell Lymphoma"
+    ],
+    "interventions": [
+      "Loncastuximab Tesirine",
+      "Rituximab",
+      "Gemcitabine",
+      "Oxaliplatin"
+    ]
+  },
+  "ADCT:Zynlonta:NCT04974996": {
+    "nct_id": "NCT04974996",
+    "title": "A Study to Evaluate the Tolerability, Safety, Pharmacokinetics, and Antitumor Activity of Loncastuximab Tesirine in Combination With Rituximab, Cyclophosphamide, Doxorubicin, Vincristine, and Prednisone (R-CHOP) in Participants With Previously Untreated Diffuse Large B-cell Lymphoma (LOTIS-8)",
+    "official_title": "A Phase 1b, Open-Label, Study to Evaluate the Tolerability, Safety, Pharmacokinetics, and Antitumor Activity of Loncastuximab Tesirine in Combination With R-CHOP in Patients With Previously Untreated Diffuse Large B-cell Lymphoma (LOTIS-8)",
+    "status": "WITHDRAWN",
+    "last_update": "2022-03-29",
+    "start_date": "2022-02-01",
+    "completion_date": "2027-05-05",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ADC Therapeutics S.A.",
+    "conditions": [
+      "Diffuse Large B-Cell Lymphoma"
+    ],
+    "interventions": [
+      "Loncastuximab tesirine",
+      "Prednisone",
+      "Rituximab",
+      "Cyclophosphamide",
+      "Doxorubicin",
+      "Vincristine"
+    ]
+  },
+  "ADCT:Zynlonta:NCT04970901": {
+    "nct_id": "NCT04970901",
+    "title": "A Study to Evaluate the Safety and Anti-cancer Activity of Loncastuximab Tesirine in Combination With Other Anti-cancer Agents in Participants With Relapsed or Refractory B-cell Non-Hodgkin Lymphoma (LOTIS-7)",
+    "official_title": "A Phase 1b Open-Label Study to Evaluate the Safety and Anti-cancer Activity of Loncastuximab Tesirine in Combination With Other Anti-cancer Agents in Patients With Relapsed or Refractory B-cell Non-Hodgkin Lymphoma (LOTIS-7)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-07-17",
+    "start_date": "2022-06-17",
+    "completion_date": "2028-04-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 154,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ADC Therapeutics S.A.",
+    "conditions": [
+      "B-Cell Non-Hodgkin Lymphoma",
+      "Relapsed B-Cell Non-Hodgkin Lymphoma",
+      "Refractory B-Cell Non-Hodgkin Lymphoma"
+    ],
+    "interventions": [
+      "Loncastuximab Tesirine",
+      "Polatuzumab Vedotin",
+      "Glofitamab",
+      "Mosunetuzumab",
+      "Obinutuzumab"
+    ]
+  },
+  "ADCT:Zynlonta:NCT02669017": {
+    "nct_id": "NCT02669017",
+    "title": "Study of ADCT-402 in Patients With Relapsed or Refractory B-cell Lineage Non Hodgkin Lymphoma (B-NHL)",
+    "official_title": "A Phase 1 Dose-escalation Study to Evaluate the Tolerability, Safety, Pharmacokinetics, and Antitumor Activity of ADCT-402 in Patients With Relapsed or Refractory B-cell Lineage Non Hodgkin Lymphoma (B-NHL)",
+    "status": "COMPLETED",
+    "last_update": "2021-05-19",
+    "start_date": "2016-03",
+    "completion_date": "2019-02-21",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 183,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ADC Therapeutics S.A.",
+    "conditions": [
+      "Non-Hodgkin Lymphoma",
+      "Burkitt's Lymphoma",
+      "Chronic Lymphocytic Leukemia",
+      "Lymphoma, Large B-Cell, Diffuse",
+      "Lymphoma, Follicular",
+      "Lymphoma, Mantle-Cell",
+      "Lymphoma, Marginal Zone",
+      "Waldenstrom Macroglobulinemia",
+      "Primary Mediastinal B-cell Lymphoma"
+    ],
+    "interventions": [
+      "ADCT-402"
+    ]
+  },
+  "ADCT:Zynlonta:NCT05660395": {
+    "nct_id": "NCT05660395",
+    "title": "A Study to Evaluate the Pharmacokinetics and Safety of Loncastuximab Tesirine in Participants With Relapsed or Refractory Diffuse Large B-cell Lymphoma or High-grade B-cell Lymphoma With Hepatic Impairment (LOTIS-10)",
+    "official_title": "A Phase 1b Open-Label Study to Evaluate the Pharmacokinetics and Safety of Loncastuximab Tesirine in Patients With Relapsed or Refractory Diffuse Large B-cell Lymphoma or High-grade B-cell Lymphoma With Hepatic Impairment (LOTIS-10)",
+    "status": "TERMINATED",
+    "last_update": "2026-07-20",
+    "start_date": "2023-07-28",
+    "completion_date": "2026-06-25",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 5,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ADC Therapeutics S.A.",
+    "conditions": [
+      "Diffuse Large B-Cell Lymphoma",
+      "High-grade B-cell Lymphoma"
+    ],
+    "interventions": [
+      "Loncastuximab Tesirine"
+    ]
+  },
+  "ADCT:Zynlonta:NCT04705454": {
+    "nct_id": "NCT04705454",
+    "title": "Loncastixumab Tesirine (ADCT-402) Expanded Access Program (EAP) for Patients With Relapsed/Refractory Diffuse Large B-Cell Lymphoma",
+    "official_title": null,
+    "status": "NO_LONGER_AVAILABLE",
+    "last_update": "2021-05-12",
+    "start_date": null,
+    "completion_date": null,
+    "study_type": "EXPANDED_ACCESS",
+    "phases": [],
+    "enrollment": null,
+    "enrollment_type": null,
+    "sponsor": "ADC Therapeutics S.A.",
+    "conditions": [
+      "Relapsed or Refractory Diffuse Large B-Cell Lymphoma (R/R DLBCL)"
+    ],
+    "interventions": [
+      "Loncastuximab Tesirine"
+    ]
+  },
+  "ADCT:Zynlonta:NCT02669264": {
+    "nct_id": "NCT02669264",
+    "title": "Study of ADCT-402 in Patients With Relapsed or Refractory B-cell Lineage Acute Lymphoblastic Leukemia (B-ALL)",
+    "official_title": "A Phase 1, Open-label, Adaptive Dose-escalation, Multicenter Study to Evaluate the Tolerability, Safety, Pharmacokinetics, and Anti-tumor Activity of ADCT-402 in Patients With Relapsed or Refractory B-cell Lineage Acute Lymphoblastic Leukemia (B-ALL)",
+    "status": "TERMINATED",
+    "last_update": "2021-05-24",
+    "start_date": "2016-03",
+    "completion_date": "2018-07-03",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 35,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ADC Therapeutics S.A.",
+    "conditions": [
+      "Acute Lymphoblastic Leukemia"
+    ],
+    "interventions": [
+      "ADCT-402"
+    ]
+  },
+  "ADCT:Zynlonta:NCT03684694": {
+    "nct_id": "NCT03684694",
+    "title": "Safety and Efficacy Study of Loncastuximab Tesirine + Ibrutinib in Diffuse Large B-Cell or Mantle Cell Lymphoma",
+    "official_title": "A Phase 1/2 Open-Label Study to Evaluate the Safety and Efficacy of Loncastuximab Tesirine and Ibrutinib in Patients With Advanced Diffuse Large B-Cell Lymphoma or Mantle Cell Lymphoma (LOTIS-3)",
+    "status": "TERMINATED",
+    "last_update": "2024-02-06",
+    "start_date": "2018-12-01",
+    "completion_date": "2022-11-08",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 136,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "ADC Therapeutics S.A.",
+    "conditions": [
+      "Diffuse Large B-Cell Lymphoma",
+      "Mantle Cell Lymphoma"
+    ],
+    "interventions": [
+      "Loncastuximab Tesirine",
+      "Ibrutinib"
+    ]
+  },
+  "SUPN:SPN-812:NCT03247543": {
+    "nct_id": "NCT03247543",
+    "title": "Evaluation of SPN-812 (Viloxazine Extended-release Capsule) High Dose in Children With ADHD",
+    "official_title": "Evaluation of SPN-812 (Viloxazine Extended-release Capsule) 200 and 400 mg Efficacy and Safety in Children With ADHD - A Double-Blind, Placebo-Controlled, Pivotal Trial",
+    "status": "COMPLETED",
+    "last_update": "2021-07-08",
+    "start_date": "2017-10-31",
+    "completion_date": "2018-10-17",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 313,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Supernus Pharmaceuticals, Inc.",
+    "conditions": [
+      "ADHD"
+    ],
+    "interventions": [
+      "Placebo",
+      "200mg SPN-812",
+      "400mg SPN-812"
+    ]
+  },
+  "SUPN:SPN-812:NCT04016792": {
+    "nct_id": "NCT04016792",
+    "title": "Classroom Study of SPN-812 in Children With ADHD",
+    "official_title": "An Analog Classroom Study: Efficacy and Safety of SPN-812 in Children With Attention-Deficit/Hyperactivity Disorder",
+    "status": "WITHDRAWN",
+    "last_update": "2019-09-18",
+    "start_date": "2019-08",
+    "completion_date": "2020-11",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Supernus Pharmaceuticals, Inc.",
+    "conditions": [
+      "ADHD"
+    ],
+    "interventions": [
+      "Placebo",
+      "200 mg SPN-812"
+    ]
+  },
+  "SUPN:SPN-812:NCT03247556": {
+    "nct_id": "NCT03247556",
+    "title": "Evaluation of SPN-812 (Viloxazine Extended-release Capsule) High Dose in Adolescents With ADHD",
+    "official_title": "Evaluation of SPN-812 (Viloxazine Extended-release Capsule) 400 and 600 mg Efficacy and Safety in Adolescents With ADHD - A Double-Blind, Placebo-Controlled, Pivotal Trial",
+    "status": "COMPLETED",
+    "last_update": "2021-07-02",
+    "start_date": "2017-11-20",
+    "completion_date": "2019-02-14",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 297,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Supernus Pharmaceuticals, Inc.",
+    "conditions": [
+      "ADHD"
+    ],
+    "interventions": [
+      "Placebo",
+      "400mg SPN-812",
+      "600mg SPN-812"
+    ]
+  },
+  "SUPN:SPN-812:NCT04786990": {
+    "nct_id": "NCT04786990",
+    "title": "Open-Label Study of SPN-812 Administered With Psychostimulants in Children and Adolescents With ADHD",
+    "official_title": "A Phase IV, Open-Label, Flexible-Dose Safety Trial Evaluating SPN-812 Administered With Psychostimulants in Children and Adolescents (6 to 17 Years of Age) With Attention-Deficit/Hyperactivity Disorder (ADHD)",
+    "status": "COMPLETED",
+    "last_update": "2024-05-01",
+    "start_date": "2021-07-27",
+    "completion_date": "2023-07-26",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE4"
+    ],
+    "enrollment": 96,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Supernus Pharmaceuticals, Inc.",
+    "conditions": [
+      "Attention-Deficit/Hyperactivity Disorder (ADHD)"
+    ],
+    "interventions": [
+      "SPN-812"
+    ]
+  },
+  "SUPN:SPN-812:NCT03247530": {
+    "nct_id": "NCT03247530",
+    "title": "Evaluation of SPN-812 (Viloxazine Extended-release Capsule) Low Dose in Children With ADHD",
+    "official_title": "Evaluation of SPN-812 (Viloxazine Extended-release Capsule) 100 and 200 mg Efficacy and Safety in Children With ADHD - A Double-Blind, Placebo-Controlled, Pivotal Trial",
+    "status": "COMPLETED",
+    "last_update": "2021-07-02",
+    "start_date": "2017-10-20",
+    "completion_date": "2018-09-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 477,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Supernus Pharmaceuticals, Inc.",
+    "conditions": [
+      "ADHD"
+    ],
+    "interventions": [
+      "Placebo",
+      "100mg SPN-812",
+      "200mg SPN-812"
+    ]
+  },
+  "SUPN:SPN-812:NCT04016779": {
+    "nct_id": "NCT04016779",
+    "title": "Evaluation of SPN-812 (Viloxazine Extended-release Capsule) in Adults With ADHD",
+    "official_title": "A Phase 3, Randomized, Double-Blind, Placebo-Controlled, Multicenter, Parallel-Group Flexible-Dose Study of the Efficacy and Safety of SPN-812 in Adults With Attention-Deficit/Hyperactivity Disorder (ADHD)",
+    "status": "COMPLETED",
+    "last_update": "2022-07-12",
+    "start_date": "2019-11-20",
+    "completion_date": "2020-10-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 374,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Supernus Pharmaceuticals, Inc.",
+    "conditions": [
+      "Attention-Deficit/Hyperactivity Disorder (ADHD)"
+    ],
+    "interventions": [
+      "Placebo",
+      "SPN-812"
+    ]
+  },
+  "SUPN:SPN-812:NCT04781140": {
+    "nct_id": "NCT04781140",
+    "title": "Evaluation of SPN-812 (Viloxazine Extended-release Capsule) in Preschool-age Children With ADHD",
+    "official_title": "A Phase 4, Randomized, Double-Blind, Multicenter, Placebo-Controlled, Parallel-Group Study of the Efficacy and Safety of SPN-812 in Preschool-Age Children (4 to 5 Years Old) With Attention-Deficit/Hyperactivity Disorder (ADHD)",
+    "status": "RECRUITING",
+    "last_update": "2026-10-05",
+    "start_date": "2024-03-19",
+    "completion_date": "2028-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE4"
+    ],
+    "enrollment": 286,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Supernus Pharmaceuticals, Inc.",
+    "conditions": [
+      "Attention-Deficit/Hyperactivity Disorder"
+    ],
+    "interventions": [
+      "100mg SPN-812",
+      "Placebo"
+    ]
+  },
+  "SUPN:SPN-812:NCT06259331": {
+    "nct_id": "NCT06259331",
+    "title": "Evaluation of Viloxazine and Its Metabolite 5-Hydroxy-viloxazine Glucuronide Into Breast Milk in Healthy Lactating Women",
+    "official_title": "Evaluation of the Excretion of Viloxazine and Its Metabolite 5-Hydroxy-viloxazine Glucuronide Into Breast Milk Following Multiple Doses of SPN-812 (600mg, QD) in Healthy Lactating Women",
+    "status": "COMPLETED",
+    "last_update": "2024-06-06",
+    "start_date": "2023-05-23",
+    "completion_date": "2023-09-20",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE4"
+    ],
+    "enrollment": 15,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Supernus Pharmaceuticals, Inc.",
+    "conditions": [
+      "Healthy Lactating Women"
+    ],
+    "interventions": [
+      "SPN-812 (600mg, QD)"
+    ]
+  },
+  "SUPN:SPN-812:NCT03247517": {
+    "nct_id": "NCT03247517",
+    "title": "Evaluation of SPN-812 (Viloxazine Extended-release Capsule) Low Dose in Adolescents With ADHD",
+    "official_title": "Evaluation of SPN 812 (Viloxazine Extended-release Capsule) 200 and 400 mg Efficacy and Safety in Adolescents With ADHD - A Double-Blind, Placebo-Controlled, Pivotal Trial",
+    "status": "COMPLETED",
+    "last_update": "2021-06-18",
+    "start_date": "2017-11-02",
+    "completion_date": "2018-10-17",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 310,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Supernus Pharmaceuticals, Inc.",
+    "conditions": [
+      "ADHD"
+    ],
+    "interventions": [
+      "Placebo",
+      "200mg SPN-812",
+      "400mg SPN-812"
+    ]
+  },
+  "SUPN:SPN-812:NCT04143217": {
+    "nct_id": "NCT04143217",
+    "title": "Open-label Long-Term Safety and Efficacy of SPN-812 (Viloxazine Extended-release Capsule) in Adults With ADHD",
+    "official_title": "An Open-Label Extension Study to Evaluate the Long-Term Safety and Efficacy of SPN-812 (Viloxazine Extended-release Capsule) in Adults With Attention-Deficit/Hyperactivity Disorder",
+    "status": "COMPLETED",
+    "last_update": "2024-02-13",
+    "start_date": "2020-01-23",
+    "completion_date": "2022-12-14",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 159,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Supernus Pharmaceuticals, Inc.",
+    "conditions": [
+      "Attention-Deficit/Hyperactivity Disorder"
+    ],
+    "interventions": [
+      "SPN-812"
+    ]
+  },
+  "SUPN:SPN-812:NCT02736656": {
+    "nct_id": "NCT02736656",
+    "title": "Open-label Study to Evaluate Long-term Safety and Efficacy of SPN-812 (Viloxazine Extended-release Capsule)",
+    "official_title": "Open-Label Extension Study to Evaluate the Long Term Safety and Efficacy of SPN-812 for the Treatment of Pediatric Patients With Attention-Deficit/Hyperactivity Disorder (ADHD)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-07-15",
+    "start_date": "2016-02-02",
+    "completion_date": "2026-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 1400,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Supernus Pharmaceuticals, Inc.",
+    "conditions": [
+      "Attention-Deficit/Hyperactivity Disorder"
+    ],
+    "interventions": [
+      "SPN-812"
+    ]
+  },
+  "SUPN:SPN-812:NCT02633527": {
+    "nct_id": "NCT02633527",
+    "title": "Efficacy and Safety of SPN-812 (Viloxazine Extended-release Capsule) in Children With ADHD",
+    "official_title": "Evaluation of the Efficacy and Safety of SPN-812 (Viloxazine Extended-release Capsule) in Children With ADHD - A Double-Blind, Placebo-Controlled, Dose-Ranging Study",
+    "status": "COMPLETED",
+    "last_update": "2021-10-27",
+    "start_date": "2016-02-01",
+    "completion_date": "2016-07-25",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 222,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Supernus Pharmaceuticals, Inc.",
+    "conditions": [
+      "Attention-Deficit/Hyperactivity Disorder (ADHD)"
+    ],
+    "interventions": [
+      "Placebo",
+      "100mg SPN-812",
+      "200mg SPN-812",
+      "300mg SPN-812",
+      "400mg SPN-812"
+    ]
+  },
+  "SUPN:SPN-812:NCT06185985": {
+    "nct_id": "NCT06185985",
+    "title": "Open-label Safety and Efficacy of SPN-812 (Viloxazine Extended-release Capsule) in Adults With ADHD and Mood Symptoms",
+    "official_title": "A Phase IV, Open-Label, Decentralized Clinical Trial to Evaluate the Efficacy and Safety of Qelbree® in Adults With Attention-Deficit/Hyperactivity Disorder and Mood Symptoms",
+    "status": "COMPLETED",
+    "last_update": "2026-03-27",
+    "start_date": "2024-03-25",
+    "completion_date": "2024-12-11",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE4"
+    ],
+    "enrollment": 161,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Supernus Pharmaceuticals, Inc.",
+    "conditions": [
+      "Attention-Deficit/Hyperactivity Disorder"
+    ],
+    "interventions": [
+      "SPN-812"
+    ]
+  },
+  "SUPN:SPN-817:NCT06798896": {
+    "nct_id": "NCT06798896",
+    "title": "RENAISSANCE 2: SPN-817 Phase 2, Double-Blind, Placebo-Controlled Study in Adults With Focal Onset Seizures",
+    "official_title": "RENAISSANCE 2: A Double-Blind, Randomized, Placebo-Controlled, Multicenter, Parallel-Group Study to Evaluate the Efficacy, Safety, and Tolerability of SPN-817 in Adults With Focal Onset Seizures",
+    "status": "RECRUITING",
+    "last_update": "2026-10-01",
+    "start_date": "2024-12-30",
+    "completion_date": "2027-08",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 216,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Supernus Pharmaceuticals, Inc.",
+    "conditions": [
+      "Focal Onset Seizures"
+    ],
+    "interventions": [
+      "SPN-817",
+      "Placebo"
+    ]
+  },
+  "SUPN:SPN-817:NCT07141329": {
+    "nct_id": "NCT07141329",
+    "title": "SPN-817 Open-Label Extension Study in Adults With Focal Onset Seizures",
+    "official_title": "An Open-Label Extension, One-Year, Safety, and Efficacy Study of SPN-817 in Adults With Focal Onset Seizures",
+    "status": "ENROLLING_BY_INVITATION",
+    "last_update": "2026-10-27",
+    "start_date": "2025-07-30",
+    "completion_date": "2027-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 100,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Supernus Pharmaceuticals, Inc.",
+    "conditions": [
+      "Focal Onset Seizures"
+    ],
+    "interventions": [
+      "SPN-817"
+    ]
+  },
+  "SUPN:SPN-817:NCT05102552": {
+    "nct_id": "NCT05102552",
+    "title": "Evaluating the Safety and Relative Bioavailability of Three SPN-817 Treatments (A, B and C) in Healthy Adult Subjects",
+    "official_title": "A Single-Center, Randomized, Open-label, Multiple-Dose, Single-Sequence Crossover Study, Evaluating the Safety and Relative Bioavailability of Three SPN-817 Treatments (A, B and C) in Healthy Adult Subjects",
+    "status": "COMPLETED",
+    "last_update": "2022-08-30",
+    "start_date": "2021-10-19",
+    "completion_date": "2022-08-15",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "EARLY_PHASE1"
+    ],
+    "enrollment": 30,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Supernus Pharmaceuticals, Inc.",
+    "conditions": [
+      "Healthy Volunteer"
+    ],
+    "interventions": [
+      "SPN-817, Treatment B",
+      "SPN-817, Treatment C",
+      "BIS-001, Treatment A"
+    ]
+  },
+  "SUPN:SPN-817:NCT05518578": {
+    "nct_id": "NCT05518578",
+    "title": "Safety and Tolerability Study of SPN-817 in Adult Patients With Treatment Resistant Epilepsy",
+    "official_title": "RENAISSANCE Study: A Phase 2, Multicenter, Open Label Safety and Tolerability Study of SPN-817 in Adult Patients With Treatment Resistant Epilepsy",
+    "status": "RECRUITING",
+    "last_update": "2026-04-21",
+    "start_date": "2023-02-07",
+    "completion_date": "2027-12-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 60,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Supernus Pharmaceuticals, Inc.",
+    "conditions": [
+      "Epilepsy",
+      "Seizures, Epileptic"
+    ],
+    "interventions": [
+      "SPN-817"
+    ]
+  },
+  "RXRX:REC-4881:NCT05552755": {
+    "nct_id": "NCT05552755",
+    "title": "Evaluate REC-4881 in Participants With Familial Adenomatous Polyposis (FAP)",
+    "official_title": "A Phase 1b-2, Multicenter, Trial to Evaluate the Efficacy, Safety, Pharmacokintetics, and Pharmacodynamics of REC-4881 in Patients With Familial Adenomatous Polyposis (FAP)",
+    "status": "RECRUITING",
+    "last_update": "2026-06-05",
+    "start_date": "2023-07-10",
+    "completion_date": "2027-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 67,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Recursion Pharmaceuticals Inc.",
+    "conditions": [
+      "Familial Adenomatous Polyposis"
+    ],
+    "interventions": [
+      "REC-4881",
+      "Placebo"
+    ]
+  },
+  "RXRX:REC-4881:NCT06005974": {
+    "nct_id": "NCT06005974",
+    "title": "A Study of REC-4881 in Participants With Cancers Which Have an AXIN1 or APC Mutation",
+    "official_title": "A Phase 2, Open Label Study of REC-4881 in Participants With Unresectable Locally Advanced or Metastatic Cancer With AXIN1 or APC Mutation",
+    "status": "TERMINATED",
+    "last_update": "2026-02-23",
+    "start_date": "2024-01-15",
+    "completion_date": "2025-02-24",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 18,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Recursion Pharmaceuticals Inc.",
+    "conditions": [
+      "AXIN1 Gene Mutation",
+      "APC Gene Mutation",
+      "Solid Tumor"
+    ],
+    "interventions": [
+      "REC-4881"
+    ]
+  },
+  "RXRX:REC-994:NCT05085561": {
+    "nct_id": "NCT05085561",
+    "title": "The Symptomatic Cerebral Cavernous Malformation Trial of REC-994",
+    "official_title": "A Two-Part Study of REC-994 in the Treatment of Adults With Symptomatic Cerebral Cavernous Malformation (CCM); Part 1: A Phase 2 Randomized, Double-Blind, Placebo-Controlled Clinical Trial to Evaluate the Safety, Efficacy and Pharmacokinetics of Two Doses of REC-994; Part 2: A Long-Term Blinded Extension Clinical Trial to Evaluate Long-Term Safety Tolerability and Efficacy of REC-994",
+    "status": "COMPLETED",
+    "last_update": "2026-10-22",
+    "start_date": "2022-03-17",
+    "completion_date": "2025-06-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 62,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Recursion Pharmaceuticals Inc.",
+    "conditions": [
+      "Cerebral Cavernous Malformation"
+    ],
+    "interventions": [
+      "REC-994",
+      "Placebo"
+    ]
+  },
+  "EWTX:sevasemten:NCT06916897": {
+    "nct_id": "NCT06916897",
+    "title": "A Study to Evaluate Effect of Verapamil and Food of Sevasemten in Healthy Volunteers",
+    "official_title": "A Phase 1, Open-Label Study to Evaluate the Effect of Verapamil and Food on the Pharmacokinetics of Sevasemten in Healthy Adult Subjects",
+    "status": "COMPLETED",
+    "last_update": "2025-04-08",
+    "start_date": "2025-01-08",
+    "completion_date": "2025-02-22",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 42,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Edgewise Therapeutics, Inc.",
+    "conditions": [
+      "Healthy Subjects"
+    ],
+    "interventions": [
+      "sevasemten",
+      "Verapamil"
+    ]
+  },
+  "EWTX:sevasemten:NCT05291091": {
+    "nct_id": "NCT05291091",
+    "title": "Phase 2 Study of EDG-5506 in Becker Muscular Dystrophy (GRAND CANYON)",
+    "official_title": "A Phase 2 Randomized, Double-blind, Placebo-controlled Study to Evaluate the Effect of EDG-5506 on Safety, Biomarkers, Pharmacokinetics, and Functional Measures in Adults and Adolescents With Becker Muscular Dystrophy",
+    "status": "COMPLETED",
+    "last_update": "2026-09-21",
+    "start_date": "2022-11-10",
+    "completion_date": "2026-09-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 244,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Edgewise Therapeutics, Inc.",
+    "conditions": [
+      "Becker Muscular Dystrophy"
+    ],
+    "interventions": [
+      "Sevasemten 10 mg",
+      "Sevasemten 5 mg",
+      "Sevasemten 12.5 mg",
+      "Placebo"
+    ]
+  },
+  "EWTX:sevasemten:NCT06066580": {
+    "nct_id": "NCT06066580",
+    "title": "Open-Label Extension of EDG-5506 in Participants With Becker Muscular Dystrophy",
+    "official_title": "An Open-Label Extension Study to Assess the Long-term Effect of EDG-5506 on Safety, Biomarkers, and Functional Measures in Adults and Adolescents With Becker Muscular Dystrophy",
+    "status": "ENROLLING_BY_INVITATION",
+    "last_update": "2026-09-17",
+    "start_date": "2023-11-02",
+    "completion_date": "2031-02",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 260,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Edgewise Therapeutics, Inc.",
+    "conditions": [
+      "Becker Muscular Dystrophy"
+    ],
+    "interventions": [
+      "Sevasemten"
+    ]
+  },
+  "EWTX:sevasemten:NCT05540860": {
+    "nct_id": "NCT05540860",
+    "title": "A Study of EDG-5506 in Children With Duchenne Muscular Dystrophy (LYNX)",
+    "official_title": "A 2-part Phase 2 Study of Safety, Pharmacokinetics and Biomarkers in Children With Duchenne Muscular Dystrophy Including a Randomized, Double-Blind, Placebo-Controlled Part A, Followed by an Open-Label Part B",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2025-11-12",
+    "start_date": "2022-10-24",
+    "completion_date": "2027-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 76,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Edgewise Therapeutics, Inc.",
+    "conditions": [
+      "Duchenne Muscular Dystrophy"
+    ],
+    "interventions": [
+      "Sevasemten Dose 1",
+      "Sevasemten Dose 2",
+      "Sevasemten Dose 3",
+      "Sevasemten Dose 4",
+      "Sevasemten Dose 5",
+      "Placebo"
+    ]
+  },
+  "EWTX:sevasemten:NCT06100887": {
+    "nct_id": "NCT06100887",
+    "title": "Phase 2 Study of EDG-5506 in Children and Adolescents With Duchenne Muscular Dystrophy Previously Treated With Gene Therapy",
+    "official_title": "A Phase 2 Study to Evaluate the Effect of EDG-5506 on Safety, Pharmacokinetics, and Biomarkers in Children and Adolescents With Duchenne Muscular Dystrophy Previously Treated With Gene Therapy",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2025-11-06",
+    "start_date": "2024-03-22",
+    "completion_date": "2027-03",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 43,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Edgewise Therapeutics, Inc.",
+    "conditions": [
+      "Duchenne Muscular Dystrophy"
+    ],
+    "interventions": [
+      "Sevasemten Dose 1",
+      "Sevasemten Dose 2",
+      "Sevasemten Dose 3",
+      "Placebo"
+    ]
+  },
+  "EWTX:sevasemten:NCT05160415": {
+    "nct_id": "NCT05160415",
+    "title": "A Study of EDG-5506 in Adult Males With Becker Muscular Dystrophy",
+    "official_title": "A Phase 1b, Open-label Study of the Safety and Pharmacokinetics of EDG-5506 in Adults With Becker Muscular Dystrophy",
+    "status": "COMPLETED",
+    "last_update": "2025-06-24",
+    "start_date": "2021-12-28",
+    "completion_date": "2024-03-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 12,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Edgewise Therapeutics, Inc.",
+    "conditions": [
+      "Becker Muscular Dystrophy"
+    ],
+    "interventions": [
+      "Sevasemten"
+    ]
+  },
+  "EWTX:EDG-7500:NCT06347159": {
+    "nct_id": "NCT06347159",
+    "title": "A Study of EDG-7500 in Adults With Hypertrophic Cardiomyopathy (CIRRUS-HCM)",
+    "official_title": "An Open-label Study to Evaluate the Safety, Tolerability, Pharmacokinetics, and Pharmacodynamics of EDG-7500 in Adults With Hypertrophic Cardiomyopathy",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-07-31",
+    "start_date": "2024-04-11",
+    "completion_date": "2027-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 79,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Edgewise Therapeutics, Inc.",
+    "conditions": [
+      "Hypertrophic Cardiomyopathy"
+    ],
+    "interventions": [
+      "EDG-7500",
+      "EDG-7500"
+    ]
+  },
+  "EWTX:EDG-7500:NCT06011317": {
+    "nct_id": "NCT06011317",
+    "title": "A Study of EDG-7500 in Healthy Adults",
+    "official_title": "A Phase 1, Randomized, Double-blind, Placebo-controlled, Single and Multiple Ascending Dose Study of the Safety, Tolerability, Pharmacokinetics, and Pharmacodynamics of EDG-7500 in Healthy Adults",
+    "status": "COMPLETED",
+    "last_update": "2024-07-16",
+    "start_date": "2023-08-14",
+    "completion_date": "2024-06-20",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 84,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Edgewise Therapeutics, Inc.",
+    "conditions": [
+      "Healthy Subjects"
+    ],
+    "interventions": [
+      "EDG-7500",
+      "Placebo"
+    ]
+  },
+  "EWTX:EDG-7500:NCT07456059": {
+    "nct_id": "NCT07456059",
+    "title": "A Study to Evaluate EDG-7500 in Caucasian and Japanese Adults",
+    "official_title": "A Phase 1, Single-center, Open-label, Study to Investigate the Safety, Tolerability, and Pharmacokinetics of a Single Dose and Multiple Doses of EDG-7500 in Healthy Adult Caucasian and Japanese Participants",
+    "status": "COMPLETED",
+    "last_update": "2026-07-31",
+    "start_date": "2026-03-10",
+    "completion_date": "2026-06-01",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 24,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Edgewise Therapeutics, Inc.",
+    "conditions": [
+      "Healthy Adult Participants"
+    ],
+    "interventions": [
+      "EDG-7500"
+    ]
+  },
+  "EWTX:EDG-7500:NCT07324616": {
+    "nct_id": "NCT07324616",
+    "title": "A Study to Evaluate EDG-7500 in Adults With Hepatic Impairment",
+    "official_title": "A Phase 1, Open-Label Study to Evaluate the Pharmacokinetics of a Single Oral Dose of EDG-7500 in Participants With Impaired and Normal Hepatic Function",
+    "status": "COMPLETED",
+    "last_update": "2026-07-31",
+    "start_date": "2026-01-26",
+    "completion_date": "2026-04-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 25,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Edgewise Therapeutics, Inc.",
+    "conditions": [
+      "Hepatic Impairment (HI)"
+    ],
+    "interventions": [
+      "EDG-7500"
+    ]
+  },
+  "EWTX:EDG-7500:NCT06738836": {
+    "nct_id": "NCT06738836",
+    "title": "A Study to Evaluate the Absorption, Metabolism, And Excretion Of Orally Administered [14C]-EDG-7500",
+    "official_title": "An Open-Label Phase 1 Study in Healthy Male Subjects to Investigate the Absorption, Metabolism and Excretion of [14C]-EDG-7500 Following Single-Dose Oral Administration",
+    "status": "COMPLETED",
+    "last_update": "2025-04-16",
+    "start_date": "2024-12-03",
+    "completion_date": "2025-01-17",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 8,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Edgewise Therapeutics, Inc.",
+    "conditions": [
+      "Healthy Volunteer"
+    ],
+    "interventions": [
+      "[14C]-EDG-7500"
+    ]
+  },
+  "EWTX:EDG-7500:NCT07034768": {
+    "nct_id": "NCT07034768",
+    "title": "A Study to Evaluate EDG-7500 in People With Renal Impairment",
+    "official_title": "A Phase 1, 2-Part, Open-Label Study to Evaluate the Pharmacokinetics of a Single Oral Dose of EDG-7500 in Participants With Impaired and Normal Renal Function",
+    "status": "COMPLETED",
+    "last_update": "2026-03-12",
+    "start_date": "2025-07-22",
+    "completion_date": "2025-12-26",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 37,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Edgewise Therapeutics, Inc.",
+    "conditions": [
+      "Renal Impairments"
+    ],
+    "interventions": [
+      "EDG-7500"
+    ]
+  },
+  "MAZE:MZE829:NCT06830629": {
+    "nct_id": "NCT06830629",
+    "title": "A Phase 2 Study of MZE829 in Adults With APOL1 Kidney Disease",
+    "official_title": "An Open-Label Phase 2 Study to Evaluate the Safety, Tolerability, and Effect on Albuminuria of MZE829 in Adults With Proteinuric Chronic Kidney Disease and the APOL1 High Risk Genotype",
+    "status": "RECRUITING",
+    "last_update": "2026-07-27",
+    "start_date": "2025-02-05",
+    "completion_date": "2026-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 74,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Maze Therapeutics",
+    "conditions": [
+      "Proteinuric Kidney Disease"
+    ],
+    "interventions": [
+      "MZE829"
+    ]
+  },
+  "MAZE:MZE782:NCT07694440": {
+    "nct_id": "NCT07694440",
+    "title": "A Study of MZE782 in Adults With PKU",
+    "official_title": "A Phase 2, Randomized, Double-blind, Placebo-controlled, Dose-ranging Study to Evaluate the Safety, Tolerability, and Efficacy of MZE782 in Adults With Phenylketonuria (PKU)",
+    "status": "RECRUITING",
+    "last_update": "2026-10-23",
+    "start_date": "2026-06-23",
+    "completion_date": "2028-02",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 38,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Maze Therapeutics",
+    "conditions": [
+      "Phenylketonuria (PKU)"
+    ],
+    "interventions": [
+      "MZE782",
+      "Placebo",
+      "MZE782"
+    ]
+  },
+  "TNGX:TNG260:NCT05887492": {
+    "nct_id": "NCT05887492",
+    "title": "Study of TNG260 and an Anti-PD Antibody in STK11 Mutated Solid Tumors",
+    "official_title": "A Phase 1/2, Open-Label Study to Evaluate the Safety, Tolerability, Pharmacokinetics and Efficacy of TNG260 as Single Agent and in Combination With an Anti-PD-1 Antibody In Patients With STK11 Mutated Advanced Solid Tumors",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-07-06",
+    "start_date": "2023-06-12",
+    "completion_date": "2026-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 126,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Tango Therapeutics, Inc.",
+    "conditions": [
+      "Non Small Cell Lung Cancer",
+      "Solid Tumors, Adult",
+      "Lung Cancer",
+      "Lung Adenocarcinoma"
+    ],
+    "interventions": [
+      "TNG260",
+      "Pembrolizumab"
+    ]
   }
 }
