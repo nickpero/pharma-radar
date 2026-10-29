@@ -162,22 +162,22 @@ def _timeline_details(alert, event, subtype):
     field_display = field_labels.get(field, field.replace("_", " ").title() if field else "Trial Timeline")
 
     details = [
-        "🚨 TRIAL TIMELINE CHANGE",
-        f"📌 Field: {field_display}",
+        "🚨 MODIFICA DELLE DATE DELLO STUDIO",
+        f"📌 Campo: {field_display}",
     ]
     if old_value:
-        details.append(f"📅 Old date: {old_value}")
+        details.append(f"📅 Data precedente: {old_value}")
     if new_value:
-        details.append(f"📅 New date: {new_value}")
+        details.append(f"📅 Nuova data: {new_value}")
     if old_date and new_date:
         delta_days = (new_date - old_date).days
         if delta_days < 0:
-            details.append(f"⏩ Accelerated: {abs(delta_days)} days")
+            details.append(f"⏩ Anticipata di {abs(delta_days)} days")
         elif delta_days > 0:
-            details.append(f"⏳ Delayed: {delta_days} days")
+            details.append(f"⏳ Posticipata di {delta_days} days")
         else:
             details.append("↔️ Change: 0 days")
-    details.append("ℹ️ Timeline change only — clinical outcome not yet reported.")
+    details.append("ℹ️ È cambiata solo la tempistica: i risultati clinici non sono ancora stati comunicati.")
     return details
 
 
@@ -236,20 +236,20 @@ def format_catalyst_alert(alert):
         alert_priority = enrich_alert_priority(priority_event).get("alert_priority", 0)
     alert_tier = event.get("alert_tier", alert.get("alert_tier")) or get_alert_tier(alert_priority)
     telegram_action = str(alert.get("telegram_action", "")).upper()
-    display_tier = "WATCH · NON CONFERMATO" if early else ("WATCH · NON URGENTE" if telegram_action == "WATCH" else alert_tier)
+    display_tier = "DA VERIFICARE · NON CONFERMATO" if early else ("DA MONITORARE · NON URGENTE" if telegram_action == "WATCH" else alert_tier)
     tier_icon = "👀" if early or telegram_action == "WATCH" else get_severity_icon(alert_tier)
 
     lines = [
-        "🟡 PHARMA RADAR — EARLY CATALYST" if early else "🚨 PHARMA RADAR",
+        "🟡 PHARMA RADAR — CATALIZZATORE PRELIMINARE" if early else "🚨 PHARMA RADAR",
         "━━━━━━━━━━━━━━━━━━",
         f"{tier_icon} {display_tier}",
-        *(["👀 WATCH — informativo, non urgente"] if telegram_action == "WATCH" and not early else []),
+        *(["👀 DA MONITORARE — informativo, non urgente"] if telegram_action == "WATCH" and not early else []),
         "",
         f"🧬 {ticker}",
         f"💊 {drug_name}",
         "",
         f"📰 {event_display}",
-        title or "Catalyst detected",
+        title or "Titolo non disponibile nella fonte.",
     ]
 
     timeline_details = _timeline_details(alert, event, subtype)
@@ -287,12 +287,12 @@ def format_catalyst_alert(alert):
 
     lines.extend([
         "",
-        (f"🎯 Potenziale catalyst (non confermato): punteggio interno {score}/100" if early else f"🎯 Catalyst: {score}/100 · {label}"),
+        (f"🎯 Potenziale catalyst (non confermato): punteggio interno {score}/100" if early else f"🎯 Catalizzatore: {score}/100 · {label}"),
         *( [f"🧠 Clinical data: {alert.get('catalyst_category', event.get('catalyst_category'))} · Novelty {alert.get('novelty_score', event.get('novelty_score', 0))}/100 · Market impact {alert.get('market_impact_score', event.get('market_impact_score', 0))}/100"] if alert.get("clinical_data_release") and not early else [] ),
-        (f"📌 Punteggio interno: {alert_priority}/100 · non operativo" if early else f"🚨 Priority: {alert_priority}/100 · {alert_tier}"),
-        (f"📊 Setup: NON CONFERMATO · Window: {window}" if early else f"📊 Setup: {setup_score}/100 · Window: {window}"),
+        (f"📌 Punteggio interno: {alert_priority}/100 · non operativo" if early else f"🚨 Priorità: {alert_priority}/100 · {alert_tier}"),
+        (f"📊 Setup: NON CONFERMATO · Finestra temporale: {window}" if early else f"📊 Setup: {setup_score}/100 · Finestra temporale: {window}"),
         "",
-        "📈 Market reaction: " + (
+        "📈 Reazione del mercato: " + (
             f"{_num(reaction_pct)}% · {reaction_direction}"
             if reaction_pct is not None and _num(reaction_pct) is not None
             else " | ".join(
@@ -317,16 +317,16 @@ def format_catalyst_alert(alert):
     if str(subtype or "").upper() == "TRIAL_COMPLETED" and trial.get("last_update"):
         lines.append(f"🗂 Registro aggiornato: {_format_timestamp(trial.get('last_update'))}")
     if early:
-        lines.append("⚠️ Early discovery — conferma da fonte primaria ancora in attesa.")
+        lines.append("⚠️ Rilevazione preliminare: in attesa di conferma da una fonte primaria.")
 
     if why:
-        lines.extend(["", "💡 WHY IT MATTERS", why])
+        lines.extend(["", "💡 PERCHÉ È IMPORTANTE", why])
 
     source = _clean_text(alert.get("source") or event.get("source"))
     if source:
-        lines.extend(["", f"🔎 Source: {source}"])
+        lines.extend(["", f"🔎 Fonte: {source}"])
 
-    lines.extend(["", "⚠️ Informational only — no automatic buy/sell signal.", "━━━━━━━━━━━━━━━━━━"])
+    lines.extend(["", "⚠️ Solo a scopo informativo: non è un segnale automatico di acquisto o vendita.", "━━━━━━━━━━━━━━━━━━"])
     return "\n".join(str(line) for line in lines)
 
 
@@ -341,18 +341,18 @@ def format_divergence_alert(divergence):
     win = divergence.get("historical_edge_win_rate_1d")
     win_text = f"{float(win) * 100:.1f}%" if win is not None else "N/A"
     return "\n".join([
-        "⚠️ PHARMA RADAR — DIVERGENCE",
+        "⚠️ PHARMA RADAR — DIVERGENZA",
         "━━━━━━━━━━━━━━━━━━",
         f"🧬 {ticker}",
         f"💊 {program}",
         "",
-        "📈 Positive catalyst / 📉 negative market reaction",
-        f"🎯 Catalyst: {catalyst}/100",
-        f"🧠 TI Score: {ti}/100",
-        f"📚 Historical edge: {edge}% · Win rate: {win_text}",
-        f"📉 Daily reaction: {daily_pct}% · DIVERGENT",
+        "📈 Catalizzatore positivo / 📉 reazione negativa del mercato",
+        f"🎯 Catalizzatore: {catalyst}/100",
+        f"🧠 Punteggio di analisi: {ti}/100",
+        f"📚 Vantaggio storico: {edge}% · Frequenza di esito positivo: {win_text}",
+        f"📉 Variazione giornaliera: {daily_pct}% · DIVERGENT",
         "",
-        "ℹ️ Informational monitor only — this is not a buy/sell signal.",
+        "ℹ️ Monitoraggio a scopo informativo: non è un segnale di acquisto o vendita.",
         "━━━━━━━━━━━━━━━━━━",
     ])
 
