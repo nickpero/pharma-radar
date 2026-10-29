@@ -26,6 +26,10 @@ def _process_item(item, watchlist):
     target = identify_fda_target(item, match_watchlist)
     if target is None:
         return None
+    # EMA headlines can mention disease areas or broad indications that overlap
+    # weak program aliases. Require an explicit issuer match for attribution.
+    if source == "EMA" and not target.get("company_matches"):
+        return None
     if source in {"SEC", "EARLY_DISCOVERY"} and source_ticker in watchlist:
         if str(target.get("ticker") or "").strip().upper() != source_ticker:
             return None
