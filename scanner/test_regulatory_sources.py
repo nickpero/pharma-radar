@@ -206,6 +206,29 @@ def test_sec_discovery_prioritizes_failed_tickers_even_if_proxy_has_them(monkeyp
     assert set(calls) == set(failed)
 
 
+def test_ema_body_only_company_and_program_match_is_rejected():
+    # The full article body can mention a watchlist company/program in an
+    # unrelated comparison. EMA attribution must be supported by headline or
+    # feed summary, not body-only coincidence.
+    watchlist = {
+        "RVMD": {
+            "company": "Revolution Medicines",
+            "programs": ["RMC-6236", "daraxonrasib"],
+        }
+    }
+    item = build_ema_news_item(
+        "EMA recommends authorisation of Rasonque for metastatic pancreatic cancer",
+        "/en/news/rasonque",
+        "2026-10-15",
+        summary="The EMA recommends authorisation of Rasonque.",
+    )
+    item["content"] = (
+        "This article compares several oncology programs, including "
+        "Revolution Medicines and RMC-6236."
+    )
+    assert process_regulatory_news([item], watchlist) == []
+
+
 def test_ema_program_alias_without_matching_company_is_rejected():
     watchlist = {
         "RVMD": {"company": "Revolution Medicines", "programs": ["RMC-6236", "daraxonrasib"]},
