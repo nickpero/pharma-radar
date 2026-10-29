@@ -1100,7 +1100,7 @@
     },
     "reaction_interpretation": "UNKNOWN",
     "reaction_strength": "UNKNOWN",
-    "recorded_at": "2026-10-29T07:49:34.793673+00:00",
+    "recorded_at": "2026-10-29T14:42:02.026746+00:00",
     "score": 95,
     "severity": "MEDIUM",
     "short_interest_pct": null,
@@ -1126,7 +1126,7 @@
       "historical_sample",
       "market_confirmation"
     ],
-    "trading_intelligence_score": 72.1,
+    "trading_intelligence_score": 69.2,
     "trading_intelligence_version": "1.1",
     "trading_setup_score": 55,
     "trading_setup_version": "5.3",
