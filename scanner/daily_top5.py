@@ -386,16 +386,16 @@ def format_daily_top5(rows, date_value=None):
         if row["catalyst_found"]:
             gate = row.get("alert_quality_gate") or {}
             freshness = row.get("catalyst_freshness", "UNKNOWN_TIME")
-            reason = f'{row["catalyst_subtype"]} · {row["catalyst_source"] or "fonte non verificata"} · {freshness}'
+            reason = f'{_display_daily_code(row["catalyst_subtype"])} · {row["catalyst_source"] or "fonte non verificata"} · {_display_daily_code(freshness)}'
             classification = _display_daily_code(row.get("classification", "CATALYST_LINKED"))
             if freshness == "REACTION_24_72H":
                 classification = _display_daily_code("REACTION_CONTINUATION")
             elif freshness == "HISTORICAL_GT_72H":
                 classification = _display_daily_code("HISTORICAL_WATCH")
             if not gate.get("eligible"):
-                classification = f'{classification}_QUALITY_GATED'
+                classification = "CATALIZZATORE IN ATTESA DI VERIFICA QUALITÀ"
         else:
-            reason = "Nessun catalyst verificato registrato per la giornata"
+            reason = "Nessun catalizzatore verificato registrato per la giornata"
             classification = _display_daily_code(row.get("classification", "MARKET_MOVE_UNEXPLAINED"))
         lines.extend([
             f"{index}. 🧬 {row['ticker']} · {row['company']}",
@@ -405,12 +405,12 @@ def format_daily_top5(rows, date_value=None):
             f"   📰 Catalizzatore: {reason}",
             f"   💊 Programma/farmaco: {row.get('catalyst_program') or ', '.join(row.get('programs') or []) or 'non specificato'}",
             f"   🔎 Classificazione: {classification}",
-            f"   🧠 Evidenza: {row.get('catalyst_evidence', 'non disponibile')}",
+            f"   🧠 Evidenza: {_display_daily_code(row.get('catalyst_evidence', 'non disponibile'))}",
             f"   📚 Fonte: {row.get('catalyst_source') or 'non disponibile'}",
             f"   🔗 Fonte primaria: {row.get('catalyst_url') or 'link non disponibile'}",
-            f"   🧭 Origine: {row.get('catalyst_origin') or 'evento registrato'}",
-            f"   📡 Rilevanza Radar: {row.get('radar_inclusion', 'non classificata')}",
-            f"   🛡️ Controllo qualità: {(row.get('alert_quality_gate') or {}).get('reason', 'non disponibile')}",
+            f"   🧭 Origine: {_display_daily_code(row.get('catalyst_origin') or 'evento registrato')}",
+            f"   📡 Rilevanza Radar: {_display_daily_code(row.get('radar_inclusion', 'non classificata'))}",
+            f"   🛡️ Controllo qualità: {_display_daily_code((row.get('alert_quality_gate') or {}).get('reason', 'non disponibile'))}",
             f"   ℹ️ Motivazione: {row.get('radar_reason', 'non disponibile')}",
             "",
         ])
