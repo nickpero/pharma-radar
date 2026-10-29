@@ -136,7 +136,7 @@ def test_telegram_is_compact_and_hierarchical():
     assert "🧬 IONS" in message
     assert "💊 Zilganersen (Zanvastro)" in message
     assert "📰 APPROVAZIONE FDA" in message
-    assert "🎯 Catalyst: 100/100" in message
+    assert "🎯 Catalizzatore: 100/100" in message
     assert "🚨 Priority: 100/100" in message
     assert "📊 Setup: 56/100 · Window: 1-7D" in message
     assert "💡 WHY IT MATTERS" in message
