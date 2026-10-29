@@ -1166,5 +1166,231 @@
       "ClinicalTrials.gov"
     ],
     "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "AGIO": {
+    "company": "Agios Pharmaceuticals",
+    "programs": [
+      "mitapivat (PYRUKYND)",
+      "sickle cell disease sNDA"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Agios Pharmaceuticals"
+    ],
+    "radar_role": "REGULATORY_CATALYST_WATCH"
+  },
+  "CNTA": {
+    "company": "Centessa Pharmaceuticals",
+    "programs": [
+      "cleminorexton",
+      "orexin receptor 2 agonist program"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "Centessa Pharmaceuticals",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "EXEL": {
+    "company": "Exelixis",
+    "programs": [
+      "zanzalintinib",
+      "cabozantinib",
+      "XL092"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Exelixis",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "CMPX": {
+    "company": "Compass Therapeutics",
+    "programs": [
+      "CTX-009",
+      "CTX-471"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Compass Therapeutics",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "CORT": {
+    "company": "Corcept Therapeutics",
+    "programs": [
+      "relacorilant",
+      "Cushing syndrome program"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Corcept Therapeutics",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "BMY": {
+    "company": "Bristol Myers Squibb",
+    "programs": [
+      "nivolumab (Opdivo)",
+      "oncology clinical and regulatory milestones",
+      "immunology pipeline milestones"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Bristol Myers Squibb",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "STRATEGIC_REGULATORY_COMMERCIAL_CATALYST"
+  },
+  "TRAW": {
+    "company": "Traws Pharma",
+    "programs": [
+      "rigosertib",
+      "influenza antiviral programs"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "Traws Pharma",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "SNDX": {
+    "company": "Syndax Pharmaceuticals",
+    "programs": [
+      "revumenib",
+      "axatilimab"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Syndax Pharmaceuticals",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "VIR": {
+    "company": "Vir Biotechnology",
+    "programs": [
+      "tobevibart",
+      "elebsiran",
+      "hepatitis B programs"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Vir Biotechnology",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "ADCT": {
+    "company": "ADC Therapeutics",
+    "programs": [
+      "loncastuximab tesirine",
+      "Zynlonta"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "ADC Therapeutics",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "REGULATORY_COMMERCIAL_CATALYST_WATCH"
+  },
+  "SUPN": {
+    "company": "Supernus Pharmaceuticals",
+    "programs": [
+      "SPN-812",
+      "SPN-830",
+      "SPN-817"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Supernus Pharmaceuticals",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "REGULATORY_CLINICAL_CATALYST"
+  },
+  "RXRX": {
+    "company": "Recursion Pharmaceuticals",
+    "programs": [
+      "REC-4881",
+      "REC-994",
+      "AI-enabled drug discovery programs"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Recursion Pharmaceuticals",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "EWTX": {
+    "company": "Edgewise Therapeutics",
+    "programs": [
+      "sevasemten",
+      "EDG-7500"
+    ],
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Edgewise Therapeutics",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "MAZE": {
+    "company": "Maze Therapeutics",
+    "programs": [
+      "MZE829",
+      "MZE782"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "Maze Therapeutics",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
+  },
+  "TNGX": {
+    "company": "Tango Therapeutics",
+    "programs": [
+      "TNG260",
+      "targeted oncology pipeline"
+    ],
+    "priority": "ORANGE",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Tango Therapeutics",
+      "ClinicalTrials.gov"
+    ],
+    "radar_role": "FUNDAMENTAL_CLINICAL_CATALYST"
   }
 }

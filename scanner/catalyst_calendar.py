@@ -65,6 +65,8 @@ def build_upcoming_calendar(days=90, watchlist=None, trials=None, today=None):
                 "date": parsed.isoformat(),
                 "date_precision": precision,
                 "source": "ClinicalTrials.gov/Radar state",
+                "source_url": (f"https://clinicaltrials.gov/study/{trial.get('nct_id')}" if trial.get("nct_id") else None),
+                "date_is_estimate": True,
             })
     rows.sort(key=lambda item: (item["date"], item["ticker"], item["nct_id"] or ""))
     return rows
@@ -85,8 +87,9 @@ def format_calendar(rows, days=90):
         lines.extend([
             f"📅 {date_text} · {row['ticker']} · {row['milestone']}",
             f"💊 {row['programs'][0] if row['programs'] else row['title'] or 'UNKNOWN'} · {row['phase'] or 'PHASE UNKNOWN'}",
-            "ℹ️ Expected trial milestone — not itself a clinical readout.",
+            "ℹ️ Estimated registry milestone — not a confirmed readout date.",
             f"🔬 {row['nct_id'] or 'N/A'} · {row['status']}",
+            *( [f"🔗 {row['source_url']}"] if row.get("source_url") else [] ),
             "",
         ])
     return "\n".join(lines).rstrip()
