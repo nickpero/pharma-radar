@@ -10,13 +10,14 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-from scanner.fda_feed import get_fda_news, is_fda_press_announcement_url, normalize_text, normalize_date
+from scanner.fda_feed import get_fda_news, get_medwatch_news, is_fda_press_announcement_url, normalize_text, normalize_date
 
 FDA_HOSTS = {"www.fda.gov", "fda.gov"}
 FDA_ALLOWED_PREFIXES = (
     "/news-events/press-announcements/",
     "/news-events/fda-newsroom/press-announcements/",
     "/drugs/resources-information-approved-drugs/",
+    "/safety/medwatch-fda-safety-information-and-adverse-event-reporting-program/",
 )
 ARTICLE_TIMEOUT = 12
 MAX_ENRICH_ITEMS = 20
@@ -202,5 +203,15 @@ def enrich_fda_news(news_items, max_items=MAX_ENRICH_ITEMS):
 
 
 def get_enriched_fda_news(max_news=50, max_pages=5, max_enrich=MAX_ENRICH_ITEMS):
-    """Fetch the FDA feed and enrich its newest article bodies."""
-    return enrich_fda_news(get_fda_news(max_news=max_news, max_pages=max_pages), max_items=max_enrich)
+    """Fetch FDA press announcements plus dedicated MedWatch safety alerts."""
+    press_news = get_fda_news(max_news=max_news, max_pages=max_pages)
+    medwatch_news = get_medwatch_news(max_news=max_news)
+    merged = []
+    seen = set()
+    for item in press_news + medwatch_news:
+        key = str(item.get("url") or item.get("item_id") or item.get("title") or "").lower()
+        if key and key not in seen:
+            seen.add(key)
+            merged.append(item)
+    print(f"FDA SOURCE COUNTS: press={len(press_news)} medwatch={len(medwatch_news)} merged={len(merged)}", flush=True)
+    return enrich_fda_news(merged, max_items=max_enrich)
