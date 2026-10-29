@@ -355,10 +355,21 @@ def _discover_missing_companies(watchlist, existing_tickers, preferred_tickers=N
     if not missing:
         print("SEC DISCOVERY BUDGET: selected=0 missing=0", flush=True)
         return []
-    tickers = missing
     bucket = int(time.time() // DISCOVERY_ROTATION_SECONDS)
-    start = (bucket * DISCOVERY_MAX_TICKERS) % len(tickers)
-    ordered = tickers[start:] + tickers[:start]
+
+    def rotated(items):
+        if not items:
+            return []
+        start = (bucket * DISCOVERY_MAX_TICKERS) % len(items)
+        return items[start:] + items[:start]
+
+    # Failed direct-EDGAR tickers form their own rotating queue and always
+    # take precedence over issuers that merely lack recent proxy coverage.
+    preferred_missing = [item for item in missing if item[1] in preferred]
+    regular_missing = [item for item in missing if item[1] not in preferred]
+    ordered = rotated(preferred_missing)
+    if len(ordered) < DISCOVERY_MAX_TICKERS:
+        ordered.extend(rotated(regular_missing))
     selected = ordered[:DISCOVERY_MAX_TICKERS]
     print(f"SEC DISCOVERY BUDGET: selected={len(selected)} missing={len(missing)} rotation_bucket={bucket}", flush=True)
     results = []
