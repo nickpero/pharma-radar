@@ -337,26 +337,39 @@ def _discover_company_filings(ticker, company, cik, max_filings=DISCOVERY_MAX_FI
         return []
 
 
-def _discover_missing_companies(watchlist, existing_tickers):
+def _discover_missing_companies(watchlist, existing_tickers, preferred_tickers=None):
     """Run a small rotating SEC discovery batch so every domestic watchlist ticker is covered over time."""
     missing = []
+    preferred = {str(ticker).upper() for ticker in (preferred_tickers or [])}
     for ticker, config in (watchlist or {}).items():
         ticker = str(ticker).upper()
-        if ticker in existing_tickers or ticker not in WATCHLIST_CIK:
+        # Probe failed direct-EDGAR tickers even if the global proxy returned an older filing.
+        if (ticker in existing_tickers and ticker not in preferred) or ticker not in WATCHLIST_CIK:
             continue
         company = config.get("company", ticker) if isinstance(config, dict) else ticker
         priority = str(config.get("priority", config.get("risk", ""))).upper() if isinstance(config, dict) else ""
         risk = str(config.get("risk", "" )).upper() if isinstance(config, dict) else ""
-        tier = 0 if priority in {"RED", "CRITICAL", "HIGH"} or risk in {"RED", "CRITICAL", "HIGH"} else 1
+        tier = -1 if ticker in preferred else (0 if priority in {"RED", "CRITICAL", "HIGH"} or risk in {"RED", "CRITICAL", "HIGH"} else 1)
         missing.append((tier, ticker, company, WATCHLIST_CIK[ticker]))
     missing.sort(key=lambda item: (item[0], item[1]))
     if not missing:
         print("SEC DISCOVERY BUDGET: selected=0 missing=0", flush=True)
         return []
-    tickers = missing
     bucket = int(time.time() // DISCOVERY_ROTATION_SECONDS)
-    start = (bucket * DISCOVERY_MAX_TICKERS) % len(tickers)
-    ordered = tickers[start:] + tickers[:start]
+
+    def rotated(items):
+        if not items:
+            return []
+        start = (bucket * DISCOVERY_MAX_TICKERS) % len(items)
+        return items[start:] + items[:start]
+
+    # Failed direct-EDGAR tickers form their own rotating queue and always
+    # take precedence over issuers that merely lack recent proxy coverage.
+    preferred_missing = [item for item in missing if item[1] in preferred]
+    regular_missing = [item for item in missing if item[1] not in preferred]
+    ordered = rotated(preferred_missing)
+    if len(ordered) < DISCOVERY_MAX_TICKERS:
+        ordered.extend(rotated(regular_missing))
     selected = ordered[:DISCOVERY_MAX_TICKERS]
     print(f"SEC DISCOVERY BUDGET: selected={len(selected)} missing={len(missing)} rotation_bucket={bucket}", flush=True)
     results = []
@@ -458,7 +471,13 @@ def get_sec_news(watchlist, max_filings_per_company=3):
     # Discovery is a bounded supplement, not a reason to discard successful direct filings.
     try:
         existing_tickers = {str(item.get("ticker", "")).upper() for item in combined}
-        combined.extend(_discover_missing_companies(watchlist, existing_tickers))
+        discovery_results = _discover_missing_companies(watchlist, existing_tickers, failed_tickers)
+        known_accessions = {(str(item.get("ticker", "")).upper(), str(item.get("accession", ""))) for item in combined}
+        for item in discovery_results:
+            key = (str(item.get("ticker", "")).upper(), str(item.get("accession", "")))
+            if key not in known_accessions:
+                combined.append(item)
+                known_accessions.add(key)
         if path == "direct_partial":
             path = "direct_plus_discovery"
     except Exception as exc:

@@ -167,6 +167,44 @@ def test_regulatory_pipeline_rejects_generic_company_only_news():
     events = process_regulatory_news(items, watchlist)
     assert events == []
 
+def test_ema_program_only_match_without_issuer_is_suppressed():
+    # A broad indication phrase must not map an EMA story to a company
+    # when the issuer itself is not identified in the article.
+    watchlist = {
+        "RVMD": {
+            "company": "Revolution Medicines",
+            "programs": ["metastatic pancreatic cancer"],
+        }
+    }
+    item = build_ema_news_item(
+        "EMA recommends authorisation of Rasonque for metastatic pancreatic cancer",
+        "/en/news/rasonque",
+        "2026-10-15",
+    )
+    item["content"] = "EMA recommends authorisation of Rasonque for metastatic pancreatic cancer."
+    assert process_regulatory_news([item], watchlist) == []
+
+
+def test_sec_discovery_prioritizes_failed_tickers_even_if_proxy_has_them(monkeypatch):
+    watchlist = {
+        ticker: {"company": ticker, "priority": "RED"}
+        for ticker in sec_feed.WATCHLIST_CIK
+    }
+    calls = []
+
+    def fake_discover(ticker, company, cik, max_filings=2):
+        calls.append(ticker)
+        return []
+
+    monkeypatch.setattr(sec_feed, "_discover_company_filings", fake_discover)
+    monkeypatch.setattr(sec_feed, "_JINA_RATE_LIMITED", False)
+    failed = ["CAPR", "SVRA", "ZYME", "MIRM", "TENX", "NUVL"]
+    sec_feed._discover_missing_companies(
+        watchlist, set(failed), preferred_tickers=failed
+    )
+    assert len(calls) == sec_feed.DISCOVERY_MAX_TICKERS
+    assert set(calls) == set(failed)
+
 
 def test_ema_program_alias_without_matching_company_is_rejected():
     watchlist = {
