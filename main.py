@@ -2,6 +2,7 @@
 
 from datetime import datetime, timezone
 from collections import Counter
+from zoneinfo import ZoneInfo
 
 from scanner.trial_scanner import scan
 from scanner.trading_intelligence_score import enrich_trading_intelligence_scores
@@ -167,6 +168,70 @@ def send_alerts(result, alerts=None):
     mark_sent(alerts, state, lambda alert: repr(_dedup_key(alert)), timestamp)
     save_sent_alerts(state)
     return responses
+
+
+def send_daily_status_if_needed(result, actionable_alerts=None, now=None):
+    """Send one honest daily Telegram status after 08:00 Rome if no alert arrived today.
+
+    This is an operational heartbeat, not a fabricated catalyst. A real catalyst
+    or source-health/divergence notification sent earlier that day suppresses it.
+    """
+    if actionable_alerts:
+        return False
+
+    rome = ZoneInfo("Europe/Rome")
+    current = now or datetime.now(rome)
+    if current.tzinfo is None:
+        current = current.replace(tzinfo=rome)
+    else:
+        current = current.astimezone(rome)
+    if current.hour < 8:
+        return False
+
+    state = load_sent_alerts()
+    today = current.date().isoformat()
+    key = f"RADAR_DAILY_STATUS:{today}"
+    if key in state:
+        print("Stato giornaliero Pharma Radar già inviato oggi.")
+        return False
+
+    # Do not send a heartbeat if any real alert was already delivered today.
+    for sent_at in state.values():
+        try:
+            parsed = datetime.fromisoformat(str(sent_at).replace("Z", "+00:00"))
+            if parsed.tzinfo is None:
+                parsed = parsed.replace(tzinfo=timezone.utc)
+            if parsed.astimezone(rome).date().isoformat() == today:
+                print("Notifica già ricevuta oggi; stato giornaliero non necessario.")
+                return False
+        except (TypeError, ValueError):
+            continue
+
+    diagnostics = result.get("source_diagnostics") or {}
+    source_line = " | ".join(
+        f"{name}={detail.get('status', 'UNKNOWN')}({detail.get('count', 0)})"
+        for name, detail in diagnostics.items()
+    ) or "diagnostica fonti non disponibile"
+    lines = [
+        "🧬 PHARMA RADAR — STATO GIORNALIERO",
+        "━━━━━━━━━━━━━━━━━━",
+        f"🕒 Controllo: {current.strftime('%d/%m/%Y %H:%M')} Europe/Rome",
+        f"🏢 Aziende configurate: {result.get('companies', 0)}",
+        f"🔬 Trial rilevanti: {result.get('relevant_trials', 0)}",
+        f"🛰 Fonti: {source_line}",
+        "",
+        "ℹ️ Finora oggi nessun nuovo catalizzatore ha superato i filtri per un alert.",
+        "Questo è un controllo operativo, NON un catalizzatore né un segnale di trading.",
+        "Il Radar continua a monitorare le fonti: un evento reale qualificato genererà un alert separato.",
+        "━━━━━━━━━━━━━━━━━━",
+    ]
+    response = send_telegram("\n".join(lines))
+    if not isinstance(response, dict) or response.get("ok") is not True:
+        raise RuntimeError(f"Telegram non ha confermato lo stato giornaliero: {response!r}")
+    state[key] = current.isoformat()
+    save_sent_alerts(state)
+    print("Stato giornaliero Pharma Radar inviato su Telegram.")
+    return True
 
 
 def send_source_health_alert_if_needed(result, actionable_alerts=None):
@@ -337,6 +402,11 @@ def main():
     except Exception as exc:
         # Health notifications must never hide the scan result or prevent the Daily from running.
         print(f"Invio dell’avviso Telegram sulla disponibilità delle fonti non riuscito: {type(exc).__name__}: {exc}")
+    try:
+        send_daily_status_if_needed(result, actionable_alerts=new_alerts)
+    except Exception as exc:
+        # The heartbeat is best-effort and must not interrupt the production scan.
+        print(f"Invio dello stato giornaliero Pharma Radar non riuscito: {type(exc).__name__}: {exc}")
     sent = send_email_alerts(result)
     print(f"Pharma Intelligence emails sent: {sent}")
 

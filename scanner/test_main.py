@@ -160,6 +160,59 @@ def test_source_health_warning_does_not_send_when_sources_are_healthy(monkeypatc
     result = {"alerts": [], "source_diagnostics": {"EMA": {"status": "OK", "count": 5}}}
     assert main.send_source_health_alert_if_needed(result, actionable_alerts=[]) is False
 
+
+def test_daily_status_sends_once_after_0800_rome_when_no_alert_today(monkeypatch):
+    from zoneinfo import ZoneInfo
+
+    sent_state = {}
+    messages = []
+    monkeypatch.setattr(main, "load_sent_alerts", lambda: dict(sent_state))
+    monkeypatch.setattr(main, "save_sent_alerts", lambda state: sent_state.update(state))
+    monkeypatch.setattr(main, "send_telegram", lambda message: messages.append(message) or {"ok": True})
+    now = datetime(2026, 10, 30, 8, 5, tzinfo=ZoneInfo("Europe/Rome"))
+    result = {
+        "companies": 320,
+        "relevant_trials": 3248,
+        "source_diagnostics": {"FDA": {"status": "OK", "count": 50}, "SEC": {"status": "OK", "count": 144}},
+    }
+
+    assert main.send_daily_status_if_needed(result, actionable_alerts=[], now=now) is True
+    assert len(messages) == 1
+    assert "PHARMA RADAR — STATO GIORNALIERO" in messages[0]
+    assert "320" in messages[0]
+    assert "NON un catalizzatore né un segnale di trading" in messages[0]
+    assert "\\n" not in messages[0]
+    assert main.send_daily_status_if_needed(result, actionable_alerts=[], now=now) is False
+    assert len(messages) == 1
+
+
+def test_daily_status_waits_until_0800_rome(monkeypatch):
+    from zoneinfo import ZoneInfo
+
+    monkeypatch.setattr(main, "load_sent_alerts", lambda: {})
+    monkeypatch.setattr(main, "send_telegram", lambda message: (_ for _ in ()).throw(AssertionError("unexpected Telegram send")))
+    now = datetime(2026, 10, 30, 7, 59, tzinfo=ZoneInfo("Europe/Rome"))
+    assert main.send_daily_status_if_needed({"companies": 320}, actionable_alerts=[], now=now) is False
+
+
+def test_daily_status_is_suppressed_if_any_alert_was_already_sent_today(monkeypatch):
+    from zoneinfo import ZoneInfo
+
+    sent_state = {"repr(('FDA_APPROVAL', 'ACME'))": "2026-10-30T06:00:00+00:00"}
+    monkeypatch.setattr(main, "load_sent_alerts", lambda: dict(sent_state))
+    monkeypatch.setattr(main, "send_telegram", lambda message: (_ for _ in ()).throw(AssertionError("unexpected Telegram send")))
+    now = datetime(2026, 10, 30, 8, 5, tzinfo=ZoneInfo("Europe/Rome"))
+    assert main.send_daily_status_if_needed({"companies": 320}, actionable_alerts=[], now=now) is False
+
+
+def test_daily_status_is_suppressed_when_catalyst_alerts_are_pending(monkeypatch):
+    from zoneinfo import ZoneInfo
+
+    monkeypatch.setattr(main, "load_sent_alerts", lambda: {})
+    monkeypatch.setattr(main, "send_telegram", lambda message: (_ for _ in ()).throw(AssertionError("unexpected Telegram send")))
+    now = datetime(2026, 10, 30, 8, 5, tzinfo=ZoneInfo("Europe/Rome"))
+    assert main.send_daily_status_if_needed({"companies": 320}, actionable_alerts=[{"ticker": "ACME"}], now=now) is False
+
 if __name__ == "__main__":
     test_clean_summary()
     test_alert_summary_is_concise()
