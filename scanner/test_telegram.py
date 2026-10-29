@@ -25,7 +25,7 @@ def test_catalyst_message_format():
     }
     message = format_catalyst_alert(alert)
     assert "🚨 PHARMA RADAR" in message
-    assert "🚨 CRITICAL" in message
+    assert "🚨 CRITICO" in message
     assert "🧬 CAPR" in message
     assert "💊 deramiocel" in message
     assert "📰 STUDIO COMPLETATO" in message
