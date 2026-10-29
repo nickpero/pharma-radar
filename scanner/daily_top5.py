@@ -13,6 +13,7 @@ from pathlib import Path
 from scanner.market_data import get_market_snapshot
 from scanner.biotech_universe import get_biotech_universe, LAST_UNIVERSE_STATUS
 from scanner.telegram import send_telegram
+from scanner.italian_translation import translate_to_italian
 
 ROOT = Path(__file__).resolve().parents[1]
 WATCHLIST_PATH = ROOT / "data" / "watchlist.json"
@@ -411,7 +412,7 @@ def format_daily_top5(rows, date_value=None):
             f"   🧭 Origine: {_display_daily_code(row.get('catalyst_origin') or 'evento registrato')}",
             f"   📡 Rilevanza Radar: {_display_daily_code(row.get('radar_inclusion', 'non classificata'))}",
             f"   🛡️ Controllo qualità: {_display_daily_code((row.get('alert_quality_gate') or {}).get('reason', 'non disponibile'))}",
-            f"   ℹ️ Motivazione: {row.get('radar_reason', 'non disponibile')}",
+            f"   ℹ️ Motivazione: {translate_to_italian(row.get('radar_reason', 'non disponibile'), [row.get('company'), row.get('ticker')] + list(row.get('programs') or []))}",
             "",
         ])
     lines.extend(["", "Legenda: catalizzatore fondamentale, clinico o regolatorio = possibile inclusione; tappa di sviluppo = solo monitoraggio; movimento tecnico o non spiegato = nessun nuovo avviso fondamentale.", "Nessuna raccomandazione di acquisto o vendita."])
