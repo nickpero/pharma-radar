@@ -28,7 +28,7 @@ jobs:
           fi
           python -m pip install --disable-pip-version-check pytest
       - name: Compile changed intelligence modules
-        run: python -m py_compile scanner/telegram_intelligence.py scanner/telegram.py scanner/alert_state.py scanner/fda_freshness.py scanner/fda_pipeline.py
+        run: python -m py_compile scanner/telegram_intelligence.py scanner/telegram.py scanner/pharma_email.py scanner/daily_top5.py scanner/alert_state.py scanner/fda_freshness.py scanner/fda_pipeline.py
       - name: Run alert and core regression tests
         run: |
-          python -m pytest -q scanner/test_telegram_intelligence.py scanner/test_alert_dedup.py scanner/test_catalyst_dedup.py scanner/test_alert_state.py scanner/test_main.py scanner/test_score.py scanner/test_regulatory_sources.py scanner/test_early_discovery_feed.py scanner/test_daily_top5.py scanner/test_biotech_universe.py scanner/test_fda_p0_unit.py scanner/test_fda_freshness.py
+          python -m pytest -q scanner/test_telegram.py scanner/test_pharma_email.py scanner/test_pharma_email_integration.py scanner/test_telegram_intelligence.py scanner/test_alert_dedup.py scanner/test_catalyst_dedup.py scanner/test_alert_state.py scanner/test_main.py scanner/test_score.py scanner/test_regulatory_sources.py scanner/test_early_discovery_feed.py scanner/test_daily_top5.py scanner/test_biotech_universe.py scanner/test_fda_p0_unit.py scanner/test_fda_freshness.py
