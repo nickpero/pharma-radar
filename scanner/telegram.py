@@ -127,7 +127,8 @@ def _it_status(value):
         "DIVERGENT": "DIVERGENTE", "STRONG POSITIVE": "FORTEMENTE POSITIVA",
         "STRONG NEGATIVE": "FORTEMENTE NEGATIVA", "CONFIRMED": "CONFERMATA",
         "UNCONFIRMED": "NON CONFERMATA", "FDA_UPDATE": "AGGIORNAMENTO FDA",
-        "1-7D": "1–7 giorni", "1-3D": "1–3 giorni", "1D": "1 giorno", "2-4W": "2–4 settimane", "1-4W": "1–4 settimane",\n        "NEXT_24H": "PROSSIME 24 ORE", "NEXT 24H": "PROSSIME 24 ORE", "NEXT_48H": "PROSSIME 48 ORE", "NEXT 7D": "PROSSIMI 7 GIORNI", "UNKNOWN_TIME": "ORA NON DISPONIBILE", "N/A": "NON DISPONIBILE", "NONE": "NON DISPONIBILE", 
+        "1-7D": "1–7 giorni", "1-3D": "1–3 giorni", "1D": "1 giorno", "2-4W": "2–4 settimane", "1-4W": "1–4 settimane",
+        "NEXT_24H": "PROSSIME 24 ORE", "NEXT 24H": "PROSSIME 24 ORE", "NEXT_48H": "PROSSIME 48 ORE", "NEXT 7D": "PROSSIMI 7 GIORNI", "UNKNOWN_TIME": "ORA NON DISPONIBILE", "N/A": "NON DISPONIBILE", "NONE": "NON DISPONIBILE", 
         "EMA_UPDATE": "AGGIORNAMENTO EMA", "WATCH": "DA MONITORARE",
     }
     if key in labels:
