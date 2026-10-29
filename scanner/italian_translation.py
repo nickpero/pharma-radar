@@ -13,6 +13,26 @@ import requests
 
 TRANSLATION_URL = "https://translate.googleapis.com/translate_a/single"
 _TRANSLATION_FAILURE = "Traduzione non disponibile; consultare la fonte originale."
+_ITALIAN_MARKERS = (
+    " il ", " lo ", " la ", " di ", " del ", " della ", " delle ", " dei ",
+    " per ", " con ", " che ", " non ", " nella ", " nelle ", " alla ",
+    " agli ", " sono ", " può ", " una ", " un ", " questo ", " questa ",
+    " programma", " studio", " fase", " dati", " approvazione", " aggiornamento",
+    " mercato", " farmaco", " clinico", " regolatorio", " società",
+)
+_ENGLISH_MARKERS = (
+    " the ", " and ", " for ", " with ", " study ", " trial ", " announced ",
+    " results ", " approval ", " data ", " company ", " treatment ", " patients ",
+    " efficacy ", " safety ", " primary ", " secondary ", " phase ", " program ",
+    " development ", " completed ", " recruiting ", " source-grounded",
+)
+
+
+def _already_italian(text):
+    normalized = f" {text.lower()} "
+    italian_hits = sum(1 for marker in _ITALIAN_MARKERS if marker in normalized)
+    english_hits = sum(1 for marker in _ENGLISH_MARKERS if marker in normalized)
+    return italian_hits >= 2 and english_hits == 0
 
 
 def _protect_terms(text, protected_terms):
@@ -57,6 +77,8 @@ def translate_to_italian(value, protected_terms=None):
     text = " ".join(str(value or "").split())
     if not text:
         return ""
+    if _already_italian(text):
+        return text
     protected_text, replacements = _protect_terms(text, protected_terms)
     try:
         translated = _translate_cached(protected_text)
