@@ -21,6 +21,17 @@ def _reaction(alert):
     return alert.get("market_reaction") or alert.get("reaction") or {}
 
 
+def _source_health_label(name, detail):
+    label = "{}={}({})".format(name, detail.get("status", "UNKNOWN"), detail.get("count", 0))
+    if name == "SEC" and detail.get("sec_enabled") is not None:
+        label += " · CIK {}/{} ({:.1f}%)".format(
+            detail.get("mapped_tickers", 0),
+            detail.get("sec_enabled", 0),
+            detail.get("coverage_pct", 0.0),
+        )
+    return label
+
+
 def _reaction_line(alert):
     reaction = _reaction(alert)
     values = [("1m", reaction.get("reaction_1m_pct")), ("5m", reaction.get("reaction_5m_pct")), ("15m", reaction.get("reaction_15m_pct")), ("30m", reaction.get("reaction_30m_pct")), ("60m", reaction.get("reaction_60m_pct"))]
@@ -69,7 +80,7 @@ def build_summary(result, intelligent_alerts=None):
         f"🧹 Filtered: {result.get('filtered_trials', 0)}",
         f"📦 Raw alerts: {len(alerts)}",
         f"📨 Telegram alerts: {len(intelligent_alerts)}",
-        *(["🛰 Source health: " + " | ".join("{}={}({})".format(name, detail.get("status", "UNKNOWN"), detail.get("count", 0)) for name, detail in result.get("source_diagnostics", {}).items())] if result.get("source_diagnostics") else []),
+        *(["🛰 Source health: " + " | ".join(_source_health_label(name, detail) for name, detail in result.get("source_diagnostics", {}).items())] if result.get("source_diagnostics") else []),
         f"🧹 duplicate/low-priority alerts suppressed: {max(0, len(alerts) - len(intelligent_alerts))}",
         f"📰 FDA news: {len(result.get('fda_news', []))}",
         f"🔄 Changes: {len(detected_changes)}",
@@ -209,7 +220,7 @@ def send_daily_status_if_needed(result, actionable_alerts=None, now=None):
 
     diagnostics = result.get("source_diagnostics") or {}
     source_line = " | ".join(
-        f"{name}={detail.get('status', 'UNKNOWN')}({detail.get('count', 0)})"
+        _source_health_label(name, detail)
         for name, detail in diagnostics.items()
     ) or "diagnostica fonti non disponibile"
     lines = [

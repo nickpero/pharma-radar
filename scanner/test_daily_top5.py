@@ -97,6 +97,21 @@ def test_fundamental_catalyst_is_classified_separately():
     assert rows[0]["catalyst_evidence"] == "RADAR_RECORDED_EVENT"
 
 
+def test_company_financial_results_can_pass_without_program():
+    watchlist = {"REGN": {"company": "Regeneron Pharmaceuticals", "programs": ["linvoseltamab"]}}
+    history = {"earnings": {
+        "ticker": "REGN", "event_timestamp": "2026-10-30T12:00:00+00:00",
+        "subtype": "COMPANY_FINANCIAL_RESULTS", "program": None,
+        "source": "SEC", "source_type": "PRIMARY_CORPORATE",
+    }}
+    rows = build_daily_top5(
+        watchlist=watchlist, history=history,
+        snapshot_fn=lambda ticker: snapshot(13.3, 2.0), date_value="2026-10-30",
+    )
+    assert rows[0]["alert_quality_gate"]["eligible"] is True
+    assert rows[0]["classification"] == "FUNDAMENTAL_OR_CLINICAL_CATALYST"
+
+
 def test_company_level_corporate_transaction_can_pass_without_program():
     watchlist = {"PCRX": {"company": "Pacira BioSciences", "programs": ["EXPAREL", "ZILRETTA"]}}
     history = {"x": {

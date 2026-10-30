@@ -40,6 +40,48 @@ def test_primary_source_builders():
     assert ema["source_type"] == "PRIMARY_REGULATORY"
     assert sec["source_type"] == "PRIMARY_CORPORATE"
     assert sec["form"] == "8-K"
+    # The SEC filing date is the publication timestamp; reportDate is the underlying event date.
+    assert sec["published_at"] == "2026-09-01"
+    assert sec["first_published_at"] == "2026-09-01"
+    assert sec["event_date"] == "2026-09-01"
+
+
+def test_sec_6k_earnings_detection_is_specific():
+    assert sec_feed._looks_like_financial_results("AstraZeneca Q3 2026 financial results")
+    assert sec_feed._looks_like_financial_results("Half-year results and interim financial statements")
+    assert not sec_feed._looks_like_financial_results("AstraZeneca announces Phase 3 clinical trial results")
+
+
+def test_sec_6k_company_results_marker_passes_without_program_match():
+    watchlist = {"AZN": {"company": "AstraZeneca", "programs": ["Tagrisso", "Imfinzi"]}}
+    item = build_sec_item(
+        "AZN", "AstraZeneca", "0000901832",
+        "0000000000-26-000002", "6-K", "2026-10-30",
+        items=[], text="AstraZeneca Q3 2026 financial results",
+        title="SEC 6-K — AstraZeneca — Q3 2026 financial results",
+    )
+    item["company_event_type"] = "COMPANY_FINANCIAL_RESULTS"
+    events = process_regulatory_news([item], watchlist)
+    assert len(events) == 1
+    assert events[0]["ticker"] == "AZN"
+    assert events[0]["subtype"] == "COMPANY_FINANCIAL_RESULTS"
+
+
+def test_sec_8k_item_202_is_included_as_company_financial_results():
+    watchlist = {"REGN": {"company": "Regeneron Pharmaceuticals", "programs": ["linvoseltamab"]}}
+    item = build_sec_item(
+        "REGN", "Regeneron Pharmaceuticals", "0000872589",
+        "0000000000-26-000001", "8-K", "2026-10-30",
+        items=["2.02"], text="Regeneron Reports Third Quarter 2026 Financial and Operating Results",
+    )
+    assert "2.02" in sec_feed.CATALYST_ITEMS
+    assert "results of operations" in sec_feed._item_context(["2.02"])
+    events = process_regulatory_news([item], watchlist)
+    assert len(events) == 1
+    assert events[0]["ticker"] == "REGN"
+    assert events[0]["program"] is None
+    assert events[0]["subtype"] == "COMPANY_FINANCIAL_RESULTS"
+    assert events[0]["trading_impact"] == "MEDIUM"
 
 
 def test_sec_body_enrichment_preserves_program_text():
@@ -79,6 +121,32 @@ def test_sec_user_agent_is_declared():
     # An unset/empty GitHub secret must not result in a blank User-Agent header.
     assert sec_feed.USER_AGENT.strip()
 
+
+
+def test_sec_coverage_reports_unmapped_tickers_and_exclusions():
+    coverage = sec_feed._watchlist_cik_coverage({
+        "REGN": {"company": "Regeneron"},
+        "AZN": {"company": "AstraZeneca"},
+        "NEXA": {"company": "Nanexa", "sec_monitoring": False},
+        "UNMAPPED": {"company": "Unmapped Bio"},
+    })
+    assert coverage["watchlist_total"] == 4
+    assert coverage["sec_enabled"] == 3
+    assert coverage["mapped_tickers"] == 2
+    assert coverage["unmapped_tickers"] == ["UNMAPPED"]
+
+
+def test_sec_feed_skips_companies_explicitly_excluded_from_sec(monkeypatch):
+    calls = []
+    def fake_direct(ticker, company, cik, max_filings=3):
+        calls.append(ticker)
+        return []
+    monkeypatch.setattr(sec_feed, "_fetch_sec_direct", fake_direct)
+    sec_feed.get_sec_news({
+        "NEXA": {"company": "Nanexa", "sec_monitoring": False},
+        "REGN": {"company": "Regeneron"},
+    })
+    assert calls == ["REGN"]
 
 
 def test_sec_watchlist_cik_map_avoids_runtime_ticker_lookup():

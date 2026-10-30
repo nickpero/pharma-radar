@@ -28,7 +28,8 @@ LAST_FETCH_STATUS = {"status": "NOT_RUN", "count": 0, "error_batches": 0, "last_
 # confirmation layer.
 DISCOVERY_DOMAINS = (
     "globenewswire.com", "businesswire.com", "prnewswire.com",
-    "biospace.com", "fiercebiotech.com",
+    "biospace.com", "fiercebiotech.com", "fiercepharma.com",
+    "endpts.com", "statnews.com", "biopharmadive.com", "pharmaphorum.com",
 )
 DOMAIN_LABELS = {
     "globenewswire.com": ("GlobeNewswire", "TRUSTED_DISTRIBUTION"),
@@ -36,6 +37,11 @@ DOMAIN_LABELS = {
     "prnewswire.com": ("PR Newswire", "TRUSTED_DISTRIBUTION"),
     "biospace.com": ("BioSpace", "SPECIALIST"),
     "fiercebiotech.com": ("Fierce Biotech", "SPECIALIST"),
+    "fiercepharma.com": ("Fierce Pharma", "SPECIALIST"),
+    "endpts.com": ("Endpoints News", "SPECIALIST"),
+    "statnews.com": ("STAT News", "SPECIALIST"),
+    "biopharmadive.com": ("BioPharma Dive", "SPECIALIST"),
+    "pharmaphorum.com": ("PharmaPhorum", "SPECIALIST"),
 }
 USER_AGENT = "PharmaRadar/1.0 (GitHub Actions; early discovery)"
 CATALYST_HINTS = (
@@ -44,6 +50,10 @@ CATALYST_HINTS = (
     "enrollment", "enrolled", "dosing", "launch", "regulatory", "clearance",
     "hold", "lifted", "submission", "agreement", "license", "acquisition",
     "partnership", "topline", "clinical",
+    "earnings", "quarterly", "revenue", "eps", "guidance", "cash runway",
+    "restructuring", "layoff", "layoffs", "strategic review", "discontinue",
+    "discontinued", "withdrawal", "withdrawn", "futility", "clinical hold",
+    "hold lifted", "safety",
 )
 
 

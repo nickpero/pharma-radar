@@ -7,6 +7,7 @@ import os
 import re
 import threading
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
@@ -49,7 +50,7 @@ try:
 except (OSError, ValueError, TypeError) as _sec_map_error:
     print(f"SEC CIK MAP SUPPLEMENT UNAVAILABLE: {type(_sec_map_error).__name__}: {_sec_map_error}", flush=True)
 
-CATALYST_ITEMS = {"1.01", "1.02", "2.01", "2.03", "3.01", "5.02", "7.01", "8.01"}
+CATALYST_ITEMS = {"1.01", "1.02", "2.01", "2.02", "2.03", "3.01", "5.02", "7.01", "8.01"}
 DISCOVERY_MAX_FILINGS = 2
 DISCOVERY_MAX_TICKERS = 6
 # Production scans run every 10 minutes; rotate each batch per scan rather than repeating it for an hour.
@@ -227,6 +228,27 @@ def get_ticker_cik_map():
     return dict(WATCHLIST_CIK)
 
 
+def _sec_monitoring_enabled(config):
+    return not (isinstance(config, dict) and config.get("sec_monitoring") is False)
+
+
+def _watchlist_cik_coverage(watchlist):
+    enabled = [
+        str(ticker).upper()
+        for ticker, config in (watchlist or {}).items()
+        if _sec_monitoring_enabled(config)
+    ]
+    mapped = [ticker for ticker in enabled if ticker in WATCHLIST_CIK]
+    unmapped = sorted(set(enabled) - set(mapped))
+    return {
+        "watchlist_total": len(watchlist or {}),
+        "sec_enabled": len(enabled),
+        "mapped_tickers": len(mapped),
+        "unmapped_tickers": unmapped,
+        "coverage_pct": round(100 * len(mapped) / len(enabled), 1) if enabled else 100.0,
+    }
+
+
 def _extract_items(items) -> list[str]:
     text = normalize_text(items)
     found = []
@@ -247,7 +269,7 @@ def _filing_url(cik, accession, primary_doc=""):
 
 def _item_context(items):
     labels = {"1.01": "material definitive agreement", "1.02": "termination of material definitive agreement",
-              "2.01": "completion of acquisition or disposition", "2.03": "creation of direct financial obligation",
+              "2.01": "completion of acquisition or disposition", "2.02": "results of operations and financial condition", "2.03": "creation of direct financial obligation",
               "3.01": "delisting or listing compliance event", "5.02": "director or officer change",
               "7.01": "Regulation FD disclosure", "8.01": "other material event"}
     return "; ".join(f"Item {code}: {labels.get(code, 'SEC current report event')}" for code in items)
@@ -270,22 +292,77 @@ def build_sec_item(ticker, company, cik, accession, form, filing_date, primary_d
             "title": title or f"SEC {form} — {company} ({ticker})",
             "summary": f"SEC filing {form}; items: {', '.join(items or detected_items)}",
             "content": content, "url": url, "published_at": filing_date,
-            "event_date": event_date or filing_date, "first_published_at": event_date or filing_date,
+            "event_date": event_date or filing_date, "first_published_at": filing_date,
             "item_id": hashlib.sha256(raw.encode("utf-8")).hexdigest()}
+
+
+EARNINGS_CONTEXT_HINTS = (
+    "financial results", "quarterly results", "quarter results", "earnings results",
+    "annual results", "interim results", "half-year results", "full-year results",
+    "results for the quarter", "results for the year", "financial statements",
+)
+
+
+def _looks_like_financial_results(text):
+    lowered = normalize_text(text).lower()
+    has_results = any(token in lowered for token in ("result", "earnings", "financial statements"))
+    has_period = any(token in lowered for token in (
+        "quarter", "annual", "interim", "half-year", "half year", "full-year", "full year",
+        "six months", "nine months", "q1 ", "q2 ", "q3 ", "q4 ",
+    ))
+    return has_results and has_period
+
+
+def _is_recent_filing_date(value, max_age_days=7):
+    try:
+        filed = datetime.strptime(str(value), "%Y-%m-%d").replace(tzinfo=timezone.utc)
+    except (TypeError, ValueError):
+        return False
+    age_days = (datetime.now(timezone.utc) - filed).total_seconds() / 86400
+    return 0 <= age_days <= max_age_days
 
 
 def _fetch_sec_direct(ticker, company, cik, max_filings=3):
     url = f"https://data.sec.gov/submissions/CIK{cik}.json"
     recent = _get_json(url).get("filings", {}).get("recent", {})
     results = []
-    for idx, form in enumerate(recent.get("form", [])):
-        if form != "8-K":
+    forms = recent.get("form", [])
+    for idx, form in enumerate(forms):
+        filing_date = recent.get("filingDate", [""] * len(forms))[idx]
+        accession = recent.get("accessionNumber", [""] * len(forms))[idx]
+        primary_doc = recent.get("primaryDocument", [""] * len(forms))[idx]
+        if form == "8-K":
+            items = _extract_items(recent.get("items", [""] * len(forms))[idx])
+            if not items:
+                continue
+            results.append(build_sec_item(
+                ticker, company, cik, accession, form, filing_date, primary_doc, items,
+                event_date=(recent.get("reportDate", [""] * len(forms))[idx] or filing_date),
+            ))
+        elif form == "6-K" and _is_recent_filing_date(filing_date):
+            # Foreign private issuers (e.g. AstraZeneca) report quarterly results
+            # through Form 6-K rather than the US domestic Form 8-K Item 2.02.
+            document_url = _filing_url(cik, accession, primary_doc)
+            try:
+                document_text = _get_jina_text(document_url)
+            except requests.RequestException as exc:
+                print(f"SEC 6-K CONTENT UNAVAILABLE: ticker={ticker} {type(exc).__name__}: {exc}", flush=True)
+                continue
+            descriptions = recent.get("primaryDocDescription") or []
+            description = descriptions[idx] if idx < len(descriptions) else ""
+            if not _looks_like_financial_results(" ".join((description, document_text))):
+                continue
+            event = build_sec_item(
+                ticker, company, cik, accession, form, filing_date, primary_doc, [],
+                text=document_text,
+                title=f"SEC 6-K — {company} ({ticker}) — {description or 'Financial results'}",
+                url=document_url,
+                event_date=filing_date,
+            )
+            event["company_event_type"] = "COMPANY_FINANCIAL_RESULTS"
+            results.append(event)
+        else:
             continue
-        items = _extract_items(recent.get("items", [""])[idx])
-        if not items:
-            continue
-        results.append(build_sec_item(ticker, company, cik, recent["accessionNumber"][idx], form,
-                                      recent["filingDate"][idx], recent["primaryDocument"][idx], items, event_date=(recent.get("reportDate", [""])[idx] or recent["filingDate"][idx])))
         if len(results) >= max_filings:
             break
     return results
@@ -361,6 +438,8 @@ def _discover_missing_companies(watchlist, existing_tickers, preferred_tickers=N
     preferred = {str(ticker).upper() for ticker in (preferred_tickers or [])}
     for ticker, config in (watchlist or {}).items():
         ticker = str(ticker).upper()
+        if not _sec_monitoring_enabled(config):
+            continue
         # Probe failed direct-EDGAR tickers even if the global proxy returned an older filing.
         if (ticker in existing_tickers and ticker not in preferred) or ticker not in WATCHLIST_CIK:
             continue
@@ -440,8 +519,17 @@ def get_sec_news(watchlist, max_filings_per_company=3):
     direct_results = []
     failed_tickers = []
     direct_errors = []
+    coverage = _watchlist_cik_coverage(watchlist)
+    print(
+        "SEC WATCHLIST COVERAGE: "
+        f"enabled={coverage['sec_enabled']} mapped={coverage['mapped_tickers']} "
+        f"unmapped={len(coverage['unmapped_tickers'])} ({coverage['coverage_pct']}%)",
+        flush=True,
+    )
     for ticker, config in (watchlist or {}).items():
         ticker = str(ticker).upper()
+        if not _sec_monitoring_enabled(config):
+            continue
         company = config.get("company", ticker) if isinstance(config, dict) else ticker
         cik = WATCHLIST_CIK.get(ticker)
         if not cik:
@@ -457,7 +545,10 @@ def get_sec_news(watchlist, max_filings_per_company=3):
 
     if not failed_tickers:
         status = "OK" if direct_results else "EMPTY_OR_DEGRADED"
-        LAST_FETCH_STATUS = {"status": status, "count": len(direct_results), "path": "direct", "error": None}
+        LAST_FETCH_STATUS = {
+            "status": status, "count": len(direct_results), "path": "direct", "error": None,
+            **coverage,
+        }
         print(f"SEC FEED STATUS: {status} filings={len(direct_results)} path=direct", flush=True)
         return direct_results
 
@@ -512,6 +603,7 @@ def get_sec_news(watchlist, max_filings_per_company=3):
         "path": path,
         "error": error_summary,
         "failed_tickers": failed_tickers,
+        **coverage,
     }
     print(
         f"SEC FEED STATUS: {status} filings={len(combined)} path={path} "

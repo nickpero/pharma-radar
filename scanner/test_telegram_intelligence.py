@@ -173,6 +173,30 @@ def test_telegram_shows_confirmed_confirmation_compactly():
     assert "🧠 Confirmation" not in message
 
 
+def test_company_financial_results_are_informational_watch_only():
+    alert = _alert("REGN", 20, 20, "LOW")
+    alert.update({
+        "subtype": "COMPANY_FINANCIAL_RESULTS",
+        "source": "SEC",
+        "source_type": "PRIMARY_CORPORATE",
+        "published_at": datetime.now(timezone.utc).isoformat(),
+    })
+    assert alert_action(alert) == "WATCH"
+    selected = select_intelligent_alerts([alert])
+    assert len(selected) == 1
+    assert selected[0]["telegram_action"] == "WATCH"
+
+
+def test_company_financial_results_from_secondary_source_are_silent():
+    alert = _alert("REGN", 100, 90, "CRITICAL")
+    alert.update({
+        "subtype": "COMPANY_FINANCIAL_RESULTS",
+        "source": "REUTERS",
+        "published_at": datetime.now(timezone.utc).isoformat(),
+    })
+    assert alert_action(alert) == "SILENT"
+
+
 def test_trial_completed_is_watch_only_when_primary_registry_was_updated_today():
     alert = _alert("CAPR", 100, 88, "CRITICAL")
     alert.update({

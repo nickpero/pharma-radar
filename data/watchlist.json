@@ -186,9 +186,24 @@
     "company": "Regeneron Pharmaceuticals",
     "programs": [
       "linvoseltamab",
-      "odronextamab"
+      "odronextamab",
+      "Dupixent (dupilumab)",
+      "EYLEA HD (aflibercept)",
+      "Libtayo (cemiplimab)",
+      "Pasatru (garetosmab)",
+      "cemdisiran",
+      "Inmazeb (atoltivimab/maftivimab/odesivimab)",
+      "Otarmeni (lunsotogene parvec)"
     ],
-    "priority": "ORANGE"
+    "priority": "RED",
+    "primary_sources": [
+      "SEC",
+      "FDA",
+      "Regeneron",
+      "ClinicalTrials.gov",
+      "EMA"
+    ],
+    "radar_role": "LARGE_CAP_CLINICAL_REGULATORY_COMMERCIAL_CATALYST"
   },
   "ALNY": {
     "company": "Alnylam Pharmaceuticals",

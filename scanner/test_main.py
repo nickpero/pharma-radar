@@ -219,3 +219,24 @@ if __name__ == "__main__":
     test_duplicate_alerts_are_suppressed_in_summary()
     test_error_summary()
     print("✅ Main integration tests passed")
+
+
+def test_summary_exposes_sec_cik_coverage():
+    message = build_summary({
+        "companies": 320,
+        "total_trials": 0,
+        "relevant_trials": 0,
+        "filtered_trials": 0,
+        "alerts": [],
+        "errors": [],
+        "source_diagnostics": {
+            "SEC": {
+                "status": "DEGRADED_FALLBACK",
+                "count": 12,
+                "sec_enabled": 318,
+                "mapped_tickers": 270,
+                "coverage_pct": 84.9,
+            }
+        },
+    })
+    assert "CIK 270/318 (84.9%)" in message

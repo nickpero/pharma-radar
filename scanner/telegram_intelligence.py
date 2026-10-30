@@ -126,6 +126,11 @@ def alert_action(alert):
     primary = primary_source_verified(alert)
     subtype = str(alert.get("subtype") or event.get("subtype") or "").upper()
 
+    # SEC 8-K Item 2.02 is a primary issuer earnings/results disclosure.
+    # Deliver it as informational WATCH, never as a directional trading signal.
+    if subtype == "COMPANY_FINANCIAL_RESULTS":
+        return "WATCH" if primary and freshness == "NEW_0_24H" else "SILENT"
+
     # Trial completion is informational only. It can be sent as WATCH only
     # when the primary registry itself was updated in the last 24 hours.
     if subtype == "TRIAL_COMPLETED":
