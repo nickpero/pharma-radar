@@ -409,3 +409,42 @@ def test_sec_cik_map_supplements_missing_static_tickers_without_overriding_prior
     # Preserve the pre-existing hand-verified mapping if the supplemental map
     # disagrees, avoiding silent replacement with a potentially stale CIK.
     assert sec_feed.WATCHLIST_CIK["GLUE"] == "0001829818"
+
+
+def test_recent_sec_10q_and_10k_are_company_financial_results(monkeypatch):
+    watchlist = {
+        "REGN": {
+            "company": "Regeneron Pharmaceuticals",
+            "programs": ["linvoseltamab"],
+        }
+    }
+    monkeypatch.setattr(sec_feed, "_is_recent_filing_date", lambda value: True)
+
+    for form, description in (
+        ("10-Q", "QUARTERLY REPORT"),
+        ("10-K", "ANNUAL REPORT"),
+    ):
+        recent = {
+            "form": [form],
+            "filingDate": ["2026-10-30"],
+            "accessionNumber": ["0000872589-26-000123"],
+            "primaryDocument": [f"regn-{form.lower()}.htm"],
+            "primaryDocDescription": [description],
+        }
+        monkeypatch.setattr(
+            sec_feed, "_get_json",
+            lambda url, recent=recent: {"filings": {"recent": recent}},
+        )
+        items = sec_feed._fetch_sec_direct(
+            "REGN", "Regeneron Pharmaceuticals", "0000872589"
+        )
+        assert len(items) == 1
+        assert items[0]["form"] == form
+        assert items[0]["company_event_type"] == "COMPANY_FINANCIAL_RESULTS"
+        assert items[0]["source_type"] == "PRIMARY_CORPORATE"
+
+        events = process_regulatory_news(items, watchlist)
+        assert len(events) == 1
+        assert events[0]["ticker"] == "REGN"
+        assert events[0]["subtype"] == "COMPANY_FINANCIAL_RESULTS"
+        assert events[0]["program"] is None
