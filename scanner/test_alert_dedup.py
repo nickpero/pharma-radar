@@ -78,7 +78,10 @@ def test_cross_source_reports_on_different_days_are_kept():
     first = _alert("Summit approval")
     first.update({"source": "SEC", "source_type": "PRIMARY_REGULATORY", "event_date": "2026-09-08"})
     second = _alert("Summit approval")
-    second.update({"source": "FDA", "source_type": "PRIMARY_REGULATORY", "event_date": "2026-09-09"})
+    second.update({
+        "source": "FDA", "source_type": "PRIMARY_REGULATORY",
+        "event_date": "2026-09-09", "event_timestamp": "2026-09-09T10:00:00+00:00",
+    })
     assert len(deduplicate_alerts([first, second])) == 2
 
 
