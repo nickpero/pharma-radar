@@ -142,3 +142,26 @@ def test_configured_sources_are_official_https_pages():
         parsed = collector.urlparse(item["listing_url"])
         assert parsed.scheme == "https"
         assert parsed.hostname == item["allowed_host"]
+    by_ticker = {item["ticker"]: item for item in sources}
+    assert {ticker for ticker, item in by_ticker.items() if item.get("enabled", True)} == {
+        "ALNY", "MRK", "ONCO", "SCYX"
+    }
+    assert {ticker for ticker, item in by_ticker.items() if item.get("enabled") is False} == {
+        "REGN", "KOD", "LFCR", "LXRX"
+    }
+
+
+
+def test_disabled_source_is_not_requested(tmp_path):
+    session = Session()
+    disabled = dict(SOURCE, enabled=False)
+    result = collector.collect_candidates(
+        [disabled],
+        tmp_path / "state.json",
+        tmp_path / "candidates.json",
+        session,
+    )
+    assert session.calls == 0
+    assert result["sources_enabled"] == 0
+    assert result["sources_disabled"] == 1
+    assert result["sources_ok"] == 0
