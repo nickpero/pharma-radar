@@ -183,10 +183,18 @@ def parse_listing_page(html, source, discovered_at=None):
             if parsed.scheme != "https" or parsed.hostname != host or url in seen:
                 continue
             seen.add(url)
-            description_node = fields.get("description") or fields.get("summary") or fields.get("content")
+            description_node = fields.get("description")
+            if description_node is None:
+                description_node = fields.get("summary")
+            if description_node is None:
+                description_node = fields.get("content")
             description = "".join(description_node.itertext()).strip() if description_node is not None else ""
             context = " ".join(f"{title} {description}".split())[:1200]
-            published_node = fields.get("pubdate") or fields.get("published") or fields.get("updated")
+            published_node = fields.get("pubdate")
+            if published_node is None:
+                published_node = fields.get("published")
+            if published_node is None:
+                published_node = fields.get("updated")
             publication = _feed_publication_metadata(
                 "".join(published_node.itertext()).strip() if published_node is not None else None,
                 "RSS_PUBDATE" if local_name(item.tag) == "item" else ("ATOM_PUBLISHED" if fields.get("published") is not None else "ATOM_UPDATED"),
