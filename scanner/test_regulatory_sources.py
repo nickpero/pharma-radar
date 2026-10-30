@@ -40,6 +40,10 @@ def test_primary_source_builders():
     assert ema["source_type"] == "PRIMARY_REGULATORY"
     assert sec["source_type"] == "PRIMARY_CORPORATE"
     assert sec["form"] == "8-K"
+    # The SEC filing date is the publication timestamp; reportDate is the underlying event date.
+    assert sec["published_at"] == "2026-09-01"
+    assert sec["first_published_at"] == "2026-09-01"
+    assert sec["event_date"] == "2026-09-01"
 
 
 def test_sec_8k_item_202_is_included_as_company_financial_results():
