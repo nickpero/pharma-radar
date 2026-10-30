@@ -88,7 +88,8 @@ def test_date_accelerated():
 
     assert event["type"] == "DATE_CHANGE"
     assert event["subtype"] == "DATE_ACCELERATED"
-    assert event["direction"] == "POSITIVE"
+    assert event["direction"] == "UNKNOWN"
+    assert event["severity"] == "LOW"
 
 
 def test_date_delayed():
@@ -99,7 +100,8 @@ def test_date_delayed():
     )
 
     assert event["subtype"] == "DATE_DELAYED"
-    assert event["direction"] == "NEGATIVE"
+    assert event["direction"] == "UNKNOWN"
+    assert event["severity"] == "LOW"
 
 
 def test_same_date():
