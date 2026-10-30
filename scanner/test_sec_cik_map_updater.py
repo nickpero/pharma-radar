@@ -54,3 +54,21 @@ def test_watchlist_map_ignores_tickers_not_in_watchlist():
     assert result == {"EXMP": "0000001234"}
     assert "UNUSED" not in result
     assert counts["official"] == 1
+
+
+def test_watchlist_map_respects_explicit_sec_exclusions():
+    result, counts = build_watchlist_cik_map(
+        {
+            "ENABLED": {"company": "Enabled Bio"},
+            "DISABLED": {"company": "Disabled Bio", "sec_monitoring": False},
+        },
+        {"ENABLED": "1234", "DISABLED": "5678"},
+    )
+    assert result == {"ENABLED": "0000001234"}
+    assert counts == {
+        "protected": 0,
+        "official": 1,
+        "fallback": 0,
+        "unmapped": 0,
+        "excluded": 1,
+    }
