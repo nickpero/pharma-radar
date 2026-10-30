@@ -79,8 +79,8 @@
   {
     "ticker": "PHVS",
     "company": "Pharvaris",
-    "listing_url": "https://ir.pharvaris.com/",
-    "allowed_host": "ir.pharvaris.com",
+    "listing_url": "https://pharvaris.gcs-web.com/",
+    "allowed_host": "pharvaris.gcs-web.com",
     "watchlist_priority": "RED",
     "enabled": true
   },
@@ -110,8 +110,8 @@
   {
     "ticker": "STOK",
     "company": "Stoke Therapeutics",
-    "listing_url": "https://investor.stoketherapeutics.com/press-releases",
-    "allowed_host": "investor.stoketherapeutics.com",
+    "listing_url": "https://stoketherapeutics.gcs-web.com/",
+    "allowed_host": "stoketherapeutics.gcs-web.com",
     "watchlist_priority": "RED",
     "enabled": true
   },
@@ -126,8 +126,8 @@
   {
     "ticker": "TENX",
     "company": "Tenax Therapeutics",
-    "listing_url": "https://investors.tenaxthera.com/news-events/news-releases",
-    "allowed_host": "investors.tenaxthera.com",
+    "listing_url": "https://tenaxthera.gcs-web.com/",
+    "allowed_host": "tenaxthera.gcs-web.com",
     "watchlist_priority": "RED",
     "enabled": true
   },
