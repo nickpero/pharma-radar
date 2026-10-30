@@ -399,3 +399,19 @@ def test_trial_timeline_revisions_are_watch_only_when_fresh_and_primary():
 
     alert["published_at"] = "2020-01-01T00:00:00Z"
     assert alert_action(alert) == "SILENT"
+
+
+
+def test_registry_results_posted_is_watch_only_when_fresh_and_primary():
+    alert = _alert("CAPR", 100, 95, "CRITICAL")
+    alert.update({
+        "source": "CLINICALTRIALS",
+        "subtype": "RESULTS_POSTED",
+        "published_at": datetime.now(timezone.utc).isoformat(),
+        "trial": {
+            "nct_id": "NCT05126758",
+            "last_update": datetime.now(timezone.utc).isoformat(),
+        },
+        "event": {"type": "RESULTS_AVAILABILITY", "subtype": "RESULTS_POSTED", "score": 34, "label": "LOW"},
+    })
+    assert alert_action(alert) == "WATCH"
