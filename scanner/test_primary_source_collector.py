@@ -141,7 +141,8 @@ def test_parser_does_not_invent_timezone_for_unzoned_timestamp():
 def test_configured_sources_are_official_https_pages():
     sources = collector.load_json(collector.SOURCES_PATH, [])
     assert {item["ticker"] for item in sources} == {
-        "ALNY", "MRK", "REGN", "KOD", "LFCR", "ONCO", "SCYX", "LXRX"
+        "ALNY", "MRK", "REGN", "KOD", "LFCR", "ONCO", "SCYX", "LXRX",
+        "CAPR", "SVRA", "ZYME", "MIRM", "PHVS", "TENX", "NUVL", "ARGX", "QURE", "STOK",
     }
     for item in sources:
         parsed = collector.urlparse(item["listing_url"])
@@ -149,12 +150,12 @@ def test_configured_sources_are_official_https_pages():
         assert parsed.hostname == item["allowed_host"]
     by_ticker = {item["ticker"]: item for item in sources}
     assert {ticker for ticker, item in by_ticker.items() if item.get("enabled", True)} == {
-        "ALNY", "MRK", "ONCO", "SCYX"
+        "ALNY", "MRK", "ONCO", "SCYX", "CAPR", "SVRA", "ZYME", "MIRM",
+        "NUVL", "ARGX", "QURE", "STOK",
     }
     assert {ticker for ticker, item in by_ticker.items() if item.get("enabled") is False} == {
-        "REGN", "KOD", "LFCR", "LXRX"
+        "KOD", "LFCR", "LXRX", "PHVS", "TENX", "REGN",
     }
-
 
 
 def test_disabled_source_is_not_requested(tmp_path):
@@ -170,3 +171,27 @@ def test_disabled_source_is_not_requested(tmp_path):
     assert result["sources_enabled"] == 0
     assert result["sources_disabled"] == 1
     assert result["sources_ok"] == 0
+
+
+
+def test_rss_parser_extracts_original_publication_timestamp():
+    source = dict(
+        SOURCE,
+        listing_url="https://company.example/rss/news.xml",
+        allowed_host="company.example",
+    )
+    rss = """
+    <rss><channel><item>
+      <title>Company announces Phase 3 clinical results from its pivotal study</title>
+      <link>https://company.example/news/phase-3-results</link>
+      <pubDate>Thu, 30 Oct 2026 09:00:00 -0400</pubDate>
+      <description>Topline clinical results from the pivotal Phase 3 study.</description>
+    </item></channel></rss>
+    """
+    rows = collector.parse_listing_page(rss, source)
+    assert len(rows) == 1
+    assert rows[0]["source_url"] == "https://company.example/news/phase-3-results"
+    assert rows[0]["published_at"] == "2026-10-30T13:00:00+00:00"
+    assert rows[0]["publication_time_precision"] == "TIMESTAMP"
+    assert rows[0]["publication_timezone_known"] is True
+    assert rows[0]["publication_timestamp_source"] == "RSS_PUBDATE"

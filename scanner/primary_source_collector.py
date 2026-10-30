@@ -6,6 +6,8 @@ A listing page does not establish that a future event date is confirmed.
 import json
 import re
 from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
@@ -102,14 +104,120 @@ def _publication_metadata(anchor, context):
     }
 
 
+def _feed_publication_metadata(raw, source_name):
+    raw = str(raw or "").strip()
+    if not raw:
+        return {
+            "published_at": None, "published_at_raw": None,
+            "publication_date_candidate": None, "publication_time_precision": "UNKNOWN",
+            "publication_timezone_known": False, "publication_timestamp_source": None,
+        }
+    parsed = None
+    try:
+        parsed = parsedate_to_datetime(raw)
+    except (TypeError, ValueError, OverflowError):
+        try:
+            parsed = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+        except ValueError:
+            parsed = None
+    if parsed is None:
+        return {
+            "published_at": None, "published_at_raw": raw,
+            "publication_date_candidate": raw, "publication_time_precision": "UNKNOWN",
+            "publication_timezone_known": False, "publication_timestamp_source": source_name,
+        }
+    has_clock = bool(parsed.hour or parsed.minute or parsed.second) or "T" in raw or ":" in raw
+    if parsed.tzinfo is not None and has_clock:
+        return {
+            "published_at": parsed.astimezone(timezone.utc).isoformat(),
+            "published_at_raw": raw,
+            "publication_date_candidate": parsed.date().isoformat(),
+            "publication_time_precision": "TIMESTAMP",
+            "publication_timezone_known": True,
+            "publication_timestamp_source": source_name,
+        }
+    return {
+        "published_at": None,
+        "published_at_raw": raw,
+        "publication_date_candidate": parsed.date().isoformat(),
+        "publication_time_precision": "TIMEZONE_UNKNOWN" if has_clock else "DATE_ONLY",
+        "publication_timezone_known": False,
+        "publication_timestamp_source": source_name,
+    }
+
+
 def parse_listing_page(html, source, discovered_at=None):
-    """Return source-host-validated, keyword-filtered candidate links."""
+    """Return source-host-validated, keyword-filtered candidate links from HTML, RSS or Atom."""
     discovered_at = discovered_at or datetime.now(timezone.utc).isoformat()
     base = source["listing_url"]
     host = source["allowed_host"].lower()
-    soup = BeautifulSoup(html, "html.parser")
     candidates = []
     seen = set()
+
+    def local_name(tag):
+        return str(tag).rsplit("}", 1)[-1].lower()
+
+    try:
+        root = ET.fromstring(html)
+        feed_items = [node for node in root.iter() if local_name(node.tag) in {"item", "entry"}]
+    except ET.ParseError:
+        feed_items = []
+
+    if feed_items:
+        for item in feed_items:
+            fields = {local_name(child.tag): child for child in list(item)}
+            title_node = fields.get("title")
+            title = "".join(title_node.itertext()).strip() if title_node is not None else ""
+            if len(title) < 18 or len(title) > 500:
+                continue
+            if not KEYWORDS.search(title) or GENERIC.search(title):
+                continue
+            link_node = fields.get("link")
+            link_value = ""
+            if link_node is not None:
+                link_value = link_node.attrib.get("href") or "".join(link_node.itertext()).strip()
+            if not link_value and fields.get("guid") is not None:
+                link_value = "".join(fields["guid"].itertext()).strip()
+            url = urljoin(base, link_value)
+            parsed = urlparse(url)
+            if parsed.scheme != "https" or parsed.hostname != host or url in seen:
+                continue
+            seen.add(url)
+            description_node = fields.get("description")
+            if description_node is None:
+                description_node = fields.get("summary")
+            if description_node is None:
+                description_node = fields.get("content")
+            description = "".join(description_node.itertext()).strip() if description_node is not None else ""
+            context = " ".join(f"{title} {description}".split())[:1200]
+            published_node = fields.get("pubdate")
+            if published_node is None:
+                published_node = fields.get("published")
+            if published_node is None:
+                published_node = fields.get("updated")
+            publication = _feed_publication_metadata(
+                "".join(published_node.itertext()).strip() if published_node is not None else None,
+                "RSS_PUBDATE" if local_name(item.tag) == "item" else ("ATOM_PUBLISHED" if fields.get("published") is not None else "ATOM_UPDATED"),
+            )
+            candidates.append({
+                "ticker": str(source["ticker"]).upper(),
+                "company": source["company"],
+                "title": title,
+                "source_url": url,
+                "listing_url": base,
+                "source_host": host,
+                "discovered_at": discovered_at,
+                "listing_context": context,
+                **publication,
+                "review_status": "PENDING_REVIEW",
+                "event_type": None,
+                "event_date": None,
+                "event_window": None,
+                "notes": "Candidate discovered from an official company feed; verify the release and any future event date before alerting.",
+            })
+        return candidates
+
+    soup = BeautifulSoup(html, "html.parser")
     for anchor in soup.find_all("a", href=True):
         title = _link_text(anchor)
         if len(title) < 18 or len(title) > 500:

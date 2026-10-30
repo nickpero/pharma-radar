@@ -7,6 +7,54 @@
     "enabled": true
   },
   {
+    "ticker": "ARGX",
+    "company": "argenx",
+    "listing_url": "https://argenx.com/newsroom",
+    "allowed_host": "argenx.com",
+    "watchlist_priority": "RED",
+    "enabled": true
+  },
+  {
+    "ticker": "CAPR",
+    "company": "Capricor Therapeutics",
+    "listing_url": "https://www.capricor.com/investors/news-events/press-releases",
+    "allowed_host": "www.capricor.com",
+    "watchlist_priority": "RED",
+    "enabled": true
+  },
+  {
+    "ticker": "KOD",
+    "company": "Kodiak Sciences",
+    "listing_url": "https://kodiak.gcs-web.com/",
+    "allowed_host": "kodiak.gcs-web.com",
+    "enabled": false,
+    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
+  },
+  {
+    "ticker": "LFCR",
+    "company": "Lifecore Biomedical",
+    "listing_url": "https://ir.lifecore.com/press-releases",
+    "allowed_host": "ir.lifecore.com",
+    "enabled": false,
+    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
+  },
+  {
+    "ticker": "LXRX",
+    "company": "Lexicon Pharmaceuticals",
+    "listing_url": "https://lexiconpharma.gcs-web.com/",
+    "allowed_host": "lexiconpharma.gcs-web.com",
+    "enabled": false,
+    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
+  },
+  {
+    "ticker": "MIRM",
+    "company": "Mirum Pharmaceuticals",
+    "listing_url": "https://ir.mirumpharma.com/news/",
+    "allowed_host": "ir.mirumpharma.com",
+    "watchlist_priority": "RED",
+    "enabled": true
+  },
+  {
     "ticker": "MRK",
     "company": "Merck & Co.",
     "listing_url": "https://www.merck.com/media/news/",
@@ -14,28 +62,12 @@
     "enabled": true
   },
   {
-    "ticker": "REGN",
-    "company": "Regeneron Pharmaceuticals",
-    "listing_url": "https://investor.regeneron.com/investor-relations/",
-    "allowed_host": "investor.regeneron.com",
-    "enabled": false,
-    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
-  },
-  {
-    "ticker": "KOD",
-    "company": "Kodiak Sciences",
-    "listing_url": "https://ir.kodiak.com/",
-    "allowed_host": "ir.kodiak.com",
-    "enabled": false,
-    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
-  },
-  {
-    "ticker": "LFCR",
-    "company": "Lifecore Biomedical",
-    "listing_url": "https://ir.lifecore.com/",
-    "allowed_host": "ir.lifecore.com",
-    "enabled": false,
-    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
+    "ticker": "NUVL",
+    "company": "Nuvalent",
+    "listing_url": "https://investors.nuvalent.com/news",
+    "allowed_host": "investors.nuvalent.com",
+    "watchlist_priority": "RED",
+    "enabled": true
   },
   {
     "ticker": "ONCO",
@@ -45,6 +77,31 @@
     "enabled": true
   },
   {
+    "ticker": "PHVS",
+    "company": "Pharvaris",
+    "listing_url": "https://pharvaris.gcs-web.com/",
+    "allowed_host": "pharvaris.gcs-web.com",
+    "watchlist_priority": "RED",
+    "enabled": false,
+    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
+  },
+  {
+    "ticker": "QURE",
+    "company": "uniQure",
+    "listing_url": "https://www.uniqure.com/investors-media",
+    "allowed_host": "www.uniqure.com",
+    "watchlist_priority": "RED",
+    "enabled": true
+  },
+  {
+    "ticker": "REGN",
+    "company": "Regeneron Pharmaceuticals",
+    "listing_url": "https://www.regeneron.com/",
+    "allowed_host": "www.regeneron.com",
+    "enabled": false,
+    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
+  },
+  {
     "ticker": "SCYX",
     "company": "SCYNEXIS",
     "listing_url": "https://ir.scynexis.com/news-events/press-releases",
@@ -52,11 +109,36 @@
     "enabled": true
   },
   {
-    "ticker": "LXRX",
-    "company": "Lexicon Pharmaceuticals",
-    "listing_url": "https://investors.lexpharma.com/news-events/news-releases",
-    "allowed_host": "investors.lexpharma.com",
+    "ticker": "STOK",
+    "company": "Stoke Therapeutics",
+    "listing_url": "https://www.stoketherapeutics.com/investors-news/media-room/",
+    "allowed_host": "www.stoketherapeutics.com",
+    "watchlist_priority": "RED",
+    "enabled": true
+  },
+  {
+    "ticker": "SVRA",
+    "company": "Savara",
+    "listing_url": "https://investors.savarapharma.com/overview/",
+    "allowed_host": "investors.savarapharma.com",
+    "watchlist_priority": "RED",
+    "enabled": true
+  },
+  {
+    "ticker": "TENX",
+    "company": "Tenax Therapeutics",
+    "listing_url": "https://tenaxthera.gcs-web.com/",
+    "allowed_host": "tenaxthera.gcs-web.com",
+    "watchlist_priority": "RED",
     "enabled": false,
     "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
+  },
+  {
+    "ticker": "ZYME",
+    "company": "Zymeworks",
+    "listing_url": "https://www.zymeworks.com/news/",
+    "allowed_host": "www.zymeworks.com",
+    "watchlist_priority": "RED",
+    "enabled": true
   }
 ]
