@@ -6260,6 +6260,890 @@
       "Prednisone/Prenisolone"
     ]
   },
+  "REGN:Dupixent (dupilumab):NCT01859988": {
+    "nct_id": "NCT01859988",
+    "title": "Study of Dupilumab Administered to Adult Patients With Moderate-to-Severe Atopic Dermatitis",
+    "official_title": "A Randomized, Double-Blind, Placebo-Controlled, Parallel-Group, Dose-Ranging Study Investigating the Efficacy, Safety, Pharmacokinetic and Biomarker Profiles of Dupilumab (REGN668) Administered to Adult Patients With Moderate-to-Severe Atopic Dermatitis",
+    "status": "COMPLETED",
+    "last_update": "2017-08-28",
+    "start_date": "2013-05",
+    "completion_date": "2014-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 380,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Atopic Dermatitis"
+    ],
+    "interventions": [
+      "Dupilumab",
+      "Placebo"
+    ]
+  },
+  "REGN:Dupixent (dupilumab):NCT03050151": {
+    "nct_id": "NCT03050151",
+    "title": "Study of Dupilumab Auto-injector Device When Used by Patients With Atopic Dermatitis",
+    "official_title": "An Open-label, Randomized, Actual Use Study of Dupilumab Auto-injector Device in Patients With Atopic Dermatitis",
+    "status": "COMPLETED",
+    "last_update": "2018-08-01",
+    "start_date": "2017-02-28",
+    "completion_date": "2018-02-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 176,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Atopic Disorders",
+      "Eczema, Atopic"
+    ],
+    "interventions": [
+      "Dupilumab",
+      "Auto-injector Device",
+      "Prefilled syringe"
+    ]
+  },
+  "REGN:Dupixent (dupilumab):NCT04203797": {
+    "nct_id": "NCT04203797",
+    "title": "A Study to Evaluate the Effect of Dupilumab on Exercise Capacity in Adult Patients With Asthma",
+    "official_title": "A Randomized, Double-blind, Placebo-controlled, Parallel-group Study to Evaluate the Effect of Dupilumab on Exercise Capacity in Patients With Moderate-to-Severe Asthma",
+    "status": "COMPLETED",
+    "last_update": "2024-04-18",
+    "start_date": "2020-07-16",
+    "completion_date": "2023-07-15",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE4"
+    ],
+    "enrollment": 40,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Asthma"
+    ],
+    "interventions": [
+      "dupilumab",
+      "Matching placebo"
+    ]
+  },
+  "REGN:EYLEA HD (aflibercept):NCT06491914": {
+    "nct_id": "NCT06491914",
+    "title": "A Phase 3b, Single-Arm Study of Aflibercept 8 mg Dosed Every 4 Weeks in Adult Participants With Neovascular Age-Related Macular Degeneration (nAMD) or Diabetic Macular Edema (DME)",
+    "official_title": "A Phase 3b Single-Arm Study of Aflibercept 8 mg in Participants With Neovascular Age-Related Macular Degeneration (nAMD) or Diabetic Macular Edema (DME)",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-09-18",
+    "start_date": "2024-07-24",
+    "completion_date": "2027-01-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 1126,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Neovascular Age-Related Macular Degeneration",
+      "Diabetic Macular Edema"
+    ],
+    "interventions": [
+      "Aflibercept 8 mg"
+    ]
+  },
+  "REGN:EYLEA HD (aflibercept):NCT04126317": {
+    "nct_id": "NCT04126317",
+    "title": "Safety, Tolerability, and Efficacy of Aflibercept in Patients With Neovascular Age-Related Macular Degeneration",
+    "official_title": "A Randomized, Single-Masked, Active-Controlled Phase 2 Study of the Safety, Tolerability, and Efficacy of Repeated Doses of High-Dose Aflibercept in Patients With Neovascular Age-Related Macular Degeneration",
+    "status": "COMPLETED",
+    "last_update": "2023-08-14",
+    "start_date": "2019-11-04",
+    "completion_date": "2021-11-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 106,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Neovascular (Wet) Age-Related Macular Degeneration"
+    ],
+    "interventions": [
+      "aflibercept",
+      "High-dose aflibercept"
+    ]
+  },
+  "REGN:EYLEA HD (aflibercept):NCT04429503": {
+    "nct_id": "NCT04429503",
+    "title": "Study of a High-Dose Aflibercept in Participants With Diabetic Eye Disease",
+    "official_title": "A Randomized, Double-Masked, Active-Controlled Phase 2/3 Study of the Efficacy and Safety of High-Dose Aflibercept in Patients With Diabetic Macular Edema",
+    "status": "COMPLETED",
+    "last_update": "2025-08-08",
+    "start_date": "2020-06-29",
+    "completion_date": "2024-06-18",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2",
+      "PHASE3"
+    ],
+    "enrollment": 660,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Diabetic Macular Edema",
+      "Type 1 Diabetes Mellitus",
+      "Type 2 Diabetes Mellitus"
+    ],
+    "interventions": [
+      "aflibercept",
+      "High-dose aflibercept"
+    ]
+  },
+  "REGN:EYLEA HD (aflibercept):NCT06398080": {
+    "nct_id": "NCT06398080",
+    "title": "An Observational Study to Investigate the Use of Aflibercept 8 mg to Treat Adult Patients With Neovascular Age-Related Macular Degeneration (nAMD) and Diabetic Macular Edema (DME) in a Real-World Setting",
+    "official_title": "Real-World Patient Characteristics, Treatment Patterns, and Outcomes Among Patients With Neovascular Age-Related Macular Degeneration (nAMD) and Diabetic Macular Edema (DME) Treated With Aflibercept 8 mg in the United States",
+    "status": "WITHDRAWN",
+    "last_update": "2024-11-25",
+    "start_date": "2024-12-12",
+    "completion_date": "2029-01-03",
+    "study_type": "OBSERVATIONAL",
+    "phases": [],
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Neovascular Age-related Macular Degeneration (nAMD)",
+      "Wet Age-related Macular Degeneration (AMD)",
+      "Diabetic Macular Edema (DME)",
+      "Visual Impairment"
+    ],
+    "interventions": [
+      "aflibercept 8 mg"
+    ]
+  },
+  "REGN:EYLEA HD (aflibercept):NCT05989126": {
+    "nct_id": "NCT05989126",
+    "title": "Study to Evaluate an 8 mg Aflibercept (EYLEA®) Prefilled Syringe (PFS)",
+    "official_title": "A Study in Patients With Diabetic Macular Edema or Neovascular Age-Related Macular Degeneration to Evaluate a High Dose Aflibercept (8 mg) Prefilled Syringe",
+    "status": "COMPLETED",
+    "last_update": "2026-05-28",
+    "start_date": "2024-04-15",
+    "completion_date": "2024-05-31",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 35,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Diabetic Macular Edema (DME)",
+      "Neovascular Age-Related Macular Degeneration (nAMD)"
+    ],
+    "interventions": [
+      "aflibercept 8 mg PFS"
+    ]
+  },
+  "REGN:Libtayo (cemiplimab):NCT03564340": {
+    "nct_id": "NCT03564340",
+    "title": "Study of REGN4018 (Ubamatamab) Administered Alone or in Combination With Cemiplimab in Adult Patients With Recurrent Ovarian Cancer or Other Recurrent Mucin-16 Expressing (MUC16+) Cancers",
+    "official_title": "A Phase 1/2 Study of REGN4018 (Ubamatamab), a MUC16×CD3 Bispecific Antibody, Administered Alone or in Combination With Cemiplimab in Patients With Recurrent Ovarian Cancer or Other Recurrent MUC16+ Cancers",
+    "status": "RECRUITING",
+    "last_update": "2026-09-25",
+    "start_date": "2018-05-21",
+    "completion_date": "2027-05-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 890,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Recurrent Ovarian Cancer",
+      "Recurrent Fallopian Tube Cancer",
+      "Recurrent Primary Peritoneal Cancer",
+      "Recurrent Endometrial Cancer",
+      "Endometrial Cancer",
+      "Low-grade Serous Ovarian Cancer"
+    ],
+    "interventions": [
+      "Ubamatamab",
+      "Cemiplimab",
+      "Sarilumab",
+      "Tocilizumab"
+    ]
+  },
+  "REGN:Libtayo (cemiplimab):NCT05259709": {
+    "nct_id": "NCT05259709",
+    "title": "A Study of ImmunoPet Imaging Using 89Zr-DFO-REGN5054 in Adult Participants With Solid Cancers Treated With Cemiplimab",
+    "official_title": "A First-in-Human Study of 89Zr-DFO-REGN5054 (Anti-CD8) Positron Emission Tomography in Patients With Solid Malignancies Treated With Cemiplimab",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-10-20",
+    "start_date": "2023-02-07",
+    "completion_date": "2027-04-29",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 22,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Advanced Solid Tumor",
+      "Metastatic Solid Tumor"
+    ],
+    "interventions": [
+      "89Zr˗DFO˗REGN5054",
+      "cemiplimab"
+    ]
+  },
+  "REGN:Libtayo (cemiplimab):NCT03002376": {
+    "nct_id": "NCT03002376",
+    "title": "An Exploratory Tumor Biopsy-driven Study to Understand the Relationship Between Biomarkers and Clinical Response in Melanoma Patients Receiving REGN2810 (Anti-PD-1)",
+    "official_title": "An Exploratory Tumor Biopsy-driven Study to Understand the Relationship Between Biomarkers and Indicators of Clinical Response in Immunomodulatory Treatment-naïve Unresectable Stage III/IV Melanoma Patients Receiving REGN2810 (Anti-PD-1)",
+    "status": "COMPLETED",
+    "last_update": "2020-04-20",
+    "start_date": "2017-04-10",
+    "completion_date": "2020-03-19",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 47,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Melanoma"
+    ],
+    "interventions": [
+      "REGN2810"
+    ]
+  },
+  "REGN:Libtayo (cemiplimab):NCT07567469": {
+    "nct_id": "NCT07567469",
+    "title": "A Safety and Efficacy Study of Combined Fianlimab + Cemiplimab in Children and Young Adults With Recurrent or Progressive High-Grade Glioma or Posterior Fossa-A Ependymoma",
+    "official_title": "A Phase 1/2 Open-Label, Safety and Efficacy Study of Neoadjuvant Fianlimab (Anti-LAG-3 Antibody) in Combination With Cemiplimab (Anti-PD-1 Antibody) and Cemiplimab Alone Followed by Adjuvant Fianlimab in Combination With Cemiplimab in Pediatric and Young Adult Participants With Recurrent or Progressive High-Grade Glioma or Pediatric and Adult Participants With Recurrent or Progressive Posterior Fossa-A Ependymoma",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-05-05",
+    "start_date": "2026-08-31",
+    "completion_date": "2034-08-17",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 120,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "High-Grade Glioma (HGG)",
+      "Posterior Fossa-A Ependymoma"
+    ],
+    "interventions": [
+      "Cemiplimab",
+      "Cemiplimab+Fianlimab Fixed Dose Combination (FDC)"
+    ]
+  },
+  "REGN:Libtayo (cemiplimab):NCT06269133": {
+    "nct_id": "NCT06269133",
+    "title": "Evaluation of Cemiplimab in Combination With Platinum-Doublet Chemotherapy in First-Line (1L) Treatment of Advanced Non-Small Cell Lung Cancer (NSCLC) in Adult United States (US) Participants",
+    "official_title": "Evaluating the Safety and Effectiveness of Cemiplimab in Combination With Platinum-Doublet Chemotherapy by Demographic Characteristics in First-Line Treatment of Advanced Non-Small Cell Lung Cancer: A Multi-Database Real World Evidence Study in US Patients",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-09-10",
+    "start_date": "2024-02-21",
+    "completion_date": "2027-03-31",
+    "study_type": "OBSERVATIONAL",
+    "phases": [],
+    "enrollment": 1000,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Advanced Non-small Cell Lung Cancer"
+    ],
+    "interventions": [
+      "REGN2810",
+      "Platinum-doublet chemotherapy"
+    ]
+  },
+  "REGN:Libtayo (cemiplimab):NCT04626635": {
+    "nct_id": "NCT04626635",
+    "title": "A Trial to Find Out How Safe REGN7075 is and How Well it Works in Combination With Cemiplimab for Adult Participants With Advanced Cancers",
+    "official_title": "A Phase 1/2 Study of REGN7075 (EGFRxCD28 Costimulatory Bispecific Antibody) in Combination With Cemiplimab in Patients With Advanced Solid Tumors",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-07-02",
+    "start_date": "2020-12-21",
+    "completion_date": "2027-03-05",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 548,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Advanced Solid Tumors"
+    ],
+    "interventions": [
+      "REGN7075",
+      "Cemiplimab",
+      "Platinum-based doublet chemotherapy",
+      "Bevacizumab",
+      "Trifluridine-tipiracil"
+    ]
+  },
+  "REGN:Libtayo (cemiplimab):NCT03969004": {
+    "nct_id": "NCT03969004",
+    "title": "Study of Adjuvant Cemiplimab Versus Placebo After Surgery and Radiation Therapy in Patients With High Risk Cutaneous Squamous Cell Carcinoma",
+    "official_title": "A Randomized, Placebo-Controlled, Double-Blind Study of Adjuvant Cemiplimab Versus Placebo After Surgery and Radiation Therapy in Patients With High Risk Cutaneous Squamous Cell Carcinoma",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-03-27",
+    "start_date": "2019-06-04",
+    "completion_date": "2028-01-07",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 415,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Cutaneous Squamous Cell Carcinoma"
+    ],
+    "interventions": [
+      "Cemiplimab",
+      "Placebo"
+    ]
+  },
+  "REGN:Libtayo (cemiplimab):NCT03198130": {
+    "nct_id": "NCT03198130",
+    "title": "An Exploratory Tumor Biopsy-driven Study to Understand the Relationship Between Biomarkers and Clinical Response in Patients With Head and Neck Cancer Receiving REGN2810 (Anti-PD-1)",
+    "official_title": "An Exploratory Tumor Biopsy-Driven Study to Understand the Relationship Between Biomarkers and Clinical Response in Immunomodulatory Treatment-Naïve Patients With Recurrent and/or Metastatic Squamous Cell Carcinoma of Head and Neck Receiving REGN2810 (Anti-PD-1)",
+    "status": "COMPLETED",
+    "last_update": "2020-03-19",
+    "start_date": "2017-07-03",
+    "completion_date": "2020-02-21",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 33,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Recurrent Squamous Cell Carcinoma of Head",
+      "Recurrent Squamous Cell Carcinoma of Neck",
+      "Metastatic Squamous Cell Carcinoma of Head",
+      "Metastatic Squamous Cell Carcinoma Neck"
+    ],
+    "interventions": [
+      "REGN2810"
+    ]
+  },
+  "REGN:Libtayo (cemiplimab):NCT02383212": {
+    "nct_id": "NCT02383212",
+    "title": "Study of REGN2810 (Anti-PD-1) in Patients With Advanced Malignancies",
+    "official_title": "A First-in-Human Study of Repeat Dosing With REGN2810, a Monoclonal, Fully Human Antibody to Programmed Death - 1 (PD-1), as Single Therapy and in Combination With Other Anti-Cancer Therapies in Patients With Advanced Malignancies",
+    "status": "COMPLETED",
+    "last_update": "2020-01-27",
+    "start_date": "2015-02-02",
+    "completion_date": "2019-11-18",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 398,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Advanced Cancer",
+      "Advanced Malignancies"
+    ],
+    "interventions": [
+      "Cemiplimab",
+      "Hypofractionated radiotherapy",
+      "Cyclophosphamide",
+      "Docetaxel",
+      "Carboplatin",
+      "GM-CSF",
+      "Paclitaxel",
+      "Pemetrexed"
+    ]
+  },
+  "REGN:Libtayo (cemiplimab):NCT03132636": {
+    "nct_id": "NCT03132636",
+    "title": "PD-1 in Patients With Advanced Basal Cell Carcinoma Who Experienced Progression of Disease on Hedgehog Pathway Inhibitor Therapy, or Were Intolerant of Prior Hedgehog Pathway Inhibitor Therapy",
+    "official_title": "A Phase 2 Study of REGN2810, a Fully Human Monoclonal Antibody to Programmed Death-1, in Patients With Advanced Basal Cell Carcinoma Who Experienced Progression of Disease on Hedgehog Pathway Inhibitor Therapy, or Were Intolerant of Prior Hedgehog Pathway Inhibitor Therapy",
+    "status": "COMPLETED",
+    "last_update": "2025-04-08",
+    "start_date": "2017-06-29",
+    "completion_date": "2023-04-27",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 138,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Carcinoma, Basal Cell"
+    ],
+    "interventions": [
+      "cemiplimab"
+    ]
+  },
+  "REGN:Libtayo (cemiplimab):NCT06787612": {
+    "nct_id": "NCT06787612",
+    "title": "Investigation of Ubamatamab Combination Therapy in Adult Participants With Platinum-Resistant Ovarian Cancer",
+    "official_title": "Multi-Arm Phase 2 Platform Study of Ubamatamab (REGN4018; MUC16×CD3 Bispecific Antibody) With or Without Additional Agents in Platinum-Resistant Ovarian Cancer",
+    "status": "RECRUITING",
+    "last_update": "2026-09-14",
+    "start_date": "2025-05-28",
+    "completion_date": "2028-06-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 297,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Ovarian Cancer",
+      "Fallopian Tube Cancer",
+      "Primary Peritoneal Cancer"
+    ],
+    "interventions": [
+      "Ubamatamab",
+      "Bevacizumab",
+      "Cemiplimab",
+      "Fianlimab",
+      "PLD",
+      "Sarilumab",
+      "REGN10597"
+    ]
+  },
+  "REGN:Pasatru (garetosmab):NCT07301450": {
+    "nct_id": "NCT07301450",
+    "title": "An Expanded Access Program of Garetosmab in Adult Patients With Fibrodysplasia Ossificans Progressiva (FOP)",
+    "official_title": "An Expanded Access Program of Garetosmab in Patients With Fibrodysplasia Ossificans Progressiva",
+    "status": "APPROVED_FOR_MARKETING",
+    "last_update": "2026-10-26",
+    "start_date": null,
+    "completion_date": null,
+    "study_type": "EXPANDED_ACCESS",
+    "phases": [],
+    "enrollment": null,
+    "enrollment_type": null,
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Fibrodysplasia Ossificans Progressiva (FOP)"
+    ],
+    "interventions": [
+      "Garetosmab"
+    ]
+  },
+  "REGN:Pasatru (garetosmab):NCT07559513": {
+    "nct_id": "NCT07559513",
+    "title": "A Study to Investigate the Safety, Pharmacokinetics (PK), and Efficacy of Garetosmab in Children and Adolescents With Fibrodysplasia Ossificans Progressiva (FOP)",
+    "official_title": "Phase 3 Evaluation of the Safety, Pharmacokinetics, and Efficacy of Garetosmab (Anti-Activin A Monoclonal Antibody) in Children and Adolescents With Fibrodysplasia Ossificans Progressiva",
+    "status": "NOT_YET_RECRUITING",
+    "last_update": "2026-10-20",
+    "start_date": "2027-02-02",
+    "completion_date": "2030-07-08",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 18,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Fibrodysplasia Ossificans Progressiva",
+      "FOP"
+    ],
+    "interventions": [
+      "garetosmab"
+    ]
+  },
+  "REGN:cemdisiran:NCT07154745": {
+    "nct_id": "NCT07154745",
+    "title": "A Study to Evaluate How Pozelimab + Cemdisiran Combination Therapy Works in Adult Patients With Paroxysmal Nocturnal Hemoglobinuria (PNH) Whose Current Treatment is Not Working Efficiently",
+    "official_title": "A Single Arm Study to Evaluate the Efficacy and Safety of Pozelimab and Cemdisiran Combination Therapy in Patients With Paroxysmal Nocturnal Hemoglobinuria With Inadequate Control of Intravascular Hemolysis on Currently Available C5 Inhibitor Therapy",
+    "status": "RECRUITING",
+    "last_update": "2026-08-05",
+    "start_date": "2026-06-11",
+    "completion_date": "2031-12-04",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 35,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Paroxysmal Nocturnal Hemoglobinuria"
+    ],
+    "interventions": [
+      "Pozelimab",
+      "Cemdisiran"
+    ]
+  },
+  "REGN:cemdisiran:NCT06479863": {
+    "nct_id": "NCT06479863",
+    "title": "Efficacy and Safety of Pozelimab and Cemdisiran Combination Therapy in Patients With Sporadic Inclusion Body Myositis",
+    "official_title": "Efficacy and Safety of Pozelimab and Cemdisiran Combination Therapy in Patients With Sporadic Inclusion Body Myositis",
+    "status": "RECRUITING",
+    "last_update": "2026-01-16",
+    "start_date": "2024-08-08",
+    "completion_date": "2027-08-30",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "EARLY_PHASE1"
+    ],
+    "enrollment": 10,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Austin Neuromuscular Center",
+    "conditions": [
+      "Sporadic Inclusion Body Myositis (sIBM)",
+      "Idiopathic Inflammatory Myopathies"
+    ],
+    "interventions": [
+      "Pozelimab/Cemdisiran"
+    ]
+  },
+  "REGN:cemdisiran:NCT05131204": {
+    "nct_id": "NCT05131204",
+    "title": "Efficacy and Safety of the Combination of Pozelimab and Cemdisiran Versus Continued Eculizumab or Ravulizumab Treatment in Adult Patients With Paroxysmal Nocturnal Hemoglobinuria",
+    "official_title": "A Randomized, Open-Label, Eculizumab and Ravulizumab Controlled Study to Evaluate the Efficacy and Safety of Pozelimab and Cemdisiran Combination Therapy in Patients With Paroxysmal Nocturnal Hemoglobinuria Who Are Currently Treated With Eculizumab or Ravulizumab",
+    "status": "TERMINATED",
+    "last_update": "2025-04-08",
+    "start_date": "2022-10-06",
+    "completion_date": "2023-07-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 3,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Paroxysmal Nocturnal Hemoglobinuria"
+    ],
+    "interventions": [
+      "Cemdisiran",
+      "Eculizumab",
+      "Pozelimab",
+      "Ravulizumab"
+    ]
+  },
+  "REGN:cemdisiran:NCT03303313": {
+    "nct_id": "NCT03303313",
+    "title": "A Study of an Investigational Drug, Cemdisiran (ALN-CC5), in Patients With Atypical Hemolytic Uremic Syndrome",
+    "official_title": "A Phase 2, Open Label, Multicenter Study of ALN-CC5 Administered Subcutaneously in Adult Patients With Atypical Hemolytic Uremic Syndrome",
+    "status": "WITHDRAWN",
+    "last_update": "2018-10-01",
+    "start_date": "2017-09-19",
+    "completion_date": "2018-09-12",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Alnylam Pharmaceuticals",
+    "conditions": [
+      "Atypical Hemolytic Uremic Syndrome"
+    ],
+    "interventions": [
+      "Cemdisiran"
+    ]
+  },
+  "REGN:cemdisiran:NCT05744921": {
+    "nct_id": "NCT05744921",
+    "title": "A Study in Adult Patients With Paroxysmal Nocturnal Hemoglobinuria (PNH) to Evaluate How Safe Long-term Treatment With Pozelimab + Cemdisiran Combination Therapy is and How Well it Works",
+    "official_title": "An Open-Label Extension Study to Evaluate the Long-Term Safety, Tolerability, and Efficacy of Pozelimab and Cemdisiran Combination Therapy in Patients With Paroxysmal Nocturnal Hemoglobinuria",
+    "status": "RECRUITING",
+    "last_update": "2026-09-28",
+    "start_date": "2023-03-07",
+    "completion_date": "2028-10-10",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 202,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Paroxysmal Nocturnal Hemoglobinuria"
+    ],
+    "interventions": [
+      "Pozelimab",
+      "Cemdisiran"
+    ]
+  },
+  "REGN:cemdisiran:NCT03999840": {
+    "nct_id": "NCT03999840",
+    "title": "Eculizumab to Cemdisiran Switch in aHUS",
+    "official_title": "A Phase II, Randomized, Double-blind, Placebo-controlled Trial to Evaluate the Safety and Efficacy of Cemdisiran (ALN-CC5) Following Withdrawal of Chronic Eculizumab Therapy in Patients With Atypical HUS at High Risk of Recurrence",
+    "status": "WITHDRAWN",
+    "last_update": "2021-03-10",
+    "start_date": "2021-01",
+    "completion_date": "2024-03",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Mario Negri Institute for Pharmacological Research",
+    "conditions": [
+      "Atypical Hemolytic Uremic Syndrome"
+    ],
+    "interventions": [
+      "cemdisiran",
+      "Placebos"
+    ]
+  },
+  "REGN:cemdisiran:NCT04940364": {
+    "nct_id": "NCT04940364",
+    "title": "A Study to Examine the Safety, Tolerability and Biological Effects of Single Doses of Subcutaneously and Intravenously Administered Pozelimab as Monotherapy and in Combination With Single Doses of Subcutaneously Administered Cemdisiran in Adult Japanese Healthy Volunteers",
+    "official_title": "An Open-Label Parallel-Dose Study of the Pharmacokinetics, Pharmacodynamics, Safety, and Tolerability of Single Doses of Subcutaneously and Intravenously Administered Pozelimab as Monotherapy and in Combination With Single Doses of Subcutaneously Administered Cemdisiran in Japanese Healthy Volunteers",
+    "status": "COMPLETED",
+    "last_update": "2022-07-06",
+    "start_date": "2021-08-04",
+    "completion_date": "2022-06-22",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 30,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Healthy"
+    ],
+    "interventions": [
+      "Pozelimab",
+      "Cemdisiran"
+    ]
+  },
+  "REGN:cemdisiran:NCT05133531": {
+    "nct_id": "NCT05133531",
+    "title": "A Study to Evaluate How Safe Pozelimab + Cemdisiran Combination Therapy is and How Well it Works in Adult Patients With Paroxysmal Nocturnal Hemoglobinuria (PNH) Who Have Not Recently Received or Have Not Received Complement Inhibitor Treatment",
+    "official_title": "A Randomized, Open-Label, C5 Inhibitor-Controlled Study to Evaluate the Efficacy and Safety of Pozelimab and Cemdisiran Combination Therapy in Patients With Paroxysmal Nocturnal Hemoglobinuria Who Are Complement Inhibitor Treatment-Naive or Have Not Recently Received Complement Inhibitor Therapy",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-04-30",
+    "start_date": "2022-08-01",
+    "completion_date": "2026-10-26",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 202,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Paroxysmal Nocturnal Hemoglobinuria"
+    ],
+    "interventions": [
+      "Ravulizumab",
+      "Pozelimab",
+      "Cemdisiran",
+      "Eculizumab"
+    ]
+  },
+  "REGN:cemdisiran:NCT05070858": {
+    "nct_id": "NCT05070858",
+    "title": "A Study to Test How Safe Pozelimab and Cemdisiran Combination Therapy and Cemdisiran Alone Are and How Well They Work in Adult Patients With Generalized Myasthenia Gravis",
+    "official_title": "Efficacy and Safety of Pozelimab and Cemdisiran Combination Therapy and Cemdisiran Monotherapy in Patients With Symptomatic Generalized Myasthenia Gravis",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-10-28",
+    "start_date": "2021-12-14",
+    "completion_date": "2028-11-11",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 288,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Generalized Myasthenia Gravis"
+    ],
+    "interventions": [
+      "Pozelimab + Cemdisiran",
+      "Cemdisiran",
+      "Placebo",
+      "Pozelimab"
+    ]
+  },
+  "REGN:cemdisiran:NCT06028594": {
+    "nct_id": "NCT06028594",
+    "title": "Compassionate Use of Pozelimab and Cemdisiran Combination Therapy in Patients With Paroxysmal Nocturnal Hemoglobinuria",
+    "official_title": "An Expanded Access Program of Pozelimab and Cemdisiran Combination Therapy in Patients With Paroxysmal Nocturnal Hemoglobinuria",
+    "status": "NO_LONGER_AVAILABLE",
+    "last_update": "2025-10-20",
+    "start_date": null,
+    "completion_date": null,
+    "study_type": "EXPANDED_ACCESS",
+    "phases": [],
+    "enrollment": null,
+    "enrollment_type": null,
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Paroxysmal Nocturnal Hemoglobinuria"
+    ],
+    "interventions": [
+      "Pozelimab",
+      "Cemdisiran"
+    ]
+  },
+  "REGN:cemdisiran:NCT04811716": {
+    "nct_id": "NCT04811716",
+    "title": "Pozelimab and Cemdisiran Combination Treatment in Adult Participants With Paroxysmal Nocturnal Hemoglobinuria Who Have Received Pozelimab Monotherapy",
+    "official_title": "A Randomized, Open-label, Two-arm Study to Evaluate the Safety, Efficacy, and Pharmacodynamic Effects of Pozelimab and Cemdisiran Combination Treatment in Patients With Paroxysmal Nocturnal Hemoglobinuria Who Have Received Pozelimab Monotherapy",
+    "status": "COMPLETED",
+    "last_update": "2025-04-08",
+    "start_date": "2021-07-29",
+    "completion_date": "2023-10-18",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 24,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Paroxysmal Nocturnal Hemoglobinuria"
+    ],
+    "interventions": [
+      "Pozelimab",
+      "Cemdisiran"
+    ]
+  },
+  "REGN:cemdisiran:NCT03841448": {
+    "nct_id": "NCT03841448",
+    "title": "A Study of Cemdisiran in Adults With Immunoglobulin A Nephropathy (IgAN)",
+    "official_title": "A Phase 2, Randomized, Double-blind, Placebo-controlled Study of Cemdisiran in Adult Patients With IgA Nephropathy",
+    "status": "TERMINATED",
+    "last_update": "2024-08-09",
+    "start_date": "2019-09-30",
+    "completion_date": "2023-06-27",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 31,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Alnylam Pharmaceuticals",
+    "conditions": [
+      "IgA Nephropathy (IgAN)",
+      "Berger Disease",
+      "Glomerulonephritis, IgA"
+    ],
+    "interventions": [
+      "Placebo",
+      "Cemdisiran"
+    ]
+  },
+  "REGN:cemdisiran:NCT04888507": {
+    "nct_id": "NCT04888507",
+    "title": "Pozelimab and Cemdisiran Combination Therapy in Adult Participants With Paroxysmal Nocturnal Hemoglobinuria Who Switch From Eculizumab Therapy",
+    "official_title": "A Single Arm, Open-Label Study to Assess the Safety, Efficacy, and Pharmacodynamic Effects of Pozelimab and Cemdisiran Combination Therapy in Patients With Paroxysmal Nocturnal Hemoglobinuria Who Switch From Eculizumab Therapy",
+    "status": "COMPLETED",
+    "last_update": "2025-08-29",
+    "start_date": "2021-07-08",
+    "completion_date": "2023-05-04",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 6,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Paroxysmal Nocturnal Hemoglobinuria"
+    ],
+    "interventions": [
+      "Pozelimab",
+      "Cemdisiran"
+    ]
+  },
+  "REGN:cemdisiran:NCT06541704": {
+    "nct_id": "NCT06541704",
+    "title": "A Study Investigating Subcutaneously Administered Pozelimab in Combination With Cemdisiran or Cemdisiran Alone in Adult Participants With Geographic Atrophy",
+    "official_title": "A Multicenter, Randomized, Double-Masked, Placebo-Controlled Phase 3 Study of the Efficacy, Safety, and Tolerability of Subcutaneously Administered Pozelimab in Combination With Cemdisiran or Cemdisiran Alone in Participants With Geographic Atrophy Secondary to Age-Related Macular Degeneration",
+    "status": "RECRUITING",
+    "last_update": "2026-10-13",
+    "start_date": "2024-10-30",
+    "completion_date": "2033-04-09",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 975,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Age-related Macular Degeneration (AMD)",
+      "Geographic Atrophy (GA)"
+    ],
+    "interventions": [
+      "Pozelimab",
+      "Cemdisiran",
+      "Placebo"
+    ]
+  },
+  "REGN:cemdisiran:NCT04601844": {
+    "nct_id": "NCT04601844",
+    "title": "Safety, Tolerability, Pharmacokinetics, and Pharmacodynamics of Pozelimab in Combination With Cemdisiran in Healthy Adult Volunteers",
+    "official_title": "An Open-Label, Ascending Dose Study of the Safety, Tolerability, Pharmacokinetics, and Pharmacodynamics of Single Doses of Subcutaneously Administered Human Monoclonal Antibody Pozelimab in Combination With Single Doses of Subcutaneously Administered siRNA Cemdisiran in Healthy Volunteers",
+    "status": "COMPLETED",
+    "last_update": "2021-11-12",
+    "start_date": "2020-11-16",
+    "completion_date": "2021-07-23",
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 19,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Healthy"
+    ],
+    "interventions": [
+      "Pozelimab",
+      "Cemdisiran"
+    ]
+  },
+  "REGN:Inmazeb (atoltivimab/maftivimab/odesivimab):NCT03576690": {
+    "nct_id": "NCT03576690",
+    "title": "R3470-3471-3479 (REGN-EB3) Expanded Access Protocol (EAP) for Treatment of Ebola Virus Disease",
+    "official_title": "Expanded Access Protocol for Emergency Use of REGN3470-3471-3479 for the Treatment of Ebola Virus Disease",
+    "status": "AVAILABLE",
+    "last_update": "2026-10-09",
+    "start_date": null,
+    "completion_date": null,
+    "study_type": "EXPANDED_ACCESS",
+    "phases": [],
+    "enrollment": null,
+    "enrollment_type": null,
+    "sponsor": "Regeneron Pharmaceuticals",
+    "conditions": [
+      "Ebola Virus Disease"
+    ],
+    "interventions": [
+      "REGN3470-3471-3479"
+    ]
+  },
   "ALNY:vutrisiran:NCT03759379": {
     "nct_id": "NCT03759379",
     "title": "HELIOS-A: A Study of Vutrisiran (ALN-TTRSC02) in Patients With Hereditary Transthyretin Amyloidosis (hATTR Amyloidosis)",
