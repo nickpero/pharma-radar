@@ -224,3 +224,17 @@ if __name__ == "__main__":
     print(
         "✅ Trading Intelligence tests passed"
   )
+
+
+
+def test_results_posted_has_low_trading_impact():
+    event = {
+        "type": "RESULTS_AVAILABILITY",
+        "severity": "LOW",
+        "direction": "UNKNOWN",
+        "subtype": "RESULTS_POSTED",
+        "score": 34,
+    }
+    assert get_trading_impact(event) == "LOW"
+    assert trading_priority_score(event) == 1
+    assert get_urgency(event) == "LOW"
