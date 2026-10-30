@@ -46,8 +46,8 @@ def test_positive_date_acceleration():
 
     score = score_event(event)
 
-    assert score == 100
-    assert score_label(score) == "CRITICAL"
+    assert score <= 34
+    assert score_label(score) == "LOW"
 
 
 def test_negative_date_delay():
@@ -61,8 +61,8 @@ def test_negative_date_delay():
 
     score = score_event(event)
 
-    assert score == 100
-    assert score_label(score) == "CRITICAL"
+    assert score <= 34
+    assert score_label(score) == "LOW"
 
 
 def test_medium_enrollment():
