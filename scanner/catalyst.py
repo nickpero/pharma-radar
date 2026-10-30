@@ -138,10 +138,12 @@ def classify_date_change(
 
     if new < old:
         subtype = "DATE_ACCELERATED"
-        direction = "POSITIVE"
     else:
         subtype = "DATE_DELAYED"
-        direction = "NEGATIVE"
+
+    # A registry timeline edit is context, not clinical evidence.
+    # Never infer positive/negative market direction from a date revision.
+    direction = "UNKNOWN"
 
     return {
         "type": "DATE_CHANGE",
@@ -150,7 +152,7 @@ def classify_date_change(
         "new_value": new_date,
         "direction": direction,
         "event_date": new.isoformat(),
-        "severity": "HIGH",
+        "severity": "LOW",
     }
 
 
@@ -285,6 +287,28 @@ def classify_trial_changes(changes):
         )
 
     # --------------------------------------------------------
+    # RESULTS BECAME AVAILABLE IN THE REGISTRY
+    # --------------------------------------------------------
+    has_results = changes.get("has_results", {})
+    results_date = changes.get("results_posted_date", {})
+    results_became_available = (
+        has_results.get("old") is False and has_results.get("new") is True
+    )
+    # Do not treat a legacy snapshot missing this field as a new result:
+    # old snapshots predate the field and would otherwise create false alerts.
+    if results_became_available:
+        events.append({
+            "type": "RESULTS_AVAILABILITY",
+            "subtype": "RESULTS_POSTED",
+            "old_value": results_date.get("old") or has_results.get("old"),
+            "new_value": results_date.get("new") or has_results.get("new"),
+            "direction": "UNKNOWN",
+            "event_date": results_date.get("new"),
+            "severity": "LOW",
+            "field": "results_posted_date",
+        })
+
+    # --------------------------------------------------------
     # PRIMARY COMPLETION DATE
     # --------------------------------------------------------
 
@@ -387,6 +411,8 @@ def classify_trial_changes(changes):
 
     ignored_fields = {
         "status",
+        "has_results",
+        "results_posted_date",
         "primary_completion_date",
         "study_completion_date",
         "completion_date",
