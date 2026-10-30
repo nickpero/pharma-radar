@@ -327,7 +327,8 @@ def _fetch_sec_direct(ticker, company, cik, max_filings=3):
             except requests.RequestException as exc:
                 print(f"SEC 6-K CONTENT UNAVAILABLE: ticker={ticker} {type(exc).__name__}: {exc}", flush=True)
                 continue
-            description = recent.get("primaryDocDescription", [""] * len(forms))[idx]
+            descriptions = recent.get("primaryDocDescription") or []
+            description = descriptions[idx] if idx < len(descriptions) else ""
             if not _looks_like_financial_results(" ".join((description, document_text))):
                 continue
             event = build_sec_item(
