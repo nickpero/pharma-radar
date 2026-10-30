@@ -27,21 +27,24 @@
     "company": "Kodiak Sciences",
     "listing_url": "https://kodiak.gcs-web.com/",
     "allowed_host": "kodiak.gcs-web.com",
-    "enabled": true
+    "enabled": false,
+    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
   },
   {
     "ticker": "LFCR",
     "company": "Lifecore Biomedical",
     "listing_url": "https://ir.lifecore.com/press-releases",
     "allowed_host": "ir.lifecore.com",
-    "enabled": true
+    "enabled": false,
+    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
   },
   {
     "ticker": "LXRX",
     "company": "Lexicon Pharmaceuticals",
     "listing_url": "https://lexiconpharma.gcs-web.com/",
     "allowed_host": "lexiconpharma.gcs-web.com",
-    "enabled": true
+    "enabled": false,
+    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
   },
   {
     "ticker": "MIRM",
@@ -79,7 +82,8 @@
     "listing_url": "https://pharvaris.gcs-web.com/",
     "allowed_host": "pharvaris.gcs-web.com",
     "watchlist_priority": "RED",
-    "enabled": true
+    "enabled": false,
+    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
   },
   {
     "ticker": "QURE",
@@ -92,8 +96,8 @@
   {
     "ticker": "REGN",
     "company": "Regeneron Pharmaceuticals",
-    "listing_url": "https://investor.regeneron.com/",
-    "allowed_host": "investor.regeneron.com",
+    "listing_url": "https://newsroom.regeneron.com/rss/news-releases.xml?items=15",
+    "allowed_host": "newsroom.regeneron.com",
     "enabled": true
   },
   {
@@ -106,8 +110,8 @@
   {
     "ticker": "STOK",
     "company": "Stoke Therapeutics",
-    "listing_url": "https://stoketherapeutics.gcs-web.com/",
-    "allowed_host": "stoketherapeutics.gcs-web.com",
+    "listing_url": "https://www.stoketherapeutics.com/investors-news/media-room/",
+    "allowed_host": "www.stoketherapeutics.com",
     "watchlist_priority": "RED",
     "enabled": true
   },
@@ -125,7 +129,8 @@
     "listing_url": "https://tenaxthera.gcs-web.com/",
     "allowed_host": "tenaxthera.gcs-web.com",
     "watchlist_priority": "RED",
-    "enabled": true
+    "enabled": false,
+    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
   },
   {
     "ticker": "ZYME",
