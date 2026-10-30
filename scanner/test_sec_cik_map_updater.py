@@ -104,7 +104,7 @@ def test_historical_cik_name_match_fills_only_unique_exact_company_matches():
     }
     historical = {
         "KALVISTA PHARMACEUTICALS": ["0000000123"],
-        "ROCHE HOLDING AG": ["0000000456"],
+        "ROCHE HOLDING": ["0000000456"],
         "ACME THERAPEUTICS": ["0000000789", "0000000999"],
     }
     result, counts = build_watchlist_cik_map(
