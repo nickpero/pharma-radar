@@ -28,6 +28,9 @@ def test_parser_keeps_clinical_candidate_and_source_domain():
     assert rows[0]["event_type"] is None
     assert rows[0]["event_date"] is None
     assert rows[0]["publication_date_candidate"] == "October 15, 2026"
+    assert rows[0]["published_at"] is None
+    assert rows[0]["publication_time_precision"] == "DATE_ONLY"
+    assert rows[0]["publication_timestamp_source"] == "CARD_TEXT"
 
 
 class Response:
@@ -94,3 +97,36 @@ def test_configured_primary_sources_cover_priority_watchlist_and_match_hosts():
         parsed = urlparse(row["listing_url"])
         assert parsed.scheme == "https"
         assert parsed.hostname == row["allowed_host"]
+
+
+
+def test_parser_extracts_timezone_aware_original_publication_timestamp():
+    html = """
+    <html><body><article>
+      <time datetime="2026-10-15T09:30:00-04:00">October 15, 2026</time>
+      <a href="/news/phase-3-topline">Test Bio announces Phase 3 topline results</a>
+    </article></body></html>
+    """
+    rows = collector.parse_listing_page(
+        html, SOURCE, discovered_at="2026-10-15T15:00:00+00:00"
+    )
+    assert len(rows) == 1
+    assert rows[0]["published_at"] == "2026-10-15T13:30:00+00:00"
+    assert rows[0]["published_at_raw"] == "2026-10-15T09:30:00-04:00"
+    assert rows[0]["publication_time_precision"] == "TIMESTAMP"
+    assert rows[0]["publication_timezone_known"] is True
+    assert rows[0]["publication_timestamp_source"] == "TIME_TAG"
+
+
+def test_parser_does_not_invent_timezone_for_unzoned_timestamp():
+    html = """
+    <html><body><article>
+      <time datetime="2026-10-15T09:30:00">October 15, 2026</time>
+      <a href="/news/phase-3-topline">Test Bio announces Phase 3 topline results</a>
+    </article></body></html>
+    """
+    rows = collector.parse_listing_page(html, SOURCE)
+    assert len(rows) == 1
+    assert rows[0]["published_at"] is None
+    assert rows[0]["publication_time_precision"] == "TIMEZONE_UNKNOWN"
+    assert rows[0]["publication_timezone_known"] is False
