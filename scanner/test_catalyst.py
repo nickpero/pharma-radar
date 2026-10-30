@@ -236,3 +236,12 @@ def test_new_registry_results_are_classified_as_informational():
     assert result_events[0]["direction"] == "UNKNOWN"
     assert result_events[0]["severity"] == "LOW"
     assert result_events[0]["event_date"] == "2026-10-30"
+
+
+
+def test_legacy_snapshot_does_not_create_false_results_posted_alert():
+    events = classify_trial_changes({
+        "has_results": {"old": None, "new": True},
+        "results_posted_date": {"old": None, "new": "2024-01-15"},
+    })
+    assert not any(event["subtype"] == "RESULTS_POSTED" for event in events)
