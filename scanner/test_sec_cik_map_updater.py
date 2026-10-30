@@ -83,9 +83,9 @@ def test_watchlist_map_respects_explicit_sec_exclusions():
 
 def test_parse_sec_cumulative_cik_name_file_with_colons_and_trailing_delimiters():
     parsed = parse_sec_cik_lookup_text(
-        "KALVISTA PHARMACEUTICALS INC:1234567:\\n"
-        "ACME:US LLC:42:\\n"
-        "MALFORMED LINE\\n"
+        "KALVISTA PHARMACEUTICALS INC:1234567:\n"
+        "ACME:US LLC:42:\n"
+        "MALFORMED LINE\n"
     )
     assert parsed == {
         "KALVISTA PHARMACEUTICALS": ["0001234567"],
