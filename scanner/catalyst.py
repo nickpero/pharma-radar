@@ -294,8 +294,9 @@ def classify_trial_changes(changes):
     results_became_available = (
         has_results.get("old") is False and has_results.get("new") is True
     )
-    results_date_added = bool(results_date.get("new")) and not results_date.get("old")
-    if results_became_available or results_date_added:
+    # Do not treat a legacy snapshot missing this field as a new result:
+    # old snapshots predate the field and would otherwise create false alerts.
+    if results_became_available:
         events.append({
             "type": "RESULTS_AVAILABILITY",
             "subtype": "RESULTS_POSTED",
