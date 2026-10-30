@@ -138,10 +138,12 @@ def classify_date_change(
 
     if new < old:
         subtype = "DATE_ACCELERATED"
-        direction = "POSITIVE"
     else:
         subtype = "DATE_DELAYED"
-        direction = "NEGATIVE"
+
+    # A registry timeline edit is context, not clinical evidence.
+    # Never infer positive/negative market direction from a date revision.
+    direction = "UNKNOWN"
 
     return {
         "type": "DATE_CHANGE",
@@ -150,7 +152,7 @@ def classify_date_change(
         "new_value": new_date,
         "direction": direction,
         "event_date": new.isoformat(),
-        "severity": "HIGH",
+        "severity": "LOW",
     }
 
 
