@@ -34,9 +34,14 @@ WATCHLIST_CIK = {
     "GLUE": "0001829818", "UTHR": "0001082554", "LONA": "0001873745", "MNKD": "0000899460", "PMVP": "0001699929",
     "SMMT": "0001599298", "VTGN": "0001411685", "ARTL": "0001621221", "DCOY": "0001615219", "SRZN": "0001824893", "GCTK": "0001506983", "HCWB": "0001828673",
 }
+# Keep the hand-verified core separate from the supplemental map. The
+# updater uses only this protected core when deciding whether an official
+# ticker→CIK mapping may replace a previous supplemental entry.
+WATCHLIST_CIK_MANUAL = dict(WATCHLIST_CIK)
+
 # Supplement the hand-verified high-priority mapping with the repository's
-# maintained SEC CIK map. Existing WATCHLIST_CIK entries take precedence because
-# this map has historically contained a few stale ticker/CIK associations.
+# maintained SEC CIK map. The official SEC ticker map may refresh supplemental
+# entries; the manual core remains authoritative.
 _SEC_MAP_PATH = Path(__file__).resolve().parent.parent / "data" / "sec_cik_map.json"
 try:
     with _SEC_MAP_PATH.open("r", encoding="utf-8") as _sec_map_file:

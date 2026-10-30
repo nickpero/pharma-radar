@@ -240,3 +240,22 @@ def test_summary_exposes_sec_cik_coverage():
         },
     })
     assert "CIK 270/318 (84.9%)" in message
+
+
+def test_summary_shows_unmapped_sec_ticker_sample():
+    message = build_summary({
+        "companies": 320,
+        "alerts": [],
+        "errors": [],
+        "source_diagnostics": {
+            "SEC": {
+                "status": "DEGRADED_FALLBACK",
+                "count": 12,
+                "sec_enabled": 318,
+                "mapped_tickers": 270,
+                "coverage_pct": 84.9,
+                "unmapped_tickers": ["KALV", "CNTA", "APLS", "VERV", "ACLX", "RHHBY", "SWTX", "TERN", "SLNO"],
+            }
+        },
+    })
+    assert "senza CIK: KALV,CNTA,APLS,VERV,ACLX,RHHBY,SWTX,TERN +1" in message
