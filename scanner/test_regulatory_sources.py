@@ -123,6 +123,32 @@ def test_sec_user_agent_is_declared():
 
 
 
+def test_sec_coverage_reports_unmapped_tickers_and_exclusions():
+    coverage = sec_feed._watchlist_cik_coverage({
+        "REGN": {"company": "Regeneron"},
+        "AZN": {"company": "AstraZeneca"},
+        "NEXA": {"company": "Nanexa", "sec_monitoring": False},
+        "UNMAPPED": {"company": "Unmapped Bio"},
+    })
+    assert coverage["watchlist_total"] == 4
+    assert coverage["sec_enabled"] == 3
+    assert coverage["mapped_tickers"] == 2
+    assert coverage["unmapped_tickers"] == ["UNMAPPED"]
+
+
+def test_sec_feed_skips_companies_explicitly_excluded_from_sec(monkeypatch):
+    calls = []
+    def fake_direct(ticker, company, cik, max_filings=3):
+        calls.append(ticker)
+        return []
+    monkeypatch.setattr(sec_feed, "_fetch_sec_direct", fake_direct)
+    sec_feed.get_sec_news({
+        "NEXA": {"company": "Nanexa", "sec_monitoring": False},
+        "REGN": {"company": "Regeneron"},
+    })
+    assert calls == ["REGN"]
+
+
 def test_sec_watchlist_cik_map_avoids_runtime_ticker_lookup():
     mapping = get_ticker_cik_map()
     assert mapping["CAPR"] == "0001133869"
