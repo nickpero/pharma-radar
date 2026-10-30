@@ -76,11 +76,14 @@ def build_watchlist_cik_map(
     existing_map = existing_map or {}
     protected_map = protected_map or {}
     result: dict[str, str] = {}
-    counts = {"protected": 0, "official": 0, "fallback": 0, "unmapped": 0}
+    counts = {"protected": 0, "official": 0, "fallback": 0, "unmapped": 0, "excluded": 0}
 
-    for raw_ticker in watchlist:
+    for raw_ticker, config in watchlist.items():
         ticker = normalize_ticker(raw_ticker)
         if not ticker:
+            continue
+        if isinstance(config, dict) and config.get("sec_monitoring") is False:
+            counts["excluded"] += 1
             continue
         protected = normalize_cik(protected_map.get(ticker))
         official = normalize_cik(official_map.get(ticker))
@@ -142,7 +145,8 @@ def main() -> int:
         "SEC CIK MAP REFRESH: "
         f"watchlist={len(watchlist)} mapped={len(updated_map)} "
         f"official={counts['official']} protected={counts['protected']} "
-        f"fallback={counts['fallback']} unmapped={counts['unmapped']}",
+        f"fallback={counts['fallback']} unmapped={counts['unmapped']} "
+        f"excluded={counts['excluded']}",
         flush=True,
     )
     if content == previous_content:
