@@ -43,6 +43,7 @@ def test_watchlist_map_prefers_protected_then_official_then_existing():
         "official": 1,
         "fallback": 1,
         "unmapped": 1,
+        "excluded": 0,
     }
 
 
