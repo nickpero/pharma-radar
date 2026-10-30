@@ -7,7 +7,7 @@ from scanner.trading_intelligence import (
 )
 
 
-def test_extreme_catalyst():
+def test_trial_completion_is_informational():
 
     event = {
         "type": "STATUS_CHANGE",
@@ -19,15 +19,15 @@ def test_extreme_catalyst():
 
     assert get_trading_impact(
         event
-    ) == "EXTREME"
+    ) == "LOW"
 
     assert trading_priority_score(
         event
-    ) == 4
+    ) == 1
 
     assert get_urgency(
         event
-    ) == "IMMEDIATE"
+    ) == "LOW"
 
 
 def test_positive_date_acceleration():
@@ -156,9 +156,9 @@ def test_enrich_event():
     )
 
     assert enriched["score"] == 100
-    assert enriched["trading_impact"] == "EXTREME"
-    assert enriched["trading_priority"] == 4
-    assert enriched["urgency"] == "IMMEDIATE"
+    assert enriched["trading_impact"] == "LOW"
+    assert enriched["trading_priority"] == 1
+    assert enriched["urgency"] == "LOW"
 
     # Original event must not be modified
 
@@ -200,11 +200,11 @@ def test_multiple_events():
 
     assert len(enriched) == 3
 
-    assert enriched[0]["trading_impact"] == "EXTREME"
-    assert enriched[0]["urgency"] == "IMMEDIATE"
+    assert enriched[0]["trading_impact"] == "LOW"
+    assert enriched[0]["urgency"] == "LOW"
 
-    assert enriched[1]["trading_impact"] == "HIGH"
-    assert enriched[1]["urgency"] == "FAST"
+    assert enriched[1]["trading_impact"] == "LOW"
+    assert enriched[1]["urgency"] == "LOW"
 
     assert enriched[2]["trading_impact"] == "LOW"
     assert enriched[2]["urgency"] == "LOW"
@@ -212,7 +212,7 @@ def test_multiple_events():
 
 if __name__ == "__main__":
 
-    test_extreme_catalyst()
+    test_trial_completion_is_informational()
     test_positive_date_acceleration()
     test_negative_date_delay()
     test_phase_change()
