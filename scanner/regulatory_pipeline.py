@@ -33,9 +33,9 @@ def _process_item(item, watchlist):
             for key in ("source", "title", "summary", "description", "url", "published_at")
         }
 
-    # SEC Form 8-K Item 2.02 is the issuer earnings/results disclosure.
-    # It is intentionally company-level: quarterly results need not name a single
-    # pipeline asset, but the SEC adapter has already bound the filing to its CIK/ticker.
+    # SEC 8-K Item 2.02, recent 10-Q/10-K, and qualifying 6-K filings are
+    # company-level financial disclosures. They need not name a pipeline asset;
+    # the SEC adapter has already bound the filing to its verified CIK/ticker.
     sec_items = {str(code).strip() for code in (item.get("filing_items") or [])}
     is_company_financial_results = (
         source == "SEC" and source_ticker in watchlist and (
