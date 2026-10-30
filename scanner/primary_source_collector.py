@@ -7,6 +7,7 @@ import json
 import re
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
@@ -150,38 +151,45 @@ def parse_listing_page(html, source, discovered_at=None):
     discovered_at = discovered_at or datetime.now(timezone.utc).isoformat()
     base = source["listing_url"]
     host = source["allowed_host"].lower()
-    soup = BeautifulSoup(html, "html.parser")
     candidates = []
     seen = set()
 
-    feed_items = soup.find_all("item") or soup.find_all("entry")
+    def local_name(tag):
+        return str(tag).rsplit("}", 1)[-1].lower()
+
+    try:
+        root = ET.fromstring(html)
+        feed_items = [node for node in root.iter() if local_name(node.tag) in {"item", "entry"}]
+    except ET.ParseError:
+        feed_items = []
+
     if feed_items:
         for item in feed_items:
-            title_node = item.find("title")
-            title = title_node.get_text(" ", strip=True) if title_node else ""
+            fields = {local_name(child.tag): child for child in list(item)}
+            title_node = fields.get("title")
+            title = "".join(title_node.itertext()).strip() if title_node is not None else ""
             if len(title) < 18 or len(title) > 500:
                 continue
             if not KEYWORDS.search(title) or GENERIC.search(title):
                 continue
-            link_node = item.find("link")
+            link_node = fields.get("link")
             link_value = ""
-            if link_node:
-                link_value = link_node.get("href") or link_node.get_text(" ", strip=True)
-            if not link_value:
-                guid = item.find("guid")
-                link_value = guid.get_text(" ", strip=True) if guid else ""
+            if link_node is not None:
+                link_value = link_node.attrib.get("href") or "".join(link_node.itertext()).strip()
+            if not link_value and fields.get("guid") is not None:
+                link_value = "".join(fields["guid"].itertext()).strip()
             url = urljoin(base, link_value)
             parsed = urlparse(url)
             if parsed.scheme != "https" or parsed.hostname != host or url in seen:
                 continue
             seen.add(url)
-            description_node = item.find("description") or item.find("summary") or item.find("content")
-            description = description_node.get_text(" ", strip=True) if description_node else ""
+            description_node = fields.get("description") or fields.get("summary") or fields.get("content")
+            description = "".join(description_node.itertext()).strip() if description_node is not None else ""
             context = " ".join(f"{title} {description}".split())[:1200]
-            published_node = item.find("pubdate") or item.find("published") or item.find("updated")
+            published_node = fields.get("pubdate") or fields.get("published") or fields.get("updated")
             publication = _feed_publication_metadata(
-                published_node.get_text(" ", strip=True) if published_node else None,
-                "RSS_PUBDATE" if item.name == "item" else ("ATOM_PUBLISHED" if item.find("published") else "ATOM_UPDATED"),
+                "".join(published_node.itertext()).strip() if published_node is not None else None,
+                "RSS_PUBDATE" if local_name(item.tag) == "item" else ("ATOM_PUBLISHED" if fields.get("published") is not None else "ATOM_UPDATED"),
             )
             candidates.append({
                 "ticker": str(source["ticker"]).upper(),
@@ -201,6 +209,7 @@ def parse_listing_page(html, source, discovered_at=None):
             })
         return candidates
 
+    soup = BeautifulSoup(html, "html.parser")
     for anchor in soup.find_all("a", href=True):
         title = _link_text(anchor)
         if len(title) < 18 or len(title) > 500:
