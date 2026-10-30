@@ -154,3 +154,16 @@ if __name__ == "__main__":
     print(
         "✅ Catalyst Score tests passed"
   )
+
+
+
+def test_results_posted_is_informational_not_directional():
+    event = {
+        "type": "RESULTS_AVAILABILITY",
+        "severity": "LOW",
+        "direction": "UNKNOWN",
+        "subtype": "RESULTS_POSTED",
+    }
+    score = score_event(event)
+    assert score <= 34
+    assert score_label(score) == "LOW"
