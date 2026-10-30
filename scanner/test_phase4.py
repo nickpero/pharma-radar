@@ -139,3 +139,40 @@ if __name__ == "__main__":
     test_phase4_inputs_change_setup_score()
     test_phase4_end_to_end_market_enrichment_to_setup()
     print("Trading Intelligence Phase 4 tests passed")
+
+
+def test_daily_top5_snapshot_uses_last_completed_exchange_session():
+    from datetime import datetime, timezone
+    from scanner.market_data import get_completed_daily_snapshot
+
+    timestamps = [
+        int(datetime(2026, 10, day, 13, 30, tzinfo=timezone.utc).timestamp())
+        for day in (28, 29, 30)
+    ]
+    payload = {"chart": {"result": [{
+        "meta": {"exchangeTimezoneName": "America/New_York"},
+        "timestamp": timestamps,
+        "indicators": {"quote": [{
+            "close": [10.0, 11.0, 12.0],
+            "volume": [100.0, 200.0, 300.0],
+        }]},
+    }]}}
+    session = FakeSession(payload)
+
+    before_close = get_completed_daily_snapshot(
+        "TEST", session=session,
+        now=datetime(2026, 10, 30, 19, 0, tzinfo=timezone.utc),
+    )
+    assert before_close["market_session_date"] == "2026-10-29"
+    assert before_close["price"] == 11.0
+    assert before_close["price_change_pct"] == 10.0
+    assert before_close["market_data_basis"] == "COMPLETED_DAILY_CLOSE"
+
+    after_close = get_completed_daily_snapshot(
+        "TEST", session=session,
+        now=datetime(2026, 10, 30, 20, 20, tzinfo=timezone.utc),
+    )
+    assert after_close["market_session_date"] == "2026-10-30"
+    assert after_close["price"] == 12.0
+    assert after_close["price_change_pct"] > 9.0
+    assert after_close["volume_ratio"] == 2.0
