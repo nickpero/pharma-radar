@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from scanner import primary_source_collector as collector
@@ -57,10 +58,14 @@ def test_collector_persists_new_candidates_and_deduplicates(tmp_path):
     assert first["sources_ok"] == 1
     assert len(first["new_candidates"]) == 1
     assert first["pending_total"] == 1
+    first_state = json.loads(state.read_text(encoding="utf-8"))
 
     second = collector.collect_candidates([SOURCE], state, candidates, session)
     assert second["new_candidates"] == []
     assert second["pending_total"] == 1
+    second_state = json.loads(state.read_text(encoding="utf-8"))
+    assert second_state == first_state
+    assert "last_checked_at" not in second_state
 
 
 def test_collector_does_not_overwrite_reviewed_candidate(tmp_path):
