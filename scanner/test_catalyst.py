@@ -223,3 +223,16 @@ def test_timeline_changes_are_informational_only():
     assert delayed["direction"] == "UNKNOWN"
     assert accelerated["severity"] == "LOW"
     assert delayed["severity"] == "LOW"
+
+
+
+def test_new_registry_results_are_classified_as_informational():
+    events = classify_trial_changes({
+        "has_results": {"old": False, "new": True},
+        "results_posted_date": {"old": None, "new": "2026-10-30"},
+    })
+    result_events = [event for event in events if event["subtype"] == "RESULTS_POSTED"]
+    assert len(result_events) == 1
+    assert result_events[0]["direction"] == "UNKNOWN"
+    assert result_events[0]["severity"] == "LOW"
+    assert result_events[0]["event_date"] == "2026-10-30"
