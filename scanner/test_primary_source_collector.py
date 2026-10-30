@@ -83,7 +83,7 @@ def test_all_sources_failure_is_reported(tmp_path):
             raise OSError("offline")
 
     import pytest
-    with pytest.raises(RuntimeError, match="All official"):
+    with pytest.raises(RuntimeError, match="All enabled official"):
         collector.collect_candidates([SOURCE], tmp_path / "state.json",
                                      tmp_path / "candidates.json", FailedSession())
 
