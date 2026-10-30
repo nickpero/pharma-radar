@@ -189,7 +189,10 @@ def collect_candidates(sources=None, state_path=None, candidates_path=None, sess
         raise RuntimeError("All enabled official press-release pages failed: " + "; ".join(source_errors))
     pending.extend(new_candidates)
     save_json(candidates_path, pending)
-    save_json(state_path, {"seen_urls": sorted(all_seen), "last_checked_at": now,
+    # Persist only durable state changes. The collector runs more often than
+    # company pages change; writing a fresh check timestamp every scan would
+    # create a needless state commit every ten minutes.
+    save_json(state_path, {"seen_urls": sorted(all_seen),
                            "successful_sources": successful_sources,
                            "source_errors": source_errors})
     print(
