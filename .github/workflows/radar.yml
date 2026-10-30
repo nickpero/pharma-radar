@@ -49,6 +49,12 @@ jobs:
           python -m pytest -q scanner/test_data_quality_audit.py scanner/test_divergence_monitor.py scanner/test_divergence_outcomes.py scanner/test_fda_p13.py scanner/test_telegram_intelligence.py scanner/test_early_discovery_feed.py scanner/test_main.py scanner/test_regulatory_sources.py scanner/test_daily_top5.py scanner/test_phase4.py scanner/test_sec_cik_map_updater.py
           python -m pytest -q scanner/test_fda_enrichment_dates.py scanner/test_trial_scanner.py
 
+      - name: Discover official company IR releases (manual review candidates)
+        run: |
+          python -m scanner.primary_source_collector || {
+            echo "WARNING: official IR discovery failed; continuing the core Pharma Radar scan."
+          }
+
       - name: Run Pharma Radar
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
