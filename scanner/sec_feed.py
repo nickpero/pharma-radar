@@ -7,6 +7,7 @@ import os
 import re
 import threading
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
@@ -274,18 +275,72 @@ def build_sec_item(ticker, company, cik, accession, form, filing_date, primary_d
             "item_id": hashlib.sha256(raw.encode("utf-8")).hexdigest()}
 
 
+EARNINGS_CONTEXT_HINTS = (
+    "financial results", "quarterly results", "quarter results", "earnings results",
+    "annual results", "interim results", "half-year results", "full-year results",
+    "results for the quarter", "results for the year", "financial statements",
+)
+
+
+def _looks_like_financial_results(text):
+    lowered = normalize_text(text).lower()
+    has_results = any(token in lowered for token in ("result", "earnings", "financial statements"))
+    has_period = any(token in lowered for token in (
+        "quarter", "annual", "interim", "half-year", "half year", "full-year", "full year",
+        "six months", "nine months", "q1 ", "q2 ", "q3 ", "q4 ",
+    ))
+    return has_results and has_period
+
+
+def _is_recent_filing_date(value, max_age_days=7):
+    try:
+        filed = datetime.strptime(str(value), "%Y-%m-%d").replace(tzinfo=timezone.utc)
+    except (TypeError, ValueError):
+        return False
+    age_days = (datetime.now(timezone.utc) - filed).total_seconds() / 86400
+    return 0 <= age_days <= max_age_days
+
+
 def _fetch_sec_direct(ticker, company, cik, max_filings=3):
     url = f"https://data.sec.gov/submissions/CIK{cik}.json"
     recent = _get_json(url).get("filings", {}).get("recent", {})
     results = []
-    for idx, form in enumerate(recent.get("form", [])):
-        if form != "8-K":
+    forms = recent.get("form", [])
+    for idx, form in enumerate(forms):
+        filing_date = recent.get("filingDate", [""] * len(forms))[idx]
+        accession = recent.get("accessionNumber", [""] * len(forms))[idx]
+        primary_doc = recent.get("primaryDocument", [""] * len(forms))[idx]
+        if form == "8-K":
+            items = _extract_items(recent.get("items", [""] * len(forms))[idx])
+            if not items:
+                continue
+            results.append(build_sec_item(
+                ticker, company, cik, accession, form, filing_date, primary_doc, items,
+                event_date=(recent.get("reportDate", [""] * len(forms))[idx] or filing_date),
+            ))
+        elif form == "6-K" and _is_recent_filing_date(filing_date):
+            # Foreign private issuers (e.g. AstraZeneca) report quarterly results
+            # through Form 6-K rather than the US domestic Form 8-K Item 2.02.
+            document_url = _filing_url(cik, accession, primary_doc)
+            try:
+                document_text = _get_jina_text(document_url)
+            except requests.RequestException as exc:
+                print(f"SEC 6-K CONTENT UNAVAILABLE: ticker={ticker} {type(exc).__name__}: {exc}", flush=True)
+                continue
+            description = recent.get("primaryDocDescription", [""] * len(forms))[idx]
+            if not _looks_like_financial_results(" ".join((description, document_text))):
+                continue
+            event = build_sec_item(
+                ticker, company, cik, accession, form, filing_date, primary_doc, [],
+                text=document_text,
+                title=f"SEC 6-K — {company} ({ticker}) — {description or 'Financial results'}",
+                url=document_url,
+                event_date=filing_date,
+            )
+            event["company_event_type"] = "COMPANY_FINANCIAL_RESULTS"
+            results.append(event)
+        else:
             continue
-        items = _extract_items(recent.get("items", [""])[idx])
-        if not items:
-            continue
-        results.append(build_sec_item(ticker, company, cik, recent["accessionNumber"][idx], form,
-                                      recent["filingDate"][idx], recent["primaryDocument"][idx], items, event_date=(recent.get("reportDate", [""])[idx] or recent["filingDate"][idx])))
         if len(results) >= max_filings:
             break
     return results
