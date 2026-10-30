@@ -131,9 +131,9 @@ def alert_action(alert):
     if subtype == "COMPANY_FINANCIAL_RESULTS":
         return "WATCH" if primary and freshness == "NEW_0_24H" else "SILENT"
 
-    # Trial completion is informational only. It can be sent as WATCH only
-    # when the primary registry itself was updated in the last 24 hours.
-    if subtype == "TRIAL_COMPLETED":
+    # Trial completion and registry timeline revisions are informational.
+    # A fresh primary-source update may be sent as WATCH, never as a signal.
+    if subtype in {"TRIAL_COMPLETED", "DATE_ACCELERATED", "DATE_DELAYED"}:
         return "WATCH" if primary and freshness == "NEW_0_24H" else "SILENT"
 
     # Recent secondary-source discovery is a clearly labelled watch, never a
