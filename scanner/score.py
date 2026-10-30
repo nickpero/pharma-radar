@@ -327,7 +327,7 @@ def score_event(event):
 
     # Trial completion and registry timeline revisions are informational,
     # not efficacy/safety evidence or directional trading catalysts.
-    if subtype in {"TRIAL_COMPLETED", "DATE_ACCELERATED", "DATE_DELAYED"}:
+    if subtype in {"TRIAL_COMPLETED", "DATE_ACCELERATED", "DATE_DELAYED", "RESULTS_POSTED"}:
         score = min(score, 34)
 
     return score
