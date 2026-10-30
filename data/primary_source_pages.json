@@ -7,19 +7,20 @@
     "enabled": true
   },
   {
-    "ticker": "MRK",
-    "company": "Merck & Co.",
-    "listing_url": "https://www.merck.com/media/news/",
-    "allowed_host": "www.merck.com",
+    "ticker": "ARGX",
+    "company": "argenx",
+    "listing_url": "https://argenx.com/newsroom",
+    "allowed_host": "argenx.com",
+    "watchlist_priority": "RED",
     "enabled": true
   },
   {
-    "ticker": "REGN",
-    "company": "Regeneron Pharmaceuticals",
-    "listing_url": "https://investor.regeneron.com/investor-relations/",
-    "allowed_host": "investor.regeneron.com",
-    "enabled": false,
-    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
+    "ticker": "CAPR",
+    "company": "Capricor Therapeutics",
+    "listing_url": "https://www.capricor.com/investors/news-events/press-releases",
+    "allowed_host": "www.capricor.com",
+    "watchlist_priority": "RED",
+    "enabled": true
   },
   {
     "ticker": "KOD",
@@ -38,11 +39,66 @@
     "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
   },
   {
+    "ticker": "LXRX",
+    "company": "Lexicon Pharmaceuticals",
+    "listing_url": "https://investors.lexpharma.com/news-events/news-releases",
+    "allowed_host": "investors.lexpharma.com",
+    "enabled": false,
+    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
+  },
+  {
+    "ticker": "MIRM",
+    "company": "Mirum Pharmaceuticals",
+    "listing_url": "https://ir.mirumpharma.com/news/",
+    "allowed_host": "ir.mirumpharma.com",
+    "watchlist_priority": "RED",
+    "enabled": true
+  },
+  {
+    "ticker": "MRK",
+    "company": "Merck & Co.",
+    "listing_url": "https://www.merck.com/media/news/",
+    "allowed_host": "www.merck.com",
+    "enabled": true
+  },
+  {
+    "ticker": "NUVL",
+    "company": "Nuvalent",
+    "listing_url": "https://investors.nuvalent.com/news",
+    "allowed_host": "investors.nuvalent.com",
+    "watchlist_priority": "RED",
+    "enabled": true
+  },
+  {
     "ticker": "ONCO",
     "company": "Onconetix",
     "listing_url": "https://ir.onconetix.com/news-releases/",
     "allowed_host": "ir.onconetix.com",
     "enabled": true
+  },
+  {
+    "ticker": "PHVS",
+    "company": "Pharvaris",
+    "listing_url": "https://ir.pharvaris.com/",
+    "allowed_host": "ir.pharvaris.com",
+    "watchlist_priority": "RED",
+    "enabled": true
+  },
+  {
+    "ticker": "QURE",
+    "company": "uniQure",
+    "listing_url": "https://www.uniqure.com/investors-media",
+    "allowed_host": "www.uniqure.com",
+    "watchlist_priority": "RED",
+    "enabled": true
+  },
+  {
+    "ticker": "REGN",
+    "company": "Regeneron Pharmaceuticals",
+    "listing_url": "https://investor.regeneron.com/investor-relations/",
+    "allowed_host": "investor.regeneron.com",
+    "enabled": false,
+    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
   },
   {
     "ticker": "SCYX",
@@ -52,11 +108,35 @@
     "enabled": true
   },
   {
-    "ticker": "LXRX",
-    "company": "Lexicon Pharmaceuticals",
-    "listing_url": "https://investors.lexpharma.com/news-events/news-releases",
-    "allowed_host": "investors.lexpharma.com",
-    "enabled": false,
-    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
+    "ticker": "STOK",
+    "company": "Stoke Therapeutics",
+    "listing_url": "https://investor.stoketherapeutics.com/press-releases",
+    "allowed_host": "investor.stoketherapeutics.com",
+    "watchlist_priority": "RED",
+    "enabled": true
+  },
+  {
+    "ticker": "SVRA",
+    "company": "Savara",
+    "listing_url": "https://investors.savarapharma.com/overview/",
+    "allowed_host": "investors.savarapharma.com",
+    "watchlist_priority": "RED",
+    "enabled": true
+  },
+  {
+    "ticker": "TENX",
+    "company": "Tenax Therapeutics",
+    "listing_url": "https://investors.tenaxthera.com/news-events/news-releases",
+    "allowed_host": "investors.tenaxthera.com",
+    "watchlist_priority": "RED",
+    "enabled": true
+  },
+  {
+    "ticker": "ZYME",
+    "company": "Zymeworks",
+    "listing_url": "https://www.zymeworks.com/news/",
+    "allowed_host": "www.zymeworks.com",
+    "watchlist_priority": "RED",
+    "enabled": true
   }
 ]
