@@ -33,7 +33,26 @@ def _process_item(item, watchlist):
             for key in ("source", "title", "summary", "description", "url", "published_at")
         }
 
-    target = identify_fda_target(match_item, match_watchlist)
+    # SEC Form 8-K Item 2.02 is the issuer earnings/results disclosure.
+    # It is intentionally company-level: quarterly results need not name a single
+    # pipeline asset, but the SEC adapter has already bound the filing to its CIK/ticker.
+    sec_items = {str(code).strip() for code in (item.get("filing_items") or [])}
+    is_company_financial_results = (
+        source == "SEC" and source_ticker in watchlist and "2.02" in sec_items
+    )
+    if is_company_financial_results:
+        company_meta = watchlist[source_ticker]
+        target = {
+            "ticker": source_ticker,
+            "company": company_meta.get("company", source_ticker),
+            "program": None,
+            "match_type": "COMPANY_LEVEL_SEC_ITEM_2_02",
+            "confidence": "HIGH",
+            "company_matches": [company_meta.get("company", source_ticker)],
+            "program_matches": [],
+        }
+    else:
+        target = identify_fda_target(match_item, match_watchlist)
     if target is None:
         return None
     # EMA headlines can mention disease areas or broad indications that overlap
@@ -52,6 +71,15 @@ def _process_item(item, watchlist):
             return None
 
     event = build_fda_catalyst(item)
+    if is_company_financial_results:
+        event.update({
+            "type": "CORPORATE_EVENT",
+            "subtype": "COMPANY_FINANCIAL_RESULTS",
+            "catalyst_type": "COMPANY_FINANCIAL_RESULTS",
+            "severity": "MEDIUM",
+            "direction": "UNKNOWN",
+            "urgency": "MEDIUM",
+        })
     event.update({
         "ticker": target.get("ticker"),
         "company": target.get("company"),
@@ -79,6 +107,12 @@ def _process_item(item, watchlist):
     scored = score_fda_event(event)
     trading = enrich_trading_event(scored)
     trading = enrich_alert_priority(trading)
+    if is_company_financial_results:
+        # Keep earnings announcements visible as informational WATCH alerts;
+        # do not imply that headline results are positive or negative.
+        trading["subtype"] = "COMPANY_FINANCIAL_RESULTS"
+        trading["trading_impact"] = "MEDIUM"
+        trading["direction"] = "UNKNOWN"
     trading["pipeline"] = item.get("source", "REGULATORY")
     trading["pipeline_stage"] = "TRADING_INTELLIGENCE"
 
