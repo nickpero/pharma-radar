@@ -207,13 +207,13 @@ def main() -> int:
     with MAP_PATH.open("r", encoding="utf-8") as handle:
         existing_map = json.load(handle)
 
-    from scanner.sec_feed import WATCHLIST_CIK
+    from scanner.sec_feed import WATCHLIST_CIK_MANUAL
 
     user_agent = os.getenv("SEC_USER_AGENT", "")
     official_map = fetch_official_map(user_agent)
     historical_name_index = fetch_sec_cik_name_index(user_agent)
     updated_map, counts = build_watchlist_cik_map(
-        watchlist, official_map, existing_map, WATCHLIST_CIK, historical_name_index
+        watchlist, official_map, existing_map, WATCHLIST_CIK_MANUAL, historical_name_index
     )
     content = json.dumps(updated_map, indent=2, ensure_ascii=False) + "\n"
     previous_content = MAP_PATH.read_text(encoding="utf-8")
