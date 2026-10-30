@@ -69,21 +69,100 @@ def _dedup_key(alert):
     )
 
 
+def _source_name(alert):
+    event = alert.get("event") if isinstance(alert.get("event"), dict) else {}
+    return str(alert.get("source") or event.get("source") or "").strip().upper()
+
+
+def _calendar_day(alert):
+    """Return the source event's calendar day, independent of publication time."""
+    event = alert.get("event") if isinstance(alert.get("event"), dict) else {}
+    for value in (
+        alert.get("catalyst_date"), alert.get("approval_date"),
+        alert.get("decision_date"), alert.get("event_date"),
+        event.get("catalyst_date"), event.get("approval_date"),
+        event.get("decision_date"), event.get("event_date"),
+        alert.get("event_timestamp"), alert.get("published_at"),
+        event.get("published_at"),
+    ):
+        if not value:
+            continue
+        text = str(value).strip()
+        if len(text) >= 10 and text[4:5] == "-" and text[7:8] == "-":
+            return text[:10]
+        try:
+            return datetime.fromisoformat(text.replace("Z", "+00:00")).date().isoformat()
+        except ValueError:
+            continue
+    return None
+
+
+def _same_cross_source_event(left, right):
+    """Match the same ticker/program/catalyst reported by different sources."""
+    left_event = left.get("event") if isinstance(left.get("event"), dict) else {}
+    right_event = right.get("event") if isinstance(right.get("event"), dict) else {}
+    left_source, right_source = _source_name(left), _source_name(right)
+    if not left_source or not right_source or left_source == right_source:
+        return False
+
+    def identity(alert, event):
+        return (
+            str(alert.get("ticker") or event.get("ticker") or "UNKNOWN").upper().strip(),
+            str(alert.get("program") or event.get("program") or "UNKNOWN").lower().strip(),
+            str(alert.get("subtype") or event.get("subtype") or "UNKNOWN").upper().strip(),
+        )
+
+    left_day, right_day = _calendar_day(left), _calendar_day(right)
+    return bool(left_day and right_day and left_day == right_day and identity(left, left_event) == identity(right, right_event))
+
+
 def _dedup_rank(alert):
     reaction = alert.get("market_reaction") or {}
     available_reaction = any(reaction.get(key) is not None for key in ("reaction_pct", "reaction_5m_pct", "reaction_15m_pct", "reaction_30m_pct", "reaction_60m_pct"))
-    return (float(alert.get("alert_priority") or 0), float(alert.get("trading_setup_score") or 0), int(available_reaction))
+    source_type = str(alert.get("source_type") or "").upper()
+    source = _source_name(alert)
+    primary = source_type.startswith("PRIMARY") or source in {
+        "SEC", "FDA", "FDA RSS", "EMA", "CLINICALTRIALS", "COMPANY",
+        "COMPANY IR", "EU CTIS",
+    }
+    return (int(primary), float(alert.get("alert_priority") or 0), float(alert.get("trading_setup_score") or 0), int(available_reaction))
+
+
+def _merge_corroboration(selected, *reports):
+    result = dict(selected)
+    sources, urls = set(result.get("corroborating_sources") or []), set(result.get("corroborating_urls") or [])
+    for report in reports:
+        source = _source_name(report)
+        url = report.get("url") or (report.get("event") or {}).get("url") if isinstance(report.get("event"), dict) else report.get("url")
+        if source:
+            sources.add(source)
+        if url:
+            urls.add(str(url))
+    if sources:
+        result["corroborating_sources"] = sorted(sources)
+    if urls:
+        result["corroborating_urls"] = sorted(urls)
+    return result
 
 
 def deduplicate_alerts(alerts):
-    """Collapse duplicate upstream reports while retaining the richest alert."""
-    unique = {}
+    """Collapse same-day cross-source reports, retaining primary evidence and corroboration."""
+    unique = []
     for alert in alerts or []:
-        key = _dedup_key(alert)
-        current = unique.get(key)
-        if current is None or _dedup_rank(alert) > _dedup_rank(current):
-            unique[key] = alert
-    return sort_by_alert_priority(list(unique.values()))
+        match_index = next((
+            index for index, current in enumerate(unique)
+            if _dedup_key(alert) == _dedup_key(current)
+            or _same_cross_source_event(alert, current)
+        ), None)
+        if match_index is None:
+            unique.append(alert)
+            continue
+
+        current = unique[match_index]
+        selected, other = (alert, current) if _dedup_rank(alert) > _dedup_rank(current) else (current, alert)
+        unique[match_index] = _merge_corroboration(selected, current, alert, other)
+
+    return sort_by_alert_priority(unique)
 
 
 def build_alert(ticker, company, program, nct_id, event, changes, trial):
