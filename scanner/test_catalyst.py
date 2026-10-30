@@ -88,7 +88,8 @@ def test_date_accelerated():
 
     assert event["type"] == "DATE_CHANGE"
     assert event["subtype"] == "DATE_ACCELERATED"
-    assert event["direction"] == "POSITIVE"
+    assert event["direction"] == "UNKNOWN"
+    assert event["severity"] == "LOW"
 
 
 def test_date_delayed():
@@ -99,7 +100,8 @@ def test_date_delayed():
     )
 
     assert event["subtype"] == "DATE_DELAYED"
-    assert event["direction"] == "NEGATIVE"
+    assert event["direction"] == "UNKNOWN"
+    assert event["severity"] == "LOW"
 
 
 def test_same_date():
@@ -213,3 +215,35 @@ if __name__ == "__main__":
     print(
         "✅ Catalyst classification tests passed"
     )
+
+
+
+def test_timeline_changes_are_informational_only():
+    accelerated = classify_date_change("2027-12-01", "2027-06-01")
+    delayed = classify_date_change("2027-06-01", "2028-01-01")
+    assert accelerated["direction"] == "UNKNOWN"
+    assert delayed["direction"] == "UNKNOWN"
+    assert accelerated["severity"] == "LOW"
+    assert delayed["severity"] == "LOW"
+
+
+
+def test_new_registry_results_are_classified_as_informational():
+    events = classify_trial_changes({
+        "has_results": {"old": False, "new": True},
+        "results_posted_date": {"old": None, "new": "2026-10-30"},
+    })
+    result_events = [event for event in events if event["subtype"] == "RESULTS_POSTED"]
+    assert len(result_events) == 1
+    assert result_events[0]["direction"] == "UNKNOWN"
+    assert result_events[0]["severity"] == "LOW"
+    assert result_events[0]["event_date"] == "2026-10-30"
+
+
+
+def test_legacy_snapshot_does_not_create_false_results_posted_alert():
+    events = classify_trial_changes({
+        "has_results": {"old": None, "new": True},
+        "results_posted_date": {"old": None, "new": "2024-01-15"},
+    })
+    assert not any(event["subtype"] == "RESULTS_POSTED" for event in events)

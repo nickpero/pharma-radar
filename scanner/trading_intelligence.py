@@ -58,12 +58,12 @@ EVENT_PRIORITY = {
     # HIGH
     # ----------------------------------------
 
-    "DATE_ACCELERATED": "HIGH",
+    "DATE_ACCELERATED": "LOW",
     "PHASE_ADVANCED": "HIGH",
     "DEVELOPMENT_MILESTONE": "HIGH",
     "PHASE_CHANGE": "HIGH",
     "SIGNIFICANT_ENROLLMENT_CHANGE": "HIGH",
-    "DATE_DELAYED": "HIGH",
+    "DATE_DELAYED": "LOW",
 
     # ----------------------------------------
     # MEDIUM
@@ -78,6 +78,7 @@ EVENT_PRIORITY = {
     # ----------------------------------------
 
     "TRIAL_COMPLETED": "LOW",
+    "RESULTS_POSTED": "LOW",
     "FIELD_UPDATED": "LOW",
     "CONTACT_UPDATED": "LOW",
     "ADMINISTRATIVE_UPDATE": "LOW",
@@ -138,7 +139,7 @@ def get_trading_impact(event):
         return "HIGH"
 
     if event_type == "DATE_CHANGE":
-        return "HIGH"
+        return "LOW"
 
     if event_type == "STATUS_CHANGE":
 
