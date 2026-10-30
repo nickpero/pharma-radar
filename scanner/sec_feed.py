@@ -49,7 +49,7 @@ try:
 except (OSError, ValueError, TypeError) as _sec_map_error:
     print(f"SEC CIK MAP SUPPLEMENT UNAVAILABLE: {type(_sec_map_error).__name__}: {_sec_map_error}", flush=True)
 
-CATALYST_ITEMS = {"1.01", "1.02", "2.01", "2.03", "3.01", "5.02", "7.01", "8.01"}
+CATALYST_ITEMS = {"1.01", "1.02", "2.01", "2.02", "2.03", "3.01", "5.02", "7.01", "8.01"}
 DISCOVERY_MAX_FILINGS = 2
 DISCOVERY_MAX_TICKERS = 6
 # Production scans run every 10 minutes; rotate each batch per scan rather than repeating it for an hour.
@@ -247,7 +247,7 @@ def _filing_url(cik, accession, primary_doc=""):
 
 def _item_context(items):
     labels = {"1.01": "material definitive agreement", "1.02": "termination of material definitive agreement",
-              "2.01": "completion of acquisition or disposition", "2.03": "creation of direct financial obligation",
+              "2.01": "completion of acquisition or disposition", "2.02": "results of operations and financial condition", "2.03": "creation of direct financial obligation",
               "3.01": "delisting or listing compliance event", "5.02": "director or officer change",
               "7.01": "Regulation FD disclosure", "8.01": "other material event"}
     return "; ".join(f"Item {code}: {labels.get(code, 'SEC current report event')}" for code in items)
