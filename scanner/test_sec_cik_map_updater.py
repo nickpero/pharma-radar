@@ -1,4 +1,8 @@
-from scripts.update_sec_cik_map import build_watchlist_cik_map, parse_sec_ticker_payload
+from scripts.update_sec_cik_map import (
+    build_watchlist_cik_map,
+    parse_sec_ticker_payload,
+    parse_sec_cik_lookup_text,
+)
 
 
 def test_parse_exchange_map_schema_and_normalize_cik():
@@ -42,6 +46,7 @@ def test_watchlist_map_prefers_protected_then_official_then_existing():
         "protected": 1,
         "official": 1,
         "fallback": 1,
+        "historical_name": 0,
         "unmapped": 1,
         "excluded": 0,
     }
@@ -70,6 +75,44 @@ def test_watchlist_map_respects_explicit_sec_exclusions():
         "protected": 0,
         "official": 1,
         "fallback": 0,
+        "historical_name": 0,
         "unmapped": 0,
         "excluded": 1,
     }
+
+
+def test_parse_sec_cumulative_cik_name_file_with_colons_and_trailing_delimiters():
+    parsed = parse_sec_cik_lookup_text(
+        "KALVISTA PHARMACEUTICALS INC:1234567:\\n"
+        "ACME:US LLC:42:\\n"
+        "MALFORMED LINE\\n"
+    )
+    assert parsed == {
+        "KALVISTA PHARMACEUTICALS": ["0001234567"],
+        "ACME US": ["0000000042"],
+    }
+
+
+def test_historical_cik_name_match_fills_only_unique_exact_company_matches():
+    watchlist = {
+        "KALV": {"company": "KalVista Pharmaceuticals"},
+        "ALIAS": {
+            "company": "Roche ADR",
+            "sec_name_aliases": ["Roche Holding AG"],
+        },
+        "AMBIG": {"company": "Acme Therapeutics"},
+    }
+    historical = {
+        "KALVISTA PHARMACEUTICALS": ["0000000123"],
+        "ROCHE HOLDING AG": ["0000000456"],
+        "ACME THERAPEUTICS": ["0000000789", "0000000999"],
+    }
+    result, counts = build_watchlist_cik_map(
+        watchlist, {}, historical_name_index=historical
+    )
+    assert result == {
+        "ALIAS": "0000000456",
+        "KALV": "0000000123",
+    }
+    assert counts["historical_name"] == 2
+    assert counts["unmapped"] == 1
