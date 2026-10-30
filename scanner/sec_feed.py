@@ -344,6 +344,22 @@ def _fetch_sec_direct(ticker, company, cik, max_filings=3):
                 ticker, company, cik, accession, form, filing_date, primary_doc, items,
                 event_date=(recent.get("reportDate", [""] * len(forms))[idx] or filing_date),
             ))
+        elif form in {"10-Q", "10-K"} and _is_recent_filing_date(filing_date):
+            # Periodic reports are primary financial disclosures even when the
+            # issuer did not publish a separate 8-K Item 2.02 earnings release.
+            descriptions = recent.get("primaryDocDescription") or []
+            description = descriptions[idx] if idx < len(descriptions) else ""
+            report_label = "Quarterly financial report" if form == "10-Q" else "Annual financial report"
+            event = build_sec_item(
+                ticker, company, cik, accession, form, filing_date, primary_doc, [],
+                text=description,
+                title=f"SEC {form} — {company} ({ticker}) — {report_label}",
+                url=_filing_url(cik, accession, primary_doc),
+                event_date=filing_date,
+            )
+            event["company_event_type"] = "COMPANY_FINANCIAL_RESULTS"
+            event["summary"] = f"{company} filed its SEC {form} on {filing_date}."
+            results.append(event)
         elif form == "6-K" and _is_recent_filing_date(filing_date):
             # Foreign private issuers (e.g. AstraZeneca) report quarterly results
             # through Form 6-K rather than the US domestic Form 8-K Item 2.02.
