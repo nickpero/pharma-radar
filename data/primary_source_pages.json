@@ -3,48 +3,60 @@
     "ticker": "ALNY",
     "company": "Alnylam Pharmaceuticals",
     "listing_url": "https://investors.alnylam.com/press-releases",
-    "allowed_host": "investors.alnylam.com"
+    "allowed_host": "investors.alnylam.com",
+    "enabled": true
   },
   {
     "ticker": "MRK",
     "company": "Merck & Co.",
     "listing_url": "https://www.merck.com/media/news/",
-    "allowed_host": "www.merck.com"
+    "allowed_host": "www.merck.com",
+    "enabled": true
   },
   {
     "ticker": "REGN",
     "company": "Regeneron Pharmaceuticals",
     "listing_url": "https://investor.regeneron.com/investor-relations/",
-    "allowed_host": "investor.regeneron.com"
+    "allowed_host": "investor.regeneron.com",
+    "enabled": false,
+    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
   },
   {
     "ticker": "KOD",
     "company": "Kodiak Sciences",
     "listing_url": "https://ir.kodiak.com/",
-    "allowed_host": "ir.kodiak.com"
+    "allowed_host": "ir.kodiak.com",
+    "enabled": false,
+    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
   },
   {
     "ticker": "LFCR",
     "company": "Lifecore Biomedical",
     "listing_url": "https://ir.lifecore.com/",
-    "allowed_host": "ir.lifecore.com"
+    "allowed_host": "ir.lifecore.com",
+    "enabled": false,
+    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
   },
   {
     "ticker": "ONCO",
     "company": "Onconetix",
     "listing_url": "https://ir.onconetix.com/news-releases/",
-    "allowed_host": "ir.onconetix.com"
+    "allowed_host": "ir.onconetix.com",
+    "enabled": true
   },
   {
     "ticker": "SCYX",
     "company": "SCYNEXIS",
     "listing_url": "https://ir.scynexis.com/news-events/press-releases",
-    "allowed_host": "ir.scynexis.com"
+    "allowed_host": "ir.scynexis.com",
+    "enabled": true
   },
   {
     "ticker": "LXRX",
     "company": "Lexicon Pharmaceuticals",
     "listing_url": "https://investors.lexpharma.com/news-events/news-releases",
-    "allowed_host": "investors.lexpharma.com"
+    "allowed_host": "investors.lexpharma.com",
+    "enabled": false,
+    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
   }
 ]
