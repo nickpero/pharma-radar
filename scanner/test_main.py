@@ -259,3 +259,65 @@ def test_summary_shows_unmapped_sec_ticker_sample():
         },
     })
     assert "senza CIK: KALV,CNTA,APLS,VERV,ACLX,RHHBY,SWTX,TERN +1" in message
+
+
+def test_catalyst_alert_is_not_marked_sent_without_telegram_confirmation(monkeypatch):
+    sent_state = {}
+    saves = []
+    monkeypatch.setattr(main, "load_sent_alerts", lambda: dict(sent_state))
+    monkeypatch.setattr(main, "save_sent_alerts", lambda state: (saves.append(dict(state)), sent_state.update(state)))
+    monkeypatch.setattr(main, "send_telegram", lambda message: {"ok": False, "description": "chat not found"})
+    alert = {"ticker": "ACME", "program": "drug-x", "event": {"subtype": "FDA_APPROVAL"}}
+
+    import pytest
+    with pytest.raises(RuntimeError, match="non ha confermato"):
+        main.send_alerts({"alerts": []}, alerts=[alert])
+
+    assert sent_state == {}
+    assert saves == []
+
+
+def test_catalyst_alert_is_persisted_only_after_telegram_confirmation(monkeypatch):
+    sent_state = {}
+    monkeypatch.setattr(main, "load_sent_alerts", lambda: dict(sent_state))
+    monkeypatch.setattr(main, "save_sent_alerts", lambda state: sent_state.update(state))
+    monkeypatch.setattr(main, "send_telegram", lambda message: {"ok": True, "result": {"message_id": 123}})
+    alert = {"ticker": "ACME", "program": "drug-x", "event": {"subtype": "FDA_APPROVAL"}}
+
+    responses = main.send_alerts({"alerts": []}, alerts=[alert])
+
+    assert responses[0]["ok"] is True
+    assert len(sent_state) == 1
+
+
+def test_source_health_warning_is_not_persisted_without_telegram_confirmation(monkeypatch):
+    sent_state = {}
+    saves = []
+    monkeypatch.setattr(main, "load_sent_alerts", lambda: dict(sent_state))
+    monkeypatch.setattr(main, "save_sent_alerts", lambda state: (saves.append(dict(state)), sent_state.update(state)))
+    monkeypatch.setattr(main, "send_telegram", lambda message: {"ok": False, "description": "blocked"})
+    result = {"alerts": [], "source_diagnostics": {"SEC": {"status": "DEGRADED", "count": 0}}}
+
+    import pytest
+    with pytest.raises(RuntimeError, match="non ha confermato"):
+        main.send_source_health_alert_if_needed(result, actionable_alerts=[])
+
+    assert sent_state == {}
+    assert saves == []
+
+
+def test_divergence_alerts_are_not_persisted_without_all_confirmations(monkeypatch):
+    sent_state = {}
+    saves = []
+    divergences = [{"ticker": "ACME", "program": "drug-x", "_dedup_key": "divergence-key"}]
+    monkeypatch.setattr(main, "_new_divergence_alerts", lambda result: divergences)
+    monkeypatch.setattr(main, "send_divergence_alerts", lambda items: [{"ok": False}])
+    monkeypatch.setattr(main, "load_sent_alerts", lambda: dict(sent_state))
+    monkeypatch.setattr(main, "save_sent_alerts", lambda state: (saves.append(dict(state)), sent_state.update(state)))
+
+    import pytest
+    with pytest.raises(RuntimeError, match="non ha confermato"):
+        main.send_divergence_alerts_once({"alerts": []})
+
+    assert sent_state == {}
+    assert saves == []
