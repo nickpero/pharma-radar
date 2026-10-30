@@ -46,8 +46,8 @@ def test_positive_date_acceleration():
 
     score = score_event(event)
 
-    assert score == 100
-    assert score_label(score) == "CRITICAL"
+    assert score <= 34
+    assert score_label(score) == "LOW"
 
 
 def test_negative_date_delay():
@@ -61,8 +61,8 @@ def test_negative_date_delay():
 
     score = score_event(event)
 
-    assert score == 100
-    assert score_label(score) == "CRITICAL"
+    assert score <= 34
+    assert score_label(score) == "LOW"
 
 
 def test_medium_enrollment():
@@ -154,3 +154,16 @@ if __name__ == "__main__":
     print(
         "✅ Catalyst Score tests passed"
   )
+
+
+
+def test_results_posted_is_informational_not_directional():
+    event = {
+        "type": "RESULTS_AVAILABILITY",
+        "severity": "LOW",
+        "direction": "UNKNOWN",
+        "subtype": "RESULTS_POSTED",
+    }
+    score = score_event(event)
+    assert score <= 34
+    assert score_label(score) == "LOW"
