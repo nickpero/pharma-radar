@@ -50,6 +50,10 @@ CATALYST_HINTS = (
     "enrollment", "enrolled", "dosing", "launch", "regulatory", "clearance",
     "hold", "lifted", "submission", "agreement", "license", "acquisition",
     "partnership", "topline", "clinical",
+    "earnings", "quarterly", "revenue", "eps", "guidance", "cash runway",
+    "restructuring", "layoff", "layoffs", "strategic review", "discontinue",
+    "discontinued", "withdrawal", "withdrawn", "futility", "clinical hold",
+    "hold lifted", "safety",
 )
 
 
