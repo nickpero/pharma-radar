@@ -17,6 +17,13 @@ from scanner.divergence_outcomes import track_divergence_outcomes
 from scanner.data_quality_audit import audit_alerts
 
 
+def _require_telegram_success(response, context):
+    """Accept delivery only when Telegram explicitly returns ok=true."""
+    if not isinstance(response, dict) or response.get("ok") is not True:
+        raise RuntimeError(f"Telegram non ha confermato {context}: {response!r}")
+    return response
+
+
 def _reaction(alert):
     return alert.get("market_reaction") or alert.get("reaction") or {}
 
@@ -179,6 +186,8 @@ def send_alerts(result, alerts=None):
     # The scan summary is kept for Actions/logs and is not sent separately.
     message = "\n\n──────────────\n\n".join(format_catalyst_alert(alert) for alert in alerts)
     responses = [send_telegram(message)]
+    for response in responses:
+        _require_telegram_success(response, "l'invio degli alert catalyst")
     state = load_sent_alerts()
     timestamp = datetime.now(timezone.utc).isoformat()
     mark_sent(alerts, state, lambda alert: repr(_dedup_key(alert)), timestamp)
@@ -242,8 +251,7 @@ def send_daily_status_if_needed(result, actionable_alerts=None, now=None):
         "━━━━━━━━━━━━━━━━━━",
     ]
     response = send_telegram("\n".join(lines))
-    if not isinstance(response, dict) or response.get("ok") is not True:
-        raise RuntimeError(f"Telegram non ha confermato lo stato giornaliero: {response!r}")
+    _require_telegram_success(response, "lo stato giornaliero")
     state[key] = current.isoformat()
     save_sent_alerts(state)
     print("Stato giornaliero Pharma Radar inviato su Telegram.")
@@ -292,10 +300,11 @@ def send_source_health_alert_if_needed(result, actionable_alerts=None):
         "━━━━━━━━━━━━━━━━━━",
     ])
     response = send_telegram("\n".join(lines))
-    # Persist only after Telegram confirms success; failed sends remain retryable.
+    # Persist only after Telegram explicitly confirms success; failed sends remain retryable.
+    _require_telegram_success(response, "l'avviso sulla disponibilità delle fonti")
     state[key] = now.isoformat()
     save_sent_alerts(state)
-    print(f"Avviso Telegram sulla disponibilità delle fonti inviato: {response.get('ok', 'response received')}")
+    print("Avviso Telegram sulla disponibilità delle fonti confermato.")
     return True
 
 
@@ -326,6 +335,10 @@ def send_divergence_alerts_once(result):
     if not divergences:
         return []
     responses = send_divergence_alerts(divergences)
+    if not isinstance(responses, list) or len(responses) != len(divergences):
+        raise RuntimeError("Telegram non ha restituito una conferma per ogni avviso di divergenza")
+    for response in responses:
+        _require_telegram_success(response, "l'invio degli avvisi di divergenza")
     state = load_sent_alerts()
     timestamp = datetime.now(timezone.utc).isoformat()
     for item in divergences:
