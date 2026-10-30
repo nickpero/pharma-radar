@@ -14,19 +14,19 @@
   {
     "ticker": "REGN",
     "company": "Regeneron Pharmaceuticals",
-    "listing_url": "https://investor.regeneron.com/news/press-releases/",
+    "listing_url": "https://investor.regeneron.com/investor-relations/",
     "allowed_host": "investor.regeneron.com"
   },
   {
     "ticker": "KOD",
     "company": "Kodiak Sciences",
-    "listing_url": "https://ir.kodiak.com/news-releases/",
+    "listing_url": "https://ir.kodiak.com/",
     "allowed_host": "ir.kodiak.com"
   },
   {
     "ticker": "LFCR",
     "company": "Lifecore Biomedical",
-    "listing_url": "https://ir.lifecore.com/investor-relations",
+    "listing_url": "https://ir.lifecore.com/",
     "allowed_host": "ir.lifecore.com"
   },
   {
@@ -44,7 +44,7 @@
   {
     "ticker": "LXRX",
     "company": "Lexicon Pharmaceuticals",
-    "listing_url": "https://www.lexpharma.com/media-center/news/",
-    "allowed_host": "www.lexpharma.com"
+    "listing_url": "https://investors.lexpharma.com/news-events/news-releases",
+    "allowed_host": "investors.lexpharma.com"
   }
 ]
