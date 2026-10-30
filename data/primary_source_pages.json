@@ -1,0 +1,50 @@
+[
+  {
+    "ticker": "ALNY",
+    "company": "Alnylam Pharmaceuticals",
+    "listing_url": "https://investors.alnylam.com/press-releases",
+    "allowed_host": "investors.alnylam.com"
+  },
+  {
+    "ticker": "MRK",
+    "company": "Merck & Co.",
+    "listing_url": "https://www.merck.com/media/news/",
+    "allowed_host": "www.merck.com"
+  },
+  {
+    "ticker": "REGN",
+    "company": "Regeneron Pharmaceuticals",
+    "listing_url": "https://investor.regeneron.com/news/press-releases/",
+    "allowed_host": "investor.regeneron.com"
+  },
+  {
+    "ticker": "KOD",
+    "company": "Kodiak Sciences",
+    "listing_url": "https://ir.kodiak.com/news-releases/",
+    "allowed_host": "ir.kodiak.com"
+  },
+  {
+    "ticker": "LFCR",
+    "company": "Lifecore Biomedical",
+    "listing_url": "https://ir.lifecore.com/investor-relations",
+    "allowed_host": "ir.lifecore.com"
+  },
+  {
+    "ticker": "ONCO",
+    "company": "Onconetix",
+    "listing_url": "https://ir.onconetix.com/news-releases/",
+    "allowed_host": "ir.onconetix.com"
+  },
+  {
+    "ticker": "SCYX",
+    "company": "SCYNEXIS",
+    "listing_url": "https://ir.scynexis.com/news-events/press-releases",
+    "allowed_host": "ir.scynexis.com"
+  },
+  {
+    "ticker": "LXRX",
+    "company": "Lexicon Pharmaceuticals",
+    "listing_url": "https://www.lexpharma.com/media-center/news/",
+    "allowed_host": "www.lexpharma.com"
+  }
+]
