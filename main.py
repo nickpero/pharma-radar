@@ -29,6 +29,11 @@ def _source_health_label(name, detail):
             detail.get("sec_enabled", 0),
             detail.get("coverage_pct", 0.0),
         )
+        unmapped = detail.get("unmapped_tickers") or []
+        if unmapped:
+            label += " · senza CIK: " + ",".join(str(ticker) for ticker in unmapped[:8])
+            if len(unmapped) > 8:
+                label += f" +{len(unmapped) - 8}"
     return label
 
 
