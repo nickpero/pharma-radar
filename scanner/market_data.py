@@ -6,6 +6,7 @@ No trading action is performed here.
 """
 
 from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 
 import requests
 
@@ -122,6 +123,82 @@ def get_market_snapshot(ticker, session=None):
     except (IndexError, KeyError, TypeError, ValueError):
         return None
 
+
+
+def get_completed_daily_snapshot(ticker, session=None, now=None):
+    """Return the latest completed daily close, never the live regular-market price.
+
+    A same-day daily candle is used only after 16:15 in the exchange timezone.
+    Before then, the prior completed session is returned.
+    """
+    ticker = str(ticker or "").strip().upper()
+    if not ticker or ticker in {"UNKNOWN", "N/A"}:
+        return None
+
+    client = session or requests
+    try:
+        response = client.get(
+            YAHOO_CHART_URL.format(ticker=ticker),
+            params={"range": "1mo", "interval": "1d", "events": "history"},
+            timeout=REQUEST_TIMEOUT,
+            headers={"User-Agent": USER_AGENT},
+        )
+        response.raise_for_status()
+        result = response.json()["chart"]["result"][0]
+        meta = result.get("meta", {})
+        exchange_tz = ZoneInfo(meta.get("exchangeTimezoneName") or "America/New_York")
+        reference = now or datetime.now(timezone.utc)
+        if reference.tzinfo is None:
+            reference = reference.replace(tzinfo=timezone.utc)
+        local_now = reference.astimezone(exchange_tz)
+        timestamps = result.get("timestamp", [])
+        quote = result.get("indicators", {}).get("quote", [{}])[0]
+        closes = quote.get("close", [])
+        volumes = quote.get("volume", [])
+
+        completed = []
+        for index, timestamp in enumerate(timestamps):
+            close = _safe_float(closes[index]) if index < len(closes) else None
+            if close is None:
+                continue
+            session_dt = datetime.fromtimestamp(int(timestamp), tz=timezone.utc).astimezone(exchange_tz)
+            if session_dt.date() == local_now.date() and local_now.hour * 60 + local_now.minute < 16 * 60 + 15:
+                continue
+            volume = _safe_float(volumes[index]) if index < len(volumes) else None
+            completed.append({
+                "session_date": session_dt.date(),
+                "close": close,
+                "volume": volume,
+                "timestamp": session_dt,
+            })
+
+        if len(completed) < 2:
+            return None
+        latest = completed[-1]
+        previous = completed[-2]
+        average_volumes = [
+            point["volume"] for point in completed[-21:-1]
+            if point["volume"] not in (None, 0)
+        ]
+        average_volume = _mean(average_volumes)
+        change_pct = _pct_change(previous["close"], latest["close"])
+        if change_pct is None:
+            return None
+        return {
+            "ticker": ticker,
+            "price": latest["close"],
+            "previous_close": previous["close"],
+            "price_change_pct": change_pct,
+            "volume": latest["volume"],
+            "average_volume_20d": average_volume,
+            "volume_ratio": latest["volume"] / average_volume if average_volume else None,
+            "market_data_source": "YAHOO_CHART_DAILY",
+            "market_data_basis": "COMPLETED_DAILY_CLOSE",
+            "market_session_date": latest["session_date"].isoformat(),
+            "market_data_timestamp": latest["timestamp"].isoformat(),
+        }
+    except (requests.RequestException, ValueError, TypeError, KeyError, IndexError, OverflowError):
+        return None
 
 
 def get_daily_series(ticker, session=None, range_="3mo"):
