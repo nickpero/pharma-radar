@@ -10,12 +10,13 @@ from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 from pathlib import Path
 
-from scanner.market_data import get_market_snapshot
+from scanner.market_data import get_completed_daily_snapshot
 from scanner.biotech_universe import get_biotech_universe, LAST_UNIVERSE_STATUS
 from scanner.telegram import send_telegram
 from scanner.italian_translation import translate_to_italian
 
 ROOT = Path(__file__).resolve().parents[1]
+MAX_BROAD_CLOSE_CANDIDATES = 100
 WATCHLIST_PATH = ROOT / "data" / "watchlist.json"
 CATALYST_HISTORY_PATH = ROOT / "data" / "catalyst_history.json"
 
@@ -151,7 +152,7 @@ def _recent_catalysts(history, ticker, date_value=None, now=None, meta=None):
     return sorted(matches, key=sort_key, reverse=True)
 
 
-def build_daily_top5(watchlist=None, history=None, snapshot_fn=get_market_snapshot, date_value=None,
+def build_daily_top5(watchlist=None, history=None, snapshot_fn=get_completed_daily_snapshot, date_value=None,
                     universe_fn=None, include_broad_universe=None):
     """Rank configured companies plus a broad US biotech/pharma market scan."""
     explicit_watchlist = watchlist is not None
@@ -173,6 +174,18 @@ def build_daily_top5(watchlist=None, history=None, snapshot_fn=get_market_snapsh
             "last_error": None, "source": "CONFIGURED_WATCHLIST",
         })
 
+    # The screener is only a discovery shortlist: its percentage changes are
+    # intraday. Final ranking always uses completed daily candles.
+    if market_quotes:
+        shortlisted = sorted(
+            market_quotes.items(),
+            key=lambda item: float(item[1].get("price_change_pct") or -1e9),
+            reverse=True,
+        )[:MAX_BROAD_CLOSE_CANDIDATES]
+        market_quotes = dict(shortlisted)
+        LAST_UNIVERSE_STATUS["close_verified_candidate_limit"] = MAX_BROAD_CLOSE_CANDIDATES
+        LAST_UNIVERSE_STATUS["close_verified_candidates"] = len(market_quotes)
+
     combined = dict(watchlist)
     for ticker, quote in market_quotes.items():
         symbol = str(ticker or "").strip().upper()
@@ -188,12 +201,9 @@ def build_daily_top5(watchlist=None, history=None, snapshot_fn=get_market_snapsh
     for ticker, meta in combined.items():
         symbol = ticker.upper()
         quote = market_quotes.get(symbol)
-        if quote:
-            snapshot = {"price_change_pct":quote.get("price_change_pct"),"volume":quote.get("volume"),
-                        "volume_ratio":quote.get("volume_ratio"),"price":quote.get("price"),
-                        "market_data_source":quote.get("market_data_source","YAHOO_FINANCE_SCREENER")}
-        else:
-            snapshot = snapshot_fn(symbol)
+        # Never rank on the screener's live percentage change or live volume.
+        # Every included name must have a completed daily close snapshot.
+        snapshot = snapshot_fn(symbol)
         if not snapshot or snapshot.get("price_change_pct") is None:
             continue
         recent = _recent_catalysts(history, symbol, date_value, meta=meta)
@@ -204,7 +214,10 @@ def build_daily_top5(watchlist=None, history=None, snapshot_fn=get_market_snapsh
             "ticker":symbol,"company":meta.get("company",symbol),"programs":meta.get("programs",[]),
             "price_change_pct":snapshot.get("price_change_pct"),"volume":snapshot.get("volume"),
             "volume_ratio":snapshot.get("volume_ratio"),"price":snapshot.get("price"),
-            "market_data_source":snapshot.get("market_data_source"),"catalyst_found":catalyst is not None,
+            "market_data_source":snapshot.get("market_data_source"),
+            "market_data_basis":snapshot.get("market_data_basis","UNVERIFIED"),
+            "market_session_date":snapshot.get("market_session_date"),
+            "catalyst_found":catalyst is not None,
             "catalyst_freshness":freshness,"catalyst_primary_source":_source_is_primary(catalyst),
             "alert_quality_gate":quality_gate,"catalyst_subtype":catalyst.get("subtype") if catalyst else None,
             "catalyst_program":catalyst.get("program") if catalyst else None,
@@ -402,7 +415,9 @@ def format_daily_top5(rows, date_value=None):
             classification = _display_daily_code(row.get("classification", "MARKET_MOVE_UNEXPLAINED"))
         lines.extend([
             f"{index}. 🧬 {row['ticker']} · {row['company']}",
-            f"   📈 Variazione: {pct:+.2f}% · Volume: {volume_text}",
+            (f"   📈 Chiusura {row.get('market_session_date') or day}: {pct:+.2f}% · Volume: {volume_text}"
+             if row.get("market_data_basis") == "COMPLETED_DAILY_CLOSE"
+             else f"   ⚠️ Variazione non certificata come chiusura: {pct:+.2f}% · Volume: {volume_text}"),
             (f"   🆕 Stato: NUOVO CANDIDATO (non ancora configurato nel Radar) · {row.get('industry') or 'settore da verificare'}"
              if row.get("radar_status") == "NEW_CANDIDATE" else "   🧭 Stato: azienda già configurata nel Radar"),
             f"   📰 Catalizzatore: {reason}",
@@ -421,7 +436,7 @@ def format_daily_top5(rows, date_value=None):
     return "\n".join(lines).rstrip()
 
 
-def run(send=True, watchlist=None, history=None, snapshot_fn=get_market_snapshot, date_value=None):
+def run(send=True, watchlist=None, history=None, snapshot_fn=get_completed_daily_snapshot, date_value=None):
     rows = build_daily_top5(watchlist, history, snapshot_fn, date_value)
     message = format_daily_top5(rows, date_value)
     if send:

@@ -79,16 +79,21 @@ def test_daily_top5_includes_unconfigured_market_candidates():
     rows = build_daily_top5(
         watchlist=watchlist, history={},
         snapshot_fn=lambda ticker: {
-            "price_change_pct": 2.0, "volume": 1000,
-            "volume_ratio": 1.0, "price": 10.0,
+            "price_change_pct": 1.0 if ticker == "NEWBIO" else 2.0,
+            "volume": 1000, "volume_ratio": 1.0, "price": 10.0,
+            "market_data_source": "YAHOO_CHART_DAILY",
+            "market_data_basis": "COMPLETED_DAILY_CLOSE",
+            "market_session_date": "2026-10-20",
         },
         date_value="2026-10-20",
         universe_fn=lambda: broad,
         include_broad_universe=True,
     )
-    assert rows[0]["ticker"] == "NEWBIO"
-    assert rows[0]["radar_status"] == "NEW_CANDIDATE"
-    assert rows[0]["market_data_source"] == "YAHOO_FINANCE_SCREENER"
+    new_candidate = next(row for row in rows if row["ticker"] == "NEWBIO")
+    assert new_candidate["radar_status"] == "NEW_CANDIDATE"
+    assert new_candidate["price_change_pct"] == 1.0
+    assert new_candidate["market_data_source"] == "YAHOO_CHART_DAILY"
+    assert new_candidate["market_data_basis"] == "COMPLETED_DAILY_CLOSE"
 
 def test_market_row_parses_yahoo_formatted_numeric_objects():
     item = quote("WRAPPED")
