@@ -1,4 +1,4 @@
-from scanner.early_discovery_feed import _query, _source_info
+from scanner.early_discovery_feed import _query, _source_info, _is_catalyst_like
 
 
 def test_query_includes_trusted_distribution_and_specialist_domains():
@@ -52,3 +52,10 @@ def test_source_info_classifies_endpoints_news():
     provider, source_type = _source_info(Entry(), "https://news.google.com/example")
     assert provider == "Endpoints News"
     assert source_type == "SPECIALIST"
+
+
+def test_discovery_detects_corporate_and_clinical_risk_events():
+    assert _is_catalyst_like("Quarterly earnings and revenue guidance", "")
+    assert _is_catalyst_like("Company announces strategic review and cash runway update", "")
+    assert _is_catalyst_like("Phase 3 futility and clinical hold", "")
+    assert not _is_catalyst_like("Company appoints a new board observer", "")
