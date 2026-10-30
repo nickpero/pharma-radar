@@ -270,7 +270,7 @@ def build_sec_item(ticker, company, cik, accession, form, filing_date, primary_d
             "title": title or f"SEC {form} — {company} ({ticker})",
             "summary": f"SEC filing {form}; items: {', '.join(items or detected_items)}",
             "content": content, "url": url, "published_at": filing_date,
-            "event_date": event_date or filing_date, "first_published_at": event_date or filing_date,
+            "event_date": event_date or filing_date, "first_published_at": filing_date,
             "item_id": hashlib.sha256(raw.encode("utf-8")).hexdigest()}
 
 
