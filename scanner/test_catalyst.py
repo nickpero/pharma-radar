@@ -213,3 +213,13 @@ if __name__ == "__main__":
     print(
         "✅ Catalyst classification tests passed"
     )
+
+
+
+def test_timeline_changes_are_informational_only():
+    accelerated = classify_date_change("2027-12-01", "2027-06-01")
+    delayed = classify_date_change("2027-06-01", "2028-01-01")
+    assert accelerated["direction"] == "UNKNOWN"
+    assert delayed["direction"] == "UNKNOWN"
+    assert accelerated["severity"] == "LOW"
+    assert delayed["severity"] == "LOW"
