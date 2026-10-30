@@ -96,7 +96,7 @@
   {
     "ticker": "REGN",
     "company": "Regeneron Pharmaceuticals",
-    "listing_url": "https://newsroom.regeneron.com/rss/news-releases.xml?items=15",
+    "listing_url": "https://newsroom.regeneron.com/news/press-releases",
     "allowed_host": "newsroom.regeneron.com",
     "enabled": true
   },
