@@ -444,3 +444,26 @@ if __name__ == "__main__":
     test_prior_day_fundamental_reaction_does_not_create_new_alert()
     test_premarket_history_dict_is_read_and_marks_new_today()
     print("Daily Top 5 tests passed")
+
+
+def test_format_labels_unverified_market_data_as_non_final():
+    rows = [{
+        "ticker": "TEST", "company": "Test Therapeutics",
+        "price_change_pct": 18.5, "volume": 100000, "volume_ratio": 3.0,
+        "market_data_basis": "UNVERIFIED",
+        "catalyst_found": False, "classification": "MARKET_MOVE_UNEXPLAINED",
+    }]
+    message = format_daily_top5(rows, "2026-10-30")
+    assert "Variazione non certificata come chiusura" in message
+
+
+def test_format_identifies_verified_close_session():
+    rows = [{
+        "ticker": "TEST", "company": "Test Therapeutics",
+        "price_change_pct": 18.5, "volume": 100000, "volume_ratio": 3.0,
+        "market_data_basis": "COMPLETED_DAILY_CLOSE",
+        "market_session_date": "2026-10-29",
+        "catalyst_found": False, "classification": "MARKET_MOVE_UNEXPLAINED",
+    }]
+    message = format_daily_top5(rows, "2026-10-30")
+    assert "Chiusura 2026-10-29" in message
