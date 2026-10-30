@@ -133,7 +133,7 @@ def alert_action(alert):
 
     # Trial completion and registry timeline revisions are informational.
     # A fresh primary-source update may be sent as WATCH, never as a signal.
-    if subtype in {"TRIAL_COMPLETED", "DATE_ACCELERATED", "DATE_DELAYED"}:
+    if subtype in {"TRIAL_COMPLETED", "DATE_ACCELERATED", "DATE_DELAYED", "RESULTS_POSTED"}:
         return "WATCH" if primary and freshness == "NEW_0_24H" else "SILENT"
 
     # Recent secondary-source discovery is a clearly labelled watch, never a
