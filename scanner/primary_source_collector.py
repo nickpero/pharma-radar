@@ -55,6 +55,53 @@ def _link_text(anchor):
     return " ".join(anchor.get_text(" ", strip=True).split())
 
 
+def _publication_metadata(anchor, context):
+    """Extract an article-card publication time without inventing a timezone."""
+    node = anchor.parent
+    for _ in range(4):
+        if node is None:
+            break
+        time_tag = node.find("time", attrs={"datetime": True})
+        if time_tag:
+            raw = str(time_tag.get("datetime") or "").strip()
+            if raw:
+                try:
+                    parsed = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+                except ValueError:
+                    parsed = None
+                if parsed is not None:
+                    date_candidate = parsed.date().isoformat()
+                    has_clock = "T" in raw or " " in raw
+                    if parsed.tzinfo is not None and has_clock:
+                        return {
+                            "published_at": parsed.astimezone(timezone.utc).isoformat(),
+                            "published_at_raw": raw,
+                            "publication_date_candidate": date_candidate,
+                            "publication_time_precision": "TIMESTAMP",
+                            "publication_timezone_known": True,
+                            "publication_timestamp_source": "TIME_TAG",
+                        }
+                    return {
+                        "published_at": None,
+                        "published_at_raw": raw,
+                        "publication_date_candidate": date_candidate,
+                        "publication_time_precision": "DATE_ONLY" if not has_clock else "TIMEZONE_UNKNOWN",
+                        "publication_timezone_known": False,
+                        "publication_timestamp_source": "TIME_TAG",
+                    }
+        node = node.parent
+
+    date_match = DATE_PATTERN.search(context)
+    return {
+        "published_at": None,
+        "published_at_raw": None,
+        "publication_date_candidate": date_match.group(0) if date_match else None,
+        "publication_time_precision": "DATE_ONLY" if date_match else "UNKNOWN",
+        "publication_timezone_known": False,
+        "publication_timestamp_source": "CARD_TEXT" if date_match else None,
+    }
+
+
 def parse_listing_page(html, source, discovered_at=None):
     """Return source-host-validated, keyword-filtered candidate links."""
     discovered_at = discovered_at or datetime.now(timezone.utc).isoformat()
@@ -79,7 +126,7 @@ def parse_listing_page(html, source, discovered_at=None):
             continue
         seen.add(url)
         context = " ".join(anchor.parent.get_text(" ", strip=True).split())[:1200]
-        date_match = DATE_PATTERN.search(context)
+        publication = _publication_metadata(anchor, context)
         candidates.append({
             "ticker": str(source["ticker"]).upper(),
             "company": source["company"],
@@ -89,7 +136,7 @@ def parse_listing_page(html, source, discovered_at=None):
             "source_host": host,
             "discovered_at": discovered_at,
             "listing_context": context,
-            "publication_date_candidate": date_match.group(0) if date_match else None,
+            **publication,
             "review_status": "PENDING_REVIEW",
             "event_type": None,
             "event_date": None,
