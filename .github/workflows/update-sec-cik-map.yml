@@ -24,6 +24,8 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --disable-pip-version-check requests beautifulsoup4
+      - name: Validate SEC CIK refresh rules
+        run: python -m pytest -q scanner/test_sec_cik_map_updater.py
       - name: Refresh watchlist CIK mappings from SEC
         env:
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
