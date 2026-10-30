@@ -29,6 +29,9 @@ jobs:
           python -m pip install --disable-pip-version-check pytest
       - name: Compile changed intelligence modules
         run: python -m py_compile scanner/primary_source_collector.py scanner/clinical_trials.py scanner/state.py scanner/telegram_intelligence.py scanner/telegram.py scanner/pharma_email.py scanner/daily_top5.py scanner/market_data.py scanner/italian_translation.py scanner/alert_state.py scanner/fda_freshness.py scanner/fda_pipeline.py scripts/update_sec_cik_map.py
+      - name: Verify live official IR source reachability
+        run: python -m scanner.primary_source_collector
+
       - name: Run alert and core regression tests
         run: |
           python -m pytest -q scanner/test_telegram.py scanner/test_pharma_email.py scanner/test_pharma_email_integration.py scanner/test_telegram_intelligence.py scanner/test_alert_dedup.py scanner/test_catalyst_dedup.py scanner/test_alert_state.py scanner/test_main.py scanner/test_score.py scanner/test_regulatory_sources.py scanner/test_fda_feed.py scanner/test_early_discovery_feed.py scanner/test_daily_top5.py scanner/test_phase4.py scanner/test_italian_translation.py scanner/test_biotech_universe.py scanner/test_fda_p0_unit.py scanner/test_fda_freshness.py scanner/test_watchlist_quality.py scanner/test_sec_cik_map_updater.py scanner/test_workflow_state_push.py scanner/test_primary_source_collector.py scanner/test_clinical_trials.py scanner/test_catalyst.py scanner/test_trading_intelligence.py
