@@ -141,7 +141,8 @@ def test_parser_does_not_invent_timezone_for_unzoned_timestamp():
 def test_configured_sources_are_official_https_pages():
     sources = collector.load_json(collector.SOURCES_PATH, [])
     assert {item["ticker"] for item in sources} == {
-        "ALNY", "MRK", "REGN", "KOD", "LFCR", "ONCO", "SCYX", "LXRX"
+        "ALNY", "MRK", "REGN", "KOD", "LFCR", "ONCO", "SCYX", "LXRX",
+        "CAPR", "SVRA", "ZYME", "MIRM", "PHVS", "TENX", "NUVL", "ARGX", "QURE", "STOK",
     }
     for item in sources:
         parsed = collector.urlparse(item["listing_url"])
@@ -149,7 +150,8 @@ def test_configured_sources_are_official_https_pages():
         assert parsed.hostname == item["allowed_host"]
     by_ticker = {item["ticker"]: item for item in sources}
     assert {ticker for ticker, item in by_ticker.items() if item.get("enabled", True)} == {
-        "ALNY", "MRK", "ONCO", "SCYX"
+        "ALNY", "MRK", "ONCO", "SCYX",
+        "CAPR", "SVRA", "ZYME", "MIRM", "PHVS", "TENX", "NUVL", "ARGX", "QURE", "STOK",
     }
     assert {ticker for ticker, item in by_ticker.items() if item.get("enabled") is False} == {
         "REGN", "KOD", "LFCR", "LXRX"
