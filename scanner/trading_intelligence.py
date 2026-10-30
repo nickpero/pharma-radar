@@ -78,6 +78,7 @@ EVENT_PRIORITY = {
     # ----------------------------------------
 
     "TRIAL_COMPLETED": "LOW",
+    "RESULTS_POSTED": "LOW",
     "FIELD_UPDATED": "LOW",
     "CONTACT_UPDATED": "LOW",
     "ADMINISTRATIVE_UPDATE": "LOW",
