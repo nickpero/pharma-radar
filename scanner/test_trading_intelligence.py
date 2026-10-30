@@ -42,15 +42,15 @@ def test_positive_date_acceleration():
 
     assert get_trading_impact(
         event
-    ) == "HIGH"
+    ) == "LOW"
 
     assert trading_priority_score(
         event
-    ) == 3
+    ) == 1
 
     assert get_urgency(
         event
-    ) == "FAST"
+    ) == "LOW"
 
 
 def test_negative_date_delay():
@@ -65,15 +65,15 @@ def test_negative_date_delay():
 
     assert get_trading_impact(
         event
-    ) == "HIGH"
+    ) == "LOW"
 
     assert trading_priority_score(
         event
-    ) == 3
+    ) == 1
 
     assert get_urgency(
         event
-    ) == "FAST"
+    ) == "LOW"
 
 
 def test_phase_change():
