@@ -228,6 +228,27 @@ def get_ticker_cik_map():
     return dict(WATCHLIST_CIK)
 
 
+def _sec_monitoring_enabled(config):
+    return not (isinstance(config, dict) and config.get("sec_monitoring") is False)
+
+
+def _watchlist_cik_coverage(watchlist):
+    enabled = [
+        str(ticker).upper()
+        for ticker, config in (watchlist or {}).items()
+        if _sec_monitoring_enabled(config)
+    ]
+    mapped = [ticker for ticker in enabled if ticker in WATCHLIST_CIK]
+    unmapped = sorted(set(enabled) - set(mapped))
+    return {
+        "watchlist_total": len(watchlist or {}),
+        "sec_enabled": len(enabled),
+        "mapped_tickers": len(mapped),
+        "unmapped_tickers": unmapped,
+        "coverage_pct": round(100 * len(mapped) / len(enabled), 1) if enabled else 100.0,
+    }
+
+
 def _extract_items(items) -> list[str]:
     text = normalize_text(items)
     found = []
@@ -417,6 +438,8 @@ def _discover_missing_companies(watchlist, existing_tickers, preferred_tickers=N
     preferred = {str(ticker).upper() for ticker in (preferred_tickers or [])}
     for ticker, config in (watchlist or {}).items():
         ticker = str(ticker).upper()
+        if not _sec_monitoring_enabled(config):
+            continue
         # Probe failed direct-EDGAR tickers even if the global proxy returned an older filing.
         if (ticker in existing_tickers and ticker not in preferred) or ticker not in WATCHLIST_CIK:
             continue
@@ -496,8 +519,17 @@ def get_sec_news(watchlist, max_filings_per_company=3):
     direct_results = []
     failed_tickers = []
     direct_errors = []
+    coverage = _watchlist_cik_coverage(watchlist)
+    print(
+        "SEC WATCHLIST COVERAGE: "
+        f"enabled={coverage['sec_enabled']} mapped={coverage['mapped_tickers']} "
+        f"unmapped={len(coverage['unmapped_tickers'])} ({coverage['coverage_pct']}%)",
+        flush=True,
+    )
     for ticker, config in (watchlist or {}).items():
         ticker = str(ticker).upper()
+        if not _sec_monitoring_enabled(config):
+            continue
         company = config.get("company", ticker) if isinstance(config, dict) else ticker
         cik = WATCHLIST_CIK.get(ticker)
         if not cik:
@@ -513,7 +545,10 @@ def get_sec_news(watchlist, max_filings_per_company=3):
 
     if not failed_tickers:
         status = "OK" if direct_results else "EMPTY_OR_DEGRADED"
-        LAST_FETCH_STATUS = {"status": status, "count": len(direct_results), "path": "direct", "error": None}
+        LAST_FETCH_STATUS = {
+            "status": status, "count": len(direct_results), "path": "direct", "error": None,
+            **coverage,
+        }
         print(f"SEC FEED STATUS: {status} filings={len(direct_results)} path=direct", flush=True)
         return direct_results
 
@@ -568,6 +603,7 @@ def get_sec_news(watchlist, max_filings_per_company=3):
         "path": path,
         "error": error_summary,
         "failed_tickers": failed_tickers,
+        **coverage,
     }
     print(
         f"SEC FEED STATUS: {status} filings={len(combined)} path={path} "
