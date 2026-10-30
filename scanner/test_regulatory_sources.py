@@ -42,6 +42,23 @@ def test_primary_source_builders():
     assert sec["form"] == "8-K"
 
 
+def test_sec_8k_item_202_is_included_as_company_financial_results():
+    watchlist = {"REGN": {"company": "Regeneron Pharmaceuticals", "programs": ["linvoseltamab"]}}
+    item = build_sec_item(
+        "REGN", "Regeneron Pharmaceuticals", "0000872589",
+        "0000000000-26-000001", "8-K", "2026-10-30",
+        items=["2.02"], text="Regeneron Reports Third Quarter 2026 Financial and Operating Results",
+    )
+    assert "2.02" in sec_feed.CATALYST_ITEMS
+    assert "results of operations" in sec_feed._item_context(["2.02"])
+    events = process_regulatory_news([item], watchlist)
+    assert len(events) == 1
+    assert events[0]["ticker"] == "REGN"
+    assert events[0]["program"] is None
+    assert events[0]["subtype"] == "COMPANY_FINANCIAL_RESULTS"
+    assert events[0]["trading_impact"] == "MEDIUM"
+
+
 def test_sec_body_enrichment_preserves_program_text():
     text = (
         "Ionis Pharmaceuticals announced that the U.S. Food and Drug Administration "
