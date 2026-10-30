@@ -151,10 +151,10 @@ def test_configured_sources_are_official_https_pages():
     by_ticker = {item["ticker"]: item for item in sources}
     assert {ticker for ticker, item in by_ticker.items() if item.get("enabled", True)} == {
         "ALNY", "MRK", "ONCO", "SCYX", "CAPR", "SVRA", "ZYME", "MIRM",
-        "NUVL", "ARGX", "QURE", "STOK", "REGN",
+        "NUVL", "ARGX", "QURE", "STOK",
     }
     assert {ticker for ticker, item in by_ticker.items() if item.get("enabled") is False} == {
-        "KOD", "LFCR", "LXRX", "PHVS", "TENX",
+        "KOD", "LFCR", "LXRX", "PHVS", "TENX", "REGN",
     }
 
 
