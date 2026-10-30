@@ -8,6 +8,11 @@ def test_query_includes_trusted_distribution_and_specialist_domains():
     assert "site:prnewswire.com" in query
     assert "site:biospace.com" in query
     assert "site:fiercebiotech.com" in query
+    assert "site:fiercepharma.com" in query
+    assert "site:endpts.com" in query
+    assert "site:statnews.com" in query
+    assert "site:biopharmadive.com" in query
+    assert "site:pharmaphorum.com" in query
 
 
 def test_source_info_classifies_globenewswire():
@@ -33,4 +38,17 @@ def test_source_info_classifies_biospace():
             return Node() if tag == "source" else None
     provider, source_type = _source_info(Entry(), "https://news.google.com/example")
     assert provider == "BioSpace"
+    assert source_type == "SPECIALIST"
+
+
+def test_source_info_classifies_endpoints_news():
+    class Node:
+        text = "Endpoints News"
+        def get(self, key):
+            return "https://endpts.com/example"
+    class Entry:
+        def find(self, tag):
+            return Node() if tag == "source" else None
+    provider, source_type = _source_info(Entry(), "https://news.google.com/example")
+    assert provider == "Endpoints News"
     assert source_type == "SPECIALIST"
