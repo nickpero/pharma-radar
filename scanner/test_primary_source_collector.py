@@ -130,3 +130,15 @@ def test_parser_does_not_invent_timezone_for_unzoned_timestamp():
     assert rows[0]["published_at"] is None
     assert rows[0]["publication_time_precision"] == "TIMEZONE_UNKNOWN"
     assert rows[0]["publication_timezone_known"] is False
+
+
+
+def test_configured_sources_are_official_https_pages():
+    sources = collector.load_json(collector.SOURCES_PATH, [])
+    assert {item["ticker"] for item in sources} == {
+        "ALNY", "MRK", "REGN", "KOD", "LFCR", "ONCO", "SCYX", "LXRX"
+    }
+    for item in sources:
+        parsed = collector.urlparse(item["listing_url"])
+        assert parsed.scheme == "https"
+        assert parsed.hostname == item["allowed_host"]
