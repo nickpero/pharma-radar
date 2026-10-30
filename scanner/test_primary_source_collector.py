@@ -149,13 +149,8 @@ def test_configured_sources_are_official_https_pages():
         assert parsed.scheme == "https"
         assert parsed.hostname == item["allowed_host"]
     by_ticker = {item["ticker"]: item for item in sources}
-    assert {ticker for ticker, item in by_ticker.items() if item.get("enabled", True)} == {
-        "ALNY", "MRK", "ONCO", "SCYX",
-        "CAPR", "SVRA", "ZYME", "MIRM", "PHVS", "TENX", "NUVL", "ARGX", "QURE", "STOK",
-    }
-    assert {ticker for ticker, item in by_ticker.items() if item.get("enabled") is False} == {
-        "REGN", "KOD", "LFCR", "LXRX"
-    }
+    assert {ticker for ticker, item in by_ticker.items() if item.get("enabled", True)} == set(by_ticker)
+    assert not {ticker for ticker, item in by_ticker.items() if item.get("enabled") is False}
 
 
 
