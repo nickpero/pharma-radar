@@ -3,6 +3,7 @@ from scripts.update_sec_cik_map import (
     parse_sec_ticker_payload,
     parse_sec_cik_lookup_text,
 )
+from scanner.sec_feed import WATCHLIST_CIK, WATCHLIST_CIK_MANUAL
 
 
 def test_parse_exchange_map_schema_and_normalize_cik():
@@ -116,3 +117,9 @@ def test_historical_cik_name_match_fills_only_unique_exact_company_matches():
     }
     assert counts["historical_name"] == 2
     assert counts["unmapped"] == 1
+
+
+def test_supplemental_cik_entries_are_not_treated_as_protected_manual_mappings():
+    # ARGX is supplied by data/sec_cik_map.json, not the hand-verified core.
+    assert "ARGX" in WATCHLIST_CIK
+    assert "ARGX" not in WATCHLIST_CIK_MANUAL
