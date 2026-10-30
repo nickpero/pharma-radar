@@ -46,6 +46,27 @@ def test_primary_source_builders():
     assert sec["event_date"] == "2026-09-01"
 
 
+def test_sec_6k_earnings_detection_is_specific():
+    assert sec_feed._looks_like_financial_results("AstraZeneca Q3 2026 financial results")
+    assert sec_feed._looks_like_financial_results("Half-year results and interim financial statements")
+    assert not sec_feed._looks_like_financial_results("AstraZeneca announces Phase 3 clinical trial results")
+
+
+def test_sec_6k_company_results_marker_passes_without_program_match():
+    watchlist = {"AZN": {"company": "AstraZeneca", "programs": ["Tagrisso", "Imfinzi"]}}
+    item = build_sec_item(
+        "AZN", "AstraZeneca", "0000901832",
+        "0000000000-26-000002", "6-K", "2026-10-30",
+        items=[], text="AstraZeneca Q3 2026 financial results",
+        title="SEC 6-K — AstraZeneca — Q3 2026 financial results",
+    )
+    item["company_event_type"] = "COMPANY_FINANCIAL_RESULTS"
+    events = process_regulatory_news([item], watchlist)
+    assert len(events) == 1
+    assert events[0]["ticker"] == "AZN"
+    assert events[0]["subtype"] == "COMPANY_FINANCIAL_RESULTS"
+
+
 def test_sec_8k_item_202_is_included_as_company_financial_results():
     watchlist = {"REGN": {"company": "Regeneron Pharmaceuticals", "programs": ["linvoseltamab"]}}
     item = build_sec_item(
