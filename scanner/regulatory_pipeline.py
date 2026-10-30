@@ -38,7 +38,9 @@ def _process_item(item, watchlist):
     # pipeline asset, but the SEC adapter has already bound the filing to its CIK/ticker.
     sec_items = {str(code).strip() for code in (item.get("filing_items") or [])}
     is_company_financial_results = (
-        source == "SEC" and source_ticker in watchlist and "2.02" in sec_items
+        source == "SEC" and source_ticker in watchlist and (
+            "2.02" in sec_items or item.get("company_event_type") == "COMPANY_FINANCIAL_RESULTS"
+        )
     )
     if is_company_financial_results:
         company_meta = watchlist[source_ticker]
