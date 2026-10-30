@@ -167,3 +167,27 @@ def test_disabled_source_is_not_requested(tmp_path):
     assert result["sources_enabled"] == 0
     assert result["sources_disabled"] == 1
     assert result["sources_ok"] == 0
+
+
+
+def test_rss_parser_extracts_original_publication_timestamp():
+    source = dict(
+        SOURCE,
+        listing_url="https://company.example/rss/news.xml",
+        allowed_host="company.example",
+    )
+    rss = """
+    <rss><channel><item>
+      <title>Company announces Phase 3 clinical results from its pivotal study</title>
+      <link>https://company.example/news/phase-3-results</link>
+      <pubDate>Thu, 30 Oct 2026 09:00:00 -0400</pubDate>
+      <description>Topline clinical results from the pivotal Phase 3 study.</description>
+    </item></channel></rss>
+    """
+    rows = collector.parse_listing_page(rss, source)
+    assert len(rows) == 1
+    assert rows[0]["source_url"] == "https://company.example/news/phase-3-results"
+    assert rows[0]["published_at"] == "2026-10-30T13:00:00+00:00"
+    assert rows[0]["publication_time_precision"] == "TIMESTAMP"
+    assert rows[0]["publication_timezone_known"] is True
+    assert rows[0]["publication_timestamp_source"] == "RSS_PUBDATE"
