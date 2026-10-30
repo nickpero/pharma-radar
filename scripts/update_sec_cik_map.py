@@ -39,7 +39,8 @@ def normalize_company_name(value: Any) -> str:
     tokens = text.split()
     legal_suffixes = {
         "INC", "INCORPORATED", "CORP", "CORPORATION", "CO", "COMPANY",
-        "LTD", "LIMITED", "PLC", "LLC", "LP",
+        "LTD", "LIMITED", "PLC", "LLC", "LP", "AG", "SA", "NV", "BV",
+        "AB", "AS", "SE", "GMBH", "KG", "SAS", "SARL", "SPA",
     }
     while tokens and tokens[-1] in legal_suffixes:
         tokens.pop()
@@ -135,7 +136,11 @@ def build_watchlist_cik_map(
             company_names = []
             if isinstance(config, dict):
                 company_names.append(config.get("company", ""))
-                company_names.extend(config.get("sec_name_aliases", []) or [])
+                aliases = config.get("sec_name_aliases", []) or []
+                if isinstance(aliases, str):
+                    aliases = [aliases]
+                if isinstance(aliases, (list, tuple, set)):
+                    company_names.extend(aliases)
             candidate_ciks = set()
             for company_name in company_names:
                 candidate_ciks.update(
