@@ -148,6 +148,8 @@ def parse_listing_page(html, source, discovered_at=None):
 
 def collect_candidates(sources=None, state_path=None, candidates_path=None, session=None):
     sources = sources if sources is not None else load_json(SOURCES_PATH, [])
+    enabled_sources = [source for source in sources if source.get("enabled", True) is not False]
+    disabled_sources = len(sources) - len(enabled_sources)
     state_path = Path(state_path) if state_path else STATE_PATH
     candidates_path = Path(candidates_path) if candidates_path else CANDIDATES_PATH
     session = session or requests
@@ -164,7 +166,7 @@ def collect_candidates(sources=None, state_path=None, candidates_path=None, sess
     source_errors = []
     successful_sources = 0
     now = datetime.now(timezone.utc).isoformat()
-    for source in sources:
+    for source in enabled_sources:
         try:
             response = session.get(
                 source["listing_url"],
@@ -183,20 +185,21 @@ def collect_candidates(sources=None, state_path=None, candidates_path=None, sess
                 known_candidates.add(url)
         except Exception as exc:
             source_errors.append(f"{source.get('ticker', 'UNKNOWN')}: {type(exc).__name__}: {exc}")
-    if sources and successful_sources == 0:
-        raise RuntimeError("All official press-release pages failed: " + "; ".join(source_errors))
+    if enabled_sources and successful_sources == 0:
+        raise RuntimeError("All enabled official press-release pages failed: " + "; ".join(source_errors))
     pending.extend(new_candidates)
     save_json(candidates_path, pending)
     save_json(state_path, {"seen_urls": sorted(all_seen), "last_checked_at": now,
                            "successful_sources": successful_sources,
                            "source_errors": source_errors})
     print(
-        f"Primary-source discovery: sources_ok={successful_sources}/{len(sources)} "
-        f"new_candidates={len(new_candidates)} pending_total={len(pending)}"
+        f"Primary-source discovery: sources_ok={successful_sources}/{len(enabled_sources)} "
+        f"disabled={disabled_sources} new_candidates={len(new_candidates)} pending_total={len(pending)}"
     )
     for error in source_errors:
         print(f"WARNING source fetch failed: {error}")
-    return {"sources_ok": successful_sources, "new_candidates": new_candidates,
+    return {"sources_ok": successful_sources, "sources_enabled": len(enabled_sources),
+            "sources_disabled": disabled_sources, "new_candidates": new_candidates,
             "pending_total": len(pending), "source_errors": source_errors}
 
 
