@@ -287,6 +287,27 @@ def classify_trial_changes(changes):
         )
 
     # --------------------------------------------------------
+    # RESULTS BECAME AVAILABLE IN THE REGISTRY
+    # --------------------------------------------------------
+    has_results = changes.get("has_results", {})
+    results_date = changes.get("results_posted_date", {})
+    results_became_available = (
+        has_results.get("old") is False and has_results.get("new") is True
+    )
+    results_date_added = bool(results_date.get("new")) and not results_date.get("old")
+    if results_became_available or results_date_added:
+        events.append({
+            "type": "RESULTS_AVAILABILITY",
+            "subtype": "RESULTS_POSTED",
+            "old_value": results_date.get("old") or has_results.get("old"),
+            "new_value": results_date.get("new") or has_results.get("new"),
+            "direction": "UNKNOWN",
+            "event_date": results_date.get("new"),
+            "severity": "LOW",
+            "field": "results_posted_date",
+        })
+
+    # --------------------------------------------------------
     # PRIMARY COMPLETION DATE
     # --------------------------------------------------------
 
@@ -389,6 +410,8 @@ def classify_trial_changes(changes):
 
     ignored_fields = {
         "status",
+        "has_results",
+        "results_posted_date",
         "primary_completion_date",
         "study_completion_date",
         "completion_date",
