@@ -3,7 +3,7 @@
     "excluded": 14,
     "late": 260,
     "live": 0,
-    "upcoming": 273,
+    "upcoming": 258,
     "watch": 0
   },
   "excluded": [
@@ -442,7 +442,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-10-31T20:07:50.600575+00:00",
+  "generated_at": "2026-10-31T23:07:27.786013+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -2004,328 +2004,6 @@
     "watch": "Fresh primary-source item with date-only precision or incomplete program verification."
   },
   "upcoming": [
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Gilead Sciences",
-      "date": "2026-10-31",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT04791839",
-      "phase": "PHASE2",
-      "programs": [
-        "lenacapavir",
-        "Trodelvy",
-        "zimberelimab",
-        "GS-1423"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT04791839",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "GILD",
-      "title": "Safety and Efficacy of Zimberelimab (AB122) in Combination With Domvanalimab (AB154) and Etrumadenant (AB928) in Patients With Previously Treated Non-Small Cell Lung Cancer"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Janux Therapeutics",
-      "date": "2026-10-31",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "STUDY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT05783622",
-      "phase": "PHASE1",
-      "programs": [
-        "JANX007",
-        "JANX008"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT05783622",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "JANX",
-      "title": "Study of JANX008 in Subjects With Advanced or Metastatic Solid Tumor Malignancies"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Olema Oncology",
-      "date": "2026-10-31",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT06016738",
-      "phase": "PHASE3",
-      "programs": [
-        "palazestrant",
-        "OP-3136"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT06016738",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "OLMA",
-      "title": "OP-1250 (Palazestrant) vs. Standard of Care for the Treatment of ER+/HER2- Advanced Breast Cancer"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Arcus Biosciences",
-      "date": "2026-10-31",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT04791839",
-      "phase": "PHASE2",
-      "programs": [
-        "domvanalimab",
-        "quemliclustat",
-        "zimberelimab"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT04791839",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "RCUS",
-      "title": "Safety and Efficacy of Zimberelimab (AB122) in Combination With Domvanalimab (AB154) and Etrumadenant (AB928) in Patients With Previously Treated Non-Small Cell Lung Cancer"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Arcus Biosciences",
-      "date": "2026-10-31",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT04791839",
-      "phase": "PHASE2",
-      "programs": [
-        "domvanalimab",
-        "quemliclustat",
-        "zimberelimab"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT04791839",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "RCUS",
-      "title": "Safety and Efficacy of Zimberelimab (AB122) in Combination With Domvanalimab (AB154) and Etrumadenant (AB928) in Patients With Previously Treated Non-Small Cell Lung Cancer"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Revolution Medicines",
-      "date": "2026-10-31",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT06360354",
-      "phase": "PHASE1",
-      "programs": [
-        "daraxonrasib",
-        "RMC-6236"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT06360354",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "RVMD",
-      "title": "A Study Evaluating Anvumetostat in Combination With Other Therapies in Participants With Advanced Gastrointestinal, Biliary Tract, or Pancreatic Cancers With Homozygous Methylthioadenosine Phosphorylase (MTAP)-Deletion (MTAPESTRY 103)"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Rhythm Pharmaceuticals",
-      "date": "2026-10-31",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT06772597",
-      "phase": "PHASE2",
-      "programs": [
-        "setmelanotide",
-        "RM-718",
-        "IMCIVREE"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT06772597",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "RYTM",
-      "title": "A Study of Setmelanotide in Patients With Prader-Willi Syndrome"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Rhythm Pharmaceuticals",
-      "date": "2026-10-31",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT06772597",
-      "phase": "PHASE2",
-      "programs": [
-        "setmelanotide",
-        "RM-718",
-        "IMCIVREE"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT06772597",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "RYTM",
-      "title": "A Study of Setmelanotide in Patients With Prader-Willi Syndrome"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "SpringWorks Therapeutics",
-      "date": "2026-10-31",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT06997276",
-      "phase": "PHASE1",
-      "programs": [
-        "nirogacestat",
-        "mirdametinib"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT06997276",
-      "status": "RECRUITING",
-      "ticker": "SWTX",
-      "title": "Effect of Hepatic Impairment on the Pharmacokinetics of Mirdametinib"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "SpringWorks Therapeutics",
-      "date": "2026-10-31",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "STUDY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT06997276",
-      "phase": "PHASE1",
-      "programs": [
-        "nirogacestat",
-        "mirdametinib"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT06997276",
-      "status": "RECRUITING",
-      "ticker": "SWTX",
-      "title": "Effect of Hepatic Impairment on the Pharmacokinetics of Mirdametinib"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "TG Therapeutics",
-      "date": "2026-10-31",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT06143514",
-      "phase": null,
-      "programs": [
-        "ublituximab",
-        "Briumvi"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT06143514",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "TGTX",
-      "title": "A Study Evaluating the Presence and Concentration of BRIUMVI™ (Ublituximab) in Breast Milk"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "TG Therapeutics",
-      "date": "2026-10-31",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "STUDY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT06143514",
-      "phase": null,
-      "programs": [
-        "ublituximab",
-        "Briumvi"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT06143514",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "TGTX",
-      "title": "A Study Evaluating the Presence and Concentration of BRIUMVI™ (Ublituximab) in Breast Milk"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "TG Therapeutics",
-      "date": "2026-10-31",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT06143514",
-      "phase": null,
-      "programs": [
-        "ublituximab",
-        "Briumvi"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT06143514",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "TGTX",
-      "title": "A Study Evaluating the Presence and Concentration of BRIUMVI™ (Ublituximab) in Breast Milk"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "TG Therapeutics",
-      "date": "2026-10-31",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "STUDY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT06143514",
-      "phase": null,
-      "programs": [
-        "ublituximab",
-        "Briumvi"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT06143514",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "TGTX",
-      "title": "A Study Evaluating the Presence and Concentration of BRIUMVI™ (Ublituximab) in Breast Milk"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Verastem",
-      "date": "2026-10-31",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "STUDY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT03875820",
-      "phase": "PHASE1",
-      "programs": [
-        "avutometinib",
-        "defactinib",
-        "VS-7375"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT03875820",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "VSTM",
-      "title": "Phase I Trial of Defactinib and VS-6766."
-    },
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
@@ -4147,6 +3825,329 @@
       "status": "RECRUITING",
       "ticker": "GILD",
       "title": "Zimberelimab and Quemliclustat in Combination With Chemotherapy for the Treatment of Patients With Borderline Resectable and Locally Advanced Pancreatic Adenocarcinoma"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Gilead Sciences",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT06082960",
+      "phase": "PHASE1",
+      "programs": [
+        "lenacapavir",
+        "Trodelvy",
+        "zimberelimab",
+        "GS-1423"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT06082960",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "GILD",
+      "title": "Study of GS-9911 With or Without Antibody Treatment for Adults With Solid Tumors"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Gilead Sciences",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT06082960",
+      "phase": "PHASE1",
+      "programs": [
+        "lenacapavir",
+        "Trodelvy",
+        "zimberelimab",
+        "GS-1423"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT06082960",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "GILD",
+      "title": "Study of GS-9911 With or Without Antibody Treatment for Adults With Solid Tumors"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Gossamer Bio",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT06274801",
+      "phase": "PHASE3",
+      "programs": [
+        "seralutinib"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT06274801",
+      "status": "RECRUITING",
+      "ticker": "GOSS",
+      "title": "Open-label Extension Study of Seralutinib in Adult Subjects With PAH (PROSERA-EXT)"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Gossamer Bio",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT06274801",
+      "phase": "PHASE3",
+      "programs": [
+        "seralutinib"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT06274801",
+      "status": "RECRUITING",
+      "ticker": "GOSS",
+      "title": "Open-label Extension Study of Seralutinib in Adult Subjects With PAH (PROSERA-EXT)"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Heron Therapeutics",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT07280195",
+      "phase": "PHASE4",
+      "programs": [
+        "HTX-034",
+        "ZYNRELEF"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT07280195",
+      "status": "ENROLLING_BY_INVITATION",
+      "ticker": "HRTX",
+      "title": "ZYNRELEF vs Continuous Catheter for Pain Management Following Shoulder Arthroplasty"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "I-Mab",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT04900818",
+      "phase": "PHASE1",
+      "programs": [
+        "givastomig"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT04900818",
+      "status": "RECRUITING",
+      "ticker": "IMAB",
+      "title": "Study of TJ033721 (Givastomig) in Subjects With Advanced or Metastatic Solid Tumors"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Immunocore",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT05785754",
+      "phase": "PHASE1",
+      "programs": [
+        "tebentafusp",
+        "IMC-F106C",
+        "IMC-I109V"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT05785754",
+      "status": "RECRUITING",
+      "ticker": "IMCR",
+      "title": "DCSZ11 as a Monotherapy and in Combination in Patients With Advanced or Metastatic Solid Tumors"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Immunocore",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT05785754",
+      "phase": "PHASE1",
+      "programs": [
+        "tebentafusp",
+        "IMC-F106C",
+        "IMC-I109V"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT05785754",
+      "status": "RECRUITING",
+      "ticker": "IMCR",
+      "title": "DCSZ11 as a Monotherapy and in Combination in Patients With Advanced or Metastatic Solid Tumors"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Immix Biopharma",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT06097832",
+      "phase": "PHASE1",
+      "programs": [
+        "NXC-201"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT06097832",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "IMMX",
+      "title": "Study of NXC-201 CAR-T in Patients With Light Chain (AL) Amyloidosis"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Immunome",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT04871282",
+      "phase": "PHASE2",
+      "programs": [
+        "varegacestat (AL102)",
+        "IM-1021"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT04871282",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "IMNM",
+      "title": "A Study of AL102 in Patients With Progressing Desmoid Tumors"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Incyte",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "DAY",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT05491226",
+      "phase": "PHASE2",
+      "programs": [
+        "povorcitinib",
+        "axatilimab",
+        "retifanlimab"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT05491226",
+      "status": "RECRUITING",
+      "ticker": "INCY",
+      "title": "Reinvigorating TNBC Response to Immunotherapy With Combination Myeloid Inhibition and Radiation"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Incyte",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "DAY",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT05491226",
+      "phase": "PHASE2",
+      "programs": [
+        "povorcitinib",
+        "axatilimab",
+        "retifanlimab"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT05491226",
+      "status": "RECRUITING",
+      "ticker": "INCY",
+      "title": "Reinvigorating TNBC Response to Immunotherapy With Combination Myeloid Inhibition and Radiation"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Jaguar Health",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT06721871",
+      "phase": "PHASE2",
+      "programs": [
+        "crofelemer",
+        "Mytesi",
+        "Canalevia"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT06721871",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "JAGX",
+      "title": "Ascending Doses of Crofelemer Powder for Oral Solution in Pediatric Microvillus Inclusion Disease (MVID)"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Jaguar Health",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT06721871",
+      "phase": "PHASE2",
+      "programs": [
+        "crofelemer",
+        "Mytesi",
+        "Canalevia"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT06721871",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "JAGX",
+      "title": "Ascending Doses of Crofelemer Powder for Oral Solution in Pediatric Microvillus Inclusion Disease (MVID)"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Krystal Biotech",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT05504837",
+      "phase": "PHASE1",
+      "programs": [
+        "Vyjuvek",
+        "KB407",
+        "KB803",
+        "KB801"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT05504837",
+      "status": "RECRUITING",
+      "ticker": "KRYS",
+      "title": "A Study Assessing KB407 for the Treatment of Cystic Fibrosis"
     }
   ],
   "watch": []
