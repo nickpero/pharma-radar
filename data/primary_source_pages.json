@@ -25,23 +25,23 @@
   {
     "ticker": "KOD",
     "company": "Kodiak Sciences",
-    "listing_url": "https://kodiak.gcs-web.com/",
-    "allowed_host": "kodiak.gcs-web.com",
+    "listing_url": "https://ir.kodiak.com/news-releases/",
+    "allowed_host": "ir.kodiak.com",
     "enabled": false,
     "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
   },
   {
     "ticker": "LFCR",
     "company": "Lifecore Biomedical",
-    "listing_url": "https://ir.lifecore.com/press-releases",
-    "allowed_host": "ir.lifecore.com",
+    "listing_url": "https://lifecore.gcs-web.com/news-releases",
+    "allowed_host": "lifecore.gcs-web.com",
     "enabled": false,
     "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
   },
   {
     "ticker": "LXRX",
     "company": "Lexicon Pharmaceuticals",
-    "listing_url": "https://lexiconpharma.gcs-web.com/",
+    "listing_url": "https://lexiconpharma.gcs-web.com/news-events/news-releases",
     "allowed_host": "lexiconpharma.gcs-web.com",
     "enabled": false,
     "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
