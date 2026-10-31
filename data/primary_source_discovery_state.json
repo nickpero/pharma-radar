@@ -55,6 +55,8 @@
     "https://www.uniqure.com/programs-pipeline/huntingtons-disease",
     "https://www.zymeworks.com/zymeworks-to-present-on-preclinical-and-clinical-programs-at-multiple-upcoming-medical-conferences/"
   ],
-  "source_errors": [],
-  "successful_sources": 12
+  "source_errors": [
+    "ZYME: ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))"
+  ],
+  "successful_sources": 11
 }
