@@ -104,8 +104,9 @@ def _is_expired(alert):
 def alert_action(alert):
     """Classify alert delivery while separating discovery from confirmed action.
 
-    IMMEDIATE/FAST require a fresh, verified primary source. Fresh discovery
-    items and recent primary-source items aged 24-72h may be WATCH only.
+    IMMEDIATE/FAST require a fresh, verified primary source. Only items
+    published/updated within 24h can be delivered; 24-72h items remain
+    reaction context and are never backfilled as new Telegram alerts.
     Historical, expired, and timestamp-less events remain silent.
     """
     if _is_expired(alert):
@@ -143,11 +144,10 @@ def alert_action(alert):
             return "WATCH"
         return "SILENT"
 
-    # Expand recall for credible primary-source catalysts published 24-72h ago.
-    # They can alert as WATCH, but cannot be upgraded to FAST/IMMEDIATE.
+    # A catalyst first detected 24-72h after publication is too late for a
+    # new Telegram notification. Keep it as historical/reaction context only;
+    # never backfill a missed delivery as if it were timely.
     if freshness == "REACTION_24_72H":
-        if primary and (priority >= 50 or tier in {"HIGH", "CRITICAL"}):
-            return "WATCH"
         return "SILENT"
 
     if not alert_quality_gate(alert)["eligible"]:
