@@ -45,8 +45,8 @@ jobs:
 
       - name: Validate Trading Intelligence Rule
         run: |
-          python -m py_compile main.py scanner/trial_scanner.py scanner/fda_enrichment.py scanner/early_discovery_feed.py scanner/regulatory_pipeline.py scanner/sec_feed.py scanner/daily_top5.py scanner/market_data.py scanner/trading_intelligence_rule.py scanner/trading_intelligence_score.py scanner/data_quality_audit.py scanner/divergence_monitor.py scanner/divergence_outcomes.py scanner/telegram_delivery_audit.py
-          python -m pytest -q scanner/test_data_quality_audit.py scanner/test_divergence_monitor.py scanner/test_divergence_outcomes.py scanner/test_fda_p13.py scanner/test_telegram_intelligence.py scanner/test_early_discovery_feed.py scanner/test_main.py scanner/test_regulatory_sources.py scanner/test_daily_top5.py scanner/test_phase4.py scanner/test_sec_cik_map_updater.py scanner/test_telegram_delivery_audit.py
+          python -m py_compile main.py scanner/trial_scanner.py scanner/fda_enrichment.py scanner/early_discovery_feed.py scanner/regulatory_pipeline.py scanner/sec_feed.py scanner/daily_top5.py scanner/market_data.py scanner/trading_intelligence_rule.py scanner/trading_intelligence_score.py scanner/data_quality_audit.py scanner/divergence_monitor.py scanner/divergence_outcomes.py scanner/telegram_delivery_audit.py scanner/opportunity_board.py scanner/catalyst_calendar.py scanner/catalyst_memory.py
+          python -m pytest -q scanner/test_data_quality_audit.py scanner/test_divergence_monitor.py scanner/test_divergence_outcomes.py scanner/test_fda_p13.py scanner/test_telegram_intelligence.py scanner/test_early_discovery_feed.py scanner/test_main.py scanner/test_regulatory_sources.py scanner/test_daily_top5.py scanner/test_phase4.py scanner/test_sec_cik_map_updater.py scanner/test_telegram_delivery_audit.py scanner/test_opportunity_board.py scanner/test_catalyst_calendar.py
           python -m pytest -q scanner/test_fda_enrichment_dates.py scanner/test_trial_scanner.py
 
       - name: Discover official company IR releases (manual review candidates)

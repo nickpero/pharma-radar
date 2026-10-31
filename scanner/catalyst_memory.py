@@ -45,6 +45,7 @@ def _snapshot(event):
         "recorded_at": datetime.now(timezone.utc).isoformat(),
         "ticker": event.get("ticker"),
         "company": event.get("company"),
+        "title": event.get("title"),
         "program": event.get("program"),
         "nct_id": event.get("nct_id"),
         "source": event.get("source"),
@@ -65,7 +66,10 @@ def _snapshot(event):
         "reaction_interpretation": event.get("reaction_interpretation"),
         "price_change_pct": event.get("price_change_pct"),
         "volume_ratio": event.get("volume_ratio"),
-        "market_cap": event.get("market_cap"),
+        "price": event.get("price") or (event.get("market_data") or {}).get("price"),
+        "average_volume_20d": event.get("average_volume_20d") or (event.get("market_data") or {}).get("average_volume_20d"),
+        "market_data_source": event.get("market_data_source") or (event.get("market_data") or {}).get("market_data_source"),
+        "market_cap": event.get("market_cap") or (event.get("market_data") or {}).get("market_cap"),
         "short_interest_pct": event.get("short_interest_pct"),
         "reaction": reaction,
         "trading_intelligence_version": event.get("trading_intelligence_version"),
@@ -85,6 +89,7 @@ def _snapshot(event):
         "url": event.get("url"),
         "catalyst_origin": event.get("catalyst_origin"),
         "detected_at": event.get("detected_at") or event.get("recorded_at"),
+        "first_seen_at": event.get("first_seen_at") or event.get("detected_at"),
     }
 
 
@@ -98,7 +103,15 @@ def record_events(events, path=MEMORY_FILE):
         key = _key(event)
         if key not in memory:
             added += 1
-        memory[key] = _snapshot(event)
+        snapshot = _snapshot(event)
+        previous = memory.get(key) or {}
+        snapshot["first_seen_at"] = (
+            previous.get("first_seen_at")
+            or event.get("first_seen_at")
+            or event.get("detected_at")
+            or snapshot.get("recorded_at")
+        )
+        memory[key] = snapshot
     if len(memory) > MAX_RECORDS:
         ordered = sorted(memory.items(), key=lambda item: item[1].get("recorded_at", ""), reverse=True)
         memory = dict(ordered[:MAX_RECORDS])
