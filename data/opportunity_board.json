@@ -271,7 +271,7 @@
         "volume_ratio": null
       },
       "nct_id": null,
-      "opportunity_score": 71.5,
+      "opportunity_score": 75.6,
       "priority_score": 99.0,
       "program": "KT-579",
       "program_status": "VERIFIED",
@@ -442,7 +442,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-10-31T11:07:02.726276+00:00",
+  "generated_at": "2026-10-31T20:07:50.600575+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
