@@ -55,6 +55,7 @@ def test_format():
         "phase": "PHASE3",
         "nct_id": "NCT1",
         "status": "RECRUITING",
+        "source_url": "https://clinicaltrials.gov/study/NCT1",
     }], days=90)
     assert "CATALYST CALENDAR" in message
     assert "2026-10 (month)" in message
