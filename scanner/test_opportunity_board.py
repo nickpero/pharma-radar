@@ -98,3 +98,22 @@ def test_upcoming_milestones_are_kept_separate_and_labelled_as_estimates():
     summary = format_board_summary(board)
     assert "LIVE=0" in summary
     assert "UPCOMING=1" in summary
+
+
+def test_catalyst_memory_preserves_first_seen_time_across_repeated_scans(tmp_path):
+    from scanner.catalyst_memory import history_records, record_events
+
+    path = tmp_path / "catalyst_history.json"
+    original = {
+        "ticker": "ABC", "program": "drug-a", "subtype": "TOPLINE_RESULTS",
+        "source": "SEC", "source_type": "PRIMARY_CORPORATE",
+        "event_timestamp": "2026-10-31T08:00:00+00:00",
+        "first_seen_at": "2026-10-31T08:02:00+00:00",
+    }
+    record_events([original], path=path)
+    repeated = dict(original, first_seen_at="2026-10-31T08:12:00+00:00")
+    record_events([repeated], path=path)
+
+    rows = history_records(path=path)
+    assert len(rows) == 1
+    assert rows[0]["first_seen_at"] == "2026-10-31T08:02:00+00:00"
