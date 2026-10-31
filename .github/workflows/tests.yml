@@ -30,6 +30,8 @@ jobs:
       - name: Compile changed intelligence modules
         run: python -m py_compile scanner/primary_source_collector.py scanner/clinical_trials.py scanner/state.py scanner/telegram_intelligence.py scanner/telegram.py scanner/pharma_email.py scanner/daily_top5.py scanner/market_data.py scanner/italian_translation.py scanner/alert_state.py scanner/telegram_delivery_audit.py scanner/opportunity_board.py scanner/catalyst_calendar.py scanner/catalyst_memory.py scanner/fda_freshness.py scanner/fda_pipeline.py scripts/update_sec_cik_map.py
       - name: Verify live official IR source reachability
+        env:
+          PRIMARY_SOURCE_REQUIRED_TICKERS: KOD,LFCR,LXRX
         run: python -m scanner.primary_source_collector
 
       - name: Run alert and core regression tests
