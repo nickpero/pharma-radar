@@ -290,10 +290,11 @@ def test_recent_secondary_discovery_cannot_become_fast_or_immediate():
     assert alert_action(alert) == "WATCH"
 
 
-def test_primary_catalyst_24_to_72_hours_becomes_watch_only():
+def test_primary_catalyst_24_to_72_hours_is_silent_not_backfilled():
     alert = _alert("VBIO", 100, 90, "CRITICAL")
     alert["published_at"] = (datetime.now(timezone.utc) - __import__("datetime").timedelta(hours=36)).isoformat()
-    assert alert_action(alert) == "WATCH"
+    assert alert_action(alert) == "SILENT"
+    assert select_intelligent_alerts([alert]) == []
 
 
 def test_secondary_non_discovery_source_remains_silent():
