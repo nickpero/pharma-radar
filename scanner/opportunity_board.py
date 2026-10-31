@@ -8,6 +8,7 @@ import os
 import tempfile
 from datetime import date, datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from scanner.catalyst_calendar import build_upcoming_calendar
 from scanner.catalyst_memory import history_records
@@ -51,7 +52,7 @@ def _freshness(event, now):
     parsed, precision = _parse_event_time(raw)
     if precision == "TIMESTAMP":
         age_hours = (now - parsed).total_seconds() / 3600.0
-        if age_hours < -1:
+        if age_hours < 0:
             return "FUTURE_TIMESTAMP", precision
         if age_hours <= 24:
             return "LIVE_0_24H", precision
@@ -232,7 +233,7 @@ def build_opportunity_board(events=None, watchlist=None, upcoming=None, now=None
 
     if upcoming is None:
         try:
-            upcoming = build_upcoming_calendar(days=90, watchlist=watchlist)
+            upcoming = build_upcoming_calendar(days=90, watchlist=watchlist, today=reference.astimezone(ZoneInfo('Europe/Rome')).date())
         except (OSError, ValueError, json.JSONDecodeError):
             upcoming = []
 
