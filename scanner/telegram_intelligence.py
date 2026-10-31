@@ -104,8 +104,9 @@ def _is_expired(alert):
 def alert_action(alert):
     """Classify alert delivery while separating discovery from confirmed action.
 
-    IMMEDIATE/FAST require a fresh, verified primary source. Fresh discovery
-    items and recent primary-source items aged 24-72h may be WATCH only.
+    IMMEDIATE/FAST require a fresh, verified primary source. Only items
+    published/updated within 24h can be delivered; 24-72h items remain
+    reaction context and are never backfilled as new Telegram alerts.
     Historical, expired, and timestamp-less events remain silent.
     """
     if _is_expired(alert):
