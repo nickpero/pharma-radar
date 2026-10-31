@@ -264,6 +264,8 @@ def test_summary_shows_unmapped_sec_ticker_sample():
 def test_catalyst_alert_is_not_marked_sent_without_telegram_confirmation(monkeypatch):
     sent_state = {}
     saves = []
+    audit_calls = []
+    monkeypatch.setattr(main, "append_delivery_audit", lambda *args, **kwargs: audit_calls.append((args, kwargs)))
     monkeypatch.setattr(main, "load_sent_alerts", lambda: dict(sent_state))
     monkeypatch.setattr(main, "save_sent_alerts", lambda state: (saves.append(dict(state)), sent_state.update(state)))
     monkeypatch.setattr(main, "send_telegram", lambda message: {"ok": False, "description": "chat not found"})
@@ -275,10 +277,13 @@ def test_catalyst_alert_is_not_marked_sent_without_telegram_confirmation(monkeyp
 
     assert sent_state == {}
     assert saves == []
+    assert [call[0][2] for call in audit_calls] == ["ATTEMPTED", "FAILED"]
 
 
 def test_catalyst_alert_is_persisted_only_after_telegram_confirmation(monkeypatch):
     sent_state = {}
+    audit_calls = []
+    monkeypatch.setattr(main, "append_delivery_audit", lambda *args, **kwargs: audit_calls.append((args, kwargs)))
     monkeypatch.setattr(main, "load_sent_alerts", lambda: dict(sent_state))
     monkeypatch.setattr(main, "save_sent_alerts", lambda state: sent_state.update(state))
     monkeypatch.setattr(main, "send_telegram", lambda message: {"ok": True, "result": {"message_id": 123}})
@@ -288,6 +293,8 @@ def test_catalyst_alert_is_persisted_only_after_telegram_confirmation(monkeypatc
 
     assert responses[0]["ok"] is True
     assert len(sent_state) == 1
+    assert [call[0][2] for call in audit_calls] == ["ATTEMPTED", "CONFIRMED"]
+    assert audit_calls[-1][1]["message_id"] == 123
 
 
 def test_source_health_warning_is_not_persisted_without_telegram_confirmation(monkeypatch):
