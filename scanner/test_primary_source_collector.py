@@ -209,3 +209,15 @@ def test_priority_ir_sources_use_alternate_official_release_endpoints():
         assert by_ticker[ticker]["enabled"] is True
         assert by_ticker[ticker]["listing_url"] == url
         assert by_ticker[ticker]["allowed_host"] == host
+
+
+def test_required_tickers_mode_fails_when_a_required_source_is_missing(tmp_path, monkeypatch):
+    monkeypatch.setenv("PRIMARY_SOURCE_REQUIRED_TICKERS", "TST,MISSING")
+    import pytest
+    with pytest.raises(RuntimeError, match="Required official IR sources unavailable: MISSING"):
+        collector.collect_candidates(
+            [SOURCE],
+            tmp_path / "state.json",
+            tmp_path / "candidates.json",
+            Session(),
+        )
