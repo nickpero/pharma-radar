@@ -11,6 +11,7 @@ from scanner.catalyst_memory import record_events
 from scanner.telegram import send_telegram, send_catalyst_alerts, format_catalyst_alert, send_divergence_alerts
 from scanner.telegram_intelligence import select_intelligent_alerts, _dedup_key, alert_quality_gate, alert_action
 from scanner.alert_state import load_sent_alerts, save_sent_alerts, filter_unsent, mark_sent
+from scanner.telegram_delivery_audit import append_delivery_audit
 from scanner.pharma_email import send_pharma_intelligence_emails
 from scanner.divergence_monitor import detect_divergences
 from scanner.divergence_outcomes import track_divergence_outcomes
@@ -178,19 +179,53 @@ def send_alerts(result, alerts=None):
     alerts = _new_telegram_alerts(result) if alerts is None else alerts
     if not alerts:
         return []
-    # Stamp detection immediately before formatting the Telegram delivery.
+    # Preserve scan discovery time separately from qualification and delivery.
     detected_at = datetime.now(timezone.utc).isoformat()
     for alert in alerts:
+        alert.setdefault("first_seen_at", detected_at)
         alert.setdefault("detected_at", detected_at)
+        alert.setdefault("qualified_at", detected_at)
+    key_fn = lambda alert: repr(_dedup_key(alert))
+    # Audit failures must never block a genuine Telegram alert.
+    try:
+        append_delivery_audit(
+            alerts, key_fn, "ATTEMPTED", attempted_at=detected_at
+        )
+    except Exception as exc:
+        print(f"WARNING Telegram delivery audit attempt write failed: {exc}")
+
     # One Telegram delivery per scan, containing all new catalyst alerts.
     # The scan summary is kept for Actions/logs and is not sent separately.
     message = "\n\n──────────────\n\n".join(format_catalyst_alert(alert) for alert in alerts)
-    responses = [send_telegram(message)]
-    for response in responses:
-        _require_telegram_success(response, "l'invio degli alert catalyst")
+    try:
+        responses = [send_telegram(message)]
+        for response in responses:
+            _require_telegram_success(response, "l'invio degli alert catalyst")
+    except Exception as exc:
+        try:
+            append_delivery_audit(
+                alerts, key_fn, "FAILED", attempted_at=detected_at, error=exc
+            )
+        except Exception as audit_exc:
+            print(f"WARNING Telegram delivery audit failure write failed: {audit_exc}")
+        raise
+
+    confirmed_at = datetime.now(timezone.utc).isoformat()
+    message_id = None
+    if responses and isinstance(responses[0], dict):
+        result_payload = responses[0].get("result")
+        if isinstance(result_payload, dict):
+            message_id = result_payload.get("message_id")
+    try:
+        append_delivery_audit(
+            alerts, key_fn, "CONFIRMED", attempted_at=detected_at,
+            confirmed_at=confirmed_at, message_id=message_id,
+        )
+    except Exception as exc:
+        print(f"WARNING Telegram delivery audit confirmation write failed: {exc}")
+
     state = load_sent_alerts()
-    timestamp = datetime.now(timezone.utc).isoformat()
-    mark_sent(alerts, state, lambda alert: repr(_dedup_key(alert)), timestamp)
+    mark_sent(alerts, state, key_fn, confirmed_at)
     save_sent_alerts(state)
     return responses
 
@@ -350,6 +385,9 @@ def send_divergence_alerts_once(result):
 def main():
     print("Starting Pharma Radar...")
     result = scan()
+    scan_seen_at = datetime.now(timezone.utc).isoformat()
+    for alert in result.get("alerts", []):
+        alert.setdefault("first_seen_at", scan_seen_at)
     result["alerts"] = enrich_trading_intelligence_scores(result.get("alerts", []))
     result["alerts"] = enrich_trading_intelligence_rules(result["alerts"])
 
