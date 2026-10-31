@@ -151,10 +151,10 @@ def test_configured_sources_are_official_https_pages():
     by_ticker = {item["ticker"]: item for item in sources}
     assert {ticker for ticker, item in by_ticker.items() if item.get("enabled", True)} == {
         "ALNY", "MRK", "ONCO", "SCYX", "CAPR", "SVRA", "ZYME", "MIRM",
-        "NUVL", "ARGX", "QURE", "STOK",
+        "NUVL", "ARGX", "QURE", "STOK", "KOD", "LFCR", "LXRX",
     }
     assert {ticker for ticker, item in by_ticker.items() if item.get("enabled") is False} == {
-        "KOD", "LFCR", "LXRX", "PHVS", "TENX", "REGN",
+        "PHVS", "TENX", "REGN",
     }
 
 
@@ -195,3 +195,17 @@ def test_rss_parser_extracts_original_publication_timestamp():
     assert rows[0]["publication_time_precision"] == "TIMESTAMP"
     assert rows[0]["publication_timezone_known"] is True
     assert rows[0]["publication_timestamp_source"] == "RSS_PUBDATE"
+
+
+def test_priority_ir_sources_use_alternate_official_release_endpoints():
+    sources = collector.load_json(collector.SOURCES_PATH, [])
+    by_ticker = {item["ticker"]: item for item in sources}
+    expected = {
+        "KOD": ("https://ir.kodiak.com/news-releases/", "ir.kodiak.com"),
+        "LFCR": ("https://lifecore.gcs-web.com/news-releases", "lifecore.gcs-web.com"),
+        "LXRX": ("https://lexiconpharma.gcs-web.com/news-events/news-releases", "lexiconpharma.gcs-web.com"),
+    }
+    for ticker, (url, host) in expected.items():
+        assert by_ticker[ticker]["enabled"] is True
+        assert by_ticker[ticker]["listing_url"] == url
+        assert by_ticker[ticker]["allowed_host"] == host
