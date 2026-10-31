@@ -195,7 +195,7 @@ def _event_row(event, watchlist, now):
         "source_url": event.get("url"),
         "published_at": event.get("event_timestamp") or event.get("published_at"),
         "publication_precision": precision,
-        "first_seen_at": event.get("detected_at") or event.get("recorded_at"),
+        "first_seen_at": event.get("first_seen_at") or event.get("detected_at"),
         "catalyst_score": _number(event.get("score")),
         "priority_score": _number(event.get("alert_priority")),
         "trading_intelligence_score": _number(event.get("trading_intelligence_score")),
@@ -258,6 +258,18 @@ def build_opportunity_board(events=None, watchlist=None, upcoming=None, now=None
 
 
 def save_opportunity_board(board, path=BOARD_PATH):
+    if path.exists():
+        try:
+            previous = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            previous = None
+        if isinstance(previous, dict):
+            previous_compare = dict(previous)
+            current_compare = dict(board)
+            previous_compare.pop("generated_at", None)
+            current_compare.pop("generated_at", None)
+            if previous_compare == current_compare:
+                return path
     path.parent.mkdir(parents=True, exist_ok=True)
     fd, temporary_path = tempfile.mkstemp(
         prefix=f".{path.name}.", suffix=".tmp", dir=str(path.parent)
