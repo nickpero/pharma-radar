@@ -8,6 +8,7 @@ from scanner.trial_scanner import scan
 from scanner.trading_intelligence_score import enrich_trading_intelligence_scores
 from scanner.trading_intelligence_rule import enrich_trading_intelligence_rules
 from scanner.catalyst_memory import record_events
+from scanner.opportunity_board import build_opportunity_board, save_opportunity_board, format_board_summary
 from scanner.telegram import send_telegram, send_catalyst_alerts, format_catalyst_alert, send_divergence_alerts
 from scanner.telegram_intelligence import select_intelligent_alerts, _dedup_key, alert_quality_gate, alert_action
 from scanner.alert_state import load_sent_alerts, save_sent_alerts, filter_unsent, mark_sent
@@ -434,6 +435,13 @@ def main():
             print(f"DATA QUALITY {row['ticker']}: {row['issues']}")
 
     record_events(result["alerts"])
+    try:
+        opportunity_board = build_opportunity_board()
+        save_opportunity_board(opportunity_board)
+        print(format_board_summary(opportunity_board))
+    except Exception as exc:
+        # The board is supplemental and must never block catalyst alert delivery.
+        print(f"WARNING Opportunity Board generation failed: {exc}")
     all_alerts = result.get("alerts", [])
     quality_reasons = Counter(
         alert_quality_gate(alert).get("reason", "UNKNOWN")
