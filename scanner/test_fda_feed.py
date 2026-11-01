@@ -1,6 +1,8 @@
 from scanner.fda_feed import (
     FDA_NEWS_URL,
     _parse_medwatch_rss,
+    _parse_cber_whats_new_page,
+    FDA_CBER_WHATS_NEW_URL,
     FDA_MEDWATCH_RSS_URL,
     normalize_text,
     get_item_id,
@@ -435,3 +437,34 @@ def test_fda_html_listing_is_checked_when_rss_fills_limit(monkeypatch):
         item["url"].endswith("/fda-approves-voceryq")
         for item in items
     )
+
+
+def test_cber_whats_new_parses_voceryq_approval_letter_and_release():
+    html = """
+    <html><body>
+      <div class="views-row">
+        <time datetime="2026-10-30">10/30/2026</time>
+        <a href="/media/196199/download">October 30, 2026 Approval Letter - VOCERYQ</a>
+      </div>
+      <div class="views-row">
+        <time datetime="2026-10-30">10/30/2026</time>
+        <a href="/news-events/press-announcements/fda-approves-first-plasmid-dna-based-immunotherapy-adults-recurrent-respiratory-papillomatosis">
+          FDA Approves First Plasmid DNA-based Immunotherapy for Adults with Recurrent Respiratory Papillomatosis
+        </a>
+      </div>
+      <div class="views-row">
+        <a href="/vaccines-blood-biologics/guidance-compliance-regulatory-information">General biologics guidance</a>
+      </div>
+    </body></html>
+    """
+    items = _parse_cber_whats_new_page(html, max_items=10)
+    assert len(items) == 2
+    assert all(item["source"] == "FDA CBER" for item in items)
+    assert any("VOCERYQ" in item["title"] for item in items)
+    assert any("FDA Approves First Plasmid" in item["title"] for item in items)
+    assert all(item["published_at"].startswith("2026-10-30") for item in items)
+    assert all("APPROVAL" in item["categories"] for item in items)
+
+
+def test_cber_whats_new_url_is_official_fda_page():
+    assert FDA_CBER_WHATS_NEW_URL.startswith("https://www.fda.gov/")
