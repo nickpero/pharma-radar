@@ -1132,5 +1132,26 @@
     "source_url": "https://www.zymeworks.com/zymeworks-to-present-on-preclinical-and-clinical-programs-at-multiple-upcoming-medical-conferences/",
     "ticker": "ZYME",
     "title": "October 2, 2026 Zymeworks to Present on Preclinical and Clinical Programs at Multiple Upcoming Medical Conferences"
+  },
+  {
+    "company": "INOVIO Pharmaceuticals",
+    "discovered_at": "2026-11-01T07:30:49.251630+00:00",
+    "event_date": null,
+    "event_type": null,
+    "event_window": null,
+    "listing_context": "Events & Presentations",
+    "listing_url": "https://ir.inovio.com/overview/default.aspx",
+    "notes": "Candidate discovered from an official company page; verify the release and any future event date before alerting.",
+    "publication_date_candidate": null,
+    "publication_time_precision": "UNKNOWN",
+    "publication_timestamp_source": null,
+    "publication_timezone_known": false,
+    "published_at": null,
+    "published_at_raw": null,
+    "review_status": "PENDING_REVIEW",
+    "source_host": "ir.inovio.com",
+    "source_url": "https://ir.inovio.com/events-and-presentations/default.aspx",
+    "ticker": "INO",
+    "title": "Events & Presentations"
   }
 ]
