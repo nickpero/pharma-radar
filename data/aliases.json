@@ -581,5 +581,26 @@
         "PYNNACLE"
       ]
     }
+  },
+  "INO": {
+    "company_aliases": [
+      "INOVIO Pharmaceuticals",
+      "INOVIO",
+      "Inovio Pharmaceuticals, Inc."
+    ],
+    "program_aliases": {
+      "INO-3107": [
+        "INO-3107",
+        "VOCERYQ",
+        "doruxapapogene ralaplasmid",
+        "lalikinogene sifuplasmid-gxfd"
+      ],
+      "VGX-3100": [
+        "VGX-3100"
+      ],
+      "INO-3112": [
+        "INO-3112"
+      ]
+    }
   }
 }
