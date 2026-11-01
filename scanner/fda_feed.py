@@ -16,6 +16,7 @@ from bs4 import BeautifulSoup
 FDA_NEWS_URL = "https://www.fda.gov/news-events/fda-newsroom/press-announcements"
 FDA_PRESS_ANNOUNCEMENTS_URL = FDA_NEWS_URL
 FDA_NEWSROOM_URL = "https://www.fda.gov/news-events/fda-newsroom"
+FDA_CBER_WHATS_NEW_URL = "https://www.fda.gov/vaccines-blood-biologics/news-events-biologics/whats-new-biologics"
 FDA_PRESS_RELEASES_RSS_URL = "https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/press-releases/rss.xml"
 FDA_MEDWATCH_RSS_URL = "https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/medwatch/rss.xml"
 DEFAULT_MAX_NEWS = 50
@@ -413,6 +414,67 @@ def _fetch_press_announcements(max_news=DEFAULT_MAX_NEWS, max_pages=DEFAULT_MAX_
         flush=True,
     )
     return sort_fda_news(deduplicate_fda_news(filtered))[:max_news]
+
+
+def _parse_cber_whats_new_page(html_content, max_items=DEFAULT_MAX_NEWS):
+    """Parse the official CBER What's New listing, including biologics approval letters."""
+    if not html_content:
+        return []
+    try:
+        max_items = max(0, int(max_items))
+    except (TypeError, ValueError):
+        max_items = DEFAULT_MAX_NEWS
+    if max_items == 0:
+        return []
+
+    soup = BeautifulSoup(str(html_content), "html.parser")
+    results = []
+    seen = set()
+    relevant = re.compile(
+        r"approval|approv(?:e|es|ed)|complete response|clinical review|"
+        r"summary basis for regulatory action|safety alert|withdrawal|recall",
+        re.IGNORECASE,
+    )
+    for link in soup.find_all("a", href=True):
+        title = normalize_text(link.get_text(" ", strip=True))
+        if not is_valid_news_title(title) or not relevant.search(title):
+            continue
+        url = normalize_url(link.get("href"), FDA_CBER_WHATS_NEW_URL)
+        parsed = urlparse(url)
+        if parsed.scheme != "https" or parsed.netloc.lower() not in {"www.fda.gov", "fda.gov"}:
+            continue
+        if url in seen:
+            continue
+        seen.add(url)
+        container = link
+        for _ in range(3):
+            parent = getattr(container, "parent", None)
+            if parent is None:
+                break
+            container = parent
+            if container.name in {"article", "li"} or container.get("class"):
+                break
+        published_at = _extract_date(container)
+        summary = normalize_text(container.get_text(" ", strip=True))
+        results.append(build_fda_news_item(
+            title, url, published_at, summary, source="FDA CBER"
+        ))
+        if len(results) >= max_items:
+            break
+    return sort_fda_news(deduplicate_fda_news(results))[:max_items]
+
+
+def get_cber_news(max_news=DEFAULT_MAX_NEWS):
+    """Fetch official CBER biologics approvals and other high-impact regulatory updates."""
+    try:
+        html = _fetch_html(FDA_CBER_WHATS_NEW_URL)
+    except requests.RequestException as exc:
+        print(f"FDA CBER FETCH ERROR: {type(exc).__name__}: {exc}", flush=True)
+        return []
+    items = _parse_cber_whats_new_page(html, max_news)
+    print(f"FDA CBER WHAT'S NEW parsed={len(items)}", flush=True)
+    return items
+
 
 def deduplicate_fda_news(news_items):
     unique, seen_ids, seen_urls, seen_titles = [], set(), set(), set()
