@@ -173,7 +173,7 @@ def scan_regulatory_sources(watchlist, ema_max=50, sec_per_company=3):
     }
     print("REGULATORY SOURCE HEALTH: " + " | ".join(
         "{}={} items={}".format(name, detail.get("status", "UNKNOWN"), detail.get("count", 0))
-        + (" error={}".format(detail.get("error")) if detail.get("error") else "")
+        + (" error={}".format(detail.get("error") or detail.get("last_error")) if (detail.get("error") or detail.get("last_error")) else "")
         for name, detail in source_diagnostics.items()
     ), flush=True)
     return {

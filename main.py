@@ -311,20 +311,30 @@ def send_source_health_alert_if_needed(result, actionable_alerts=None):
         print("Avviso Telegram sulla disponibilità delle fonti già inviato oggi.")
         return False
 
+    candidate_alerts = result.get("alerts", [])
+    selected_candidates = select_intelligent_alerts(candidate_alerts)
+    quality_reasons = Counter(
+        alert_quality_gate(alert).get("reason", "UNKNOWN")
+        for alert in candidate_alerts
+    )
+    action_counts = Counter(alert_action(alert) for alert in candidate_alerts)
+
     lines = [
         "⚠️ PHARMA RADAR — AVVISO SULLA DISPONIBILITÀ DELLE FONTI",
         "━━━━━━━━━━━━━━━━━━",
         f"🕒 Scansione UTC: {now.strftime('%Y-%m-%d %H:%M:%S')}",
         f"🏢 Aziende configurate: {result.get('companies', 0)}",
         f"📰 FDA news raccolte: {len(result.get('fda_news', []))}",
-        f"🚨 Avvisi candidati: {len(result.get('alerts', []))}",
+        f"🚨 Avvisi candidati: {len(candidate_alerts)}",
+        f"🔎 Filtro Telegram: {len(selected_candidates)}/{len(candidate_alerts)} candidati qualificati",
+        f"Motivi filtro: quality_gate={dict(quality_reasons)} · azioni={dict(action_counts)}",
         "📡 Fonti con problemi:",
     ]
     for name, detail in degraded.items():
         status = detail.get("status", "UNKNOWN")
         count = detail.get("count", 0)
         path = detail.get("path") or "non disponibile"
-        error = detail.get("error")
+        error = detail.get("error") or detail.get("last_error")
         lines.append(f"• {name}: {status} · elementi={count} · percorso={path}")
         if error:
             lines.append(f"  Errore: {str(error)[:240]}")

@@ -125,13 +125,17 @@ def test_degraded_source_health_warning_sends_once(monkeypatch):
         "alerts": [{"ticker": "UTHR"}],
         "fda_news": [{}] * 30,
         "source_diagnostics": {
-            "SEC": {"status": "DEGRADED_FALLBACK", "count": 12, "path": "proxy_fallback"}
+            "SEC": {"status": "DEGRADED_FALLBACK", "count": 12, "path": "proxy_fallback"},
+            "EARLY_DISCOVERY": {"status": "ERROR", "count": 0, "path": "google_news_rss", "last_error": "HTTPError: 503"},
         },
     }
     assert main.send_source_health_alert_if_needed(result, actionable_alerts=[]) is True
     assert len(messages) == 1
     assert "PHARMA RADAR — AVVISO SULLA DISPONIBILITÀ DELLE FONTI" in messages[0]
     assert "SEC: DEGRADED_FALLBACK" in messages[0]
+    assert "EARLY_DISCOVERY: ERROR" in messages[0]
+    assert "Errore: HTTPError: 503" in messages[0]
+    assert "percorso=non disponibile" not in messages[0]
     assert "Questo è un avviso tecnico" in messages[0]
     assert "\\n" not in messages[0]
     assert main.send_source_health_alert_if_needed(result, actionable_alerts=[]) is False
@@ -151,6 +155,7 @@ def test_source_health_warning_is_not_suppressed_by_catalyst_alerts(monkeypatch)
     }
     assert main.send_source_health_alert_if_needed(result, actionable_alerts=[{"ticker": "KYMR"}]) is True
     assert "Avvisi inviati in questa scansione: 1" in messages[0]
+    assert "Filtro Telegram: 0/1 candidati qualificati" in messages[0]
     assert "Copertura incompleta" in messages[0]
 
 
@@ -303,11 +308,12 @@ def test_source_health_warning_is_not_persisted_without_telegram_confirmation(mo
     monkeypatch.setattr(main, "load_sent_alerts", lambda: dict(sent_state))
     monkeypatch.setattr(main, "save_sent_alerts", lambda state: (saves.append(dict(state)), sent_state.update(state)))
     monkeypatch.setattr(main, "send_telegram", lambda message: {"ok": False, "description": "blocked"})
-    result = {"alerts": [], "source_diagnostics": {"SEC": {"status": "DEGRADED", "count": 0}}}
+    result = {"alerts": [], "source_diagnostics": {"EARLY_DISCOVERY": {"status": "ERROR", "count": 0, "path": "google_news_rss", "last_error": "HTTPError: 503"}}}
 
     import pytest
     with pytest.raises(RuntimeError, match="non ha confermato"):
         main.send_source_health_alert_if_needed(result, actionable_alerts=[])
+    assert "HTTPError: 503" in str(result["source_diagnostics"]["EARLY_DISCOVERY"]["last_error"])
 
     assert sent_state == {}
     assert saves == []

@@ -10,6 +10,7 @@ import hashlib
 import html
 import re
 from datetime import datetime, timezone
+import time
 from email.utils import parsedate_to_datetime
 from urllib.parse import quote_plus
 import xml.etree.ElementTree as ET
@@ -21,7 +22,10 @@ REQUEST_TIMEOUT = 15
 BATCH_SIZE = 10
 MAX_ITEMS_PER_FEED = 30
 MAX_AGE_HOURS = 24
-LAST_FETCH_STATUS = {"status": "NOT_RUN", "count": 0, "error_batches": 0, "last_error": None}
+MAX_RETRIES = 3
+RETRYABLE_STATUS_CODES = {429, 500, 502, 503, 504}
+SPLITTABLE_STATUS_CODES = {400, 414, 431}
+LAST_FETCH_STATUS = {"status": "NOT_RUN", "count": 0, "error_batches": 0, "last_error": None, "path": "google_news_rss"}
 # Fast discovery is deliberately broader than Google News alone. The query
 # asks Google News to surface company releases carried by major distributors
 # and specialist biotech publications, while primary sources remain the
@@ -169,6 +173,51 @@ def _parse_feed(xml_text, batch):
     return rows
 
 
+def _request_batch(batch, batch_number, depth=0):
+    """Fetch one RSS batch, retry transient failures and split oversized queries."""
+    query = _query(batch)
+    if not query:
+        return []
+    url = _feed_url(query)
+    for attempt in range(MAX_RETRIES):
+        try:
+            response = requests.get(
+                url,
+                headers={"User-Agent": USER_AGENT, "Accept": "application/rss+xml, application/xml"},
+                timeout=REQUEST_TIMEOUT,
+            )
+            status_code = response.status_code
+            if status_code in SPLITTABLE_STATUS_CODES and len(batch) > 1 and depth < 4:
+                midpoint = max(1, len(batch) // 2)
+                print(
+                    f"EARLY DISCOVERY QUERY SPLIT: batch={batch_number} "
+                    f"status={status_code} companies={len(batch)}",
+                    flush=True,
+                )
+                return (
+                    _request_batch(batch[:midpoint], batch_number, depth + 1)
+                    + _request_batch(batch[midpoint:], batch_number, depth + 1)
+                )
+            if status_code in RETRYABLE_STATUS_CODES and attempt < MAX_RETRIES - 1:
+                retry_after = response.headers.get("Retry-After")
+                try:
+                    delay = min(10.0, max(1.0, float(retry_after))) if retry_after else 1.5 * (2 ** attempt)
+                except (TypeError, ValueError):
+                    delay = 1.5 * (2 ** attempt)
+                print(
+                    f"EARLY DISCOVERY RETRY: batch={batch_number} "
+                    f"status={status_code} attempt={attempt + 1}/{MAX_RETRIES} wait={delay:.1f}s",
+                    flush=True,
+                )
+                time.sleep(delay)
+                continue
+            response.raise_for_status()
+            return _parse_feed(response.text, batch)
+        except (requests.RequestException, ET.ParseError):
+            raise
+    return []
+
+
 def get_early_news(watchlist, batch_size=BATCH_SIZE):
     """Return fresh watchlist-matched news for rapid catalyst discovery."""
     global LAST_FETCH_STATUS
@@ -180,28 +229,39 @@ def get_early_news(watchlist, batch_size=BATCH_SIZE):
     results = []
     error_batches = 0
     last_error = None
-    for start in range(0, len(companies), batch_size):
-        batch = companies[start:start + batch_size]
-        query = _query(batch)
-        if not query:
+    attempted_batches = 0
+    for start in range(0, len(companies), max(1, batch_size)):
+        batch = companies[start:start + max(1, batch_size)]
+        if not _query(batch):
             continue
+        attempted_batches += 1
         try:
-            response = requests.get(
-                _feed_url(query),
-                headers={"User-Agent": USER_AGENT, "Accept": "application/rss+xml, application/xml"},
-                timeout=REQUEST_TIMEOUT,
-            )
-            response.raise_for_status()
-            results.extend(_parse_feed(response.text, batch))
+            results.extend(_request_batch(batch, attempted_batches))
         except (requests.RequestException, ET.ParseError) as exc:
             error_batches += 1
             last_error = f"{type(exc).__name__}: {exc}"
-            print(f"EARLY DISCOVERY ERROR: batch={start // batch_size + 1} {last_error}", flush=True)
+            print(f"EARLY DISCOVERY ERROR: batch={attempted_batches} {last_error}", flush=True)
+        # Pace requests to reduce the chance of triggering upstream throttling.
+        time.sleep(0.25)
     unique = {}
     for row in results:
         unique[(row["ticker"], row["url"])] = row
     ordered = sorted(unique.values(), key=lambda item: item.get("published_at", ""), reverse=True)
     status = "DEGRADED" if error_batches and ordered else ("ERROR" if error_batches and not ordered else ("OK" if ordered else "EMPTY"))
-    LAST_FETCH_STATUS = {"status": status, "count": len(ordered), "error_batches": error_batches, "last_error": last_error}
-    print(f"EARLY DISCOVERY STATUS: {status} items={len(ordered)} failed_batches={error_batches}", flush=True)
+    LAST_FETCH_STATUS = {
+        "status": status,
+        "count": len(ordered),
+        "error_batches": error_batches,
+        "batches_attempted": attempted_batches,
+        "companies_queried": len(companies),
+        "last_error": last_error,
+        "path": "google_news_rss",
+        "endpoint": RSS_ENDPOINT,
+    }
+    print(
+        f"EARLY DISCOVERY STATUS: {status} items={len(ordered)} "
+        f"failed_batches={error_batches}/{attempted_batches} companies={len(companies)} "
+        f"last_error={last_error or 'none'}",
+        flush=True,
+    )
     return ordered
