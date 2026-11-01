@@ -141,7 +141,7 @@ def test_parser_does_not_invent_timezone_for_unzoned_timestamp():
 def test_configured_sources_are_official_https_pages():
     sources = collector.load_json(collector.SOURCES_PATH, [])
     assert {item["ticker"] for item in sources} == {
-        "ALNY", "MRK", "REGN", "KOD", "LFCR", "ONCO", "SCYX", "LXRX",
+        "ALNY", "MRK", "REGN", "KOD", "LFCR", "ONCO", "SCYX", "LXRX", "INO",
         "CAPR", "SVRA", "ZYME", "MIRM", "PHVS", "TENX", "NUVL", "ARGX", "QURE", "STOK",
     }
     for item in sources:
