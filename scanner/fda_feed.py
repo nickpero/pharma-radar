@@ -378,7 +378,10 @@ def _fetch_press_announcements(max_news=DEFAULT_MAX_NEWS, max_pages=DEFAULT_MAX_
     results = list(rss_results)
 
     for page in range(max_pages):
-        if len(results) >= max_news:
+        # Always inspect the live HTML listing at least once. The RSS feed can
+        # fill max_news with older items; stopping before page 0 would hide
+        # newer FDA announcements that are already visible on the website.
+        if page > 0 and len(results) >= max_news:
             break
         try:
             html = _fetch_html(FDA_PRESS_ANNOUNCEMENTS_URL, {"page": page})
