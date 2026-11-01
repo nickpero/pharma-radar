@@ -140,5 +140,13 @@
     "allowed_host": "www.zymeworks.com",
     "watchlist_priority": "RED",
     "enabled": true
+  },
+  {
+    "ticker": "INO",
+    "company": "INOVIO Pharmaceuticals",
+    "listing_url": "https://ir.inovio.com/overview/default.aspx",
+    "allowed_host": "ir.inovio.com",
+    "watchlist_priority": "RED",
+    "enabled": true
   }
 ]
