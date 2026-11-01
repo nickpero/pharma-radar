@@ -133,6 +133,7 @@ def test_degraded_source_health_warning_sends_once(monkeypatch):
     assert "PHARMA RADAR — AVVISO SULLA DISPONIBILITÀ DELLE FONTI" in messages[0]
     assert "SEC: DEGRADED_FALLBACK" in messages[0]
     assert "percorso=non disponibile" not in messages[0]
+    assert "percorso=google_news_rss" in messages[0]
     assert "Questo è un avviso tecnico" in messages[0]
     assert "\\n" not in messages[0]
     assert main.send_source_health_alert_if_needed(result, actionable_alerts=[]) is False
@@ -309,6 +310,7 @@ def test_source_health_warning_is_not_persisted_without_telegram_confirmation(mo
     import pytest
     with pytest.raises(RuntimeError, match="non ha confermato"):
         main.send_source_health_alert_if_needed(result, actionable_alerts=[])
+    assert "HTTPError: 503" in str(result["source_diagnostics"]["EARLY_DISCOVERY"]["last_error"])
 
     assert sent_state == {}
     assert saves == []
