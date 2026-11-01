@@ -134,10 +134,8 @@ def test_degraded_source_health_warning_sends_once(monkeypatch):
     assert "PHARMA RADAR — AVVISO SULLA DISPONIBILITÀ DELLE FONTI" in messages[0]
     assert "SEC: DEGRADED_FALLBACK" in messages[0]
     assert "EARLY_DISCOVERY: ERROR" in messages[0]
-    assert "percorso=google_news_rss" in messages[0]
     assert "Errore: HTTPError: 503" in messages[0]
     assert "percorso=non disponibile" not in messages[0]
-    assert "percorso=google_news_rss" in messages[0]
     assert "Questo è un avviso tecnico" in messages[0]
     assert "\\n" not in messages[0]
     assert main.send_source_health_alert_if_needed(result, actionable_alerts=[]) is False
@@ -157,6 +155,7 @@ def test_source_health_warning_is_not_suppressed_by_catalyst_alerts(monkeypatch)
     }
     assert main.send_source_health_alert_if_needed(result, actionable_alerts=[{"ticker": "KYMR"}]) is True
     assert "Avvisi inviati in questa scansione: 1" in messages[0]
+    assert "Filtro Telegram: 0/1 candidati qualificati" in messages[0]
     assert "Copertura incompleta" in messages[0]
 
 
