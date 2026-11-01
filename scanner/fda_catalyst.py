@@ -59,6 +59,7 @@ APPROVAL_POSITIVE_PATTERNS = (
     r"\breceives?\s+(?:full\s+|accelerated\s+)?fda\s+approval\b",
     r"\bfda\s+grants?\s+(?:full\s+|accelerated\s+)?approval\b",
     r"\bfda\s+authorizes\b",
+    r"\bapproval\s+letter\b",
 )
 
 APPROVAL_NEGATION_PATTERNS = (

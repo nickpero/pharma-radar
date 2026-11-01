@@ -10,7 +10,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-from scanner.fda_feed import get_fda_news, get_medwatch_news, is_fda_press_announcement_url, normalize_text, normalize_date, sort_fda_news
+from scanner.fda_feed import get_fda_news, get_medwatch_news, get_cber_news, is_fda_press_announcement_url, normalize_text, normalize_date, sort_fda_news
 
 FDA_HOSTS = {"www.fda.gov", "fda.gov"}
 FDA_ALLOWED_PREFIXES = (
@@ -206,13 +206,14 @@ def get_enriched_fda_news(max_news=50, max_pages=5, max_enrich=MAX_ENRICH_ITEMS)
     """Fetch FDA press announcements plus dedicated MedWatch safety alerts."""
     press_news = get_fda_news(max_news=max_news, max_pages=max_pages)
     medwatch_news = get_medwatch_news(max_news=max_news)
+    cber_news = get_cber_news(max_news=max_news)
     merged = []
     seen = set()
-    for item in press_news + medwatch_news:
+    for item in press_news + medwatch_news + cber_news:
         key = str(item.get("url") or item.get("item_id") or item.get("title") or "").lower()
         if key and key not in seen:
             seen.add(key)
             merged.append(item)
     merged = sort_fda_news(merged)
-    print(f"FDA SOURCE COUNTS: press={len(press_news)} medwatch={len(medwatch_news)} merged={len(merged)}", flush=True)
+    print(f"FDA SOURCE COUNTS: press={len(press_news)} medwatch={len(medwatch_news)} cber={len(cber_news)} merged={len(merged)}", flush=True)
     return enrich_fda_news(merged, max_items=max_enrich)

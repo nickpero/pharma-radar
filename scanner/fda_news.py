@@ -63,6 +63,7 @@ CATEGORY_KEYWORDS = {
         "fda grants approval",
         "receives fda approval",
         "fda authorizes",
+        "approval letter",
         "grants accelerated approval",
     ],
     "REJECTION": [

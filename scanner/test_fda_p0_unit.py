@@ -1,9 +1,12 @@
 """Deterministic FDA P0 regression tests (no live network calls)."""
 
+from datetime import datetime, timezone
 from unittest.mock import Mock, patch
 
 from scanner.fda_enrichment import enrich_fda_news_item
 from scanner.fda_matcher import identify_fda_target
+from scanner.fda_news import build_fda_news_item
+from scanner.fda_pipeline import process_fda_news_item
 from scanner.trial_scanner import load_watchlist
 
 
@@ -72,3 +75,33 @@ def test_enrichment_does_not_fetch_non_fda_urls():
     get.assert_not_called()
     assert enriched["url"] == item["url"]
     assert "content" not in enriched
+
+
+def test_voceryq_cber_approval_resolves_to_ino_critical_catalyst_without_network():
+    published_at = datetime.now(timezone.utc).isoformat()
+    item = build_fda_news_item(
+        title="October 30, 2026 Approval Letter - VOCERYQ",
+        summary=(
+            "The FDA granted accelerated approval to VOCERYQ, developed by "
+            "INOVIO Pharmaceuticals, to reduce the frequency of surgical "
+            "papilloma excisions in adults with recurrent respiratory papillomatosis. "
+            "VOCERYQ was previously referred to as INO-3107."
+        ),
+        url="https://www.fda.gov/media/196199/download",
+        published_at=published_at,
+        source="FDA CBER",
+    )
+    watchlist = load_watchlist()
+    target = identify_fda_target(item, watchlist)
+    assert target is not None
+    assert target["ticker"] == "INO"
+    assert target["program"] == "INO-3107"
+    assert target["confidence"] == "HIGH"
+
+    event = process_fda_news_item(item, watchlist)
+    assert event is not None
+    assert event["ticker"] == "INO"
+    assert event["program"] == "INO-3107"
+    assert event["subtype"] == "FDA_APPROVAL"
+    assert event["trading_impact"] == "EXTREME"
+    assert event["urgency"] == "IMMEDIATE"
