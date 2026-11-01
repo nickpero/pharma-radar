@@ -4,6 +4,7 @@ This module deliberately creates review candidates, not live clinical alerts.
 A listing page does not establish that a future event date is confirmed.
 """
 import json
+import os
 import re
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
@@ -273,6 +274,7 @@ def collect_candidates(sources=None, state_path=None, candidates_path=None, sess
     new_candidates = []
     source_errors = []
     successful_sources = 0
+    successful_tickers = set()
     now = datetime.now(timezone.utc).isoformat()
     for source in enabled_sources:
         try:
@@ -288,6 +290,7 @@ def collect_candidates(sources=None, state_path=None, candidates_path=None, sess
             )
             response.raise_for_status()
             successful_sources += 1
+            successful_tickers.add(str(source.get("ticker") or "").upper())
             found = parse_listing_page(response.text, source, discovered_at=now)
             for candidate in found:
                 url = candidate["source_url"]
@@ -300,6 +303,19 @@ def collect_candidates(sources=None, state_path=None, candidates_path=None, sess
             source_errors.append(f"{source.get('ticker', 'UNKNOWN')}: {type(exc).__name__}: {exc}")
     if enabled_sources and successful_sources == 0:
         raise RuntimeError("All enabled official press-release pages failed: " + "; ".join(source_errors))
+    required_tickers = {
+        ticker.strip().upper()
+        for ticker in os.getenv("PRIMARY_SOURCE_REQUIRED_TICKERS", "").split(",")
+        if ticker.strip()
+    }
+    missing_required = sorted(required_tickers - successful_tickers)
+    if missing_required:
+        raise RuntimeError(
+            "Required official IR sources unavailable: "
+            + ",".join(missing_required)
+            + " | "
+            + "; ".join(source_errors)
+        )
     pending.extend(new_candidates)
     save_json(candidates_path, pending)
     # Persist only durable state changes. The collector runs more often than
