@@ -125,13 +125,17 @@ def test_degraded_source_health_warning_sends_once(monkeypatch):
         "alerts": [{"ticker": "UTHR"}],
         "fda_news": [{}] * 30,
         "source_diagnostics": {
-            "SEC": {"status": "DEGRADED_FALLBACK", "count": 12, "path": "proxy_fallback"}
+            "SEC": {"status": "DEGRADED_FALLBACK", "count": 12, "path": "proxy_fallback"},
+            "EARLY_DISCOVERY": {"status": "ERROR", "count": 0, "path": "google_news_rss", "last_error": "HTTPError: 503"},
         },
     }
     assert main.send_source_health_alert_if_needed(result, actionable_alerts=[]) is True
     assert len(messages) == 1
     assert "PHARMA RADAR — AVVISO SULLA DISPONIBILITÀ DELLE FONTI" in messages[0]
     assert "SEC: DEGRADED_FALLBACK" in messages[0]
+    assert "EARLY_DISCOVERY: ERROR" in messages[0]
+    assert "percorso=google_news_rss" in messages[0]
+    assert "Errore: HTTPError: 503" in messages[0]
     assert "percorso=non disponibile" not in messages[0]
     assert "percorso=google_news_rss" in messages[0]
     assert "Questo è un avviso tecnico" in messages[0]
