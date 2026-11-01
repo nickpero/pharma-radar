@@ -324,7 +324,7 @@ def send_source_health_alert_if_needed(result, actionable_alerts=None):
         status = detail.get("status", "UNKNOWN")
         count = detail.get("count", 0)
         path = detail.get("path") or "non disponibile"
-        error = detail.get("error")
+        error = detail.get("error") or detail.get("last_error")
         lines.append(f"• {name}: {status} · elementi={count} · percorso={path}")
         if error:
             lines.append(f"  Errore: {str(error)[:240]}")
