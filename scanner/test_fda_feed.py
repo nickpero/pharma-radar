@@ -398,3 +398,40 @@ def test_medwatch_rss_parses_primary_safety_alerts():
 def test_medwatch_rss_rejects_non_fda_links():
     xml = """<rss><channel><item><title>FDA safety alert</title><link>https://example.com/fake</link><pubDate>Thu, 29 Oct 2026 12:00:00 GMT</pubDate></item></channel></rss>"""
     assert _parse_medwatch_rss(xml, max_items=10) == []
+
+
+
+def test_fda_html_listing_is_checked_when_rss_fills_limit(monkeypatch):
+    from scanner import fda_feed
+
+    stale_rss = [
+        fda_feed.build_fda_news_item(
+            f"FDA older announcement {index}",
+            f"https://www.fda.gov/news-events/press-announcements/older-{index}",
+            "2026-10-01",
+            source="FDA RSS",
+        )
+        for index in range(50)
+    ]
+    fresh_html = """
+    <html><body><article>
+      <h2>FDA approves VOCERYQ for recurrent respiratory papillomatosis</h2>
+      <time datetime="2026-10-30">October 30, 2026</time>
+      <p>FDA grants accelerated approval to INOVIO Pharmaceuticals.</p>
+      <a href="/news-events/press-announcements/fda-approves-voceryq">Read more</a>
+    </article></body></html>
+    """
+
+    monkeypatch.setattr(fda_feed, "_fetch_press_rss", lambda max_news: stale_rss)
+    monkeypatch.setattr(
+        fda_feed,
+        "_fetch_html",
+        lambda url, params=None: fresh_html,
+    )
+
+    items = fda_feed._fetch_press_announcements(max_news=50, max_pages=1)
+
+    assert any(
+        item["url"].endswith("/fda-approves-voceryq")
+        for item in items
+    )
