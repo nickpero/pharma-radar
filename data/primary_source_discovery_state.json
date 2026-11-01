@@ -55,9 +55,6 @@
     "https://www.uniqure.com/programs-pipeline/huntingtons-disease",
     "https://www.zymeworks.com/zymeworks-to-present-on-preclinical-and-clinical-programs-at-multiple-upcoming-medical-conferences/"
   ],
-  "source_errors": [
-    "MIRM: HTTPError: 403 Client Error: Forbidden for url: https://ir.mirumpharma.com/news/",
-    "SVRA: HTTPError: 403 Client Error: Forbidden for url: https://investors.savarapharma.com/overview/"
-  ],
-  "successful_sources": 10
+  "source_errors": [],
+  "successful_sources": 12
 }
