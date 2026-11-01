@@ -1,5 +1,7 @@
 """P0 acceptance test: live FDA article -> body enrichment -> matcher -> catalyst."""
 
+from datetime import datetime, timezone
+
 from scanner.fda_enrichment import enrich_fda_news_item
 from scanner.fda_news import build_fda_news_item
 from scanner.fda_matcher import identify_fda_target
@@ -55,3 +57,41 @@ if __name__ == "__main__":
     test_live_fda_zidesamtinib_p0()
     test_rare_false_positive_protection()
     print("P0 FDA LIVE ENRICHMENT TESTS PASSED")
+
+
+def test_live_fda_voceryq_approval_reaches_ino_critical_catalyst():
+    """VOCERYQ/INO-3107 approval must resolve to INO and an extreme FDA catalyst."""
+    published_at = datetime.now(timezone.utc).isoformat()
+    item = build_fda_news_item(
+        title="FDA approves VOCERYQ for adults with recurrent respiratory papillomatosis",
+        summary=(
+            "INOVIO Pharmaceuticals announced accelerated FDA approval of VOCERYQ, "
+            "previously referred to as INO-3107, for adults with recurrent respiratory "
+            "papillomatosis. The approved product contains doruxapapogene ralaplasmid "
+            "and lalikinogene sifuplasmid-gxfd."
+        ),
+        url="https://www.fda.gov/news-events/press-announcements/fda-approves-voceryq",
+        published_at=published_at,
+        source="FDA",
+        content=(
+            "The U.S. Food and Drug Administration granted accelerated approval to "
+            "VOCERYQ (doruxapapogene ralaplasmid and lalikinogene sifuplasmid-gxfd), "
+            "previously referred to as INO-3107, developed by INOVIO Pharmaceuticals, "
+            "to reduce the frequency of surgical papilloma excisions in adults with "
+            "recurrent respiratory papillomatosis. "
+        ) * 3,
+    )
+    watchlist = load_watchlist()
+    target = identify_fda_target(item, watchlist)
+    assert target is not None, "VOCERYQ approval did not resolve to a watchlist program"
+    assert target["ticker"] == "INO"
+    assert target["program"] == "INO-3107"
+    assert target["confidence"] == "HIGH"
+
+    event = process_fda_news_item(item, watchlist)
+    assert event is not None, "VOCERYQ approval did not reach the FDA catalyst pipeline"
+    assert event["ticker"] == "INO"
+    assert event["program"] == "INO-3107"
+    assert event["subtype"] == "FDA_APPROVAL"
+    assert event["trading_impact"] == "EXTREME"
+    assert event["urgency"] == "IMMEDIATE"
