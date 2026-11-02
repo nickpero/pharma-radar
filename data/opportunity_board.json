@@ -4,7 +4,7 @@
     "late": 261,
     "live": 0,
     "upcoming": 219,
-    "watch": 9
+    "watch": 10
   },
   "excluded": [
     {
@@ -442,7 +442,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-02T21:38:36.535197+00:00",
+  "generated_at": "2026-11-02T21:49:04.644598+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -4424,6 +4424,37 @@
       "ticker": "TVTX",
       "title": "SEC 8-K — Travere Therapeutics (TVTX)",
       "trading_intelligence_score": 57.6
+    },
+    {
+      "catalyst_score": 55.0,
+      "company": "Recursion Pharmaceuticals",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-02T21:49:04.426295+00:00",
+      "market": {
+        "average_volume_20d": 31533460.0,
+        "estimated_average_dollar_volume_20d": 120773151.8,
+        "market_cap": null,
+        "price": 3.83,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-02",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1601830/000160183026000145/rxrx-20260930.htm",
+      "status": "WATCH",
+      "ticker": "RXRX",
+      "title": "SEC 10-Q — Recursion Pharmaceuticals (RXRX) — Quarterly financial report",
+      "trading_intelligence_score": 57.1
     }
   ]
 }
