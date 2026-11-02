@@ -4,7 +4,7 @@
     "late": 260,
     "live": 0,
     "upcoming": 240,
-    "watch": 0
+    "watch": 1
   },
   "excluded": [
     {
@@ -442,7 +442,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-02T00:06:37.567369+00:00",
+  "generated_at": "2026-11-02T12:06:38.148486+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -4166,5 +4166,37 @@
       "title": "Study of GS-9911 With or Without Antibody Treatment for Adults With Solid Tumors"
     }
   ],
-  "watch": []
+  "watch": [
+    {
+      "catalyst_score": 80.0,
+      "company": "Tiziana Life Sciences",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-02T12:06:37.971182+00:00",
+      "market": {
+        "average_volume_20d": 493335.0,
+        "estimated_average_dollar_volume_20d": 394668.0,
+        "market_cap": null,
+        "price": 0.8,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 78.6,
+      "priority_score": 43.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-02",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1723069/000121390026114650/ea0310465-6k_tiziana.htm",
+      "status": "WATCH",
+      "ticker": "TLSA",
+      "title": "SEC 6-K — Tiziana Life Sciences (TLSA) — REPORT OF FOREIGN PRIVATE ISSUER",
+      "trading_intelligence_score": 67.3
+    }
+  ]
 }

@@ -1153,5 +1153,26 @@
     "source_url": "https://ir.inovio.com/events-and-presentations/default.aspx",
     "ticker": "INO",
     "title": "Events & Presentations"
+  },
+  {
+    "company": "Merck & Co.",
+    "discovered_at": "2026-11-02T12:01:11.933411+00:00",
+    "event_date": null,
+    "event_type": null,
+    "event_window": null,
+    "listing_context": "Merck to Present New Data from Its Broad Oral HIV Portfolio and Pipeline at HIV Glasgow 2026",
+    "listing_url": "https://www.merck.com/media/news/",
+    "notes": "Candidate discovered from an official company page; verify the release and any future event date before alerting.",
+    "publication_date_candidate": null,
+    "publication_time_precision": "UNKNOWN",
+    "publication_timestamp_source": null,
+    "publication_timezone_known": false,
+    "published_at": null,
+    "published_at_raw": null,
+    "review_status": "PENDING_REVIEW",
+    "source_host": "www.merck.com",
+    "source_url": "https://www.merck.com/news/merck-to-present-new-data-from-its-broad-oral-hiv-portfolio-and-pipeline-at-hiv-glasgow-2026/",
+    "ticker": "MRK",
+    "title": "Merck to Present New Data from Its Broad Oral HIV Portfolio and Pipeline at HIV Glasgow 2026"
   }
 ]
