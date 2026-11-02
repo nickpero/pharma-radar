@@ -4,7 +4,7 @@
     "late": 261,
     "live": 0,
     "upcoming": 219,
-    "watch": 4
+    "watch": 9
   },
   "excluded": [
     {
@@ -442,7 +442,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-02T21:08:10.600854+00:00",
+  "generated_at": "2026-11-02T21:18:25.423154+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -978,9 +978,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518041+00:00",
       "market": {
         "average_volume_20d": 14115.0,
-        "estimated_average_dollar_volume_20d": 179683.95,
+        "estimated_average_dollar_volume_20d": 178837.05,
         "market_cap": null,
-        "price": 12.73,
+        "price": 12.67,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1806,7 +1806,7 @@
       "status": "LATE",
       "ticker": "REPL",
       "title": "SEC 10-Q — Replimune Group (REPL) — Quarterly financial report",
-      "trading_intelligence_score": 60.5
+      "trading_intelligence_score": 60.6
     },
     {
       "catalyst_score": 55.0,
@@ -1970,9 +1970,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518730+00:00",
       "market": {
         "average_volume_20d": 2615770.0,
-        "estimated_average_dollar_volume_20d": 46691494.5,
+        "estimated_average_dollar_volume_20d": 46717652.2,
         "market_cap": null,
-        "price": 17.85,
+        "price": 17.86,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4179,6 +4179,99 @@
     },
     {
       "catalyst_score": 55.0,
+      "company": "Emergent BioSolutions",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-02T21:18:25.209842+00:00",
+      "market": {
+        "average_volume_20d": 1069145.0,
+        "estimated_average_dollar_volume_20d": 6885293.8,
+        "market_cap": null,
+        "price": 6.44,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-02",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1367644/000136764426000110/ebs-20261102.htm",
+      "status": "WATCH",
+      "ticker": "EBS",
+      "title": "SEC 8-K — Emergent BioSolutions (EBS)",
+      "trading_intelligence_score": 57.1
+    },
+    {
+      "catalyst_score": 55.0,
+      "company": "Vertex Pharmaceuticals",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-02T21:18:25.208135+00:00",
+      "market": {
+        "average_volume_20d": 1394130.0,
+        "estimated_average_dollar_volume_20d": 771163009.5,
+        "market_cap": null,
+        "price": 553.15,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-02",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/875320/000087532026000287/vrtx-20261102.htm",
+      "status": "WATCH",
+      "ticker": "VRTX",
+      "title": "SEC 8-K — Vertex Pharmaceuticals (VRTX)",
+      "trading_intelligence_score": 58.9
+    },
+    {
+      "catalyst_score": 55.0,
+      "company": "CRISPR Therapeutics",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-02T21:18:25.208124+00:00",
+      "market": {
+        "average_volume_20d": 1526255.0,
+        "estimated_average_dollar_volume_20d": 76297487.45,
+        "market_cap": null,
+        "price": 49.99,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-02",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1674416/000119312526443665/crsp-20260930.htm",
+      "status": "WATCH",
+      "ticker": "CRSP",
+      "title": "SEC 10-Q — CRISPR Therapeutics (CRSP) — Quarterly financial report",
+      "trading_intelligence_score": 57.1
+    },
+    {
+      "catalyst_score": 55.0,
       "company": "Syndax Pharmaceuticals",
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-11-02T21:08:10.392470+00:00",
@@ -4241,6 +4334,37 @@
     },
     {
       "catalyst_score": 55.0,
+      "company": "BioMarin Pharmaceutical",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-02T21:18:25.209297+00:00",
+      "market": {
+        "average_volume_20d": 2532245.0,
+        "estimated_average_dollar_volume_20d": 145452152.8,
+        "market_cap": null,
+        "price": 57.44,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-02",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1048477/000104847726000021/bmrn-20261102.htm",
+      "status": "WATCH",
+      "ticker": "BMRN",
+      "title": "SEC 8-K — BioMarin Pharmaceutical (BMRN)",
+      "trading_intelligence_score": 57.5
+    },
+    {
+      "catalyst_score": 55.0,
       "company": "Axsome Therapeutics",
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-11-02T12:17:46.460354+00:00",
@@ -4269,6 +4393,37 @@
       "ticker": "AXSM",
       "title": "SEC 8-K — Axsome Therapeutics (AXSM)",
       "trading_intelligence_score": 60.0
+    },
+    {
+      "catalyst_score": 55.0,
+      "company": "Travere Therapeutics",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-02T21:18:25.209173+00:00",
+      "market": {
+        "average_volume_20d": 2082970.0,
+        "estimated_average_dollar_volume_20d": 102607102.2,
+        "market_cap": null,
+        "price": 49.26,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-02",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1438533/000143853326000074/tvtx-20261102.htm",
+      "status": "WATCH",
+      "ticker": "TVTX",
+      "title": "SEC 8-K — Travere Therapeutics (TVTX)",
+      "trading_intelligence_score": 57.5
     }
   ]
 }
