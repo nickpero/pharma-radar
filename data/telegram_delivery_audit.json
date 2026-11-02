@@ -24,5 +24,57 @@
     "telegram_confirmed_at": "2026-11-02T12:06:38.579914+00:00",
     "telegram_message_id": 303,
     "ticker": "TLSA"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'axsm|unknown|company_financial_results|2026-11-02')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-02",
+    "first_seen_at": "2026-11-02T12:17:46.628673+00:00",
+    "program": null,
+    "qualified_at": "2026-11-02T12:17:46.736404+00:00",
+    "telegram_attempted_at": "2026-11-02T12:17:46.736404+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "AXSM"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'krys|unknown|company_financial_results|2026-11-02')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-02",
+    "first_seen_at": "2026-11-02T12:17:46.628673+00:00",
+    "program": null,
+    "qualified_at": "2026-11-02T12:17:46.736404+00:00",
+    "telegram_attempted_at": "2026-11-02T12:17:46.736404+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "KRYS"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'axsm|unknown|company_financial_results|2026-11-02')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-02",
+    "first_seen_at": "2026-11-02T12:17:46.628673+00:00",
+    "program": null,
+    "qualified_at": "2026-11-02T12:17:46.736404+00:00",
+    "telegram_attempted_at": "2026-11-02T12:17:46.736404+00:00",
+    "telegram_confirmed_at": "2026-11-02T12:17:47.353848+00:00",
+    "telegram_message_id": 304,
+    "ticker": "AXSM"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'krys|unknown|company_financial_results|2026-11-02')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-02",
+    "first_seen_at": "2026-11-02T12:17:46.628673+00:00",
+    "program": null,
+    "qualified_at": "2026-11-02T12:17:46.736404+00:00",
+    "telegram_attempted_at": "2026-11-02T12:17:46.736404+00:00",
+    "telegram_confirmed_at": "2026-11-02T12:17:47.353848+00:00",
+    "telegram_message_id": 304,
+    "ticker": "KRYS"
   }
 ]
