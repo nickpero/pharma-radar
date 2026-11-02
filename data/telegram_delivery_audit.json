@@ -76,5 +76,31 @@
     "telegram_confirmed_at": "2026-11-02T12:17:47.353848+00:00",
     "telegram_message_id": 304,
     "ticker": "KRYS"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'sndx|unknown|company_financial_results|2026-11-02')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-02",
+    "first_seen_at": "2026-11-02T21:08:10.562008+00:00",
+    "program": null,
+    "qualified_at": "2026-11-02T21:08:10.668467+00:00",
+    "telegram_attempted_at": "2026-11-02T21:08:10.668467+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "SNDX"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'sndx|unknown|company_financial_results|2026-11-02')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-02",
+    "first_seen_at": "2026-11-02T21:08:10.562008+00:00",
+    "program": null,
+    "qualified_at": "2026-11-02T21:08:10.668467+00:00",
+    "telegram_attempted_at": "2026-11-02T21:08:10.668467+00:00",
+    "telegram_confirmed_at": "2026-11-02T21:08:11.182550+00:00",
+    "telegram_message_id": 305,
+    "ticker": "SNDX"
   }
 ]

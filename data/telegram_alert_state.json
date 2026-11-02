@@ -15,6 +15,7 @@
   "('EVENT_KEY', 'krys|unknown|company_financial_results|2026-11-02')": "2026-11-02T12:17:47.353848+00:00",
   "('EVENT_KEY', 'kymr|kt-579|clinical_results|2026-10-28')": "2026-10-28T21:38:07.810395+00:00",
   "('EVENT_KEY', 'regn|unknown|company_financial_results|2026-10-30')": "2026-10-30T22:27:25.485597+00:00",
+  "('EVENT_KEY', 'sndx|unknown|company_financial_results|2026-11-02')": "2026-11-02T21:08:11.182550+00:00",
   "('EVENT_KEY', 'tlsa|unknown|company_financial_results|2026-11-02')": "2026-11-02T12:06:38.579914+00:00",
   "('IBRX', 'anktiva (nogapendekin alfa inbakicept)', 'FDA_APPROVAL', ('TITLE', 'fda approves first treatment for certain people with bcg-unresponsive bladder cancer'), 'CATALYST')": "2026-10-14T19:31:35.628170+00:00",
   "('IONS', 'zilganersen', 'clinical_results', ('ID', '457a6b6645be77efdbc017bbd4114dae1070bc0affd68013084438a476eea220'))": "2026-09-10T01:08:06.399882+00:00",
