@@ -518,5 +518,31 @@
     "telegram_confirmed_at": "2026-11-03T14:38:33.203686+00:00",
     "telegram_message_id": 318,
     "ticker": "BEAM"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'abbv|unknown|company_financial_results|2026-11-03')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-03",
+    "first_seen_at": "2026-11-03T18:58:32.429484+00:00",
+    "program": null,
+    "qualified_at": "2026-11-03T18:58:32.525350+00:00",
+    "telegram_attempted_at": "2026-11-03T18:58:32.525350+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "ABBV"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'abbv|unknown|company_financial_results|2026-11-03')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-03",
+    "first_seen_at": "2026-11-03T18:58:32.429484+00:00",
+    "program": null,
+    "qualified_at": "2026-11-03T18:58:32.525350+00:00",
+    "telegram_attempted_at": "2026-11-03T18:58:32.525350+00:00",
+    "telegram_confirmed_at": "2026-11-03T18:58:33.102283+00:00",
+    "telegram_message_id": 319,
+    "ticker": "ABBV"
   }
 ]
