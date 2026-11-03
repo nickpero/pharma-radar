@@ -58,8 +58,6 @@
     "https://www.uniqure.com/programs-pipeline/huntingtons-disease",
     "https://www.zymeworks.com/zymeworks-to-present-on-preclinical-and-clinical-programs-at-multiple-upcoming-medical-conferences/"
   ],
-  "source_errors": [
-    "NUVL: ReadTimeout: HTTPSConnectionPool(host='investors.nuvalent.com', port=443): Read timed out. (read timeout=20)"
-  ],
-  "successful_sources": 12
+  "source_errors": [],
+  "successful_sources": 13
 }
