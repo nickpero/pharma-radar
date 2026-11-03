@@ -442,7 +442,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-03T22:09:16.113221+00:00",
+  "generated_at": "2026-11-03T23:08:36.306637+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -2004,29 +2004,6 @@
     "watch": "Fresh primary-source item with date-only precision or incomplete program verification."
   },
   "upcoming": [
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Novartis",
-      "date": "2026-11-03",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT05677451",
-      "phase": "PHASE3",
-      "programs": [
-        "remibrutinib",
-        "ianalumab",
-        "Pluvicto",
-        "Fabhalta"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT05677451",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "NVS",
-      "title": "24 Weeks Double-blind Randomized Placebo-controlled Trial to Evaluate Efficacy, PK, Safety of LOU064 in Adolescents (12 - <18) With CSU and Inadequate Response to H1-antihistamine Followed by Optional 3 Years Open-label Extension and an Optional 3 Years Safety Long-term Treatment-free Follow-up"
-    },
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
@@ -4110,6 +4087,27 @@
       "status": "RECRUITING",
       "ticker": "VTGN",
       "title": "A Clinical Trial to Assess the Efficacy, Safety, and Tolerability of a Repeat Dose of Fasedienol Nasal Spray for the Acute Treatment of Anxiety in Adults With Social Anxiety Disorder"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Xenon Pharmaceuticals",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT06775379",
+      "phase": "PHASE3",
+      "programs": [
+        "azetukalner",
+        "XEN1101"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT06775379",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "XENE",
+      "title": "A Randomized Study of Azetukalner Versus Placebo in Major Depressive Disorder"
     },
     {
       "actionability": "WATCH",
