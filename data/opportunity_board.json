@@ -442,7 +442,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-03T02:27:47.762991+00:00",
+  "generated_at": "2026-11-03T05:57:24.925536+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -1660,9 +1660,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518846+00:00",
       "market": {
         "average_volume_20d": 1153530.0,
-        "estimated_average_dollar_volume_20d": 48355977.6,
+        "estimated_average_dollar_volume_20d": 41850068.4,
         "market_cap": null,
-        "price": 41.92,
+        "price": 36.28,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
