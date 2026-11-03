@@ -1195,5 +1195,26 @@
     "source_url": "https://argenx.com/news/2026/press-release-3393895.html",
     "ticker": "ARGX",
     "title": "argenx to Present at Upcoming Investor Conferences"
+  },
+  {
+    "company": "Merck & Co.",
+    "discovered_at": "2026-11-03T11:50:33.921963+00:00",
+    "event_date": null,
+    "event_type": null,
+    "event_window": null,
+    "listing_context": "Merck Initiates Phase 3 Study Evaluating Ohtuvayre® (ensifentrine) for the Prevention of COPD Exacerbations in Adult Patients Receiving Standard of Care With a History of Exacerbations",
+    "listing_url": "https://www.merck.com/media/news/",
+    "notes": "Candidate discovered from an official company page; verify the release and any future event date before alerting.",
+    "publication_date_candidate": null,
+    "publication_time_precision": "UNKNOWN",
+    "publication_timestamp_source": null,
+    "publication_timezone_known": false,
+    "published_at": null,
+    "published_at_raw": null,
+    "review_status": "PENDING_REVIEW",
+    "source_host": "www.merck.com",
+    "source_url": "https://www.merck.com/news/merck-initiates-phase-3-study-evaluating-ohtuvayre-ensifentrine-for-the-prevention-of-copd-exacerbations-in-adult-patients-receiving-standard-of-care-with-a-history-of-exacerbations/",
+    "ticker": "MRK",
+    "title": "Merck Initiates Phase 3 Study Evaluating Ohtuvayre® (ensifentrine) for the Prevention of COPD Exacerbations in Adult Patients Receiving Standard of Care With a History of Exacerbations"
   }
 ]
