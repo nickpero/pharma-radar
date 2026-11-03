@@ -544,5 +544,31 @@
     "telegram_confirmed_at": "2026-11-03T18:58:33.102283+00:00",
     "telegram_message_id": 319,
     "ticker": "ABBV"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'dnli|unknown|company_financial_results|2026-11-03')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-03",
+    "first_seen_at": "2026-11-03T21:10:19.829958+00:00",
+    "program": null,
+    "qualified_at": "2026-11-03T21:10:19.930385+00:00",
+    "telegram_attempted_at": "2026-11-03T21:10:19.930385+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "DNLI"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'dnli|unknown|company_financial_results|2026-11-03')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-03",
+    "first_seen_at": "2026-11-03T21:10:19.829958+00:00",
+    "program": null,
+    "qualified_at": "2026-11-03T21:10:19.930385+00:00",
+    "telegram_attempted_at": "2026-11-03T21:10:19.930385+00:00",
+    "telegram_confirmed_at": "2026-11-03T21:10:20.525735+00:00",
+    "telegram_message_id": 321,
+    "ticker": "DNLI"
   }
 ]
