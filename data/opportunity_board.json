@@ -4,7 +4,7 @@
     "late": 274,
     "live": 0,
     "upcoming": 237,
-    "watch": 23
+    "watch": 24
   },
   "excluded": [
     {
@@ -442,7 +442,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-03T21:37:55.779473+00:00",
+  "generated_at": "2026-11-03T21:47:44.939372+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -4567,6 +4567,37 @@
       "ticker": "TARS",
       "title": "SEC 10-Q — Tarsus Pharmaceuticals (TARS) — Quarterly financial report",
       "trading_intelligence_score": 57.1
+    },
+    {
+      "catalyst_score": 55.0,
+      "company": "BioMarin Pharmaceutical",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-03T21:47:44.715835+00:00",
+      "market": {
+        "average_volume_20d": 2575075.0,
+        "estimated_average_dollar_volume_20d": 143328674.5,
+        "market_cap": null,
+        "price": 55.66,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-03",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1048477/000104847726000023/bmrn-20260930.htm",
+      "status": "WATCH",
+      "ticker": "BMRN",
+      "title": "SEC 10-Q — BioMarin Pharmaceutical (BMRN) — Quarterly financial report",
+      "trading_intelligence_score": 58.5
     },
     {
       "catalyst_score": 55.0,
