@@ -442,7 +442,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-03T00:39:07.208422+00:00",
+  "generated_at": "2026-11-03T02:27:47.762991+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -1682,7 +1682,7 @@
       "status": "LATE",
       "ticker": "SUPN",
       "title": "SEC 10-Q — Supernus Pharmaceuticals (SUPN) — Quarterly financial report",
-      "trading_intelligence_score": 58.6
+      "trading_intelligence_score": 57.1
     },
     {
       "catalyst_score": 55.0,
