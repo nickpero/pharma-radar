@@ -1216,5 +1216,26 @@
     "source_url": "https://www.merck.com/news/merck-initiates-phase-3-study-evaluating-ohtuvayre-ensifentrine-for-the-prevention-of-copd-exacerbations-in-adult-patients-receiving-standard-of-care-with-a-history-of-exacerbations/",
     "ticker": "MRK",
     "title": "Merck Initiates Phase 3 Study Evaluating Ohtuvayre® (ensifentrine) for the Prevention of COPD Exacerbations in Adult Patients Receiving Standard of Care With a History of Exacerbations"
+  },
+  {
+    "company": "Alnylam Pharmaceuticals",
+    "discovered_at": "2026-11-03T13:30:54.729829+00:00",
+    "event_date": null,
+    "event_type": null,
+    "event_window": null,
+    "listing_context": "Alnylam to Present Five-Year HELIOS-B Data and Expanding Evidence on the Benefits of RNAi-Powered TTR Silencing with AMVUTTRA® (vutrisiran) at AHA and ISA 2026",
+    "listing_url": "https://investors.alnylam.com/press-releases",
+    "notes": "Candidate discovered from an official company page; verify the release and any future event date before alerting.",
+    "publication_date_candidate": null,
+    "publication_time_precision": "UNKNOWN",
+    "publication_timestamp_source": null,
+    "publication_timezone_known": false,
+    "published_at": null,
+    "published_at_raw": null,
+    "review_status": "PENDING_REVIEW",
+    "source_host": "investors.alnylam.com",
+    "source_url": "https://investors.alnylam.com/press-release?id=672e7907-201f-4d4c-8c4e-93190d543ae8",
+    "ticker": "ALNY",
+    "title": "Alnylam to Present Five-Year HELIOS-B Data and Expanding Evidence on the Benefits of RNAi-Powered TTR Silencing with AMVUTTRA® (vutrisiran) at AHA and ISA 2026"
   }
 ]
