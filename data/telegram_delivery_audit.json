@@ -492,5 +492,31 @@
     "telegram_confirmed_at": "2026-11-03T13:26:32.920284+00:00",
     "telegram_message_id": 313,
     "ticker": "BNTX"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'beam|unknown|company_financial_results|2026-11-03')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-03",
+    "first_seen_at": "2026-11-03T14:38:32.544314+00:00",
+    "program": null,
+    "qualified_at": "2026-11-03T14:38:32.622547+00:00",
+    "telegram_attempted_at": "2026-11-03T14:38:32.622547+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "BEAM"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'beam|unknown|company_financial_results|2026-11-03')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-03",
+    "first_seen_at": "2026-11-03T14:38:32.544314+00:00",
+    "program": null,
+    "qualified_at": "2026-11-03T14:38:32.622547+00:00",
+    "telegram_attempted_at": "2026-11-03T14:38:32.622547+00:00",
+    "telegram_confirmed_at": "2026-11-03T14:38:33.203686+00:00",
+    "telegram_message_id": 318,
+    "ticker": "BEAM"
   }
 ]
