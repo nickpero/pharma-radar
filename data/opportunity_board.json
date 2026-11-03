@@ -442,7 +442,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-03T23:17:27.948800+00:00",
+  "generated_at": "2026-11-03T23:27:28.484392+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -1473,10 +1473,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.519550+00:00",
       "market": {
-        "average_volume_20d": 1709705.0,
-        "estimated_average_dollar_volume_20d": 10112905.07,
+        "average_volume_20d": 1795095.0,
+        "estimated_average_dollar_volume_20d": 10303845.3,
         "market_cap": null,
-        "price": 5.915,
+        "price": 5.74,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1496,7 +1496,7 @@
       "status": "LATE",
       "ticker": "PHAT",
       "title": "SEC 10-Q — Phathom Pharmaceuticals (PHAT) — Quarterly financial report",
-      "trading_intelligence_score": 58.2
+      "trading_intelligence_score": 57.5
     },
     {
       "catalyst_score": 55.0,
