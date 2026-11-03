@@ -442,7 +442,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-03T20:08:42.021150+00:00",
+  "generated_at": "2026-11-03T20:18:13.959527+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -947,9 +947,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518061+00:00",
       "market": {
         "average_volume_20d": 3117615.0,
-        "estimated_average_dollar_volume_20d": 572924108.55,
+        "estimated_average_dollar_volume_20d": 572612347.05,
         "market_cap": null,
-        "price": 183.77,
+        "price": 183.67,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1133,9 +1133,9 @@
       "first_seen_at": "2026-11-02T12:06:37.971182+00:00",
       "market": {
         "average_volume_20d": 664865.0,
-        "estimated_average_dollar_volume_20d": 450778.47,
+        "estimated_average_dollar_volume_20d": 448119.01,
         "market_cap": null,
-        "price": 0.678,
+        "price": 0.674,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1164,9 +1164,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518903+00:00",
       "market": {
         "average_volume_20d": 5344785.0,
-        "estimated_average_dollar_volume_20d": 1533338644.72,
+        "estimated_average_dollar_volume_20d": 1530131773.73,
         "market_cap": null,
-        "price": 286.885,
+        "price": 286.285,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1195,9 +1195,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518196+00:00",
       "market": {
         "average_volume_20d": 793225.0,
-        "estimated_average_dollar_volume_20d": 773156407.5,
+        "estimated_average_dollar_volume_20d": 772692370.88,
         "market_cap": null,
-        "price": 974.7,
+        "price": 974.115,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1226,9 +1226,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518958+00:00",
       "market": {
         "average_volume_20d": 6406040.0,
-        "estimated_average_dollar_volume_20d": 1083837907.6,
+        "estimated_average_dollar_volume_20d": 1083325424.4,
         "market_cap": null,
-        "price": 169.19,
+        "price": 169.11,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1257,9 +1257,9 @@
       "first_seen_at": "2026-10-31T11:07:02.519014+00:00",
       "market": {
         "average_volume_20d": 2621500.0,
-        "estimated_average_dollar_volume_20d": 3715622347.5,
+        "estimated_average_dollar_volume_20d": 3713223675.0,
         "market_cap": null,
-        "price": 1417.365,
+        "price": 1416.45,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1288,9 +1288,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518759+00:00",
       "market": {
         "average_volume_20d": 2562995.0,
-        "estimated_average_dollar_volume_20d": 187098635.0,
+        "estimated_average_dollar_volume_20d": 187457454.3,
         "market_cap": null,
-        "price": 73.0,
+        "price": 73.14,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1319,9 +1319,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518995+00:00",
       "market": {
         "average_volume_20d": 10273990.0,
-        "estimated_average_dollar_volume_20d": 1480481959.0,
+        "estimated_average_dollar_volume_20d": 1476988802.4,
         "market_cap": null,
-        "price": 144.1,
+        "price": 143.76,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1350,9 +1350,9 @@
       "first_seen_at": "2026-10-31T11:07:02.519577+00:00",
       "market": {
         "average_volume_20d": 1101065.0,
-        "estimated_average_dollar_volume_20d": 74877925.32,
+        "estimated_average_dollar_volume_20d": 74514573.88,
         "market_cap": null,
-        "price": 68.005,
+        "price": 67.675,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1372,7 +1372,7 @@
       "status": "LATE",
       "ticker": "PTCT",
       "title": "SEC 10-Q — PTC Therapeutics (PTCT) — Quarterly financial report",
-      "trading_intelligence_score": 57.9
+      "trading_intelligence_score": 58.0
     },
     {
       "catalyst_score": 55.0,
@@ -1381,9 +1381,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518466+00:00",
       "market": {
         "average_volume_20d": 2854790.0,
-        "estimated_average_dollar_volume_20d": 212881690.3,
+        "estimated_average_dollar_volume_20d": 213081525.6,
         "market_cap": null,
-        "price": 74.57,
+        "price": 74.64,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1412,9 +1412,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518207+00:00",
       "market": {
         "average_volume_20d": 2342745.0,
-        "estimated_average_dollar_volume_20d": 374112949.05,
+        "estimated_average_dollar_volume_20d": 374382364.73,
         "market_cap": null,
-        "price": 159.69,
+        "price": 159.805,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1434,7 +1434,7 @@
       "status": "LATE",
       "ticker": "ALNY",
       "title": "SEC 10-Q — Alnylam Pharmaceuticals (ALNY) — Quarterly financial report",
-      "trading_intelligence_score": 57.1
+      "trading_intelligence_score": 57.2
     },
     {
       "catalyst_score": 55.0,
@@ -1443,9 +1443,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518475+00:00",
       "market": {
         "average_volume_20d": 895555.0,
-        "estimated_average_dollar_volume_20d": 113936984.88,
+        "estimated_average_dollar_volume_20d": 114590740.02,
         "market_cap": null,
-        "price": 127.225,
+        "price": 127.955,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1474,9 +1474,9 @@
       "first_seen_at": "2026-10-31T11:07:02.519550+00:00",
       "market": {
         "average_volume_20d": 1795095.0,
-        "estimated_average_dollar_volume_20d": 10079458.43,
+        "estimated_average_dollar_volume_20d": 10025605.57,
         "market_cap": null,
-        "price": 5.615,
+        "price": 5.585,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1505,9 +1505,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518227+00:00",
       "market": {
         "average_volume_20d": 3687650.0,
-        "estimated_average_dollar_volume_20d": 385580684.0,
+        "estimated_average_dollar_volume_20d": 386871361.5,
         "market_cap": null,
-        "price": 104.56,
+        "price": 104.91,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1567,9 +1567,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518968+00:00",
       "market": {
         "average_volume_20d": 6406040.0,
-        "estimated_average_dollar_volume_20d": 1083837907.6,
+        "estimated_average_dollar_volume_20d": 1083325424.4,
         "market_cap": null,
-        "price": 169.19,
+        "price": 169.11,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1598,9 +1598,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518437+00:00",
       "market": {
         "average_volume_20d": 3764975.0,
-        "estimated_average_dollar_volume_20d": 57622942.38,
+        "estimated_average_dollar_volume_20d": 57754716.5,
         "market_cap": null,
-        "price": 15.305,
+        "price": 15.34,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1629,9 +1629,9 @@
       "first_seen_at": "2026-10-31T11:07:02.519942+00:00",
       "market": {
         "average_volume_20d": 1971685.0,
-        "estimated_average_dollar_volume_20d": 26321994.75,
+        "estimated_average_dollar_volume_20d": 26361428.45,
         "market_cap": null,
-        "price": 13.35,
+        "price": 13.37,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1660,9 +1660,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518846+00:00",
       "market": {
         "average_volume_20d": 1089110.0,
-        "estimated_average_dollar_volume_20d": 31812903.1,
+        "estimated_average_dollar_volume_20d": 31758447.6,
         "market_cap": null,
-        "price": 29.21,
+        "price": 29.16,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1682,7 +1682,7 @@
       "status": "LATE",
       "ticker": "SUPN",
       "title": "SEC 10-Q — Supernus Pharmaceuticals (SUPN) — Quarterly financial report",
-      "trading_intelligence_score": 61.3
+      "trading_intelligence_score": 61.7
     },
     {
       "catalyst_score": 55.0,
@@ -1691,9 +1691,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518788+00:00",
       "market": {
         "average_volume_20d": 12154525.0,
-        "estimated_average_dollar_volume_20d": 752122007.0,
+        "estimated_average_dollar_volume_20d": 752486642.75,
         "market_cap": null,
-        "price": 61.88,
+        "price": 61.91,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1722,9 +1722,9 @@
       "first_seen_at": "2026-10-31T11:07:02.519357+00:00",
       "market": {
         "average_volume_20d": 5028535.0,
-        "estimated_average_dollar_volume_20d": 131797902.35,
+        "estimated_average_dollar_volume_20d": 131888415.98,
         "market_cap": null,
-        "price": 26.21,
+        "price": 26.228,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1753,9 +1753,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518134+00:00",
       "market": {
         "average_volume_20d": 1272765.0,
-        "estimated_average_dollar_volume_20d": 34364655.0,
+        "estimated_average_dollar_volume_20d": 34415565.6,
         "market_cap": null,
-        "price": 27.0,
+        "price": 27.04,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1784,9 +1784,9 @@
       "first_seen_at": "2026-10-31T11:07:02.519319+00:00",
       "market": {
         "average_volume_20d": 1891405.0,
-        "estimated_average_dollar_volume_20d": 223280360.25,
+        "estimated_average_dollar_volume_20d": 223478957.78,
         "market_cap": null,
-        "price": 118.05,
+        "price": 118.155,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1815,9 +1815,9 @@
       "first_seen_at": "2026-10-31T11:07:02.520037+00:00",
       "market": {
         "average_volume_20d": 58260.0,
-        "estimated_average_dollar_volume_20d": 175828.68,
+        "estimated_average_dollar_volume_20d": 174780.0,
         "market_cap": null,
-        "price": 3.018,
+        "price": 3.0,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1846,9 +1846,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518940+00:00",
       "market": {
         "average_volume_20d": 1354060.0,
-        "estimated_average_dollar_volume_20d": 336923979.5,
+        "estimated_average_dollar_volume_20d": 336646397.2,
         "market_cap": null,
-        "price": 248.825,
+        "price": 248.62,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1877,9 +1877,9 @@
       "first_seen_at": "2026-10-31T11:07:02.519366+00:00",
       "market": {
         "average_volume_20d": 5028535.0,
-        "estimated_average_dollar_volume_20d": 131797902.35,
+        "estimated_average_dollar_volume_20d": 131888415.98,
         "market_cap": null,
-        "price": 26.21,
+        "price": 26.228,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1908,9 +1908,9 @@
       "first_seen_at": "2026-10-31T11:07:02.519596+00:00",
       "market": {
         "average_volume_20d": 2757640.0,
-        "estimated_average_dollar_volume_20d": 55483716.8,
+        "estimated_average_dollar_volume_20d": 56255856.0,
         "market_cap": null,
-        "price": 20.12,
+        "price": 20.4,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1930,7 +1930,7 @@
       "status": "LATE",
       "ticker": "REPL",
       "title": "SEC 10-Q — Replimune Group (REPL) — Quarterly financial report",
-      "trading_intelligence_score": 57.4
+      "trading_intelligence_score": 57.5
     },
     {
       "catalyst_score": 55.0,
@@ -4141,9 +4141,9 @@
       "first_seen_at": "2026-11-03T11:08:34.915877+00:00",
       "market": {
         "average_volume_20d": 999575.0,
-        "estimated_average_dollar_volume_20d": 6112401.12,
+        "estimated_average_dollar_volume_20d": 6177373.5,
         "market_cap": null,
-        "price": 6.115,
+        "price": 6.18,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4163,7 +4163,7 @@
       "status": "WATCH",
       "ticker": "EBS",
       "title": "SEC 10-Q — Emergent BioSolutions (EBS) — Quarterly financial report",
-      "trading_intelligence_score": 59.3
+      "trading_intelligence_score": 59.4
     },
     {
       "catalyst_score": 55.0,
@@ -4172,9 +4172,9 @@
       "first_seen_at": "2026-11-03T13:18:42.511031+00:00",
       "market": {
         "average_volume_20d": 717820.0,
-        "estimated_average_dollar_volume_20d": 62376404.54,
+        "estimated_average_dollar_volume_20d": 63089199.8,
         "market_cap": null,
-        "price": 86.897,
+        "price": 87.89,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4203,9 +4203,9 @@
       "first_seen_at": "2026-11-03T13:18:42.511723+00:00",
       "market": {
         "average_volume_20d": 221865.0,
-        "estimated_average_dollar_volume_20d": 1540852.43,
+        "estimated_average_dollar_volume_20d": 1535305.8,
         "market_cap": null,
-        "price": 6.945,
+        "price": 6.92,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4265,9 +4265,9 @@
       "first_seen_at": "2026-11-03T13:18:42.510378+00:00",
       "market": {
         "average_volume_20d": 757530.0,
-        "estimated_average_dollar_volume_20d": 5204231.1,
+        "estimated_average_dollar_volume_20d": 5261045.85,
         "market_cap": null,
-        "price": 6.87,
+        "price": 6.945,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4287,7 +4287,7 @@
       "status": "WATCH",
       "ticker": "ARVN",
       "title": "SEC 8-K — Arvinas (ARVN)",
-      "trading_intelligence_score": 57.3
+      "trading_intelligence_score": 57.4
     },
     {
       "catalyst_score": 55.0,
@@ -4358,9 +4358,9 @@
       "first_seen_at": "2026-11-03T13:18:42.510491+00:00",
       "market": {
         "average_volume_20d": 883675.0,
-        "estimated_average_dollar_volume_20d": 27809252.25,
+        "estimated_average_dollar_volume_20d": 27765068.5,
         "market_cap": null,
-        "price": 31.47,
+        "price": 31.42,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4389,9 +4389,9 @@
       "first_seen_at": "2026-11-03T14:38:32.413474+00:00",
       "market": {
         "average_volume_20d": 1914235.0,
-        "estimated_average_dollar_volume_20d": 50564517.52,
+        "estimated_average_dollar_volume_20d": 50708085.15,
         "market_cap": null,
-        "price": 26.415,
+        "price": 26.49,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4420,9 +4420,9 @@
       "first_seen_at": "2026-11-03T18:58:32.284793+00:00",
       "market": {
         "average_volume_20d": 5344785.0,
-        "estimated_average_dollar_volume_20d": 1533338644.72,
+        "estimated_average_dollar_volume_20d": 1530131773.73,
         "market_cap": null,
-        "price": 286.885,
+        "price": 286.285,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4451,9 +4451,9 @@
       "first_seen_at": "2026-11-03T13:26:32.292742+00:00",
       "market": {
         "average_volume_20d": 1123920.0,
-        "estimated_average_dollar_volume_20d": 97601212.8,
+        "estimated_average_dollar_volume_20d": 97702365.6,
         "market_cap": null,
-        "price": 86.84,
+        "price": 86.93,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
