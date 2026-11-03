@@ -466,5 +466,31 @@
     "telegram_confirmed_at": "2026-11-03T13:18:43.434872+00:00",
     "telegram_message_id": 312,
     "ticker": "DTIL"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'bntx|unknown|company_financial_results|2026-11-03')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-03",
+    "first_seen_at": "2026-11-03T13:26:32.465636+00:00",
+    "program": null,
+    "qualified_at": "2026-11-03T13:26:32.578919+00:00",
+    "telegram_attempted_at": "2026-11-03T13:26:32.578919+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "BNTX"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'bntx|unknown|company_financial_results|2026-11-03')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-03",
+    "first_seen_at": "2026-11-03T13:26:32.465636+00:00",
+    "program": null,
+    "qualified_at": "2026-11-03T13:26:32.578919+00:00",
+    "telegram_attempted_at": "2026-11-03T13:26:32.578919+00:00",
+    "telegram_confirmed_at": "2026-11-03T13:26:32.920284+00:00",
+    "telegram_message_id": 313,
+    "ticker": "BNTX"
   }
 ]
