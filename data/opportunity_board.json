@@ -1,7 +1,7 @@
 {
   "counts": {
     "excluded": 14,
-    "late": 273,
+    "late": 274,
     "live": 0,
     "upcoming": 241,
     "watch": 0
@@ -442,7 +442,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-03T00:03:00.658209+00:00",
+  "generated_at": "2026-11-03T00:16:29.757400+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
