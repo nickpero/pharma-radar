@@ -442,7 +442,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-03T21:28:12.762201+00:00",
+  "generated_at": "2026-11-03T21:37:55.779473+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -1279,7 +1279,7 @@
       "status": "LATE",
       "ticker": "LLY",
       "title": "SEC 10-Q — Eli Lilly (LLY) — Quarterly financial report",
-      "trading_intelligence_score": 57.1
+      "trading_intelligence_score": 57.2
     },
     {
       "catalyst_score": 55.0,
