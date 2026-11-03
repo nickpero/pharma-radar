@@ -4,6 +4,7 @@
     "https://argenx.com/investors/events-presentations",
     "https://argenx.com/news/2026/press-release-3376936.html",
     "https://argenx.com/news/2026/press-release-3383399.html",
+    "https://argenx.com/news/2026/press-release-3393895.html",
     "https://argenx.com/patients",
     "https://investors.alnylam.com/events",
     "https://investors.alnylam.com/press-release?id=0ea5d557-9f90-444e-9c30-3edf5dbdfe68",
@@ -57,6 +58,8 @@
     "https://www.uniqure.com/programs-pipeline/huntingtons-disease",
     "https://www.zymeworks.com/zymeworks-to-present-on-preclinical-and-clinical-programs-at-multiple-upcoming-medical-conferences/"
   ],
-  "source_errors": [],
-  "successful_sources": 13
+  "source_errors": [
+    "NUVL: ReadTimeout: HTTPSConnectionPool(host='investors.nuvalent.com', port=443): Read timed out. (read timeout=20)"
+  ],
+  "successful_sources": 12
 }
