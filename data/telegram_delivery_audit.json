@@ -258,5 +258,31 @@
     "telegram_confirmed_at": "2026-11-02T21:49:05.200242+00:00",
     "telegram_message_id": 307,
     "ticker": "RXRX"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'ebs|unknown|company_financial_results|2026-11-03')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-03",
+    "first_seen_at": "2026-11-03T11:08:35.085175+00:00",
+    "program": null,
+    "qualified_at": "2026-11-03T11:08:35.202948+00:00",
+    "telegram_attempted_at": "2026-11-03T11:08:35.202948+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "EBS"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'ebs|unknown|company_financial_results|2026-11-03')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-03",
+    "first_seen_at": "2026-11-03T11:08:35.085175+00:00",
+    "program": null,
+    "qualified_at": "2026-11-03T11:08:35.202948+00:00",
+    "telegram_attempted_at": "2026-11-03T11:08:35.202948+00:00",
+    "telegram_confirmed_at": "2026-11-03T11:08:35.908148+00:00",
+    "telegram_message_id": 309,
+    "ticker": "EBS"
   }
 ]
