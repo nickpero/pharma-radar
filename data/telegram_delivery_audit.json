@@ -960,5 +960,31 @@
     "telegram_confirmed_at": "2026-11-04T11:07:30.564853+00:00",
     "telegram_message_id": 326,
     "ticker": "AMGN"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'uthr|unknown|company_financial_results|2026-11-04')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-04",
+    "first_seen_at": "2026-11-04T11:37:14.217551+00:00",
+    "program": null,
+    "qualified_at": "2026-11-04T11:37:14.289639+00:00",
+    "telegram_attempted_at": "2026-11-04T11:37:14.289639+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "UTHR"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'uthr|unknown|company_financial_results|2026-11-04')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-04",
+    "first_seen_at": "2026-11-04T11:37:14.217551+00:00",
+    "program": null,
+    "qualified_at": "2026-11-04T11:37:14.289639+00:00",
+    "telegram_attempted_at": "2026-11-04T11:37:14.289639+00:00",
+    "telegram_confirmed_at": "2026-11-04T11:37:14.925202+00:00",
+    "telegram_message_id": 327,
+    "ticker": "UTHR"
   }
 ]
