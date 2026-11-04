@@ -25,26 +25,23 @@
   {
     "ticker": "KOD",
     "company": "Kodiak Sciences",
-    "listing_url": "https://kodiak.gcs-web.com/",
-    "allowed_host": "kodiak.gcs-web.com",
-    "enabled": false,
-    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
+    "listing_url": "https://ir.kodiak.com/investor-relations/",
+    "allowed_host": "ir.kodiak.com",
+    "enabled": true
   },
   {
     "ticker": "LFCR",
     "company": "Lifecore Biomedical",
     "listing_url": "https://ir.lifecore.com/press-releases",
     "allowed_host": "ir.lifecore.com",
-    "enabled": false,
-    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
+    "enabled": true
   },
   {
     "ticker": "LXRX",
     "company": "Lexicon Pharmaceuticals",
-    "listing_url": "https://lexiconpharma.gcs-web.com/",
-    "allowed_host": "lexiconpharma.gcs-web.com",
-    "enabled": false,
-    "disabled_reason": "HTTP_403_FROM_GITHUB_ACTIONS"
+    "listing_url": "https://investors.lexpharma.com/news-events/news-releases",
+    "allowed_host": "investors.lexpharma.com",
+    "enabled": true
   },
   {
     "ticker": "MIRM",

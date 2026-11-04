@@ -151,10 +151,10 @@ def test_configured_sources_are_official_https_pages():
     by_ticker = {item["ticker"]: item for item in sources}
     assert {ticker for ticker, item in by_ticker.items() if item.get("enabled", True)} == {
         "ALNY", "MRK", "ONCO", "SCYX", "CAPR", "SVRA", "ZYME", "MIRM",
-        "NUVL", "ARGX", "QURE", "STOK", "INO",
+        "NUVL", "ARGX", "QURE", "STOK", "INO", "KOD", "LFCR", "LXRX",
     }
     assert {ticker for ticker, item in by_ticker.items() if item.get("enabled") is False} == {
-        "KOD", "LFCR", "LXRX", "PHVS", "TENX", "REGN",
+        "PHVS", "TENX", "REGN",
     }
 
 
@@ -195,3 +195,77 @@ def test_rss_parser_extracts_original_publication_timestamp():
     assert rows[0]["publication_time_precision"] == "TIMESTAMP"
     assert rows[0]["publication_timezone_known"] is True
     assert rows[0]["publication_timestamp_source"] == "RSS_PUBDATE"
+
+
+def test_restored_priority_ir_sources_use_verified_official_hosts():
+    sources = collector.load_json(collector.SOURCES_PATH, [])
+    by_ticker = {item["ticker"]: item for item in sources}
+    expected = {
+        "KOD": ("https://ir.kodiak.com/investor-relations/", "ir.kodiak.com"),
+        "LFCR": ("https://ir.lifecore.com/press-releases", "ir.lifecore.com"),
+        "LXRX": ("https://investors.lexpharma.com/news-events/news-releases", "investors.lexpharma.com"),
+    }
+    for ticker, (url, host) in expected.items():
+        assert by_ticker[ticker]["enabled"] is True
+        assert by_ticker[ticker]["listing_url"] == url
+        assert by_ticker[ticker]["allowed_host"] == host
+
+
+def test_required_tickers_mode_fails_when_a_required_source_is_missing(tmp_path, monkeypatch):
+    monkeypatch.setenv("PRIMARY_SOURCE_REQUIRED_TICKERS", "TST,MISSING")
+    import pytest
+    with pytest.raises(RuntimeError, match="Required official IR sources unavailable: MISSING"):
+        collector.collect_candidates(
+            [SOURCE],
+            tmp_path / "state.json",
+            tmp_path / "candidates.json",
+            Session(),
+        )
+
+
+
+def test_collector_retries_transient_timeout_then_succeeds(tmp_path, monkeypatch):
+    import requests
+
+    class FlakySession:
+        def __init__(self):
+            self.calls = 0
+            self.timeouts = []
+
+        def get(self, url, **kwargs):
+            self.calls += 1
+            self.timeouts.append(kwargs["timeout"])
+            if self.calls < 3:
+                raise requests.Timeout("temporary read timeout")
+            return Response()
+
+    session = FlakySession()
+    sleeps = []
+    monkeypatch.setattr(collector.time, "sleep", lambda seconds: sleeps.append(seconds))
+    result = collector.collect_candidates(
+        [SOURCE], tmp_path / "state.json", tmp_path / "candidates.json", session
+    )
+    assert result["sources_ok"] == 1
+    assert session.calls == 3
+    assert session.timeouts == [(10, 45), (10, 45), (10, 45)]
+    assert sleeps == [1, 2]
+
+
+def test_collector_does_not_retry_non_transient_http_errors(monkeypatch):
+    import requests
+    import pytest
+
+    class ForbiddenSession:
+        def __init__(self):
+            self.calls = 0
+
+        def get(self, url, **kwargs):
+            self.calls += 1
+            response = requests.Response()
+            response.status_code = 403
+            raise requests.HTTPError("forbidden", response=response)
+
+    session = ForbiddenSession()
+    with pytest.raises(requests.HTTPError):
+        collector._fetch_source_page(session, SOURCE["listing_url"], {})
+    assert session.calls == 1
