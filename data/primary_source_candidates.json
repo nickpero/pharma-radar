@@ -1237,5 +1237,26 @@
     "source_url": "https://investors.alnylam.com/press-release?id=672e7907-201f-4d4c-8c4e-93190d543ae8",
     "ticker": "ALNY",
     "title": "Alnylam to Present Five-Year HELIOS-B Data and Expanding Evidence on the Benefits of RNAi-Powered TTR Silencing with AMVUTTRA® (vutrisiran) at AHA and ISA 2026"
+  },
+  {
+    "company": "Zymeworks",
+    "discovered_at": "2026-11-04T14:01:16.544548+00:00",
+    "event_date": null,
+    "event_type": null,
+    "event_window": null,
+    "listing_context": "November 4, 2026 Zymeworks to Present Preclinical Data on ZW1953, a Multispecific T Cell Engager with Integrated CD28 Co-stimulation for Acute Myeloid Leukemia, at ASH 2026",
+    "listing_url": "https://www.zymeworks.com/news/",
+    "notes": "Candidate discovered from an official company page; verify the release and any future event date before alerting.",
+    "publication_date_candidate": "November 4, 2026",
+    "publication_time_precision": "DATE_ONLY",
+    "publication_timestamp_source": "CARD_TEXT",
+    "publication_timezone_known": false,
+    "published_at": null,
+    "published_at_raw": null,
+    "review_status": "PENDING_REVIEW",
+    "source_host": "www.zymeworks.com",
+    "source_url": "https://www.zymeworks.com/zymeworks-to-present-preclinical-data-on-zw1953-a-multispecific-t-cell-engager-with-integrated-cd28-co-stimulation-for-acute-myeloid-leukemia-at-ash-2026/",
+    "ticker": "ZYME",
+    "title": "November 4, 2026 Zymeworks to Present Preclinical Data on ZW1953, a Multispecific T Cell Engager with Integrated CD28 Co-stimulation for Acute Myeloid Leukemia, at ASH 2026"
   }
 ]
