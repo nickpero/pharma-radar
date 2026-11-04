@@ -6,6 +6,7 @@ A listing page does not establish that a future event date is confirmed.
 import json
 import os
 import re
+import time
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 import xml.etree.ElementTree as ET
@@ -255,6 +256,28 @@ def parse_listing_page(html, source, discovered_at=None):
     return candidates
 
 
+def _fetch_source_page(session, url, headers, attempts=3):
+    """Fetch an official listing page with bounded retries for transient network failures."""
+    last_error = None
+    for attempt in range(attempts):
+        try:
+            response = session.get(url, timeout=(10, 45), headers=headers)
+            response.raise_for_status()
+            return response
+        except requests.RequestException as exc:
+            last_error = exc
+            status = getattr(getattr(exc, "response", None), "status_code", None)
+            retryable = (
+                isinstance(exc, (requests.Timeout, requests.ConnectionError))
+                or status == 429
+                or (status is not None and status >= 500)
+            )
+            if not retryable or attempt + 1 >= attempts:
+                raise
+            time.sleep(min(2 ** attempt, 4))
+    raise last_error
+
+
 def collect_candidates(sources=None, state_path=None, candidates_path=None, session=None):
     sources = sources if sources is not None else load_json(SOURCES_PATH, [])
     enabled_sources = [source for source in sources if source.get("enabled", True) is not False]
@@ -278,17 +301,16 @@ def collect_candidates(sources=None, state_path=None, candidates_path=None, sess
     now = datetime.now(timezone.utc).isoformat()
     for source in enabled_sources:
         try:
-            response = session.get(
+            response = _fetch_source_page(
+                session,
                 source["listing_url"],
-                timeout=20,
-                headers={
+                {
                     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
                                   "(KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
                     "Accept-Language": "en-US,en;q=0.9",
                 },
             )
-            response.raise_for_status()
             successful_sources += 1
             successful_tickers.add(str(source.get("ticker") or "").upper())
             found = parse_listing_page(response.text, source, discovered_at=now)
