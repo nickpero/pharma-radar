@@ -221,3 +221,51 @@ def test_required_tickers_mode_fails_when_a_required_source_is_missing(tmp_path,
             tmp_path / "candidates.json",
             Session(),
         )
+
+
+
+def test_collector_retries_transient_timeout_then_succeeds(tmp_path, monkeypatch):
+    import requests
+
+    class FlakySession:
+        def __init__(self):
+            self.calls = 0
+            self.timeouts = []
+
+        def get(self, url, **kwargs):
+            self.calls += 1
+            self.timeouts.append(kwargs["timeout"])
+            if self.calls < 3:
+                raise requests.Timeout("temporary read timeout")
+            return Response()
+
+    session = FlakySession()
+    sleeps = []
+    monkeypatch.setattr(collector.time, "sleep", lambda seconds: sleeps.append(seconds))
+    result = collector.collect_candidates(
+        [SOURCE], tmp_path / "state.json", tmp_path / "candidates.json", session
+    )
+    assert result["sources_ok"] == 1
+    assert session.calls == 3
+    assert session.timeouts == [(10, 45), (10, 45), (10, 45)]
+    assert sleeps == [1, 2]
+
+
+def test_collector_does_not_retry_non_transient_http_errors(monkeypatch):
+    import requests
+    import pytest
+
+    class ForbiddenSession:
+        def __init__(self):
+            self.calls = 0
+
+        def get(self, url, **kwargs):
+            self.calls += 1
+            response = requests.Response()
+            response.status_code = 403
+            raise requests.HTTPError("forbidden", response=response)
+
+    session = ForbiddenSession()
+    with pytest.raises(requests.HTTPError):
+        collector._fetch_source_page(session, SOURCE["listing_url"], {})
+    assert session.calls == 1
