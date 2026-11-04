@@ -442,7 +442,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-04T13:48:02.213603+00:00",
+  "generated_at": "2026-11-04T14:38:25.734652+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -946,10 +946,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.518061+00:00",
       "market": {
-        "average_volume_20d": 3117615.0,
-        "estimated_average_dollar_volume_20d": 573267046.2,
+        "average_volume_20d": 3199235.0,
+        "estimated_average_dollar_volume_20d": 603199763.07,
         "market_cap": null,
-        "price": 183.88,
+        "price": 188.545,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -969,7 +969,7 @@
       "status": "LATE",
       "ticker": "AZN",
       "title": "SEC 6-K — AstraZeneca (AZN) — 3RD QUARTER RESULTS",
-      "trading_intelligence_score": 64.9
+      "trading_intelligence_score": 64.7
     },
     {
       "catalyst_score": 80.0,
@@ -977,10 +977,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.518086+00:00",
       "market": {
-        "average_volume_20d": 3033325.0,
-        "estimated_average_dollar_volume_20d": 62941493.75,
+        "average_volume_20d": 3006805.0,
+        "estimated_average_dollar_volume_20d": 63218075.12,
         "market_cap": null,
-        "price": 20.75,
+        "price": 21.025,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1132,10 +1132,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-11-02T12:06:37.971182+00:00",
       "market": {
-        "average_volume_20d": 664865.0,
-        "estimated_average_dollar_volume_20d": 458756.85,
+        "average_volume_20d": 660430.0,
+        "estimated_average_dollar_volume_20d": 462301.0,
         "market_cap": null,
-        "price": 0.69,
+        "price": 0.7,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1155,7 +1155,7 @@
       "status": "LATE",
       "ticker": "TLSA",
       "title": "SEC 6-K — Tiziana Life Sciences (TLSA) — REPORT OF FOREIGN PRIVATE ISSUER",
-      "trading_intelligence_score": 64.7
+      "trading_intelligence_score": 66.2
     },
     {
       "catalyst_score": 55.0,
@@ -1163,10 +1163,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.518903+00:00",
       "market": {
-        "average_volume_20d": 5344785.0,
-        "estimated_average_dollar_volume_20d": 1528608510.0,
+        "average_volume_20d": 5387240.0,
+        "estimated_average_dollar_volume_20d": 1552117716.4,
         "market_cap": null,
-        "price": 286.0,
+        "price": 288.11,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1186,7 +1186,7 @@
       "status": "LATE",
       "ticker": "ABBV",
       "title": "SEC 8-K — AbbVie (ABBV)",
-      "trading_intelligence_score": 57.2
+      "trading_intelligence_score": 57.1
     },
     {
       "catalyst_score": 55.0,
@@ -1194,10 +1194,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.518196+00:00",
       "market": {
-        "average_volume_20d": 793225.0,
-        "estimated_average_dollar_volume_20d": 772093486.0,
+        "average_volume_20d": 822400.0,
+        "estimated_average_dollar_volume_20d": 807892864.0,
         "market_cap": null,
-        "price": 973.36,
+        "price": 982.36,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1217,7 +1217,7 @@
       "status": "LATE",
       "ticker": "REGN",
       "title": "SEC 10-Q — Regeneron Pharmaceuticals (REGN) — Quarterly financial report",
-      "trading_intelligence_score": 58.0
+      "trading_intelligence_score": 57.1
     },
     {
       "catalyst_score": 55.0,
@@ -1225,10 +1225,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.518958+00:00",
       "market": {
-        "average_volume_20d": 6406040.0,
-        "estimated_average_dollar_volume_20d": 1072819518.8,
+        "average_volume_20d": 6538050.0,
+        "estimated_average_dollar_volume_20d": 1125492617.25,
         "market_cap": null,
-        "price": 167.47,
+        "price": 172.145,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1256,10 +1256,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.519014+00:00",
       "market": {
-        "average_volume_20d": 2621500.0,
-        "estimated_average_dollar_volume_20d": 3694689670.0,
+        "average_volume_20d": 2653080.0,
+        "estimated_average_dollar_volume_20d": 3802168744.2,
         "market_cap": null,
-        "price": 1409.38,
+        "price": 1433.115,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1279,7 +1279,7 @@
       "status": "LATE",
       "ticker": "LLY",
       "title": "SEC 10-Q — Eli Lilly (LLY) — Quarterly financial report",
-      "trading_intelligence_score": 57.2
+      "trading_intelligence_score": 57.1
     },
     {
       "catalyst_score": 55.0,
@@ -1287,10 +1287,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.518759+00:00",
       "market": {
-        "average_volume_20d": 2562995.0,
-        "estimated_average_dollar_volume_20d": 185330168.45,
+        "average_volume_20d": 2653875.0,
+        "estimated_average_dollar_volume_20d": 192538631.25,
         "market_cap": null,
-        "price": 72.31,
+        "price": 72.55,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1310,7 +1310,7 @@
       "status": "LATE",
       "ticker": "EXEL",
       "title": "SEC 10-Q — Exelixis (EXEL) — Quarterly financial report",
-      "trading_intelligence_score": 58.0
+      "trading_intelligence_score": 57.1
     },
     {
       "catalyst_score": 55.0,
@@ -1318,10 +1318,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.518995+00:00",
       "market": {
-        "average_volume_20d": 10273990.0,
-        "estimated_average_dollar_volume_20d": 1486338133.3,
+        "average_volume_20d": 10313545.0,
+        "estimated_average_dollar_volume_20d": 1521041616.6,
         "market_cap": null,
-        "price": 144.67,
+        "price": 147.48,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1349,10 +1349,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.519577+00:00",
       "market": {
-        "average_volume_20d": 1101065.0,
-        "estimated_average_dollar_volume_20d": 75004547.8,
+        "average_volume_20d": 1170000.0,
+        "estimated_average_dollar_volume_20d": 80905500.0,
         "market_cap": null,
-        "price": 68.12,
+        "price": 69.15,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1372,7 +1372,7 @@
       "status": "LATE",
       "ticker": "PTCT",
       "title": "SEC 10-Q — PTC Therapeutics (PTCT) — Quarterly financial report",
-      "trading_intelligence_score": 59.4
+      "trading_intelligence_score": 57.1
     },
     {
       "catalyst_score": 55.0,
@@ -1380,10 +1380,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.518466+00:00",
       "market": {
-        "average_volume_20d": 2854790.0,
-        "estimated_average_dollar_volume_20d": 211340103.7,
+        "average_volume_20d": 2793235.0,
+        "estimated_average_dollar_volume_20d": 209646252.93,
         "market_cap": null,
-        "price": 74.03,
+        "price": 75.055,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1411,10 +1411,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.518207+00:00",
       "market": {
-        "average_volume_20d": 2342745.0,
-        "estimated_average_dollar_volume_20d": 374581498.05,
+        "average_volume_20d": 2462925.0,
+        "estimated_average_dollar_volume_20d": 408402223.5,
         "market_cap": null,
-        "price": 159.89,
+        "price": 165.82,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1434,7 +1434,7 @@
       "status": "LATE",
       "ticker": "ALNY",
       "title": "SEC 10-Q — Alnylam Pharmaceuticals (ALNY) — Quarterly financial report",
-      "trading_intelligence_score": 58.1
+      "trading_intelligence_score": 57.1
     },
     {
       "catalyst_score": 55.0,
@@ -1442,10 +1442,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.518475+00:00",
       "market": {
-        "average_volume_20d": 895555.0,
-        "estimated_average_dollar_volume_20d": 113816084.95,
+        "average_volume_20d": 917530.0,
+        "estimated_average_dollar_volume_20d": 118723794.35,
         "market_cap": null,
-        "price": 127.09,
+        "price": 129.395,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1465,7 +1465,7 @@
       "status": "LATE",
       "ticker": "KYMR",
       "title": "SEC 10-Q — Kymera Therapeutics (KYMR) — Quarterly financial report",
-      "trading_intelligence_score": 58.1
+      "trading_intelligence_score": 57.1
     },
     {
       "catalyst_score": 55.0,
@@ -1473,10 +1473,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.519550+00:00",
       "market": {
-        "average_volume_20d": 1795095.0,
-        "estimated_average_dollar_volume_20d": 10303845.3,
+        "average_volume_20d": 1798835.0,
+        "estimated_average_dollar_volume_20d": 10757033.3,
         "market_cap": null,
-        "price": 5.74,
+        "price": 5.98,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1496,7 +1496,7 @@
       "status": "LATE",
       "ticker": "PHAT",
       "title": "SEC 10-Q — Phathom Pharmaceuticals (PHAT) — Quarterly financial report",
-      "trading_intelligence_score": 57.5
+      "trading_intelligence_score": 57.1
     },
     {
       "catalyst_score": 55.0,
@@ -1504,10 +1504,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.518227+00:00",
       "market": {
-        "average_volume_20d": 3687650.0,
-        "estimated_average_dollar_volume_20d": 385138166.0,
+        "average_volume_20d": 3814165.0,
+        "estimated_average_dollar_volume_20d": 404930827.23,
         "market_cap": null,
-        "price": 104.44,
+        "price": 106.165,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1527,7 +1527,7 @@
       "status": "LATE",
       "ticker": "INSM",
       "title": "SEC 8-K — Insmed (INSM)",
-      "trading_intelligence_score": 58.3
+      "trading_intelligence_score": 57.1
     },
     {
       "catalyst_score": 55.0,
@@ -1566,10 +1566,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.518968+00:00",
       "market": {
-        "average_volume_20d": 6406040.0,
-        "estimated_average_dollar_volume_20d": 1072819518.8,
+        "average_volume_20d": 6538050.0,
+        "estimated_average_dollar_volume_20d": 1125492617.25,
         "market_cap": null,
-        "price": 167.47,
+        "price": 172.145,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1597,10 +1597,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.518437+00:00",
       "market": {
-        "average_volume_20d": 3764975.0,
-        "estimated_average_dollar_volume_20d": 58771259.75,
+        "average_volume_20d": 3713115.0,
+        "estimated_average_dollar_volume_20d": 59576930.18,
         "market_cap": null,
-        "price": 15.61,
+        "price": 16.045,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1628,10 +1628,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.519942+00:00",
       "market": {
-        "average_volume_20d": 1971685.0,
-        "estimated_average_dollar_volume_20d": 26479729.55,
+        "average_volume_20d": 1966135.0,
+        "estimated_average_dollar_volume_20d": 27840471.6,
         "market_cap": null,
-        "price": 13.43,
+        "price": 14.16,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1659,10 +1659,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.518846+00:00",
       "market": {
-        "average_volume_20d": 2933415.0,
-        "estimated_average_dollar_volume_20d": 82575632.25,
+        "average_volume_20d": 3205190.0,
+        "estimated_average_dollar_volume_20d": 92662042.9,
         "market_cap": null,
-        "price": 28.15,
+        "price": 28.91,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1682,7 +1682,7 @@
       "status": "LATE",
       "ticker": "SUPN",
       "title": "SEC 10-Q — Supernus Pharmaceuticals (SUPN) — Quarterly financial report",
-      "trading_intelligence_score": 59.9
+      "trading_intelligence_score": 57.1
     },
     {
       "catalyst_score": 55.0,
@@ -1690,10 +1690,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.518788+00:00",
       "market": {
-        "average_volume_20d": 12154525.0,
-        "estimated_average_dollar_volume_20d": 750055737.75,
+        "average_volume_20d": 12174850.0,
+        "estimated_average_dollar_volume_20d": 774990076.75,
         "market_cap": null,
-        "price": 61.71,
+        "price": 63.655,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1721,10 +1721,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.519357+00:00",
       "market": {
-        "average_volume_20d": 5028535.0,
-        "estimated_average_dollar_volume_20d": 131194478.15,
+        "average_volume_20d": 4809415.0,
+        "estimated_average_dollar_volume_20d": 130960370.45,
         "market_cap": null,
-        "price": 26.09,
+        "price": 27.23,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1752,10 +1752,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.518134+00:00",
       "market": {
-        "average_volume_20d": 1272765.0,
-        "estimated_average_dollar_volume_20d": 34351927.35,
+        "average_volume_20d": 1300780.0,
+        "estimated_average_dollar_volume_20d": 35836489.0,
         "market_cap": null,
-        "price": 26.99,
+        "price": 27.55,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1775,7 +1775,7 @@
       "status": "LATE",
       "ticker": "STOK",
       "title": "SEC 8-K — Stoke Therapeutics (STOK)",
-      "trading_intelligence_score": 57.7
+      "trading_intelligence_score": 57.1
     },
     {
       "catalyst_score": 55.0,
@@ -1783,10 +1783,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.519319+00:00",
       "market": {
-        "average_volume_20d": 1891405.0,
-        "estimated_average_dollar_volume_20d": 222410313.95,
+        "average_volume_20d": 1877020.0,
+        "estimated_average_dollar_volume_20d": 224932691.7,
         "market_cap": null,
-        "price": 117.59,
+        "price": 119.835,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1806,7 +1806,7 @@
       "status": "LATE",
       "ticker": "INCY",
       "title": "SEC 10-Q — Incyte (INCY) — Quarterly financial report",
-      "trading_intelligence_score": 57.4
+      "trading_intelligence_score": 57.1
     },
     {
       "catalyst_score": 55.0,
@@ -1876,10 +1876,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-10-31T11:07:02.519366+00:00",
       "market": {
-        "average_volume_20d": 5028535.0,
-        "estimated_average_dollar_volume_20d": 131194478.15,
+        "average_volume_20d": 4809415.0,
+        "estimated_average_dollar_volume_20d": 130960370.45,
         "market_cap": null,
-        "price": 26.09,
+        "price": 27.23,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4140,10 +4140,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-11-04T12:20:38.653715+00:00",
       "market": {
-        "average_volume_20d": 4880020.0,
-        "estimated_average_dollar_volume_20d": 41821771.4,
+        "average_volume_20d": 5007915.0,
+        "estimated_average_dollar_volume_20d": 42507182.52,
         "market_cap": null,
-        "price": 8.57,
+        "price": 8.488,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4163,7 +4163,7 @@
       "status": "WATCH",
       "ticker": "BCRX",
       "title": "SEC 8-K — BioCryst Pharmaceuticals (BCRX)",
-      "trading_intelligence_score": 57.7
+      "trading_intelligence_score": 57.1
     },
     {
       "catalyst_score": 55.0,
@@ -4202,10 +4202,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-11-04T11:07:29.876522+00:00",
       "market": {
-        "average_volume_20d": 2618000.0,
-        "estimated_average_dollar_volume_20d": 1207578680.0,
+        "average_volume_20d": 2633990.0,
+        "estimated_average_dollar_volume_20d": 1249227705.28,
         "market_cap": null,
-        "price": 461.26,
+        "price": 474.272,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4233,10 +4233,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-11-04T12:20:38.653739+00:00",
       "market": {
-        "average_volume_20d": 12676305.0,
-        "estimated_average_dollar_volume_20d": 11788963.65,
+        "average_volume_20d": 15331920.0,
+        "estimated_average_dollar_volume_20d": 15638558.4,
         "market_cap": null,
-        "price": 0.93,
+        "price": 1.02,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4256,7 +4256,7 @@
       "status": "WATCH",
       "ticker": "GERN",
       "title": "SEC 8-K — Geron Corporation (GERN)",
-      "trading_intelligence_score": 63.1
+      "trading_intelligence_score": 57.1
     },
     {
       "catalyst_score": 55.0,
@@ -4264,10 +4264,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-11-04T11:37:14.100903+00:00",
       "market": {
-        "average_volume_20d": 669930.0,
-        "estimated_average_dollar_volume_20d": 402842307.6,
+        "average_volume_20d": 639015.0,
+        "estimated_average_dollar_volume_20d": 372961104.75,
         "market_cap": null,
-        "price": 601.32,
+        "price": 583.65,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4295,10 +4295,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-11-04T11:07:29.875596+00:00",
       "market": {
-        "average_volume_20d": 3378755.0,
-        "estimated_average_dollar_volume_20d": 56188695.65,
+        "average_volume_20d": 3368865.0,
+        "estimated_average_dollar_volume_20d": 57075310.83,
         "market_cap": null,
-        "price": 16.63,
+        "price": 16.942,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4318,7 +4318,7 @@
       "status": "WATCH",
       "ticker": "RARE",
       "title": "SEC 10-Q — Ultragenyx (RARE) — Quarterly financial report",
-      "trading_intelligence_score": 57.3
+      "trading_intelligence_score": 57.1
     },
     {
       "catalyst_score": 55.0,
@@ -4326,10 +4326,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-11-04T12:20:38.652797+00:00",
       "market": {
-        "average_volume_20d": 572985.0,
-        "estimated_average_dollar_volume_20d": 3678563.7,
+        "average_volume_20d": 526275.0,
+        "estimated_average_dollar_volume_20d": 3386579.62,
         "market_cap": null,
-        "price": 6.42,
+        "price": 6.435,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4357,10 +4357,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-11-04T11:07:29.877267+00:00",
       "market": {
-        "average_volume_20d": 2289240.0,
-        "estimated_average_dollar_volume_20d": 32255391.6,
+        "average_volume_20d": 2307055.0,
+        "estimated_average_dollar_volume_20d": 31352877.45,
         "market_cap": null,
-        "price": 14.09,
+        "price": 13.59,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4380,7 +4380,7 @@
       "status": "WATCH",
       "ticker": "QDEL",
       "title": "SEC 10-Q — QuidelOrtho (QDEL) — Quarterly financial report",
-      "trading_intelligence_score": 58.1
+      "trading_intelligence_score": 57.1
     },
     {
       "catalyst_score": 55.0,
@@ -4388,10 +4388,10 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-11-04T12:48:34.404659+00:00",
       "market": {
-        "average_volume_20d": 1430885.0,
-        "estimated_average_dollar_volume_20d": 28474611.5,
+        "average_volume_20d": 1471170.0,
+        "estimated_average_dollar_volume_20d": 30188408.4,
         "market_cap": null,
-        "price": 19.9,
+        "price": 20.52,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4411,7 +4411,7 @@
       "status": "WATCH",
       "ticker": "NAMS",
       "title": "SEC 10-Q — NewAmsterdam Pharma (NAMS) — Quarterly financial report",
-      "trading_intelligence_score": 57.9
+      "trading_intelligence_score": 57.1
     },
     {
       "catalyst_score": 55.0,
