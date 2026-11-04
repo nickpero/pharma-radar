@@ -4,7 +4,7 @@
     "late": 299,
     "live": 0,
     "upcoming": 241,
-    "watch": 32
+    "watch": 33
   },
   "excluded": [
     {
@@ -442,7 +442,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-04T21:39:33.334274+00:00",
+  "generated_at": "2026-11-04T21:57:44.643883+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -4722,6 +4722,37 @@
       "ticker": "RLAY",
       "title": "SEC 8-K — Relay Therapeutics (RLAY)",
       "trading_intelligence_score": 58.0
+    },
+    {
+      "catalyst_score": 55.0,
+      "company": "Summit Therapeutics",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-04T21:57:44.480957+00:00",
+      "market": {
+        "average_volume_20d": 5054675.0,
+        "estimated_average_dollar_volume_20d": 81734094.75,
+        "market_cap": null,
+        "price": 16.17,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-04",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1599298/000159929826000088/smmt-20261104.htm",
+      "status": "WATCH",
+      "ticker": "SMMT",
+      "title": "SEC 8-K — Summit Therapeutics (SMMT)",
+      "trading_intelligence_score": 57.1
     },
     {
       "catalyst_score": 55.0,

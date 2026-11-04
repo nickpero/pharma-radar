@@ -1714,5 +1714,31 @@
     "telegram_confirmed_at": "2026-11-04T21:39:33.906267+00:00",
     "telegram_message_id": 336,
     "ticker": "INVA"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'smmt|unknown|company_financial_results|2026-11-04')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-04",
+    "first_seen_at": "2026-11-04T21:57:44.613200+00:00",
+    "program": null,
+    "qualified_at": "2026-11-04T21:57:44.695330+00:00",
+    "telegram_attempted_at": "2026-11-04T21:57:44.695330+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "SMMT"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'smmt|unknown|company_financial_results|2026-11-04')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-04",
+    "first_seen_at": "2026-11-04T21:57:44.613200+00:00",
+    "program": null,
+    "qualified_at": "2026-11-04T21:57:44.695330+00:00",
+    "telegram_attempted_at": "2026-11-04T21:57:44.695330+00:00",
+    "telegram_confirmed_at": "2026-11-04T21:57:45.022677+00:00",
+    "telegram_message_id": 337,
+    "ticker": "SMMT"
   }
 ]
