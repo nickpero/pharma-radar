@@ -1116,5 +1116,31 @@
     "telegram_confirmed_at": "2026-11-04T12:48:35.303244+00:00",
     "telegram_message_id": 331,
     "ticker": "NAMS"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'apre|unknown|company_financial_results|2026-11-04')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-04",
+    "first_seen_at": "2026-11-04T13:48:02.174716+00:00",
+    "program": null,
+    "qualified_at": "2026-11-04T13:48:02.269902+00:00",
+    "telegram_attempted_at": "2026-11-04T13:48:02.269902+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "APRE"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'apre|unknown|company_financial_results|2026-11-04')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-04",
+    "first_seen_at": "2026-11-04T13:48:02.174716+00:00",
+    "program": null,
+    "qualified_at": "2026-11-04T13:48:02.269902+00:00",
+    "telegram_attempted_at": "2026-11-04T13:48:02.269902+00:00",
+    "telegram_confirmed_at": "2026-11-04T13:48:02.820531+00:00",
+    "telegram_message_id": 332,
+    "ticker": "APRE"
   }
 ]
