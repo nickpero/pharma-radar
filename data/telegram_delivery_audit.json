@@ -1818,5 +1818,57 @@
     "telegram_confirmed_at": "2026-11-05T11:18:56.442185+00:00",
     "telegram_message_id": 342,
     "ticker": "CGTX"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'agio|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T11:47:57.760314+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T11:47:57.884077+00:00",
+    "telegram_attempted_at": "2026-11-05T11:47:57.884077+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "AGIO"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'zlab|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T11:47:57.760314+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T11:47:57.884077+00:00",
+    "telegram_attempted_at": "2026-11-05T11:47:57.884077+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "ZLAB"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'agio|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T11:47:57.760314+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T11:47:57.884077+00:00",
+    "telegram_attempted_at": "2026-11-05T11:47:57.884077+00:00",
+    "telegram_confirmed_at": "2026-11-05T11:47:58.249233+00:00",
+    "telegram_message_id": 343,
+    "ticker": "AGIO"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'zlab|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T11:47:57.760314+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T11:47:57.884077+00:00",
+    "telegram_attempted_at": "2026-11-05T11:47:57.884077+00:00",
+    "telegram_confirmed_at": "2026-11-05T11:47:58.249233+00:00",
+    "telegram_message_id": 343,
+    "ticker": "ZLAB"
   }
 ]
