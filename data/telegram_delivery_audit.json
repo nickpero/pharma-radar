@@ -2260,5 +2260,57 @@
     "telegram_confirmed_at": "2026-11-05T13:09:50.154040+00:00",
     "telegram_message_id": 347,
     "ticker": "SCYX"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'vcel|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T13:19:26.626129+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T13:19:26.748877+00:00",
+    "telegram_attempted_at": "2026-11-05T13:19:26.748877+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "VCEL"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'nvax|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T13:19:26.626129+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T13:19:26.748877+00:00",
+    "telegram_attempted_at": "2026-11-05T13:19:26.748877+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "NVAX"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'vcel|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T13:19:26.626129+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T13:19:26.748877+00:00",
+    "telegram_attempted_at": "2026-11-05T13:19:26.748877+00:00",
+    "telegram_confirmed_at": "2026-11-05T13:19:27.281142+00:00",
+    "telegram_message_id": 348,
+    "ticker": "VCEL"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'nvax|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T13:19:26.626129+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T13:19:26.748877+00:00",
+    "telegram_attempted_at": "2026-11-05T13:19:26.748877+00:00",
+    "telegram_confirmed_at": "2026-11-05T13:19:27.281142+00:00",
+    "telegram_message_id": 348,
+    "ticker": "NVAX"
   }
 ]
