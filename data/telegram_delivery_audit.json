@@ -2364,5 +2364,31 @@
     "telegram_confirmed_at": "2026-11-05T13:37:08.685621+00:00",
     "telegram_message_id": 350,
     "ticker": "AMTX"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'lpcn|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T14:37:31.488191+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T14:37:31.608120+00:00",
+    "telegram_attempted_at": "2026-11-05T14:37:31.608120+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "LPCN"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'lpcn|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T14:37:31.488191+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T14:37:31.608120+00:00",
+    "telegram_attempted_at": "2026-11-05T14:37:31.608120+00:00",
+    "telegram_confirmed_at": "2026-11-05T14:37:32.036786+00:00",
+    "telegram_message_id": 351,
+    "ticker": "LPCN"
   }
 ]
