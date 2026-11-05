@@ -442,7 +442,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-05T20:49:44.150414+00:00",
+  "generated_at": "2026-11-05T20:57:49.851661+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -947,9 +947,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518061+00:00",
       "market": {
         "average_volume_20d": 3314230.0,
-        "estimated_average_dollar_volume_20d": 620970703.95,
+        "estimated_average_dollar_volume_20d": 620871277.05,
         "market_cap": null,
-        "price": 187.365,
+        "price": 187.335,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -969,7 +969,7 @@
       "status": "LATE",
       "ticker": "AZN",
       "title": "SEC 6-K — AstraZeneca (AZN) — 3RD QUARTER RESULTS",
-      "trading_intelligence_score": 64.8
+      "trading_intelligence_score": 64.9
     },
     {
       "catalyst_score": 80.0,
@@ -1133,9 +1133,9 @@
       "first_seen_at": "2026-11-02T12:06:37.971182+00:00",
       "market": {
         "average_volume_20d": 662245.0,
-        "estimated_average_dollar_volume_20d": 400658.22,
+        "estimated_average_dollar_volume_20d": 410591.9,
         "market_cap": null,
-        "price": 0.605,
+        "price": 0.62,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1155,7 +1155,7 @@
       "status": "LATE",
       "ticker": "TLSA",
       "title": "SEC 6-K — Tiziana Life Sciences (TLSA) — REPORT OF FOREIGN PRIVATE ISSUER",
-      "trading_intelligence_score": 64.8
+      "trading_intelligence_score": 64.9
     },
     {
       "catalyst_score": 55.0,
@@ -1164,9 +1164,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518903+00:00",
       "market": {
         "average_volume_20d": 5505990.0,
-        "estimated_average_dollar_volume_20d": 1592029478.55,
+        "estimated_average_dollar_volume_20d": 1588533174.9,
         "market_cap": null,
-        "price": 289.145,
+        "price": 288.51,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1195,9 +1195,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518196+00:00",
       "market": {
         "average_volume_20d": 860830.0,
-        "estimated_average_dollar_volume_20d": 778091324.55,
+        "estimated_average_dollar_volume_20d": 777488743.55,
         "market_cap": null,
-        "price": 903.885,
+        "price": 903.185,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1217,7 +1217,7 @@
       "status": "LATE",
       "ticker": "REGN",
       "title": "SEC 10-Q — Regeneron Pharmaceuticals (REGN) — Quarterly financial report",
-      "trading_intelligence_score": 57.5
+      "trading_intelligence_score": 57.6
     },
     {
       "catalyst_score": 55.0,
@@ -1226,9 +1226,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518958+00:00",
       "market": {
         "average_volume_20d": 6777140.0,
-        "estimated_average_dollar_volume_20d": 1138220663.0,
+        "estimated_average_dollar_volume_20d": 1133747750.6,
         "market_cap": null,
-        "price": 167.95,
+        "price": 167.29,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1248,7 +1248,7 @@
       "status": "LATE",
       "ticker": "GILD",
       "title": "SEC 10-Q — Gilead Sciences (GILD) — Quarterly financial report",
-      "trading_intelligence_score": 57.3
+      "trading_intelligence_score": 57.4
     },
     {
       "catalyst_score": 55.0,
@@ -1319,9 +1319,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518995+00:00",
       "market": {
         "average_volume_20d": 10533100.0,
-        "estimated_average_dollar_volume_20d": 1548049707.0,
+        "estimated_average_dollar_volume_20d": 1548681693.0,
         "market_cap": null,
-        "price": 146.97,
+        "price": 147.03,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1505,9 +1505,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518227+00:00",
       "market": {
         "average_volume_20d": 3903175.0,
-        "estimated_average_dollar_volume_20d": 419903566.5,
+        "estimated_average_dollar_volume_20d": 423572551.0,
         "market_cap": null,
-        "price": 107.58,
+        "price": 108.52,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1567,9 +1567,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518968+00:00",
       "market": {
         "average_volume_20d": 6777140.0,
-        "estimated_average_dollar_volume_20d": 1138220663.0,
+        "estimated_average_dollar_volume_20d": 1133747750.6,
         "market_cap": null,
-        "price": 167.95,
+        "price": 167.29,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1589,7 +1589,7 @@
       "status": "LATE",
       "ticker": "GILD",
       "title": "SEC 8-K — Gilead Sciences (GILD)",
-      "trading_intelligence_score": 57.3
+      "trading_intelligence_score": 57.4
     },
     {
       "catalyst_score": 55.0,
@@ -1598,9 +1598,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518437+00:00",
       "market": {
         "average_volume_20d": 3689415.0,
-        "estimated_average_dollar_volume_20d": 51319762.65,
+        "estimated_average_dollar_volume_20d": 51504233.4,
         "market_cap": null,
-        "price": 13.91,
+        "price": 13.96,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1629,9 +1629,9 @@
       "first_seen_at": "2026-10-31T11:07:02.519942+00:00",
       "market": {
         "average_volume_20d": 1872860.0,
-        "estimated_average_dollar_volume_20d": 25433438.8,
+        "estimated_average_dollar_volume_20d": 25405345.9,
         "market_cap": null,
-        "price": 13.58,
+        "price": 13.565,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1753,9 +1753,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518134+00:00",
       "market": {
         "average_volume_20d": 1329425.0,
-        "estimated_average_dollar_volume_20d": 34538461.5,
+        "estimated_average_dollar_volume_20d": 34604932.75,
         "market_cap": null,
-        "price": 25.98,
+        "price": 26.03,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1877,9 +1877,9 @@
       "first_seen_at": "2026-10-31T11:07:02.519366+00:00",
       "market": {
         "average_volume_20d": 4759660.0,
-        "estimated_average_dollar_volume_20d": 122228068.8,
+        "estimated_average_dollar_volume_20d": 122942017.8,
         "market_cap": null,
-        "price": 25.68,
+        "price": 25.83,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4152,9 +4152,9 @@
       "first_seen_at": "2026-11-05T19:37:40.391956+00:00",
       "market": {
         "average_volume_20d": 662245.0,
-        "estimated_average_dollar_volume_20d": 400658.22,
+        "estimated_average_dollar_volume_20d": 410591.9,
         "market_cap": null,
-        "price": 0.605,
+        "price": 0.62,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4174,7 +4174,7 @@
       "status": "WATCH",
       "ticker": "TLSA",
       "title": "SEC 6-K — Tiziana Life Sciences (TLSA) — REPORT OF FOREIGN PRIVATE ISSUER",
-      "trading_intelligence_score": 64.8
+      "trading_intelligence_score": 64.9
     },
     {
       "catalyst_score": 55.0,
@@ -4214,9 +4214,9 @@
       "first_seen_at": "2026-11-05T12:17:50.470143+00:00",
       "market": {
         "average_volume_20d": 1173205.0,
-        "estimated_average_dollar_volume_20d": 10429792.45,
+        "estimated_average_dollar_volume_20d": 10353534.12,
         "market_cap": null,
-        "price": 8.89,
+        "price": 8.825,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4245,9 +4245,9 @@
       "first_seen_at": "2026-11-05T13:27:29.495304+00:00",
       "market": {
         "average_volume_20d": 4918090.0,
-        "estimated_average_dollar_volume_20d": 54605553.27,
+        "estimated_average_dollar_volume_20d": 54762932.15,
         "market_cap": null,
-        "price": 11.103,
+        "price": 11.135,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4267,7 +4267,7 @@
       "status": "WATCH",
       "ticker": "NTLA",
       "title": "SEC 8-K — Intellia Therapeutics (NTLA)",
-      "trading_intelligence_score": 57.6
+      "trading_intelligence_score": 57.7
     },
     {
       "catalyst_score": 55.0,
@@ -4276,9 +4276,9 @@
       "first_seen_at": "2026-11-05T12:09:27.111429+00:00",
       "market": {
         "average_volume_20d": 333710.0,
-        "estimated_average_dollar_volume_20d": 23106080.4,
+        "estimated_average_dollar_volume_20d": 23171153.85,
         "market_cap": null,
-        "price": 69.24,
+        "price": 69.435,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4298,7 +4298,7 @@
       "status": "WATCH",
       "ticker": "ANIP",
       "title": "SEC 10-Q — ANI Pharmaceuticals (ANIP) — Quarterly financial report",
-      "trading_intelligence_score": 60.5
+      "trading_intelligence_score": 60.8
     },
     {
       "catalyst_score": 55.0,
@@ -4307,9 +4307,9 @@
       "first_seen_at": "2026-11-05T12:09:27.110302+00:00",
       "market": {
         "average_volume_20d": 1912860.0,
-        "estimated_average_dollar_volume_20d": 3070140.3,
+        "estimated_average_dollar_volume_20d": 3098833.2,
         "market_cap": null,
-        "price": 1.605,
+        "price": 1.62,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4329,7 +4329,7 @@
       "status": "WATCH",
       "ticker": "LXRX",
       "title": "SEC 8-K — Lexicon Pharmaceuticals (LXRX)",
-      "trading_intelligence_score": 58.4
+      "trading_intelligence_score": 58.5
     },
     {
       "catalyst_score": 55.0,
@@ -4338,9 +4338,9 @@
       "first_seen_at": "2026-11-05T11:47:57.579109+00:00",
       "market": {
         "average_volume_20d": 1138810.0,
-        "estimated_average_dollar_volume_20d": 25691553.6,
+        "estimated_average_dollar_volume_20d": 25816822.7,
         "market_cap": null,
-        "price": 22.56,
+        "price": 22.67,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4369,9 +4369,9 @@
       "first_seen_at": "2026-11-05T13:09:49.293636+00:00",
       "market": {
         "average_volume_20d": 87305.0,
-        "estimated_average_dollar_volume_20d": 286360.4,
+        "estimated_average_dollar_volume_20d": 290289.12,
         "market_cap": null,
-        "price": 3.28,
+        "price": 3.325,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4391,7 +4391,7 @@
       "status": "WATCH",
       "ticker": "SCYX",
       "title": "SEC 10-Q — SCYNEXIS (SCYX) — Quarterly financial report",
-      "trading_intelligence_score": 57.8
+      "trading_intelligence_score": 58.0
     },
     {
       "catalyst_score": 55.0,
@@ -4431,9 +4431,9 @@
       "first_seen_at": "2026-11-05T11:08:28.153846+00:00",
       "market": {
         "average_volume_20d": 1680200.0,
-        "estimated_average_dollar_volume_20d": 35611839.0,
+        "estimated_average_dollar_volume_20d": 35704250.0,
         "market_cap": null,
-        "price": 21.195,
+        "price": 21.25,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4453,7 +4453,7 @@
       "status": "WATCH",
       "ticker": "ACAD",
       "title": "SEC 10-Q — ACADIA Pharmaceuticals (ACAD) — Quarterly financial report",
-      "trading_intelligence_score": 60.5
+      "trading_intelligence_score": 60.6
     },
     {
       "catalyst_score": 55.0,
@@ -4679,9 +4679,9 @@
       "first_seen_at": "2026-11-05T12:17:50.468746+00:00",
       "market": {
         "average_volume_20d": 1144830.0,
-        "estimated_average_dollar_volume_20d": 2152280.4,
+        "estimated_average_dollar_volume_20d": 2163728.7,
         "market_cap": null,
-        "price": 1.88,
+        "price": 1.89,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4701,7 +4701,7 @@
       "status": "WATCH",
       "ticker": "FATE",
       "title": "SEC 10-Q — Fate Therapeutics (FATE) — Quarterly financial report",
-      "trading_intelligence_score": 59.1
+      "trading_intelligence_score": 59.3
     },
     {
       "catalyst_score": 55.0,
@@ -4710,9 +4710,9 @@
       "first_seen_at": "2026-11-05T12:09:27.110040+00:00",
       "market": {
         "average_volume_20d": 2120485.0,
-        "estimated_average_dollar_volume_20d": 3488197.83,
+        "estimated_average_dollar_volume_20d": 3477595.4,
         "market_cap": null,
-        "price": 1.645,
+        "price": 1.64,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4834,9 +4834,9 @@
       "first_seen_at": "2026-11-05T12:09:27.112291+00:00",
       "market": {
         "average_volume_20d": 2925000.0,
-        "estimated_average_dollar_volume_20d": 19451250.0,
+        "estimated_average_dollar_volume_20d": 19480500.0,
         "market_cap": null,
-        "price": 6.65,
+        "price": 6.66,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
