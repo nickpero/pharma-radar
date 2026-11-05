@@ -2182,5 +2182,57 @@
     "telegram_confirmed_at": "2026-11-05T12:17:51.277585+00:00",
     "telegram_message_id": 345,
     "ticker": "CLYM"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'dyn|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T12:39:07.869571+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T12:39:07.989175+00:00",
+    "telegram_attempted_at": "2026-11-05T12:39:07.989175+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "DYN"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'caba|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T12:39:07.869571+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T12:39:07.989175+00:00",
+    "telegram_attempted_at": "2026-11-05T12:39:07.989175+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "CABA"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'dyn|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T12:39:07.869571+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T12:39:07.989175+00:00",
+    "telegram_attempted_at": "2026-11-05T12:39:07.989175+00:00",
+    "telegram_confirmed_at": "2026-11-05T12:39:08.442972+00:00",
+    "telegram_message_id": 346,
+    "ticker": "DYN"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'caba|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T12:39:07.869571+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T12:39:07.989175+00:00",
+    "telegram_attempted_at": "2026-11-05T12:39:07.989175+00:00",
+    "telegram_confirmed_at": "2026-11-05T12:39:08.442972+00:00",
+    "telegram_message_id": 346,
+    "ticker": "CABA"
   }
 ]
