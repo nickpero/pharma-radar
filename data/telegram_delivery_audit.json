@@ -2234,5 +2234,31 @@
     "telegram_confirmed_at": "2026-11-05T12:39:08.442972+00:00",
     "telegram_message_id": 346,
     "ticker": "CABA"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'scyx|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T13:09:49.468866+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T13:09:49.589710+00:00",
+    "telegram_attempted_at": "2026-11-05T13:09:49.589710+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "SCYX"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'scyx|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T13:09:49.468866+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T13:09:49.589710+00:00",
+    "telegram_attempted_at": "2026-11-05T13:09:49.589710+00:00",
+    "telegram_confirmed_at": "2026-11-05T13:09:50.154040+00:00",
+    "telegram_message_id": 347,
+    "ticker": "SCYX"
   }
 ]
