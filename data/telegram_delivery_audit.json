@@ -1792,5 +1792,31 @@
     "telegram_confirmed_at": "2026-11-05T11:08:29.065702+00:00",
     "telegram_message_id": 341,
     "ticker": "ACAD"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'cgtx|unknown|company_financial_results|2026-11-03')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T11:18:55.630596+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T11:18:55.838164+00:00",
+    "telegram_attempted_at": "2026-11-05T11:18:55.838164+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "CGTX"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'cgtx|unknown|company_financial_results|2026-11-03')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T11:18:55.630596+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T11:18:55.838164+00:00",
+    "telegram_attempted_at": "2026-11-05T11:18:55.838164+00:00",
+    "telegram_confirmed_at": "2026-11-05T11:18:56.442185+00:00",
+    "telegram_message_id": 342,
+    "ticker": "CGTX"
   }
 ]
