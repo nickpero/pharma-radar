@@ -2390,5 +2390,31 @@
     "telegram_confirmed_at": "2026-11-05T14:37:32.036786+00:00",
     "telegram_message_id": 351,
     "ticker": "LPCN"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'tlsa|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T19:37:40.546544+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T19:37:40.643644+00:00",
+    "telegram_attempted_at": "2026-11-05T19:37:40.643644+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "TLSA"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'tlsa|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T19:37:40.546544+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T19:37:40.643644+00:00",
+    "telegram_attempted_at": "2026-11-05T19:37:40.643644+00:00",
+    "telegram_confirmed_at": "2026-11-05T19:37:41.132904+00:00",
+    "telegram_message_id": 352,
+    "ticker": "TLSA"
   }
 ]
