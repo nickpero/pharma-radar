@@ -3040,5 +3040,57 @@
     "telegram_confirmed_at": "2026-11-05T21:28:52.027140+00:00",
     "telegram_message_id": 355,
     "ticker": "COGT"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'pcrx|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T21:53:59.273924+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T21:53:59.392162+00:00",
+    "telegram_attempted_at": "2026-11-05T21:53:59.392162+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "PCRX"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'nktx|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T21:53:59.273924+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T21:53:59.392162+00:00",
+    "telegram_attempted_at": "2026-11-05T21:53:59.392162+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "NKTX"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'pcrx|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T21:53:59.273924+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T21:53:59.392162+00:00",
+    "telegram_attempted_at": "2026-11-05T21:53:59.392162+00:00",
+    "telegram_confirmed_at": "2026-11-05T21:53:59.977818+00:00",
+    "telegram_message_id": 357,
+    "ticker": "PCRX"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'nktx|unknown|company_financial_results|2026-11-05')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-05",
+    "first_seen_at": "2026-11-05T21:53:59.273924+00:00",
+    "program": null,
+    "qualified_at": "2026-11-05T21:53:59.392162+00:00",
+    "telegram_attempted_at": "2026-11-05T21:53:59.392162+00:00",
+    "telegram_confirmed_at": "2026-11-05T21:53:59.977818+00:00",
+    "telegram_message_id": 357,
+    "ticker": "NKTX"
   }
 ]
