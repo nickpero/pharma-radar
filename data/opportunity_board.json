@@ -3,8 +3,8 @@
     "excluded": 15,
     "late": 386,
     "live": 0,
-    "upcoming": 254,
-    "watch": 5
+    "upcoming": 256,
+    "watch": 6
   },
   "excluded": [
     {
@@ -473,7 +473,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-06T13:58:28.476359+00:00",
+  "generated_at": "2026-11-06T14:07:34.587885+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -2059,6 +2059,34 @@
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
+      "company": "Regeneron Pharmaceuticals",
+      "date": "2026-11-13",
+      "date_is_estimate": true,
+      "date_precision": "DAY",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT04626635",
+      "phase": "PHASE1",
+      "programs": [
+        "linvoseltamab",
+        "odronextamab",
+        "Dupixent (dupilumab)",
+        "EYLEA HD (aflibercept)",
+        "Libtayo (cemiplimab)",
+        "Pasatru (garetosmab)",
+        "cemdisiran",
+        "Inmazeb (atoltivimab/maftivimab/odesivimab)",
+        "Otarmeni (lunsotogene parvec)"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT04626635",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "REGN",
+      "title": "A Trial to Find Out How Safe REGN7075 is and How Well it Works in Combination With Cemiplimab for Adult Participants With Advanced Cancers"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
       "company": "Roche ADR",
       "date": "2026-11-13",
       "date_is_estimate": true,
@@ -2077,26 +2105,6 @@
       "status": "RECRUITING",
       "ticker": "RHHBY",
       "title": "A Study Evaluating the Efficacy and Safety of Inavolisib Plus Fulvestrant Compared With Alpelisib Plus Fulvestrant in Participants With HR-Positive, HER2-Negative, PIK3CA Mutated, Locally Advanced or Metastatic Breast Cancer Post CDK4/6i and Endocrine Combination Therapy"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Achieve Life Sciences",
-      "date": "2026-11-15",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT07392125",
-      "phase": "PHASE3",
-      "programs": [
-        "cytisinicline"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT07392125",
-      "status": "NOT_YET_RECRUITING",
-      "ticker": "ACHV",
-      "title": "Phase 3 Trial Evaluating the Efficacy and Safety of Cytisinicline for Vaping Cessation in Adults Using Nicotine-Containing E Cigarettes"
     },
     {
       "actionability": "WATCH",
@@ -2337,6 +2345,28 @@
       "status": "RECRUITING",
       "ticker": "INCY",
       "title": "Retifanlimab with Bevacizumab and Hypofractionated Radiotherapy for the Treatment of Recurrent Glioblastoma"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Nautilus Biotechnology",
+      "date": "2026-11-30",
+      "date_is_estimate": true,
+      "date_precision": "DAY",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT05476926",
+      "phase": null,
+      "programs": [
+        "Voyager",
+        "Iterative Mapping Early Access Program",
+        "broadscale proteomics"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT05476926",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "NAUT",
+      "title": "A Real-World Study to Gain Clinical Insights Into Roche Ophthalmology Products"
     },
     {
       "actionability": "WATCH",
@@ -2920,27 +2950,6 @@
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
-      "company": "Corcept Therapeutics",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "MONTH",
-      "milestone": "STUDY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT06906341",
-      "phase": "PHASE2",
-      "programs": [
-        "relacorilant",
-        "Cushing syndrome program"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT06906341",
-      "status": "RECRUITING",
-      "ticker": "CORT",
-      "title": "Relacorilant in Combination With Different Treatment Regimens in Patients With Gynecological Cancers"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
       "company": "Deciphera Pharmaceuticals",
       "date": "2026-12-01",
       "date_is_estimate": true,
@@ -3144,6 +3153,28 @@
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
+      "company": "Exelixis",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT05613894",
+      "phase": "PHASE1",
+      "programs": [
+        "zanzalintinib",
+        "cabozantinib",
+        "XL092"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT05613894",
+      "status": "RECRUITING",
+      "ticker": "EXEL",
+      "title": "Dose-Escalation Study of Cabozantinib in Combination With Lutetium-177 (177Lu)-PSMA-617 in Patients With Metastatic Castration-Resistant Prostate Cancer"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
       "company": "EyePoint Pharmaceuticals",
       "date": "2026-12-01",
       "date_is_estimate": true,
@@ -3226,6 +3257,30 @@
       "status": "RECRUITING",
       "ticker": "GILD",
       "title": "Adenosine Signaling Modulation and Immune Checkpoint Inhibition With Hormone Sensitive Oligometastatic Prostate Cancer"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Monte Rosa Therapeutics",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT05546268",
+      "phase": "PHASE1",
+      "programs": [
+        "MRT-8102",
+        "GFORCE-1",
+        "GFORCE-2",
+        "MRT-6160",
+        "MRT-2359"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT05546268",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "GLUE",
+      "title": "Study of Oral MRT-2359 in Selected Cancer Patients"
     },
     {
       "actionability": "WATCH",
@@ -3905,6 +3960,28 @@
       "company": "Arcus Biosciences",
       "date": "2026-12-01",
       "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT05024097",
+      "phase": "PHASE2",
+      "programs": [
+        "domvanalimab",
+        "quemliclustat",
+        "zimberelimab"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT05024097",
+      "status": "RECRUITING",
+      "ticker": "RCUS",
+      "title": "A Phase I-II Study to Test the Safety and Efficacy of PD1 (AB122) and Adenosine Receptor (AB928) Antagonists With Chemotherapy After Short-Course Radiation for Rectal Cancer."
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Arcus Biosciences",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
       "date_precision": "DAY",
       "milestone": "PRIMARY_COMPLETION",
       "milestone_type": "EXPECTED_TRIAL_COMPLETION",
@@ -3930,18 +4007,18 @@
       "date_precision": "DAY",
       "milestone": "PRIMARY_COMPLETION",
       "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT05688215",
-      "phase": "PHASE1",
+      "nct_id": "NCT05915442",
+      "phase": "PHASE2",
       "programs": [
         "domvanalimab",
         "quemliclustat",
         "zimberelimab"
       ],
       "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT05688215",
+      "source_url": "https://clinicaltrials.gov/study/NCT05915442",
       "status": "RECRUITING",
       "ticker": "RCUS",
-      "title": "Zimberelimab and Quemliclustat in Combination With Chemotherapy for the Treatment of Patients With Borderline Resectable and Locally Advanced Pancreatic Adenocarcinoma"
+      "title": "Adenosine Signaling Modulation and Immune Checkpoint Inhibition With Hormone Sensitive Oligometastatic Prostate Cancer"
     },
     {
       "actionability": "WATCH",
@@ -4107,69 +4184,6 @@
       "status": "ACTIVE_NOT_RECRUITING",
       "ticker": "SLS",
       "title": "Galinpepimut-S Versus Investigator's Choice of Best Available Therapy for Maintenance in AML CR2/CRp2"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Syndax Pharmaceuticals",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT05491226",
-      "phase": "PHASE2",
-      "programs": [
-        "revumenib",
-        "axatilimab"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT05491226",
-      "status": "RECRUITING",
-      "ticker": "SNDX",
-      "title": "Reinvigorating TNBC Response to Immunotherapy With Combination Myeloid Inhibition and Radiation"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Syndax Pharmaceuticals",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "STUDY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT05491226",
-      "phase": "PHASE2",
-      "programs": [
-        "revumenib",
-        "axatilimab"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT05491226",
-      "status": "RECRUITING",
-      "ticker": "SNDX",
-      "title": "Reinvigorating TNBC Response to Immunotherapy With Combination Myeloid Inhibition and Radiation"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Syndax Pharmaceuticals",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "MONTH",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT05723055",
-      "phase": "PHASE2",
-      "programs": [
-        "revumenib",
-        "axatilimab"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT05723055",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "SNDX",
-      "title": "Evaluating Combination of Nivolumab and Axatilimab in Patients With Relapsed/Refractory Classical Hodgkin Lymphoma"
     }
   ],
   "watch": [
@@ -4202,6 +4216,37 @@
       "status": "WATCH",
       "ticker": "PHAR",
       "title": "SEC 6-K — Pharming Group N.V. (PHAR) — 6-K",
+      "trading_intelligence_score": 57.1
+    },
+    {
+      "catalyst_score": 55.0,
+      "company": "Immunocore",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-06T14:07:34.417887+00:00",
+      "market": {
+        "average_volume_20d": 504440.0,
+        "estimated_average_dollar_volume_20d": 14326096.0,
+        "market_cap": null,
+        "price": 28.4,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-06",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1671927/000167192726000035/imcr-20260930.htm",
+      "status": "WATCH",
+      "ticker": "IMCR",
+      "title": "SEC 10-Q — Immunocore (IMCR) — Quarterly financial report",
       "trading_intelligence_score": 57.1
     },
     {

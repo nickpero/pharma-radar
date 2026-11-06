@@ -3222,5 +3222,31 @@
     "telegram_confirmed_at": "2026-11-06T13:37:12.515023+00:00",
     "telegram_message_id": 364,
     "ticker": "CGON"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'imcr|unknown|company_financial_results|2026-11-06')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-06",
+    "first_seen_at": "2026-11-06T14:07:34.551834+00:00",
+    "program": null,
+    "qualified_at": "2026-11-06T14:07:34.642003+00:00",
+    "telegram_attempted_at": "2026-11-06T14:07:34.642003+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "IMCR"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'imcr|unknown|company_financial_results|2026-11-06')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-06",
+    "first_seen_at": "2026-11-06T14:07:34.551834+00:00",
+    "program": null,
+    "qualified_at": "2026-11-06T14:07:34.642003+00:00",
+    "telegram_attempted_at": "2026-11-06T14:07:34.642003+00:00",
+    "telegram_confirmed_at": "2026-11-06T14:07:35.042226+00:00",
+    "telegram_message_id": 365,
+    "ticker": "IMCR"
   }
 ]
