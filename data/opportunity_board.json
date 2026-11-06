@@ -442,7 +442,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-06T00:08:38.108902+00:00",
+  "generated_at": "2026-11-06T02:28:12.361114+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -1961,7 +1961,7 @@
       "status": "LATE",
       "ticker": "NVCR",
       "title": "SEC 8-K — NovoCure (NVCR)",
-      "trading_intelligence_score": 57.1
+      "trading_intelligence_score": 57.3
     },
     {
       "catalyst_score": 55.0,
