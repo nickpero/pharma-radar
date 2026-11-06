@@ -3118,5 +3118,31 @@
     "telegram_confirmed_at": "2026-11-06T11:07:09.821555+00:00",
     "telegram_message_id": 360,
     "ticker": "ALLO"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'phar|unknown|company_financial_results|2026-11-06')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-06",
+    "first_seen_at": "2026-11-06T11:28:05.884456+00:00",
+    "program": null,
+    "qualified_at": "2026-11-06T11:28:05.989158+00:00",
+    "telegram_attempted_at": "2026-11-06T11:28:05.989158+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "PHAR"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'phar|unknown|company_financial_results|2026-11-06')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-06",
+    "first_seen_at": "2026-11-06T11:28:05.884456+00:00",
+    "program": null,
+    "qualified_at": "2026-11-06T11:28:05.989158+00:00",
+    "telegram_attempted_at": "2026-11-06T11:28:05.989158+00:00",
+    "telegram_confirmed_at": "2026-11-06T11:28:06.484785+00:00",
+    "telegram_message_id": 361,
+    "ticker": "PHAR"
   }
 ]
