@@ -3170,5 +3170,31 @@
     "telegram_confirmed_at": "2026-11-06T11:58:26.806524+00:00",
     "telegram_message_id": 362,
     "ticker": "MRNA"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'anik|unknown|company_financial_results|2026-11-06')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-06",
+    "first_seen_at": "2026-11-06T12:26:44.047544+00:00",
+    "program": null,
+    "qualified_at": "2026-11-06T12:26:44.165978+00:00",
+    "telegram_attempted_at": "2026-11-06T12:26:44.165978+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "ANIK"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'anik|unknown|company_financial_results|2026-11-06')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-06",
+    "first_seen_at": "2026-11-06T12:26:44.047544+00:00",
+    "program": null,
+    "qualified_at": "2026-11-06T12:26:44.165978+00:00",
+    "telegram_attempted_at": "2026-11-06T12:26:44.165978+00:00",
+    "telegram_confirmed_at": "2026-11-06T12:26:44.526253+00:00",
+    "telegram_message_id": 363,
+    "ticker": "ANIK"
   }
 ]
