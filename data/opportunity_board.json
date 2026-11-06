@@ -473,7 +473,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-06T21:08:11.901304+00:00",
+  "generated_at": "2026-11-06T21:18:51.384848+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -1226,9 +1226,9 @@
       "first_seen_at": "2026-11-02T21:18:25.209842+00:00",
       "market": {
         "average_volume_20d": 1135670.0,
-        "estimated_average_dollar_volume_20d": 6876481.85,
+        "estimated_average_dollar_volume_20d": 6882160.2,
         "market_cap": null,
-        "price": 6.055,
+        "price": 6.06,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1505,9 +1505,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518903+00:00",
       "market": {
         "average_volume_20d": 5629735.0,
-        "estimated_average_dollar_volume_20d": 1639575872.73,
+        "estimated_average_dollar_volume_20d": 1639998102.85,
         "market_cap": null,
-        "price": 291.235,
+        "price": 291.31,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1660,9 +1660,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518995+00:00",
       "market": {
         "average_volume_20d": 10690240.0,
-        "estimated_average_dollar_volume_20d": 1568578915.2,
+        "estimated_average_dollar_volume_20d": 1568472012.8,
         "market_cap": null,
-        "price": 146.73,
+        "price": 146.72,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1939,9 +1939,9 @@
       "first_seen_at": "2026-10-31T11:07:02.518437+00:00",
       "market": {
         "average_volume_20d": 3728045.0,
-        "estimated_average_dollar_volume_20d": 53944811.15,
+        "estimated_average_dollar_volume_20d": 53982091.6,
         "market_cap": null,
-        "price": 14.47,
+        "price": 14.48,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4247,7 +4247,7 @@
       "status": "WATCH",
       "ticker": "IMCR",
       "title": "SEC 10-Q — Immunocore (IMCR) — Quarterly financial report",
-      "trading_intelligence_score": 60.4
+      "trading_intelligence_score": 60.5
     },
     {
       "catalyst_score": 55.0,
