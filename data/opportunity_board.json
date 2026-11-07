@@ -3,7 +3,7 @@
     "excluded": 15,
     "late": 397,
     "live": 0,
-    "upcoming": 257,
+    "upcoming": 259,
     "watch": 0
   },
   "excluded": [
@@ -473,7 +473,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-07T21:47:00.555785+00:00",
+  "generated_at": "2026-11-07T21:56:59.973148+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -3430,6 +3430,27 @@
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
+      "company": "Immunome",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT04871282",
+      "phase": "PHASE2",
+      "programs": [
+        "varegacestat (AL102)",
+        "IM-1021"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT04871282",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "IMNM",
+      "title": "A Study of AL102 in Patients With Progressing Desmoid Tumors"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
       "company": "Incyte",
       "date": "2026-12-01",
       "date_is_estimate": true,
@@ -4163,26 +4184,6 @@
       "status": "ACTIVE_NOT_RECRUITING",
       "ticker": "SLS",
       "title": "Galinpepimut-S Versus Investigator's Choice of Best Available Therapy for Maintenance in AML CR2/CRp2"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Summit Therapeutics",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT07070466",
-      "phase": "PHASE2",
-      "programs": [
-        "ivonescimab"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT07070466",
-      "status": "RECRUITING",
-      "ticker": "SMMT",
-      "title": "Ivonescimab in Comb. With FOLFOX in Advanced HER2 Neg. GEA"
     }
   ],
   "watch": []
