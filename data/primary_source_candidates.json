@@ -1279,5 +1279,26 @@
     "source_url": "https://www.zymeworks.com/zymeworks-presents-new-preclinical-data-on-a-pd-1-x-vegf-x-il-7-multispecific-antibody-at-the-society-for-immunotherapy-of-cancer-conference/",
     "ticker": "ZYME",
     "title": "November 6, 2026 Zymeworks Presents New Preclinical Data on a PD-1 x VEGF x IL-7 Multispecific Antibody at the Society for Immunotherapy of Cancer Conference"
+  },
+  {
+    "company": "argenx",
+    "discovered_at": "2026-11-07T15:10:33.082618+00:00",
+    "event_date": null,
+    "event_type": null,
+    "event_window": null,
+    "listing_context": "argenx Presents Phase 3 ALKIVIA Data at ACR Convergence 2026 Showing Rapid and Sustained Improvement with Efgartigimod in Autoimmune Myositis",
+    "listing_url": "https://argenx.com/newsroom",
+    "notes": "Candidate discovered from an official company page; verify the release and any future event date before alerting.",
+    "publication_date_candidate": null,
+    "publication_time_precision": "UNKNOWN",
+    "publication_timestamp_source": null,
+    "publication_timezone_known": false,
+    "published_at": null,
+    "published_at_raw": null,
+    "review_status": "PENDING_REVIEW",
+    "source_host": "argenx.com",
+    "source_url": "https://argenx.com/news/2026/press-release-3397967.html",
+    "ticker": "ARGX",
+    "title": "argenx Presents Phase 3 ALKIVIA Data at ACR Convergence 2026 Showing Rapid and Sustained Improvement with Efgartigimod in Autoimmune Myositis"
   }
 ]
