@@ -143,7 +143,7 @@ def test_telegram_is_compact_and_hierarchical():
     assert "💡 Perché conta:" in message
     assert "Awareness:" not in message
     assert "Surprise:" not in message
-    assert "📈 Reazione del mercato: N/A" in message
+    assert "Reazione del titolo:" not in message
 
 
 def test_telegram_shows_market_reaction_compactly():
