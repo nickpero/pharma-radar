@@ -3,7 +3,7 @@
     "excluded": 15,
     "late": 406,
     "live": 0,
-    "upcoming": 258,
+    "upcoming": 259,
     "watch": 0
   },
   "excluded": [
@@ -473,7 +473,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-08T17:56:46.886046+00:00",
+  "generated_at": "2026-11-08T18:08:53.810977+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
