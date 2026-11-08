@@ -256,10 +256,13 @@ def format_catalyst_alert(alert):
     if early:
         heading = "🟡 NOTIZIA DA VERIFICARE"
         next_step = "Verificare con una fonte ufficiale"
-    elif action == "IMMEDIATE" or tier == "CRITICAL":
+    elif action == "WATCH":
+        heading = "👀 AGGIORNAMENTO DA MONITORARE"
+        next_step = "Monitorare: non è un segnale operativo"
+    elif action == "IMMEDIATE" or (not action and tier == "CRITICAL"):
         heading = "🚨 CATALIZZATORE IMPORTANTE"
         next_step = "Approfondire subito: possibile impatto rilevante sul titolo"
-    elif action == "FAST" or tier == "HIGH":
+    elif action == "FAST" or (not action and tier == "HIGH"):
         heading = "🔴 NOVITÀ DA APPROFONDIRE"
         next_step = "Approfondire oggi"
     else:
