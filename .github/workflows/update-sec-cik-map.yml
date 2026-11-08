@@ -1,6 +1,12 @@
 name: Refresh SEC CIK Map
 
 on:
+  push:
+    paths:
+      - ".github/workflows/update-sec-cik-map.yml"
+      - "data/watchlist.json"
+      - "scripts/update_sec_cik_map.py"
+      - "scanner/sec_feed.py"
   schedule:
     - cron: "17 13 * * *"
   workflow_dispatch:
