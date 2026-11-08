@@ -244,7 +244,10 @@ def format_catalyst_alert(alert):
     event_type = event.get("type", alert.get("event_type", "UNKNOWN"))
     event_display = _event_display_name(subtype, event_type)
     title = _clean_text(alert.get("title") or event.get("title"), 220)
+    protected_terms = alert_protected_terms(alert)
+    title = translate_to_italian(title, protected_terms) if title else ""
     why = _why_it_matters(alert, event, subtype)
+    why = translate_to_italian(why, protected_terms) if why else ""
     early = alert.get("early_discovery") is True
     action = str(alert.get("telegram_action", "")).upper()
     tier = str(
