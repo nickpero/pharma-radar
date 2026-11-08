@@ -332,7 +332,7 @@ def format_catalyst_alert(alert):
         lines.append(f"🔗 {source_url}")
 
     lines.append("ℹ️ Informazione per l’analisi: non è un ordine automatico di acquisto o vendita.")
-    return "\\n".join(str(line) for line in lines)
+    return "\n".join(str(line) for line in lines)
 def format_divergence_alert(divergence):
     """Create a non-operational alert for strong catalyst/market divergence."""
     ticker = _clean_text(divergence.get("ticker", "UNKNOWN"), 20).upper()
