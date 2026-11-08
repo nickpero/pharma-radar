@@ -232,7 +232,7 @@ def _why_it_matters(alert, event, subtype):
 
 
 def format_catalyst_alert(alert):
-    """Create a compact Telegram alert optimized for rapid human scanning."""
+    """Build a short, plain-language Telegram alert focused on the event and next step."""
     ticker = _clean_text(alert.get("ticker", "UNKNOWN"), 20).upper()
     program = _clean_text(alert.get("program", "UNKNOWN"), 80)
     drug_name = _drug_name(alert, program)
@@ -240,123 +240,109 @@ def format_catalyst_alert(alert):
     if not isinstance(event, dict):
         event = {}
 
-    event_type = event.get("type", alert.get("event_type", "UNKNOWN"))
-    score = event.get("score", alert.get("score", 0))
-    label = event.get("label", alert.get("label", "LOW"))
     subtype = event.get("subtype", alert.get("subtype", ""))
-    trading_impact = event.get("trading_impact", alert.get("trading_impact", "LOW"))
-    urgency = event.get("urgency", alert.get("urgency", "LOW"))
-    alert_priority = alert.get("alert_priority", event.get("alert_priority"))
-    setup_score = alert.get("trading_setup_score", event.get("trading_setup_score", 0))
-    window = alert.get("trading_window", event.get("trading_window", "UNKNOWN"))
-    reaction = alert.get("market_reaction") or event.get("market_reaction") or {}
-    reaction_pct = alert.get("reaction_pct", reaction.get("reaction_pct"))
-    reaction_direction = alert.get("reaction_direction", reaction.get("reaction_direction", "UNKNOWN"))
-    title = _clean_text(alert.get("title") or event.get("title"), 260)
-    why = _why_it_matters(alert, event, subtype)
+    event_type = event.get("type", alert.get("event_type", "UNKNOWN"))
     event_display = _event_display_name(subtype, event_type)
+    title = _clean_text(alert.get("title") or event.get("title"), 220)
+    why = _why_it_matters(alert, event, subtype)
     early = alert.get("early_discovery") is True
+    action = str(alert.get("telegram_action", "")).upper()
+    tier = str(
+        event.get("alert_tier") or alert.get("alert_tier")
+        or event.get("label") or alert.get("label")
+        or event.get("severity") or alert.get("severity") or ""
+    ).upper()
 
-    if alert_priority is None:
-        priority_event = dict(event)
-        priority_event.update({"score": score, "trading_impact": trading_impact, "urgency": urgency})
-        alert_priority = enrich_alert_priority(priority_event).get("alert_priority", 0)
-    alert_tier = event.get("alert_tier", alert.get("alert_tier")) or get_alert_tier(alert_priority)
-    telegram_action = str(alert.get("telegram_action", "")).upper()
-    display_tier = "DA VERIFICARE · NON CONFERMATO" if early else ("DA MONITORARE · NON URGENTE" if telegram_action == "WATCH" else _it_status(alert_tier))
-    tier_icon = "👀" if early or telegram_action == "WATCH" else get_severity_icon(alert_tier)
+    if early:
+        heading = "🟡 NOTIZIA DA VERIFICARE"
+        next_step = "Verificare con una fonte ufficiale"
+    elif action == "WATCH":
+        heading = "👀 AGGIORNAMENTO DA MONITORARE"
+        next_step = "Monitorare: non è un segnale operativo"
+    elif action == "IMMEDIATE" or (not action and tier == "CRITICAL"):
+        heading = "🚨 CATALIZZATORE IMPORTANTE"
+        next_step = "Approfondire subito: possibile impatto rilevante sul titolo"
+    elif action == "FAST" or (not action and tier == "HIGH"):
+        heading = "🔴 NOVITÀ DA APPROFONDIRE"
+        next_step = "Approfondire oggi"
+    else:
+        heading = "👀 AGGIORNAMENTO DA MONITORARE"
+        next_step = "Monitorare: non è un segnale operativo"
 
     lines = [
-        "🟡 PHARMA RADAR — CATALIZZATORE PRELIMINARE" if early else "🚨 PHARMA RADAR",
-        "━━━━━━━━━━━━━━━━━━",
-        f"{tier_icon} {display_tier}",
-        *(["👀 DA MONITORARE — informativo, non urgente"] if telegram_action == "WATCH" and not early else []),
+        "🚨 PHARMA RADAR",
+        heading,
         "",
-        f"🧬 {ticker}",
-        f"💊 {drug_name}",
-        "",
+        f"🧬 {ticker} — {drug_name}",
         f"📰 {event_display}",
-        title or "Titolo non disponibile nella fonte.",
+        f"📌 {title or 'La fonte non riporta un titolo leggibile.'}",
     ]
 
-    timeline_details = _timeline_details(alert, event, subtype)
-    if timeline_details:
-        lines.extend(["", *timeline_details])
+    timeline = _timeline_details(alert, event, subtype)
+    if timeline:
+        # Keep only the concrete change and its interpretation.
+        lines.extend(["", *timeline])
 
     trial = alert.get("trial") if isinstance(alert.get("trial"), dict) else {}
     if str(subtype or "").upper() == "TRIAL_COMPLETED":
         nct_id = _clean_text(alert.get("nct_id") or trial.get("nct_id"), 40)
-        completion_date = _clean_text(trial.get("completion_date"), 40)
-        lines.extend([
-            "",
-            "ℹ️ Stato su ClinicalTrials.gov: COMPLETATO — non implica risultati positivi.",
-        ])
+        lines.append("ℹ️ Studio segnato come completato: non significa che i risultati siano positivi.")
         if nct_id:
-            lines.append(f"🔗 Registro: {nct_id}")
+            lines.append(f"Registro: {nct_id}")
+        completion_date = _clean_text(trial.get("completion_date"), 40)
         if completion_date:
-            lines.append(f"📅 Completamento studio registrato: {completion_date}")
+            lines.append(f"Completamento registrato: {completion_date}")
+
+    if early:
+        lines.append("⚠️ Notizia preliminare: manca ancora la conferma di una fonte primaria.")
+
+    if why:
+        lines.extend(["", f"💡 Perché conta: {why}"])
+
+    reaction = alert.get("market_reaction") or event.get("market_reaction") or {}
+    reaction_values = [
+        f"{period} {_num(reaction.get(f'reaction_{period}_pct'))}%"
+        for period in ("5m", "15m", "30m", "60m")
+        if _num(reaction.get(f"reaction_{period}_pct")) is not None
+    ]
+    reaction_pct = alert.get("reaction_pct", reaction.get("reaction_pct"))
+    if reaction_pct is not None and _num(reaction_pct) is not None:
+        reaction_values.insert(0, f"{_num(reaction_pct)}%")
+    if reaction_values:
+        lines.append("📈 Reazione del titolo: " + " · ".join(reaction_values[:3]))
 
     if alert.get("post_spike_watch") is True:
         retracement = _num(alert.get("post_spike_retracement_pct"))
-        spike_pct = _num(alert.get("post_spike_pct"))
-        volume_ratio = alert.get("post_spike_volume_ratio")
-        spike_price = alert.get("post_spike_price")
-        current_price = alert.get("post_spike_current_price")
-        lines.extend([
-            "",
-            "🔄 MONITORAGGIO DOPO IL RIALZO",
-            f"📅 Data del rialzo: {alert.get('post_spike_date', 'non disponibile')}",
-            f"🚀 Rialzo: {spike_pct}% · Volume {volume_ratio:.1f}×" if isinstance(volume_ratio, (int, float)) and spike_pct is not None else "🚀 Rialzo: dato disponibile",
-            f"💵 Chiusura al rialzo: {spike_price} → Prezzo attuale: {current_price}",
-            f"📉 Ritracciamento: {retracement}%" if retracement is not None else "📉 Ritracciamento: non disponibile",
-            "ℹ️ Il catalizzatore ha già prodotto un movimento rilevante; si monitora l’andamento successivo.",
-        ])
+        lines.append(
+            f"🔄 Dopo il rialzo: ritracciamento {retracement}%."
+            if retracement is not None else
+            "🔄 Il titolo ha già registrato un rialzo: attenzione a eventuali rincorse."
+        )
 
-    lines.extend([
-        "",
-        (f"🎯 Potenziale catalizzatore (non confermato): punteggio interno {score}/100" if early else f"🎯 Catalizzatore: {score}/100 · {_it_status(label)}"),
-        *( [f"🧠 Dati clinici: {alert.get('catalyst_category', event.get('catalyst_category'))} · Novità {alert.get('novelty_score', event.get('novelty_score', 0))}/100 · Impatto sul mercato {alert.get('market_impact_score', event.get('market_impact_score', 0))}/100"] if alert.get("clinical_data_release") and not early else [] ),
-        (f"📌 Punteggio interno: {alert_priority}/100 · non operativo" if early else f"🚨 Priorità: {alert_priority}/100 · {_it_status(alert_tier)}"),
-        (f"📊 Configurazione: NON CONFERMATA · Finestra temporale: {_it_status(window)}" if early else f"📊 Configurazione: {setup_score}/100 · Finestra temporale: {_it_status(window)}"),
-        "",
-        "📈 Reazione del mercato: " + (
-            f"{_num(reaction_pct)}% · {_it_status(reaction_direction)}"
-            if reaction_pct is not None and _num(reaction_pct) is not None
-            else " | ".join(
-                f"{label_window} {_num(reaction.get(f'reaction_{label_window}_pct'))}%"
-                for label_window in ("1m", "5m", "15m", "30m", "60m")
-                if _num(reaction.get(f"reaction_{label_window}_pct")) is not None
-            ) or "N/A"
-        ),
-    ])
-
-    published_value = (
+    published = (
         alert.get("first_published_at") or alert.get("published_at")
         or alert.get("publication_date") or event.get("first_published_at")
         or event.get("published_at") or event.get("publication_date")
     )
-    detected_value = alert.get("detected_at") or datetime.now(timezone.utc).isoformat()
+    detected = alert.get("detected_at")
     lines.extend([
         "",
-        f"🗞 Pubblicata: {_format_timestamp(published_value)}",
-        f"🛰 Rilevata dal Radar: {_format_timestamp(detected_value)}",
+        f"➡️ Cosa fare: {next_step}.",
+        f"🕒 Pubblicata: {_format_timestamp(published)}",
+        f"🛰 Rilevata: {_format_timestamp(detected)}",
     ])
     if str(subtype or "").upper() == "TRIAL_COMPLETED" and trial.get("last_update"):
         lines.append(f"🗂 Registro aggiornato: {_format_timestamp(trial.get('last_update'))}")
-    if early:
-        lines.append("⚠️ Rilevazione preliminare: in attesa di conferma da una fonte primaria.")
-
-    if why:
-        lines.extend(["", "💡 PERCHÉ È IMPORTANTE", why])
 
     source = _clean_text(alert.get("source") or event.get("source"))
+    source_url = _clean_text(alert.get("url") or event.get("url"), 500)
     if source:
-        lines.extend(["", f"🔎 Fonte: {source}"])
+        lines.append(f"🔎 Fonte: {source}")
+    if source_url:
+        lines.append(f"🔗 {source_url}")
 
-    lines.extend(["", "⚠️ Solo a scopo informativo: non è un segnale automatico di acquisto o vendita.", "━━━━━━━━━━━━━━━━━━"])
+    lines.append("ℹ️ Informazione per l’analisi: non è un ordine automatico di acquisto o vendita.")
     return "\n".join(str(line) for line in lines)
-
-
 def format_divergence_alert(divergence):
     """Create a non-operational alert for strong catalyst/market divergence."""
     ticker = _clean_text(divergence.get("ticker", "UNKNOWN"), 20).upper()

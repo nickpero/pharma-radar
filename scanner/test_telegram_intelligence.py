@@ -132,18 +132,18 @@ def test_telegram_is_compact_and_hierarchical():
         "source": "FDA RSS",
     })
     message = format_catalyst_alert(alert)
-    assert "🚨 PHARMA RADAR" in message
-    assert "🚨 CRITICO" in message
-    assert "🧬 IONS" in message
-    assert "💊 Zilganersen (Zanvastro)" in message
+    assert "PHARMA RADAR" in message
+    assert "🚨 CATALIZZATORE IMPORTANTE" in message
+    assert "🧬 IONS —" in message
+    assert "🧬 IONS — Zilganersen (Zanvastro)" in message
     assert "📰 APPROVAZIONE FDA" in message
-    assert "🎯 Catalizzatore: 100/100" in message
-    assert "🚨 Priorità: 100/100" in message
-    assert "📊 Configurazione: 56/100 · Finestra temporale: 1–7 giorni" in message
-    assert "💡 PERCHÉ È IMPORTANTE" in message
+    assert "📌 FDA Approves First Drug to Treat Alexander Disease" in message
+    assert "➡️ Cosa fare: Approfondire subito" in message
+    assert "1–7 giorni" not in message
+    assert "💡 Perché conta:" in message
     assert "Awareness:" not in message
     assert "Surprise:" not in message
-    assert "📈 Reazione del mercato: N/A" in message
+    assert "Reazione del titolo:" not in message
 
 
 def test_telegram_shows_market_reaction_compactly():
@@ -246,7 +246,7 @@ def test_trial_completed_telegram_explains_status_and_shows_registry_dates():
         "event": {"type": "STATUS_CHANGE", "subtype": "TRIAL_COMPLETED", "score": 35, "label": "MEDIUM"},
     })
     message = format_catalyst_alert(alert)
-    assert "non implica risultati positivi" in message
+    assert "non significa che i risultati siano positivi" in message
     assert "NCT05126758" in message
     assert "2026-10-01" in message
     assert "Registro aggiornato:" in message
@@ -346,8 +346,8 @@ def test_telegram_shows_publication_and_detection_timestamps():
         "detected_at": "2026-10-14T10:35:00Z",
     })
     message = format_catalyst_alert(alert)
-    assert "🗞 Pubblicata: 14/10/2026 12:30 CEST" in message
-    assert "🛰 Rilevata dal Radar: 14/10/2026 12:35 CEST" in message
+    assert "🕒 Pubblicata: 14/10/2026 12:30 CEST" in message
+    assert "🛰 Rilevata: 14/10/2026 12:35 CEST" in message
 
 
 def test_telegram_does_not_invent_missing_publication_time():
@@ -355,7 +355,7 @@ def test_telegram_does_not_invent_missing_publication_time():
     alert.pop("published_at", None)
     alert.pop("event_date", None)
     message = format_catalyst_alert(alert)
-    assert "🗞 Pubblicata: NON DISPONIBILE" in message
+    assert "🕒 Pubblicata: NON DISPONIBILE" in message
 
 
 
@@ -363,7 +363,20 @@ def test_telegram_marks_watch_only_alert_as_non_urgent():
     alert = _alert("VBIO", 45, 60, "WATCH")
     alert["telegram_action"] = "WATCH"
     message = format_catalyst_alert(alert)
-    assert "👀 DA MONITORARE — informativo, non urgente" in message
+    assert "👀 AGGIORNAMENTO DA MONITORARE" in message
+
+
+
+def test_watch_action_overrides_critical_internal_label():
+    alert = _alert("CAPR", 100, 95, "CRITICAL")
+    alert.update({
+        "telegram_action": "WATCH",
+        "event": {"type": "STATUS_CHANGE", "subtype": "TRIAL_COMPLETED", "label": "CRITICAL"},
+    })
+    message = format_catalyst_alert(alert)
+    assert "👀 AGGIORNAMENTO DA MONITORARE" in message
+    assert "🚨 CATALIZZATORE IMPORTANTE" not in message
+    assert "Cosa fare: Monitorare" in message
 
 
 def test_early_discovery_never_displays_critical_as_operational():
@@ -377,10 +390,10 @@ def test_early_discovery_never_displays_critical_as_operational():
         "published_at": datetime.now(timezone.utc).isoformat(),
     })
     message = format_catalyst_alert(alert)
-    assert "DA VERIFICARE · NON CONFERMATO" in message
-    assert "Potenziale catalizzatore (non confermato)" in message
-    assert "Punteggio interno: 99/100 · non operativo" in message
-    assert "🚨 CRITICO" not in message
+    assert "🟡 NOTIZIA DA VERIFICARE" in message
+    assert "Potenziale catalizzatore (non confermato)" not in message
+    assert "Punteggio interno: 99/100 · non operativo" not in message
+    assert "🚨 CATALIZZATORE IMPORTANTE" not in message
     assert "Priorità: 99/100 · CRITICO" not in message
 
 
