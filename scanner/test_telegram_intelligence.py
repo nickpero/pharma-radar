@@ -1,4 +1,5 @@
 from datetime import datetime, timezone
+from unittest.mock import patch
 from scanner.telegram_intelligence import alert_action, select_intelligent_alerts
 from scanner.telegram import format_catalyst_alert
 
@@ -131,13 +132,20 @@ def test_telegram_is_compact_and_hierarchical():
         "trading_window": "1-7D",
         "source": "FDA RSS",
     })
-    message = format_catalyst_alert(alert)
+    with patch(
+        "scanner.telegram.translate_to_italian",
+        side_effect=lambda value, protected_terms=None: (
+            "La FDA approva il primo farmaco per la malattia di Alexander"
+            if value == "FDA Approves First Drug to Treat Alexander Disease" else value
+        ),
+    ):
+        message = format_catalyst_alert(alert)
     assert "PHARMA RADAR" in message
     assert "🚨 CATALIZZATORE IMPORTANTE" in message
     assert "🧬 IONS —" in message
     assert "🧬 IONS — Zilganersen (Zanvastro)" in message
     assert "📰 APPROVAZIONE FDA" in message
-    assert "📌 FDA Approves First Drug to Treat Alexander Disease" in message
+    assert "📌 La FDA approva il primo farmaco per la malattia di Alexander" in message
     assert "➡️ Cosa fare: Approfondire subito" in message
     assert "1–7 giorni" not in message
     assert "💡 Perché conta:" in message
@@ -345,7 +353,8 @@ def test_telegram_shows_publication_and_detection_timestamps():
         "published_at": "2026-10-14T10:30:00Z",
         "detected_at": "2026-10-14T10:35:00Z",
     })
-    message = format_catalyst_alert(alert)
+    with patch("scanner.telegram.translate_to_italian", side_effect=lambda value, protected_terms=None: value):
+        message = format_catalyst_alert(alert)
     assert "🕒 Pubblicata: 14/10/2026 12:30 CEST" in message
     assert "🛰 Rilevata: 14/10/2026 12:35 CEST" in message
 
@@ -389,7 +398,8 @@ def test_early_discovery_never_displays_critical_as_operational():
         "title": "Kymera Therapeutics to Announce KT-579 Phase 1 Results Tomorrow",
         "published_at": datetime.now(timezone.utc).isoformat(),
     })
-    message = format_catalyst_alert(alert)
+    with patch("scanner.telegram.translate_to_italian", side_effect=lambda value, protected_terms=None: value):
+        message = format_catalyst_alert(alert)
     assert "🟡 NOTIZIA DA VERIFICARE" in message
     assert "Potenziale catalizzatore (non confermato)" not in message
     assert "Punteggio interno: 99/100 · non operativo" not in message
