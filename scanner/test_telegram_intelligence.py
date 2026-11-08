@@ -366,6 +366,19 @@ def test_telegram_marks_watch_only_alert_as_non_urgent():
     assert "👀 AGGIORNAMENTO DA MONITORARE" in message
 
 
+
+def test_watch_action_overrides_critical_internal_label():
+    alert = _alert("CAPR", 100, 95, "CRITICAL")
+    alert.update({
+        "telegram_action": "WATCH",
+        "event": {"type": "STATUS_CHANGE", "subtype": "TRIAL_COMPLETED", "label": "CRITICAL"},
+    })
+    message = format_catalyst_alert(alert)
+    assert "👀 AGGIORNAMENTO DA MONITORARE" in message
+    assert "🚨 CATALIZZATORE IMPORTANTE" not in message
+    assert "Cosa fare: Monitorare" in message
+
+
 def test_early_discovery_never_displays_critical_as_operational():
     alert = _alert("KYMR", 99, 56, "CRITICAL")
     alert.update({
