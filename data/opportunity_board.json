@@ -3,7 +3,7 @@
     "excluded": 15,
     "late": 397,
     "live": 0,
-    "upcoming": 244,
+    "upcoming": 259,
     "watch": 0
   },
   "excluded": [
@@ -473,7 +473,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-08T08:42:39.203624+00:00",
+  "generated_at": "2026-11-08T08:58:21.467403+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -3430,6 +3430,27 @@
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
+      "company": "Immunome",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT04871282",
+      "phase": "PHASE2",
+      "programs": [
+        "varegacestat (AL102)",
+        "IM-1021"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT04871282",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "IMNM",
+      "title": "A Study of AL102 in Patients With Progressing Desmoid Tumors"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
       "company": "Incyte",
       "date": "2026-12-01",
       "date_is_estimate": true,
@@ -3936,6 +3957,116 @@
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
+      "company": "Arcus Biosciences",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT05024097",
+      "phase": "PHASE2",
+      "programs": [
+        "domvanalimab",
+        "quemliclustat",
+        "zimberelimab"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT05024097",
+      "status": "RECRUITING",
+      "ticker": "RCUS",
+      "title": "A Phase I-II Study to Test the Safety and Efficacy of PD1 (AB122) and Adenosine Receptor (AB928) Antagonists With Chemotherapy After Short-Course Radiation for Rectal Cancer."
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Arcus Biosciences",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "DAY",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT05688215",
+      "phase": "PHASE1",
+      "programs": [
+        "domvanalimab",
+        "quemliclustat",
+        "zimberelimab"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT05688215",
+      "status": "RECRUITING",
+      "ticker": "RCUS",
+      "title": "Zimberelimab and Quemliclustat in Combination With Chemotherapy for the Treatment of Patients With Borderline Resectable and Locally Advanced Pancreatic Adenocarcinoma"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Arcus Biosciences",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "DAY",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT05915442",
+      "phase": "PHASE2",
+      "programs": [
+        "domvanalimab",
+        "quemliclustat",
+        "zimberelimab"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT05915442",
+      "status": "RECRUITING",
+      "ticker": "RCUS",
+      "title": "Adenosine Signaling Modulation and Immune Checkpoint Inhibition With Hormone Sensitive Oligometastatic Prostate Cancer"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Arcus Biosciences",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "DAY",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT05915442",
+      "phase": "PHASE2",
+      "programs": [
+        "domvanalimab",
+        "quemliclustat",
+        "zimberelimab"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT05915442",
+      "status": "RECRUITING",
+      "ticker": "RCUS",
+      "title": "Adenosine Signaling Modulation and Immune Checkpoint Inhibition With Hormone Sensitive Oligometastatic Prostate Cancer"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Arcus Biosciences",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT06048133",
+      "phase": "PHASE2",
+      "programs": [
+        "domvanalimab",
+        "quemliclustat",
+        "zimberelimab"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT06048133",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "RCUS",
+      "title": "Study of Gemcitabine, Cisplatin, AB680 and AB122 During First Line Treatment of Advanced Biliary Tract Cancers (QUIC)"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
       "company": "Renalytix",
       "date": "2026-12-01",
       "date_is_estimate": true,
@@ -4053,131 +4184,6 @@
       "status": "ACTIVE_NOT_RECRUITING",
       "ticker": "SLS",
       "title": "Galinpepimut-S Versus Investigator's Choice of Best Available Therapy for Maintenance in AML CR2/CRp2"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Summit Therapeutics",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT07070466",
-      "phase": "PHASE2",
-      "programs": [
-        "ivonescimab"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT07070466",
-      "status": "RECRUITING",
-      "ticker": "SMMT",
-      "title": "Ivonescimab in Comb. With FOLFOX in Advanced HER2 Neg. GEA"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Syndax Pharmaceuticals",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT05491226",
-      "phase": "PHASE2",
-      "programs": [
-        "revumenib",
-        "axatilimab"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT05491226",
-      "status": "RECRUITING",
-      "ticker": "SNDX",
-      "title": "Reinvigorating TNBC Response to Immunotherapy With Combination Myeloid Inhibition and Radiation"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Syndax Pharmaceuticals",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "STUDY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT05491226",
-      "phase": "PHASE2",
-      "programs": [
-        "revumenib",
-        "axatilimab"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT05491226",
-      "status": "RECRUITING",
-      "ticker": "SNDX",
-      "title": "Reinvigorating TNBC Response to Immunotherapy With Combination Myeloid Inhibition and Radiation"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Syndax Pharmaceuticals",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "MONTH",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT05723055",
-      "phase": "PHASE2",
-      "programs": [
-        "revumenib",
-        "axatilimab"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT05723055",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "SNDX",
-      "title": "Evaluating Combination of Nivolumab and Axatilimab in Patients With Relapsed/Refractory Classical Hodgkin Lymphoma"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Tiziana Life Sciences",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "MONTH",
-      "milestone": "STUDY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT06489548",
-      "phase": "PHASE2",
-      "programs": [
-        "foralumab"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT06489548",
-      "status": "RECRUITING",
-      "ticker": "TLSA",
-      "title": "Assessment of Foralumab Safety and Modulation of Microglial Activation in Alzheimer's Disease"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Travere Therapeutics",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT07224776",
-      "phase": "PHASE1",
-      "programs": [
-        "sparsentan",
-        "FILSPARI",
-        "pegtibatinase"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT07224776",
-      "status": "RECRUITING",
-      "ticker": "TVTX",
-      "title": "Sparsentan for the Treatment of VEGF Signaling Pathway Inhibitor-Associated Proteinuria"
     }
   ],
   "watch": []
