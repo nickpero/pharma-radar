@@ -247,7 +247,11 @@ def format_catalyst_alert(alert):
     why = _why_it_matters(alert, event, subtype)
     early = alert.get("early_discovery") is True
     action = str(alert.get("telegram_action", "")).upper()
-    tier = str(event.get("alert_tier", alert.get("alert_tier", ""))).upper()
+    tier = str(
+        event.get("alert_tier") or alert.get("alert_tier")
+        or event.get("label") or alert.get("label")
+        or event.get("severity") or alert.get("severity") or ""
+    ).upper()
 
     if early:
         heading = "🟡 NOTIZIA DA VERIFICARE"
@@ -263,7 +267,7 @@ def format_catalyst_alert(alert):
         next_step = "Monitorare: non è un segnale operativo"
 
     lines = [
-        "PHARMA RADAR",
+        "🚨 PHARMA RADAR",
         heading,
         "",
         f"🧬 {ticker} — {drug_name}",
@@ -274,7 +278,7 @@ def format_catalyst_alert(alert):
     timeline = _timeline_details(alert, event, subtype)
     if timeline:
         # Keep only the concrete change and its interpretation.
-        lines.extend(["", *timeline[:4]])
+        lines.extend(["", *timeline])
 
     trial = alert.get("trial") if isinstance(alert.get("trial"), dict) else {}
     if str(subtype or "").upper() == "TRIAL_COMPLETED":
@@ -282,6 +286,9 @@ def format_catalyst_alert(alert):
         lines.append("ℹ️ Studio segnato come completato: non significa che i risultati siano positivi.")
         if nct_id:
             lines.append(f"Registro: {nct_id}")
+        completion_date = _clean_text(trial.get("completion_date"), 40)
+        if completion_date:
+            lines.append(f"Completamento registrato: {completion_date}")
 
     if early:
         lines.append("⚠️ Notizia preliminare: manca ancora la conferma di una fonte primaria.")
