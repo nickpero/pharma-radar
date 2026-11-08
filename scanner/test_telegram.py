@@ -25,14 +25,14 @@ def test_catalyst_message_format():
     }
     message = format_catalyst_alert(alert)
     assert "🚨 PHARMA RADAR" in message
-    assert "🚨 CRITICO" in message
+    assert "🚨 CATALIZZATORE IMPORTANTE" in message
     assert "🧬 CAPR" in message
-    assert "💊 deramiocel" in message
+    assert "🧬 CAPR — deramiocel" in message
     assert "📰 STUDIO COMPLETATO" in message
-    assert "🎯 Catalizzatore: 95/100 · CRITICO" in message
-    assert "🚨 Priorità: 100/100 · CRITICO" in message
-    assert "📊 Configurazione: 80/100 · Finestra temporale: IMMEDIATA" in message
-    assert "📈 Reazione del mercato:" in message
+    assert "➡️ Cosa fare: Approfondire subito" in message
+    assert "🚨 Priorità: 100/100 · CRITICO" not in message
+    assert "📊 Configurazione: 80/100 · Finestra temporale: IMMEDIATA" not in message
+    assert "📈 Reazione del titolo:" not in message
 
 
 def test_real_newlines():
@@ -125,7 +125,7 @@ def test_negative_direction():
     message = format_catalyst_alert(alert)
     assert "🧬 CAPR" in message
     assert "📰 STUDIO INTERROTTO" in message
-    assert "🎯 Catalizzatore: 95/100 · CRITICO" in message
+    assert "🚨 CATALIZZATORE IMPORTANTE" in message
 
 
 def test_unknown_direction():
@@ -146,7 +146,7 @@ def test_unknown_direction():
     assert "ZYME" in message
     assert "zanidatamab" in message
     assert "STATO DELLO STUDIO NON NOTO" in message
-    assert "🎯 Catalizzatore: 15/100 · BASSO" in message
+    assert "👀 AGGIORNAMENTO DA MONITORARE" in message
 
 
 if __name__ == "__main__":
