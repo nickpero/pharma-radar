@@ -135,7 +135,7 @@ def test_telegram_is_compact_and_hierarchical():
     assert "PHARMA RADAR" in message
     assert "🚨 CATALIZZATORE IMPORTANTE" in message
     assert "🧬 IONS —" in message
-    assert "💊 Zilganersen (Zanvastro)" in message
+    assert "🧬 IONS — Zilganersen (Zanvastro)" in message
     assert "📰 APPROVAZIONE FDA" in message
     assert "📌 FDA Approves First Drug to Treat Alexander Disease" in message
     assert "➡️ Cosa fare: Approfondire subito" in message
