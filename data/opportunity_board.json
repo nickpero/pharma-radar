@@ -3,7 +3,7 @@
     "excluded": 16,
     "late": 406,
     "live": 0,
-    "upcoming": 252,
+    "upcoming": 251,
     "watch": 16
   },
   "excluded": [
@@ -504,7 +504,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-09T13:29:02.976428+00:00",
+  "generated_at": "2026-11-09T13:40:01.380378+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -2113,34 +2113,6 @@
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
-      "company": "Regeneron Pharmaceuticals",
-      "date": "2026-11-13",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT04626635",
-      "phase": "PHASE1",
-      "programs": [
-        "linvoseltamab",
-        "odronextamab",
-        "Dupixent (dupilumab)",
-        "EYLEA HD (aflibercept)",
-        "Libtayo (cemiplimab)",
-        "Pasatru (garetosmab)",
-        "cemdisiran",
-        "Inmazeb (atoltivimab/maftivimab/odesivimab)",
-        "Otarmeni (lunsotogene parvec)"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT04626635",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "REGN",
-      "title": "A Trial to Find Out How Safe REGN7075 is and How Well it Works in Combination With Cemiplimab for Adult Participants With Advanced Cancers"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
       "company": "Axsome Therapeutics",
       "date": "2026-11-15",
       "date_is_estimate": true,
@@ -2267,28 +2239,6 @@
       "status": "RECRUITING",
       "ticker": "ABT",
       "title": "Pforzheim Tricuspid Valve Registry - Outcomes of Percutaneous Tricuspid Valve Repair"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Nautilus Biotechnology",
-      "date": "2026-11-30",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT05476926",
-      "phase": null,
-      "programs": [
-        "Voyager",
-        "Iterative Mapping Early Access Program",
-        "broadscale proteomics"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT05476926",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "NAUT",
-      "title": "A Real-World Study to Gain Clinical Insights Into Roche Ophthalmology Products"
     },
     {
       "actionability": "WATCH",
@@ -3072,46 +3022,6 @@
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
-      "company": "EyePoint Pharmaceuticals",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT06728852",
-      "phase": "PHASE2",
-      "programs": [
-        "vorolanib"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT06728852",
-      "status": "RECRUITING",
-      "ticker": "EYPT",
-      "title": "Efficacy and Safety of Vorolanib Monotherapy As Third-line or Later Treatment for Advanced Non-small Cell Lung Cancer Patients: a Single-arm, Prospective, Open-label Phase II Clinical Study"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "EyePoint Pharmaceuticals",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "STUDY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT06728852",
-      "phase": "PHASE2",
-      "programs": [
-        "vorolanib"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT06728852",
-      "status": "RECRUITING",
-      "ticker": "EYPT",
-      "title": "Efficacy and Safety of Vorolanib Monotherapy As Third-line or Later Treatment for Advanced Non-small Cell Lung Cancer Patients: a Single-arm, Prospective, Open-label Phase II Clinical Study"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
       "company": "Gilead Sciences",
       "date": "2026-12-01",
       "date_is_estimate": true,
@@ -3636,6 +3546,28 @@
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
+      "company": "Nautilus Biotechnology",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT04291105",
+      "phase": "PHASE2",
+      "programs": [
+        "Voyager",
+        "Iterative Mapping Early Access Program",
+        "broadscale proteomics"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT04291105",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "NAUT",
+      "title": "Phase 2 Trial of Voyager V1 in Combination With Cemiplimab in Cancer Patients"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
       "company": "Nkarta",
       "date": "2026-12-01",
       "date_is_estimate": true,
@@ -3974,26 +3906,6 @@
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
-      "company": "Summit Therapeutics",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT07070466",
-      "phase": "PHASE2",
-      "programs": [
-        "ivonescimab"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT07070466",
-      "status": "RECRUITING",
-      "ticker": "SMMT",
-      "title": "Ivonescimab in Comb. With FOLFOX in Advanced HER2 Neg. GEA"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
       "company": "Syndax Pharmaceuticals",
       "date": "2026-12-01",
       "date_is_estimate": true,
@@ -4189,6 +4101,28 @@
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
+      "company": "Verastem",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT04625270",
+      "phase": "PHASE2",
+      "programs": [
+        "avutometinib",
+        "defactinib",
+        "VS-7375"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT04625270",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "VSTM",
+      "title": "A Study of Avutometinib (VS-6766) v. Avutometinib (VS-6766) + Defactinib in Recurrent Low-Grade Serous Ovarian Cancer With and Without a KRAS Mutation"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
       "company": "Xenon Pharmaceuticals",
       "date": "2026-12-01",
       "date_is_estimate": true,
@@ -4206,6 +4140,70 @@
       "status": "ACTIVE_NOT_RECRUITING",
       "ticker": "XENE",
       "title": "A Randomized Study of Azetukalner Versus Placebo in Major Depressive Disorder"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Xenon Pharmaceuticals",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT06775379",
+      "phase": "PHASE3",
+      "programs": [
+        "azetukalner",
+        "XEN1101"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT06775379",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "XENE",
+      "title": "A Randomized Study of Azetukalner Versus Placebo in Major Depressive Disorder"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Xencor",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT06559163",
+      "phase": "PHASE2",
+      "programs": [
+        "XmAb942",
+        "XmAb541",
+        "XmAb657",
+        "obexelimab"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT06559163",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "XNCR",
+      "title": "A Study of Obexelimab in Patients With Systemic Lupus Erythematosus"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Zenas BioPharma",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT06559163",
+      "phase": "PHASE2",
+      "programs": [
+        "obexelimab"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT06559163",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "ZBIO",
+      "title": "A Study of Obexelimab in Patients With Systemic Lupus Erythematosus"
     }
   ],
   "watch": [
