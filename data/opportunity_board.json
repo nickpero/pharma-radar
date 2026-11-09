@@ -4,7 +4,7 @@
     "late": 406,
     "live": 0,
     "upcoming": 259,
-    "watch": 13
+    "watch": 15
   },
   "excluded": [
     {
@@ -504,7 +504,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-09T13:09:30.756592+00:00",
+  "generated_at": "2026-11-09T13:19:46.298808+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -4406,6 +4406,37 @@
     },
     {
       "catalyst_score": 55.0,
+      "company": "ADC Therapeutics",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-09T13:19:46.073844+00:00",
+      "market": {
+        "average_volume_20d": 1484620.0,
+        "estimated_average_dollar_volume_20d": 2345699.6,
+        "market_cap": null,
+        "price": 1.58,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-09",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1771910/000162828026071899/adc-20261109.htm",
+      "status": "WATCH",
+      "ticker": "ADCT",
+      "title": "SEC 8-K — ADC Therapeutics (ADCT)",
+      "trading_intelligence_score": 57.1
+    },
+    {
+      "catalyst_score": 55.0,
       "company": "Praxis Precision Medicines",
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-11-09T12:09:52.355589+00:00",
@@ -4620,6 +4651,37 @@
       "ticker": "EDIT",
       "title": "SEC 8-K — Editas Medicine (EDIT)",
       "trading_intelligence_score": 57.1
+    },
+    {
+      "catalyst_score": 55.0,
+      "company": "Mereo BioPharma",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-09T13:19:46.074893+00:00",
+      "market": {
+        "average_volume_20d": 640790.0,
+        "estimated_average_dollar_volume_20d": 181343.57,
+        "market_cap": null,
+        "price": 0.283,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-09",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1719714/000119312526452716/mreo-20261109.htm",
+      "status": "WATCH",
+      "ticker": "MREO",
+      "title": "SEC 8-K — Mereo BioPharma (MREO)",
+      "trading_intelligence_score": 57.2
     }
   ]
 }

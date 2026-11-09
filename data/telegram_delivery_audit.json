@@ -3742,5 +3742,57 @@
     "telegram_confirmed_at": "2026-11-09T13:09:31.702198+00:00",
     "telegram_message_id": 379,
     "ticker": "CMPX"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'adct|unknown|company_financial_results|2026-11-09')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-09",
+    "first_seen_at": "2026-11-09T13:19:46.249325+00:00",
+    "program": null,
+    "qualified_at": "2026-11-09T13:19:46.365605+00:00",
+    "telegram_attempted_at": "2026-11-09T13:19:46.365605+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "ADCT"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'mreo|unknown|company_financial_results|2026-11-09')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-09",
+    "first_seen_at": "2026-11-09T13:19:46.249325+00:00",
+    "program": null,
+    "qualified_at": "2026-11-09T13:19:46.365605+00:00",
+    "telegram_attempted_at": "2026-11-09T13:19:46.365605+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "MREO"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'adct|unknown|company_financial_results|2026-11-09')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-09",
+    "first_seen_at": "2026-11-09T13:19:46.249325+00:00",
+    "program": null,
+    "qualified_at": "2026-11-09T13:19:46.365605+00:00",
+    "telegram_attempted_at": "2026-11-09T13:19:46.365605+00:00",
+    "telegram_confirmed_at": "2026-11-09T13:19:49.369384+00:00",
+    "telegram_message_id": 380,
+    "ticker": "ADCT"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'mreo|unknown|company_financial_results|2026-11-09')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-09",
+    "first_seen_at": "2026-11-09T13:19:46.249325+00:00",
+    "program": null,
+    "qualified_at": "2026-11-09T13:19:46.365605+00:00",
+    "telegram_attempted_at": "2026-11-09T13:19:46.365605+00:00",
+    "telegram_confirmed_at": "2026-11-09T13:19:49.369384+00:00",
+    "telegram_message_id": 380,
+    "ticker": "MREO"
   }
 ]
