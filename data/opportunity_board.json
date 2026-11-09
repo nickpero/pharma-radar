@@ -76,9 +76,9 @@
       "first_seen_at": "2026-11-09T12:47:01.329864+00:00",
       "market": {
         "average_volume_20d": 2097215.0,
-        "estimated_average_dollar_volume_20d": 6019007.05,
+        "estimated_average_dollar_volume_20d": 5903660.22,
         "market_cap": null,
-        "price": 2.87,
+        "price": 2.815,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -98,7 +98,7 @@
       "status": "EXCLUDED",
       "ticker": "EDIT",
       "title": "EDIT: EDIT-401 nears first dosing as durable preclinical results and cash runway support execution into 2028 - TradingView",
-      "trading_intelligence_score": 72.4
+      "trading_intelligence_score": 72.5
     },
     {
       "catalyst_score": 100.0,
@@ -504,7 +504,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-09T20:29:40.138448+00:00",
+  "generated_at": "2026-11-09T20:39:23.250774+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -1009,9 +1009,9 @@
       "first_seen_at": "2026-11-05T19:37:40.391956+00:00",
       "market": {
         "average_volume_20d": 573115.0,
-        "estimated_average_dollar_volume_20d": 387483.05,
+        "estimated_average_dollar_volume_20d": 392469.15,
         "market_cap": null,
-        "price": 0.6761,
+        "price": 0.6848,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1350,9 +1350,9 @@
       "first_seen_at": "2026-11-05T21:09:12.577022+00:00",
       "market": {
         "average_volume_20d": 1045245.0,
-        "estimated_average_dollar_volume_20d": 2106168.68,
+        "estimated_average_dollar_volume_20d": 2116621.12,
         "market_cap": null,
-        "price": 2.015,
+        "price": 2.025,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1381,9 +1381,9 @@
       "first_seen_at": "2026-11-05T12:17:50.470143+00:00",
       "market": {
         "average_volume_20d": 1212635.0,
-        "estimated_average_dollar_volume_20d": 13684585.97,
+        "estimated_average_dollar_volume_20d": 13496627.55,
         "market_cap": null,
-        "price": 11.285,
+        "price": 11.13,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1412,9 +1412,9 @@
       "first_seen_at": "2026-11-05T21:18:24.837180+00:00",
       "market": {
         "average_volume_20d": 241465.0,
-        "estimated_average_dollar_volume_20d": 10119798.15,
+        "estimated_average_dollar_volume_20d": 10128249.43,
         "market_cap": null,
-        "price": 41.91,
+        "price": 41.945,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1505,9 +1505,9 @@
       "first_seen_at": "2026-11-05T21:18:24.837135+00:00",
       "market": {
         "average_volume_20d": 423795.0,
-        "estimated_average_dollar_volume_20d": 3561996.97,
+        "estimated_average_dollar_volume_20d": 3593781.6,
         "market_cap": null,
-        "price": 8.405,
+        "price": 8.48,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1527,7 +1527,7 @@
       "status": "LATE",
       "ticker": "PBYI",
       "title": "SEC 8-K — Puma Biotechnology (PBYI)",
-      "trading_intelligence_score": 57.6
+      "trading_intelligence_score": 57.7
     },
     {
       "catalyst_score": 55.0,
@@ -1536,9 +1536,9 @@
       "first_seen_at": "2026-11-05T21:18:24.836538+00:00",
       "market": {
         "average_volume_20d": 5877640.0,
-        "estimated_average_dollar_volume_20d": 51811396.6,
+        "estimated_average_dollar_volume_20d": 52252219.6,
         "market_cap": null,
-        "price": 8.815,
+        "price": 8.89,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1598,9 +1598,9 @@
       "first_seen_at": "2026-11-05T12:09:27.111429+00:00",
       "market": {
         "average_volume_20d": 379380.0,
-        "estimated_average_dollar_volume_20d": 25668850.8,
+        "estimated_average_dollar_volume_20d": 25769386.5,
         "market_cap": null,
-        "price": 67.66,
+        "price": 67.925,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1691,9 +1691,9 @@
       "first_seen_at": "2026-11-05T11:47:57.579109+00:00",
       "market": {
         "average_volume_20d": 1174060.0,
-        "estimated_average_dollar_volume_20d": 31394364.4,
+        "estimated_average_dollar_volume_20d": 31382623.8,
         "market_cap": null,
-        "price": 26.74,
+        "price": 26.73,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1713,7 +1713,7 @@
       "status": "LATE",
       "ticker": "ZLAB",
       "title": "SEC 10-Q — Zai Lab (ZLAB) — Quarterly financial report",
-      "trading_intelligence_score": 57.8
+      "trading_intelligence_score": 57.9
     },
     {
       "catalyst_score": 55.0,
@@ -1784,9 +1784,9 @@
       "first_seen_at": "2026-11-05T21:28:51.176506+00:00",
       "market": {
         "average_volume_20d": 24805985.0,
-        "estimated_average_dollar_volume_20d": 37333007.42,
+        "estimated_average_dollar_volume_20d": 37010529.62,
         "market_cap": null,
-        "price": 1.505,
+        "price": 1.492,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1815,9 +1815,9 @@
       "first_seen_at": "2026-11-05T21:53:59.103416+00:00",
       "market": {
         "average_volume_20d": 1206835.0,
-        "estimated_average_dollar_volume_20d": 43995169.92,
+        "estimated_average_dollar_volume_20d": 43989135.75,
         "market_cap": null,
-        "price": 36.455,
+        "price": 36.45,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1846,9 +1846,9 @@
       "first_seen_at": "2026-11-05T11:08:28.153846+00:00",
       "market": {
         "average_volume_20d": 1896225.0,
-        "estimated_average_dollar_volume_20d": 34084644.38,
+        "estimated_average_dollar_volume_20d": 32681437.88,
         "market_cap": null,
-        "price": 17.975,
+        "price": 17.235,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1868,7 +1868,7 @@
       "status": "LATE",
       "ticker": "ACAD",
       "title": "SEC 10-Q — ACADIA Pharmaceuticals (ACAD) — Quarterly financial report",
-      "trading_intelligence_score": 60.2
+      "trading_intelligence_score": 60.8
     },
     {
       "catalyst_score": 55.0,
@@ -1877,9 +1877,9 @@
       "first_seen_at": "2026-11-05T21:18:24.836961+00:00",
       "market": {
         "average_volume_20d": 2712515.0,
-        "estimated_average_dollar_volume_20d": 6672786.9,
+        "estimated_average_dollar_volume_20d": 6713474.62,
         "market_cap": null,
-        "price": 2.46,
+        "price": 2.475,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -2001,9 +2001,9 @@
       "first_seen_at": "2026-11-05T21:53:59.104399+00:00",
       "market": {
         "average_volume_20d": 1275655.0,
-        "estimated_average_dollar_volume_20d": 1990021.8,
+        "estimated_average_dollar_volume_20d": 2009156.62,
         "market_cap": null,
-        "price": 1.56,
+        "price": 1.575,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -2032,9 +2032,9 @@
       "first_seen_at": "2026-11-05T21:18:24.837283+00:00",
       "market": {
         "average_volume_20d": 9325845.0,
-        "estimated_average_dollar_volume_20d": 9745508.02,
+        "estimated_average_dollar_volume_20d": 9838766.47,
         "market_cap": null,
-        "price": 1.045,
+        "price": 1.055,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4214,9 +4214,9 @@
       "first_seen_at": "2026-11-09T18:48:20.079328+00:00",
       "market": {
         "average_volume_20d": 573115.0,
-        "estimated_average_dollar_volume_20d": 387483.05,
+        "estimated_average_dollar_volume_20d": 392469.15,
         "market_cap": null,
-        "price": 0.6761,
+        "price": 0.6848,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4276,9 +4276,9 @@
       "first_seen_at": "2026-11-09T12:18:11.933923+00:00",
       "market": {
         "average_volume_20d": 662645.0,
-        "estimated_average_dollar_volume_20d": 1371675.15,
+        "estimated_average_dollar_volume_20d": 1391554.5,
         "market_cap": null,
-        "price": 2.07,
+        "price": 2.1,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4298,7 +4298,7 @@
       "status": "WATCH",
       "ticker": "FHTX",
       "title": "SEC 10-Q — Foghorn Therapeutics (FHTX) — Quarterly financial report",
-      "trading_intelligence_score": 57.9
+      "trading_intelligence_score": 58.0
     },
     {
       "catalyst_score": 55.0,
@@ -4338,9 +4338,9 @@
       "first_seen_at": "2026-11-09T13:09:30.571135+00:00",
       "market": {
         "average_volume_20d": 2531805.0,
-        "estimated_average_dollar_volume_20d": 2113550.81,
+        "estimated_average_dollar_volume_20d": 2107221.3,
         "market_cap": null,
-        "price": 0.8348,
+        "price": 0.8323,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4462,9 +4462,9 @@
       "first_seen_at": "2026-11-09T13:19:46.073844+00:00",
       "market": {
         "average_volume_20d": 1369005.0,
-        "estimated_average_dollar_volume_20d": 2115112.73,
+        "estimated_average_dollar_volume_20d": 2197253.02,
         "market_cap": null,
-        "price": 1.545,
+        "price": 1.605,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4484,7 +4484,7 @@
       "status": "WATCH",
       "ticker": "ADCT",
       "title": "SEC 8-K — ADC Therapeutics (ADCT)",
-      "trading_intelligence_score": 57.8
+      "trading_intelligence_score": 57.9
     },
     {
       "catalyst_score": 55.0,
@@ -4493,9 +4493,9 @@
       "first_seen_at": "2026-11-09T12:09:52.355589+00:00",
       "market": {
         "average_volume_20d": 475740.0,
-        "estimated_average_dollar_volume_20d": 157845774.6,
+        "estimated_average_dollar_volume_20d": 157353383.7,
         "market_cap": null,
-        "price": 331.79,
+        "price": 330.755,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4515,7 +4515,7 @@
       "status": "WATCH",
       "ticker": "PRAX",
       "title": "SEC 8-K — Praxis Precision Medicines (PRAX)",
-      "trading_intelligence_score": 58.2
+      "trading_intelligence_score": 58.4
     },
     {
       "catalyst_score": 55.0,
@@ -4648,9 +4648,9 @@
       "first_seen_at": "2026-11-09T12:18:11.933212+00:00",
       "market": {
         "average_volume_20d": 1654915.0,
-        "estimated_average_dollar_volume_20d": 102985360.45,
+        "estimated_average_dollar_volume_20d": 103498384.1,
         "market_cap": null,
-        "price": 62.23,
+        "price": 62.54,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4670,7 +4670,7 @@
       "status": "WATCH",
       "ticker": "TGTX",
       "title": "SEC 8-K — TG Therapeutics (TGTX)",
-      "trading_intelligence_score": 58.6
+      "trading_intelligence_score": 58.8
     },
     {
       "catalyst_score": 55.0,
@@ -4679,9 +4679,9 @@
       "first_seen_at": "2026-11-09T12:18:11.933143+00:00",
       "market": {
         "average_volume_20d": 2097215.0,
-        "estimated_average_dollar_volume_20d": 6019007.05,
+        "estimated_average_dollar_volume_20d": 5903660.22,
         "market_cap": null,
-        "price": 2.87,
+        "price": 2.815,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4701,7 +4701,7 @@
       "status": "WATCH",
       "ticker": "EDIT",
       "title": "SEC 8-K — Editas Medicine (EDIT)",
-      "trading_intelligence_score": 57.5
+      "trading_intelligence_score": 57.6
     },
     {
       "catalyst_score": 55.0,
