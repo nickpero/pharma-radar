@@ -329,13 +329,22 @@ def scan(baseline=False):
     old_state = load_state()
     new_state, detected_changes, alerts, errors, relevant_details = {}, [], [], [], []
     total_trials = relevant_trials = filtered_trials = 0
+    program_queries_total = program_queries_succeeded = 0
+    program_query_failures = []
+    company_program_stats = {}
     for ticker, company in watchlist.items():
-        for program in company.get("programs", []):
+        programs = company.get("programs", [])
+        company_program_stats[ticker] = {"total": len(programs), "succeeded": 0}
+        for program in programs:
+            program_queries_total += 1
             print(f"Searching {ticker} - {program}")
             try:
                 trials = search_program(program)
+                program_queries_succeeded += 1
+                company_program_stats[ticker]["succeeded"] += 1
             except Exception as error:
                 print(f"ERROR searching {ticker} - {program}: {error}")
+                program_query_failures.append({"ticker": ticker, "program": program, "error": str(error)})
                 errors.append({"ticker": ticker, "program": program, "error": str(error)})
                 continue
             for trial in trials:
@@ -365,6 +374,14 @@ def scan(baseline=False):
     fda_result = scan_fda(watchlist)
     if fda_result["error"]: errors.append({"ticker": "FDA", "program": "FDA_FEED", "error": fda_result["error"]})
     else: alerts.extend(fda_result["alerts"])
+    fda_diagnostics = dict(fda_result.get("diagnostics") or {})
+    source_diagnostics_fda = {
+        "status": "ERROR" if fda_result.get("error") else ("OK" if fda_result.get("news") else "EMPTY"),
+        "count": len(fda_result.get("news") or []),
+        "path": "FDA news feed",
+        "error": fda_result.get("error"),
+        **fda_diagnostics,
+    }
     print("\nSearching EMA + SEC catalyst news...")
     try:
         regulatory_result = scan_regulatory_sources(watchlist)
@@ -428,8 +445,34 @@ def scan(baseline=False):
         f"final_alerts_after_catalyst_dedup={len(alerts)}"
     )
     print("===================================")
+    program_queries_failed = len(program_query_failures)
+    companies_with_success = sum(1 for stats in company_program_stats.values() if stats["succeeded"] > 0)
+    companies_fully_scanned = sum(
+        1 for stats in company_program_stats.values()
+        if stats["total"] > 0 and stats["succeeded"] == stats["total"]
+    )
+    companies_with_programs = sum(1 for stats in company_program_stats.values() if stats["total"] > 0)
+    source_diagnostics = dict(regulatory_result.get("source_diagnostics", {}))
+    source_diagnostics["FDA"] = source_diagnostics_fda
+    source_event_counts = {
+        source: sum(1 for event in regulatory_result.get("events", []) if str(event.get("source") or "").upper() == source)
+        for source in ("EARLY_DISCOVERY", "EMA", "SEC")
+    }
+    source_event_counts["FDA"] = len(fda_result.get("events") or [])
+    scan_diagnostics = {
+        "program_queries_total": program_queries_total,
+        "program_queries_succeeded": program_queries_succeeded,
+        "program_queries_failed": program_queries_failed,
+        "program_query_failures": program_query_failures,
+        "companies_with_programs": companies_with_programs,
+        "companies_with_success": companies_with_success,
+        "companies_fully_scanned": companies_fully_scanned,
+        "companies_partial_or_failed": max(0, companies_with_programs - companies_fully_scanned),
+    }
     return {"companies": len(watchlist), "total_trials": total_trials, "relevant_trials": relevant_trials, "filtered_trials": filtered_trials,
             "detected_changes": detected_changes, "changes": alerts, "alerts": alerts, "monitoring_alerts": monitoring_alerts, "suppressed_duplicates": suppressed_duplicates, "errors": errors, "relevant_details": relevant_details,
             "fda_news": fda_result["news"], "fda_events": fda_result["events"], "fda_alerts": fda_result["alerts"],
             "ema_news": regulatory_result["ema_news"], "sec_news": regulatory_result["sec_news"], "regulatory_events": regulatory_result["events"],
-            "regulatory_alerts": regulatory_result["alerts"], "source_diagnostics": regulatory_result.get("source_diagnostics", {}), "memory_added": memory_added, "memory": memory_info, "baseline": baseline}
+            "regulatory_alerts": regulatory_result["alerts"], "source_diagnostics": source_diagnostics,
+            "source_event_counts": source_event_counts, "scan_diagnostics": scan_diagnostics,
+            "memory_added": memory_added, "memory": memory_info, "baseline": baseline}

@@ -165,6 +165,19 @@ def test_source_health_warning_does_not_send_when_sources_are_healthy(monkeypatc
     result = {"alerts": [], "source_diagnostics": {"EMA": {"status": "OK", "count": 5}}}
     assert main.send_source_health_alert_if_needed(result, actionable_alerts=[]) is False
 
+def test_empty_feed_is_healthy_and_does_not_trigger_source_warning(monkeypatch):
+    monkeypatch.setattr(main, "load_sent_alerts", lambda: {})
+    monkeypatch.setattr(main, "send_telegram", lambda message: (_ for _ in ()).throw(AssertionError("unexpected Telegram send")))
+    result = {
+        "alerts": [],
+        "source_diagnostics": {
+            "EARLY_DISCOVERY": {"status": "EMPTY", "count": 0, "error_batches": 0},
+            "EMA": {"status": "EMPTY", "count": 0},
+            "FDA": {"status": "EMPTY", "count": 0},
+        },
+    }
+    assert main.send_source_health_alert_if_needed(result, actionable_alerts=[]) is False
+
 
 def test_daily_status_sends_once_after_0800_rome_when_no_alert_today(monkeypatch):
     from zoneinfo import ZoneInfo
@@ -177,18 +190,99 @@ def test_daily_status_sends_once_after_0800_rome_when_no_alert_today(monkeypatch
     now = datetime(2026, 10, 30, 8, 5, tzinfo=ZoneInfo("Europe/Rome"))
     result = {
         "companies": 320,
+        "total_trials": 3400,
         "relevant_trials": 3248,
-        "source_diagnostics": {"FDA": {"status": "OK", "count": 50}, "SEC": {"status": "OK", "count": 144}},
+        "filtered_trials": 152,
+        "detected_changes": [],
+        "fda_events": [],
+        "regulatory_events": [],
+        "source_diagnostics": {
+            "FDA": {"status": "OK", "count": 50},
+            "EARLY_DISCOVERY": {"status": "OK", "count": 10, "companies_queried": 320, "error_batches": 0, "batches_attempted": 32},
+            "EMA": {"status": "OK", "count": 6},
+            "SEC": {"status": "OK", "count": 841, "sec_enabled": 318, "mapped_tickers": 318, "coverage_pct": 100.0},
+        },
+        "source_event_counts": {"FDA": 0, "EARLY_DISCOVERY": 0, "EMA": 0, "SEC": 0},
+        "scan_diagnostics": {
+            "program_queries_total": 500,
+            "program_queries_succeeded": 500,
+            "program_queries_failed": 0,
+            "companies_with_programs": 320,
+            "companies_with_success": 320,
+            "companies_fully_scanned": 320,
+        },
     }
 
     assert main.send_daily_status_if_needed(result, actionable_alerts=[], now=now) is True
     assert len(messages) == 1
-    assert "PHARMA RADAR — STATO GIORNALIERO" in messages[0]
+    assert "PHARMA RADAR — REPORT OPERATIVO" in messages[0]
     assert "320" in messages[0]
-    assert "NON un catalizzatore né un segnale di trading" in messages[0]
+    assert "CONTROLLO COMPLETATO" in messages[0]
+    assert "query programma 500/500 riuscite" in messages[0]
+    assert "SEC filings: OK · acquisiti: 841" in messages[0]
+    assert "CIK 318/318 (100.0%)" in messages[0]
+    assert "Nessun nuovo catalizzatore ha superato i filtri" in messages[0]
+    assert "NON un catalizzatore né un segnale di trading" not in messages[0]
     assert "\\n" not in messages[0]
     assert main.send_daily_status_if_needed(result, actionable_alerts=[], now=now) is False
     assert len(messages) == 1
+
+
+def test_daily_status_marks_scan_partial_when_queries_or_sources_are_missing(monkeypatch):
+    from zoneinfo import ZoneInfo
+
+    messages = []
+    monkeypatch.setattr(main, "load_sent_alerts", lambda: {})
+    monkeypatch.setattr(main, "save_sent_alerts", lambda state: None)
+    monkeypatch.setattr(main, "send_telegram", lambda message: messages.append(message) or {"ok": True})
+    now = datetime(2026, 10, 30, 8, 5, tzinfo=ZoneInfo("Europe/Rome"))
+    result = {
+        "companies": 320,
+        "source_diagnostics": {"SEC": {"status": "OK", "count": 12}},
+        "scan_diagnostics": {
+            "program_queries_total": 100,
+            "program_queries_succeeded": 97,
+            "program_queries_failed": 3,
+            "companies_with_success": 80,
+            "companies_fully_scanned": 77,
+        },
+    }
+    assert main.send_daily_status_if_needed(result, actionable_alerts=[], now=now) is True
+    assert "CONTROLLO PARZIALE / DA VERIFICARE" in messages[0]
+    assert "query programma 97/100 riuscite · 3 fallite" in messages[0]
+    assert "diagnostica assente" in messages[0].lower()
+
+
+def test_daily_status_marks_sec_cik_gaps_as_partial_coverage(monkeypatch):
+    from zoneinfo import ZoneInfo
+
+    messages = []
+    monkeypatch.setattr(main, "load_sent_alerts", lambda: {})
+    monkeypatch.setattr(main, "save_sent_alerts", lambda state: None)
+    monkeypatch.setattr(main, "send_telegram", lambda message: messages.append(message) or {"ok": True})
+    now = datetime(2026, 10, 30, 8, 5, tzinfo=ZoneInfo("Europe/Rome"))
+    diagnostics = {
+        "FDA": {"status": "OK", "count": 5},
+        "EARLY_DISCOVERY": {"status": "EMPTY", "count": 0},
+        "EMA": {"status": "OK", "count": 5},
+        "SEC": {"status": "OK", "count": 12, "sec_enabled": 318, "mapped_tickers": 310, "coverage_pct": 97.5, "unmapped_tickers": ["AFMD", "ALPN", "BDSI"]},
+    }
+    result = {
+        "companies": 320,
+        "source_diagnostics": diagnostics,
+        "scan_diagnostics": {
+            "program_queries_total": 100,
+            "program_queries_succeeded": 100,
+            "program_queries_failed": 0,
+            "companies_with_programs": 320,
+            "companies_with_success": 320,
+            "companies_fully_scanned": 320,
+        },
+    }
+    assert main.send_daily_status_if_needed(result, actionable_alerts=[], now=now) is True
+    assert "CONTROLLO PARZIALE / DA VERIFICARE" in messages[0]
+    assert "CIK 310/318 (97.5%)" in messages[0]
+    assert "senza CIK" in messages[0]
 
 
 def test_daily_status_waits_until_0800_rome(monkeypatch):
