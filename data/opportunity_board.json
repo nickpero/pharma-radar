@@ -4,7 +4,7 @@
     "late": 406,
     "live": 0,
     "upcoming": 251,
-    "watch": 18
+    "watch": 27
   },
   "excluded": [
     {
@@ -98,7 +98,7 @@
       "status": "EXCLUDED",
       "ticker": "EDIT",
       "title": "EDIT: EDIT-401 nears first dosing as durable preclinical results and cash runway support execution into 2028 - TradingView",
-      "trading_intelligence_score": 73.3
+      "trading_intelligence_score": 73.4
     },
     {
       "catalyst_score": 100.0,
@@ -504,7 +504,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-09T21:10:07.733570+00:00",
+  "generated_at": "2026-11-09T21:19:09.990414+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -1620,7 +1620,7 @@
       "status": "LATE",
       "ticker": "ANIP",
       "title": "SEC 10-Q — ANI Pharmaceuticals (ANIP) — Quarterly financial report",
-      "trading_intelligence_score": 57.3
+      "trading_intelligence_score": 57.4
     },
     {
       "catalyst_score": 55.0,
@@ -4333,6 +4333,37 @@
     },
     {
       "catalyst_score": 55.0,
+      "company": "Zymeworks",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-09T21:19:09.752860+00:00",
+      "market": {
+        "average_volume_20d": 1444840.0,
+        "estimated_average_dollar_volume_20d": 44515520.4,
+        "market_cap": null,
+        "price": 30.81,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-09",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1937653/000193765326000068/zyme-20260930.htm",
+      "status": "WATCH",
+      "ticker": "ZYME",
+      "title": "SEC 10-Q — Zymeworks (ZYME) — Quarterly financial report",
+      "trading_intelligence_score": 57.1
+    },
+    {
+      "catalyst_score": 55.0,
       "company": "Compass Therapeutics",
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-11-09T13:09:30.571135+00:00",
@@ -4392,6 +4423,37 @@
       "ticker": "HRTX",
       "title": "SEC 8-K — Heron Therapeutics (HRTX)",
       "trading_intelligence_score": 57.1
+    },
+    {
+      "catalyst_score": 55.0,
+      "company": "Structure Therapeutics",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-09T21:19:09.754060+00:00",
+      "market": {
+        "average_volume_20d": 1077800.0,
+        "estimated_average_dollar_volume_20d": 23075698.0,
+        "market_cap": null,
+        "price": 21.41,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-09",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1888886/000110465926124494/tm2629207d1_8k.htm",
+      "status": "WATCH",
+      "ticker": "GPCR",
+      "title": "SEC 8-K — Structure Therapeutics (GPCR)",
+      "trading_intelligence_score": 57.4
     },
     {
       "catalyst_score": 55.0,
@@ -4515,7 +4577,38 @@
       "status": "WATCH",
       "ticker": "PRAX",
       "title": "SEC 8-K — Praxis Precision Medicines (PRAX)",
-      "trading_intelligence_score": 59.1
+      "trading_intelligence_score": 59.2
+    },
+    {
+      "catalyst_score": 55.0,
+      "company": "Maze Therapeutics",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-09T21:19:09.753616+00:00",
+      "market": {
+        "average_volume_20d": 726905.0,
+        "estimated_average_dollar_volume_20d": 25376253.55,
+        "market_cap": null,
+        "price": 34.91,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-09",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1842295/000119312526453590/maze-20261109.htm",
+      "status": "WATCH",
+      "ticker": "MAZE",
+      "title": "SEC 8-K — Maze Therapeutics (MAZE)",
+      "trading_intelligence_score": 57.1
     },
     {
       "catalyst_score": 55.0,
@@ -4546,6 +4639,37 @@
       "status": "WATCH",
       "ticker": "IBRX",
       "title": "SEC 8-K — ImmunityBio (IBRX)",
+      "trading_intelligence_score": 57.1
+    },
+    {
+      "catalyst_score": 55.0,
+      "company": "Annexon",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-09T21:19:09.752927+00:00",
+      "market": {
+        "average_volume_20d": 3746600.0,
+        "estimated_average_dollar_volume_20d": 15848118.0,
+        "market_cap": null,
+        "price": 4.23,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-09",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1528115/000119312526453585/annx-20260930.htm",
+      "status": "WATCH",
+      "ticker": "ANNX",
+      "title": "SEC 10-Q — Annexon (ANNX) — Quarterly financial report",
       "trading_intelligence_score": 57.1
     },
     {
@@ -4581,6 +4705,37 @@
     },
     {
       "catalyst_score": 55.0,
+      "company": "ArriVent BioPharma",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-09T21:19:09.754474+00:00",
+      "market": {
+        "average_volume_20d": 1584055.0,
+        "estimated_average_dollar_volume_20d": 22430218.8,
+        "market_cap": null,
+        "price": 14.16,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-09",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1868279/000110465926124484/tm2629343d1_8k.htm",
+      "status": "WATCH",
+      "ticker": "AVBP",
+      "title": "SEC 8-K — ArriVent BioPharma (AVBP)",
+      "trading_intelligence_score": 57.1
+    },
+    {
+      "catalyst_score": 55.0,
       "company": "Immunovant",
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-11-09T12:18:11.933105+00:00",
@@ -4609,6 +4764,37 @@
       "ticker": "IMVT",
       "title": "SEC 8-K — Immunovant (IMVT)",
       "trading_intelligence_score": 58.8
+    },
+    {
+      "catalyst_score": 55.0,
+      "company": "Zentalis Pharmaceuticals",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-09T21:19:09.754384+00:00",
+      "market": {
+        "average_volume_20d": 1324270.0,
+        "estimated_average_dollar_volume_20d": 2304229.8,
+        "market_cap": null,
+        "price": 1.74,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-09",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1725160/000172516026000070/zntl-20260930.htm",
+      "status": "WATCH",
+      "ticker": "ZNTL",
+      "title": "SEC 10-Q — Zentalis Pharmaceuticals (ZNTL) — Quarterly financial report",
+      "trading_intelligence_score": 57.1
     },
     {
       "catalyst_score": 55.0,
@@ -4643,6 +4829,37 @@
     },
     {
       "catalyst_score": 55.0,
+      "company": "CervoMed",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-09T21:19:09.753311+00:00",
+      "market": {
+        "average_volume_20d": 350690.0,
+        "estimated_average_dollar_volume_20d": 501486.7,
+        "market_cap": null,
+        "price": 1.43,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-09",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1053691/000143774926035885/crvo20261109_8k.htm",
+      "status": "WATCH",
+      "ticker": "CRVO",
+      "title": "SEC 8-K — CervoMed (CRVO)",
+      "trading_intelligence_score": 57.1
+    },
+    {
+      "catalyst_score": 55.0,
       "company": "TG Therapeutics",
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-11-09T12:18:11.933212+00:00",
@@ -4670,7 +4887,7 @@
       "status": "WATCH",
       "ticker": "TGTX",
       "title": "SEC 8-K — TG Therapeutics (TGTX)",
-      "trading_intelligence_score": 59.9
+      "trading_intelligence_score": 60.2
     },
     {
       "catalyst_score": 55.0,
@@ -4736,6 +4953,68 @@
     },
     {
       "catalyst_score": 55.0,
+      "company": "Immunome",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-09T21:19:09.753442+00:00",
+      "market": {
+        "average_volume_20d": 1566995.0,
+        "estimated_average_dollar_volume_20d": 30337023.2,
+        "market_cap": null,
+        "price": 19.36,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-09",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1472012/000119312526453597/imnm-20260930.htm",
+      "status": "WATCH",
+      "ticker": "IMNM",
+      "title": "SEC 10-Q — Immunome (IMNM) — Quarterly financial report",
+      "trading_intelligence_score": 57.1
+    },
+    {
+      "catalyst_score": 55.0,
+      "company": "Savara",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-09T21:19:09.752847+00:00",
+      "market": {
+        "average_volume_20d": 2484100.0,
+        "estimated_average_dollar_volume_20d": 12544705.0,
+        "market_cap": null,
+        "price": 5.05,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-09",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1160308/000119312526453535/svra-20260930.htm",
+      "status": "WATCH",
+      "ticker": "SVRA",
+      "title": "SEC 10-Q — Savara (SVRA) — Quarterly financial report",
+      "trading_intelligence_score": 57.1
+    },
+    {
+      "catalyst_score": 55.0,
       "company": "Xenon Pharmaceuticals",
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-11-09T21:10:07.536978+00:00",
@@ -4763,7 +5042,7 @@
       "status": "WATCH",
       "ticker": "XENE",
       "title": "SEC 8-K — Xenon Pharmaceuticals (XENE)",
-      "trading_intelligence_score": 57.4
+      "trading_intelligence_score": 57.5
     }
   ]
 }
