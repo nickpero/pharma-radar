@@ -3794,5 +3794,31 @@
     "telegram_confirmed_at": "2026-11-09T13:19:49.369384+00:00",
     "telegram_message_id": 380,
     "ticker": "MREO"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'hrtx|unknown|company_financial_results|2026-11-09')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-09",
+    "first_seen_at": "2026-11-09T13:29:02.922117+00:00",
+    "program": null,
+    "qualified_at": "2026-11-09T13:29:03.041247+00:00",
+    "telegram_attempted_at": "2026-11-09T13:29:03.041247+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "HRTX"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'hrtx|unknown|company_financial_results|2026-11-09')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-09",
+    "first_seen_at": "2026-11-09T13:29:02.922117+00:00",
+    "program": null,
+    "qualified_at": "2026-11-09T13:29:03.041247+00:00",
+    "telegram_attempted_at": "2026-11-09T13:29:03.041247+00:00",
+    "telegram_confirmed_at": "2026-11-09T13:29:04.200320+00:00",
+    "telegram_message_id": 381,
+    "ticker": "HRTX"
   }
 ]

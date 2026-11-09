@@ -3,8 +3,8 @@
     "excluded": 16,
     "late": 406,
     "live": 0,
-    "upcoming": 259,
-    "watch": 15
+    "upcoming": 252,
+    "watch": 16
   },
   "excluded": [
     {
@@ -504,7 +504,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-09T13:19:46.298808+00:00",
+  "generated_at": "2026-11-09T13:29:02.976428+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -2069,6 +2069,29 @@
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
+      "company": "Amgen",
+      "date": "2026-11-10",
+      "date_is_estimate": true,
+      "date_precision": "DAY",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT06660173",
+      "phase": "PHASE2",
+      "programs": [
+        "maridebart cafraglutide",
+        "rocatinlimab",
+        "olpasiran",
+        "MariTide"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT06660173",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "AMGN",
+      "title": "A Study of Maridebart Cafraglutide in Adult Participants With Type 2 Diabetes Mellitus (T2DM)"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
       "company": "Precigen",
       "date": "2026-11-11",
       "date_is_estimate": true,
@@ -2118,135 +2141,25 @@
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
-      "company": "Roche ADR",
-      "date": "2026-11-13",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT05646862",
-      "phase": "PHASE3",
-      "programs": [
-        "giredestrant",
-        "inavolisib",
-        "fenebrutinib"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT05646862",
-      "status": "RECRUITING",
-      "ticker": "RHHBY",
-      "title": "A Study Evaluating the Efficacy and Safety of Inavolisib Plus Fulvestrant Compared With Alpelisib Plus Fulvestrant in Participants With HR-Positive, HER2-Negative, PIK3CA Mutated, Locally Advanced or Metastatic Breast Cancer Post CDK4/6i and Endocrine Combination Therapy"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Amgen",
+      "company": "Axsome Therapeutics",
       "date": "2026-11-15",
       "date_is_estimate": true,
       "date_precision": "DAY",
       "milestone": "PRIMARY_COMPLETION",
       "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT07160257",
-      "phase": "PHASE1",
+      "nct_id": "NCT06590662",
+      "phase": "PHASE2",
       "programs": [
-        "maridebart cafraglutide",
-        "rocatinlimab",
-        "olpasiran",
-        "MariTide"
+        "AXS-05",
+        "AXS-12",
+        "AXS-14",
+        "solriamfetol"
       ],
       "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT07160257",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "AMGN",
-      "title": "A Study to Evaluate the Effect of Maridebart Cafraglutide on Insulin Sensitivity and β-cell Function in Participants With Type 2 Diabetes Mellitus"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "SpringWorks Therapeutics",
-      "date": "2026-11-17",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT07840612",
-      "phase": "PHASE1",
-      "programs": [
-        "nirogacestat",
-        "mirdametinib"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT07840612",
-      "status": "RECRUITING",
-      "ticker": "SWTX",
-      "title": "A Study to Assess the Effects of Probenecid on the Pharmacokinetics of Mirdametinib and Its Metabolites in Healthy Participants"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "SpringWorks Therapeutics",
-      "date": "2026-11-17",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "STUDY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT07840612",
-      "phase": "PHASE1",
-      "programs": [
-        "nirogacestat",
-        "mirdametinib"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT07840612",
-      "status": "RECRUITING",
-      "ticker": "SWTX",
-      "title": "A Study to Assess the Effects of Probenecid on the Pharmacokinetics of Mirdametinib and Its Metabolites in Healthy Participants"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Amgen",
-      "date": "2026-11-18",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT07523711",
-      "phase": "PHASE1",
-      "programs": [
-        "maridebart cafraglutide",
-        "rocatinlimab",
-        "olpasiran",
-        "MariTide"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT07523711",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "AMGN",
-      "title": "Effect of Maridebart Cafraglutide on How Oral Contraceptives Are Absorbed and Processed in the Body in Postmenopausal Female Participants Living With Overweight or Obesity"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Amgen",
-      "date": "2026-11-18",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "STUDY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT07523711",
-      "phase": "PHASE1",
-      "programs": [
-        "maridebart cafraglutide",
-        "rocatinlimab",
-        "olpasiran",
-        "MariTide"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT07523711",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "AMGN",
-      "title": "Effect of Maridebart Cafraglutide on How Oral Contraceptives Are Absorbed and Processed in the Body in Postmenopausal Female Participants Living With Overweight or Obesity"
+      "source_url": "https://clinicaltrials.gov/study/NCT06590662",
+      "status": "NOT_YET_RECRUITING",
+      "ticker": "AXSM",
+      "title": "Efficacy and Tolerance of Solriamfetol in Patients Affected with Idiopathic Hypersomnia."
     },
     {
       "actionability": "WATCH",
@@ -2354,28 +2267,6 @@
       "status": "RECRUITING",
       "ticker": "ABT",
       "title": "Pforzheim Tricuspid Valve Registry - Outcomes of Percutaneous Tricuspid Valve Repair"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Incyte",
-      "date": "2026-11-30",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT06160206",
-      "phase": "PHASE2",
-      "programs": [
-        "povorcitinib",
-        "axatilimab",
-        "retifanlimab"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT06160206",
-      "status": "RECRUITING",
-      "ticker": "INCY",
-      "title": "Retifanlimab with Bevacizumab and Hypofractionated Radiotherapy for the Treatment of Recurrent Glioblastoma"
     },
     {
       "actionability": "WATCH",
@@ -2566,6 +2457,48 @@
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
+      "company": "Ardelyx",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT06460038",
+      "phase": "PHASE2",
+      "programs": [
+        "tenapanor",
+        "Xphozah",
+        "IBAT inhibitor"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT06460038",
+      "status": "RECRUITING",
+      "ticker": "ARDX",
+      "title": "Tenapanor in Synucleinopathy-Related Constipation"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "ArriVent BioPharma",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT04853342",
+      "phase": "PHASE3",
+      "programs": [
+        "furmonertinib"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT04853342",
+      "status": "RECRUITING",
+      "ticker": "AVBP",
+      "title": "To Assess the Efficacy and Safety of Furmonertinib Versus Placebo, in Patients With Epidermal Growth Factor Receptor Mutation Positive Stage II-IIIA Non-small Cell Lung Carcinoma, Following Complete Tumour Resection With or Without Adjuvant Chemotherapy"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
       "company": "ArriVent BioPharma",
       "date": "2026-12-01",
       "date_is_estimate": true,
@@ -2582,26 +2515,6 @@
       "status": "NOT_YET_RECRUITING",
       "ticker": "AVBP",
       "title": "RC48 Combined With EGFR or HER2 TKI for Locally Advanced or Metastatic NSCLC Patients With HER2 Alterations"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "ArriVent BioPharma",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "MONTH",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT06652048",
-      "phase": "PHASE2",
-      "programs": [
-        "furmonertinib"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT06652048",
-      "status": "RECRUITING",
-      "ticker": "AVBP",
-      "title": "High-dose Furmonertinib or Combined With Chemotherapy in EGFR-mutant Advanced NSCLC After Disease Progression on Third-generation EGFR-TKI"
     },
     {
       "actionability": "WATCH",
@@ -2671,52 +2584,6 @@
       "status": "RECRUITING",
       "ticker": "AXSM",
       "title": "Elucidating TAAR-1, Dopamine, and Norepinephrine in Binge Eating Disorder Using Solriamfetol"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Axsome Therapeutics",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "MONTH",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT06568367",
-      "phase": "PHASE3",
-      "programs": [
-        "AXS-05",
-        "AXS-12",
-        "AXS-14",
-        "solriamfetol"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT06568367",
-      "status": "RECRUITING",
-      "ticker": "AXSM",
-      "title": "Studying Solriamfetol Modulation of TAAR-1, Dopamine, and Norepinephrine in Shift Work Disorder (SUSTAIN)"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Axsome Therapeutics",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "MONTH",
-      "milestone": "STUDY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT06568367",
-      "phase": "PHASE3",
-      "programs": [
-        "AXS-05",
-        "AXS-12",
-        "AXS-14",
-        "solriamfetol"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT06568367",
-      "status": "RECRUITING",
-      "ticker": "AXSM",
-      "title": "Studying Solriamfetol Modulation of TAAR-1, Dopamine, and Norepinephrine in Shift Work Disorder (SUSTAIN)"
     },
     {
       "actionability": "WATCH",
@@ -2922,48 +2789,6 @@
       "date": "2026-12-01",
       "date_is_estimate": true,
       "date_precision": "MONTH",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT03604198",
-      "phase": "PHASE2",
-      "programs": [
-        "relacorilant",
-        "Cushing syndrome program"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT03604198",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "CORT",
-      "title": "Extension Study to Evaluate the Safety of Long-Term Use of Relacorilant in Patients With Cushing Syndrome"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Corcept Therapeutics",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "MONTH",
-      "milestone": "STUDY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT03604198",
-      "phase": "PHASE2",
-      "programs": [
-        "relacorilant",
-        "Cushing syndrome program"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT03604198",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "CORT",
-      "title": "Extension Study to Evaluate the Safety of Long-Term Use of Relacorilant in Patients With Cushing Syndrome"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Corcept Therapeutics",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "MONTH",
       "milestone": "STUDY_COMPLETION",
       "milestone_type": "EXPECTED_TRIAL_COMPLETION",
       "nct_id": "NCT05257408",
@@ -2981,6 +2806,27 @@
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
+      "company": "Corcept Therapeutics",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT06906341",
+      "phase": "PHASE2",
+      "programs": [
+        "relacorilant",
+        "Cushing syndrome program"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT06906341",
+      "status": "RECRUITING",
+      "ticker": "CORT",
+      "title": "Relacorilant in Combination With Different Treatment Regimens in Patients With Gynecological Cancers"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
       "company": "Deciphera Pharmaceuticals",
       "date": "2026-12-01",
       "date_is_estimate": true,
@@ -3069,16 +2915,16 @@
       "date_precision": "MONTH",
       "milestone": "PRIMARY_COMPLETION",
       "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT05047094",
+      "nct_id": "NCT03737734",
       "phase": "NA",
       "programs": [
         "Alpha DaRT"
       ],
       "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT05047094",
-      "status": "RECRUITING",
+      "source_url": "https://clinicaltrials.gov/study/NCT03737734",
+      "status": "ACTIVE_NOT_RECRUITING",
       "ticker": "DRTS",
-      "title": "Alpha Radiation Emitters Device (DaRT) in Combination With Check Point Inhibitor for the Treatment of Recurrent Unresectable or mHNSCC"
+      "title": "Alpha Radiation Emitters Device for the Treatment of Cutaneous, Mucosal or Superficial Soft Tissue Neoplasia (DaRT)"
     },
     {
       "actionability": "WATCH",
@@ -3089,16 +2935,16 @@
       "date_precision": "MONTH",
       "milestone": "STUDY_COMPLETION",
       "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT06202339",
+      "nct_id": "NCT03737734",
       "phase": "NA",
       "programs": [
         "Alpha DaRT"
       ],
       "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT06202339",
-      "status": "NOT_YET_RECRUITING",
+      "source_url": "https://clinicaltrials.gov/study/NCT03737734",
+      "status": "ACTIVE_NOT_RECRUITING",
       "ticker": "DRTS",
-      "title": "Alpha Radiation Emitters Device for the Treatment of Primary and Recurrent Squamous Cell Carcinoma of the Vulva (DaRT)."
+      "title": "Alpha Radiation Emitters Device for the Treatment of Cutaneous, Mucosal or Superficial Soft Tissue Neoplasia (DaRT)"
     },
     {
       "actionability": "WATCH",
@@ -3119,6 +2965,26 @@
       "status": "ACTIVE_NOT_RECRUITING",
       "ticker": "DRTS",
       "title": "Alpha Radiation Emitters (DaRT) With Chemotherapy for the Treatment of Locally Advanced and Metastatic Pancreatic Cancer"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Alpha Tau Medical",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "DAY",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT06910306",
+      "phase": "NA",
+      "programs": [
+        "Alpha DaRT"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT06910306",
+      "status": "RECRUITING",
+      "ticker": "DRTS",
+      "title": "Alpha Radiation Emitters Device (DaRT) for the Treatment of Recurrent Glioblastoma"
     },
     {
       "actionability": "WATCH",
@@ -3190,18 +3056,18 @@
       "date_precision": "MONTH",
       "milestone": "PRIMARY_COMPLETION",
       "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT05613894",
-      "phase": "PHASE1",
+      "nct_id": "NCT06568562",
+      "phase": "PHASE2",
       "programs": [
         "zanzalintinib",
         "cabozantinib",
         "XL092"
       ],
       "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT05613894",
+      "source_url": "https://clinicaltrials.gov/study/NCT06568562",
       "status": "RECRUITING",
       "ticker": "EXEL",
-      "title": "Dose-Escalation Study of Cabozantinib in Combination With Lutetium-177 (177Lu)-PSMA-617 in Patients With Metastatic Castration-Resistant Prostate Cancer"
+      "title": "XL092 in Patients With Metastatic Castration-Resistant Prostate Cancer"
     },
     {
       "actionability": "WATCH",
@@ -3272,10 +3138,10 @@
       "company": "Gilead Sciences",
       "date": "2026-12-01",
       "date_is_estimate": true,
-      "date_precision": "DAY",
+      "date_precision": "MONTH",
       "milestone": "PRIMARY_COMPLETION",
       "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT05915442",
+      "nct_id": "NCT06048133",
       "phase": "PHASE2",
       "programs": [
         "lenacapavir",
@@ -3284,10 +3150,10 @@
         "GS-1423"
       ],
       "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT05915442",
-      "status": "RECRUITING",
+      "source_url": "https://clinicaltrials.gov/study/NCT06048133",
+      "status": "ACTIVE_NOT_RECRUITING",
       "ticker": "GILD",
-      "title": "Adenosine Signaling Modulation and Immune Checkpoint Inhibition With Hormone Sensitive Oligometastatic Prostate Cancer"
+      "title": "Study of Gemcitabine, Cisplatin, AB680 and AB122 During First Line Treatment of Advanced Biliary Tract Cancers (QUIC)"
     },
     {
       "actionability": "WATCH",
@@ -3728,95 +3594,6 @@
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
-      "company": "Eli Lilly",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "MONTH",
-      "milestone": "STUDY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT06662383",
-      "phase": "PHASE3",
-      "programs": [
-        "orforglipron",
-        "retatrutide",
-        "lebrikizumab",
-        "donanemab"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT06662383",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "LLY",
-      "title": "A Study of Retatrutide (LY3437943) Compared to Tirzepatide (LY3298176) in Adults Who Have Obesity"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Eli Lilly",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "MONTH",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT07807228",
-      "phase": null,
-      "programs": [
-        "orforglipron",
-        "retatrutide",
-        "lebrikizumab",
-        "donanemab"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT07807228",
-      "status": "RECRUITING",
-      "ticker": "LLY",
-      "title": "Changes in Skin Myco- and Microbiome After Lebrikizumab Treatment"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Liquidia Corporation",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "MONTH",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT07333183",
-      "phase": "PHASE2",
-      "programs": [
-        "Yutrepia",
-        "treprostinil"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT07333183",
-      "status": "RECRUITING",
-      "ticker": "LQDA",
-      "title": "A Study of Mosliciguat in Combination With Inhaled Treprostinil in PH-ILD"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Madrigal Pharmaceuticals",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "MONTH",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT05500222",
-      "phase": "PHASE3",
-      "programs": [
-        "resmetirom",
-        "Rezdiffra",
-        "MGL-3196"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT05500222",
-      "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "MDGL",
-      "title": "A Phase 3 Study to Evaluate the Effect of Resmetirom on Clinical Outcomes in Patients With Well-compensated NASH Cirrhosis (MAESTRO-NASH-OUTCOMES)"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
       "company": "Madrigal Pharmaceuticals",
       "date": "2026-12-01",
       "date_is_estimate": true,
@@ -4016,28 +3793,6 @@
       "date_precision": "DAY",
       "milestone": "PRIMARY_COMPLETION",
       "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT05688215",
-      "phase": "PHASE1",
-      "programs": [
-        "domvanalimab",
-        "quemliclustat",
-        "zimberelimab"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT05688215",
-      "status": "RECRUITING",
-      "ticker": "RCUS",
-      "title": "Zimberelimab and Quemliclustat in Combination With Chemotherapy for the Treatment of Patients With Borderline Resectable and Locally Advanced Pancreatic Adenocarcinoma"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Arcus Biosciences",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
       "nct_id": "NCT05915442",
       "phase": "PHASE2",
       "programs": [
@@ -4057,10 +3812,10 @@
       "company": "Arcus Biosciences",
       "date": "2026-12-01",
       "date_is_estimate": true,
-      "date_precision": "DAY",
+      "date_precision": "MONTH",
       "milestone": "PRIMARY_COMPLETION",
       "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT05915442",
+      "nct_id": "NCT06048133",
       "phase": "PHASE2",
       "programs": [
         "domvanalimab",
@@ -4068,10 +3823,10 @@
         "zimberelimab"
       ],
       "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT05915442",
-      "status": "RECRUITING",
+      "source_url": "https://clinicaltrials.gov/study/NCT06048133",
+      "status": "ACTIVE_NOT_RECRUITING",
       "ticker": "RCUS",
-      "title": "Adenosine Signaling Modulation and Immune Checkpoint Inhibition With Hormone Sensitive Oligometastatic Prostate Cancer"
+      "title": "Study of Gemcitabine, Cisplatin, AB680 and AB122 During First Line Treatment of Advanced Biliary Tract Cancers (QUIC)"
     },
     {
       "actionability": "WATCH",
@@ -4215,6 +3970,242 @@
       "status": "ACTIVE_NOT_RECRUITING",
       "ticker": "SLS",
       "title": "Galinpepimut-S Versus Investigator's Choice of Best Available Therapy for Maintenance in AML CR2/CRp2"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Summit Therapeutics",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "DAY",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT07070466",
+      "phase": "PHASE2",
+      "programs": [
+        "ivonescimab"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT07070466",
+      "status": "RECRUITING",
+      "ticker": "SMMT",
+      "title": "Ivonescimab in Comb. With FOLFOX in Advanced HER2 Neg. GEA"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Syndax Pharmaceuticals",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "DAY",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT05491226",
+      "phase": "PHASE2",
+      "programs": [
+        "revumenib",
+        "axatilimab"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT05491226",
+      "status": "RECRUITING",
+      "ticker": "SNDX",
+      "title": "Reinvigorating TNBC Response to Immunotherapy With Combination Myeloid Inhibition and Radiation"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Syndax Pharmaceuticals",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "DAY",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT05491226",
+      "phase": "PHASE2",
+      "programs": [
+        "revumenib",
+        "axatilimab"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT05491226",
+      "status": "RECRUITING",
+      "ticker": "SNDX",
+      "title": "Reinvigorating TNBC Response to Immunotherapy With Combination Myeloid Inhibition and Radiation"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Syndax Pharmaceuticals",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT05723055",
+      "phase": "PHASE2",
+      "programs": [
+        "revumenib",
+        "axatilimab"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT05723055",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "SNDX",
+      "title": "Evaluating Combination of Nivolumab and Axatilimab in Patients With Relapsed/Refractory Classical Hodgkin Lymphoma"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Tiziana Life Sciences",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT06489548",
+      "phase": "PHASE2",
+      "programs": [
+        "foralumab"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT06489548",
+      "status": "RECRUITING",
+      "ticker": "TLSA",
+      "title": "Assessment of Foralumab Safety and Modulation of Microglial Activation in Alzheimer's Disease"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Travere Therapeutics",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "DAY",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT07224776",
+      "phase": "PHASE1",
+      "programs": [
+        "sparsentan",
+        "FILSPARI",
+        "pegtibatinase"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT07224776",
+      "status": "RECRUITING",
+      "ticker": "TVTX",
+      "title": "Sparsentan for the Treatment of VEGF Signaling Pathway Inhibitor-Associated Proteinuria"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "United Therapeutics",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT03683186",
+      "phase": "PHASE3",
+      "programs": [
+        "Tyvaso",
+        "Tyvaso DPI",
+        "Yutrepia litigation",
+        "ralinepag"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT03683186",
+      "status": "ENROLLING_BY_INVITATION",
+      "ticker": "UTHR",
+      "title": "A Study Evaluating the Long-Term Efficacy and Safety of Ralinepag in Subjects With PAH Via an Open-Label Extension"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "United Therapeutics",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT03683186",
+      "phase": "PHASE3",
+      "programs": [
+        "Tyvaso",
+        "Tyvaso DPI",
+        "Yutrepia litigation",
+        "ralinepag"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT03683186",
+      "status": "ENROLLING_BY_INVITATION",
+      "ticker": "UTHR",
+      "title": "A Study Evaluating the Long-Term Efficacy and Safety of Ralinepag in Subjects With PAH Via an Open-Label Extension"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Vir Biotechnology",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT07128550",
+      "phase": "PHASE3",
+      "programs": [
+        "tobevibart",
+        "elebsiran",
+        "hepatitis B programs"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT07128550",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "VIR",
+      "title": "A Study to Evaluate Tobevibart+Elebsiran in Participants With Chronic HDV Infection Not Virologically Suppressed With Bulevirtide"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Vir Biotechnology",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "PRIMARY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT07128550",
+      "phase": "PHASE3",
+      "programs": [
+        "tobevibart",
+        "elebsiran",
+        "hepatitis B programs"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT07128550",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "VIR",
+      "title": "A Study to Evaluate Tobevibart+Elebsiran in Participants With Chronic HDV Infection Not Virologically Suppressed With Bulevirtide"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
+      "company": "Xenon Pharmaceuticals",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT06775379",
+      "phase": "PHASE3",
+      "programs": [
+        "azetukalner",
+        "XEN1101"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT06775379",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "XENE",
+      "title": "A Randomized Study of Azetukalner Versus Placebo in Major Depressive Disorder"
     }
   ],
   "watch": [
@@ -4340,6 +4331,37 @@
       "status": "WATCH",
       "ticker": "CMPX",
       "title": "SEC 10-Q — Compass Therapeutics (CMPX) — Quarterly financial report",
+      "trading_intelligence_score": 57.1
+    },
+    {
+      "catalyst_score": 55.0,
+      "company": "Heron Therapeutics",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-09T13:29:02.748921+00:00",
+      "market": {
+        "average_volume_20d": 1729510.0,
+        "estimated_average_dollar_volume_20d": 506746.43,
+        "market_cap": null,
+        "price": 0.293,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-09",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/818033/000119312526452721/hrtx-20261109.htm",
+      "status": "WATCH",
+      "ticker": "HRTX",
+      "title": "SEC 8-K — Heron Therapeutics (HRTX)",
       "trading_intelligence_score": 57.1
     },
     {
