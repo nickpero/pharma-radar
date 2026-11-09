@@ -1,10 +1,10 @@
 {
   "counts": {
-    "excluded": 15,
+    "excluded": 16,
     "late": 406,
     "live": 0,
-    "upcoming": 257,
-    "watch": 10
+    "upcoming": 259,
+    "watch": 11
   },
   "excluded": [
     {
@@ -68,6 +68,37 @@
       "ticker": "PDSB",
       "title": null,
       "trading_intelligence_score": 68.7
+    },
+    {
+      "catalyst_score": 95.0,
+      "company": "Editas Medicine",
+      "event_type": "CLINICAL_RESULTS",
+      "first_seen_at": "2026-11-09T12:47:01.329864+00:00",
+      "market": {
+        "average_volume_20d": 2165775.0,
+        "estimated_average_dollar_volume_20d": 5566041.75,
+        "market_cap": null,
+        "price": 2.57,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 78.0,
+      "priority_score": 99.0,
+      "program": "EDIT-401",
+      "program_status": "VERIFIED",
+      "publication_precision": "TIMESTAMP",
+      "published_at": "2026-11-09T12:09:44+00:00",
+      "reason": "PRIMARY_SOURCE_NOT_VERIFIED",
+      "source": "EARLY_DISCOVERY",
+      "source_type": "DISCOVERY",
+      "source_url": "https://news.google.com/rss/articles/CBMimgJBVV95cUxQX1NWWFh6VU5zV1NjWkJRdkhJMGNwU1pXdW92OEFYRzB2SVlzU09kSVcxRzE3VmplbFEtdHZQbzhiSzJ3aUVfbW1WelE5aUQyNlZSX2xLVVhMRlZqNlYwa01lTVU3ekFFS190SjVacnNoNHJLQ0VUZHp4SEY1RjRSNXgxVzI5LUlLTWhmTzhLblRwTFQ3ZGFqSWE3bEhobkRoRC1aa1NsbzdmOHA0em1WU1A2ME05cERFRlduZENoU1dpUldTN3cxbzVXcU5KMXRYZ3JLVlhjVVdILWxSVWhhTGFDazhzeTJvaWtyTVZ1eG1Qc3R6X1hyLW1IN2dkc3ZpQUlEdERDbzk2ZXgyODlPamdyU2JuZGtnU3c?oc=5",
+      "status": "EXCLUDED",
+      "ticker": "EDIT",
+      "title": "EDIT: EDIT-401 nears first dosing as durable preclinical results and cash runway support execution into 2028 - TradingView",
+      "trading_intelligence_score": 70.5
     },
     {
       "catalyst_score": 100.0,
@@ -473,7 +504,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-09T12:37:39.986771+00:00",
+  "generated_at": "2026-11-09T12:47:01.572054+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -3430,6 +3461,27 @@
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
+      "company": "Immunome",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT04871282",
+      "phase": "PHASE2",
+      "programs": [
+        "varegacestat (AL102)",
+        "IM-1021"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT04871282",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "IMNM",
+      "title": "A Study of AL102 in Patients With Progressing Desmoid Tumors"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
       "company": "Incyte",
       "date": "2026-12-01",
       "date_is_estimate": true,
@@ -4163,26 +4215,6 @@
       "status": "ACTIVE_NOT_RECRUITING",
       "ticker": "SLS",
       "title": "Galinpepimut-S Versus Investigator's Choice of Best Available Therapy for Maintenance in AML CR2/CRp2"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Summit Therapeutics",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT07070466",
-      "phase": "PHASE2",
-      "programs": [
-        "ivonescimab"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT07070466",
-      "status": "RECRUITING",
-      "ticker": "SMMT",
-      "title": "Ivonescimab in Comb. With FOLFOX in Advanced HER2 Neg. GEA"
     }
   ],
   "watch": [
@@ -4339,6 +4371,37 @@
       "status": "WATCH",
       "ticker": "PRAX",
       "title": "SEC 8-K — Praxis Precision Medicines (PRAX)",
+      "trading_intelligence_score": 57.1
+    },
+    {
+      "catalyst_score": 55.0,
+      "company": "ImmunityBio",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-09T12:47:01.330237+00:00",
+      "market": {
+        "average_volume_20d": 12968140.0,
+        "estimated_average_dollar_volume_20d": 111979888.9,
+        "market_cap": null,
+        "price": 8.635,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-09",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1326110/000132611026000097/ibrx-20261109.htm",
+      "status": "WATCH",
+      "ticker": "IBRX",
+      "title": "SEC 8-K — ImmunityBio (IBRX)",
       "trading_intelligence_score": 57.1
     },
     {
