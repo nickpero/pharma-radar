@@ -374,7 +374,7 @@ def send_source_health_alert_if_needed(result, actionable_alerts=None):
     diagnostics = result.get("source_diagnostics") or {}
     degraded = {
         name: detail for name, detail in diagnostics.items()
-        if str(detail.get("status") or "UNKNOWN").upper() not in {"OK", "SUCCESS", "HEALTHY"}
+        if str(detail.get("status") or "UNKNOWN").upper() not in {"OK", "SUCCESS", "HEALTHY", "EMPTY"}
     }
     if not degraded:
         return False
