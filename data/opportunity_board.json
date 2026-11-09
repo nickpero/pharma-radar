@@ -504,7 +504,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-09T21:56:24.576977+00:00",
+  "generated_at": "2026-11-09T22:15:43.285975+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -1620,7 +1620,7 @@
       "status": "LATE",
       "ticker": "ANIP",
       "title": "SEC 10-Q — ANI Pharmaceuticals (ANIP) — Quarterly financial report",
-      "trading_intelligence_score": 57.4
+      "trading_intelligence_score": 57.6
     },
     {
       "catalyst_score": 55.0,
