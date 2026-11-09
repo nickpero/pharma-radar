@@ -3378,5 +3378,83 @@
     "telegram_confirmed_at": "2026-11-06T22:36:01.002087+00:00",
     "telegram_message_id": 369,
     "ticker": "BIAF"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'tlsa|unknown|company_financial_results|2026-11-09')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-09",
+    "first_seen_at": "2026-11-09T12:09:52.538103+00:00",
+    "program": null,
+    "qualified_at": "2026-11-09T12:09:52.691459+00:00",
+    "telegram_attempted_at": "2026-11-09T12:09:52.691459+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "TLSA"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'ions|unknown|company_financial_results|2026-11-09')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-09",
+    "first_seen_at": "2026-11-09T12:09:52.538103+00:00",
+    "program": null,
+    "qualified_at": "2026-11-09T12:09:52.691459+00:00",
+    "telegram_attempted_at": "2026-11-09T12:09:52.691459+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "IONS"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'prax|unknown|company_financial_results|2026-11-09')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-09",
+    "first_seen_at": "2026-11-09T12:09:52.538103+00:00",
+    "program": null,
+    "qualified_at": "2026-11-09T12:09:52.691459+00:00",
+    "telegram_attempted_at": "2026-11-09T12:09:52.691459+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "PRAX"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'tlsa|unknown|company_financial_results|2026-11-09')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-09",
+    "first_seen_at": "2026-11-09T12:09:52.538103+00:00",
+    "program": null,
+    "qualified_at": "2026-11-09T12:09:52.691459+00:00",
+    "telegram_attempted_at": "2026-11-09T12:09:52.691459+00:00",
+    "telegram_confirmed_at": "2026-11-09T12:09:56.825626+00:00",
+    "telegram_message_id": 375,
+    "ticker": "TLSA"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'ions|unknown|company_financial_results|2026-11-09')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-09",
+    "first_seen_at": "2026-11-09T12:09:52.538103+00:00",
+    "program": null,
+    "qualified_at": "2026-11-09T12:09:52.691459+00:00",
+    "telegram_attempted_at": "2026-11-09T12:09:52.691459+00:00",
+    "telegram_confirmed_at": "2026-11-09T12:09:56.825626+00:00",
+    "telegram_message_id": 375,
+    "ticker": "IONS"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'prax|unknown|company_financial_results|2026-11-09')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-09",
+    "first_seen_at": "2026-11-09T12:09:52.538103+00:00",
+    "program": null,
+    "qualified_at": "2026-11-09T12:09:52.691459+00:00",
+    "telegram_attempted_at": "2026-11-09T12:09:52.691459+00:00",
+    "telegram_confirmed_at": "2026-11-09T12:09:56.825626+00:00",
+    "telegram_message_id": 375,
+    "ticker": "PRAX"
   }
 ]

@@ -4,7 +4,7 @@
     "late": 406,
     "live": 0,
     "upcoming": 259,
-    "watch": 0
+    "watch": 3
   },
   "excluded": [
     {
@@ -473,7 +473,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-09T11:47:44.767363+00:00",
+  "generated_at": "2026-11-09T12:09:52.607234+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -4186,5 +4186,99 @@
       "title": "Galinpepimut-S Versus Investigator's Choice of Best Available Therapy for Maintenance in AML CR2/CRp2"
     }
   ],
-  "watch": []
+  "watch": [
+    {
+      "catalyst_score": 80.0,
+      "company": "Tiziana Life Sciences",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-09T12:09:52.354943+00:00",
+      "market": {
+        "average_volume_20d": 678060.0,
+        "estimated_average_dollar_volume_20d": 467047.73,
+        "market_cap": null,
+        "price": 0.6888,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 78.6,
+      "priority_score": 43.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-09",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1723069/000121390026117181/ea0311443-6k_tiziana.htm",
+      "status": "WATCH",
+      "ticker": "TLSA",
+      "title": "SEC 6-K — Tiziana Life Sciences (TLSA) — REPORT OF FOREIGN PRIVATE ISSUER",
+      "trading_intelligence_score": 64.7
+    },
+    {
+      "catalyst_score": 55.0,
+      "company": "Ionis Pharmaceuticals",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-09T12:09:52.355105+00:00",
+      "market": {
+        "average_volume_20d": 2807675.0,
+        "estimated_average_dollar_volume_20d": 110678548.5,
+        "market_cap": null,
+        "price": 39.42,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-09",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/874015/000114036126042598/ef20085128_8k.htm",
+      "status": "WATCH",
+      "ticker": "IONS",
+      "title": "SEC 8-K — Ionis Pharmaceuticals (IONS)",
+      "trading_intelligence_score": 57.2
+    },
+    {
+      "catalyst_score": 55.0,
+      "company": "Praxis Precision Medicines",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-09T12:09:52.355589+00:00",
+      "market": {
+        "average_volume_20d": 485870.0,
+        "estimated_average_dollar_volume_20d": 134887229.4,
+        "market_cap": null,
+        "price": 277.62,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-09",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1689548/000168954826000086/prax-20261109.htm",
+      "status": "WATCH",
+      "ticker": "PRAX",
+      "title": "SEC 8-K — Praxis Precision Medicines (PRAX)",
+      "trading_intelligence_score": 57.1
+    }
+  ]
 }
