@@ -155,7 +155,7 @@ def build_summary(result, intelligent_alerts=None):
 
     degraded_sources = {
         name: detail for name, detail in (result.get("source_diagnostics") or {}).items()
-        if str(detail.get("status") or "UNKNOWN").upper() not in {"OK", "SUCCESS", "HEALTHY"}
+        if str(detail.get("status") or "UNKNOWN").upper() not in {"OK", "SUCCESS", "HEALTHY", "EMPTY"}
     }
     if errors or degraded_sources:
         if degraded_sources:
@@ -289,11 +289,19 @@ def send_daily_status_if_needed(result, actionable_alerts=None, now=None):
         path = detail.get("path")
         suffix = f" · eventi associati: {matched}"
         if name == "SEC" and detail.get("sec_enabled") is not None:
+            suffix += " · SEC abilitate: {}/{}".format(
+                detail.get("sec_enabled", 0), detail.get("watchlist_total", result.get("companies", "n/d"))
+            )
             suffix += " · CIK {}/{} ({:.1f}%)".format(
                 detail.get("mapped_tickers", 0),
                 detail.get("sec_enabled", 0),
                 detail.get("coverage_pct", 0.0),
             )
+            unmapped = detail.get("unmapped_tickers") or []
+            if unmapped:
+                suffix += " · senza CIK: " + ",".join(str(ticker) for ticker in unmapped[:8])
+                if len(unmapped) > 8:
+                    suffix += f" +{len(unmapped) - 8}"
         if name == "EARLY_DISCOVERY":
             suffix += " · aziende interrogate: {}".format(detail.get("companies_queried", "n/d"))
             suffix += " · batch falliti: {}/{}".format(
@@ -327,9 +335,10 @@ def send_daily_status_if_needed(result, actionable_alerts=None, now=None):
             total_programs if total_programs is not None else "n/d",
             failed_programs if failed_programs is not None else "n/d",
         ),
-        "🏢 Aziende con scansione completa: {}/{} · con almeno una query riuscita: {}".format(
+        "🏢 Aziende con programmi: {} · scansione completa: {}/{} · almeno una query riuscita: {}".format(
+            scan.get("companies_with_programs", "n/d"),
             companies_complete if companies_complete is not None else "n/d",
-            result.get("companies", "n/d"),
+            scan.get("companies_with_programs", "n/d"),
             companies_with_success if companies_with_success is not None else "n/d",
         ),
         "🔬 Trial trovati: {} · rilevanti: {} · esclusi: {}".format(
