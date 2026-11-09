@@ -4106,5 +4106,31 @@
     "telegram_confirmed_at": "2026-11-09T21:37:21.132286+00:00",
     "telegram_message_id": 385,
     "ticker": "SRZN"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'pbyi|unknown|company_financial_results|2026-11-09')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-09",
+    "first_seen_at": "2026-11-09T21:56:24.543667+00:00",
+    "program": null,
+    "qualified_at": "2026-11-09T21:56:24.632570+00:00",
+    "telegram_attempted_at": "2026-11-09T21:56:24.632570+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "PBYI"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'pbyi|unknown|company_financial_results|2026-11-09')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-09",
+    "first_seen_at": "2026-11-09T21:56:24.543667+00:00",
+    "program": null,
+    "qualified_at": "2026-11-09T21:56:24.632570+00:00",
+    "telegram_attempted_at": "2026-11-09T21:56:24.632570+00:00",
+    "telegram_confirmed_at": "2026-11-09T21:56:26.292700+00:00",
+    "telegram_message_id": 387,
+    "ticker": "PBYI"
   }
 ]
