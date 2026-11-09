@@ -165,6 +165,19 @@ def test_source_health_warning_does_not_send_when_sources_are_healthy(monkeypatc
     result = {"alerts": [], "source_diagnostics": {"EMA": {"status": "OK", "count": 5}}}
     assert main.send_source_health_alert_if_needed(result, actionable_alerts=[]) is False
 
+def test_empty_feed_is_healthy_and_does_not_trigger_source_warning(monkeypatch):
+    monkeypatch.setattr(main, "load_sent_alerts", lambda: {})
+    monkeypatch.setattr(main, "send_telegram", lambda message: (_ for _ in ()).throw(AssertionError("unexpected Telegram send")))
+    result = {
+        "alerts": [],
+        "source_diagnostics": {
+            "EARLY_DISCOVERY": {"status": "EMPTY", "count": 0, "error_batches": 0},
+            "EMA": {"status": "EMPTY", "count": 0},
+            "FDA": {"status": "EMPTY", "count": 0},
+        },
+    }
+    assert main.send_source_health_alert_if_needed(result, actionable_alerts=[]) is False
+
 
 def test_daily_status_sends_once_after_0800_rome_when_no_alert_today(monkeypatch):
     from zoneinfo import ZoneInfo
@@ -194,6 +207,7 @@ def test_daily_status_sends_once_after_0800_rome_when_no_alert_today(monkeypatch
             "program_queries_total": 500,
             "program_queries_succeeded": 500,
             "program_queries_failed": 0,
+            "companies_with_programs": 320,
             "companies_with_success": 320,
             "companies_fully_scanned": 320,
         },
