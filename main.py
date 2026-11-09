@@ -322,6 +322,10 @@ def send_daily_status_if_needed(result, actionable_alerts=None, now=None):
         and all(str(item.get("status") or "").upper() in {"OK", "SUCCESS", "HEALTHY", "EMPTY"}
                 for item in diagnostics.values() if isinstance(item, dict))
         and len(diagnostics) >= 4
+        and (
+            not isinstance(diagnostics.get("SEC"), dict)
+            or float(diagnostics["SEC"].get("coverage_pct", 0)) >= 100.0
+        )
     )
     overall = "CONTROLLO COMPLETATO" if scan_complete else "CONTROLLO PARZIALE / DA VERIFICARE"
     lines = [
