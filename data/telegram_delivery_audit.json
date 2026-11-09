@@ -3690,5 +3690,57 @@
     "telegram_confirmed_at": "2026-11-09T12:47:04.284416+00:00",
     "telegram_message_id": 378,
     "ticker": "IBRX"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'dcth|unknown|company_financial_results|2026-11-09')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-09",
+    "first_seen_at": "2026-11-09T13:09:30.716667+00:00",
+    "program": null,
+    "qualified_at": "2026-11-09T13:09:30.817548+00:00",
+    "telegram_attempted_at": "2026-11-09T13:09:30.817548+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "DCTH"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'cmpx|unknown|company_financial_results|2026-11-09')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-09",
+    "first_seen_at": "2026-11-09T13:09:30.716667+00:00",
+    "program": null,
+    "qualified_at": "2026-11-09T13:09:30.817548+00:00",
+    "telegram_attempted_at": "2026-11-09T13:09:30.817548+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "CMPX"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'dcth|unknown|company_financial_results|2026-11-09')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-09",
+    "first_seen_at": "2026-11-09T13:09:30.716667+00:00",
+    "program": null,
+    "qualified_at": "2026-11-09T13:09:30.817548+00:00",
+    "telegram_attempted_at": "2026-11-09T13:09:30.817548+00:00",
+    "telegram_confirmed_at": "2026-11-09T13:09:31.702198+00:00",
+    "telegram_message_id": 379,
+    "ticker": "DCTH"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'cmpx|unknown|company_financial_results|2026-11-09')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-09",
+    "first_seen_at": "2026-11-09T13:09:30.716667+00:00",
+    "program": null,
+    "qualified_at": "2026-11-09T13:09:30.817548+00:00",
+    "telegram_attempted_at": "2026-11-09T13:09:30.817548+00:00",
+    "telegram_confirmed_at": "2026-11-09T13:09:31.702198+00:00",
+    "telegram_message_id": 379,
+    "ticker": "CMPX"
   }
 ]
