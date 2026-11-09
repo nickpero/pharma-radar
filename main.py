@@ -269,21 +269,87 @@ def send_daily_status_if_needed(result, actionable_alerts=None, now=None):
             continue
 
     diagnostics = result.get("source_diagnostics") or {}
-    source_line = " | ".join(
-        _source_health_label(name, detail)
-        for name, detail in diagnostics.items()
-    ) or "diagnostica fonti non disponibile"
+    scan = result.get("scan_diagnostics") or {}
+    source_labels = {
+        "FDA": "FDA news",
+        "EARLY_DISCOVERY": "Early discovery news",
+        "EMA": "EMA news",
+        "SEC": "SEC filings",
+    }
+    source_lines = []
+    source_event_counts = result.get("source_event_counts") or {}
+    for name in ("FDA", "EARLY_DISCOVERY", "EMA", "SEC"):
+        detail = diagnostics.get(name)
+        if not isinstance(detail, dict):
+            source_lines.append(f"• {source_labels[name]}: DIAGNOSTICA ASSENTE")
+            continue
+        status = str(detail.get("status") or "UNKNOWN").upper()
+        count = detail.get("count", 0)
+        matched = source_event_counts.get(name, 0)
+        path = detail.get("path")
+        suffix = f" · eventi associati: {matched}"
+        if name == "SEC" and detail.get("sec_enabled") is not None:
+            suffix += " · CIK {}/{} ({:.1f}%)".format(
+                detail.get("mapped_tickers", 0),
+                detail.get("sec_enabled", 0),
+                detail.get("coverage_pct", 0.0),
+            )
+        if name == "EARLY_DISCOVERY":
+            suffix += " · aziende interrogate: {}".format(detail.get("companies_queried", "n/d"))
+            suffix += " · batch falliti: {}/{}".format(
+                detail.get("error_batches", 0), detail.get("batches_attempted", 0)
+            )
+        if path:
+            suffix += f" · via {path}"
+        source_lines.append(f"• {source_labels[name]}: {status} · acquisiti: {count}{suffix}")
+    failed_programs = scan.get("program_queries_failed")
+    successful_programs = scan.get("program_queries_succeeded")
+    total_programs = scan.get("program_queries_total")
+    companies_with_success = scan.get("companies_with_success")
+    companies_complete = scan.get("companies_fully_scanned")
+    scan_complete = (
+        isinstance(failed_programs, int) and failed_programs == 0
+        and isinstance(total_programs, int) and isinstance(successful_programs, int)
+        and total_programs == successful_programs
+        and all(str(item.get("status") or "").upper() in {"OK", "SUCCESS", "HEALTHY", "EMPTY"}
+                for item in diagnostics.values() if isinstance(item, dict))
+        and len(diagnostics) >= 4
+    )
+    overall = "CONTROLLO COMPLETATO" if scan_complete else "CONTROLLO PARZIALE / DA VERIFICARE"
     lines = [
-        "🧬 PHARMA RADAR — STATO GIORNALIERO",
+        "🧬 PHARMA RADAR — REPORT OPERATIVO",
         "━━━━━━━━━━━━━━━━━━",
-        f"🕒 Controllo: {current.strftime('%d/%m/%Y %H:%M')} Europe/Rome",
-        f"🏢 Aziende configurate: {result.get('companies', 0)}",
-        f"🔬 Trial rilevanti: {result.get('relevant_trials', 0)}",
-        f"🛰 Fonti: {source_line}",
+        f"🕒 Ultimo controllo: {current.strftime('%d/%m/%Y %H:%M')} Europe/Rome",
+        f"📊 Esito: {overall}",
+        f"🏢 Aziende in watchlist: {result.get('companies', 'n/d')}",
+        "🔎 ClinicalTrials: query programma {}/{} riuscite · {} fallite".format(
+            successful_programs if successful_programs is not None else "n/d",
+            total_programs if total_programs is not None else "n/d",
+            failed_programs if failed_programs is not None else "n/d",
+        ),
+        "🏢 Aziende con scansione completa: {}/{} · con almeno una query riuscita: {}".format(
+            companies_complete if companies_complete is not None else "n/d",
+            result.get("companies", "n/d"),
+            companies_with_success if companies_with_success is not None else "n/d",
+        ),
+        "🔬 Trial trovati: {} · rilevanti: {} · esclusi: {}".format(
+            result.get("total_trials", "n/d"),
+            result.get("relevant_trials", "n/d"),
+            result.get("filtered_trials", "n/d"),
+        ),
+        "🧪 Variazioni trial: {} · eventi FDA: {} · eventi EMA/SEC: {}".format(
+            len(result.get("detected_changes", [])),
+            len(result.get("fda_events", [])),
+            len(result.get("regulatory_events", [])),
+        ),
+        "🛰 FONTI — documenti acquisiti e corrispondenze con aziende monitorate:",
+        *source_lines,
         "",
-        "ℹ️ Finora oggi nessun nuovo catalizzatore ha superato i filtri per un alert.",
-        "Questo è un controllo operativo, NON un catalizzatore né un segnale di trading.",
-        "Il Radar continua a monitorare le fonti: un evento reale qualificato genererà un alert separato.",
+        "🚨 Nuovi alert qualificati: 0",
+        "ℹ️ Nessun nuovo catalizzatore ha superato i filtri in questo controllo."
+        if scan_complete else
+        "⚠️ Nessun alert qualificato, ma la copertura non è completa: non interpretare lo zero come assenza certa di opportunità.",
+        "Questo report descrive l'esito del controllo, NON è un segnale di trading.",
         "━━━━━━━━━━━━━━━━━━",
     ]
     response = send_telegram("\n".join(lines))
