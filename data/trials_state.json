@@ -21388,6 +21388,50 @@
       "EXPAREL"
     ]
   },
+  "PCRX:PCRX-201:NCT06884865": {
+    "nct_id": "NCT06884865",
+    "title": "A Study to Assess Safety and Tolerability of PCRX-201 in Subjects With Painful Osteoarthritis of the Knee",
+    "official_title": "A Phase 2, Two-Part, Randomized, Double-Blind, Active-Controlled Study to Assess the Safety and Tolerability of Enekinragene Inzadenovec (PCRX-201) in Subjects With Painful Osteoarthritis of the Knee",
+    "status": "RECRUITING",
+    "last_update": "2026-08-25",
+    "last_update_submitted": "2026-08-21",
+    "start_date": "2025-02-26",
+    "primary_completion_date": "2026-11",
+    "completion_date": "2032-07",
+    "results_posted_date": null,
+    "has_results": false,
+    "primary_outcomes": [
+      {
+        "measure": "Incidence (number and percent) of treatment-emergent adverse events (TEAEs) for PCRX-201 Dose A and Dose B versus placebo from Week 1 through Week 52",
+        "description": null,
+        "time_frame": "Week 1 through Week 52."
+      },
+      {
+        "measure": "Incidence (number and percent) of adverse events of special interest (AESIs) for PCRX-201 Dose A and Dose B versus placebo from Week 1 through Week 52",
+        "description": null,
+        "time_frame": "Week 1 through Week 52."
+      },
+      {
+        "measure": "Incidence (number and percent) of serious adverse events (SAEs) for PCRX-201 Dose A and Dose B versus placebo from Week 1 through Week 52",
+        "description": null,
+        "time_frame": "Week 1 through Week 52."
+      }
+    ],
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 135,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Pacira Pharmaceuticals, Inc",
+    "conditions": [
+      "Osteoarthritis (OA) of the Knee"
+    ],
+    "interventions": [
+      "Enekinragene Inzadenovec (PCRX-201)",
+      "Placebo"
+    ]
+  },
   "BIAF:CyPath Lung:NCT03837600": {
     "nct_id": "NCT03837600",
     "title": "Sputum Labeling Utilizing Synthetic Meso-Tetra (4-Carboxyphenyl) Porphyrin (TCPP) for Detection of Lung Cancer",

@@ -76,9 +76,9 @@
       "first_seen_at": "2026-11-09T12:47:01.329864+00:00",
       "market": {
         "average_volume_20d": 2097215.0,
-        "estimated_average_dollar_volume_20d": 6039979.2,
+        "estimated_average_dollar_volume_20d": 6092409.57,
         "market_cap": null,
-        "price": 2.88,
+        "price": 2.905,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -504,7 +504,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-09T19:59:36.483395+00:00",
+  "generated_at": "2026-11-09T20:08:50.776185+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -1009,9 +1009,9 @@
       "first_seen_at": "2026-11-05T19:37:40.391956+00:00",
       "market": {
         "average_volume_20d": 573115.0,
-        "estimated_average_dollar_volume_20d": 385362.53,
+        "estimated_average_dollar_volume_20d": 392641.09,
         "market_cap": null,
-        "price": 0.6724,
+        "price": 0.6851,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1350,9 +1350,9 @@
       "first_seen_at": "2026-11-05T21:09:12.577022+00:00",
       "market": {
         "average_volume_20d": 1045245.0,
-        "estimated_average_dollar_volume_20d": 2103032.94,
+        "estimated_average_dollar_volume_20d": 2111394.9,
         "market_cap": null,
-        "price": 2.012,
+        "price": 2.02,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1381,9 +1381,9 @@
       "first_seen_at": "2026-11-05T12:17:50.470143+00:00",
       "market": {
         "average_volume_20d": 1212635.0,
-        "estimated_average_dollar_volume_20d": 13642143.75,
+        "estimated_average_dollar_volume_20d": 13720965.02,
         "market_cap": null,
-        "price": 11.25,
+        "price": 11.315,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1403,7 +1403,7 @@
       "status": "LATE",
       "ticker": "CLYM",
       "title": "SEC 10-Q — Climb Bio (CLYM) — Quarterly financial report",
-      "trading_intelligence_score": 57.1
+      "trading_intelligence_score": 57.2
     },
     {
       "catalyst_score": 55.0,
@@ -1412,9 +1412,9 @@
       "first_seen_at": "2026-11-05T21:18:24.837180+00:00",
       "market": {
         "average_volume_20d": 241465.0,
-        "estimated_average_dollar_volume_20d": 10146359.3,
+        "estimated_average_dollar_volume_20d": 10129456.75,
         "market_cap": null,
-        "price": 42.02,
+        "price": 41.95,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1505,9 +1505,9 @@
       "first_seen_at": "2026-11-05T21:18:24.837135+00:00",
       "market": {
         "average_volume_20d": 423795.0,
-        "estimated_average_dollar_volume_20d": 3610733.4,
+        "estimated_average_dollar_volume_20d": 3604376.48,
         "market_cap": null,
-        "price": 8.52,
+        "price": 8.505,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1536,9 +1536,9 @@
       "first_seen_at": "2026-11-05T21:18:24.836538+00:00",
       "market": {
         "average_volume_20d": 5877640.0,
-        "estimated_average_dollar_volume_20d": 51488126.4,
+        "estimated_average_dollar_volume_20d": 51546902.8,
         "market_cap": null,
-        "price": 8.76,
+        "price": 8.77,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1598,9 +1598,9 @@
       "first_seen_at": "2026-11-05T12:09:27.111429+00:00",
       "market": {
         "average_volume_20d": 379380.0,
-        "estimated_average_dollar_volume_20d": 25809221.4,
+        "estimated_average_dollar_volume_20d": 25721964.0,
         "market_cap": null,
-        "price": 68.03,
+        "price": 67.8,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1691,9 +1691,9 @@
       "first_seen_at": "2026-11-05T11:47:57.579109+00:00",
       "market": {
         "average_volume_20d": 1174060.0,
-        "estimated_average_dollar_volume_20d": 31312180.2,
+        "estimated_average_dollar_volume_20d": 31335661.4,
         "market_cap": null,
-        "price": 26.67,
+        "price": 26.69,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1722,9 +1722,9 @@
       "first_seen_at": "2026-11-05T13:09:49.293636+00:00",
       "market": {
         "average_volume_20d": 72040.0,
-        "estimated_average_dollar_volume_20d": 253580.8,
+        "estimated_average_dollar_volume_20d": 255021.6,
         "market_cap": null,
-        "price": 3.52,
+        "price": 3.54,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1784,9 +1784,9 @@
       "first_seen_at": "2026-11-05T21:28:51.176506+00:00",
       "market": {
         "average_volume_20d": 24805985.0,
-        "estimated_average_dollar_volume_20d": 37829127.12,
+        "estimated_average_dollar_volume_20d": 37605873.26,
         "market_cap": null,
-        "price": 1.525,
+        "price": 1.516,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1846,9 +1846,9 @@
       "first_seen_at": "2026-11-05T11:08:28.153846+00:00",
       "market": {
         "average_volume_20d": 1896225.0,
-        "estimated_average_dollar_volume_20d": 35326671.75,
+        "estimated_average_dollar_volume_20d": 34691436.38,
         "market_cap": null,
-        "price": 18.63,
+        "price": 18.295,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1868,7 +1868,7 @@
       "status": "LATE",
       "ticker": "ACAD",
       "title": "SEC 10-Q — ACADIA Pharmaceuticals (ACAD) — Quarterly financial report",
-      "trading_intelligence_score": 59.0
+      "trading_intelligence_score": 59.2
     },
     {
       "catalyst_score": 55.0,
@@ -1877,9 +1877,9 @@
       "first_seen_at": "2026-11-05T21:18:24.836961+00:00",
       "market": {
         "average_volume_20d": 2712515.0,
-        "estimated_average_dollar_volume_20d": 6604974.03,
+        "estimated_average_dollar_volume_20d": 6686349.47,
         "market_cap": null,
-        "price": 2.435,
+        "price": 2.465,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -2001,9 +2001,9 @@
       "first_seen_at": "2026-11-05T21:53:59.104399+00:00",
       "market": {
         "average_volume_20d": 1275655.0,
-        "estimated_average_dollar_volume_20d": 1919860.77,
+        "estimated_average_dollar_volume_20d": 2021913.18,
         "market_cap": null,
-        "price": 1.505,
+        "price": 1.585,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -2032,9 +2032,9 @@
       "first_seen_at": "2026-11-05T21:18:24.837283+00:00",
       "market": {
         "average_volume_20d": 9325845.0,
-        "estimated_average_dollar_volume_20d": 9792137.25,
+        "estimated_average_dollar_volume_20d": 9745508.02,
         "market_cap": null,
-        "price": 1.05,
+        "price": 1.045,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4214,9 +4214,9 @@
       "first_seen_at": "2026-11-09T18:48:20.079328+00:00",
       "market": {
         "average_volume_20d": 573115.0,
-        "estimated_average_dollar_volume_20d": 385362.53,
+        "estimated_average_dollar_volume_20d": 392641.09,
         "market_cap": null,
-        "price": 0.6724,
+        "price": 0.6851,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4298,7 +4298,7 @@
       "status": "WATCH",
       "ticker": "FHTX",
       "title": "SEC 10-Q — Foghorn Therapeutics (FHTX) — Quarterly financial report",
-      "trading_intelligence_score": 57.7
+      "trading_intelligence_score": 57.8
     },
     {
       "catalyst_score": 55.0,
@@ -4338,9 +4338,9 @@
       "first_seen_at": "2026-11-09T13:09:30.571135+00:00",
       "market": {
         "average_volume_20d": 2531805.0,
-        "estimated_average_dollar_volume_20d": 2120133.51,
+        "estimated_average_dollar_volume_20d": 2112791.27,
         "market_cap": null,
-        "price": 0.8374,
+        "price": 0.8345,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4462,9 +4462,9 @@
       "first_seen_at": "2026-11-09T13:19:46.073844+00:00",
       "market": {
         "average_volume_20d": 1369005.0,
-        "estimated_average_dollar_volume_20d": 2128802.77,
+        "estimated_average_dollar_volume_20d": 2101422.67,
         "market_cap": null,
-        "price": 1.555,
+        "price": 1.535,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4493,9 +4493,9 @@
       "first_seen_at": "2026-11-09T12:09:52.355589+00:00",
       "market": {
         "average_volume_20d": 475740.0,
-        "estimated_average_dollar_volume_20d": 153547463.7,
+        "estimated_average_dollar_volume_20d": 154853370.0,
         "market_cap": null,
-        "price": 322.755,
+        "price": 325.5,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4515,7 +4515,7 @@
       "status": "WATCH",
       "ticker": "PRAX",
       "title": "SEC 8-K — Praxis Precision Medicines (PRAX)",
-      "trading_intelligence_score": 58.0
+      "trading_intelligence_score": 58.1
     },
     {
       "catalyst_score": 55.0,
@@ -4648,9 +4648,9 @@
       "first_seen_at": "2026-11-09T12:18:11.933212+00:00",
       "market": {
         "average_volume_20d": 1654915.0,
-        "estimated_average_dollar_volume_20d": 103001909.6,
+        "estimated_average_dollar_volume_20d": 103217048.55,
         "market_cap": null,
-        "price": 62.24,
+        "price": 62.37,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4670,7 +4670,7 @@
       "status": "WATCH",
       "ticker": "TGTX",
       "title": "SEC 8-K — TG Therapeutics (TGTX)",
-      "trading_intelligence_score": 58.3
+      "trading_intelligence_score": 58.5
     },
     {
       "catalyst_score": 55.0,
@@ -4679,9 +4679,9 @@
       "first_seen_at": "2026-11-09T12:18:11.933143+00:00",
       "market": {
         "average_volume_20d": 2097215.0,
-        "estimated_average_dollar_volume_20d": 6039979.2,
+        "estimated_average_dollar_volume_20d": 6092409.57,
         "market_cap": null,
-        "price": 2.88,
+        "price": 2.905,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
