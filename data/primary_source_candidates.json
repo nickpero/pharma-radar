@@ -1321,5 +1321,26 @@
     "source_url": "https://www.capricor.com/investors/news-events/press-releases/detail/358/capricors-hope-3-phase-3-cardiac-results-for-deramiocel",
     "ticker": "CAPR",
     "title": "Capricor’s HOPE-3 Phase 3 Cardiac Results for Deramiocel Win American Heart Association Outstanding Research Award in Pediatric Cardiology"
+  },
+  {
+    "company": "Alnylam Pharmaceuticals",
+    "discovered_at": "2026-11-09T15:50:34.729192+00:00",
+    "event_date": null,
+    "event_type": null,
+    "event_window": null,
+    "listing_context": "Alnylam Announces Five-Year HELIOS-B Data Demonstrating Sustained Benefit of AMVUTTRA® (vutrisiran) in ATTR-CM",
+    "listing_url": "https://investors.alnylam.com/press-releases",
+    "notes": "Candidate discovered from an official company page; verify the release and any future event date before alerting.",
+    "publication_date_candidate": null,
+    "publication_time_precision": "UNKNOWN",
+    "publication_timestamp_source": null,
+    "publication_timezone_known": false,
+    "published_at": null,
+    "published_at_raw": null,
+    "review_status": "PENDING_REVIEW",
+    "source_host": "investors.alnylam.com",
+    "source_url": "https://investors.alnylam.com/press-release?id=65c2d0ab-27cd-42a0-a174-728416129efe",
+    "ticker": "ALNY",
+    "title": "Alnylam Announces Five-Year HELIOS-B Data Demonstrating Sustained Benefit of AMVUTTRA® (vutrisiran) in ATTR-CM"
   }
 ]
