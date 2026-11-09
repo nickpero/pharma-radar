@@ -200,7 +200,7 @@ def test_daily_status_sends_once_after_0800_rome_when_no_alert_today(monkeypatch
             "FDA": {"status": "OK", "count": 50},
             "EARLY_DISCOVERY": {"status": "OK", "count": 10, "companies_queried": 320, "error_batches": 0, "batches_attempted": 32},
             "EMA": {"status": "OK", "count": 6},
-            "SEC": {"status": "OK", "count": 841, "sec_enabled": 318, "mapped_tickers": 310, "coverage_pct": 100.0},
+            "SEC": {"status": "OK", "count": 841, "sec_enabled": 318, "mapped_tickers": 318, "coverage_pct": 100.0},
         },
         "source_event_counts": {"FDA": 0, "EARLY_DISCOVERY": 0, "EMA": 0, "SEC": 0},
         "scan_diagnostics": {
@@ -265,7 +265,7 @@ def test_daily_status_marks_sec_cik_gaps_as_partial_coverage(monkeypatch):
         "FDA": {"status": "OK", "count": 5},
         "EARLY_DISCOVERY": {"status": "EMPTY", "count": 0},
         "EMA": {"status": "OK", "count": 5},
-        "SEC": {"status": "OK", "count": 12, "sec_enabled": 318, "mapped_tickers": 310, "coverage_pct": 97.5},
+        "SEC": {"status": "OK", "count": 12, "sec_enabled": 318, "mapped_tickers": 310, "coverage_pct": 97.5, "unmapped_tickers": ["AFMD", "ALPN", "BDSI"]},
     }
     result = {
         "companies": 320,
