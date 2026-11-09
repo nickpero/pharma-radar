@@ -130363,6 +130363,155 @@
       "Placebo"
     ]
   },
+  "CNSP:Berubicin:NCT04762069": {
+    "nct_id": "NCT04762069",
+    "title": "A Study of Berubicin in Adult Subjects With Recurrent Glioblastoma Multiforme",
+    "official_title": "A Multicenter, Open-Label Study With a Randomized Control Arm of the Efficacy, Safety, and Pharmacokinetics of Intravenously Infused Berubicin in Adult Patients With Recurrent Glioblastoma Multiforme After Failure of Standard First Line Therapy",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-04-15",
+    "last_update_submitted": "2026-04-13",
+    "start_date": "2021-05-18",
+    "primary_completion_date": "2026-04-27",
+    "completion_date": "2026-07-15",
+    "results_posted_date": null,
+    "has_results": false,
+    "primary_outcomes": [
+      {
+        "measure": "Overall Survival",
+        "description": "To assess the effect of berubicin compared with lomustine on overall survival (OS) in adult patients with GBM that has recurred or progressed after standard initial therapy",
+        "time_frame": "Through study completion an average of 4 years."
+      }
+    ],
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 252,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "CNS Pharmaceuticals, Inc.",
+    "conditions": [
+      "Glioblastoma Multiforme, Adult"
+    ],
+    "interventions": [
+      "Berubicin",
+      "Lomustine"
+    ]
+  },
+  "CNSP:Berubicin:NCT04915404": {
+    "nct_id": "NCT04915404",
+    "title": "Berubicin in Adult Patients With Recurrent Glioblastoma Multiforme (WHO Grade IV)",
+    "official_title": "A Multicenter, Open-Label Study of the Efficacy, Safety, and Pharmacokinetics of Intravenously Infused Berubicin in Adult Patients With Recurrent Glioblastoma Multiforme (WHO Grade IV) After Failure of Standard First Line Therapy",
+    "status": "TERMINATED",
+    "last_update": "2024-06-06",
+    "last_update_submitted": "2024-06-03",
+    "start_date": "2022-12-07",
+    "primary_completion_date": "2023-12-30",
+    "completion_date": "2023-12-30",
+    "results_posted_date": null,
+    "has_results": false,
+    "primary_outcomes": [
+      {
+        "measure": "objective response rate (ORR)",
+        "description": "To confirm the efficacy (or futility) of Berubicin treatment on objective response rate (ORR) defined as CR or PR per modified Response Assessment in Neuro-Oncology (m RANO) criteria in patients with GBM (World Health Organization \\[WHO\\] Grade IV) that has recurred after standard initial therapy, based on Simon's 2-stage design",
+        "time_frame": "6 months"
+      }
+    ],
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 5,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "WPD Pharmaceuticals Sp. z o.o.",
+    "conditions": [
+      "Recurrent Glioblastoma Multiforme"
+    ],
+    "interventions": [
+      "Berubicin Hydrochloride"
+    ]
+  },
+  "CNSP:Berubicin:NCT00538343": {
+    "nct_id": "NCT00538343",
+    "title": "RTA 744 in Breast Cancer Patients With Progression of Previously Irradiated Brain Metastases",
+    "official_title": "A Phase II Efficacy and Tolerability Study of RTA 744 in Breast Cancer Patients With Progression of Previously Irradiated Brain Metastases",
+    "status": "TERMINATED",
+    "last_update": "2025-05-29",
+    "last_update_submitted": "2025-05-26",
+    "start_date": "2007-10-31",
+    "primary_completion_date": "2008-12-01",
+    "completion_date": "2009-01-01",
+    "results_posted_date": null,
+    "has_results": false,
+    "primary_outcomes": [
+      {
+        "measure": "To evaluate the efficacy of RTA 744 in reducing intracranial tumor on contrast-enhanced MRI of breast cancer patients with progression of brain metastases following whole brain radiotherapy (WBRT).",
+        "description": null,
+        "time_frame": "21 Days"
+      }
+    ],
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 14,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Biogen",
+    "conditions": [
+      "Brain Metastases"
+    ],
+    "interventions": [
+      "berubicin hydrochloride (RTA 744)"
+    ]
+  },
+  "CNSP:Berubicin:NCT05082493": {
+    "nct_id": "NCT05082493",
+    "title": "A Multicenter, Study of the Safety and Pharmacokinetics of Intravenously Infused Berubicin in Pediatric Patients With Progressive, Refractory, or Recurrent High Grade Gliomas",
+    "official_title": "A Phase 1, Multicenter, Open-label, Dose Escalation Study of the Safety and Pharmacokinetics of Intravenously Infused Berubicin in Pediatric Patients With Progressive, Refractory, or Recurrent High Grade Gliomas",
+    "status": "WITHDRAWN",
+    "last_update": "2024-06-06",
+    "last_update_submitted": "2024-06-03",
+    "start_date": "2023-12",
+    "primary_completion_date": "2023-12-30",
+    "completion_date": "2023-12-30",
+    "results_posted_date": null,
+    "has_results": false,
+    "primary_outcomes": [
+      {
+        "measure": "• Dose Escalation Cohorts first outcome",
+        "description": "To estimate the maximum tolerated dose (MTD) and/or the recommended Phase 2 dose (RP2D) of single-agent Berubicin administered after at least 1 prior line of therapy in pediatric patients with progressive, refractory, or recurrent HGG.\n\nTo completely document the assessment of response, the measurements of the longest tumor dimension, and its perpendicular, of all target lesions should be recorded for the baseline and all subsequent follow-up exams. Changes in nontarget lesions and newly occurring lesions should also be described. The same method of assessment and the same technique should be used at baseline and during follow-up.",
+        "time_frame": "6 months"
+      },
+      {
+        "measure": "• Dose Escalation Cohorts second outcome",
+        "description": "To estimate the maximum tolerated dose (MTD) and/or the recommended Phase 2 dose (RP2D) of single-agent Berubicin administered after at least 1 prior line of therapy in pediatric patients with progressive, refractory, or recurrent HGG.\n\nTumor response criteria are determined by changes in size using the longest tumor dimension and its perpendicular. If multiple measurable lesions are present, a minimum of the 2 largest lesions should be measured; a maximum of 5 should be selected as target lesions. Target lesions should be selected on the basis of size and suitability for accurate repeated measurements. All other lesions will be followed as nontarget lesions. Only solid components of cystic/necrotic tumors should be measured.",
+        "time_frame": "6 months"
+      },
+      {
+        "measure": "• Expansion Cohort first outcome",
+        "description": "To evaluate the safety of Berubicin administered at the MTD or RP2D to pediatric patients with progressive, refractory, or recurrent HGG who have completed at least 1 prior line of therapy The MTD is empirically defined as the highest dose level at which 6 patients have been treated with at most 1 patient experiencing a DLT and the next higher dose level has been determined to be not tolerated (≥2 out of 6 patients experience a DLT). The MTD estimation will be limited to evaluable patients and toxicity assessments from the first cycle of Berubicin treatment (21 days).",
+        "time_frame": "6 months"
+      },
+      {
+        "measure": "• Expansion Cohort second outcome",
+        "description": "To evaluate the safety of Berubicin administered at the MTD or RP2D to pediatric patients with progressive, refractory, or recurrent HGG who have completed at least 1 prior line of therapy The RP2D is a multifactorial endpoint that considers toxicity as well as additional determinants (eg, efficacy, pharmacodynamics) to define the optimal Phase 2 dose on the basis of available clinical safety and efficacy data. It is usually a dose in which there is ≤20% dose-limiting toxicity; however, it can be further defined by exploration of doses that maximize efficacy in the presence of minimal safety concerns.",
+        "time_frame": "6 months"
+      }
+    ],
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 0,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "WPD Pharmaceuticals Sp. z o.o.",
+    "conditions": [
+      "High Grade Glioma"
+    ],
+    "interventions": [
+      "Berubicin Hydrochloride"
+    ]
+  },
   "CYAD:CYAD-211:NCT04613557": {
     "nct_id": "NCT04613557",
     "title": "Safety, Activity and Cell Kinetics of CYAD-211 in Patients With Relapsed or Refractory Multiple Myeloma",
