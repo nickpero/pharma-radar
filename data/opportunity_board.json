@@ -504,7 +504,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-10T17:18:53.086164+00:00",
+  "generated_at": "2026-11-10T17:29:39.071152+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -1319,9 +1319,9 @@
       "first_seen_at": "2026-11-06T21:28:04.957823+00:00",
       "market": {
         "average_volume_20d": 481635.0,
-        "estimated_average_dollar_volume_20d": 1534007.48,
+        "estimated_average_dollar_volume_20d": 1541232.0,
         "market_cap": null,
-        "price": 3.185,
+        "price": 3.2,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1381,9 +1381,9 @@
       "first_seen_at": "2026-11-06T22:28:11.353044+00:00",
       "market": {
         "average_volume_20d": 901365.0,
-        "estimated_average_dollar_volume_20d": 1162760.85,
+        "estimated_average_dollar_volume_20d": 1171774.5,
         "market_cap": null,
-        "price": 1.29,
+        "price": 1.3,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1412,9 +1412,9 @@
       "first_seen_at": "2026-11-06T14:07:34.417887+00:00",
       "market": {
         "average_volume_20d": 572215.0,
-        "estimated_average_dollar_volume_20d": 18299435.7,
+        "estimated_average_dollar_volume_20d": 18339490.75,
         "market_cap": null,
-        "price": 31.98,
+        "price": 32.05,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1505,9 +1505,9 @@
       "first_seen_at": "2026-11-06T22:36:00.310682+00:00",
       "market": {
         "average_volume_20d": 147210.0,
-        "estimated_average_dollar_volume_20d": 354776.1,
+        "estimated_average_dollar_volume_20d": 356984.25,
         "market_cap": null,
-        "price": 2.41,
+        "price": 2.425,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1536,9 +1536,9 @@
       "first_seen_at": "2026-11-06T21:28:04.956188+00:00",
       "market": {
         "average_volume_20d": 321950.0,
-        "estimated_average_dollar_volume_20d": 428193.5,
+        "estimated_average_dollar_volume_20d": 418535.0,
         "market_cap": null,
-        "price": 1.33,
+        "price": 1.3,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1753,9 +1753,9 @@
       "first_seen_at": "2026-11-05T21:09:12.577022+00:00",
       "market": {
         "average_volume_20d": 1087415.0,
-        "estimated_average_dollar_volume_20d": 1957347.0,
+        "estimated_average_dollar_volume_20d": 2006280.68,
         "market_cap": null,
-        "price": 1.8,
+        "price": 1.845,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1784,9 +1784,9 @@
       "first_seen_at": "2026-11-05T12:17:50.470143+00:00",
       "market": {
         "average_volume_20d": 1256250.0,
-        "estimated_average_dollar_volume_20d": 14754656.25,
+        "estimated_average_dollar_volume_20d": 14767218.75,
         "market_cap": null,
-        "price": 11.745,
+        "price": 11.755,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1815,9 +1815,9 @@
       "first_seen_at": "2026-11-05T21:18:24.837180+00:00",
       "market": {
         "average_volume_20d": 248850.0,
-        "estimated_average_dollar_volume_20d": 10739121.75,
+        "estimated_average_dollar_volume_20d": 10712245.95,
         "market_cap": null,
-        "price": 43.155,
+        "price": 43.047,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1908,9 +1908,9 @@
       "first_seen_at": "2026-11-05T21:18:24.837135+00:00",
       "market": {
         "average_volume_20d": 447085.0,
-        "estimated_average_dollar_volume_20d": 3648213.6,
+        "estimated_average_dollar_volume_20d": 3654472.79,
         "market_cap": null,
-        "price": 8.16,
+        "price": 8.174,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1939,9 +1939,9 @@
       "first_seen_at": "2026-11-05T21:18:24.836538+00:00",
       "market": {
         "average_volume_20d": 5836330.0,
-        "estimated_average_dollar_volume_20d": 49958984.8,
+        "estimated_average_dollar_volume_20d": 49871439.85,
         "market_cap": null,
-        "price": 8.56,
+        "price": 8.545,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -2001,9 +2001,9 @@
       "first_seen_at": "2026-11-05T12:09:27.111429+00:00",
       "market": {
         "average_volume_20d": 387650.0,
-        "estimated_average_dollar_volume_20d": 26747850.0,
+        "estimated_average_dollar_volume_20d": 26724591.0,
         "market_cap": null,
-        "price": 69.0,
+        "price": 68.94,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -2023,7 +2023,7 @@
       "status": "LATE",
       "ticker": "ANIP",
       "title": "SEC 10-Q — ANI Pharmaceuticals (ANIP) — Quarterly financial report",
-      "trading_intelligence_score": 58.7
+      "trading_intelligence_score": 58.8
     },
     {
       "catalyst_score": 55.0,
@@ -4265,9 +4265,9 @@
       "first_seen_at": "2026-11-10T12:25:41.710946+00:00",
       "market": {
         "average_volume_20d": 1184470.0,
-        "estimated_average_dollar_volume_20d": 7556918.6,
+        "estimated_average_dollar_volume_20d": 7568763.3,
         "market_cap": null,
-        "price": 6.38,
+        "price": 6.39,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4296,9 +4296,9 @@
       "first_seen_at": "2026-11-10T12:25:41.709889+00:00",
       "market": {
         "average_volume_20d": 819250.0,
-        "estimated_average_dollar_volume_20d": 9339450.0,
+        "estimated_average_dollar_volume_20d": 9290295.0,
         "market_cap": null,
-        "price": 11.4,
+        "price": 11.34,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4358,9 +4358,9 @@
       "first_seen_at": "2026-11-10T11:40:03.848363+00:00",
       "market": {
         "average_volume_20d": 881215.0,
-        "estimated_average_dollar_volume_20d": 1480441.2,
+        "estimated_average_dollar_volume_20d": 1484847.28,
         "market_cap": null,
-        "price": 1.68,
+        "price": 1.685,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4389,9 +4389,9 @@
       "first_seen_at": "2026-11-10T12:43:58.315950+00:00",
       "market": {
         "average_volume_20d": 2491630.0,
-        "estimated_average_dollar_volume_20d": 9605233.65,
+        "estimated_average_dollar_volume_20d": 9630149.95,
         "market_cap": null,
-        "price": 3.855,
+        "price": 3.865,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4451,9 +4451,9 @@
       "first_seen_at": "2026-11-10T12:25:41.710626+00:00",
       "market": {
         "average_volume_20d": 1447660.0,
-        "estimated_average_dollar_volume_20d": 10538964.8,
+        "estimated_average_dollar_volume_20d": 10567918.0,
         "market_cap": null,
-        "price": 7.28,
+        "price": 7.3,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4482,9 +4482,9 @@
       "first_seen_at": "2026-11-10T12:25:41.710931+00:00",
       "market": {
         "average_volume_20d": 5509270.0,
-        "estimated_average_dollar_volume_20d": 3101719.01,
+        "estimated_average_dollar_volume_20d": 3103922.72,
         "market_cap": null,
-        "price": 0.563,
+        "price": 0.5634,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4504,7 +4504,7 @@
       "status": "WATCH",
       "ticker": "HUMA",
       "title": "SEC 8-K — Humacyte (HUMA)",
-      "trading_intelligence_score": 58.8
+      "trading_intelligence_score": 58.9
     }
   ]
 }
