@@ -456,7 +456,7 @@ def test_routine_sec_financial_filings_are_batched_into_one_compact_digest():
 
     message = format_catalyst_alerts(alerts)
 
-    assert message.count("RIEPILOGO SEC") == 1
+    assert message.count("PHARMA RADAR — SEC") == 1
     assert "3 depositi finanziari ordinari" in message
     for ticker, form in (("CAPR", "8-K"), ("KURA", "10-Q"), ("PRME", "10-Q")):
         assert message.count(ticker) == 1
@@ -485,7 +485,41 @@ def test_non_financial_catalyst_keeps_its_individual_alert_format():
 
     message = format_catalyst_alerts([financial, catalyst])
 
-    assert "RIEPILOGO SEC" in message
+    assert "PHARMA RADAR — SEC" in message
     assert "CATALIZZATORE IMPORTANTE" in message
     assert "IONS" in message
     assert "CAPR" in message
+
+
+def test_informational_watch_alerts_are_batched_but_immediate_alerts_stay_individual():
+    watch = [
+        {
+            "ticker": ticker,
+            "subtype": subtype,
+            "telegram_action": "WATCH",
+            "title": title,
+            "url": f"https://example.com/{ticker.lower()}",
+        }
+        for ticker, subtype, title in (
+            ("CAPR", "COMPANY_FINANCIAL_RESULTS", "Quarterly results"),
+            ("KURA", "COMPANY_FINANCIAL_RESULTS", "Quarterly results"),
+            ("IONS", "TRIAL_COMPLETED", "Study completion update"),
+        )
+    ]
+    urgent = _alert("ZYME", 100, 90, "CRITICAL")
+    urgent.update({
+        "subtype": "FDA_APPROVAL",
+        "telegram_action": "IMMEDIATE",
+        "title": "FDA approval",
+        "source": "FDA",
+        "url": "https://www.fda.gov/example",
+    })
+
+    message = format_catalyst_alerts(watch + [urgent])
+
+    assert message.count("PHARMA RADAR — SEC") == 1
+    assert "2 depositi finanziari" in message
+    assert "AGGIORNAMENTI INFORMATIVI" in message
+    assert "1 elementi da monitorare" in message
+    assert message.count("ZYME") == 1
+    assert "IONS" in message
