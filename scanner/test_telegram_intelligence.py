@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from unittest.mock import patch
 from scanner.telegram_intelligence import alert_action, select_intelligent_alerts
-from scanner.telegram import format_catalyst_alert
+from scanner.telegram import format_catalyst_alert, format_catalyst_alerts
 
 
 def _alert(ticker, priority, setup, tier, strength="UNKNOWN", interpretation="UNKNOWN"):
@@ -440,3 +440,52 @@ def test_registry_results_posted_is_watch_only_when_fresh_and_primary():
         "event": {"type": "RESULTS_AVAILABILITY", "subtype": "RESULTS_POSTED", "score": 34, "label": "LOW"},
     })
     assert alert_action(alert) == "WATCH"
+
+
+def test_routine_sec_financial_filings_are_batched_into_one_compact_digest():
+    alerts = []
+    for ticker, form in (("CAPR", "8-K"), ("KURA", "10-Q"), ("PRME", "10-Q")):
+        alerts.append({
+            "ticker": ticker,
+            "subtype": "COMPANY_FINANCIAL_RESULTS",
+            "telegram_action": "WATCH",
+            "form": form,
+            "source": "SEC",
+            "url": f"https://www.sec.gov/{ticker.lower()}/{form.lower()}",
+        })
+
+    message = format_catalyst_alerts(alerts)
+
+    assert message.count("RIEPILOGO SEC") == 1
+    assert "3 depositi finanziari ordinari" in message
+    for ticker, form in (("CAPR", "8-K"), ("KURA", "10-Q"), ("PRME", "10-Q")):
+        assert message.count(ticker) == 1
+        assert form in message
+    assert "Traduzione non disponibile" not in message
+    assert "Rilevata:" not in message
+    assert "non è un ordine automatico" not in message
+
+
+def test_non_financial_catalyst_keeps_its_individual_alert_format():
+    financial = {
+        "ticker": "CAPR",
+        "subtype": "COMPANY_FINANCIAL_RESULTS",
+        "telegram_action": "WATCH",
+        "form": "10-Q",
+        "url": "https://www.sec.gov/capr/10q",
+    }
+    catalyst = _alert("IONS", 100, 56, "CRITICAL")
+    catalyst.update({
+        "subtype": "FDA_APPROVAL",
+        "telegram_action": "IMMEDIATE",
+        "title": "FDA approves a new treatment",
+        "source": "FDA",
+        "url": "https://www.fda.gov/example",
+    })
+
+    message = format_catalyst_alerts([financial, catalyst])
+
+    assert "RIEPILOGO SEC" in message
+    assert "CATALIZZATORE IMPORTANTE" in message
+    assert "IONS" in message
+    assert "CAPR" in message
