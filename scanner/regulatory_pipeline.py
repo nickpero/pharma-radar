@@ -104,6 +104,7 @@ def _process_item(item, watchlist):
         "early_discovery": bool(item.get("early_discovery")),
         "provider": item.get("provider"),
         "source_reliability": item.get("source_reliability"),
+        "financial_analysis": item.get("financial_analysis"),
     })
     event = enrich_clinical_impact(event)
     scored = score_fda_event(event)
