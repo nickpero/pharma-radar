@@ -504,7 +504,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-10T00:09:32.857616+00:00",
+  "generated_at": "2026-11-10T02:49:35.294087+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -1628,8 +1628,8 @@
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-11-06T11:07:09.072135+00:00",
       "market": {
-        "average_volume_20d": 9325845.0,
-        "estimated_average_dollar_volume_20d": 9885395.7,
+        "average_volume_20d": 9329485.0,
+        "estimated_average_dollar_volume_20d": 9889254.1,
         "market_cap": null,
         "price": 1.06,
         "price_change_pct": null,
