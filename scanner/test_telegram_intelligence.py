@@ -196,6 +196,28 @@ def test_company_financial_results_are_informational_watch_only():
     assert selected[0]["telegram_action"] == "WATCH"
 
 
+def test_sec_financial_distress_escalates_to_immediate():
+    alert = _alert("REGN", 20, 20, "LOW")
+    alert.update({
+        "subtype": "COMPANY_FINANCIAL_RESULTS",
+        "source": "SEC",
+        "published_at": datetime.now(timezone.utc).isoformat(),
+        "financial_analysis": {"status": "ANALYZED", "alert_level": "CRITICAL", "signals": [{"code": "GOING_CONCERN"}]},
+    })
+    assert alert_action(alert) == "IMMEDIATE"
+
+
+def test_sec_guidance_withdrawal_escalates_to_fast():
+    alert = _alert("REGN", 20, 20, "LOW")
+    alert.update({
+        "subtype": "COMPANY_FINANCIAL_RESULTS",
+        "source": "SEC",
+        "published_at": datetime.now(timezone.utc).isoformat(),
+        "financial_analysis": {"status": "ANALYZED", "alert_level": "HIGH", "signals": [{"code": "GUIDANCE_WITHDRAWN"}]},
+    })
+    assert alert_action(alert) == "FAST"
+
+
 def test_company_financial_results_from_secondary_source_are_silent():
     alert = _alert("REGN", 100, 90, "CRITICAL")
     alert.update({
