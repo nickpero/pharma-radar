@@ -381,5 +381,59 @@ def send_catalyst_alerts(alerts):
     return [send_catalyst_alert(alert) for alert in alerts]
 
 
+def _alert_subtype(alert):
+    event = alert.get("event") if isinstance(alert.get("event"), dict) else {}
+    return str(alert.get("subtype") or event.get("subtype") or "").upper()
+
+
+def _alert_form(alert):
+    event = alert.get("event") if isinstance(alert.get("event"), dict) else {}
+    form = _clean_text(alert.get("form") or event.get("form"), 20).upper()
+    if form:
+        return form
+    title = _clean_text(alert.get("title") or event.get("title"), 220)
+    import re
+    match = re.search(r"\\b(10-Q|10-K|8-K|6-K)\\b", title, flags=re.I)
+    return match.group(1).upper() if match else "SEC"
+
+
+def format_catalyst_alerts(alerts):
+    """Build one concise scan message, batching routine SEC financial filings."""
+    routine_financial = [
+        item for item in (alerts or [])
+        if _alert_subtype(item) == "COMPANY_FINANCIAL_RESULTS"
+        and str(item.get("telegram_action", "WATCH")).upper() == "WATCH"
+    ]
+    other_alerts = [
+        item for item in (alerts or [])
+        if item not in routine_financial
+    ]
+    sections = []
+
+    if routine_financial:
+        rows = []
+        for item in sorted(routine_financial, key=lambda value: str(value.get("ticker") or "")):
+            event = item.get("event") if isinstance(item.get("event"), dict) else {}
+            ticker = _clean_text(item.get("ticker") or event.get("ticker") or "N/D", 20).upper()
+            form = _alert_form(item)
+            url = _clean_text(item.get("url") or event.get("url"), 500)
+            rows.append(f"• {ticker} · {form}" + (f" — {url}" if url else ""))
+
+        sections.append("\\n".join([
+            "📊 PHARMA RADAR — RIEPILOGO SEC",
+            f"📄 {len(routine_financial)} depositi finanziari ordinari",
+            *rows,
+            "",
+            "ℹ️ Da monitorare; nessun segnale operativo dedotto dal solo deposito.",
+        ]))
+
+    if other_alerts:
+        sections.append("\\n\\n──────────────\\n\\n".join(
+            format_catalyst_alert(alert) for alert in other_alerts
+        ))
+
+    return "\\n\\n━━━━━━━━━━━━━━━━━━\\n\\n".join(sections)
+
+
 def send_divergence_alerts(divergences):
     return [send_telegram(format_divergence_alert(item)) for item in divergences]
