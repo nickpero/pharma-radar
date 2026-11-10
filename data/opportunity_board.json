@@ -4,7 +4,7 @@
     "late": 435,
     "live": 0,
     "upcoming": 251,
-    "watch": 8
+    "watch": 9
   },
   "excluded": [
     {
@@ -504,7 +504,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-10T12:43:58.541091+00:00",
+  "generated_at": "2026-11-10T13:10:17.659989+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -4207,6 +4207,37 @@
     }
   ],
   "watch": [
+    {
+      "catalyst_score": 55.0,
+      "company": "Atossa Therapeutics",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-10T13:10:17.444039+00:00",
+      "market": {
+        "average_volume_20d": 82575.0,
+        "estimated_average_dollar_volume_20d": 175884.75,
+        "market_cap": null,
+        "price": 2.13,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-10",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1488039/000119312526454468/atos-20260930.htm",
+      "status": "WATCH",
+      "ticker": "ATOS",
+      "title": "SEC 10-Q — Atossa Therapeutics (ATOS) — Quarterly financial report",
+      "trading_intelligence_score": 57.1
+    },
     {
       "catalyst_score": 55.0,
       "company": "Immatics",
