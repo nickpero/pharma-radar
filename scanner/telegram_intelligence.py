@@ -130,7 +130,15 @@ def alert_action(alert):
     # SEC 8-K Item 2.02 is a primary issuer earnings/results disclosure.
     # Deliver it as informational WATCH, never as a directional trading signal.
     if subtype == "COMPANY_FINANCIAL_RESULTS":
-        return "WATCH" if primary and freshness == "NEW_0_24H" else "SILENT"
+        if not primary or freshness != "NEW_0_24H":
+            return "SILENT"
+        financial = alert.get("financial_analysis") if isinstance(alert.get("financial_analysis"), dict) else {}
+        financial_level = str(financial.get("alert_level") or "NONE").upper()
+        if financial.get("status") == "ANALYZED" and financial_level == "CRITICAL":
+            return "IMMEDIATE"
+        if financial.get("status") == "ANALYZED" and financial_level == "HIGH":
+            return "FAST"
+        return "WATCH"
 
     # Trial completion and registry timeline revisions are informational.
     # A fresh primary-source update may be sent as WATCH, never as a signal.
