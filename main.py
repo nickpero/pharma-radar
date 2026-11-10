@@ -9,7 +9,7 @@ from scanner.trading_intelligence_score import enrich_trading_intelligence_score
 from scanner.trading_intelligence_rule import enrich_trading_intelligence_rules
 from scanner.catalyst_memory import record_events
 from scanner.opportunity_board import build_opportunity_board, save_opportunity_board, format_board_summary
-from scanner.telegram import send_telegram, send_catalyst_alerts, format_catalyst_alert, send_divergence_alerts
+from scanner.telegram import send_telegram, send_catalyst_alerts, format_catalyst_alert, format_catalyst_alerts, send_divergence_alerts
 from scanner.telegram_intelligence import select_intelligent_alerts, _dedup_key, alert_quality_gate, alert_action
 from scanner.alert_state import load_sent_alerts, save_sent_alerts, filter_unsent, mark_sent
 from scanner.telegram_delivery_audit import append_delivery_audit
@@ -197,7 +197,7 @@ def send_alerts(result, alerts=None):
 
     # One Telegram delivery per scan, containing all new catalyst alerts.
     # The scan summary is kept for Actions/logs and is not sent separately.
-    message = "\n\n──────────────\n\n".join(format_catalyst_alert(alert) for alert in alerts)
+    message = format_catalyst_alerts(alerts)
     try:
         responses = [send_telegram(message)]
         for response in responses:
