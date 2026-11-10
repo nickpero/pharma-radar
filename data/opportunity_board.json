@@ -4,7 +4,7 @@
     "late": 435,
     "live": 0,
     "upcoming": 247,
-    "watch": 9
+    "watch": 12
   },
   "excluded": [
     {
@@ -504,7 +504,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-10T21:00:26.775164+00:00",
+  "generated_at": "2026-11-10T21:10:29.644990+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -1009,9 +1009,9 @@
       "first_seen_at": "2026-11-05T19:37:40.391956+00:00",
       "market": {
         "average_volume_20d": 560010.0,
-        "estimated_average_dollar_volume_20d": 349054.23,
+        "estimated_average_dollar_volume_20d": 341718.1,
         "market_cap": null,
-        "price": 0.6233,
+        "price": 0.6102,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1257,9 +1257,9 @@
       "first_seen_at": "2026-11-09T18:48:20.079328+00:00",
       "market": {
         "average_volume_20d": 560010.0,
-        "estimated_average_dollar_volume_20d": 349054.23,
+        "estimated_average_dollar_volume_20d": 341718.1,
         "market_cap": null,
-        "price": 0.6233,
+        "price": 0.6102,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1350,9 +1350,9 @@
       "first_seen_at": "2026-11-06T11:28:05.724948+00:00",
       "market": {
         "average_volume_20d": 17795.0,
-        "estimated_average_dollar_volume_20d": 231690.9,
+        "estimated_average_dollar_volume_20d": 235249.9,
         "market_cap": null,
-        "price": 13.02,
+        "price": 13.22,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1381,9 +1381,9 @@
       "first_seen_at": "2026-11-06T22:28:11.353044+00:00",
       "market": {
         "average_volume_20d": 901365.0,
-        "estimated_average_dollar_volume_20d": 1149240.38,
+        "estimated_average_dollar_volume_20d": 1144733.55,
         "market_cap": null,
-        "price": 1.275,
+        "price": 1.27,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1412,9 +1412,9 @@
       "first_seen_at": "2026-11-06T14:07:34.417887+00:00",
       "market": {
         "average_volume_20d": 572215.0,
-        "estimated_average_dollar_volume_20d": 18545488.15,
+        "estimated_average_dollar_volume_20d": 18528321.7,
         "market_cap": null,
-        "price": 32.41,
+        "price": 32.38,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1434,7 +1434,7 @@
       "status": "LATE",
       "ticker": "IMCR",
       "title": "SEC 10-Q — Immunocore (IMCR) — Quarterly financial report",
-      "trading_intelligence_score": 57.6
+      "trading_intelligence_score": 57.8
     },
     {
       "catalyst_score": 55.0,
@@ -1505,9 +1505,9 @@
       "first_seen_at": "2026-11-06T22:36:00.310682+00:00",
       "market": {
         "average_volume_20d": 147210.0,
-        "estimated_average_dollar_volume_20d": 348887.7,
+        "estimated_average_dollar_volume_20d": 351831.9,
         "market_cap": null,
-        "price": 2.37,
+        "price": 2.39,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1536,9 +1536,9 @@
       "first_seen_at": "2026-11-06T21:28:04.956188+00:00",
       "market": {
         "average_volume_20d": 321950.0,
-        "estimated_average_dollar_volume_20d": 439783.7,
+        "estimated_average_dollar_volume_20d": 441071.5,
         "market_cap": null,
-        "price": 1.366,
+        "price": 1.37,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1629,9 +1629,9 @@
       "first_seen_at": "2026-11-06T11:07:09.072135+00:00",
       "market": {
         "average_volume_20d": 9652205.0,
-        "estimated_average_dollar_volume_20d": 9005507.27,
+        "estimated_average_dollar_volume_20d": 8995855.06,
         "market_cap": null,
-        "price": 0.933,
+        "price": 0.932,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1651,7 +1651,7 @@
       "status": "LATE",
       "ticker": "ALLO",
       "title": "SEC 10-Q — Allogene Therapeutics (ALLO) — Quarterly financial report",
-      "trading_intelligence_score": 59.2
+      "trading_intelligence_score": 59.3
     },
     {
       "catalyst_score": 55.0,
@@ -1753,9 +1753,9 @@
       "first_seen_at": "2026-11-05T21:09:12.577022+00:00",
       "market": {
         "average_volume_20d": 1087415.0,
-        "estimated_average_dollar_volume_20d": 1989969.45,
+        "estimated_average_dollar_volume_20d": 1984532.38,
         "market_cap": null,
-        "price": 1.83,
+        "price": 1.825,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1784,9 +1784,9 @@
       "first_seen_at": "2026-11-05T12:17:50.470143+00:00",
       "market": {
         "average_volume_20d": 1256250.0,
-        "estimated_average_dollar_volume_20d": 14773500.0,
+        "estimated_average_dollar_volume_20d": 14748375.0,
         "market_cap": null,
-        "price": 11.76,
+        "price": 11.74,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1806,7 +1806,7 @@
       "status": "LATE",
       "ticker": "CLYM",
       "title": "SEC 10-Q — Climb Bio (CLYM) — Quarterly financial report",
-      "trading_intelligence_score": 57.3
+      "trading_intelligence_score": 57.5
     },
     {
       "catalyst_score": 55.0,
@@ -1815,9 +1815,9 @@
       "first_seen_at": "2026-11-05T21:18:24.837180+00:00",
       "market": {
         "average_volume_20d": 248850.0,
-        "estimated_average_dollar_volume_20d": 10941934.5,
+        "estimated_average_dollar_volume_20d": 10927003.5,
         "market_cap": null,
-        "price": 43.97,
+        "price": 43.91,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1908,9 +1908,9 @@
       "first_seen_at": "2026-11-05T21:18:24.837135+00:00",
       "market": {
         "average_volume_20d": 447085.0,
-        "estimated_average_dollar_volume_20d": 3621388.5,
+        "estimated_average_dollar_volume_20d": 3639271.9,
         "market_cap": null,
-        "price": 8.1,
+        "price": 8.14,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -1930,7 +1930,7 @@
       "status": "LATE",
       "ticker": "PBYI",
       "title": "SEC 8-K — Puma Biotechnology (PBYI)",
-      "trading_intelligence_score": 57.2
+      "trading_intelligence_score": 57.7
     },
     {
       "catalyst_score": 55.0,
@@ -1939,9 +1939,9 @@
       "first_seen_at": "2026-11-05T21:18:24.836538+00:00",
       "market": {
         "average_volume_20d": 5836330.0,
-        "estimated_average_dollar_volume_20d": 51155432.45,
+        "estimated_average_dollar_volume_20d": 50951160.9,
         "market_cap": null,
-        "price": 8.765,
+        "price": 8.73,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -2001,9 +2001,9 @@
       "first_seen_at": "2026-11-05T12:09:27.111429+00:00",
       "market": {
         "average_volume_20d": 387650.0,
-        "estimated_average_dollar_volume_20d": 27559976.75,
+        "estimated_average_dollar_volume_20d": 27620062.5,
         "market_cap": null,
-        "price": 71.095,
+        "price": 71.25,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -2023,7 +2023,7 @@
       "status": "LATE",
       "ticker": "ANIP",
       "title": "SEC 10-Q — ANI Pharmaceuticals (ANIP) — Quarterly financial report",
-      "trading_intelligence_score": 59.3
+      "trading_intelligence_score": 59.7
     },
     {
       "catalyst_score": 55.0,
@@ -4229,6 +4229,68 @@
   "watch": [
     {
       "catalyst_score": 55.0,
+      "company": "INOVIO Pharmaceuticals",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-10T21:10:29.447056+00:00",
+      "market": {
+        "average_volume_20d": 26262640.0,
+        "estimated_average_dollar_volume_20d": 38080828.0,
+        "market_cap": null,
+        "price": 1.45,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-10",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1055726/000105572626000029/ino-20260930.htm",
+      "status": "WATCH",
+      "ticker": "INO",
+      "title": "SEC 10-Q — INOVIO Pharmaceuticals (INO) — Quarterly financial report",
+      "trading_intelligence_score": 57.1
+    },
+    {
+      "catalyst_score": 55.0,
+      "company": "Bionano Genomics",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-10T21:10:29.448210+00:00",
+      "market": {
+        "average_volume_20d": 172630.0,
+        "estimated_average_dollar_volume_20d": 212334.9,
+        "market_cap": null,
+        "price": 1.23,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-10",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1411690/000141169026000058/bngo-20261110.htm",
+      "status": "WATCH",
+      "ticker": "BNGO",
+      "title": "SEC 8-K — Bionano Genomics (BNGO)",
+      "trading_intelligence_score": 60.7
+    },
+    {
+      "catalyst_score": 55.0,
       "company": "Atossa Therapeutics",
       "event_type": "COMPANY_FINANCIAL_RESULTS",
       "first_seen_at": "2026-11-10T13:10:17.444039+00:00",
@@ -4287,7 +4349,7 @@
       "status": "WATCH",
       "ticker": "IMTX",
       "title": "SEC 6-K — Immatics (IMTX) — 6-K",
-      "trading_intelligence_score": 57.1
+      "trading_intelligence_score": 57.2
     },
     {
       "catalyst_score": 55.0,
@@ -4319,6 +4381,37 @@
       "ticker": "CGEM",
       "title": "SEC 10-Q — Cullinan Therapeutics (CGEM) — Quarterly financial report",
       "trading_intelligence_score": 57.1
+    },
+    {
+      "catalyst_score": 55.0,
+      "company": "Orchestra BioMed",
+      "event_type": "COMPANY_FINANCIAL_RESULTS",
+      "first_seen_at": "2026-11-10T21:10:29.448290+00:00",
+      "market": {
+        "average_volume_20d": 438735.0,
+        "estimated_average_dollar_volume_20d": 2513951.55,
+        "market_cap": null,
+        "price": 5.73,
+        "price_change_pct": null,
+        "source": "YAHOO_CHART",
+        "status": "AVAILABLE",
+        "volume_ratio": null
+      },
+      "nct_id": null,
+      "opportunity_score": 68.8,
+      "priority_score": 38.0,
+      "program": null,
+      "program_status": "COMPANY_LEVEL",
+      "publication_precision": "DATE_ONLY",
+      "published_at": "2026-11-10",
+      "reason": "DATE_PRECISION_INSUFFICIENT",
+      "source": "SEC",
+      "source_type": "PRIMARY_CORPORATE",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1814114/000110465926125148/obio-20260930x10q.htm",
+      "status": "WATCH",
+      "ticker": "OBIO",
+      "title": "SEC 10-Q — Orchestra BioMed (OBIO) — Quarterly financial report",
+      "trading_intelligence_score": 57.2
     },
     {
       "catalyst_score": 55.0,
@@ -4389,9 +4482,9 @@
       "first_seen_at": "2026-11-10T12:43:58.315950+00:00",
       "market": {
         "average_volume_20d": 2491630.0,
-        "estimated_average_dollar_volume_20d": 9567859.2,
+        "estimated_average_dollar_volume_20d": 9518026.6,
         "market_cap": null,
-        "price": 3.84,
+        "price": 3.82,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4420,9 +4513,9 @@
       "first_seen_at": "2026-11-10T12:25:41.710868+00:00",
       "market": {
         "average_volume_20d": 149280.0,
-        "estimated_average_dollar_volume_20d": 370214.4,
+        "estimated_average_dollar_volume_20d": 365736.0,
         "market_cap": null,
-        "price": 2.48,
+        "price": 2.45,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4451,9 +4544,9 @@
       "first_seen_at": "2026-11-10T12:25:41.710626+00:00",
       "market": {
         "average_volume_20d": 1447660.0,
-        "estimated_average_dollar_volume_20d": 10531726.5,
+        "estimated_average_dollar_volume_20d": 10524488.2,
         "market_cap": null,
-        "price": 7.275,
+        "price": 7.27,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4482,9 +4575,9 @@
       "first_seen_at": "2026-11-10T12:25:41.710931+00:00",
       "market": {
         "average_volume_20d": 5509885.0,
-        "estimated_average_dollar_volume_20d": 3236506.45,
+        "estimated_average_dollar_volume_20d": 3250832.15,
         "market_cap": null,
-        "price": 0.5874,
+        "price": 0.59,
         "price_change_pct": null,
         "source": "YAHOO_CHART",
         "status": "AVAILABLE",
@@ -4504,7 +4597,7 @@
       "status": "WATCH",
       "ticker": "HUMA",
       "title": "SEC 8-K — Humacyte (HUMA)",
-      "trading_intelligence_score": 60.0
+      "trading_intelligence_score": 60.1
     }
   ]
 }

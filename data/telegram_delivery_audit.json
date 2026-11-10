@@ -4366,5 +4366,83 @@
     "telegram_confirmed_at": "2026-11-10T13:10:18.384420+00:00",
     "telegram_message_id": 398,
     "ticker": "ATOS"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'bngo|unknown|company_financial_results|2026-11-10')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-10",
+    "first_seen_at": "2026-11-10T21:10:29.607948+00:00",
+    "program": null,
+    "qualified_at": "2026-11-10T21:10:29.696876+00:00",
+    "telegram_attempted_at": "2026-11-10T21:10:29.696876+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "BNGO"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'ino|unknown|company_financial_results|2026-11-10')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-10",
+    "first_seen_at": "2026-11-10T21:10:29.607948+00:00",
+    "program": null,
+    "qualified_at": "2026-11-10T21:10:29.696876+00:00",
+    "telegram_attempted_at": "2026-11-10T21:10:29.696876+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "INO"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'obio|unknown|company_financial_results|2026-11-10')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-10",
+    "first_seen_at": "2026-11-10T21:10:29.607948+00:00",
+    "program": null,
+    "qualified_at": "2026-11-10T21:10:29.696876+00:00",
+    "telegram_attempted_at": "2026-11-10T21:10:29.696876+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "OBIO"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'bngo|unknown|company_financial_results|2026-11-10')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-10",
+    "first_seen_at": "2026-11-10T21:10:29.607948+00:00",
+    "program": null,
+    "qualified_at": "2026-11-10T21:10:29.696876+00:00",
+    "telegram_attempted_at": "2026-11-10T21:10:29.696876+00:00",
+    "telegram_confirmed_at": "2026-11-10T21:10:31.733234+00:00",
+    "telegram_message_id": 400,
+    "ticker": "BNGO"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'ino|unknown|company_financial_results|2026-11-10')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-10",
+    "first_seen_at": "2026-11-10T21:10:29.607948+00:00",
+    "program": null,
+    "qualified_at": "2026-11-10T21:10:29.696876+00:00",
+    "telegram_attempted_at": "2026-11-10T21:10:29.696876+00:00",
+    "telegram_confirmed_at": "2026-11-10T21:10:31.733234+00:00",
+    "telegram_message_id": 400,
+    "ticker": "INO"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'obio|unknown|company_financial_results|2026-11-10')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-10",
+    "first_seen_at": "2026-11-10T21:10:29.607948+00:00",
+    "program": null,
+    "qualified_at": "2026-11-10T21:10:29.696876+00:00",
+    "telegram_attempted_at": "2026-11-10T21:10:29.696876+00:00",
+    "telegram_confirmed_at": "2026-11-10T21:10:31.733234+00:00",
+    "telegram_message_id": 400,
+    "ticker": "OBIO"
   }
 ]
