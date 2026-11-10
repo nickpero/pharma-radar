@@ -300,6 +300,7 @@ def build_sec_item(ticker, company, cik, accession, form, filing_date, primary_d
             "summary": f"SEC filing {form}; items: {', '.join(items or detected_items)}",
             "content": content, "url": url, "published_at": filing_date,
             "event_date": event_date or filing_date, "first_published_at": filing_date,
+            "financial_analysis": analyze_sec_financial_filing(text) if len(normalize_text(text)) >= 300 else {"status": "INSUFFICIENT_CONTENT", "alert_level": "NONE", "signals": [], "evidence": []},
             "item_id": hashlib.sha256(raw.encode("utf-8")).hexdigest()}
 
 
