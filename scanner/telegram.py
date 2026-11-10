@@ -446,7 +446,7 @@ def format_catalyst_alerts(alerts):
                 rows.append(f"• {ticker} · {form}" + (f" — {url}" if url else ""))
             sections.append("\n".join([
                 "📊 PHARMA RADAR — SEC",
-                f"{len(financial)} depositi finanziari",
+                f"{len(financial)} depositi finanziari ordinari",
                 *rows,
             ]))
 
