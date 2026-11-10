@@ -306,6 +306,22 @@ def format_catalyst_alert(alert):
     if why:
         lines.extend(["", f"💡 Perché conta: {why}"])
 
+    financial = alert.get("financial_analysis") if isinstance(alert.get("financial_analysis"), dict) else {}
+    if financial.get("status") == "ANALYZED" and financial.get("signals"):
+        names = {
+            "GOING_CONCERN": "dubbi sulla continuità aziendale",
+            "DEFAULT_OR_COVENANT": "inadempienza o covenant del debito",
+            "LIQUIDITY_STRESS": "tensione di liquidità",
+            "RUNWAY_UNDER_12_MONTHS": "liquidità indicata sotto i 12 mesi",
+            "GUIDANCE_WITHDRAWN": "guidance ritirata",
+            "GUIDANCE_REDUCED": "guidance ridotta",
+        }
+        level = str(financial.get("alert_level") or "MEDIUM").upper()
+        signal_names = [names.get(item.get("code"), item.get("code")) for item in financial.get("signals", [])]
+        lines.extend(["", f"🏦 Analisi SEC: {level} · " + ", ".join(signal_names[:3])])
+        for evidence in (financial.get("evidence") or [])[:2]:
+            lines.append("   ↳ " + _clean_text(evidence, 220))
+
     reaction = alert.get("market_reaction") or event.get("market_reaction") or {}
     reaction_values = [
         f"{period} {_num(reaction.get(f'reaction_{period}_pct'))}%"
