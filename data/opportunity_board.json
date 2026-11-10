@@ -3,7 +3,7 @@
     "excluded": 16,
     "late": 435,
     "live": 0,
-    "upcoming": 244,
+    "upcoming": 251,
     "watch": 0
   },
   "excluded": [
@@ -504,7 +504,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-10T08:57:32.295694+00:00",
+  "generated_at": "2026-11-10T09:09:59.775278+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -3237,6 +3237,27 @@
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
+      "company": "Immunome",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT04871282",
+      "phase": "PHASE2",
+      "programs": [
+        "varegacestat (AL102)",
+        "IM-1021"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT04871282",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "IMNM",
+      "title": "A Study of AL102 in Patients With Progressing Desmoid Tumors"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
       "company": "Incyte",
       "date": "2026-12-01",
       "date_is_estimate": true,
@@ -4167,44 +4188,22 @@
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
-      "company": "Zentalis Pharmaceuticals",
+      "company": "Zenas BioPharma",
       "date": "2026-12-01",
       "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
+      "date_precision": "MONTH",
+      "milestone": "STUDY_COMPLETION",
       "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT05128825",
+      "nct_id": "NCT06559163",
       "phase": "PHASE2",
       "programs": [
-        "azenosertib"
+        "obexelimab"
       ],
       "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT05128825",
-      "status": "RECRUITING",
-      "ticker": "ZNTL",
-      "title": "A Study of Azenosertib (ZN-c3) in Subjects With Platinum-Resistant High-Grade Serous Ovarian, Fallopian Tube or Primary Peritoneal Cancer"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Verastem",
-      "date": "2026-12-03",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT05798507",
-      "phase": "EARLY_PHASE1",
-      "programs": [
-        "avutometinib",
-        "defactinib",
-        "VS-7375"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT05798507",
+      "source_url": "https://clinicaltrials.gov/study/NCT06559163",
       "status": "ACTIVE_NOT_RECRUITING",
-      "ticker": "VSTM",
-      "title": "Identification of Treatment Concentrations of Defactinib or VS-6766 for the Treatment of Patients With Glioblastoma"
+      "ticker": "ZBIO",
+      "title": "A Study of Obexelimab in Patients With Systemic Lupus Erythematosus"
     }
   ],
   "watch": []
