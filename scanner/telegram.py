@@ -402,38 +402,67 @@ def _alert_form(alert):
 
 
 def format_catalyst_alerts(alerts):
-    """Build one concise scan message, batching routine SEC financial filings."""
-    routine_financial = [
+    """Batch informational WATCH items; keep FAST/IMMEDIATE catalysts individual."""
+    watch_alerts = [
         item for item in (alerts or [])
-        if _alert_subtype(item) == "COMPANY_FINANCIAL_RESULTS"
-        and str(item.get("telegram_action", "WATCH")).upper() == "WATCH"
+        if str(item.get("telegram_action", "WATCH")).upper() == "WATCH"
     ]
-    other_alerts = [
+    priority_alerts = [
         item for item in (alerts or [])
-        if item not in routine_financial
+        if str(item.get("telegram_action", "WATCH")).upper() != "WATCH"
     ]
     sections = []
 
-    if routine_financial:
-        rows = []
-        for item in sorted(routine_financial, key=lambda value: str(value.get("ticker") or "")):
-            event = item.get("event") if isinstance(item.get("event"), dict) else {}
-            ticker = _clean_text(item.get("ticker") or event.get("ticker") or "N/D", 20).upper()
-            form = _alert_form(item)
-            url = _clean_text(item.get("url") or event.get("url"), 500)
-            rows.append(f"• {ticker} · {form}" + (f" — {url}" if url else ""))
+    if watch_alerts:
+        financial = [
+            item for item in watch_alerts
+            if _alert_subtype(item) == "COMPANY_FINANCIAL_RESULTS"
+        ]
+        other_watch = [item for item in watch_alerts if item not in financial]
 
-        sections.append("\n".join([
-            "📊 PHARMA RADAR — RIEPILOGO SEC",
-            f"📄 {len(routine_financial)} depositi finanziari ordinari",
-            *rows,
-            "",
-            "ℹ️ Da monitorare; nessun segnale operativo dedotto dal solo deposito.",
-        ]))
+        if financial:
+            rows = []
+            for item in sorted(financial, key=lambda value: str(value.get("ticker") or "")):
+                event = item.get("event") if isinstance(item.get("event"), dict) else {}
+                ticker = _clean_text(item.get("ticker") or event.get("ticker") or "N/D", 20).upper()
+                form = _alert_form(item)
+                url = _clean_text(item.get("url") or event.get("url"), 500)
+                rows.append(f"• {ticker} · {form}" + (f" — {url}" if url else ""))
+            sections.append("\n".join([
+                "📊 PHARMA RADAR — SEC",
+                f"{len(financial)} depositi finanziari",
+                *rows,
+            ]))
 
-    if other_alerts:
+        if other_watch:
+            rows = []
+            for item in sorted(
+                other_watch,
+                key=lambda value: (
+                    str(value.get("subtype") or (value.get("event") or {}).get("subtype") or ""),
+                    str(value.get("ticker") or ""),
+                ),
+            ):
+                event = item.get("event") if isinstance(item.get("event"), dict) else {}
+                ticker = _clean_text(item.get("ticker") or event.get("ticker") or "N/D", 20).upper()
+                subtype = _clean_text(item.get("subtype") or event.get("subtype") or "AGGIORNAMENTO", 48)
+                title = _clean_text(item.get("title") or event.get("title"), 110)
+                url = _clean_text(item.get("url") or event.get("url"), 500)
+                description = f"• {ticker} · {subtype}"
+                if title and title.lower() not in {"catalyst detected", "unknown"}:
+                    description += f" — {title}"
+                if url:
+                    description += f" — {url}"
+                rows.append(description)
+            sections.append("\n".join([
+                "👀 PHARMA RADAR — AGGIORNAMENTI INFORMATIVI",
+                f"{len(other_watch)} elementi da monitorare",
+                *rows,
+            ]))
+
+    if priority_alerts:
         sections.append("\n\n──────────────\n\n".join(
-            format_catalyst_alert(alert) for alert in other_alerts
+            format_catalyst_alert(alert) for alert in priority_alerts
         ))
 
     return "\n\n━━━━━━━━━━━━━━━━━━\n\n".join(sections)
