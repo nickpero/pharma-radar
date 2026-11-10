@@ -393,7 +393,7 @@ def _alert_form(alert):
         return form
     title = _clean_text(alert.get("title") or event.get("title"), 220)
     import re
-    match = re.search(r"\\b(10-Q|10-K|8-K|6-K)\\b", title, flags=re.I)
+    match = re.search(r"\b(10-Q|10-K|8-K|6-K)\b", title, flags=re.I)
     return match.group(1).upper() if match else "SEC"
 
 
@@ -419,7 +419,7 @@ def format_catalyst_alerts(alerts):
             url = _clean_text(item.get("url") or event.get("url"), 500)
             rows.append(f"• {ticker} · {form}" + (f" — {url}" if url else ""))
 
-        sections.append("\\n".join([
+        sections.append("\n".join([
             "📊 PHARMA RADAR — RIEPILOGO SEC",
             f"📄 {len(routine_financial)} depositi finanziari ordinari",
             *rows,
@@ -428,11 +428,11 @@ def format_catalyst_alerts(alerts):
         ]))
 
     if other_alerts:
-        sections.append("\\n\\n──────────────\\n\\n".join(
+        sections.append("\n\n──────────────\n\n".join(
             format_catalyst_alert(alert) for alert in other_alerts
         ))
 
-    return "\\n\\n━━━━━━━━━━━━━━━━━━\\n\\n".join(sections)
+    return "\n\n━━━━━━━━━━━━━━━━━━\n\n".join(sections)
 
 
 def send_divergence_alerts(divergences):
