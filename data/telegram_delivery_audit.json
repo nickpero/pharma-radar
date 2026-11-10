@@ -4652,5 +4652,31 @@
     "telegram_confirmed_at": "2026-11-10T21:30:15.795274+00:00",
     "telegram_message_id": 402,
     "ticker": "ACHV"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'bmea|unknown|company_financial_results|2026-11-10')",
+    "delivery_status": "ATTEMPTED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-10",
+    "first_seen_at": "2026-11-10T21:40:00.509098+00:00",
+    "program": null,
+    "qualified_at": "2026-11-10T21:40:00.598009+00:00",
+    "telegram_attempted_at": "2026-11-10T21:40:00.598009+00:00",
+    "telegram_confirmed_at": null,
+    "telegram_message_id": null,
+    "ticker": "BMEA"
+  },
+  {
+    "dedup_key": "('EVENT_KEY', 'bmea|unknown|company_financial_results|2026-11-10')",
+    "delivery_status": "CONFIRMED",
+    "event_type": "COMPANY_FINANCIAL_RESULTS",
+    "first_published_at": "2026-11-10",
+    "first_seen_at": "2026-11-10T21:40:00.509098+00:00",
+    "program": null,
+    "qualified_at": "2026-11-10T21:40:00.598009+00:00",
+    "telegram_attempted_at": "2026-11-10T21:40:00.598009+00:00",
+    "telegram_confirmed_at": "2026-11-10T21:40:01.626643+00:00",
+    "telegram_message_id": 403,
+    "ticker": "BMEA"
   }
 ]
