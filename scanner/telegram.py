@@ -234,9 +234,13 @@ def _why_it_matters(alert, event, subtype):
 def format_catalyst_alert(alert):
     """Build a short, plain-language Telegram alert focused on the event and next step."""
     ticker = _clean_text(alert.get("ticker", "UNKNOWN"), 20).upper()
-    program = _clean_text(alert.get("program", "UNKNOWN"), 80)
-    drug_name = _drug_name(alert, program)
     event = alert.get("event", {})
+    if not isinstance(event, dict):
+        event = {}
+    program = _clean_text(alert.get("program") or event.get("program"), 80)
+    drug_name = _drug_name(alert, program) if (
+        program or alert.get("drug_name") or alert.get("drug")
+    ) else ""
     if not isinstance(event, dict):
         event = {}
 
@@ -276,7 +280,7 @@ def format_catalyst_alert(alert):
         "🚨 PHARMA RADAR",
         heading,
         "",
-        f"🧬 {ticker} — {drug_name}",
+        f"🧬 {ticker}" + (f" — {drug_name}" if drug_name and drug_name.upper() not in {"UNKNOWN", "N/A"} else ""),
         f"📰 {event_display}",
         f"📌 {title or 'La fonte non riporta un titolo leggibile.'}",
     ]
