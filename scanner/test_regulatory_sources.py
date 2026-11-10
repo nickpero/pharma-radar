@@ -419,6 +419,7 @@ def test_recent_sec_10q_and_10k_are_company_financial_results(monkeypatch):
         }
     }
     monkeypatch.setattr(sec_feed, "_is_recent_filing_date", lambda value: True)
+    monkeypatch.setattr(sec_feed, "_get_jina_text", lambda url: "")
 
     for form, description in (
         ("10-Q", "QUARTERLY REPORT"),
