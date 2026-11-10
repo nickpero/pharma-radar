@@ -1363,5 +1363,26 @@
     "source_url": "https://www.merck.com/news/merck-announces-positive-results-from-phase-2b-trial-of-efinopegdutide-in-adults-with-metabolic-dysfunction-associated-steatohepatitis-mash-and-stage-2-3-fibrosis/",
     "ticker": "MRK",
     "title": "Merck Announces Positive Results from Phase 2b Trial of Efinopegdutide in Adults with Metabolic Dysfunction-Associated Steatohepatitis (MASH) and Stage 2-3 Fibrosis"
+  },
+  {
+    "company": "Alnylam Pharmaceuticals",
+    "discovered_at": "2026-11-10T15:01:12.267183+00:00",
+    "event_date": null,
+    "event_type": null,
+    "event_window": null,
+    "listing_context": "Alnylam Collaborator Regeneron Advances CIDEBsiRNA with Promising First-in-Human Results in Patients with MASLD",
+    "listing_url": "https://investors.alnylam.com/press-releases",
+    "notes": "Candidate discovered from an official company page; verify the release and any future event date before alerting.",
+    "publication_date_candidate": null,
+    "publication_time_precision": "UNKNOWN",
+    "publication_timestamp_source": null,
+    "publication_timezone_known": false,
+    "published_at": null,
+    "published_at_raw": null,
+    "review_status": "PENDING_REVIEW",
+    "source_host": "investors.alnylam.com",
+    "source_url": "https://investors.alnylam.com/press-release?id=4b211104-afdd-4ba6-a070-afd9ef5e5738",
+    "ticker": "ALNY",
+    "title": "Alnylam Collaborator Regeneron Advances CIDEBsiRNA with Promising First-in-Human Results in Patients with MASLD"
   }
 ]
