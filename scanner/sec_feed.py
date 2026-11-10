@@ -12,6 +12,8 @@ from pathlib import Path
 
 import requests
 
+from scanner.sec_financial_analysis import analyze_sec_financial_filing
+
 SEC_ARCHIVES = "https://www.sec.gov/Archives/edgar/data"
 SEC_BROWSE = "https://www.sec.gov/cgi-bin/browse-edgar"
 SEC_PROXY = "https://filingfirehose.com/v1/public/8k"
@@ -350,14 +352,22 @@ def _fetch_sec_direct(ticker, company, cik, max_filings=3):
             descriptions = recent.get("primaryDocDescription") or []
             description = descriptions[idx] if idx < len(descriptions) else ""
             report_label = "Quarterly financial report" if form == "10-Q" else "Annual financial report"
+            document_url = _filing_url(cik, accession, primary_doc)
+            document_text = ""
+            try:
+                document_text = _get_jina_text(document_url)
+            except requests.RequestException as exc:
+                print(f"SEC PERIODIC CONTENT UNAVAILABLE: ticker={ticker} form={form} {type(exc).__name__}: {exc}", flush=True)
+            financial_analysis = analyze_sec_financial_filing(document_text)
             event = build_sec_item(
                 ticker, company, cik, accession, form, filing_date, primary_doc, [],
-                text=description,
+                text=" ".join(filter(None, [description, document_text[:12000]])),
                 title=f"SEC {form} — {company} ({ticker}) — {report_label}",
-                url=_filing_url(cik, accession, primary_doc),
+                url=document_url,
                 event_date=filing_date,
             )
             event["company_event_type"] = "COMPANY_FINANCIAL_RESULTS"
+            event["financial_analysis"] = financial_analysis
             event["summary"] = f"{company} filed its SEC {form} on {filing_date}."
             results.append(event)
         elif form == "6-K" and _is_recent_filing_date(filing_date):
