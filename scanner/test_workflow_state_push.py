@@ -17,4 +17,6 @@ def test_production_state_commit_reconciles_known_json_conflicts():
     assert "data/catalyst_history.json" in workflow
     assert "data/opportunity_board.json" in workflow
     assert "python -m scanner.merge_radar_state" in workflow
-    assert "git reset --soft origin/main" in workflow
+    assert "git reset --hard origin/main" in workflow
+    assert "git checkout \"$local_state_commit\" -- \"$path\"" in workflow
+    assert "unexpected_overlap" in workflow
