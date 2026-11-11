@@ -3,7 +3,7 @@
     "excluded": 16,
     "late": 463,
     "live": 0,
-    "upcoming": 245,
+    "upcoming": 247,
     "watch": 0
   },
   "excluded": [
@@ -504,7 +504,7 @@
       "trading_intelligence_score": null
     }
   ],
-  "generated_at": "2026-11-11T09:17:13.573767+00:00",
+  "generated_at": "2026-11-11T09:36:15.793258+00:00",
   "late": [
     {
       "catalyst_score": 100.0,
@@ -3462,6 +3462,27 @@
     {
       "actionability": "WATCH",
       "clinical_outcome_available": false,
+      "company": "Immunome",
+      "date": "2026-12-01",
+      "date_is_estimate": true,
+      "date_precision": "MONTH",
+      "milestone": "STUDY_COMPLETION",
+      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
+      "nct_id": "NCT04871282",
+      "phase": "PHASE2",
+      "programs": [
+        "varegacestat (AL102)",
+        "IM-1021"
+      ],
+      "source": "ClinicalTrials.gov/Radar state",
+      "source_url": "https://clinicaltrials.gov/study/NCT04871282",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "ticker": "IMNM",
+      "title": "A Study of AL102 in Patients With Progressing Desmoid Tumors"
+    },
+    {
+      "actionability": "WATCH",
+      "clinical_outcome_available": false,
       "company": "Incyte",
       "date": "2026-12-01",
       "date_is_estimate": true,
@@ -4203,26 +4224,6 @@
       "status": "ACTIVE_NOT_RECRUITING",
       "ticker": "RNLX",
       "title": "Decision Impact Trial of KidneyIntelX"
-    },
-    {
-      "actionability": "WATCH",
-      "clinical_outcome_available": false,
-      "company": "Renalytix",
-      "date": "2026-12-01",
-      "date_is_estimate": true,
-      "date_precision": "DAY",
-      "milestone": "PRIMARY_COMPLETION",
-      "milestone_type": "EXPECTED_TRIAL_COMPLETION",
-      "nct_id": "NCT04802395",
-      "phase": null,
-      "programs": [
-        "kidneyintelX"
-      ],
-      "source": "ClinicalTrials.gov/Radar state",
-      "source_url": "https://clinicaltrials.gov/study/NCT04802395",
-      "status": "RECRUITING",
-      "ticker": "RNLX",
-      "title": "Real World Evidence Clinical Utility Study of KidneyIntelX"
     }
   ],
   "watch": []
