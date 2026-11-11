@@ -106,8 +106,40 @@ jobs:
               fi
 
               echo "Reconciling concurrent catalyst history and rebuilding opportunity board."
+              base_commit="$(git merge-base "$local_state_commit" origin/main)"
+              local_files="$(git diff-tree --no-commit-id --name-only -r "$local_state_commit" | sort)"
+              remote_files="$(git diff --name-only "$base_commit" origin/main | sort)"
+              unexpected_overlap="$(comm -12 <(printf '%s\\n' "$local_files") <(printf '%s\\n' "$remote_files") | grep -Ev '^data/(catalyst_history|opportunity_board)\\.json
+            fi
+
+            if git push origin HEAD:main; then
+              echo "Pharma Radar state committed to main."
+              exit 0
+            fi
+            echo "main moved during push; retrying after refresh."
+            sleep $((attempt * 2))
+          done
+
+          echo "State push failed after three retries."
+          exit 1
+ || true)"
+              if [ -n "$unexpected_overlap" ]; then
+                echo "Unexpected overlapping state/code changes; refusing to overwrite:"
+                printf '%s\\n' "$unexpected_overlap"
+                git rebase --abort || true
+                exit 1
+              fi
+
               git rebase --abort
-              git reset --soft origin/main
+              # Start from the newest main so concurrent code/config changes survive.
+              git reset --hard origin/main
+              while IFS= read -r path; do
+                [ -z "$path" ] && continue
+                case "$path" in
+                  data/catalyst_history.json|data/opportunity_board.json) ;;
+                  *) git checkout "$local_state_commit" -- "$path" ;;
+                esac
+              done <<< "$local_files"
               python -m scanner.merge_radar_state --local-ref "$local_state_commit" --remote-ref origin/main
               git add -A
               git commit -m "Reconcile Pharma Radar state after concurrent scan [skip ci]"
