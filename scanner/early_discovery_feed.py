@@ -213,6 +213,30 @@ def _request_batch(batch, batch_number, depth=0):
                 continue
             response.raise_for_status()
             return _parse_feed(response.text, batch)
+        except requests.Timeout as exc:
+            if attempt < MAX_RETRIES:
+                delay = 1.5 * (2 ** attempt)
+                print(
+                    f"EARLY DISCOVERY TIMEOUT RETRY: batch={batch_number} "
+                    f"attempt={attempt + 1}/{MAX_RETRIES} wait={delay:.1f}s "
+                    f"error={type(exc).__name__}",
+                    flush=True,
+                )
+                time.sleep(delay)
+                continue
+            raise
+        except requests.ConnectionError as exc:
+            if attempt < MAX_RETRIES:
+                delay = 1.5 * (2 ** attempt)
+                print(
+                    f"EARLY DISCOVERY CONNECTION RETRY: batch={batch_number} "
+                    f"attempt={attempt + 1}/{MAX_RETRIES} wait={delay:.1f}s "
+                    f"error={type(exc).__name__}",
+                    flush=True,
+                )
+                time.sleep(delay)
+                continue
+            raise
         except (requests.RequestException, ET.ParseError):
             raise
     return []
