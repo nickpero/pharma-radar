@@ -9,3 +9,12 @@ def test_production_state_commit_rebases_and_retries_without_force_push():
     assert "for attempt in 1 2 3" in workflow
     assert "git push origin HEAD:main" in workflow
     assert "git push --force" not in workflow
+
+
+def test_production_state_commit_reconciles_known_json_conflicts():
+    workflow = Path(".github/workflows/radar.yml").read_text(encoding="utf-8")
+    assert "git diff --name-only --diff-filter=U" in workflow
+    assert "data/catalyst_history.json" in workflow
+    assert "data/opportunity_board.json" in workflow
+    assert "python -m scanner.merge_radar_state" in workflow
+    assert "git reset --soft origin/main" in workflow
