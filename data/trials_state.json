@@ -34385,6 +34385,519 @@
       "Paclitaxel"
     ]
   },
+  "IMNM:varegacestat (AL102):NCT06845852": {
+    "nct_id": "NCT06845852",
+    "title": "A Phase 1 Mass Balance Study of Varegacestat",
+    "official_title": "A Phase 1, Open-Label Study to Assess the Absorption, Metabolism, Excretion, and Mass Balance of [14C]Varegacestat Following a Single Oral Dose in Healthy Adult Male Participants",
+    "status": "COMPLETED",
+    "last_update": "2025-09-26",
+    "last_update_submitted": "2025-09-23",
+    "start_date": "2025-02-25",
+    "primary_completion_date": "2025-03-11",
+    "completion_date": "2025-03-26",
+    "results_posted_date": null,
+    "has_results": false,
+    "primary_outcomes": [
+      {
+        "measure": "The mass balance of varegacestat following administration of a single oral dose (containing ~100 µCi) [14C]varegacestat in healthy adult male participants.",
+        "description": null,
+        "time_frame": "Up to 15 days"
+      }
+    ],
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 6,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Immunome, Inc.",
+    "conditions": [
+      "Healthy Volunteer"
+    ],
+    "interventions": [
+      "varegacestat"
+    ]
+  },
+  "IMNM:varegacestat (AL102):NCT06855264": {
+    "nct_id": "NCT06855264",
+    "title": "A Cardiac Liability Study of Varegacestat in Healthy Participants",
+    "official_title": "A Phase 1, Randomized, Single-Dose, Positive- and Placebo-Controlled, 3-Way Crossover Study to Evaluate the Effects of Varegacestat on Cardiac Repolarization in Healthy Participants",
+    "status": "COMPLETED",
+    "last_update": "2025-09-24",
+    "last_update_submitted": "2025-09-19",
+    "start_date": "2025-02-24",
+    "primary_completion_date": "2025-04-08",
+    "completion_date": "2025-05-06",
+    "results_posted_date": null,
+    "has_results": false,
+    "primary_outcomes": [
+      {
+        "measure": "Placebo-corrected change from baseline QTc and varegacestat and its metabolite, AL102 MTB, plasma concentrations",
+        "description": null,
+        "time_frame": "24 hours"
+      }
+    ],
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 32,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Immunome, Inc.",
+    "conditions": [
+      "Healthy Volunteer"
+    ],
+    "interventions": [
+      "varegacestat",
+      "Placebo",
+      "Moxifloxacin 400 mg"
+    ]
+  },
+  "IMNM:varegacestat (AL102):NCT04871282": {
+    "nct_id": "NCT04871282",
+    "title": "A Study of AL102 in Patients With Progressing Desmoid Tumors",
+    "official_title": "RINGSIDE: A Phase 2/3, Randomized, Multicenter Study to Evaluate AL102 in Patients With Progressing Desmoid Tumors",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-06-08",
+    "last_update_submitted": "2026-06-04",
+    "start_date": "2021-09-01",
+    "primary_completion_date": "2025-12-03",
+    "completion_date": "2026-12",
+    "results_posted_date": null,
+    "has_results": false,
+    "primary_outcomes": [
+      {
+        "measure": "Part A: Safety and Tolerability - Adverse Events",
+        "description": "Evaluation of the safety and tolerability of AL102 in subjects with progressing desmoid tumors as defined by as defined by the frequency and severity of treatment emergent adverse events (TEAEs) and serious adverse events (SAEs)",
+        "time_frame": "Approximately 1.5 years"
+      },
+      {
+        "measure": "Part B: Progression free survival (PFS)",
+        "description": "PFS as defined as the time from randomization until the date of assessment of progression as assessed by BICR based on Response Evaluation Criteria in Solid Tumors (RECIST) v1.1 or death by any cause",
+        "time_frame": "Approximately 2 years"
+      }
+    ],
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2",
+      "PHASE3"
+    ],
+    "enrollment": 198,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Immunome, Inc.",
+    "conditions": [
+      "Desmoid",
+      "Desmoid Tumor"
+    ],
+    "interventions": [
+      "AL102",
+      "Placebo"
+    ]
+  },
+  "IMNM:varegacestat (AL102):NCT06677996": {
+    "nct_id": "NCT06677996",
+    "title": "A Phase 1 Study to Examine the Effects of Itraconazole After Single Dose Administration of Varegacestat (AL102) to Healthy Participants",
+    "official_title": "A Phase 1, Open-Label, Fixed Sequence, 1-way Crossover Study Examining the Effect of Itraconazole on the Pharmacokinetics, Safety and Tolerability After Varegacestat Single Dose Administration to Healthy Participants",
+    "status": "COMPLETED",
+    "last_update": "2025-05-11",
+    "last_update_submitted": "2025-05-07",
+    "start_date": "2024-11-11",
+    "primary_completion_date": "2024-12-30",
+    "completion_date": "2025-05-07",
+    "results_posted_date": null,
+    "has_results": false,
+    "primary_outcomes": [
+      {
+        "measure": "Effect of itraconazole on the PK of varegacestat in healthy participants.",
+        "description": "AUC0-t for varegacestat administered with and without itraconazole.",
+        "time_frame": "Up to 5 weeks"
+      },
+      {
+        "measure": "Effect of itraconazole on the PK of varegacestat in healthy participants.",
+        "description": "AUC0-inf for varegacestat administered with and without itraconazole.",
+        "time_frame": "Up to 5 weeks"
+      },
+      {
+        "measure": "Effect of itraconazole on the PK of varegacestat in healthy participants.",
+        "description": "Cmax for varegacestat administered with and without itraconazole.",
+        "time_frame": "Up to 5 weeks"
+      },
+      {
+        "measure": "Effect of itraconazole on the PK of varegacestat in healthy participants.",
+        "description": "Tmax for varegacestat administered with and without itraconazole.",
+        "time_frame": "Up to 5 weeks"
+      }
+    ],
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 22,
+    "enrollment_type": "ACTUAL",
+    "sponsor": "Immunome, Inc.",
+    "conditions": [
+      "Healthy Volunteer"
+    ],
+    "interventions": [
+      "varegacestat",
+      "Itraconazole (200 mg)"
+    ]
+  },
+  "IMNM:IM-1021:NCT06823167": {
+    "nct_id": "NCT06823167",
+    "title": "A Phase 1 Study of IM-1021 in Participants With Advanced Cancer",
+    "official_title": "A Phase 1 Study of IM-1021 in Participants With Advanced Malignancies",
+    "status": "RECRUITING",
+    "last_update": "2026-08-10",
+    "last_update_submitted": "2026-08-05",
+    "start_date": "2025-02-26",
+    "primary_completion_date": "2028-05",
+    "completion_date": "2029-02",
+    "results_posted_date": null,
+    "has_results": false,
+    "primary_outcomes": [
+      {
+        "measure": "Safety and tolerability of IM-1021 in participants with advanced lymphomas and advanced solid tumors as measured by incidence of treatment emergent adverse events (TEAEs)",
+        "description": "Type, frequency, seriousness, and severity of adverse events (AEs) graded using the National Cancer Institute Common Terminology Criteria for Adverse Events (NCI-CTCAE) criteria version 5.0, including serious adverse events (SAEs), AEs of interest (AEI), AEs leading to discontinuation, and deaths",
+        "time_frame": "From first dose to 37 days following last dose of study treatment"
+      },
+      {
+        "measure": "Determine the recommended dose(s) and schedule(s) of IM-1021 for further development",
+        "description": "Type, frequency, seriousness, and severity of AEs graded using the NCI-CTCAE v6.0, including SAEs, AEIs, AEs leading to discontinuation, and deaths",
+        "time_frame": "From first dose to 37 days following last dose of study treatment"
+      }
+    ],
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1"
+    ],
+    "enrollment": 190,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Immunome, Inc.",
+    "conditions": [
+      "Solid Malignancies",
+      "Hematologic Malignancies"
+    ],
+    "interventions": [
+      "IM-1021"
+    ]
+  },
+  "COGT:bezuclastinib:NCT05208047": {
+    "nct_id": "NCT05208047",
+    "title": "(Peak) A Phase 3 Randomized Trial of CGT9486+Sunitinib vs. Sunitinib in Subjects With Gastrointestinal Stromal Tumors",
+    "official_title": "A Phase 3 Randomized, Open-Label, Multicenter Clinical Study of CGT9486+Sunitinib vs. Sunitinib in Subjects With Locally Advanced, Unresectable, or Metastatic Gastrointestinal Stromal Tumors",
+    "status": "RECRUITING",
+    "last_update": "2026-06-16",
+    "last_update_submitted": "2026-06-12",
+    "start_date": "2022-04-14",
+    "primary_completion_date": "2025-09-30",
+    "completion_date": "2030-01",
+    "results_posted_date": null,
+    "has_results": false,
+    "primary_outcomes": [
+      {
+        "measure": "Part 1a - pharmacokinetics - Cmax",
+        "description": "Maximum plasma concentration (Cmax)",
+        "time_frame": "16 days"
+      },
+      {
+        "measure": "Part 1a - pharmacokinetics - AUC",
+        "description": "Area under the plasma concentration-time curve (AUC)",
+        "time_frame": "16 days"
+      },
+      {
+        "measure": "Part 1b - pharmacokinetics - Cmax",
+        "description": "Maximum plasma concentration (Cmax)",
+        "time_frame": "14 days"
+      },
+      {
+        "measure": "Part 1b - pharmacokinetics - AUC",
+        "description": "Area under the plasma concentration-time curve (AUC)",
+        "time_frame": "14 days"
+      },
+      {
+        "measure": "Part 1b - pharmacokinetics - Tmax",
+        "description": "Time to maximum observed plasma concentration (Tmax)",
+        "time_frame": "14 days"
+      },
+      {
+        "measure": "Part 2 - Progression Free Survival (PFS)",
+        "description": "Time from first dose to documented disease progression or death due to any cause, whichever occurs first",
+        "time_frame": "Approximately 48 months"
+      },
+      {
+        "measure": "DDI Substudy - pharmacokinetics - AUC",
+        "description": "Area under the plasma concentration-time curve (AUC)",
+        "time_frame": "16 days"
+      },
+      {
+        "measure": "DDI Substudy - pharmacokinetics - Cmax",
+        "description": "Maximum plasma concentration (Cmax)",
+        "time_frame": "14 days"
+      }
+    ],
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE3"
+    ],
+    "enrollment": 482,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Cogent Biosciences, Inc.",
+    "conditions": [
+      "Advanced Gastrointestinal Stromal Tumors",
+      "Metastatic Cancer"
+    ],
+    "interventions": [
+      "CGT9486",
+      "CGT9486",
+      "Sunitinib",
+      "Sunitinib",
+      "Midazolam",
+      "CGT9486",
+      "Sunitinib",
+      "CGT9486",
+      "Sunitinib"
+    ]
+  },
+  "COGT:bezuclastinib:NCT05186753": {
+    "nct_id": "NCT05186753",
+    "title": "(Summit) A Study to Evaluate the Efficacy and Safety of CGT9486 Versus Placebo in Patients With Indolent or Smoldering Systemic Mastocytosis",
+    "official_title": "A Multi-Part, Randomized, Double-Blind, Placebo-Controlled Phase 2 Clinical Study of The Safety and Efficacy of CGT9486 in Subjects With Nonadvanced Systemic Mastocytosis",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-10-22",
+    "last_update_submitted": "2026-10-21",
+    "start_date": "2022-06-27",
+    "primary_completion_date": "2025-05-22",
+    "completion_date": "2030-01",
+    "results_posted_date": null,
+    "has_results": false,
+    "primary_outcomes": [
+      {
+        "measure": "Part 1: Determine recommended dose of bezuclastinib (CGT9486) in subjects with NonAdvSM",
+        "description": "Selection of the recommended dose to be used in subsequent parts of the study.",
+        "time_frame": "3 months"
+      },
+      {
+        "measure": "Part 2: Efficacy of bezuclastinib at the selected dose versus placebo",
+        "description": "Mean absolute change on the Mastocytosis Symptom Severity Daily Diary (MS2D2)",
+        "time_frame": "24 Weeks"
+      },
+      {
+        "measure": "Part 3: Safety and tolerability of bezuclastinib as assessed by number of adverse events",
+        "description": "CTCAE v5",
+        "time_frame": "Up to 5 years"
+      }
+    ],
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 237,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Cogent Biosciences, Inc.",
+    "conditions": [
+      "SSM",
+      "Mastocytosis, Indolent",
+      "Mastocytosis, Systemic",
+      "Mastocytosis",
+      "ISM",
+      "BMM",
+      "Smoldering Systemic Mastocytosis",
+      "Bone Marrow Mastocytosis"
+    ],
+    "interventions": [
+      "Bezuclastinib Tablets (Formulation A)",
+      "Bezuclastinib Tablets (Formulation B)",
+      "Placebo Tablets"
+    ]
+  },
+  "COGT:bezuclastinib:NCT06208748": {
+    "nct_id": "NCT06208748",
+    "title": "SARC044: A Phase II Trial of Bezuclastinib in Combination With Sunitinib in Patients With GIST",
+    "official_title": "A Phase II Trial of Bezuclastinib in Combination With Sunitinib in Patients With GIST Who Progressed on Sunitinib Monotherapy",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2025-10-31",
+    "last_update_submitted": "2025-10-29",
+    "start_date": "2024-08-01",
+    "primary_completion_date": "2026-06",
+    "completion_date": "2027-06",
+    "results_posted_date": null,
+    "has_results": false,
+    "primary_outcomes": [
+      {
+        "measure": "To estimate the median progression free survival (mPFS)",
+        "description": "mPFS will be summarized with a Kaplan-Meier curve",
+        "time_frame": "From the time of first dose to the occurrence of disease progression (as accessed by mRECIST v1.1) or death due to any cause prior to documented disease progression, up to 2 years.."
+      }
+    ],
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 40,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Sarcoma Alliance for Research through Collaboration",
+    "conditions": [
+      "Gastrointestinal Stromal Tumors",
+      "GIST"
+    ],
+    "interventions": [
+      "Bezuclastinib in combination with sunitinib"
+    ]
+  },
+  "COGT:bezuclastinib:NCT04996875": {
+    "nct_id": "NCT04996875",
+    "title": "(Apex) Bezuclastinib in Patients With Advanced Systemic Mastocytosis",
+    "official_title": "A Phase 2 Open-Label, Multicenter Clinical Study of the Safety, Efficacy, Pharmacokinetic, and Pharmacodynamic Profiles of CGT9486 as a Single Agent in Patients With Advanced Systemic Mastocytosis",
+    "status": "RECRUITING",
+    "last_update": "2026-09-15",
+    "last_update_submitted": "2026-09-14",
+    "start_date": "2021-11-09",
+    "primary_completion_date": "2025-09-19",
+    "completion_date": "2027-07",
+    "results_posted_date": null,
+    "has_results": false,
+    "primary_outcomes": [
+      {
+        "measure": "Part I: Identify clinically active and tolerable exposures of bezuclastinib in patients with AdvSM",
+        "description": null,
+        "time_frame": "18 months"
+      },
+      {
+        "measure": "Part II: - Determine efficacy of bezuclastinib as measured by mIWG Objective Response Rate (ORR) - Confirm the exposure-response relationship of bezuclastinib",
+        "description": null,
+        "time_frame": "18 months"
+      }
+    ],
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE2"
+    ],
+    "enrollment": 140,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Cogent Biosciences, Inc.",
+    "conditions": [
+      "Advanced Systemic Mastocytosis (AdvSM)",
+      "SM With an Associated Hematologic Neoplasm (SM-AHN)",
+      "Mast Cell Leukemia (MCL)",
+      "Aggressive Systemic Mastocytosis (ASM)"
+    ],
+    "interventions": [
+      "bezuclastinib"
+    ]
+  },
+  "COGT:bezuclastinib:NCT06948955": {
+    "nct_id": "NCT06948955",
+    "title": "Expanded Access to Bezuclastinib to be Coadministered With Sunitinib for Patients With Gastrointestinal Stromal Tumors",
+    "official_title": "Expanded Access to Bezuclastinib to be Coadministered With Sunitinib for Patients With Locally Advanced, Unresectable, or Metastatic Gastrointestinal Stromal Tumors",
+    "status": "AVAILABLE",
+    "last_update": "2026-07-13",
+    "last_update_submitted": "2026-07-10",
+    "start_date": null,
+    "primary_completion_date": null,
+    "completion_date": null,
+    "results_posted_date": null,
+    "has_results": false,
+    "primary_outcomes": [],
+    "study_type": "EXPANDED_ACCESS",
+    "phases": [],
+    "enrollment": null,
+    "enrollment_type": null,
+    "sponsor": "Cogent Biosciences, Inc.",
+    "conditions": [
+      "Gastrointestinal Neoplasms, Gastrointestinal Stromal Tumors"
+    ],
+    "interventions": [
+      "Bezuclastinib",
+      "Sunitinib"
+    ]
+  },
+  "COGT:bezuclastinib:NCT06915766": {
+    "nct_id": "NCT06915766",
+    "title": "Expanded Access to Bezuclastinib for Patients With NonAdvanced Systemic Mastocytosis or Advanced Systemic Mastocytosis",
+    "official_title": "Intermediate-Size Patient Population Expanded Access to Bezuclastinib for Patients With NonAdvanced Systemic Mastocytosis or Advanced Systemic Mastocytosis",
+    "status": "AVAILABLE",
+    "last_update": "2026-07-13",
+    "last_update_submitted": "2026-07-10",
+    "start_date": null,
+    "primary_completion_date": null,
+    "completion_date": null,
+    "results_posted_date": null,
+    "has_results": false,
+    "primary_outcomes": [],
+    "study_type": "EXPANDED_ACCESS",
+    "phases": [],
+    "enrollment": null,
+    "enrollment_type": null,
+    "sponsor": "Cogent Biosciences, Inc.",
+    "conditions": [
+      "Systemic Mastocytoses, Indolent",
+      "Systemic Mastocytoses, Aggressive"
+    ],
+    "interventions": [
+      "Bezuclastinib"
+    ]
+  },
+  "COGT:CGT4859:NCT06777316": {
+    "nct_id": "NCT06777316",
+    "title": "A Study of an FGFR2/3 Inhibitor (CGT4859) in Patients With Cholangiocarcinoma and Other Advanced Solid Tumors",
+    "official_title": "A Phase 1/2 Study of a Selective FGFR2/3 Inhibitor, CGT4859, in Patients With Cholangiocarcinoma and Other Advanced Solid Tumors Harboring FGFR2 and/or FGFR3 Genetic Alterations",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "last_update": "2026-04-17",
+    "last_update_submitted": "2026-04-15",
+    "start_date": "2025-01-22",
+    "primary_completion_date": "2027-03",
+    "completion_date": "2027-06",
+    "results_posted_date": null,
+    "has_results": false,
+    "primary_outcomes": [
+      {
+        "measure": "Phase 1: Determine the maximum tolerated dose (MTD) and RP2D of CGT4859 - AEs",
+        "description": "Incidence, severity, and seriousness or treatment-emergent adverse events (AEs) leading to dose modification",
+        "time_frame": "Approximately 12 months"
+      },
+      {
+        "measure": "Phase 1: Determine the maximum tolerated dose (MTD) and RP2D of CGT4859 - Laboratory results",
+        "description": "Clinically significant changes or abnormalities observed from baseline in laboratory results in chemistry, hematology, and coagulation parameters",
+        "time_frame": "Approximately 12 months"
+      },
+      {
+        "measure": "Phase 1: Determine the maximum tolerated dose (MTD) and RP2D of CGT4859 - ECG results",
+        "description": "Clinically significant changes or abnormalities observed from baseline in electrocardiogram (ECG) parameters",
+        "time_frame": "Approximately 12 months"
+      },
+      {
+        "measure": "Phase 2: Evaluate antitumor activity of CGT4859 - Objective Response Rate (ORR)",
+        "description": null,
+        "time_frame": "Approximately 8 months"
+      }
+    ],
+    "study_type": "INTERVENTIONAL",
+    "phases": [
+      "PHASE1",
+      "PHASE2"
+    ],
+    "enrollment": 110,
+    "enrollment_type": "ESTIMATED",
+    "sponsor": "Cogent Biosciences, Inc.",
+    "conditions": [
+      "Intrahepatic Cholangiocarcinoma (Icc)",
+      "Cholangiocarcinoma",
+      "Other Solid Tumors, Adult",
+      "FGFR2 Gene Fusion/Rearrangement",
+      "FGFR2 Gene Amplification",
+      "FGFR2 Gene Short Variants",
+      "FGFR3 Gene Fusion/Rearrangement",
+      "FGFR3 Gene Amplification",
+      "FGFR3 Gene Short Variants",
+      "FGFR2 Genetic Alterations",
+      "FGFR3 Genetic Alterations",
+      "Advanced Solid Tumors"
+    ],
+    "interventions": [
+      "CGT4859"
+    ]
+  },
   "ZBIO:obexelimab:NCT05662241": {
     "nct_id": "NCT05662241",
     "title": "A Phase 3 Study of Obexelimab in Patients With IgG4-Related Disease",
