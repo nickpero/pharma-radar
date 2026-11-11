@@ -120,3 +120,27 @@ def test_early_discovery_diagnostics_include_source_path(monkeypatch):
     assert feed.get_early_news({}) == []
     assert feed.LAST_FETCH_STATUS["path"] == "google_news_rss"
     assert feed.LAST_FETCH_STATUS["companies_queried"] == 0
+
+def test_request_batch_retries_read_timeout(monkeypatch):
+    from types import SimpleNamespace
+    from scanner import early_discovery_feed as feed
+    import requests
+
+    calls = []
+
+    def fake_get(url, **kwargs):
+        calls.append(url)
+        if len(calls) == 1:
+            raise requests.ReadTimeout("simulated read timeout")
+        return SimpleNamespace(
+            status_code=200,
+            headers={},
+            text="<rss><channel></channel></rss>",
+            raise_for_status=lambda: None,
+        )
+
+    monkeypatch.setattr(feed.requests, "get", fake_get)
+    monkeypatch.setattr(feed.time, "sleep", lambda _delay: None)
+    rows = feed._request_batch([("AAA", "Alpha Bio")], 1)
+    assert rows == []
+    assert len(calls) == 2
